@@ -8,7 +8,7 @@ export const CACHE = join(import.meta.dirname, '..', 'cache')
 /** @typedef {{ en: string, zh?: string, hans?: string, ja?: string, ko?: string }} Names */
 /**
  * @typedef {{ name: string, url: string, licence: string, attribution?: string, version?: string, note?: string }} Source
- * @typedef {'shape' | 'reading' | 'historical' | 'direct' | 'index' | 'encoding'} Family
+ * @typedef {'shape' | 'reading' | 'extended' | 'historical' | 'direct' | 'index' | 'encoding'} Family
  * @typedef {{ id: string, family: Family, names: Names, source: Source, about?: string, keys?: string, tone?: 'pinyin', entries: Iterable<[string, string]> }} Method
  */
 
@@ -17,7 +17,7 @@ export async function fetchOnce(url, as) {
   const path = join(CACHE, as ?? url.replace(/^https?:\/\//, '').replace(/[^\w.\-]+/g, '_'))
   if (existsSync(path)) return path
   mkdirSync(dirname(path), { recursive: true })
-  const response = await fetch(url)
+  const response = await fetch(url, { signal: AbortSignal.timeout(60_000) })
   if (!response.ok) throw new Error(`${url}: ${response.status}`)
   writeFileSync(path, new Uint8Array(await response.arrayBuffer()))
   console.log(`  fetched ${url}`)

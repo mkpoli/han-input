@@ -1,0 +1,620 @@
+[
+{
+"file": "100radicals",
+"zh": "百部",
+"en": "100 Radicals",
+"family": "shape"
+},
+{
+"file": "3corner",
+"zh": "三角編號",
+"en": "Three-corner code",
+"family": "shape"
+},
+{
+"file": "array10",
+"zh": "行列10",
+"en": "Array 10",
+"family": "shape"
+},
+{
+"file": "array30",
+"zh": "行列30",
+"en": "Array 30",
+"family": "shape"
+},
+{
+"file": "array40",
+"zh": "行列40",
+"en": "Array 40",
+"family": "shape"
+},
+{
+"file": "bsm",
+"zh": "筆順碼",
+"en": "Stroke-order code (BSM)",
+"family": "shape"
+},
+{
+"file": "bxm",
+"zh": "表形碼",
+"en": "Biaoxingma",
+"family": "shape"
+},
+{
+"file": "cangjie",
+"zh": "正體倉頡",
+"en": "Cangjie (CNS-based)",
+"family": "shape"
+},
+{
+"file": "cj5",
+"zh": "倉五",
+"en": "Cangjie 5",
+"family": "shape"
+},
+{
+"file": "ckc",
+"zh": "縱橫碼",
+"en": "CKC (Zongheng code)",
+"family": "shape"
+},
+{
+"file": "cnscj",
+"zh": "全字庫倉頡",
+"en": "CNS Cangjie",
+"family": "shape"
+},
+{
+"file": "daomax",
+"zh": "全拼形導碼",
+"en": "Daoma X (full-pinyin + shape)",
+"family": "shape"
+},
+{
+"file": "dayi2",
+"zh": "大易二碼",
+"en": "Dayi 2-code",
+"family": "shape"
+},
+{
+"file": "dayi3",
+"zh": "大易三碼",
+"en": "Dayi 3-code",
+"family": "shape"
+},
+{
+"file": "dayi4",
+"zh": "大易四碼",
+"en": "Dayi 4-code",
+"family": "shape"
+},
+{
+"file": "dna",
+"zh": "筆結基因",
+"en": "DNA (one-hand 10-key)",
+"family": "shape"
+},
+{
+"file": "dragonfly",
+"zh": "龍飛",
+"en": "Dragonfly (Dayi variant)",
+"family": "shape"
+},
+{
+"file": "ejcj",
+"zh": "尹卂倉頡",
+"en": "EJCJ Cangjie table",
+"family": "shape"
+},
+{
+"file": "emhz",
+"zh": "Ｅ碼漢字",
+"en": "E-code",
+"family": "shape"
+},
+{
+"file": "erbi-kuai",
+"zh": "二笔快版",
+"en": "Erbi (Yin-Yang, quick)",
+"family": "shape"
+},
+{
+"file": "ez",
+"zh": "輕鬆",
+"en": "EZ Tiny (Qingsong)",
+"family": "shape"
+},
+{
+"file": "fcitx-erbi",
+"zh": "二笔",
+"en": "Erbi (fcitx)",
+"family": "shape"
+},
+{
+"file": "fcitx-qxm",
+"zh": "冰蟾全息",
+"en": "Quanxi (Bingchan)",
+"family": "shape"
+},
+{
+"file": "fcitx-wanfeng",
+"zh": "晚风",
+"en": "Wanfeng",
+"family": "shape"
+},
+{
+"file": "freenewcj",
+"zh": "自由大新",
+"en": "Free New Cangjie",
+"family": "shape"
+},
+{
+"file": "g6code",
+"zh": "六碼筆畫",
+"en": "G6 code (six-stroke)",
+"family": "shape"
+},
+{
+"file": "harvo",
+"zh": "妙通",
+"en": "Harvo (Miaotong)",
+"family": "shape"
+},
+{
+"file": "hs",
+"zh": "華象直覺",
+"en": "Huaxiang Zhijue (HS pictograph)",
+"family": "shape"
+},
+{
+"file": "jinjin",
+"zh": "晶晶码",
+"en": "Jingjing code (letters)",
+"family": "shape"
+},
+{
+"file": "jsm",
+"zh": "晶数码",
+"en": "Jingshu code (digits)",
+"family": "shape"
+},
+{
+"file": "jtcj",
+"zh": "仓颉",
+"en": "Cangjie (simplified-oriented table)",
+"family": "shape"
+},
+{
+"file": "mscj3",
+"zh": "微倉三",
+"en": "Microsoft-compatible Cangjie 3",
+"family": "shape"
+},
+{
+"file": "newcj3",
+"zh": "亂倉打鳥",
+"en": "New Cangjie 3 (Luanchang Daniao)",
+"family": "shape"
+},
+{
+"file": "q9glyph",
+"zh": "九方字形",
+"en": "Q9 Glyph (Jiufang)",
+"family": "shape"
+},
+{
+"file": "qcode",
+"zh": "快碼",
+"en": "Q code (Kuaima)",
+"family": "shape"
+},
+{
+"file": "renee",
+"zh": "余氏",
+"en": "Yu-shi (Renee)",
+"family": "shape"
+},
+{
+"file": "scj6",
+"zh": "快速倉頡",
+"en": "Speed Cangjie 6",
+"family": "shape"
+},
+{
+"file": "simplecj",
+"zh": "正體簡易",
+"en": "Simplified Cangjie (CNS-based)",
+"family": "shape"
+},
+{
+"file": "simplex",
+"zh": "速成",
+"en": "Quick / Simplex (Suchéng)",
+"family": "shape"
+},
+{
+"file": "simplex5",
+"zh": "簡五",
+"en": "Quick 5",
+"family": "shape"
+},
+{
+"file": "stroke5",
+"zh": "筆順五碼",
+"en": "Stroke 5",
+"family": "shape"
+},
+{
+"file": "t9",
+"zh": "Ｔ９",
+"en": "T9 stroke",
+"family": "shape"
+},
+{
+"file": "taiji",
+"zh": "太極",
+"en": "Taiji code (two-stroke)",
+"family": "shape"
+},
+{
+"file": "wbx",
+"zh": "海峰五笔",
+"en": "Haifeng Wubi 98",
+"family": "shape"
+},
+{
+"file": "wenyi",
+"zh": "文宜",
+"en": "WenYi (culture-and-pleasantness)",
+"family": "shape"
+},
+{
+"file": "whale",
+"zh": "鯨魚",
+"en": "Whale",
+"family": "shape"
+},
+{
+"file": "wlkm",
+"zh": "王林快码",
+"en": "Wang Lin Kuaima",
+"family": "shape"
+},
+{
+"file": "wm2",
+"zh": "象形王碼",
+"en": "Xiangxing Wangma 2",
+"family": "shape"
+},
+{
+"file": "yima",
+"zh": "易碼",
+"en": "Yima",
+"family": "shape"
+},
+{
+"file": "yong",
+"zh": "永码",
+"en": "Yong code",
+"family": "shape"
+},
+{
+"file": "bopomofo",
+"zh": "正體注音",
+"en": "Regular Bopomofo",
+"family": "reading"
+},
+{
+"file": "cantonhk",
+"zh": "港式廣東話",
+"en": "Cantonese (Hong Kong style)",
+"family": "reading"
+},
+{
+"file": "cnsphoneticlite",
+"zh": "全字庫注音",
+"en": "CNS Phonetic Lite",
+"family": "reading"
+},
+{
+"file": "dapu",
+"zh": "大埔客語",
+"en": "Hakka Da-Pu",
+"family": "reading"
+},
+{
+"file": "et41",
+"zh": "倚天注音",
+"en": "Eten 41-key Zhuyin",
+"family": "reading"
+},
+{
+"file": "flypy",
+"zh": "小鹤音形",
+"en": "Xiaohe Yinxing (double pinyin + shape)",
+"family": "reading"
+},
+{
+"file": "hailu",
+"zh": "海陸客語",
+"en": "Hakka Hai-Lu",
+"family": "reading"
+},
+{
+"file": "hanja",
+"zh": "韓文漢字",
+"en": "Korean Hanja",
+"family": "reading"
+},
+{
+"file": "hkim_word_1",
+"zh": "臺客四縣",
+"en": "Taiwan Hakka Sixian (HKIM1)",
+"family": "reading"
+},
+{
+"file": "hkim_word_2",
+"zh": "臺客海陸",
+"en": "Taiwan Hakka Hailu (HKIM2)",
+"family": "reading"
+},
+{
+"file": "hkim_word_3",
+"zh": "臺客大埔",
+"en": "Taiwan Hakka Dapu (HKIM3)",
+"family": "reading"
+},
+{
+"file": "hkim_word_4",
+"zh": "臺客饒平",
+"en": "Taiwan Hakka Raoping (HKIM4)",
+"family": "reading"
+},
+{
+"file": "hkim_word_5",
+"zh": "臺客詔安",
+"en": "Taiwan Hakka Zhaoan (HKIM5)",
+"family": "reading"
+},
+{
+"file": "hkim_word_6",
+"zh": "臺客南四",
+"en": "Taiwan Hakka South-Sixian (HKIM6)",
+"family": "reading"
+},
+{
+"file": "ile",
+"zh": "廣東拼音",
+"en": "Cantonese Pinyin (ILE)",
+"family": "reading"
+},
+{
+"file": "jyutping",
+"zh": "帶調粵拼",
+"en": "Jyutping with tones",
+"family": "reading"
+},
+{
+"file": "jyutping0",
+"zh": "無調粵拼",
+"en": "Jyutping without tones",
+"family": "reading"
+},
+{
+"file": "kks",
+"zh": "台語漢羅",
+"en": "Taiwanese Han-Lo (KKS)",
+"family": "reading"
+},
+{
+"file": "kks_hakka_henry",
+"zh": "客語漢羅",
+"en": "Hakka Han-Lo (KKS)",
+"family": "reading"
+},
+{
+"file": "kks_hakka_tl",
+"zh": "客語台羅",
+"en": "Hakka Tai-Lo (KKS)",
+"family": "reading"
+},
+{
+"file": "kks_tl",
+"zh": "台羅拼音",
+"en": "Tai-Lo (KKS)",
+"family": "reading"
+},
+{
+"file": "nippon",
+"zh": "日文漢字",
+"en": "Japanese kanji (Nippon)",
+"family": "reading"
+},
+{
+"file": "phofsi",
+"zh": "普實台文",
+"en": "Taiwanese Phof-Si",
+"family": "reading"
+},
+{
+"file": "pinyin",
+"zh": "正體拼音",
+"en": "Hanyu Pinyin (CNS-based)",
+"family": "reading"
+},
+{
+"file": "pinyin0",
+"zh": "无调拼音",
+"en": "Pinyin without tones",
+"family": "reading"
+},
+{
+"file": "poj-holo",
+"zh": "白話漢羅",
+"en": "POJ Han-Lo",
+"family": "reading"
+},
+{
+"file": "roman",
+"zh": "羅馬拼音",
+"en": "Romanization (CNS-based)",
+"family": "reading"
+},
+{
+"file": "shuangpin++",
+"zh": "双拼加加",
+"en": "Shuangpin Jiajia",
+"family": "reading"
+},
+{
+"file": "sixian",
+"zh": "四縣客語",
+"en": "Hakka Sixian",
+"family": "reading"
+},
+{
+"file": "soutzoe",
+"zh": "蘇州吳語",
+"en": "Suzhou Wu",
+"family": "reading"
+},
+{
+"file": "taiwan-minnan-zhuyin",
+"zh": "台式閩南語注音",
+"en": "Taiwanese Min-Nan Zhuyin",
+"family": "reading"
+},
+{
+"file": "taiwanese",
+"zh": "臺語注音",
+"en": "Taiwanese Zhuyin",
+"family": "reading"
+},
+{
+"file": "tin",
+"zh": "臺語注音",
+"en": "Taiwanese Zhuyin (Wu Shouli)",
+"family": "reading"
+},
+{
+"file": "tlim2",
+"zh": "臺灣閩漢",
+"en": "Taiwan Min-Han (MOE TLIM2)",
+"family": "reading"
+},
+{
+"file": "tlpa",
+"zh": "TLPA台語",
+"en": "TLPA Taiwanese",
+"family": "reading"
+},
+{
+"file": "tp_hakka_hl",
+"zh": "通用海陸",
+"en": "Tongyong Hailu Hakka",
+"family": "reading"
+},
+{
+"file": "tp_hakka_sy",
+"zh": "通用四縣",
+"en": "Tongyong Sixian Hakka",
+"family": "reading"
+},
+{
+"file": "trs",
+"zh": "臺語TRS",
+"en": "Taigi TRS",
+"family": "reading"
+},
+{
+"file": "uanniu",
+"zh": "灣娘臺漢",
+"en": "Uan Niu Taiwanese (MOE roman)",
+"family": "reading"
+},
+{
+"file": "wu",
+"zh": "吴语拼音",
+"en": "Wu Pinyin",
+"family": "reading"
+},
+{
+"file": "ziranma",
+"zh": "自然碼",
+"en": "Ziranma (double pinyin)",
+"family": "reading"
+},
+{
+"file": "zyujam",
+"zh": "粵語注音",
+"en": "Cantonese Zhuyin (Zyujam)",
+"family": "reading"
+},
+{
+"file": "4corner",
+"zh": "四角號碼",
+"en": "Four-corner code",
+"family": "index"
+},
+{
+"file": "4corner5",
+"zh": "四角五碼",
+"en": "Four-corner code, 5 digits",
+"family": "index"
+},
+{
+"file": "frequency",
+"zh": "字頻序",
+"en": "Character frequency order",
+"family": "index"
+},
+{
+"file": "strokes",
+"zh": "筆畫數",
+"en": "Stroke counts (total + minus radical)",
+"family": "index"
+},
+{
+"file": "brief",
+"zh": "簡捷",
+"en": "Brief (Hantong Jianjie)",
+"family": "historical"
+},
+{
+"file": "telecode",
+"zh": "電信碼",
+"en": "Telegraph code (Chinese Telecode)",
+"family": "historical"
+},
+{
+"file": "top-bottom",
+"zh": "上下形",
+"en": "Top-bottom method (Lin Yutang, MingKwai first/last-stroke keyboard)",
+"family": "historical"
+},
+{
+"file": "big5e",
+"zh": "五大碼擴充",
+"en": "Big5e",
+"family": "encoding"
+},
+{
+"file": "big5p",
+"zh": "五大碼加強",
+"en": "Big5+ (Big5p)",
+"family": "encoding"
+},
+{
+"file": "cccii",
+"zh": "資訊交換碼",
+"en": "CCCII",
+"family": "encoding"
+},
+{
+"file": "cns11643",
+"zh": "標準交換碼",
+"en": "CNS 11643 code",
+"family": "encoding"
+}
+]

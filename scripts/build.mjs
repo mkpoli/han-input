@@ -14,11 +14,13 @@ import { readUnihan, unihanMethods, rankChars } from './sources/unihan.mjs'
 import { buildParts } from './sources/ids.mjs'
 import { allMethods } from './sources/index.mjs'
 import { meaningWords } from './sources/meaning.mjs'
+import { rhymeTable } from './sources/qieyun.mjs'
 import { CACHE } from './lib.mjs'
+import * as OpenCC from 'opencc-js'
 
 const OUT = join(import.meta.dirname, '..', 'app', 'public', 'data')
 const SPOOL = join(CACHE, 'spool')
-rmSync(OUT, { recursive: true, force: true })
+for (const dir of ['s', 'c', 'x', 'm', 'p']) rmSync(join(OUT, dir), { recursive: true, force: true })
 rmSync(SPOOL, { recursive: true, force: true })
 for (const dir of ['s', 'c', 'x', 'm', 'p']) mkdirSync(join(OUT, dir), { recursive: true })
 for (const dir of ['c', 'x', 'm']) mkdirSync(join(SPOOL, dir), { recursive: true })
@@ -49,7 +51,13 @@ console.log('reading Unihan')
 const fields = await readUnihan()
 const methods = [...unihanMethods(fields), ...await allMethods()]
 
+const toHans = OpenCC.Converter({ from: 'hk', to: 'cn' })
 const manifest = []
+const ids = new Set()
+for (const { id } of methods) {
+  if (ids.has(id)) throw new Error(`two methods share the id ${id}`)
+  ids.add(id)
+}
 for (const method of methods) {
   /** @type {Map<string, Set<string>>} */
   const table = new Map()
@@ -59,7 +67,7 @@ for (const method of methods) {
     if (!set) table.set(code, set = new Set())
     set.add(char)
   }
-  if (!table.size) throw new Error(`${method.id}: no rows`)
+  if (!table.size) { console.warn(`  left out ${method.id}: no rows`); continue }
   const lines = [...table].map(([code, set]) => [code, [...set].join('')])
   lines.sort((a, b) => (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0))
   writeFileSync(join(OUT, 's', `${method.id}.tsv.gz`), gz(lines.map(line => line.join('\t')).join('\n')))
@@ -79,7 +87,7 @@ for (const method of methods) {
   }
   for (const [char, list] of perChar) chars.add(charBucket(char), `${char}\t${method.id}\t${list.join(' ')}`)
   manifest.push({
-    id: method.id, family: method.family, names: method.names, keys: method.keys, about: method.about,
+    id: method.id, family: method.family, names: { ...method.names, hans: method.names.hans ?? (method.names.zh ? toHans(method.names.zh) : undefined) }, keys: method.keys, about: method.about,
     source: method.source, codes: table.size, chars: covered.size,
   })
   console.log(`  ${method.id}: ${table.size} codes, ${covered.size} characters`)
@@ -114,6 +122,16 @@ for (const [part, list] of await buildParts()) {
 for (const [bucket, rows] of partFiles) writeFileSync(join(OUT, 'p', `${bucket}.gz`), gz(rows.join('\n')))
 
 writeFileSync(join(OUT, 'chars.tsv.gz'), gz(rankChars(fields).map(row => row.join('\t')).join('\n')))
+writeFileSync(join(OUT, 'rhymes.json.gz'), gz(JSON.stringify(rhymeTable())))
+// Two tables of one method keep the same name, so where they come from tells them apart.
+const uses = new Map()
+for (const { names } of manifest) uses.set(names.en, (uses.get(names.en) ?? 0) + 1)
+for (const entry of manifest) {
+  if (uses.get(entry.names.en) < 2) continue
+  const from = entry.source.name.split(',')[0].replace(/^rime\//, '').replace(/^Unihan.*/, 'Unihan')
+  const names = /** @type {Record<string, string | undefined>} */ (entry.names)
+  for (const key of Object.keys(names)) if (names[key]) names[key] += ` · ${from}`
+}
 writeFileSync(join(OUT, 'methods.json'), JSON.stringify(manifest))
 rmSync(SPOOL, { recursive: true, force: true })
 console.log(`${manifest.length} methods`)
