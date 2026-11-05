@@ -1,0 +1,15 @@
+/* The app layer: the design system, and the faces that reach the characters a system lacks. */
+@import '../design/index.css';
+@import './fonts.css';
+
+:root {
+  --ui-font-script: 'Noto Serif CJK JP', 'Noto Serif CJK SC', 'Source Han Serif', 'Songti SC', 'Hiragino Mincho ProN', 'Yu Mincho', serif, 'Jigmo', 'Jigmo2', 'Jigmo3';
+  --topbar-h: 54px;
+  --writing-h: 62px;
+}
+
+.ui-input,
+.ui-textarea,
+.ui-toast {
+  font-family: var(--ui-font-sans), 'Jigmo', 'Jigmo2', 'Jigmo3';
+}

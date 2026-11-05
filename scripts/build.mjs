@@ -1,0 +1,119 @@
+// Builds app/public/data from the pinned sources in cache/.
+//   s/<id>.tsv.gz    one method: code, tab, its characters
+//   c/<bucket>.gz    every code of every method, by its first two folded characters
+//   x/<plane>.gz     every code of every character, by code point
+//   m/<bucket>.gz    meaning words to characters
+//   p/<plane>.gz     parts to the characters written with them
+//   chars.tsv.gz     code point, rank, strokes, radical
+//   methods.json     what the above were made from
+import { appendFileSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { join } from 'node:path'
+import { gzipSync } from 'node:zlib'
+import { charBucket, codeBucket, fold, isHan, partBucket, pinyinDigits, wordBucket } from '../src/fold.js'
+import { readUnihan, unihanMethods, rankChars } from './sources/unihan.mjs'
+import { buildParts } from './sources/ids.mjs'
+import { allMethods } from './sources/index.mjs'
+import { meaningWords } from './sources/meaning.mjs'
+import { CACHE } from './lib.mjs'
+
+const OUT = join(import.meta.dirname, '..', 'app', 'public', 'data')
+const SPOOL = join(CACHE, 'spool')
+rmSync(OUT, { recursive: true, force: true })
+rmSync(SPOOL, { recursive: true, force: true })
+for (const dir of ['s', 'c', 'x', 'm', 'p']) mkdirSync(join(OUT, dir), { recursive: true })
+for (const dir of ['c', 'x', 'm']) mkdirSync(join(SPOOL, dir), { recursive: true })
+
+const gz = (/** @type {string} */ text) => gzipSync(text, { level: 9 })
+
+/** Rows wait in memory and go to disk in lumps, since the corpus is many million rows. */
+class Spool {
+  /** @param {string} dir */
+  constructor(dir) { this.dir = dir; /** @type {Map<string, string[]>} */ this.rows = new Map(); this.held = 0 }
+  /** @param {string} bucket @param {string} row */
+  add(bucket, row) {
+    let list = this.rows.get(bucket)
+    if (!list) this.rows.set(bucket, list = [])
+    list.push(row)
+    if (++this.held > 2_000_000) this.flush()
+  }
+  flush() {
+    for (const [bucket, list] of this.rows) appendFileSync(join(SPOOL, this.dir, bucket), `${list.join('\n')}\n`)
+    this.rows.clear()
+    this.held = 0
+  }
+}
+const codes = new Spool('c')
+const chars = new Spool('x')
+
+console.log('reading Unihan')
+const fields = await readUnihan()
+const methods = [...unihanMethods(fields), ...await allMethods()]
+
+const manifest = []
+for (const method of methods) {
+  /** @type {Map<string, Set<string>>} */
+  const table = new Map()
+  for (const [code, char] of method.entries) {
+    if (!isHan(char)) continue
+    let set = table.get(code)
+    if (!set) table.set(code, set = new Set())
+    set.add(char)
+  }
+  if (!table.size) throw new Error(`${method.id}: no rows`)
+  const lines = [...table].map(([code, set]) => [code, [...set].join('')])
+  lines.sort((a, b) => (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0))
+  writeFileSync(join(OUT, 's', `${method.id}.tsv.gz`), gz(lines.map(line => line.join('\t')).join('\n')))
+  const covered = new Set()
+  /** @type {Map<string, string[]>} */
+  const perChar = new Map()
+  for (const [code, set] of lines) {
+    const forms = new Set([fold(code)])
+    if (method.tone === 'pinyin') forms.add(pinyinDigits(code))
+    for (const form of forms) if (form) codes.add(codeBucket(form), `${form}\t${code}\t${method.id}\t${set}`)
+    for (const char of set) {
+      covered.add(char)
+      let list = perChar.get(char)
+      if (!list) perChar.set(char, list = [])
+      list.push(code)
+    }
+  }
+  for (const [char, list] of perChar) chars.add(charBucket(char), `${char}\t${method.id}\t${list.join(' ')}`)
+  manifest.push({
+    id: method.id, family: method.family, names: method.names, keys: method.keys, about: method.about,
+    source: method.source, codes: table.size, chars: covered.size,
+  })
+  console.log(`  ${method.id}: ${table.size} codes, ${covered.size} characters`)
+}
+codes.flush()
+for (const bucket of readdirSync(join(SPOOL, 'c'))) writeFileSync(join(OUT, 'c', `${bucket}.gz`), gz(readFileSync(join(SPOOL, 'c', bucket), 'utf8').trimEnd()))
+
+
+for (const [char, gloss] of fields.get('kDefinition') ?? []) chars.add(charBucket(char), `${char}\t:gloss\t${gloss}`)
+chars.flush()
+for (const bucket of readdirSync(join(SPOOL, 'x'))) writeFileSync(join(OUT, 'x', `${bucket}.gz`), gz(readFileSync(join(SPOOL, 'x', bucket), 'utf8').trimEnd()))
+
+console.log('meanings')
+const words = await meaningWords(fields)
+/** @type {Map<string, string[]>} */
+const wordFiles = new Map()
+for (const [word, list] of words) {
+  const bucket = wordBucket(word)
+  if (!wordFiles.has(bucket)) wordFiles.set(bucket, [])
+  ;/** @type {string[]} */ (wordFiles.get(bucket)).push(`${word}\t${list.join('')}`)
+}
+for (const [bucket, rows] of wordFiles) writeFileSync(join(OUT, 'm', `${bucket}.gz`), gz(rows.join('\n')))
+
+console.log('parts')
+/** @type {Map<string, string[]>} */
+const partFiles = new Map()
+for (const [part, list] of await buildParts()) {
+  const bucket = partBucket(part)
+  if (!partFiles.has(bucket)) partFiles.set(bucket, [])
+  ;/** @type {string[]} */ (partFiles.get(bucket)).push(`${part}\t${list.join('')}`)
+}
+for (const [bucket, rows] of partFiles) writeFileSync(join(OUT, 'p', `${bucket}.gz`), gz(rows.join('\n')))
+
+writeFileSync(join(OUT, 'chars.tsv.gz'), gz(rankChars(fields).map(row => row.join('\t')).join('\n')))
+writeFileSync(join(OUT, 'methods.json'), JSON.stringify(manifest))
+rmSync(SPOOL, { recursive: true, force: true })
+console.log(`${manifest.length} methods`)

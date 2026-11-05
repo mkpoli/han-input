@@ -1,0 +1,12 @@
+{
+  "name": "han-input",
+  "compatibility_date": "2026-10-30",
+  // A static site: the assets are the app, and a miss opens the app so a link can carry a query.
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "single-page-application"
+  },
+  "routes": [{ "pattern": "han.mkpo.li", "custom_domain": true }],
+  "workers_dev": false,
+  "observability": { "enabled": true }
+}

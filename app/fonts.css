@@ -1,0 +1,5 @@
+/* Jigmo (CC0) draws the extension blocks a reader's system may not. Each file is fetched only when a
+   character from its range is on screen and no earlier face in the stack has it. */
+@font-face { font-family: 'Jigmo'; src: url('/fonts/Jigmo.woff2') format('woff2'); font-display: swap; unicode-range: U+2E80-2FDF, U+3005-3007, U+3021-3029, U+3038-303B, U+3400-4DBF, U+4E00-9FFF, U+F900-FAFF; }
+@font-face { font-family: 'Jigmo2'; src: url('/fonts/Jigmo2.woff2') format('woff2'); font-display: swap; unicode-range: U+20000-2FFFF; }
+@font-face { font-family: 'Jigmo3'; src: url('/fonts/Jigmo3.woff2') format('woff2'); font-display: swap; unicode-range: U+30000-3FFFF; }
