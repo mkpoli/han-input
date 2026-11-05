@@ -10,4 +10,3 @@ __pycache__/
 cache/
 # Built from the pinned sources by `bun run build:data`.
 app/public/data/
-app/public/fonts/*.ttf
