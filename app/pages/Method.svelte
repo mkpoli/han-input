@@ -1,13 +1,14 @@
 <script>
   // One method as an input method: type its code, take a numbered candidate into the text.
-  import { loadMethods, loadScheme } from '../lib/data.js'
+  import { loadMethods, loadScheme, loadVarieties, loadVariety } from '../lib/data.js'
   import { route, setQuery } from '../lib/route.svelte.js'
   import { autofocus, choose, put } from '../lib/ui.svelte.js'
   import { backspace } from '../lib/text.svelte.js'
   import { nameOf, t } from '../lib/i18n.svelte.js'
   import { fold } from '../../src/fold.js'
 
-  /** @type {import('../lib/data.js').Method | undefined} */
+  // A variety's readings type the same way as a method's codes, so one page serves both.
+  /** @type {{ title: string, family: string, intro: string, keys?: string, source: { name: string, url: string, licence: string, attribution?: string, note?: string } } | undefined} */
   let method = $state()
   /** @type {import('../lib/data.js').SchemeRow[]} */
   let rows = $state([])
@@ -17,9 +18,33 @@
 
   $effect(() => {
     const id = route.method
-    loadMethods().then(list => { method = list.find(entry => entry.id === id) })
     rows = []
-    loadScheme(id).then(table => { if (id === route.method) rows = table })
+    if (route.page === 'v') {
+      loadVarieties().then(list => {
+        const variety = list[Number(id)]
+        if (!variety) return
+        method = {
+          title: variety.name, family: variety.atlas || variety.region, intro: t('method.reachChars', { chars: variety.chars.toLocaleString() }),
+          source: {
+            name: variety.source || `漢字音典 (MCPDict), ${variety.short}`,
+            url: 'https://github.com/osfans/MCPDict',
+            attribution: [variety.refs, variety.author, variety.version].filter(Boolean).join(' · '),
+            licence: t('method.mcpdictTerms'),
+          },
+        }
+      })
+      loadVariety(id).then(table => { if (id === route.method) rows = table })
+    } else {
+      loadMethods().then(list => {
+        const found = list.find(entry => entry.id === id)
+        if (!found) return
+        method = {
+          title: nameOf(found.names), family: t(`family.${found.family}`), keys: found.keys, source: found.source,
+          intro: `${t('method.reach', { codes: found.codes.toLocaleString(), chars: found.chars.toLocaleString() })}${found.about ? ` ${found.about}` : ''}`,
+        }
+      })
+      loadScheme(id).then(table => { if (id === route.method) rows = table })
+    }
   })
 
   const query = $derived(fold(code))
@@ -57,9 +82,9 @@
 <div class="ui-page">
   {#if method}
     <header class="ui-page-head">
-      <p class="ui-label">{t(`family.${method.family}`)}</p>
-      <h1 class="ui-page-title">{nameOf(method.names)}</h1>
-      <p class="ui-page-intro">{t('method.reach', { codes: method.codes.toLocaleString(), chars: method.chars.toLocaleString() })}{#if method.about} {method.about}{/if}</p>
+      <p class="ui-label">{method.family}</p>
+      <h1 class="ui-page-title">{method.title}</h1>
+      <p class="ui-page-intro">{method.intro}</p>
     </header>
     <input class="ui-input box" data-primary lang="und-Hani" use:autofocus bind:value={code} oninput={() => setQuery(code)} onkeydown={keys}
       placeholder={method.keys ? t('method.keys', { keys: method.keys }) : t('method.type')} aria-label={t('method.type')}

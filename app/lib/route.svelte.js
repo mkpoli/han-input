@@ -4,6 +4,8 @@
 export const NAV = /** @type {const} */ ([
   { path: '', label: 'nav.find' },
   { path: 'methods', label: 'nav.methods' },
+  { path: 'readings', label: 'nav.readings' },
+  { path: 'rhymes', label: 'nav.rhymes' },
   { path: 'radicals', label: 'nav.radicals' },
   { path: 'about', label: 'nav.about' },
 ])
@@ -19,9 +21,9 @@ function read() {
   const c = params.get('c') ?? ''
   const q = params.get('q') ?? ''
   const char = /^[0-9a-f]{4,5}$/i.test(c) ? String.fromCodePoint(parseInt(c, 16)) : ''
-  const method = path.match(/^m\/([\w-]+)$/)?.[1] ?? ''
+  const inner = path.match(/^([mv])\/([\w-]+)$/)
   const known = NAV.some(entry => entry.path === path)
-  return { page: method ? 'm' : known ? path : '', method, q, c: char }
+  return { page: inner ? inner[1] : known ? path : '', method: inner?.[2] ?? '', q, c: char }
 }
 
 export const route = $state(read())
@@ -32,7 +34,7 @@ function href(next) {
   if (next.q) params.set('q', next.q)
   if (next.c) params.set('c', hex(next.c))
   const search = params.toString()
-  const path = next.page === 'm' ? `m/${next.method}` : next.page
+  const path = next.method ? `${next.page}/${next.method}` : next.page
   return `/${path}${search ? `?${search}` : ''}`
 }
 

@@ -4,6 +4,7 @@
   import { FAMILIES } from '../lib/families.js'
   import { go, link } from '../lib/route.svelte.js'
   import { nameOf, t } from '../lib/i18n.svelte.js'
+  import { UNAVAILABLE } from '../lib/unavailable.js'
 
   /** @type {import('../lib/data.js').Method[]} */
   let methods = $state([])
@@ -37,11 +38,25 @@
       </ul>
     </section>
   {/each}
+  <section class="ui-section">
+    <h2 class="ui-label">{t('methods.unavailable')}</h2>
+    <p class="ui-hint">{t('methods.unavailableIntro')}</p>
+    <dl class="none">
+      {#each UNAVAILABLE as item (item.names)}
+        <div>
+          <dt class="ui-label">{t(`family.${item.family}`)} · {t(`methods.reason.${item.reason}`)}</dt>
+          <dd>{#if item.url}<a href={item.url} target="_blank" rel="noopener noreferrer">{item.names}</a>{:else}{item.names}{/if}{#if item.note} <span class="ui-hint">({item.note})</span>{/if}</dd>
+        </div>
+      {/each}
+    </dl>
+  </section>
 </div>
 
 <style>
   .list{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:0 var(--ui-space-xl);margin:0;padding:0;list-style:none}
   li{display:flex;justify-content:space-between;gap:var(--ui-space-sm);align-items:baseline;padding-block:var(--ui-space-2xs);border-bottom:1px solid var(--ui-color-border)}
+  .none{display:grid;gap:var(--ui-space-sm);margin:0}
+  .none dd{margin:0;font-size:var(--ui-text-sm);line-height:1.6}
   .name{color:var(--ui-color-ink);text-decoration:none;min-inline-size:0}
   .name:hover{text-decoration:underline}
 </style>

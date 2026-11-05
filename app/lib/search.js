@@ -1,11 +1,11 @@
 // A query is one or more clues, split on spaces. Each clue names a set of characters; several clues
 // leave the characters in all of them.
 import { hanIn, isHan } from '../../src/fold.js'
-import { findCodes, findMeaning, findPart, loadChars } from './data.js'
+import { findCodes, findMeaning, findPart, findReadings, loadChars } from './data.js'
 
 /**
  * @typedef {{ kind: 'code' | 'scoped' | 'strokes' | 'point' | 'text' | 'part', text: string, method?: string, code?: string, value?: number }} Clue
- * @typedef {{ clue: Clue, hits: import('./data.js').CodeHit[], meaning: string[], parts: string[], chars: string[] }} Answer
+ * @typedef {{ clue: Clue, hits: import('./data.js').CodeHit[], readings: import('./data.js').ReadingHit[], meaning: string[], parts: string[], chars: string[] }} Answer
  */
 
 /** @param {string} term @param {boolean} alone @returns {Clue} */
@@ -29,8 +29,18 @@ export function readQuery(query) {
 
 /** @param {Clue} clue @returns {Promise<Answer>} */
 export async function answer(clue) {
+  const found = await lookUp(clue)
+  // Commonest first, since a table's own order is often by code point.
+  const rows = await loadChars()
+  const rank = (/** @type {string} */ char) => rows.get(char)?.rank ?? 1e6
+  for (const hit of [...found.hits, ...found.readings]) hit.chars.sort((a, b) => rank(a) - rank(b))
+  return found
+}
+
+/** @param {Clue} clue @returns {Promise<Answer>} */
+async function lookUp(clue) {
   /** @type {Answer} */
-  const out = { clue, hits: [], meaning: [], parts: [], chars: [] }
+  const out = { clue, hits: [], readings: [], meaning: [], parts: [], chars: [] }
   if (clue.kind === 'point') {
     if (clue.value !== undefined && clue.value <= 0x10FFFF) out.chars = [String.fromCodePoint(clue.value)]
     return out
@@ -57,10 +67,11 @@ export async function answer(clue) {
     out.meaning = await findMeaning(clue.text)
     return out
   }
-  const [hits, meaning] = await Promise.all([findCodes(clue.text), findMeaning(clue.text)])
+  const [hits, meaning, readings] = await Promise.all([findCodes(clue.text), findMeaning(clue.text), findReadings(clue.text)])
   out.hits = hits
   out.meaning = meaning
-  out.chars = [...new Set([...hits.flatMap(hit => hit.chars), ...meaning])]
+  out.readings = readings
+  out.chars = [...new Set([...hits.flatMap(hit => hit.chars), ...meaning, ...readings.flatMap(hit => hit.chars)])]
   return out
 }
 
@@ -83,7 +94,15 @@ export function groupHits(hits) {
     else byMethod.set(hit.method, [hit])
   }
   return [...byMethod].map(([method, list]) => {
-    list.sort((a, b) => Number(b.exact) - Number(a.exact) || a.code.length - b.code.length)
-    return { method, hits: list, exact: list.some(hit => hit.exact), total: list.reduce((sum, hit) => sum + hit.chars.length, 0) }
-  }).sort((a, b) => Number(b.exact) - Number(a.exact) || a.total - b.total)
+    list.sort((a, b) => Number(b.literal) - Number(a.literal) || Number(b.exact) - Number(a.exact) || a.code.length - b.code.length)
+    return { method, hits: list, literal: list.some(hit => hit.literal), exact: list.some(hit => hit.exact), total: list.reduce((sum, hit) => sum + hit.chars.length, 0) }
+  }).sort((a, b) => Number(b.literal) - Number(a.literal) || Number(b.exact) - Number(a.exact) || a.total - b.total)
+}
+
+/** The characters a reading names, those named by the most varieties first. @param {import('./data.js').ReadingHit[]} hits */
+export function tallyReadings(hits) {
+  /** @type {Map<string, number>} */
+  const tally = new Map()
+  for (const hit of hits) for (const char of hit.chars) tally.set(char, (tally.get(char) ?? 0) + 1)
+  return [...tally].sort((a, b) => b[1] - a[1])
 }

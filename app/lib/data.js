@@ -38,21 +38,29 @@ const codeFile = once(bucket => readGz(`c/${bucket}.gz`))
 const charFile = once(bucket => readGz(`x/${bucket}.gz`))
 const wordFile = once(bucket => readGz(`m/${bucket}.gz`))
 const partFile = once(bucket => readGz(`p/${bucket}.gz`))
-const schemeFile = once(id => readGz(`s/${id}.tsv.gz`))
+const schemeFile = once(path => readGz(path))
+const readingFile = once(bucket => readGz(`r/${bucket}.gz`))
+const charReadingFile = once(shard => readGz(`y/${shard}.gz`))
 
-/** @typedef {{ method: string, code: string, chars: string[], exact: boolean }} CodeHit */
+/** @typedef {{ method: string, code: string, chars: string[], exact: boolean, literal: boolean }} CodeHit */
 
 /** Every code, in any method, that begins with this text. @param {string} text @returns {Promise<CodeHit[]>} */
 export async function findCodes(text) {
   const query = fold(text)
   if (!query) return []
   const body = await codeFile(codeBucket(query))
+  const typed = text.normalize('NFC').toLowerCase()
+  const seen = new Set()
   /** @type {CodeHit[]} */
   const hits = []
   for (const line of body.split('\n')) {
     if (!line.startsWith(query)) continue
     const [folded, code, method, chars] = line.split('\t')
-    hits.push({ method, code, chars: [...chars], exact: folded === query })
+    // A pinyin code is filed under its plain and its digit form, and one query can match both.
+    const key = `${method}\t${code}`
+    if (seen.has(key)) continue
+    seen.add(key)
+    hits.push({ method, code, chars: [...chars], exact: folded === query, literal: code.normalize('NFC').toLowerCase() === typed })
   }
   return hits
 }
@@ -103,9 +111,61 @@ export const loadChars = () => (charRows ??= readGz('chars.tsv.gz').then(body =>
 
 /** One method's whole table, for typing in it key by key. @param {string} id @returns {Promise<SchemeRow[]>} */
 export async function loadScheme(id) {
-  const body = await schemeFile(id)
+  return loadTable(`s/${id}.tsv.gz`)
+}
+
+/** One variety's whole table of readings. @param {number | string} n @returns {Promise<SchemeRow[]>} */
+export const loadVariety = n => loadTable(`d/${n}.tsv.gz`)
+
+/** @param {string} path @returns {Promise<SchemeRow[]>} */
+async function loadTable(path) {
+  const body = await schemeFile(path)
   return body.split('\n').filter(Boolean).map(line => {
     const [code, chars] = line.split('\t')
     return { code, folded: fold(code), digits: /[̀-̌]/.test(code.normalize('NFD')) ? pinyinDigits(code) : '', chars: [...chars] }
   }).sort((a, b) => a.folded.length - b.folded.length || (a.folded < b.folded ? -1 : 1))
 }
+
+/**
+ * @typedef {{ n: number, name: string, short: string, version: string, atlas: string, region: string, place: string, at: string, source: string, refs: string, author: string, chars: number }} Variety
+ */
+/** @type {Promise<Variety[]> | null} */
+let varieties = null
+/** Every variety in 漢字音典. @returns {Promise<Variety[]>} */
+export const loadVarieties = () => (varieties ??= fetch('/data/varieties.json').then(response => response.json()))
+
+/** @typedef {{ n: number, form: string, chars: string[] }} ReadingHit */
+
+/** A reading, whole, in any variety. @param {string} text @returns {Promise<ReadingHit[]>} */
+export async function findReadings(text) {
+  const query = fold(text)
+  if (!query) return []
+  const body = await readingFile(codeBucket(query))
+  /** @type {ReadingHit[]} */
+  const hits = []
+  const prefix = `${query}\t`
+  for (const line of body.split('\n')) {
+    if (!line.startsWith(prefix)) continue
+    const [, form, n, chars] = line.split('\t')
+    hits.push({ n: Number(n), form, chars: [...chars] })
+  }
+  return hits
+}
+
+/** A character's readings in every variety that has it. @param {string} char @returns {Promise<{ n: number, forms: string[] }[]>} */
+export async function readingsOf(char) {
+  const body = await charReadingFile(((char.codePointAt(0) ?? 0) >> 5).toString(16))
+  const out = []
+  for (const line of body.split('\n')) {
+    if (!line.startsWith(char)) continue
+    const [own, n, forms] = line.split('\t')
+    if (own === char) out.push({ n: Number(n), forms: forms.split(' ') })
+  }
+  return out
+}
+
+/** @typedef {{ 母: string, 呼: string, 等: string, 類: string, 韻: string, 聲: string, 描述: string, 反切: string, 字: string }} RhymeRow */
+/** @type {Promise<RhymeRow[]> | null} */
+let rhymes = null
+/** Every small rhyme of the Guangyun. @returns {Promise<RhymeRow[]>} */
+export const loadRhymes = () => (rhymes ??= readGz('rhymes.json.gz').then(body => JSON.parse(body)))

@@ -14,11 +14,11 @@
 </section>
 
 <style>
-  .writing{position:sticky;top:var(--topbar-h);z-index:14;display:flex;align-items:center;gap:var(--ui-space-sm);padding:var(--ui-space-xs) var(--ui-space-2xl);background:var(--ui-color-surface);border-bottom:1px solid var(--ui-color-border)}
+  .writing{display:flex;align-items:center;gap:var(--ui-space-sm);block-size:100%;padding-inline:var(--ui-space-xl);background:var(--ui-color-surface-sunken);border-block-start:1px solid var(--ui-color-border-strong)}
   .writing-label{flex:none}
-  .writing-field{flex:1;min-inline-size:0;font-size:20px}
+  .writing-field{flex:1;min-inline-size:0;font-size:20px;background:var(--ui-color-surface)}
   @media (max-width:900px){
-    .writing{padding:var(--ui-space-xs) var(--ui-space-lg)}
+    .writing{padding-inline:var(--ui-space-sm)}
     .writing-label{display:none}
   }
 </style>

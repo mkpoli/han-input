@@ -1,6 +1,6 @@
 <script>
-  // The frame: the bar, the text being written, the finder of the page, and the card beside it (a
-  // sheet over it on a phone).
+  // The frame: a dark rail of pages down the side, the finder in the middle, the card of the open
+  // character on the right (a sheet on a phone), and the text being written docked along the bottom.
   import { NAV, go, route } from './lib/route.svelte.js'
   import { ui, applyTheme } from './lib/ui.svelte.js'
   import { toast } from './lib/clip.svelte.js'
@@ -11,11 +11,15 @@
   import Find from './pages/Find.svelte'
   import Methods from './pages/Methods.svelte'
   import Method from './pages/Method.svelte'
+  import Readings from './pages/Readings.svelte'
+  import Rhymes from './pages/Rhymes.svelte'
   import Radicals from './pages/Radicals.svelte'
   import About from './pages/About.svelte'
 
   applyTheme()
   let settings = $state(false)
+  const OWNER = /** @type {Record<string, string>} */ ({ m: 'methods', v: 'readings' })
+  const current = $derived(OWNER[route.page] ?? route.page)
 
   /** @param {MouseEvent} event @param {string} page */
   function nav(event, page) {
@@ -38,67 +42,67 @@
 <svelte:window onkeydown={keys} />
 
 <div class="shell">
-  <header class="top">
-    <a class="mark" href="/" onclick={event => nav(event, '')} aria-label={t('app.home')}>
-      <span class="badge ui-script" aria-hidden="true">字</span>
-      <span class="name">{t('app.name')}</span>
-    </a>
-    <nav class="finders" aria-label={t('nav.label')}>
+  <nav class="rail" aria-label={t('nav.label')}>
+    <a class="seal ui-script" href="/" aria-label={t('app.home')} onclick={event => nav(event, '')}>字</a>
+    <div class="pages">
       {#each NAV as entry (entry.path)}
-        <a href="/{entry.path}" class:on={route.page === entry.path || (entry.path === 'methods' && route.page === 'm')}
-          aria-current={route.page === entry.path ? 'page' : undefined} onclick={event => nav(event, entry.path)}>{t(entry.label)}</a>
+        <a href="/{entry.path}" class:on={current === entry.path} aria-current={current === entry.path ? 'page' : undefined} onclick={event => nav(event, entry.path)}>{t(entry.label)}</a>
       {/each}
-    </nav>
-    <div class="settings">
-      <button class="ui-button" data-variant="quiet" data-size="icon" type="button" aria-label={t('settings.label')} title={t('settings.label')}
-        aria-expanded={settings} onclick={() => { settings = !settings }}>
-        <svg viewBox="0 0 20 20" width="17" height="17" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8M16 5v4M10 15v4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
-      </button>
-      {#if settings}
-        <div class="pop ui-popover" role="dialog" aria-label={t('settings.label')}><SettingsRows /></div>
-      {/if}
     </div>
-  </header>
+    <div class="settings">
+      <button class="gear" type="button" aria-label={t('settings.label')} title={t('settings.label')} aria-expanded={settings} onclick={() => { settings = !settings }}>
+        <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8M16 5v4M10 15v4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      </button>
+      {#if settings}<div class="pop ui-popover" role="dialog" aria-label={t('settings.label')}><SettingsRows /></div>{/if}
+    </div>
+  </nav>
 
-  <Writing />
+  <main class="finder">
+    {#if route.page === ''}<Find />
+    {:else if route.page === 'methods'}<Methods />
+    {:else if route.page === 'm' || route.page === 'v'}{#key route.page + route.method}<Method />{/key}
+    {:else if route.page === 'readings'}<Readings />
+    {:else if route.page === 'rhymes'}<Rhymes />
+    {:else if route.page === 'radicals'}<Radicals />
+    {:else}<About />{/if}
+  </main>
 
-  <div class="body">
-    <main class="finder">
-      {#if route.page === ''}<Find />
-      {:else if route.page === 'methods'}<Methods />
-      {:else if route.page === 'm'}{#key route.method}<Method />{/key}
-      {:else if route.page === 'radicals'}<Radicals />
-      {:else}<About />{/if}
-    </main>
-    <aside class="card" class:open={ui.sheet} aria-label={t('card.label')}><Card /></aside>
-  </div>
+  <aside class="card" class:open={ui.sheet} aria-label={t('card.label')}><Card /></aside>
+
+  <div class="dock"><Writing /></div>
 
   <div class="toast" role="status" aria-live="polite">{#if toast.message}<span class="ui-toast">{toast.message}</span>{/if}</div>
 </div>
 
 <style>
-  .shell{min-block-size:100dvh;display:flex;flex-direction:column}
-  .top{position:sticky;top:0;z-index:var(--ui-z-chrome);display:flex;align-items:center;gap:var(--ui-space-xl);block-size:var(--topbar-h);padding-inline:var(--ui-space-2xl);background:var(--ui-color-surface);border-bottom:1px solid var(--ui-color-border)}
-  .mark{display:flex;align-items:center;gap:var(--ui-space-sm);color:var(--ui-color-ink);text-decoration:none}
-  .badge{display:grid;place-items:center;inline-size:30px;block-size:30px;border-radius:var(--ui-radius-sm);background:var(--ui-color-accent);color:var(--ui-color-on-accent);font-size:21px;line-height:1}
-  .name{font-family:var(--ui-font-serif);font-size:17px;font-weight:var(--ui-weight-semibold);white-space:nowrap}
-  .finders{align-self:stretch;display:flex;gap:2px;min-inline-size:0;overflow-x:auto;scrollbar-width:none}
-  .finders a{position:relative;display:flex;align-items:center;padding:0 var(--ui-space-sm);color:var(--ui-color-ink-soft);text-decoration:none;font-size:var(--ui-text-sm);font-weight:var(--ui-weight-medium);white-space:nowrap}
-  .finders a:hover{color:var(--ui-color-ink);background:var(--ui-color-surface-hover)}
-  .finders a.on{color:var(--ui-color-ink);font-weight:var(--ui-weight-semibold)}
-  .finders a.on::after{content:'';position:absolute;inset-inline:var(--ui-space-sm);bottom:0;block-size:2px;background:var(--ui-color-accent)}
-  .settings{position:relative;margin-inline-start:auto}
-  .pop{position:absolute;inset-inline-end:0;inset-block-start:calc(100% + var(--ui-space-sm));z-index:var(--ui-z-menu);inline-size:320px;padding:var(--ui-space-2xs) var(--ui-space-lg)}
-  .body{flex:1;display:grid;grid-template-columns:minmax(0,1fr) 420px;align-items:start}
-  .finder{min-inline-size:0;padding:var(--ui-space-3xl) var(--ui-space-4xl) 72px}
-  .card{position:sticky;top:var(--topbar-h);block-size:calc(100dvh - var(--topbar-h));overflow:auto;border-inline-start:1px solid var(--ui-color-border);background:var(--ui-color-surface);overscroll-behavior:contain}
-  .toast{position:fixed;left:50%;bottom:var(--ui-space-3xl);transform:translateX(-50%);z-index:var(--ui-z-toast);pointer-events:none}
+  .shell{--rail-w:104px;--card-w:440px;--dock-h:56px;display:grid;grid-template-columns:var(--rail-w) minmax(0,1fr) var(--card-w);grid-template-rows:minmax(0,1fr) var(--dock-h);block-size:100dvh}
+  .rail{grid-row:1 / span 2;display:flex;flex-direction:column;align-items:stretch;background:var(--p-rail);color:var(--p-rail-ink);padding-block:var(--ui-space-lg)}
+  .seal{align-self:center;display:grid;place-items:center;inline-size:48px;block-size:48px;border-radius:2px;background:var(--p-seal);color:#fff8f2;font-size:34px;line-height:1;text-decoration:none}
+  .pages{display:flex;flex-direction:column;gap:2px;margin-block-start:var(--ui-space-2xl)}
+  .pages a{padding:var(--ui-space-sm) var(--ui-space-sm);color:var(--p-rail-soft);text-decoration:none;font-size:var(--ui-text-sm);text-align:center;border-inline-start:3px solid transparent;line-height:1.25}
+  .pages a:hover{color:var(--p-rail-ink);background:color-mix(in srgb,var(--p-rail-active) 55%,transparent)}
+  .pages a.on{color:#fff;background:var(--p-rail-active);border-inline-start-color:var(--p-seal);font-weight:var(--ui-weight-semibold)}
+  .settings{position:relative;margin-block-start:auto;align-self:center}
+  .gear{display:grid;place-items:center;inline-size:40px;block-size:40px;border:0;border-radius:var(--ui-radius-sm);background:none;color:var(--p-rail-soft);cursor:pointer}
+  .gear:hover{color:var(--p-rail-ink);background:var(--p-rail-active)}
+  .pop{position:absolute;inset-inline-start:calc(100% + var(--ui-space-sm));inset-block-end:0;z-index:var(--ui-z-menu);inline-size:320px;padding:var(--ui-space-2xs) var(--ui-space-lg);color:var(--ui-color-ink)}
+  .finder{grid-column:2;grid-row:1;min-inline-size:0;overflow:auto;padding:var(--ui-space-3xl) clamp(var(--ui-space-xl),4vw,72px) var(--ui-space-3xl)}
+  .card{grid-column:3;grid-row:1;overflow:auto;background:var(--ui-color-surface);border-inline-start:1px solid var(--ui-color-border);overscroll-behavior:contain}
+  .dock{grid-column:2 / span 2;grid-row:2;min-inline-size:0}
+  .toast{position:fixed;left:50%;bottom:calc(var(--dock-h) + var(--ui-space-lg));transform:translateX(-50%);z-index:var(--ui-z-toast);pointer-events:none}
+  @media (max-width:1200px){.shell{--card-w:360px;--rail-w:88px}}
   @media (max-width:900px){
-    .top{gap:var(--ui-space-sm);padding-inline:var(--ui-space-lg)}
-    .name{display:none}
-    .body{grid-template-columns:minmax(0,1fr)}
-    .finder{padding:var(--ui-space-xl) var(--ui-space-lg) 48px}
-    .card{position:fixed;inset:0;block-size:100dvh;z-index:var(--ui-z-modal);border:0;transform:translateY(100%);transition:transform var(--ui-duration) var(--ui-ease);visibility:hidden}
+    .shell{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) var(--dock-h) auto}
+    .rail{grid-column:1;grid-row:3;flex-direction:row;align-items:center;padding:var(--ui-space-2xs) var(--ui-space-xs) calc(var(--ui-space-2xs) + env(safe-area-inset-bottom));min-inline-size:0}
+    .seal{display:none}
+    .pages{flex-direction:row;flex:1;margin:0;overflow-x:auto;scrollbar-width:none}
+    .pages a{flex:none;padding:var(--ui-space-xs) var(--ui-space-sm);border-inline-start:0;border-block-end:2px solid transparent;white-space:nowrap}
+    .pages a.on{border-block-end-color:var(--p-seal)}
+    .settings{margin:0}
+    .pop{inset-inline-start:auto;inset-inline-end:0;inset-block-end:calc(100% + var(--ui-space-sm));inline-size:min(320px,calc(100vw - 32px))}
+    .finder{grid-column:1;padding:var(--ui-space-xl) var(--ui-space-lg)}
+    .dock{grid-column:1;grid-row:2}
+    .card{position:fixed;inset:0;grid-column:auto;z-index:var(--ui-z-modal);border:0;transform:translateY(100%);transition:transform var(--ui-duration) var(--ui-ease);visibility:hidden}
     .card.open{transform:none;visibility:visible}
   }
   @media (prefers-reduced-motion:reduce){.card{transition:none}}

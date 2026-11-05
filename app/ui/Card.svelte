@@ -1,7 +1,7 @@
 <script>
   // What a character is called: its code in every method, then the sites that say more. Definitions
   // live with those sites, so the card carries one line of gloss and no entry.
-  import { codesOf, loadMethods } from '../lib/data.js'
+  import { codesOf, loadMethods, loadVarieties, readingsOf } from '../lib/data.js'
   import { LINKS } from '../lib/links.js'
   import { link, route, go } from '../lib/route.svelte.js'
   import { put, ui } from '../lib/ui.svelte.js'
@@ -16,11 +16,38 @@
   /** @type {import('../lib/data.js').Method[]} */
   let methods = $state([])
 
+  /** @type {import('../lib/data.js').Variety[]} */
+  let varieties = $state([])
+  /** @type {{ n: number, forms: string[] }[]} */
+  let readings = $state([])
+  let filter = $state('')
+
   loadMethods().then(list => { methods = list })
+  loadVarieties().then(list => { varieties = list })
   $effect(() => {
     const at = char
     if (!at) return
     codesOf(at).then(found => { if (at === char) codes = found })
+    readingsOf(at).then(found => { if (at === char) readings = found })
+  })
+
+  const needle = $derived(filter.trim().toLowerCase())
+  /** Readings by the top level of the atlas's classification. */
+  const regions = $derived.by(() => {
+    /** @type {Map<string, { n: number, name: string, forms: string[] }[]>} */
+    const out = new Map()
+    for (const row of readings) {
+      const variety = varieties[row.n]
+      if (!variety) continue
+      const haystack = `${variety.name} ${variety.short} ${variety.atlas} ${row.forms.join(' ')}`.toLowerCase()
+      if (needle && !haystack.includes(needle)) continue
+      const region = variety.atlas.split('－')[0] || t('card.unclassed')
+      const list = out.get(region)
+      const item = { n: row.n, name: variety.short, forms: row.forms }
+      if (list) list.push(item)
+      else out.set(region, [item])
+    }
+    return [...out]
   })
 
   const gloss = $derived(codes.get(':gloss')?.join(' ') ?? '')
@@ -62,6 +89,26 @@
       </div>
     </section>
 
+    {#if readings.length}
+      <section class="family">
+        <h3 class="ui-label">{t('card.readings', { count: readings.length })}</h3>
+        <input class="ui-input" type="search" bind:value={filter} placeholder={t('card.readingsFilter')} aria-label={t('card.readingsFilter')}>
+        {#each regions as [region, rows] (region)}
+          <details class="region" open={needle !== ''}>
+            <summary><span>{region}</span> <span class="ui-count">{rows.length}</span></summary>
+            <dl>
+              {#each rows as row (row.n)}
+                <div class="row">
+                  <dt><a href={link('v', { method: String(row.n), c: char })} onclick={event => { event.preventDefault(); go('v', String(row.n)) }}>{row.name}</a></dt>
+                  <dd class="ui-mono">{row.forms.join(' · ')}</dd>
+                </div>
+              {/each}
+            </dl>
+          </details>
+        {/each}
+      </section>
+    {/if}
+
     {#each families as group (group.family)}
       <section class="family">
         <h3 class="ui-label">{t(`family.${group.family}`)}</h3>
@@ -94,10 +141,11 @@
   .links a{padding:2px var(--ui-space-sm);border:1px solid var(--ui-color-border);border-radius:var(--ui-radius-sm);font-size:var(--ui-text-xs);color:var(--ui-color-ink);text-decoration:none;white-space:nowrap}
   .links a:hover{background:var(--ui-color-surface-hover)}
   .links a.first{background:var(--ui-color-accent);border-color:var(--ui-color-accent);color:var(--ui-color-on-accent)}
+  .region summary{cursor:pointer;padding-block:3px;font-size:var(--ui-text-sm);border-bottom:1px solid var(--ui-color-border)}
   dl{display:grid;margin:0}
   .row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--ui-space-sm);padding-block:3px;border-bottom:1px solid var(--ui-color-border)}
   dt{font-size:var(--ui-text-xs);min-inline-size:0}
   dt a{color:var(--ui-color-ink-soft);text-decoration:none}
   dt a:hover{color:var(--ui-color-ink);text-decoration:underline}
-  dd{margin:0;font-size:var(--ui-text-xs);overflow-wrap:anywhere;font-family:var(--ui-font-mono),var(--ui-font-sans),'Jigmo','Jigmo2','Jigmo3'}
+  dd{margin:0;font-size:var(--ui-text-xs);overflow-wrap:anywhere;font-family:'Jigmo Ext',var(--ui-font-mono),var(--ui-font-sans),'Jigmo'}
 </style>

@@ -2,13 +2,13 @@
   // Find: one box for whatever the reader has. A clue is tried as a code in every method at once and
   // as a word of meaning. Several clues, split by spaces, leave the characters that fit them all.
   import { route, setQuery, link, go } from '../lib/route.svelte.js'
-  import { answer, groupHits, intersect, readQuery } from '../lib/search.js'
+  import { answer, groupHits, intersect, readQuery, tallyReadings } from '../lib/search.js'
   import { loadMethods } from '../lib/data.js'
   import { autofocus } from '../lib/ui.svelte.js'
   import { nameOf, t } from '../lib/i18n.svelte.js'
   import Tiles from '../ui/Tiles.svelte'
 
-  const EXAMPLES = ['ユタヘヘミ', 'jnd', 'zhong', '30407', '氵 12畫', 'water ジ', 'a672', 'U+5B57']
+  const EXAMPLES = ['ユタヘヘミ', 'jnd', 'luong', '端一東平', '30407', 'tsɿ', '氵 12畫', 'river ジ', 'a672', 'U+5B57']
 
   let query = $state(route.q)
   /** @type {import('../lib/search.js').Answer[]} */
@@ -40,6 +40,10 @@
   const many = $derived(answers.length > 1)
   const single = $derived(answers.length === 1 ? answers[0] : null)
   const groups = $derived(single ? groupHits(single.hits) : [])
+  const tally = $derived(single ? tallyReadings(single.readings) : [])
+  const tallyChars = $derived(tally.map(([char]) => char))
+  const tallyNotes = $derived(new Map(tally.map(([char, count]) => [char, String(count)])))
+  const varieties = $derived(single ? new Set(single.readings.map(hit => hit.n)).size : 0)
   const empty = $derived(!busy && answers.length > 0 && !common.length && !groups.length)
 </script>
 
@@ -92,6 +96,12 @@
         <Tiles chars={single.parts} limit={48} label={t('find.parts', { part: single.clue.text })} />
       </section>
     {/if}
+    {#if tally.length}
+      <section class="ui-section">
+        <h2 class="ui-label">{t('find.readings', { count: varieties, chars: tally.length })}</h2>
+        <Tiles chars={tallyChars} notes={tallyNotes} limit={48} label={t('find.readings', { count: varieties, chars: tally.length })} />
+      </section>
+    {/if}
     {#each groups as group (group.method)}
       {@const method = methods.get(group.method)}
       <section class="ui-section">
@@ -121,6 +131,6 @@
   .method a{color:inherit}
   .hits{display:grid;gap:var(--ui-space-xs)}
   .hit{display:grid;grid-template-columns:minmax(72px,auto) minmax(0,1fr);gap:var(--ui-space-md);align-items:center}
-  .code{font-size:var(--ui-text-sm);color:var(--ui-color-ink-soft);font-family:var(--ui-font-mono),var(--ui-font-sans),'Jigmo','Jigmo2','Jigmo3'}
+  .code{font-size:var(--ui-text-sm);color:var(--ui-color-ink-soft);font-family:'Jigmo Ext',var(--ui-font-mono),var(--ui-font-sans),'Jigmo'}
   .code.exact{color:var(--ui-color-accent-ink);font-weight:var(--ui-weight-semibold)}
 </style>
