@@ -2,15 +2,23 @@
 // always filed under the form a query will be folded to.
 
 const LATIN_WITH_MARK = /\p{Script=Latin}\p{M}*/gu
-const IGNORED = /[\s\-_'’ʼ`·・*]/g
+const IGNORED = /[\s\-_'’ʼ`·・*=+~]/g
 
-/** Lower case, half width, no tone marks on Latin, hiragana for katakana, no spaces or hyphens. @param {string} text */
+/**
+ * Lower case, half width, no tone marks on Latin, hiragana for katakana, no spaces or hyphens. IPA
+ * becomes its nearest plain letters, so a dialect reading can be typed on an ordinary keyboard.
+ * @param {string} text
+ */
 export function fold(text) {
   return text.normalize('NFKC').toLowerCase()
+    .replace(IPA_LETTERS, letter => IPA[/** @type {keyof typeof IPA} */ (letter)])
     .replace(LATIN_WITH_MARK, part => part.normalize('NFD').replace(/\p{M}/gu, ''))
     .replace(/[ァ-ヶ]/g, kana => String.fromCharCode(kana.charCodeAt(0) - 0x60))
     .replace(IGNORED, '')
 }
+
+const IPA = { 'ŋ': 'ng', 'ɲ': 'ny', 'ɐ': 'a', 'ɑ': 'a', 'ᴀ': 'a', 'ɒ': 'o', 'ɔ': 'o', 'ɛ': 'e', 'ə': 'e', 'ɜ': 'e', 'ɤ': 'e', 'æ': 'a', 'ɪ': 'i', 'ɨ': 'i', 'ʉ': 'u', 'ʊ': 'u', 'ɯ': 'u', 'ʏ': 'y', 'ø': 'o', 'œ': 'o', 'ɵ': 'o', 'ʰ': 'h', 'ʃ': 'sh', 'ʂ': 'sh', 'ʒ': 'zh', 'ʐ': 'r', 'ɕ': 'x', 'ʑ': 'z', 'ɿ': 'i', 'ʅ': 'i', 'ʮ': 'y', 'ʯ': 'y', 'ɦ': 'h', 'ɡ': 'g', 'ʔ': 'q', 'ː': '' }
+const IPA_LETTERS = new RegExp(`[${Object.keys(IPA).join('')}]`, 'gu')
 
 const TONE_MARKS = { '̄': '1', '́': '2', '̌': '3', '̀': '4' }
 
