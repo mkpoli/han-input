@@ -49,5 +49,5 @@ links open the site's search page.
 
 - No drawing pad yet.
 - The readings of a variety lose their notes (文白 and usage) in this index; 音典 keeps them.
-- Tables with no stated terms are published with that fact shown. Those, and the non-commercial ones
-  (表形碼, 導碼, E碼, 華象, the 通用 Hakka tables), are a question to settle before any public deployment.
+- Tables with no stated terms are published with that fact shown, as are the non-commercial ones (表形碼,
+  導碼, E碼, 華象, the 通用 Hakka tables).
