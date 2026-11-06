@@ -1,6 +1,7 @@
 // Kana and Nüshu: scripts derived from Han characters, findable by reading and, for kana, by the
 // character each form was written from.
 import { readFileSync } from 'node:fs'
+import * as OpenCC from 'opencc-js'
 import { fetchOnce } from '../lib.mjs'
 
 const UCD = 'https://www.unicode.org/Public/18.0.0/ucd'
@@ -21,13 +22,14 @@ export async function kanaMethods() {
     const match = name?.match(/^(?:HALFWIDTH )?(?:HIRAGANA|KATAKANA|HENTAIGANA) LETTER (.+)$/)
     if (!match) continue
     const char = String.fromCodePoint(parseInt(hex, 16))
-    const reading = match[1].toLowerCase()
+    // A space would split the name into two clues when typed; a hyphen folds away.
+    const reading = match[1].toLowerCase().replace(/ /g, '-')
     named.push([reading, char])
     const respelled = reading.replace(/\b(si|ti|tu|hu|zi|di|du)\b/, whole => HEPBURN[/** @type {keyof typeof HEPBURN} */ (whole)])
     hepburn.push([respelled, char])
   }
 
-  const el = readFileSync(await fetchOnce('https://raw.githubusercontent.com/kawabata/hentaigana/master/hentaigana.el', 'hentaigana.el'), 'utf8')
+  const el = readFileSync(await fetchOnce('https://raw.githubusercontent.com/kawabata/hentaigana/29c07a4e479239cdc389409630f57d8a103f7270/hentaigana.el', 'hentaigana.el'), 'utf8')
   const HENTAIGANA_EL = {
     name: 'hentaigana.el, version 1.170817', url: 'https://github.com/kawabata/hentaigana',
     licence: 'GPL-3.0-or-later, as the file states', attribution: '川幡太一 (KAWABATA Taichi), 2017',
@@ -41,7 +43,12 @@ export async function kanaMethods() {
     if (list) for (const form of forms) list.push([key, form])
   }
 
-  const rime = readFileSync(await fetchOnce('https://raw.githubusercontent.com/yuanhao-chen-nyoeghau/rime-hentaigana/master/hentaigana.dict.yaml', 'rime-hentaigana.dict.yaml'), 'utf8')
+  // The table lists old forms, and readers mostly type the new ones the file maps them to.
+  for (const [, older, newer] of el.matchAll(/\(\?(.) \. \?(.)\)/gu)) {
+    for (const [key, form] of fromHan.filter(([key]) => key === older)) fromHan.push([newer, form])
+  }
+
+  const rime = readFileSync(await fetchOnce('https://raw.githubusercontent.com/yuanhao-chen-nyoeghau/rime-hentaigana/daab772b5ae64562f7abd49897589d5429cc1009/hentaigana.dict.yaml', 'rime-hentaigana.dict.yaml'), 'utf8')
   const body = rime.slice(rime.indexOf('\n...') + 4)
   /** @type {[string, string][]} */
   const collection = body.split(/\r?\n/).filter(line => line && !line.startsWith('#')).map(line => {
@@ -61,12 +68,19 @@ export async function kanaMethods() {
     if (tag === 'kNSHU_Reading') nushuReadings.push([value, char])
     if (tag === 'kNSHU_DubenSrc') nushuDuben.push([value, char])
   }
-  const table = readFileSync(await fetchOnce('https://raw.githubusercontent.com/osfans/MCPDict/HEAD/tools/tables/data/unicode_nushu_data.csv', 'unicode_nushu_data.csv'), 'utf8')
+  const table = readFileSync(await fetchOnce('https://raw.githubusercontent.com/osfans/MCPDict/cc3e2932666fc0aff0d0b5d52751e75e5a2204bc/tools/tables/data/unicode_nushu_data.csv', 'unicode_nushu_data.csv'), 'utf8')
+  // The table writes simplified forms, so traditional ones are added by conversion.
+  const toTraditional = OpenCC.Converter({ from: 'cn', to: 'hk' })
   /** @type {[string, string][]} */
   const nushuHan = []
   for (const line of table.replace(/^\uFEFF/, '').split(/\r?\n/).slice(1)) {
     const [char, , han] = line.split(',')
-    if (char && han) for (const one of han) nushuHan.push([one, char])
+    if (!char || !han) continue
+    for (const one of han) {
+      nushuHan.push([one, char])
+      const traditional = toTraditional(one)
+      if (traditional !== one) nushuHan.push([traditional, char])
+    }
   }
 
   return [
@@ -75,14 +89,15 @@ export async function kanaMethods() {
     { id: 'kana-hepburn', family: 'extended', keys: 'a–z', names: { en: 'Kana in Hepburn', zh: '假名（平文式）', ja: '仮名（ヘボン式）' },
       about: 'Unicode’s names respelled by rule.', source: { name: 'UnicodeData.txt, respelled', url: `${UCD}/UnicodeData.txt`, ...UNICODE }, entries: hepburn },
     { id: 'kana-origin', family: 'extended', names: { en: 'Kana by source character', zh: '假名（字母）', ja: '仮名（字母）' },
-      about: 'The Han character a kana form was written from.', source: HENTAIGANA_EL, entries: fromHan },
+      about: 'The Han character a hiragana or hentaigana form was written from, in old and new forms.', source: HENTAIGANA_EL, entries: fromHan },
     { id: 'hentaigana-by-kana', family: 'extended', names: { en: 'Hentaigana by modern kana', zh: '變體假名（現行假名）', ja: '変体仮名（現行仮名）' }, source: HENTAIGANA_EL, entries: fromKana },
-    { id: 'kana-rime', family: 'extended', keys: 'a–z', names: { en: 'Kana Syū, including Taiwanese and Ainu kana', zh: '仮名集', ja: '仮名集' },
+    { id: 'kana-rime', family: 'extended', keys: 'a–z', names: { en: 'Kana Syū', zh: '仮名集', ja: '仮名集' },
       source: { name: 'rime-hentaigana, hentaigana.dict.yaml', url: 'https://github.com/yuanhao-chen-nyoeghau/rime-hentaigana', licence: 'Apache-2.0' }, entries: collection },
     { id: 'nushu-reading', family: 'extended', names: { en: 'Nüshu by Jiangyong reading', zh: '女書（江永讀音）' },
       source: { name: 'NushuSources.txt, kNSHU_Reading', url: `${UCD}/NushuSources.txt`, ...UNICODE }, entries: nushuReadings },
     { id: 'nushu-han', family: 'extended', names: { en: 'Nüshu by corresponding Han character', zh: '女書（對應漢字）' },
-      source: { name: 'unicode_nushu_data.csv, as carried by 漢字音典 (MCPDict) 20261104', url: 'https://github.com/osfans/MCPDict', licence: 'MCPDict repository MIT; no separate terms checked for this table', attribution: 'osfans and contributors' }, entries: nushuHan },
+      about: 'Traditional forms are converted from the table’s simplified ones.',
+      source: { name: 'unicode_nushu_data.csv, as carried by 漢字音典 (MCPDict), commit cc3e293', url: 'https://github.com/osfans/MCPDict', licence: 'MCPDict repository MIT; no separate terms checked for this table', attribution: 'osfans and contributors' }, entries: nushuHan },
     { id: 'nushu-duben', family: 'index', names: { en: 'Nüshu Duben position', zh: '《女書讀本》位置' },
       source: { name: 'NushuSources.txt, kNSHU_DubenSrc', url: `${UCD}/NushuSources.txt`, ...UNICODE }, entries: nushuDuben },
   ]

@@ -23,8 +23,9 @@ Discord discussion of 2026-10-27, and the works themselves were not read.
 | [cin-tables](https://github.com/chinese-opendesktop/cin-tables) | 103 `.cin` tables | Per file; the header line is shown on each method's page. Repository CC0-1.0 |
 | Rime tables named in `scripts/sources/index.mjs` | codes and spellings | Per repository |
 | [UnicodeData.txt and NushuSources.txt](https://www.unicode.org/Public/18.0.0/ucd/), Unicode 18.0 | kana names, Nüshu readings and Nüshu Duben positions | Unicode License v3 |
-| [hentaigana.el](https://github.com/kawabata/hentaigana) 1.170817, 川幡太一 | the Han character each kana form was written from, and hentaigana by modern kana | GPL-3.0-or-later |
-| [rime-hentaigana](https://github.com/yuanhao-chen-nyoeghau/rime-hentaigana) | kana by spelling, with Taiwanese and Ainu kana | Apache-2.0 |
+| [hentaigana.el](https://github.com/kawabata/hentaigana) 1.170817, 川幡太一 | the Han character each hiragana and hentaigana form was written from, and hentaigana by modern kana | GPL-3.0-or-later |
+| [rime-hentaigana](https://github.com/yuanhao-chen-nyoeghau/rime-hentaigana) | kana by spelling | Apache-2.0 |
+| `unicode_nushu_data.csv` in [漢字音典 MCPDict](https://github.com/osfans/MCPDict), commit `cc3e293` | the Han characters each Nüshu character corresponds to, with traditional forms converted by OpenCC | MCPDict repository MIT; no separate terms stated for this table |
 | [BabelStone IDS](https://www.babelstone.co.uk/CJK/IDS.TXT), Andrew West | which parts each character is written with | As stated in the file |
 | [Noto Sans Nushu and Noto Serif Hentaigana](https://github.com/notofonts) | glyphs for Nüshu and hentaigana | OFL-1.1 |
 | [Jigmo](https://kamichikoichi.github.io/jigmo/) 2025-09-12, 上地宏一 | glyphs for the extension blocks, cut by `scripts/build_fonts.py` | CC0-1.0 |
@@ -51,6 +52,9 @@ links open the site's search page.
 ## Known gaps
 
 - No drawing pad yet.
+- Kana written with a combining mark (か゚, カ̣, ㇷ゚) are not indexed, since an entry is one code point. That leaves out the dotted Taiwanese kana and some Ainu kana.
+- Katakana have no source characters: `hentaigana.el` gives them for hiragana and hentaigana only.
+- 26 kana have no bundled glyph, among them the Minnan letters (U+1AFF0–U+1AFFF) and U+1B150, and depend on the reader's system fonts.
 - The readings of a variety lose their notes (文白 and usage) in this index; 音典 keeps them.
 - Tables with no stated terms are published with that fact shown. Those, and the non-commercial ones
   (表形碼, 導碼, E碼, 華象, the 通用 Hakka tables), are a question to settle before any public deployment.
