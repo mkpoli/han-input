@@ -46,7 +46,7 @@
   "find.parts": "Written with {part}",
   "find.moreCodes": "{count} more codes",
   "methods.title": "Every way in",
-  "methods.intro": "Open one to type in it.",
+  "methods.intro": "Open a method to type in it.",
   "methods.filter": "Filter by name",
   "methods.count": "{chars} characters",
   "method.reach": "{codes} codes for {chars} characters.",
