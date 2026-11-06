@@ -76,7 +76,7 @@
 
 <div class="site-select" bind:this={root}>
   <button class="site-trigger" type="button" bind:this={trigger}
-    aria-haspopup="menu" aria-expanded={open} aria-controls={open ? `sites-${uid}` : undefined} aria-label={t('app.sites')}
+    aria-haspopup="menu" aria-expanded={open} aria-controls={open ? `sites-${uid}` : undefined} aria-label={`${t('app.name')}: ${t('app.sites')}`}
     onclick={() => (open ? hide() : show())} onkeydown={triggerKeys}>
     {@render children()}
     <svg class="chevron" class:up={open} viewBox="0 0 10 10" width="10" height="10" aria-hidden="true"><path d="M2 3.5 5 6.5 8 3.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -86,10 +86,10 @@
       {#each SITES as site (site.id)}
         {@const current = site.id === 'han'}
         <a class="ui-menu-item site-item" role="menuitem" tabindex="-1" href={site.href}
-          aria-current={current ? 'page' : undefined}
-          onclick={event => { if (current) home(event); hide() }}>
+          aria-current={current ? 'true' : undefined}
+          onclick={event => { if (current) home(event); hide(current) }}>
           <img src={site.logo} alt="" width="28" height="28" />
-          <span class="site-name">{site.name}</span>
+          <span class="site-name">{current ? t('app.name') : site.name}</span>
           {#if current}
             <svg class="check" viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="m3 8.5 3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
           {/if}
