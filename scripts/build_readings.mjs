@@ -8,7 +8,7 @@ import { Database } from 'bun:sqlite'
 import { appendFileSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { gzipSync } from 'node:zlib'
-import { codeBucket, fold, isHan } from '../src/fold.js'
+import { codeBucket, fold, inScope } from '../src/fold.js'
 import { CACHE } from './lib.mjs'
 
 const DB = join(CACHE, 'mcpdict/x/assets/databases/mcpdict.db')
@@ -60,7 +60,7 @@ let seen = 0
 for (const row of /** @type {IterableIterator<{ c0: string, c1: string, c2: string }>} */ (db.query('select c0, c1, c2 from langs_content').iterate())) {
   const n = indexOf.get(row.c1)
   if (n === undefined || !row.c2) continue
-  const chars = row.c0.split(' ').filter(isHan).join('')
+  const chars = row.c0.split(' ').filter(inScope).join('')
   if (chars) raw.add(String(n), `${row.c2}\t${chars}`)
   if (++seen % 1_000_000 === 0) console.log(`  ${seen}`)
 }

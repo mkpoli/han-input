@@ -32,8 +32,15 @@ export function pinyinDigits(syllable) {
 /** Whether a string is exactly one Han character. @param {string} text */
 export const isHan = text => /^\p{Script=Han}$/u.test(text)
 
-/** The Han characters of a string, in order. @param {string} text @returns {string[]} */
-export const hanIn = text => text.match(/\p{Script=Han}/gu) ?? []
+/**
+ * Whether a string is one character of a script this site covers: Han with its extended forms, and the
+ * kana and Nüshu derived from it. Siniform scripts such as Tangut, Jurchen and Khitan are out.
+ * @param {string} text
+ */
+export const inScope = text => /^[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Nushu}]$/u.test(text)
+
+/** The Han and Nüshu characters of a string, in order. Kana stays out: a run of it is a code or a reading. @param {string} text @returns {string[]} */
+export const hanIn = text => text.match(/[\p{Script=Han}\p{Script=Nushu}]/gu) ?? []
 
 const BUCKETS = 4096
 

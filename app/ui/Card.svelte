@@ -8,6 +8,7 @@
   import { copy } from '../lib/clip.svelte.js'
   import { nameOf, t } from '../lib/i18n.svelte.js'
   import { FAMILIES } from '../lib/families.js'
+  import { isHan } from '../../src/fold.js'
 
   const char = $derived(route.c)
   const cp = $derived(char ? `U+${(char.codePointAt(0) ?? 0).toString(16).toUpperCase()}` : '')
@@ -83,7 +84,7 @@
     <section class="more">
       <h3 class="ui-label">{t('card.more')}</h3>
       <div class="links">
-        {#each LINKS as site (site.key)}
+        {#each LINKS.filter(site => site.every || isHan(char)) as site (site.key)}
           <a href={site.url(char)} target="_blank" rel="noopener noreferrer" class:first={site.key === 'zitools'}>{site.name}</a>
         {/each}
       </div>

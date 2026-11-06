@@ -8,7 +8,7 @@
   import { nameOf, t } from '../lib/i18n.svelte.js'
   import Tiles from '../ui/Tiles.svelte'
 
-  const EXAMPLES = ['ユタヘヘミ', 'jnd', 'luong', '端一東平', '30407', 'tsɿ', '氵 12畫', 'river ジ', 'a672', 'U+5B57']
+  const EXAMPLES = ['ユタヘヘミ', 'jnd', 'luong', '端一東平', '30407', 'tsɿ', '氵 12畫', 'river ジ', 'chữ', 'a-1', 'a672', 'U+5B57']
 
   let query = $state(route.q)
   /** @type {import('../lib/search.js').Answer[]} */

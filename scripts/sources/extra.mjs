@@ -2,12 +2,10 @@
 import { execFileSync } from 'node:child_process'
 import { readFileSync } from 'node:fs'
 import { gunzipSync } from 'node:zlib'
+import { inScope as isHan } from '../../src/fold.js'
 import { fetchOnce } from '../lib.mjs'
 import { readRimeDict } from './rime.mjs'
 
-const HAN = /^\p{Script=Han}$/u
-/** @param {string} text */
-const isHan = text => HAN.test(text)
 
 /** @param {string} text */
 const decodeEntities = text => text.replace(/&(amp|lt|gt|quot|apos);/g, (_, name) => ({ amp: '&', lt: '<', gt: '>', quot: '"', apos: "'" })[/** @type {'amp'} */ (name)])

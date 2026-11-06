@@ -1,6 +1,6 @@
 // A query is one or more clues, split on spaces. Each clue names a set of characters; several clues
 // leave the characters in all of them.
-import { hanIn, isHan } from '../../src/fold.js'
+import { hanIn, inScope, isHan } from '../../src/fold.js'
 import { findCodes, findMeaning, findPart, findReadings, loadChars } from './data.js'
 
 /**
@@ -17,6 +17,7 @@ export function readClue(term, alone) {
   const scoped = term.match(/^([a-z][\w-]*):(.+)$/)
   if (scoped) return { kind: 'scoped', text: term, method: scoped[1], code: scoped[2] }
   if (isHan(term)) return { kind: alone ? 'text' : 'part', text: term }
+  if (alone && inScope(term)) return { kind: 'text', text: term }
   if (hanIn(term).length === [...term].length) return { kind: 'text', text: term }
   return { kind: 'code', text: term }
 }
@@ -61,7 +62,7 @@ async function lookUp(clue) {
     return out
   }
   if (clue.kind === 'text') {
-    out.chars = hanIn(clue.text)
+    out.chars = [...clue.text].filter(inScope)
     out.hits = await findCodes(clue.text)
     out.parts = [...clue.text].length === 1 ? await findPart(clue.text) : []
     out.meaning = await findMeaning(clue.text)

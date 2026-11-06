@@ -76,6 +76,14 @@ const FINDS = [
   ['A meaning in English', 'dragon', '龍'],
   ['A meaning in Chinese', '河流', '河'],
   ['A code point', 'U+5B57', '字'],
+  ['Kana by spelling', 'shi', 'し'],
+  ['Hentaigana by name', 'a-1', '\u{1B002}'],
+  ['Kana by source character', '安', 'あ'],
+  ['Hentaigana by source character', '安', '\u{1B002}'],
+  ['A pasted kana', 'あ', 'あ'],
+  ['Nüshu by reading', 'na33', '\u{1B171}'],
+  ['Nüshu by Han character', '一', '\u{1B170}'],
+  ['Nüshu by code point', 'U+1B170', '\u{1B170}'],
 ]
 for (const [name, query, char] of FINDS) {
   await check(`find ${name}: ${query} → ${char}`, async () => assert.ok((await find(query)).includes(char)))
@@ -89,9 +97,12 @@ await check('clues narrow: 氵 with 12 strokes leaves 湖 and not 河', async ()
 await check('clues narrow: reading and meaning', async () => {
   assert.ok((await find('liu2 river')).includes('流'))
 })
-await check('siniform scripts stay out', async () => {
-  const found = await find('U+18E01')
-  assert.equal(found.join('').includes('字'), false)
+await check('siniform scripts stay out of the tables', async () => {
+  const methods = await (await fetch(`${SITE}/data/methods.json`)).json()
+  assert.ok(!methods.some((/** @type {{ id: string }} */ method) => /tangut|jurchen|khitan/i.test(method.id)))
+  await page.goto(`${SITE}/?q=U%2B18E01&c=18E01`)
+  await page.waitForLoadState('networkidle')
+  assert.equal(await page.locator('.card dl .row').count(), 0)
 })
 
 await check('the card lists codes, every reading, and 字統 first', async () => {
@@ -124,8 +135,8 @@ await check('rhyme table opens a character', async () => {
   await page.locator('.cell').first().click()
   await page.waitForURL(/c=/)
 })
-for (const [name, hex] of [['Extension B', '20000'], ['Extension G', '30000'], ['Extension J', '33473']]) {
-  await check(`${name} is drawn by Jigmo, not an empty box`, async () => {
+for (const [name, hex] of [['Extension B', '20000'], ['Extension G', '30000'], ['Extension J', '33473'], ['Nüshu', '1B170'], ['Hentaigana', '1B002']]) {
+  await check(`${name} is drawn by a bundled face, not an empty box`, async () => {
     await page.goto(`${SITE}/?c=${hex}`)
     await page.waitForLoadState('networkidle')
     await page.waitForFunction(() => document.fonts.status === 'loaded')
@@ -140,7 +151,7 @@ for (const [name, hex] of [['Extension B', '20000'], ['Extension G', '30000'], [
 }
 await check('no script errors', async () => assert.equal(errors.join(' | '), ''))
 
-const SHOTS = [['find', '/?q=lung4&c=9F8D'], ['clues', '/?q=%E6%B0%B5+12%E7%95%AB&c=6E56'], ['methods', '/methods'], ['ashide', '/m/ashide?q=%E3%83%A6%E3%82%BF'], ['readings', '/readings'], ['rhymes', '/rhymes?q=%E6%9D%B1&c=6771'], ['radicals', '/radicals?q=85'], ['rare', '/?c=33473'], ['about', '/about']]
+const SHOTS = [['find', '/?q=lung4&c=9F8D'], ['clues', '/?q=%E6%B0%B5+12%E7%95%AB&c=6E56'], ['methods', '/methods'], ['ashide', '/m/ashide?q=%E3%83%A6%E3%82%BF'], ['readings', '/readings'], ['rhymes', '/rhymes?q=%E6%9D%B1&c=6771'], ['radicals', '/radicals?q=85'], ['rare', '/?c=33473'], ['nushu', '/?q=%E4%B8%80&c=1B170'], ['hentaigana', '/?q=%E5%AE%89&c=1B002'], ['about', '/about']]
 for (const [theme, phone] of [['light', false], ['dark', false], ['light', true], ['dark', true]]) {
   const view = await browser.newContext({ viewport: phone ? { width: 390, height: 844 } : { width: 1360, height: 900 }, deviceScaleFactor: 2, colorScheme: /** @type {'light' | 'dark'} */ (theme), locale: 'en-US' })
   const tab = await view.newPage()
