@@ -80,6 +80,13 @@ const FINDS = [
   ['Hentaigana by name', 'a-1', '\u{1B002}'],
   ['Kana by source character', '安', 'あ'],
   ['Hentaigana by source character', '安', '\u{1B002}'],
+  ['Kana by a new-form source character', '与', 'よ'],
+  ['Kana by an old-form source character', '與', 'よ'],
+  ['A kana name with two words', 'small-a', 'ぁ'],
+  ['The same name without its hyphen', 'smalla', 'ぁ'],
+  ['A kana newer than the runtime', 'alternate-ne', '\u{1B127}'],
+  ['A Han character newer than the runtime', 'U+2B81E', '\u{2B81E}'],
+  ['Nüshu by a traditional Han character', '錯', '\u{1B172}'],
   ['A pasted kana', 'あ', 'あ'],
   ['Nüshu by reading', 'na33', '\u{1B171}'],
   ['Nüshu by Han character', '一', '\u{1B170}'],
@@ -96,6 +103,15 @@ await check('clues narrow: 氵 with 12 strokes leaves 湖 and not 河', async ()
 })
 await check('clues narrow: reading and meaning', async () => {
   assert.ok((await find('liu2 river')).includes('流'))
+})
+await check('clues combine a source character with a code', async () => {
+  assert.ok((await find('安 a-1')).includes('\u{1B002}'))
+  assert.ok((await find('日 na33')).includes('\u{1B171}'))
+  assert.ok((await find('a-1 \u{1B002}')).includes('\u{1B002}'))
+})
+await check('a code typed exactly comes before the readings it folds onto', async () => {
+  await find('a-1')
+  assert.match(await page.locator('main .ui-section h2').first().innerText(), /kana/i)
 })
 await check('siniform scripts stay out of the tables', async () => {
   const methods = await (await fetch(`${SITE}/data/methods.json`)).json()
@@ -135,7 +151,7 @@ await check('rhyme table opens a character', async () => {
   await page.locator('.cell').first().click()
   await page.waitForURL(/c=/)
 })
-for (const [name, hex] of [['Extension B', '20000'], ['Extension G', '30000'], ['Extension J', '33473'], ['Nüshu', '1B170'], ['Hentaigana', '1B002']]) {
+for (const [name, hex] of [['Extension B', '20000'], ['Extension G', '30000'], ['Extension J', '33473'], ['Nüshu', '1B170'], ['Nüshu iteration mark', '16FE1'], ['Hentaigana', '1B002']]) {
   await check(`${name} is drawn by a bundled face, not an empty box`, async () => {
     await page.goto(`${SITE}/?c=${hex}`)
     await page.waitForLoadState('networkidle')
