@@ -1,6 +1,7 @@
 {
   "app.name": "Han Input",
-  "app.home": "Han Input home",
+  "app.sites": "Sites",
+  "app.sites.more": "More writing-system projects",
   "nav.label": "Pages",
   "nav.find": "Find",
   "nav.methods": "Methods",

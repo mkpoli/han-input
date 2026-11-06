@@ -1,6 +1,7 @@
 {
   "app.name": "한자 찾기",
-  "app.home": "처음으로",
+  "app.sites": "사이트",
+  "app.sites.more": "다른 문자 프로젝트",
   "nav.label": "페이지",
   "nav.find": "찾기",
   "nav.methods": "입력법",

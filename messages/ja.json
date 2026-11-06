@@ -1,6 +1,7 @@
 {
   "app.name": "漢字検索",
-  "app.home": "トップページ",
+  "app.sites": "サイト",
+  "app.sites.more": "他の文字プロジェクト",
   "nav.label": "ページ",
   "nav.find": "探す",
   "nav.methods": "入力法",

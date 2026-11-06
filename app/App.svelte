@@ -8,6 +8,7 @@
   import Writing from './ui/Writing.svelte'
   import SettingsRows from './ui/SettingsRows.svelte'
   import Card from './ui/Card.svelte'
+  import SiteSelect from './ui/SiteSelect.svelte'
   import Find from './pages/Find.svelte'
   import Methods from './pages/Methods.svelte'
   import Method from './pages/Method.svelte'
@@ -43,7 +44,9 @@
 
 <div class="shell">
   <nav class="rail" aria-label={t('nav.label')}>
-    <a class="seal ui-script" href="/" aria-label={t('app.home')} onclick={event => nav(event, '')}>字</a>
+    <div class="site">
+      <SiteSelect home={event => nav(event, '')}><span class="seal ui-script" aria-hidden="true">字</span></SiteSelect>
+    </div>
     <div class="pages">
       {#each NAV as entry (entry.path)}
         <a href="/{entry.path}" class:on={current === entry.path} aria-current={current === entry.path ? 'page' : undefined} onclick={event => nav(event, entry.path)}>{t(entry.label)}</a>
@@ -77,7 +80,8 @@
 <style>
   .shell{--rail-w:104px;--card-w:440px;--dock-h:56px;display:grid;grid-template-columns:var(--rail-w) minmax(0,1fr) var(--card-w);grid-template-rows:minmax(0,1fr) var(--dock-h);block-size:100dvh}
   .rail{grid-row:1 / span 2;display:flex;flex-direction:column;align-items:stretch;background:var(--p-rail);color:var(--p-rail-ink);padding-block:var(--ui-space-lg)}
-  .seal{align-self:center;display:grid;place-items:center;inline-size:48px;block-size:48px;border-radius:2px;background:var(--p-seal);color:#fff8f2;font-size:34px;line-height:1;text-decoration:none}
+  .site{position:relative;display:flex;justify-content:center}
+  .seal{display:grid;place-items:center;inline-size:48px;block-size:48px;border-radius:2px;background:var(--p-seal);color:#fff8f2;font-size:34px;line-height:1;text-decoration:none}
   .pages{display:flex;flex-direction:column;gap:2px;margin-block-start:var(--ui-space-2xl)}
   .pages a{padding:var(--ui-space-sm) var(--ui-space-sm);color:var(--p-rail-soft);text-decoration:none;font-size:var(--ui-text-sm);text-align:center;border-inline-start:3px solid transparent;line-height:1.25}
   .pages a:hover{color:var(--p-rail-ink);background:color-mix(in srgb,var(--p-rail-active) 55%,transparent)}
@@ -94,7 +98,7 @@
   @media (max-width:900px){
     .shell{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) var(--dock-h) auto}
     .rail{grid-column:1;grid-row:3;flex-direction:row;align-items:center;padding:var(--ui-space-2xs) var(--ui-space-xs) calc(var(--ui-space-2xs) + env(safe-area-inset-bottom));min-inline-size:0}
-    .seal{display:none}
+    .site{display:none}
     .pages{flex-direction:row;flex:1;margin:0;overflow-x:auto;scrollbar-width:none}
     .pages a{flex:none;padding:var(--ui-space-xs) var(--ui-space-sm);border-inline-start:0;border-block-end:2px solid transparent;white-space:nowrap}
     .pages a.on{border-block-end-color:var(--p-seal)}

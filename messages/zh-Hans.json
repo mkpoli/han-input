@@ -1,6 +1,7 @@
 {
   "app.name": "汉字检索",
-  "app.home": "首页",
+  "app.sites": "网站",
+  "app.sites.more": "更多文字项目",
   "nav.label": "页面",
   "nav.find": "查找",
   "nav.methods": "输入法",
