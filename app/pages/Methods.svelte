@@ -21,8 +21,8 @@
 
 <div class="ui-page" data-width="wide">
   <header class="ui-page-head">
-    <h1 class="ui-page-title">{t('methods.title')}</h1>
-    <p class="ui-page-intro">{t('methods.intro', { count: methods.length })}</p>
+    <h1 class="ui-page-title">{t('methods.title')} <span class="ui-count">{methods.length}</span></h1>
+    <p class="ui-page-intro">{t('methods.intro')}</p>
   </header>
   <input class="ui-input" type="search" bind:value={filter} placeholder={t('methods.filter')} aria-label={t('methods.filter')}>
   {#each groups as group (group.family)}

@@ -25,8 +25,8 @@
 
 <div class="ui-page" data-width="wide">
   <header class="ui-page-head">
-    <h1 class="ui-page-title">{t('readings.title')}</h1>
-    <p class="ui-page-intro">{t('readings.intro', { count: varieties.length.toLocaleString() })}</p>
+    <h1 class="ui-page-title">{t('readings.title')} <span class="ui-count">{varieties.length.toLocaleString()}</span></h1>
+    <p class="ui-page-intro">{t('readings.intro')}</p>
   </header>
   <input class="ui-input" type="search" data-primary bind:value={filter} placeholder={t('readings.filter')} aria-label={t('readings.filter')}>
   {#each groups as [group, rows] (group)}
