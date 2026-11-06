@@ -22,5 +22,5 @@
 @font-face { font-family: 'Han Ext'; src: url('/fonts/jigmo-31.woff2') format('woff2'); font-display: swap; unicode-range: U+31000-31FFF; }
 @font-face { font-family: 'Han Ext'; src: url('/fonts/jigmo-32.woff2') format('woff2'); font-display: swap; unicode-range: U+32000-32FFF; }
 @font-face { font-family: 'Han Ext'; src: url('/fonts/jigmo-33.woff2') format('woff2'); font-display: swap; unicode-range: U+33000-33FFF; }
-@font-face { font-family: 'Han Ext'; src: url('/fonts/noto-nushu.woff2') format('woff2'); font-display: swap; unicode-range: U+1B170-1B2FF; }
+@font-face { font-family: 'Han Ext'; src: url('/fonts/noto-nushu.woff2') format('woff2'); font-display: swap; unicode-range: U+16FE1, U+1B170-1B2FF; }
 @font-face { font-family: 'Han Ext'; src: url('/fonts/noto-hentaigana.woff2') format('woff2'); font-display: swap; unicode-range: U+1B000-1B16F; }

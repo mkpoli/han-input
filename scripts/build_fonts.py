@@ -46,7 +46,7 @@ source = ROOT / "cache/jigmo/Jigmo.ttf"
 cmap = TTFont(source, lazy=True).getBestCmap()
 cut(source, [code for code in cmap if 0x2E80 <= code < 0x10000], "jigmo-bmp.woff2")
 
-for family_file, name, codes in (("NotoSansNushu", "noto-nushu.woff2", "U+1B170-1B2FF"), ("NotoSerifHentaigana", "noto-hentaigana.woff2", "U+1B000-1B16F")):
+for family_file, name, codes in (("NotoSansNushu", "noto-nushu.woff2", "U+16FE1, U+1B170-1B2FF"), ("NotoSerifHentaigana", "noto-hentaigana.woff2", "U+1B000-1B16F")):
     font = TTFont(ROOT / "cache/noto" / f"{family_file}.ttf")
     font.flavor = "woff2"
     font.save(OUT / name)
