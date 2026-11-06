@@ -131,6 +131,6 @@
   .method a{color:inherit}
   .hits{display:grid;gap:var(--ui-space-xs)}
   .hit{display:grid;grid-template-columns:minmax(72px,auto) minmax(0,1fr);gap:var(--ui-space-md);align-items:center}
-  .code{font-size:var(--ui-text-sm);color:var(--ui-color-ink-soft);font-family:'Jigmo Ext',var(--ui-font-mono),var(--ui-font-sans),'Jigmo'}
+  .code{font-size:var(--ui-text-sm);color:var(--ui-color-ink-soft);font-family:'Han Ext',var(--ui-font-mono),var(--ui-font-sans),'Jigmo'}
   .code.exact{color:var(--ui-color-accent-ink);font-weight:var(--ui-weight-semibold)}
 </style>

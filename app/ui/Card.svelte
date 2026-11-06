@@ -147,5 +147,5 @@
   dt{font-size:var(--ui-text-xs);min-inline-size:0}
   dt a{color:var(--ui-color-ink-soft);text-decoration:none}
   dt a:hover{color:var(--ui-color-ink);text-decoration:underline}
-  dd{margin:0;font-size:var(--ui-text-xs);overflow-wrap:anywhere;font-family:'Jigmo Ext',var(--ui-font-mono),var(--ui-font-sans),'Jigmo'}
+  dd{margin:0;font-size:var(--ui-text-xs);overflow-wrap:anywhere;font-family:'Han Ext',var(--ui-font-mono),var(--ui-font-sans),'Jigmo'}
 </style>
