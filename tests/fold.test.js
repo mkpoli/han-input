@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'bun:test'
-import { charBucket, codeBucket, fold, hanIn, inScope, isHan, pinyinDigits } from '../src/fold.js'
+import { charBucket, codeBucket, fold, hanIn, inScope, isHan, isRareKana, pinyinDigits } from '../src/fold.js'
 
 describe('fold', () => {
   test('drops tone marks and case on Latin', () => {
@@ -51,6 +51,15 @@ describe('scope', () => {
   test('takes Han, kana, hentaigana and Nüshu, and leaves out siniform scripts', () => {
     for (const char of ['字', '𡨸', 'あ', 'ア', '\u{1B002}', '\u{1B170}']) expect(inScope(char)).toBe(true)
     for (const char of ['\u{17000}', '\u{18E01}', '\u{18B00}', 'a', '한']) expect(inScope(char)).toBe(false)
+  })
+  test('takes characters newer than the runtime knows', () => {
+    expect(isHan('\u{2B81E}')).toBe(true)
+    expect(inScope('\u{1B127}')).toBe(true)
+    expect(inScope('\u{1B168}')).toBe(true)
+  })
+  test('tells the supplement kana from modern kana', () => {
+    expect(isRareKana('\u{1B002}')).toBe(true)
+    expect(isRareKana('あ')).toBe(false)
   })
   test('a run of kana is not read as characters, and Nüshu is', () => {
     expect(hanIn('ユタ')).toEqual([])
