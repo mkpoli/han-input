@@ -14,6 +14,13 @@
   const char = $derived(route.c)
   const cp = $derived(char ? `U+${(char.codePointAt(0) ?? 0).toString(16).toUpperCase()}` : '')
   const puaRows = $derived(char ? puaOf(char) : [])
+
+  /** @param {MouseEvent} event @param {string} to */
+  function follow(event, to) {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return
+    event.preventDefault()
+    open(to)
+  }
   /** @type {Map<string, string[]>} */
   let codes = $state(new Map())
   /** @type {import('../lib/data.js').Method[]} */
@@ -87,13 +94,13 @@
       <section class="family">
         <h3 class="ui-label">{t('pua.title')} <span class="ui-count">{puaRows.length}</span></h3>
         <dl>
-          {#each puaRows as row (row.code + row.char)}
+          {#each puaRows as row (row.code + row.char + row.relation)}
             <div class="row">
               <dt>
                 {#if row.relation === 'own'}
                   {t('pua.own')}
                 {:else}
-                  <a href={link(route.page, { c: row.char })} onclick={event => { event.preventDefault(); open(row.char) }}>{row.char}</a> · {t(`pua.relation.${row.relation}`)}
+                  <a href={link(route.page, { method: route.method, c: row.char })} lang="und-Hani" onclick={event => follow(event, row.char)}>{row.char}</a> · {t(`pua.relation.${row.relation}`)}
                 {/if}
               </dt>
               <dd class="ui-mono">{row.code}</dd>

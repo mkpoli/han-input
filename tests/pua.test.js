@@ -60,6 +60,9 @@ describe('lookup', () => {
     expect(puaChar('FFFF')).toBe('')
     expect(puaChar('ZZZZ')).toBe('')
   })
+  test('leaves hex above the code space alone', () => {
+    for (const hex of ['FFFFFF', '110000', '123456', 'U+FFFFFF']) expect(puaChar(hex)).toBe('')
+  })
   test('lists a character’s own PUA codes', () => {
     expect(puaOf('䀯')).toEqual([{ code: 'U+E43B', char: '䀯', relation: 'own' }])
     expect(puaOf('雞')).toEqual([{ code: 'U+E463', char: '雞', relation: 'own' }])
@@ -92,10 +95,23 @@ describe('variant index', () => {
       鸡: [{ char: '雞', relation: 'traditional' }],
     })
   })
-  test('swaps the relation when the PUA character is the one pointed at', () => {
+  test('names the inverse relation when the PUA character is the row’s own', () => {
     const line = 'U+4E00\tkSimplifiedVariant\tU+3400'
     expect(variantIndex(line, new Set(['㐀']))).toEqual({ 一: [{ char: '㐀', relation: 'simplified' }] })
     expect(variantIndex(line, new Set(['一']))).toEqual({ 㐀: [{ char: '一', relation: 'traditional' }] })
+  })
+  test('reads specialized, Z and multi-target rows, once per relation', () => {
+    const rows = [
+      'U+3400\tkSpecializedSemanticVariant\tU+4E00',
+      'U+4E01\tkZVariant\tU+4E00 U+4E02',
+      'U+4E02\tkSemanticVariant\tU+4E00',
+    ].join('\n')
+    expect(variantIndex(rows, new Set(['一']))).toEqual({
+      㐀: [{ char: '一', relation: 'specialized' }],
+      丁: [{ char: '一', relation: 'z' }],
+      丂: [{ char: '一', relation: 'semantic' }],
+    })
+    expect(variantIndex('U+4E01\tkZVariant\tU+4E00\nU+4E01\tkZVariant\tU+4E00', new Set(['一']))).toEqual({ 丁: [{ char: '一', relation: 'z' }] })
   })
   test('leaves out characters with no PUA on either side', () => {
     expect(variantIndex(body, new Set(['字']))).toEqual({})

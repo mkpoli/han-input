@@ -1,10 +1,13 @@
 // bun scripts/import_moe_pua_variants.mjs [Unihan_Variants.txt]
 // Unihan's variant relations run both ways: a row names the variant of its own character. This index
-// keeps only relations that touch a character with an MOE PUA code, and swaps the relation name when the
-// PUA character is the one a row points to.
+// keeps only relations that touch a character with an MOE PUA code. When the row's own character has
+// the PUA code, the relation is named from the other side, as that character's card will read it.
 import { createHash } from 'node:crypto'
 import { readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
+
+const SHA256 = '4ccfd34b08ac7b9c14353f6668ba43e3796d85c4cdce7952b635be16015aafa2'
+const VERSION = '18.0.0'
 
 const RELATIONS = {
   kSimplifiedVariant: { relation: 'simplified', inverse: 'traditional' },
@@ -22,7 +25,6 @@ export function variantIndex(body, withPua) {
     let row = byChar.get(char)
     if (!row) byChar.set(char, row = new Map())
     row.set(`${other}\t${relation}`, relation)
-    byChar.set(char, row)
   }
   for (const line of body.split('\n')) {
     if (!line.startsWith('U+')) continue
@@ -47,14 +49,16 @@ export function variantIndex(body, withPua) {
 if (import.meta.main) {
   const input = process.argv[2] ?? join(import.meta.dirname, '..', 'cache', 'unihan', 'Unihan_Variants.txt')
   const body = readFileSync(input, 'utf8')
+  const sha256 = createHash('sha256').update(body).digest('hex')
+  if (sha256 !== SHA256) throw new Error('Unihan_Variants.txt changed; review the new file before importing')
   const mapping = JSON.parse(readFileSync(join(import.meta.dirname, '..', 'data', 'moe-pua.json'), 'utf8'))
   const data = {
     source: {
-      name: 'Unihan 18.0.0, variant fields',
-      url: 'https://www.unicode.org/Public/18.0.0/ucd/Unihan.zip',
-      version: '18.0.0',
+      name: `Unihan ${VERSION}, variant fields`,
+      url: `https://www.unicode.org/Public/${VERSION}/ucd/Unihan.zip`,
+      version: VERSION,
       fields: Object.keys(RELATIONS),
-      sha256: createHash('sha256').update(body).digest('hex'),
+      sha256,
       licence: 'Unicode-3.0',
       attribution: 'Copyright Unicode, Inc.',
     },
