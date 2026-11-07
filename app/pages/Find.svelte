@@ -69,7 +69,7 @@
 <div class="ui-page">
   <header class="ui-page-head">
     <h1 class="ui-page-title">{t('find.title')}</h1>
-    <p class="ui-page-intro">{t('find.intro', { count: methods.size })}</p>
+    <p class="ui-page-intro">{t('find.intro')}</p>
   </header>
 
   <input class="ui-input box" data-primary type="search" lang="und-Hani" use:autofocus bind:value={query} aria-label={t('find.label')}
