@@ -62,6 +62,35 @@ try {
       await page.waitForURL(/c=/)
       await page.locator('.card .glyph').waitFor({ state: 'visible' })
       assert.equal(await page.locator('.card .glyph').innerText(), Object.values(MOE_PUA.mappings)[0])
+
+      /** @param {string} query */
+      const found = async query => {
+        await page.goto(`${SITE}/?q=${encodeURIComponent(query)}`)
+        await page.waitForLoadState('networkidle')
+        return page.locator('main .ui-tile-glyph').allTextContents()
+      }
+      assert.ok((await found('U+E43B')).includes('䀯'))
+      assert.ok((await found('E43B')).includes('䀯'))
+      await page.screenshot({ path: `shots/pua/find-pua-${theme}.png`, fullPage: true })
+
+      await page.setViewportSize({ width: 1360, height: 900 })
+      await page.goto(`${SITE}/?c=96DE`)
+      await page.waitForLoadState('networkidle')
+      await page.locator('.card .record').waitFor({ state: 'visible' })
+      assert.match(await page.locator('.card').innerText(), /U\+E463/)
+      await page.goto(`${SITE}/?c=9E21`)
+      await page.waitForLoadState('networkidle')
+      const simplifiedCard = await page.locator('.card').innerText()
+      assert.match(simplifiedCard, /雞/)
+      assert.match(simplifiedCard, /Traditional variant/)
+      assert.match(simplifiedCard, /U\+E463/)
+      await page.screenshot({ path: `shots/pua/card-variant-${theme}.png`, fullPage: true })
+      await page.goto(`${SITE}/?c=7FB6`)
+      await page.waitForLoadState('networkidle')
+      const variantCard = await page.locator('.card').innerText()
+      assert.match(variantCard, /羴/)
+      assert.match(variantCard, /Semantic variant/)
+      assert.match(variantCard, /U\+E4DE/)
       for (const locale of ['ja', 'zh-Hans', 'zh-Hant', 'ko']) {
         await page.goto(`${SITE}/convert?lang=${locale}`)
         await page.waitForLoadState('networkidle')

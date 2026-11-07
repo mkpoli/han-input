@@ -113,5 +113,13 @@
   "convert.legacy": "Legacy PUA",
   "convert.standard": "Unicode",
   "convert.character": "Character",
-  "convert.data": "Mapping data"
+  "convert.data": "Mapping data",
+  "pua.title": "Private-use codes",
+  "pua.own": "This character",
+  "pua.hint": "From the Ministry of Education’s legacy Taiwanese and Hakka fonts.",
+  "pua.relation.simplified": "Simplified variant",
+  "pua.relation.traditional": "Traditional variant",
+  "pua.relation.semantic": "Semantic variant",
+  "pua.relation.specialized": "Specialized semantic variant",
+  "pua.relation.z": "Z variant"
 }

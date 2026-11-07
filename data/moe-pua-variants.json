@@ -1,0 +1,73 @@
+{
+  "source": {
+    "name": "Unihan 18.0.0, variant fields",
+    "url": "https://www.unicode.org/Public/18.0.0/ucd/Unihan.zip",
+    "version": "18.0.0",
+    "fields": [
+      "kSimplifiedVariant",
+      "kTraditionalVariant",
+      "kSemanticVariant",
+      "kSpecializedSemanticVariant",
+      "kZVariant"
+    ],
+    "sha256": "4ccfd34b08ac7b9c14353f6668ba43e3796d85c4cdce7952b635be16015aafa2",
+    "licence": "Unicode-3.0",
+    "attribution": "Copyright Unicode, Inc."
+  },
+  "byChar": {
+    "摮": [
+      {
+        "char": "𢳆",
+        "relation": "semantic"
+      }
+    ],
+    "羶": [
+      {
+        "char": "羴",
+        "relation": "semantic"
+      }
+    ],
+    "踭": [
+      {
+        "char": "㬹",
+        "relation": "semantic"
+      }
+    ],
+    "鳮": [
+      {
+        "char": "雞",
+        "relation": "semantic"
+      }
+    ],
+    "鷄": [
+      {
+        "char": "雞",
+        "relation": "semantic"
+      }
+    ],
+    "鸡": [
+      {
+        "char": "雞",
+        "relation": "traditional"
+      }
+    ],
+    "𦈖": [
+      {
+        "char": "䌈",
+        "relation": "traditional"
+      }
+    ],
+    "𫥳": [
+      {
+        "char": "𠠝",
+        "relation": "traditional"
+      }
+    ],
+    "𬊾": [
+      {
+        "char": "㸐",
+        "relation": "traditional"
+      }
+    ]
+  }
+}
