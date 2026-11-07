@@ -1,7 +1,7 @@
 // Builds app/public/data from the pinned sources in cache/.
 //   s/<id>.tsv.gz    one method: code, tab, its characters
 //   c/<bucket>.gz    every code of every method, by its first two folded characters
-//   x/<plane>.gz     every code of every character, by code point
+//   x/<plane>.gz     every code of every character, by code point: character, method, then one code per column
 //   m/<bucket>.gz    meaning words to characters
 //   p/<plane>.gz     parts to the characters written with them
 //   chars.tsv.gz     code point, rank, strokes, radical
@@ -88,7 +88,7 @@ for (const method of methods) {
       list.push(code)
     }
   }
-  for (const [char, list] of perChar) chars.add(charBucket(char), `${char}\t${method.id}\t${list.join(' ')}`)
+  for (const [char, list] of perChar) chars.add(charBucket(char), `${char}\t${method.id}\t${list.join('\t')}`)
   manifest.push({
     id: method.id, family: method.family, names: { ...method.names, hans: method.names.hans ?? (method.names.zh ? toHans(method.names.zh) : undefined) }, keys: method.keys, about: method.about,
     source: method.source, codes: table.size, chars: covered.size,

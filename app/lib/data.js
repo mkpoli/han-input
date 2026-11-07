@@ -72,8 +72,8 @@ export async function codesOf(char) {
   const out = new Map()
   for (const line of body.split('\n')) {
     if (!line.startsWith(char)) continue
-    const [own, method, codes] = line.split('\t')
-    if (own === char) out.set(method, codes.split(' '))
+    const [own, method, ...codes] = line.split('\t')
+    if (own === char) out.set(method, codes)
   }
   return out
 }
@@ -158,8 +158,8 @@ export async function readingsOf(char) {
   const out = []
   for (const line of body.split('\n')) {
     if (!line.startsWith(char)) continue
-    const [own, n, forms] = line.split('\t')
-    if (own === char) out.push({ n: Number(n), forms: forms.split(' ') })
+    const [own, n, ...forms] = line.split('\t')
+    if (own === char) out.push({ n: Number(n), forms })
   }
   return out
 }

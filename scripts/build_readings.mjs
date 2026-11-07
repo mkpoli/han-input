@@ -1,6 +1,6 @@
 // Every reading of every variety in 漢字音典 (MCPDict), from the database inside its release APK.
 //   d/<n>.tsv.gz     one variety: reading, tab, characters
-//   y/<shard>.gz     a character's readings in all varieties, by code point
+//   y/<shard>.gz     a character's readings in all varieties, by code point: character, variety, then one reading per column
 //   r/<bucket>.gz    a reading in any variety, by its first two folded characters
 //   varieties.json   who each variety is, and where its table came from
 // Run after unpacking: unzip <apk> 'assets/databases/mcpdict.db' -d cache/mcpdict/x
@@ -96,7 +96,7 @@ for (const file of readdirSync(join(SPOOL, 'raw'))) {
       list.push(form)
     }
   }
-  for (const [char, forms] of perChar) byChar.add(((char.codePointAt(0) ?? 0) >> 5).toString(16), `${char}\t${n}\t${forms.join(' ')}`)
+  for (const [char, forms] of perChar) byChar.add(((char.codePointAt(0) ?? 0) >> 5).toString(16), `${char}\t${n}\t${forms.join('\t')}`)
   rmSync(join(SPOOL, 'raw', file))
 }
 byChar.flush()
