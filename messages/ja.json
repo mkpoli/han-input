@@ -113,5 +113,13 @@
   "convert.legacy": "旧外字コード",
   "convert.standard": "Unicode",
   "convert.character": "文字",
-  "convert.data": "対応データ"
+  "convert.data": "対応データ",
+  "pua.title": "私用領域コード",
+  "pua.own": "この字",
+  "pua.hint": "コードは台湾教育部の旧Windows用台湾語・客家語フォント、異体字の関係はUnihanによります。",
+  "pua.relation.simplified": "簡体字",
+  "pua.relation.traditional": "繁体字",
+  "pua.relation.semantic": "意味上の異体字",
+  "pua.relation.specialized": "専用の意味上の異体字",
+  "pua.relation.z": "Z異体字"
 }
