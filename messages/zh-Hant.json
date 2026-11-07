@@ -116,7 +116,7 @@
   "convert.data": "對照資料",
   "pua.title": "私用區碼位",
   "pua.own": "本字",
-  "pua.hint": "臺灣教育部舊Windows用臺灣台語、臺灣客語字型的自造字碼位。",
+  "pua.hint": "碼位來自臺灣教育部舊Windows用臺灣台語、臺灣客語字型，異體字關係來自Unihan。",
   "pua.relation.simplified": "簡體字",
   "pua.relation.traditional": "繁體字",
   "pua.relation.semantic": "語義異體字",

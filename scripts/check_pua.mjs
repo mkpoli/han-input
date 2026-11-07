@@ -79,6 +79,8 @@ try {
 
       await page.setViewportSize({ width: 1360, height: 900 })
       assert.ok((await found('U+E43B')).includes('䀯'))
+      assert.ok((await found('E4DE')).includes('羴'))
+      assert.ok((await found('E4DE')).includes('鬿'))
       await page.screenshot({ path: `shots/pua/find-pua-${theme}.png`, fullPage: true })
       await page.goto(`${SITE}/?c=96DE`)
       await page.waitForLoadState('networkidle')
@@ -104,6 +106,14 @@ try {
       assert.match(variantCard, /Semantic variant/)
       assert.match(variantCard, /U\+E4DE/)
       await page.screenshot({ path: `shots/pua/card-semantic-${theme}.png`, fullPage: true })
+
+      await page.goto(`${SITE}/m/ashide?c=9E21`)
+      await page.waitForLoadState('networkidle')
+      const variantHref = await page.locator('.card a[href*="c=96DE"]').getAttribute('href')
+      assert.ok(variantHref?.startsWith('/m/ashide?'), variantHref ?? 'no href')
+      await page.goto(`${SITE}/?c=9E21&lang=ja`)
+      await page.waitForLoadState('networkidle')
+      assert.match(await page.locator('.card').innerText(), /繁体字/)
       for (const locale of ['ja', 'zh-Hans', 'zh-Hant', 'ko']) {
         await page.goto(`${SITE}/convert?lang=${locale}`)
         await page.waitForLoadState('networkidle')
