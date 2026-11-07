@@ -1,0 +1,11 @@
+# 內政部移民署用字
+# CNS source release: 20260805
+# 數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw
+# Sources: https://www.cns11643.gov.tw/opendata/Properties.zip ; https://www.cns11643.gov.tw/opendata/MapingTables.zip
+# Licence: https://www.cns11643.gov.tw/pageView.jsp?ID=59
+CNS	Unicode
+17-2128	U+FFB90
+17-2129	U+FFB8F
+17-212A	U+FFB8E
+17-212B	U+FFB8D
+17-212C	U+FFB8C

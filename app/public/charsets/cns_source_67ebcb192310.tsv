@@ -1,0 +1,33 @@
+# 符號之組合附加記號(combining diacritical mark for symbol), CNS 14649
+# CNS source release: 20260805
+# 數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw
+# Sources: https://www.cns11643.gov.tw/opendata/Properties.zip ; https://www.cns11643.gov.tw/opendata/MapingTables.zip
+# Licence: https://www.cns11643.gov.tw/pageView.jsp?ID=59
+CNS	Unicode
+8-5C37	U+20D0
+8-5C38	U+20D1
+8-5C39	U+20D2
+8-5C3A	U+20D3
+8-5C3B	U+20D4
+8-5C3C	U+20D5
+8-5C3D	U+20D6
+8-5C3E	U+20D7
+8-5C3F	U+20D8
+8-5C40	U+20D9
+8-5C41	U+20DA
+8-5C42	U+20DB
+8-5C43	U+20DC
+8-5C44	U+20DD
+8-5C45	U+20DE
+8-5C46	U+20DF
+8-5C47	U+20E0
+8-5C48	U+20E1
+8-5C49	U+20E2
+8-5C4A	U+20E3
+8-5C4B	U+20E4
+8-5C4C	U+20E5
+8-5C4D	U+20E6
+8-5C4E	U+20E7
+8-5C4F	U+20E8
+8-5C50	U+20E9
+8-5C51	U+20EA

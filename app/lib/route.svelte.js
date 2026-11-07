@@ -1,5 +1,5 @@
 // Where the reader is: the page in the path, the open character in `?c=` (its code point in hex),
-// and the page's own query in `?q=`. Every state worth sharing is in the address.
+// the page's query in `?q=`, and Find's character set in `?set=`.
 
 export const NAV = /** @type {const} */ ([
   { path: '', label: 'nav.find' },
@@ -11,7 +11,7 @@ export const NAV = /** @type {const} */ ([
   { path: 'about', label: 'nav.about' },
 ])
 
-/** @typedef {{ page: string, method: string, q: string, c: string }} Route */
+/** @typedef {{ page: string, method: string, q: string, c: string, set: string }} Route */
 
 const hex = (/** @type {string} */ char) => (char.codePointAt(0) ?? 0).toString(16).toUpperCase()
 
@@ -24,7 +24,8 @@ function read() {
   const char = /^[0-9a-f]{4,5}$/i.test(c) ? String.fromCodePoint(parseInt(c, 16)) : ''
   const inner = path.match(/^([mv])\/([\w-]+)$/)
   const known = NAV.some(entry => entry.path === path)
-  return { page: inner ? inner[1] : known ? path : '', method: inner?.[2] ?? '', q, c: char }
+  const page = inner ? inner[1] : known ? path : ''
+  return { page, method: inner?.[2] ?? '', q, c: char, set: page === '' ? params.get('set') ?? '' : '' }
 }
 
 export const route = $state(read())
@@ -34,6 +35,7 @@ function href(next) {
   const params = new URLSearchParams()
   if (next.q) params.set('q', next.q)
   if (next.c) params.set('c', hex(next.c))
+  if (next.page === '' && next.set) params.set('set', next.set)
   const search = params.toString()
   const path = next.method ? `${next.page}/${next.method}` : next.page
   return `/${path}${search ? `?${search}` : ''}`
@@ -44,6 +46,7 @@ export function go(page, method = '') {
   route.page = page
   route.method = method
   route.q = ''
+  route.set = ''
   history.pushState(null, '', href(route))
   scrollTo(0, 0)
 }
@@ -61,7 +64,14 @@ export function setQuery(q) {
   history.replaceState(null, '', href(route))
 }
 
-/** A link into the site. @param {string} page @param {{ method?: string, c?: string, q?: string }} [at] */
-export const link = (page, at = {}) => href({ page, method: at.method ?? '', c: at.c ?? '', q: at.q ?? '' })
+/** @param {string} id */
+export function setCharset(id) {
+  if (route.page !== '' || route.set === id) return
+  route.set = id
+  history.pushState(null, '', href(route))
+}
+
+/** A link into the site. @param {string} page @param {{ method?: string, c?: string, q?: string, set?: string }} [at] */
+export const link = (page, at = {}) => href({ page, method: at.method ?? '', c: at.c ?? '', q: at.q ?? '', set: at.set ?? '' })
 
 addEventListener('popstate', () => Object.assign(route, read()))

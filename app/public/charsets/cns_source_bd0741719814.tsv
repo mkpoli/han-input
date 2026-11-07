@@ -1,0 +1,22 @@
+# 輔助箭號A (supplemental arrow-A), CNS 14649
+# CNS source release: 20260805
+# 數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw
+# Sources: https://www.cns11643.gov.tw/opendata/Properties.zip ; https://www.cns11643.gov.tw/opendata/MapingTables.zip
+# Licence: https://www.cns11643.gov.tw/pageView.jsp?ID=59
+CNS	Unicode
+8-6A74	U+27F0
+8-6A75	U+27F1
+8-6A76	U+27F2
+8-6A77	U+27F3
+8-6A78	U+27F4
+8-6A79	U+27F5
+8-6A7A	U+27F6
+8-6A7B	U+27F7
+8-6A7C	U+27F8
+8-6A7D	U+27F9
+8-6A7E	U+27FA
+8-6B21	U+27FB
+8-6B22	U+27FC
+8-6B23	U+27FD
+8-6B24	U+27FE
+8-6B25	U+27FF

@@ -1,0 +1,36 @@
+# 數字序列符號(《CNS 11643》96年公布)
+# CNS source release: 20260805
+# 數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw
+# Sources: https://www.cns11643.gov.tw/opendata/Properties.zip ; https://www.cns11643.gov.tw/opendata/MapingTables.zip
+# Licence: https://www.cns11643.gov.tw/pageView.jsp?ID=59
+CNS	Unicode
+1-2621	U+2460
+1-2622	U+2461
+1-2623	U+2462
+1-2624	U+2463
+1-2625	U+2464
+1-2626	U+2465
+1-2627	U+2466
+1-2628	U+2467
+1-2629	U+2468
+1-262A	U+2469
+1-262B	U+2474
+1-262C	U+2475
+1-262D	U+2476
+1-262E	U+2477
+1-262F	U+2478
+1-2630	U+2479
+1-2631	U+247A
+1-2632	U+247B
+1-2633	U+247C
+1-2634	U+247D
+1-2635	U+2170
+1-2636	U+2171
+1-2637	U+2172
+1-2638	U+2173
+1-2639	U+2174
+1-263A	U+2175
+1-263B	U+2176
+1-263C	U+2177
+1-263D	U+2178
+1-263E	U+2179

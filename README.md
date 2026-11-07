@@ -12,6 +12,7 @@ It covers Han, extended sinographies such as Chữ Nôm and Sawndip, and kana an
 
 - **Find**: one box. A clue is tried as a code in every method, as a reading in every variety and as a
   word of meaning. Spaces separate clues: `氵 12畫`, `river ジ`, `cangjie5:jnd`.
+  A [character-set filter](docs/character-sets.md) narrows the results or browses a set on its own.
 - **Methods**: every input method, each usable as an input method of its own.
 - **Readings**: every variety in 漢字音典, each typed the same way.
 - **Rhyme tables**: the Guangyun by rhyme, initial, grade and tone.

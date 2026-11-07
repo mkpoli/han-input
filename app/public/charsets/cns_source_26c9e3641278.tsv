@@ -1,0 +1,14 @@
+# 箭頭符號(《CNS 11643》96年公布)
+# CNS source release: 20260805
+# 數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw
+# Sources: https://www.cns11643.gov.tw/opendata/Properties.zip ; https://www.cns11643.gov.tw/opendata/MapingTables.zip
+# Licence: https://www.cns11643.gov.tw/pageView.jsp?ID=59
+CNS	Unicode
+1-2255	U+2191
+1-2256	U+2193
+1-2257	U+2190
+1-2258	U+2192
+1-2259	U+2196
+1-225A	U+2197
+1-225B	U+2199
+1-225C	U+2198

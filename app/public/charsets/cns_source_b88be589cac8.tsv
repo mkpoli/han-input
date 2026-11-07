@@ -1,0 +1,38 @@
+# 貨幣及單位符號(《CNS 11643》96年公布)
+# CNS source release: 20260805
+# 數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw
+# Sources: https://www.cns11643.gov.tw/opendata/Properties.zip ; https://www.cns11643.gov.tw/opendata/MapingTables.zip
+# Licence: https://www.cns11643.gov.tw/pageView.jsp?ID=59
+CNS	Unicode
+1-2263	U+FF04
+1-2264	U+FFE5
+1-2265	U+3012
+1-2266	U+FFE0
+1-2267	U+FFE1
+1-2268	U+FF05
+1-2269	U+FF20
+1-226A	U+2103
+1-226B	U+2109
+1-226C	U+FE69
+1-226D	U+FE6A
+1-226E	U+FE6B
+1-226F	U+33D5
+1-2270	U+339C
+1-2271	U+339D
+1-2272	U+339E
+1-2273	U+33CE
+1-2274	U+33A1
+1-2275	U+338E
+1-2276	U+338F
+1-2277	U+33C4
+1-2278	U+00B0
+1-2279	U+5159
+1-227A	U+515B
+1-227B	U+515E
+1-227C	U+515D
+1-227D	U+5161
+1-227E	U+5163
+1-2321	U+55E7
+1-2322	U+74E9
+1-2323	U+7CCE
+1-4242	U+20AC

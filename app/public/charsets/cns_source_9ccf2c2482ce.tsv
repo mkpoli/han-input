@@ -1,0 +1,18 @@
+# 表意文字描述字元(ideographic description character), CNS 14649
+# CNS source release: 20260805
+# 數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw
+# Sources: https://www.cns11643.gov.tw/opendata/Properties.zip ; https://www.cns11643.gov.tw/opendata/MapingTables.zip
+# Licence: https://www.cns11643.gov.tw/pageView.jsp?ID=59
+CNS	Unicode
+1-4270	U+2FF0
+1-4271	U+2FF1
+1-4272	U+2FF2
+1-4273	U+2FF3
+1-4274	U+2FF4
+1-4275	U+2FF5
+1-4276	U+2FF6
+1-4277	U+2FF7
+1-4278	U+2FF8
+1-4279	U+2FF9
+1-427A	U+2FFA
+1-427B	U+2FFB
