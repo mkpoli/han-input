@@ -23,7 +23,6 @@ export function readClue(term, alone) {
   if (isHan(term)) return { kind: alone ? 'text' : 'part', text: term }
   if (isRareKana(term) || (alone && inScope(term))) return { kind: 'text', text: term }
   if (hanIn(term).length === [...term].length) return { kind: 'text', text: term }
-  // A bare hex code can be a private-use assignment; the lookup still tries it as an ordinary code.
   const hex = term.match(/^[0-9a-fA-F]{4,6}$/)
   if (hex) {
     const char = puaChar(hex[0])
@@ -58,7 +57,6 @@ async function lookUp(clue) {
   }
   if (clue.kind === 'pua') {
     out.chars = clue.char ? [clue.char] : []
-    // A bare hex code is also tried as an ordinary code, so an encoding that shares it still shows.
     out.hits = await findCodes(clue.text)
     return out
   }
@@ -95,9 +93,8 @@ async function lookUp(clue) {
   return out
 }
 
-/** The characters an answer contributes to an intersection. @param {Answer} item */
+/** Characters an answer contributes to an intersection. @param {Answer} item */
 export function answerChars(item) {
-  // A PUA clue can also be an ordinary code; both sides stay candidates.
   const chars = [...item.chars, ...(item.clue.kind === 'pua' ? item.hits.flatMap(hit => hit.chars) : [])]
   return chars.length ? chars : [...item.hits.flatMap(hit => hit.chars), ...item.parts, ...item.meaning]
 }

@@ -4,10 +4,10 @@ import variants from '../data/moe-pua-variants.json' with { type: 'json' }
 export const MOE_PUA = /** @type {{ source: typeof snapshot.source, mappings: Record<string, string> }} */ (snapshot)
 export const MOE_PUA_VARIANTS = /** @type {{ source: typeof variants.source, byChar: Record<string, { char: string, relation: string }[]> }} */ (variants)
 
-/** A character's Unicode code point. @param {string} char */
+/** A character's code point. @param {string} char */
 export const codePoint = char => `U+${(char.codePointAt(0) ?? 0).toString(16).toUpperCase().padStart(4, '0')}`
 
-/** The character an MOE PUA code point stands for, from hex without `U+`; empty if there is none. @param {string} hex */
+/** The character a PUA code stands for, from hex without U+. @param {string} hex */
 export function puaChar(hex) {
   if (!/^[0-9a-f]{4,6}$/i.test(hex)) return ''
   const point = parseInt(hex, 16)
@@ -24,7 +24,7 @@ for (const [pua, char] of Object.entries(MOE_PUA.mappings)) {
 }
 
 /**
- * Every MOE PUA code documented for a character: its own, then those of the Unihan variants that have one.
+ * A character's PUA codes: its own, then its variants'.
  * @param {string} char
  * @returns {{ code: string, char: string, relation: 'own' | string }[]}
  */
@@ -35,7 +35,7 @@ export function puaOf(char) {
   return [...own, ...related]
 }
 
-/** Convert only the MOE font assignments; preserve all other text exactly. @param {string} text */
+/** Convert the MOE assignments, leaving other text as it is. @param {string} text */
 export function convertMoePua(text) {
   let converted = 0
   let unmapped = 0

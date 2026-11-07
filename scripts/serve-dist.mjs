@@ -1,4 +1,4 @@
-// Serves the built site to a Playwright context from disk, so a browser check needs no port or server.
+// Serves the built site from disk to a Playwright context.
 import { readFileSync, statSync } from 'node:fs'
 import { extname, join } from 'node:path'
 

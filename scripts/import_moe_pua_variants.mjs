@@ -1,7 +1,5 @@
 // bun scripts/import_moe_pua_variants.mjs [Unihan_Variants.txt]
-// Unihan's variant relations run both ways: a row names the variant of its own character. This index
-// keeps only relations that touch a character with an MOE PUA code. When the row's own character has
-// the PUA code, the relation is named from the other side, as that character's card will read it.
+// Indexes Unihan variant relations for characters with an MOE PUA code.
 import { createHash } from 'node:crypto'
 import { readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
