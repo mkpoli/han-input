@@ -56,5 +56,5 @@ links open the site's search page.
 - Katakana have no source characters: `hentaigana.el` gives them for hiragana and hentaigana only.
 - 26 kana have no bundled glyph, among them the Minnan letters (U+1AFF0–U+1AFFF) and U+1B150, and depend on the reader's system fonts.
 - The readings of a variety lose their notes (文白 and usage) in this index; 音典 keeps them.
-- Tables with no stated terms are published with that fact shown. Those, and the non-commercial ones
-  (表形碼, 導碼, E碼, 華象, the 通用 Hakka tables), are a question to settle before any public deployment.
+- Tables with no stated terms are published with that fact shown, as are the non-commercial ones (表形碼,
+  導碼, E碼, 華象, the 通用 Hakka tables).
