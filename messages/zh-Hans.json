@@ -115,8 +115,6 @@
   "convert.character": "文字",
   "convert.data": "对照数据",
   "pua.title": "私用区码位",
-  "pua.own": "本字",
-  "pua.hint": "码位来自台湾教育部旧Windows用台语、客家语字体，异体字关系来自Unihan。",
   "pua.relation.simplified": "简体字",
   "pua.relation.traditional": "繁体字",
   "pua.relation.semantic": "语义异体字",

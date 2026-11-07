@@ -96,18 +96,17 @@
         <dl>
           {#each puaRows as row (row.code + row.char + row.relation)}
             <div class="row">
-              <dt>
+              <dt class="ui-mono">{row.code}</dt>
+              <dd>
                 {#if row.relation === 'own'}
-                  {t('pua.own')}
+                  {row.char}
                 {:else}
                   <a href={link(route.page, { method: route.method, c: row.char })} lang="und-Hani" onclick={event => follow(event, row.char)}>{row.char}</a> · {t(`pua.relation.${row.relation}`)}
                 {/if}
-              </dt>
-              <dd class="ui-mono">{row.code}</dd>
+              </dd>
             </div>
           {/each}
         </dl>
-        <p class="ui-hint">{t('pua.hint')}</p>
       </section>
     {/if}
 
