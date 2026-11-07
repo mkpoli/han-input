@@ -8,7 +8,7 @@
   import { nameOf, t } from '../lib/i18n.svelte.js'
   import Tiles from '../ui/Tiles.svelte'
 
-  const EXAMPLES = ['ユタヘヘミ', 'jnd', 'luong', '端一東平', '30407', 'tsɿ', '氵 12畫', 'river ジ', 'a672', 'U+5B57']
+  const EXAMPLES = ['ユタヘヘミ', 'jnd', 'luong', '端一東平', '30407', 'tsɿ', '氵 12畫', 'river ジ', 'chữ', 'a-1', 'a672', 'U+5B57']
 
   let query = $state(route.q)
   /** @type {import('../lib/search.js').Answer[]} */
@@ -47,6 +47,25 @@
   const empty = $derived(!busy && answers.length > 0 && !common.length && !groups.length)
 </script>
 
+{#snippet methodGroup(/** @type {ReturnType<typeof groupHits>[number]} */ group)}
+      {@const method = methods.get(group.method)}
+      <section class="ui-section">
+        <h2 class="ui-label method">
+          <a href={link('m', { method: group.method, q: query })} onclick={event => { event.preventDefault(); go('m', group.method); setQuery(query) }}>{method ? nameOf(method.names) : group.method}</a>
+          <span class="ui-count">{group.total}</span>
+        </h2>
+        <div class="hits">
+          {#each group.hits.slice(0, 8) as hit (hit.code)}
+            <div class="hit">
+              <span class="code ui-mono" class:exact={hit.exact}>{hit.code}</span>
+              <Tiles chars={hit.chars} size={44} limit={24} label={hit.code} />
+            </div>
+          {/each}
+          {#if group.hits.length > 8}<p class="ui-hint">{t('find.moreCodes', { count: group.hits.length - 8 })}</p>{/if}
+        </div>
+      </section>
+    {/snippet}
+
 <div class="ui-page">
   <header class="ui-page-head">
     <h1 class="ui-page-title">{t('find.title')}</h1>
@@ -84,6 +103,7 @@
         <Tiles chars={single.chars} size={72} label={t('find.characters')} />
       </section>
     {/if}
+    {#each groups.filter(group => group.literal) as group (group.method)}{@render methodGroup(group)}{/each}
     {#if single.meaning.length}
       <section class="ui-section">
         <h2 class="ui-label">{t('find.meaning', { word: single.clue.text })} <span class="ui-count">{single.meaning.length}</span></h2>
@@ -102,24 +122,7 @@
         <Tiles chars={tallyChars} notes={tallyNotes} limit={48} label={t('find.readings', { count: varieties, chars: tally.length })} />
       </section>
     {/if}
-    {#each groups as group (group.method)}
-      {@const method = methods.get(group.method)}
-      <section class="ui-section">
-        <h2 class="ui-label method">
-          <a href={link('m', { method: group.method, q: query })} onclick={event => { event.preventDefault(); go('m', group.method); setQuery(query) }}>{method ? nameOf(method.names) : group.method}</a>
-          <span class="ui-count">{group.total}</span>
-        </h2>
-        <div class="hits">
-          {#each group.hits.slice(0, 8) as hit (hit.code)}
-            <div class="hit">
-              <span class="code ui-mono" class:exact={hit.exact}>{hit.code}</span>
-              <Tiles chars={hit.chars} size={44} limit={24} label={hit.code} />
-            </div>
-          {/each}
-          {#if group.hits.length > 8}<p class="ui-hint">{t('find.moreCodes', { count: group.hits.length - 8 })}</p>{/if}
-        </div>
-      </section>
-    {/each}
+    {#each groups.filter(group => !group.literal) as group (group.method)}{@render methodGroup(group)}{/each}
   {/if}
 </div>
 
@@ -131,6 +134,6 @@
   .method a{color:inherit}
   .hits{display:grid;gap:var(--ui-space-xs)}
   .hit{display:grid;grid-template-columns:minmax(72px,auto) minmax(0,1fr);gap:var(--ui-space-md);align-items:center}
-  .code{font-size:var(--ui-text-sm);color:var(--ui-color-ink-soft);font-family:'Jigmo Ext',var(--ui-font-mono),var(--ui-font-sans),'Jigmo'}
+  .code{font-size:var(--ui-text-sm);color:var(--ui-color-ink-soft);font-family:'Han Ext',var(--ui-font-mono),var(--ui-font-sans),'Jigmo'}
   .code.exact{color:var(--ui-color-accent-ink);font-weight:var(--ui-weight-semibold)}
 </style>

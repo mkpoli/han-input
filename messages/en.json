@@ -81,7 +81,7 @@
   "rhymes.source": "Data: nk2028 tshet-uinh-data (CC0), through TshetUinh.js. For the printed tables, see Web韻圖 by 鈴木慎吾.",
   "method.reachChars": "{chars} characters.",
   "method.mcpdictTerms": "Collected by 漢字音典 (MCPDict, MIT code). The project asks to be told of copyright concerns; this table's own terms were not checked.",
-  "family.extended": "Extended sinographies",
+  "family.extended": "Extended and derived scripts",
   "methods.unavailable": "Known, and not searchable here",
   "methods.unavailableIntro": "These exist. A table for any of them would make it searchable.",
   "methods.reason.terms": "Terms do not allow publishing the table",

@@ -1,6 +1,6 @@
 // A query is one or more clues, split on spaces. Each clue names a set of characters; several clues
 // leave the characters in all of them.
-import { hanIn, isHan } from '../../src/fold.js'
+import { hanIn, inScope, isHan, isRareKana } from '../../src/fold.js'
 import { findCodes, findMeaning, findPart, findReadings, loadChars } from './data.js'
 
 /**
@@ -17,6 +17,7 @@ export function readClue(term, alone) {
   const scoped = term.match(/^([a-z][\w-]*):(.+)$/)
   if (scoped) return { kind: 'scoped', text: term, method: scoped[1], code: scoped[2] }
   if (isHan(term)) return { kind: alone ? 'text' : 'part', text: term }
+  if (isRareKana(term) || (alone && inScope(term))) return { kind: 'text', text: term }
   if (hanIn(term).length === [...term].length) return { kind: 'text', text: term }
   return { kind: 'code', text: term }
 }
@@ -51,8 +52,11 @@ async function lookUp(clue) {
     return out
   }
   if (clue.kind === 'part') {
-    out.parts = await findPart(clue.text)
-    out.chars = out.parts
+    // A character also names what is filed under it, as 安 does あ and 一 does its Nüshu.
+    const [parts, hits] = await Promise.all([findPart(clue.text), findCodes(clue.text)])
+    out.parts = parts
+    out.hits = hits.filter(hit => hit.exact)
+    out.chars = [...new Set([...parts, ...out.hits.flatMap(hit => hit.chars)])]
     return out
   }
   if (clue.kind === 'scoped') {
@@ -61,7 +65,7 @@ async function lookUp(clue) {
     return out
   }
   if (clue.kind === 'text') {
-    out.chars = hanIn(clue.text)
+    out.chars = [...clue.text].filter(inScope)
     out.hits = await findCodes(clue.text)
     out.parts = [...clue.text].length === 1 ? await findPart(clue.text) : []
     out.meaning = await findMeaning(clue.text)

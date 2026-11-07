@@ -9,7 +9,7 @@
 import { appendFileSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { gzipSync } from 'node:zlib'
-import { charBucket, codeBucket, fold, isHan, partBucket, pinyinDigits, wordBucket } from '../src/fold.js'
+import { charBucket, codeBucket, fold, inScope, isHan, partBucket, pinyinDigits, wordBucket } from '../src/fold.js'
 import { readUnihan, unihanMethods, rankChars } from './sources/unihan.mjs'
 import { buildParts } from './sources/ids.mjs'
 import { allMethods } from './sources/index.mjs'
@@ -52,6 +52,8 @@ const fields = await readUnihan()
 const methods = [...unihanMethods(fields), ...await allMethods()]
 
 const toHans = OpenCC.Converter({ from: 'hk', to: 'cn' })
+/** Kana and Nüshu met in any table, for the ordering file. */
+const derived = new Set()
 const manifest = []
 const ids = new Set()
 for (const { id } of methods) {
@@ -62,7 +64,8 @@ for (const method of methods) {
   /** @type {Map<string, Set<string>>} */
   const table = new Map()
   for (const [code, char] of method.entries) {
-    if (!isHan(char)) continue
+    if (!inScope(char)) continue
+    if (!isHan(char)) derived.add(char)
     let set = table.get(code)
     if (!set) table.set(code, set = new Set())
     set.add(char)
@@ -121,7 +124,9 @@ for (const [part, list] of await buildParts()) {
 }
 for (const [bucket, rows] of partFiles) writeFileSync(join(OUT, 'p', `${bucket}.gz`), gz(rows.join('\n')))
 
-writeFileSync(join(OUT, 'chars.tsv.gz'), gz(rankChars(fields).map(row => row.join('\t')).join('\n')))
+// Modern kana come among the commonest characters, and hentaigana and Nüshu after every block of Han.
+const derivedRows = [...derived].map(char => [char, /[\u3040-\u30FF]/.test(char) ? 500 : 7000, 0, ''])
+writeFileSync(join(OUT, 'chars.tsv.gz'), gz([...rankChars(fields), ...derivedRows].map(row => row.join('\t')).join('\n')))
 writeFileSync(join(OUT, 'rhymes.json.gz'), gz(JSON.stringify(rhymeTable())))
 // Two tables of one method keep the same name, so where they come from tells them apart.
 const uses = new Map()

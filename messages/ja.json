@@ -81,7 +81,7 @@
   "rhymes.source": "データ：nk2028 tshet-uinh-data（CC0）、TshetUinh.js 経由。版面に沿った韻図は鈴木慎吾氏の Web韻圖 を参照。",
   "method.reachChars": "{chars}字。",
   "method.mcpdictTerms": "漢字音典（MCPDict、コードは MIT）の収集。権利上の懸念は同プロジェクトが受け付けています。この字表個別の条件は未確認です。",
-  "family.extended": "変用・変形漢字",
+  "family.extended": "漢字系文字",
   "methods.unavailable": "存在は確認済み、ここでは検索不可",
   "methods.unavailableIntro": "これらは実在します。表が手に入れば検索できるようになります。",
   "methods.reason.terms": "表の公開が許諾されていない",

@@ -5,13 +5,12 @@ own source and terms are also in the site, on its Sources page and on each metho
 
 ## Scope
 
-The site finds characters of sinographic writing systems: Han, and the extended sinographies that reuse
-and extend it, such as Chữ Nôm and Sawndip. Siniform scripts (Tangut, Khitan, Jurchen) stay out, as do
-the non-Han scripts around them. The line follows Zev Handel's "sinographic" and "siniform" and Marc
-Miyake's "extended sinography" (2017, *Encyclopedia of Chinese Language and Linguistics*), as summarized
-in a private Discord discussion of 2026-10-27; the two works themselves were not read for this.
-Kana and Nüshu, which 吉池孝一 (2006) counts as 漢字系文字 by that same summary, are outside Unicode's Han
-script and are not included.
+The site finds characters of sinographic writing systems: Han, the extended sinographies that reuse and
+extend it such as Chữ Nôm and Sawndip, and the kana and Nüshu derived from it. Siniform scripts (Tangut,
+Khitan, Jurchen) stay out. The terms follow Zev Handel's "sinographic" and "siniform", Marc Miyake's
+"extended sinography" (2017, *Encyclopedia of Chinese Language and Linguistics*) and 吉池孝一 (2006,
+「中国周辺の漢字系文字」), who counts kana and Nüshu as 漢字系文字. They are taken from a summary in a private
+Discord discussion of 2026-10-27, and the works themselves were not read.
 
 ## Characters, codes, readings
 
@@ -23,7 +22,12 @@ script and are not included.
 | [葦手入力](https://ashide.otodo.net/) version 5, 中山春明, 2021-12-10 | kana shape codes | None stated for version 5; the [2018 repository](https://github.com/haruakira/Ashide) is GPL-3.0 |
 | [cin-tables](https://github.com/chinese-opendesktop/cin-tables) | 103 `.cin` tables | Per file; the header line is shown on each method's page. Repository CC0-1.0 |
 | Rime tables named in `scripts/sources/index.mjs` | codes and spellings | Per repository |
+| [UnicodeData.txt and NushuSources.txt](https://www.unicode.org/Public/18.0.0/ucd/), Unicode 18.0 | kana names, Nüshu readings and Nüshu Duben positions | Unicode License v3 |
+| [hentaigana.el](https://github.com/kawabata/hentaigana) 1.170817, 川幡太一 | the Han character each hiragana and hentaigana form was written from, and hentaigana by modern kana | GPL-3.0-or-later |
+| [rime-hentaigana](https://github.com/yuanhao-chen-nyoeghau/rime-hentaigana) | kana by spelling | Apache-2.0 |
+| `unicode_nushu_data.csv` in [漢字音典 MCPDict](https://github.com/osfans/MCPDict), commit `cc3e293` | the Han characters each Nüshu character corresponds to, with traditional forms converted by OpenCC | MCPDict repository MIT; no separate terms stated for this table |
 | [BabelStone IDS](https://www.babelstone.co.uk/CJK/IDS.TXT), Andrew West | which parts each character is written with | As stated in the file |
+| [Noto Sans Nushu and Noto Serif Hentaigana](https://github.com/notofonts) | glyphs for Nüshu and hentaigana | OFL-1.1 |
 | [Jigmo](https://kamichikoichi.github.io/jigmo/) 2025-09-12, 上地宏一 | glyphs for the extension blocks, cut by `scripts/build_fonts.py` | CC0-1.0 |
 
 The research behind these choices, with every candidate and what was checked, is in
@@ -48,6 +52,9 @@ links open the site's search page.
 ## Known gaps
 
 - No drawing pad yet.
+- Kana written with a combining mark (か゚, カ̣, ㇷ゚) are not indexed, since an entry is one code point. That leaves out the dotted Taiwanese kana and some Ainu kana.
+- Katakana have no source characters: `hentaigana.el` gives them for hiragana and hentaigana only.
+- 26 kana have no bundled glyph, among them the Minnan letters (U+1AFF0–U+1AFFF) and U+1B150, and depend on the reader's system fonts.
 - The readings of a variety lose their notes (文白 and usage) in this index; 音典 keeps them.
 - Tables with no stated terms are published with that fact shown. Those, and the non-commercial ones
   (表形碼, 導碼, E碼, 華象, the 通用 Hakka tables), are a question to settle before any public deployment.

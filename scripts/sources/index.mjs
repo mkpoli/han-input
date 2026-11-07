@@ -9,6 +9,7 @@ import { qieyunMethods } from './qieyun.mjs'
 import { cinMethods } from './cin.mjs'
 import { extendedMethods } from './extended.mjs'
 import { extraMethods } from './extra.mjs'
+import { kanaMethods } from './kana.mjs'
 
 /** @type {[string, string, string, string, string, import('../lib.mjs').Family, string?][]} repo, file, id, English, 漢字 name, family, licence */
 const RIME = [
@@ -65,6 +66,7 @@ export async function allMethods() {
       source: { name: 'rime/rime-luna-pinyin, luna_pinyin.dict.yaml', url: 'https://github.com/rime/rime-luna-pinyin', licence: 'LGPL-3.0' },
       entries: table.map(row => /** @type {[string, string]} */ ([row.code, row.char])) },
     ...await extendedMethods(),
+    ...await kanaMethods(),
     ...await cinMethods(),
     ...await extraMethods(),
   ]

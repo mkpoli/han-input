@@ -29,11 +29,27 @@ export function pinyinDigits(syllable) {
   return parts.replace(/ü/g, 'v').replace(/\p{M}/gu, '') + tone
 }
 
-/** Whether a string is exactly one Han character. @param {string} text */
-export const isHan = text => /^\p{Script=Han}$/u.test(text)
+// The runtime's Unicode tables lag the data's: Bun 1.3 and Node both reject U+2B81E and U+1B127. Planes 2
+// and 3 hold only Han and these blocks only kana, so the code points themselves say what a character is.
+const HAN = '\\p{Script=Han}\\u{20000}-\\u{3FFFD}'
+const KANA = '\\p{Script=Hiragana}\\p{Script=Katakana}\\u{1AFF0}-\\u{1B16F}'
+const NUSHU = '\\p{Script=Nushu}'
 
-/** The Han characters of a string, in order. @param {string} text @returns {string[]} */
-export const hanIn = text => text.match(/\p{Script=Han}/gu) ?? []
+/** Whether a string is exactly one Han character. @param {string} text */
+export const isHan = text => new RegExp(`^[${HAN}]$`, 'u').test(text)
+
+/**
+ * Whether a string is one character of a script this site covers: Han with its extended forms, and the
+ * kana and Nüshu derived from it. Siniform scripts such as Tangut, Jurchen and Khitan are out.
+ * @param {string} text
+ */
+export const inScope = text => new RegExp(`^[${HAN}${KANA}${NUSHU}]$`, 'u').test(text)
+
+/** Whether a string is one hentaigana, archaic or other kana of the supplement blocks. @param {string} text */
+export const isRareKana = text => /^[\u{1AFF0}-\u{1B16F}]$/u.test(text)
+
+/** The Han and Nüshu characters of a string, in order. Kana stays out: a run of it is a code or a reading. @param {string} text @returns {string[]} */
+export const hanIn = text => text.match(new RegExp(`[${HAN}${NUSHU}]`, 'gu')) ?? []
 
 const BUCKETS = 4096
 
