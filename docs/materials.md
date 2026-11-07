@@ -9,7 +9,7 @@ The site finds characters of sinographic writing systems: Han, and the extended 
 and extend it, such as Chữ Nôm and Sawndip. Siniform scripts (Tangut, Khitan, Jurchen) stay out, as do
 the non-Han scripts around them. The line follows Zev Handel's "sinographic" and "siniform" and Marc
 Miyake's "extended sinography" (2017, *Encyclopedia of Chinese Language and Linguistics*), as summarized
-by 眞來穗梨 and 海楫 in a Discord discussion of 2026-10-27; the two works themselves were not read for this.
+in a private Discord discussion of 2026-10-27; the two works themselves were not read for this.
 Kana and Nüshu, which 吉池孝一 (2006) counts as 漢字系文字 by that same summary, are outside Unicode's Han
 script and are not included.
 
