@@ -3,15 +3,17 @@
   // live with those sites, so the card carries one line of gloss and no entry.
   import { codesOf, loadMethods, loadVarieties, readingsOf } from '../lib/data.js'
   import { LINKS } from '../lib/links.js'
-  import { link, route, go } from '../lib/route.svelte.js'
+  import { link, route, go, open } from '../lib/route.svelte.js'
   import { put, ui } from '../lib/ui.svelte.js'
   import { copy } from '../lib/clip.svelte.js'
   import { nameOf, t } from '../lib/i18n.svelte.js'
   import { FAMILIES } from '../lib/families.js'
   import { isHan } from '../../src/fold.js'
+  import { puaOf } from '../../src/pua.js'
 
   const char = $derived(route.c)
   const cp = $derived(char ? `U+${(char.codePointAt(0) ?? 0).toString(16).toUpperCase()}` : '')
+  const puaRows = $derived(char ? puaOf(char) : [])
   /** @type {Map<string, string[]>} */
   let codes = $state(new Map())
   /** @type {import('../lib/data.js').Method[]} */
@@ -80,6 +82,27 @@
         </div>
       </div>
     </header>
+
+    {#if puaRows.length}
+      <section class="family">
+        <h3 class="ui-label">{t('pua.title')} <span class="ui-count">{puaRows.length}</span></h3>
+        <dl>
+          {#each puaRows as row (row.code + row.char)}
+            <div class="row">
+              <dt>
+                {#if row.relation === 'own'}
+                  {t('pua.own')}
+                {:else}
+                  <a href={link(route.page, { c: row.char })} onclick={event => { event.preventDefault(); open(row.char) }}>{row.char}</a> · {t(`pua.relation.${row.relation}`)}
+                {/if}
+              </dt>
+              <dd class="ui-mono">{row.code}</dd>
+            </div>
+          {/each}
+        </dl>
+        <p class="ui-hint">{t('pua.hint')}</p>
+      </section>
+    {/if}
 
     <section class="more">
       <h3 class="ui-label">{t('card.more')}</h3>
