@@ -1,21 +1,17 @@
 // A query is one or more clues, split on spaces. Each clue names a set of characters; several clues
 // leave the characters in all of them.
 import { hanIn, inScope, isHan, isRareKana } from '../../src/fold.js'
-import { puaChar } from '../../src/pua.js'
 import { findCodes, findMeaning, findPart, findReadings, loadChars } from './data.js'
 
 /**
- * @typedef {{ kind: 'code' | 'scoped' | 'strokes' | 'point' | 'pua' | 'text' | 'part', text: string, method?: string, code?: string, value?: number, char?: string }} Clue
+ * @typedef {{ kind: 'code' | 'scoped' | 'strokes' | 'point' | 'text' | 'part', text: string, method?: string, code?: string, value?: number }} Clue
  * @typedef {{ clue: Clue, hits: import('./data.js').CodeHit[], readings: import('./data.js').ReadingHit[], meaning: string[], parts: string[], chars: string[] }} Answer
  */
 
 /** @param {string} term @param {boolean} alone @returns {Clue} */
 export function readClue(term, alone) {
   const point = term.match(/^[uU]\+?([0-9a-fA-F]{4,6})$/)
-  if (point) {
-    const char = puaChar(point[1])
-    return char ? { kind: 'pua', text: term, value: parseInt(point[1], 16), char } : { kind: 'point', text: term, value: parseInt(point[1], 16) }
-  }
+  if (point) return { kind: 'point', text: term, value: parseInt(point[1], 16) }
   const strokes = term.match(/^(\d{1,2})[畫画劃划]$/)
   if (strokes) return { kind: 'strokes', text: term, value: Number(strokes[1]) }
   const scoped = term.match(/^([a-z][\w-]*):(.+)$/)
@@ -23,12 +19,6 @@ export function readClue(term, alone) {
   if (isHan(term)) return { kind: alone ? 'text' : 'part', text: term }
   if (isRareKana(term) || (alone && inScope(term))) return { kind: 'text', text: term }
   if (hanIn(term).length === [...term].length) return { kind: 'text', text: term }
-  // A bare hex code can be a private-use assignment; the lookup still tries it as an ordinary code.
-  const hex = term.match(/^[0-9a-fA-F]{4,6}$/)
-  if (hex) {
-    const char = puaChar(hex[0])
-    if (char) return { kind: 'pua', text: term, value: parseInt(hex[0], 16), char }
-  }
   return { kind: 'code', text: term }
 }
 
@@ -54,12 +44,6 @@ async function lookUp(clue) {
   const out = { clue, hits: [], readings: [], meaning: [], parts: [], chars: [] }
   if (clue.kind === 'point') {
     if (clue.value !== undefined && clue.value <= 0x10FFFF) out.chars = [String.fromCodePoint(clue.value)]
-    return out
-  }
-  if (clue.kind === 'pua') {
-    out.chars = clue.char ? [clue.char] : []
-    // A bare hex code is also tried as an ordinary code, so an encoding that shares it still shows.
-    out.hits = await findCodes(clue.text)
     return out
   }
   if (clue.kind === 'strokes') {
@@ -95,17 +79,10 @@ async function lookUp(clue) {
   return out
 }
 
-/** The characters an answer contributes to an intersection. @param {Answer} item */
-export function answerChars(item) {
-  // A PUA clue can also be an ordinary code; both sides stay candidates.
-  const chars = [...item.chars, ...(item.clue.kind === 'pua' ? item.hits.flatMap(hit => hit.chars) : [])]
-  return chars.length ? chars : [...item.hits.flatMap(hit => hit.chars), ...item.parts, ...item.meaning]
-}
-
 /** The characters every answer names, commonest first. @param {Answer[]} answers */
 export async function intersect(answers) {
   const rows = await loadChars()
-  const sets = answers.map(item => new Set(answerChars(item)))
+  const sets = answers.map(item => new Set(item.chars.length ? item.chars : [...item.hits.flatMap(hit => hit.chars), ...item.parts, ...item.meaning]))
   const [first, ...rest] = sets
   const kept = [...(first ?? [])].filter(char => rest.every(set => set.has(char)))
   return kept.sort((a, b) => (rows.get(a)?.rank ?? 1e6) - (rows.get(b)?.rank ?? 1e6))

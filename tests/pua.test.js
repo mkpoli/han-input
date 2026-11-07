@@ -1,9 +1,8 @@
 import { describe, expect, test } from 'bun:test'
 import { createHash } from 'node:crypto'
 import { readFileSync } from 'node:fs'
-import { MOE_PUA, MOE_PUA_VARIANTS, codePoint, convertMoePua, puaChar, puaOf } from '../src/pua.js'
+import { MOE_PUA, codePoint, convertMoePua } from '../src/pua.js'
 import { parseMoeWordbooks } from '../scripts/import_moe_pua.mjs'
-import { variantIndex } from '../scripts/import_moe_pua_variants.mjs'
 
 const book = rows => `var wordbooks = ${JSON.stringify(rows)};`
 
@@ -49,72 +48,6 @@ describe('MOE PUA snapshot', () => {
     expect(codePoint('\uE43B')).toBe('U+E43B')
     expect(codePoint('𠊎')).toBe('U+2028E')
     expect(codePoint('\u{F8FAF}')).toBe('U+F8FAF')
-  })
-})
-
-describe('lookup', () => {
-  test('resolves a PUA code point to its character', () => {
-    expect(puaChar('E43B')).toBe('䀯')
-    expect(puaChar('e43b')).toBe('䀯')
-    expect(puaChar('F8FAF')).toBe('𰹬')
-    expect(puaChar('FFFF')).toBe('')
-    expect(puaChar('ZZZZ')).toBe('')
-  })
-  test('leaves hex above the code space alone', () => {
-    for (const hex of ['FFFFFF', '110000', '123456', 'U+FFFFFF']) expect(puaChar(hex)).toBe('')
-  })
-  test('lists a character’s own PUA codes', () => {
-    expect(puaOf('䀯')).toEqual([{ code: 'U+E43B', char: '䀯', relation: 'own' }])
-    expect(puaOf('雞')).toEqual([{ code: 'U+E463', char: '雞', relation: 'own' }])
-    expect(puaOf('字')).toEqual([])
-  })
-  test('lists the PUA codes of a variant, and the inverse relation from it', () => {
-    expect(puaOf('羶')).toEqual([{ code: 'U+E4DE', char: '羴', relation: 'semantic' }])
-    expect(puaOf('鸡')).toEqual([{ code: 'U+E463', char: '雞', relation: 'traditional' }])
-    expect(puaOf('鷄')).toEqual([{ code: 'U+E463', char: '雞', relation: 'semantic' }])
-  })
-  test('records the variant source', () => {
-    expect(MOE_PUA_VARIANTS.source.version).toBe('18.0.0')
-    expect(MOE_PUA_VARIANTS.source.licence).toBe('Unicode-3.0')
-    expect(Object.keys(MOE_PUA_VARIANTS.byChar)).toHaveLength(9)
-  })
-})
-
-describe('variant index', () => {
-  const body = [
-    'U+7FB6\tkSemanticVariant\tU+7FB4<kMatthews',
-    'U+9E21\tkTraditionalVariant\tU+96DE',
-    'U+96DE\tkSimplifiedVariant\tU+9E21',
-    'U+4E00\tkCompatibilityVariant\tU+2F00',
-    'U+3400\tkSimplifiedVariant\tU+4E00',
-    'U+4E01\tkSemanticVariant\tU+3400 U+4E02',
-  ].join('\n')
-  test('keeps relations that touch a PUA character, named from each side', () => {
-    expect(variantIndex(body, new Set(['羴', '雞']))).toEqual({
-      羶: [{ char: '羴', relation: 'semantic' }],
-      鸡: [{ char: '雞', relation: 'traditional' }],
-    })
-  })
-  test('names the inverse relation when the PUA character is the row’s own', () => {
-    const line = 'U+4E00\tkSimplifiedVariant\tU+3400'
-    expect(variantIndex(line, new Set(['㐀']))).toEqual({ 一: [{ char: '㐀', relation: 'simplified' }] })
-    expect(variantIndex(line, new Set(['一']))).toEqual({ 㐀: [{ char: '一', relation: 'traditional' }] })
-  })
-  test('reads specialized, Z and multi-target rows, once per relation', () => {
-    const rows = [
-      'U+3400\tkSpecializedSemanticVariant\tU+4E00',
-      'U+4E01\tkZVariant\tU+4E00 U+4E02',
-      'U+4E02\tkSemanticVariant\tU+4E00',
-    ].join('\n')
-    expect(variantIndex(rows, new Set(['一']))).toEqual({
-      㐀: [{ char: '一', relation: 'specialized' }],
-      丁: [{ char: '一', relation: 'z' }],
-      丂: [{ char: '一', relation: 'semantic' }],
-    })
-    expect(variantIndex('U+4E01\tkZVariant\tU+4E00\nU+4E01\tkZVariant\tU+4E00', new Set(['一']))).toEqual({ 丁: [{ char: '一', relation: 'z' }] })
-  })
-  test('leaves out characters with no PUA on either side', () => {
-    expect(variantIndex(body, new Set(['字']))).toEqual({})
   })
 })
 

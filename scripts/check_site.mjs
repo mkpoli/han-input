@@ -7,10 +7,8 @@ import { strict as assert } from 'node:assert'
 import { existsSync, mkdirSync, readdirSync } from 'node:fs'
 import { homedir } from 'node:os'
 import { join } from 'node:path'
-import { serveDist } from './serve-dist.mjs'
 
 const SITE = process.env.SITE_URL ?? 'http://localhost:5302'
-const dist = process.env.SITE_DIR
 mkdirSync('shots', { recursive: true })
 
 function browserPath() {
@@ -38,7 +36,6 @@ async function check(name, run) {
 }
 
 const context = await browser.newContext({ viewport: { width: 1360, height: 900 }, locale: 'en-US', colorScheme: 'light' })
-if (dist) await serveDist(context, dist)
 const page = await context.newPage()
 /** @type {string[]} */
 const errors = []
@@ -117,7 +114,7 @@ await check('a code typed exactly comes before the readings it folds onto', asyn
   assert.match(await page.locator('main .ui-section h2').first().innerText(), /kana/i)
 })
 await check('siniform scripts stay out of the tables', async () => {
-  const methods = await page.evaluate(async () => (await fetch('/data/methods.json')).json())
+  const methods = await (await fetch(`${SITE}/data/methods.json`)).json()
   assert.ok(!methods.some((/** @type {{ id: string }} */ method) => /tangut|jurchen|khitan/i.test(method.id)))
   await page.goto(`${SITE}/?q=U%2B18E01&c=18E01`)
   await page.waitForLoadState('networkidle')
@@ -173,7 +170,6 @@ await check('no script errors', async () => assert.equal(errors.join(' | '), '')
 const SHOTS = [['find', '/?q=lung4&c=9F8D'], ['clues', '/?q=%E6%B0%B5+12%E7%95%AB&c=6E56'], ['methods', '/methods'], ['ashide', '/m/ashide?q=%E3%83%A6%E3%82%BF'], ['readings', '/readings'], ['rhymes', '/rhymes?q=%E6%9D%B1&c=6771'], ['radicals', '/radicals?q=85'], ['rare', '/?c=33473'], ['nushu', '/?q=%E4%B8%80&c=1B170'], ['hentaigana', '/?q=%E5%AE%89&c=1B002'], ['about', '/about']]
 for (const [theme, phone] of [['light', false], ['dark', false], ['light', true], ['dark', true]]) {
   const view = await browser.newContext({ viewport: phone ? { width: 390, height: 844 } : { width: 1360, height: 900 }, deviceScaleFactor: 2, colorScheme: /** @type {'light' | 'dark'} */ (theme), locale: 'en-US' })
-  if (dist) await serveDist(view, dist)
   const tab = await view.newPage()
   for (const [name, path] of SHOTS) {
     await tab.goto(`${SITE}${path}`)

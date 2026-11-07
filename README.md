@@ -17,7 +17,7 @@ It covers Han, extended sinographies such as Chữ Nôm and Sawndip, and kana an
 - **Readings**: every variety in 漢字音典, each typed the same way.
 - **Rhyme tables**: the Guangyun by rhyme, initial, grade and tone.
 - **Radicals**: the 214 Kangxi radicals by residual strokes.
-- **PUA conversion**: convert text from the Ministry of Education's Taiwanese/Hakka fonts to Unicode and browse the mappings. Each character's card lists its own PUA codes and those of its Unihan variants.
+- **PUA conversion**: convert text from the Ministry of Education's Taiwanese/Hakka fonts to Unicode and browse the mappings.
 
 ## Development
 
@@ -34,5 +34,4 @@ before `build:data` reads it. The generated `app/public/data/` is about 300 MB a
 
 The PUA converter uses the committed [MOE mapping snapshot](data/moe-pua.json), independently of the
 search tables. `bun scripts/import_moe_pua.mjs` imports the checksum-pinned official source;
-`bun scripts/import_moe_pua_variants.mjs [Unihan_Variants.txt]` rebuilds the Unihan variant index from
-Unihan 18.0; `SITE_URL=http://127.0.0.1:5317 bun scripts/check_pua.mjs` checks a running preview in Chromium.
+`SITE_URL=http://127.0.0.1:5317 bun scripts/check_pua.mjs` checks a running preview in Chromium.

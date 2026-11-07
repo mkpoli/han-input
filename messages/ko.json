@@ -113,13 +113,5 @@
   "convert.legacy": "기존 PUA 코드",
   "convert.standard": "유니코드",
   "convert.character": "글자",
-  "convert.data": "대응 데이터",
-  "pua.title": "사용자 정의 영역 코드",
-  "pua.own": "이 글자",
-  "pua.hint": "코드는 대만 교육부의 구형 Windows용 대만어·하카어 글꼴에서, 이체자 관계는 Unihan에서 가져왔습니다.",
-  "pua.relation.simplified": "간체자",
-  "pua.relation.traditional": "번체자",
-  "pua.relation.semantic": "의미 이체자",
-  "pua.relation.specialized": "전용 의미 이체자",
-  "pua.relation.z": "Z 이체자"
+  "convert.data": "대응 데이터"
 }

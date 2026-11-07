@@ -113,13 +113,5 @@
   "convert.legacy": "原私用碼位",
   "convert.standard": "Unicode碼位",
   "convert.character": "文字",
-  "convert.data": "對照資料",
-  "pua.title": "私用區碼位",
-  "pua.own": "本字",
-  "pua.hint": "碼位來自臺灣教育部舊Windows用臺灣台語、臺灣客語字型，異體字關係來自Unihan。",
-  "pua.relation.simplified": "簡體字",
-  "pua.relation.traditional": "繁體字",
-  "pua.relation.semantic": "語義異體字",
-  "pua.relation.specialized": "專用語義異體字",
-  "pua.relation.z": "Z異體字"
+  "convert.data": "對照資料"
 }

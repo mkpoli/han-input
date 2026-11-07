@@ -1,15 +1,12 @@
 // SITE_URL=http://127.0.0.1:5317 bun scripts/check_pua.mjs [--before]
-// SITE_DIR=dist SITE_URL=http://site.test bun scripts/check_pua.mjs   (served from disk, no port)
 import { chromium } from 'playwright-core'
 import { strict as assert } from 'node:assert'
 import { existsSync, mkdirSync, readdirSync } from 'node:fs'
 import { homedir } from 'node:os'
 import { join } from 'node:path'
 import { MOE_PUA } from '../src/pua.js'
-import { serveDist } from './serve-dist.mjs'
 
 const SITE = process.env.SITE_URL ?? 'http://127.0.0.1:5317'
-const dist = process.env.SITE_DIR
 const before = process.argv.includes('--before')
 const cache = join(homedir(), '.cache/ms-playwright')
 const executablePath = process.env.CHROMIUM_PATH ?? readdirSync(cache).filter(name => name.startsWith('chromium-')).sort().reverse()
@@ -20,7 +17,6 @@ const browser = await chromium.launch({ executablePath })
 try {
   for (const theme of /** @type {const} */ (['light', 'dark'])) {
     const context = await browser.newContext({ viewport: { width: 1360, height: 900 }, deviceScaleFactor: 2, colorScheme: theme, locale: 'en-US', permissions: ['clipboard-read', 'clipboard-write'] })
-    if (dist) await serveDist(context, dist)
     await context.addInitScript(value => localStorage.setItem('han-input:theme', value), theme)
     const page = await context.newPage()
     const errors = /** @type {string[]} */ ([])
@@ -66,54 +62,6 @@ try {
       await page.waitForURL(/c=/)
       await page.locator('.card .glyph').waitFor({ state: 'visible' })
       assert.equal(await page.locator('.card .glyph').innerText(), Object.values(MOE_PUA.mappings)[0])
-
-      /** @param {string} query */
-      const found = async query => {
-        await page.goto(`${SITE}/?q=${encodeURIComponent(query)}`)
-        await page.waitForLoadState('networkidle')
-        return page.locator('main .ui-tile-glyph').allTextContents()
-      }
-      assert.ok((await found('U+E43B')).includes('䀯'))
-      assert.ok((await found('E43B')).includes('䀯'))
-      await page.screenshot({ path: `shots/pua/find-pua-mobile-${theme}.png`, fullPage: true })
-
-      await page.setViewportSize({ width: 1360, height: 900 })
-      assert.ok((await found('U+E43B')).includes('䀯'))
-      assert.ok((await found('E4DE')).includes('羴'))
-      assert.ok((await found('E4DE')).includes('鬿'))
-      await page.screenshot({ path: `shots/pua/find-pua-${theme}.png`, fullPage: true })
-      await page.goto(`${SITE}/?c=96DE`)
-      await page.waitForLoadState('networkidle')
-      await page.locator('.card .record').waitFor({ state: 'visible' })
-      assert.match(await page.locator('.card').innerText(), /U\+E463/)
-      await page.goto(`${SITE}/?c=402F`)
-      await page.waitForLoadState('networkidle')
-      const ownCard = await page.locator('.card').innerText()
-      assert.match(ownCard, /This character/)
-      assert.match(ownCard, /U\+E43B/)
-      await page.screenshot({ path: `shots/pua/card-own-${theme}.png`, fullPage: true })
-      await page.goto(`${SITE}/?c=9E21`)
-      await page.waitForLoadState('networkidle')
-      const simplifiedCard = await page.locator('.card').innerText()
-      assert.match(simplifiedCard, /雞/)
-      assert.match(simplifiedCard, /Traditional variant/)
-      assert.match(simplifiedCard, /U\+E463/)
-      await page.screenshot({ path: `shots/pua/card-variant-${theme}.png`, fullPage: true })
-      await page.goto(`${SITE}/?c=7FB6`)
-      await page.waitForLoadState('networkidle')
-      const variantCard = await page.locator('.card').innerText()
-      assert.match(variantCard, /羴/)
-      assert.match(variantCard, /Semantic variant/)
-      assert.match(variantCard, /U\+E4DE/)
-      await page.screenshot({ path: `shots/pua/card-semantic-${theme}.png`, fullPage: true })
-
-      await page.goto(`${SITE}/m/ashide?c=9E21`)
-      await page.waitForLoadState('networkidle')
-      const variantHref = await page.locator('.card a[href*="c=96DE"]').getAttribute('href')
-      assert.ok(variantHref?.startsWith('/m/ashide?'), variantHref ?? 'no href')
-      await page.goto(`${SITE}/?c=9E21&lang=ja`)
-      await page.waitForLoadState('networkidle')
-      assert.match(await page.locator('.card').innerText(), /繁体字/)
       for (const locale of ['ja', 'zh-Hans', 'zh-Hant', 'ko']) {
         await page.goto(`${SITE}/convert?lang=${locale}`)
         await page.waitForLoadState('networkidle')
