@@ -85,5 +85,19 @@
   "methods.unavailable": "존재는 확인했으나 여기서는 검색 불가",
   "methods.unavailableIntro": "모두 실재하는 방법으로, 표가 있으면 검색할 수 있습니다.",
   "methods.reason.terms": "표 공개가 허락되지 않음",
-  "methods.reason.none": "표를 찾지 못함"
+  "methods.reason.none": "표를 찾지 못함",
+  "nav.convert": "변환",
+  "convert.title": "교육부 사용자 정의 문자를 유니코드로",
+  "convert.intro": "대만 교육부의 구형 Windows용 대만어·하카어 글꼴에 쓰인 문자를 유니코드로 변환합니다. 대응표에 없는 사용자 정의 영역 문자는 그대로 남습니다.",
+  "convert.local": "텍스트는 이 페이지 안에서 처리합니다.",
+  "convert.input": "원문",
+  "convert.output": "변환 결과",
+  "convert.placeholder": "교육부 글꼴의 텍스트를 붙여 넣으세요",
+  "convert.converted": "변환한 문자: {count}자",
+  "convert.remaining": "남은 사용자 정의 문자: {count}자",
+  "convert.mapping": "대응표",
+  "convert.legacy": "기존 PUA 코드",
+  "convert.standard": "유니코드",
+  "convert.character": "글자",
+  "convert.data": "대응 데이터"
 }

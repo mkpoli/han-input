@@ -26,6 +26,7 @@ Discord discussion of 2026-10-27, and the works themselves were not read.
 | [hentaigana.el](https://github.com/kawabata/hentaigana) 1.170817, 川幡太一 | the Han character each hiragana and hentaigana form was written from, and hentaigana by modern kana | GPL-3.0-or-later |
 | [rime-hentaigana](https://github.com/yuanhao-chen-nyoeghau/rime-hentaigana) | kana by spelling | Apache-2.0 |
 | `unicode_nushu_data.csv` in [漢字音典 MCPDict](https://github.com/osfans/MCPDict), commit `cc3e293` | the Han characters each Nüshu character corresponds to, with traditional forms converted by OpenCC | MCPDict repository MIT; no separate terms stated for this table |
+| [自造字轉換字碼工具](https://happyhakka.moe.edu.tw/crechar/index.html), Ministry of Education, Taiwan; [wordbooks.js](https://happyhakka.moe.edu.tw/crechar/wordbooks.js), retrieved 2026-11-07, SHA-256 `685336386d696c30114ab779ebafef2bbb56a098f22de60f1f6ef68475d16923` | 59 PUA-to-Unicode assignments for the early Windows Taiwanese/Hakka fonts | ©2024 Ministry of Education, R.O.C. All rights reserved; no separate data licence stated |
 | [BabelStone IDS](https://www.babelstone.co.uk/CJK/IDS.TXT), Andrew West | which parts each character is written with | As stated in the file |
 | [Noto Sans Nushu and Noto Serif Hentaigana](https://github.com/notofonts) | glyphs for Nüshu and hentaigana | OFL-1.1 |
 | [Jigmo](https://kamichikoichi.github.io/jigmo/) 2025-09-12, 上地宏一 | glyphs for the extension blocks, cut by `scripts/build_fonts.py` | CC0-1.0 |

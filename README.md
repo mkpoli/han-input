@@ -16,6 +16,7 @@ It covers Han, extended sinographies such as Chữ Nôm and Sawndip, and kana an
 - **Readings**: every variety in 漢字音典, each typed the same way.
 - **Rhyme tables**: the Guangyun by rhyme, initial, grade and tone.
 - **Radicals**: the 214 Kangxi radicals by residual strokes.
+- **PUA conversion**: convert text from the Ministry of Education's Taiwanese/Hakka fonts to Unicode and browse the mappings.
 
 ## Development
 
@@ -29,3 +30,7 @@ bun run verify          # unit tests, type check, messages
 `bun scripts/build_readings.mjs` builds the readings from the database in 漢字音典's release APK, unpacked to
 `cache/mcpdict/x`. `bun scripts/build_wiktionary.mjs <dir>` builds the meaning index from Wiktionary dumps
 before `build:data` reads it. The generated `app/public/data/` is about 300 MB and is not committed.
+
+The PUA converter uses the committed [MOE mapping snapshot](data/moe-pua.json), independently of the
+search tables. `bun scripts/import_moe_pua.mjs` imports the checksum-pinned official source;
+`SITE_URL=http://127.0.0.1:5317 bun scripts/check_pua.mjs` checks a running preview in Chromium.

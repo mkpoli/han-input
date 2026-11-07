@@ -85,5 +85,19 @@
   "methods.unavailable": "存在は確認済み、ここでは検索不可",
   "methods.unavailableIntro": "これらは実在します。表が手に入れば検索できるようになります。",
   "methods.reason.terms": "表の公開が許諾されていない",
-  "methods.reason.none": "表が見つからない"
+  "methods.reason.none": "表が見つからない",
+  "nav.convert": "変換",
+  "convert.title": "教育部の外字をUnicodeに変換",
+  "convert.intro": "台湾教育部の旧Windows用台湾語・客家語フォントの外字をUnicodeに変換します。対応表にない私用領域の文字はそのまま残ります。",
+  "convert.local": "テキストはこのページ内で処理します。",
+  "convert.input": "元のテキスト",
+  "convert.output": "変換後のテキスト",
+  "convert.placeholder": "教育部フォントのテキストを貼り付け",
+  "convert.converted": "変換した文字：{count}字",
+  "convert.remaining": "残っている私用文字：{count}字",
+  "convert.mapping": "対応表",
+  "convert.legacy": "旧外字コード",
+  "convert.standard": "Unicode",
+  "convert.character": "文字",
+  "convert.data": "対応データ"
 }

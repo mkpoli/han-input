@@ -85,5 +85,19 @@
   "methods.unavailable": "已知但无法在此检索",
   "methods.unavailableIntro": "这些方法确实存在，有了码表就能检索。",
   "methods.reason.terms": "条款不允许公开码表",
-  "methods.reason.none": "未找到码表"
+  "methods.reason.none": "未找到码表",
+  "nav.convert": "转码",
+  "convert.title": "教育部自造字转Unicode",
+  "convert.intro": "将台湾教育部早期Windows用台语、客家语字体中的自造字转为Unicode。未列入对照表的私用区字符会保留原样。",
+  "convert.local": "文字仅在此页面处理。",
+  "convert.input": "原始文字",
+  "convert.output": "转换后文字",
+  "convert.placeholder": "粘贴使用教育部字体的文字",
+  "convert.converted": "已转换：{count}个字符",
+  "convert.remaining": "剩余私用字符：{count}个",
+  "convert.mapping": "字码对照表",
+  "convert.legacy": "原私用码位",
+  "convert.standard": "Unicode码位",
+  "convert.character": "文字",
+  "convert.data": "对照数据"
 }
