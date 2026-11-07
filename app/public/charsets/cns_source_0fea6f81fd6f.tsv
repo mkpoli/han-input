@@ -1,0 +1,16 @@
+# 全形羅馬數字(《CNS 11643》96年公布)
+# CNS source release: 20260805
+# 數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw
+# Sources: https://www.cns11643.gov.tw/opendata/Properties.zip ; https://www.cns11643.gov.tw/opendata/MapingTables.zip
+# Licence: https://www.cns11643.gov.tw/pageView.jsp?ID=59
+CNS	Unicode
+1-242B	U+2160
+1-242C	U+2161
+1-242D	U+2162
+1-242E	U+2163
+1-242F	U+2164
+1-2430	U+2165
+1-2431	U+2166
+1-2432	U+2167
+1-2433	U+2168
+1-2434	U+2169

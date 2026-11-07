@@ -1,0 +1,22 @@
+# 漢文訓讀(Kanbun), ISO/IEC 10646
+# CNS source release: 20260805
+# 數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw
+# Sources: https://www.cns11643.gov.tw/opendata/Properties.zip ; https://www.cns11643.gov.tw/opendata/MapingTables.zip
+# Licence: https://www.cns11643.gov.tw/pageView.jsp?ID=59
+CNS	Unicode
+8-7633	U+3190
+8-7634	U+3191
+8-7635	U+3192
+8-7636	U+3193
+8-7637	U+3194
+8-7638	U+3195
+8-7639	U+3196
+8-763A	U+3197
+8-763B	U+3198
+8-763C	U+3199
+8-763D	U+319A
+8-763E	U+319B
+8-763F	U+319C
+8-7640	U+319D
+8-7641	U+319E
+8-7642	U+319F

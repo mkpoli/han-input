@@ -1,0 +1,33 @@
+# 國語注音符號擴充
+# CNS source release: 20260805
+# 數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw
+# Sources: https://www.cns11643.gov.tw/opendata/Properties.zip ; https://www.cns11643.gov.tw/opendata/MapingTables.zip
+# Licence: https://www.cns11643.gov.tw/pageView.jsp?ID=59
+CNS	Unicode
+1-2576	U+312E
+1-2577	U+312F
+1-2A60	U+31A0
+1-2A61	U+31A1
+1-2A62	U+31A2
+1-2A63	U+31A3
+1-2A64	U+31A4
+1-2A65	U+31A5
+1-2A66	U+31A6
+1-2A67	U+31A7
+1-2A68	U+31A8
+1-2A69	U+31A9
+1-2A6A	U+31AA
+1-2A6B	U+31AB
+1-2A6C	U+31AC
+1-2A6D	U+31AD
+1-2A6E	U+31AE
+1-2A6F	U+31AF
+1-2A70	U+31B0
+1-2A71	U+31B1
+1-2A72	U+31B2
+1-2A73	U+31B3
+1-2A74	U+31B4
+1-2A75	U+31B5
+1-2A76	U+31B6
+1-2A77	U+31B7
+1-2A78	U+31BB

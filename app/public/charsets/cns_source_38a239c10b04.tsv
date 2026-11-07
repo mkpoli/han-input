@@ -1,0 +1,21 @@
+# 方塊元件(block element), CNS 14649
+# CNS source release: 20260805
+# 數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw
+# Sources: https://www.cns11643.gov.tw/opendata/Properties.zip ; https://www.cns11643.gov.tw/opendata/MapingTables.zip
+# Licence: https://www.cns11643.gov.tw/pageView.jsp?ID=59
+CNS	Unicode
+8-6637	U+2580
+8-6638	U+2590
+8-6639	U+2591
+8-663A	U+2592
+8-663B	U+2593
+8-663C	U+2596
+8-663D	U+2597
+8-663E	U+2598
+8-663F	U+2599
+8-6640	U+259A
+8-6641	U+259B
+8-6642	U+259C
+8-6643	U+259D
+8-6644	U+259E
+8-6645	U+259F

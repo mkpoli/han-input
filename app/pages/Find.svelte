@@ -1,40 +1,84 @@
 <script>
   // Find: one box for whatever the reader has. A clue is tried as a code in every method at once and
   // as a word of meaning. Several clues, split by spaces, leave the characters that fit them all.
-  import { route, setQuery, link, go } from '../lib/route.svelte.js'
+  import { route, setQuery, setCharset, link, go } from '../lib/route.svelte.js'
+  import { loadCharsets, loadCharset, filterAnswer, browseCharset } from '../lib/charsets.js'
   import { answer, groupHits, intersect, readQuery, tallyReadings } from '../lib/search.js'
   import { loadMethods } from '../lib/data.js'
   import { autofocus } from '../lib/ui.svelte.js'
   import { nameOf, t } from '../lib/i18n.svelte.js'
   import Tiles from '../ui/Tiles.svelte'
+  import CharsetFilter from '../ui/CharsetFilter.svelte'
 
   const EXAMPLES = ['ユタヘヘミ', 'jnd', 'luong', '端一東平', '30407', 'tsɿ', '氵 12畫', 'river ジ', 'chữ', 'a-1', 'a672', 'U+5B57']
 
-  let query = $state(route.q)
+  const query = $derived(route.q)
   /** @type {import('../lib/search.js').Answer[]} */
   let answers = $state([])
   /** @type {string[]} */
   let common = $state([])
+  /** @type {string[]} */
+  let browsed = $state([])
+  /** @type {import('../lib/charsets.js').Charset[]} */
+  let charsets = $state([])
+  const chosen = $derived(charsets.find(set => set.id === route.set))
   let busy = $state(false)
+  let failed = $state(false)
+  let catalogueFailed = $state(false)
+  let retry = $state(0)
   /** @type {Map<string, import('../lib/data.js').Method>} */
   let methods = $state(new Map())
-  let run = 0
 
-  loadMethods().then(list => { methods = new Map(list.map(method => [method.id, method])) })
+  loadMethods().then(list => { methods = new Map(list.map(method => [method.id, method])) }).catch(() => {})
+
+  $effect(() => {
+    retry
+    let active = true
+    catalogueFailed = false
+    loadCharsets().then(list => { if (active) charsets = list }).catch(() => { if (active) catalogueFailed = true })
+    return () => { active = false }
+  })
 
   $effect(() => {
     const clues = readQuery(query)
-    const mine = ++run
-    if (!clues.length) { answers = []; common = []; busy = false; return }
+    const selected = route.set
+    retry
+    let active = true
+    answers = []
+    common = []
+    browsed = []
+    failed = false
     busy = true
-    Promise.all(clues.map(answer)).then(async found => {
-      if (mine !== run) return
-      const kept = await intersect(found)
-      if (mine !== run) return
-      answers = found
-      common = kept
-      busy = false
-    })
+    ;(async () => {
+      try {
+        if (selected) {
+          const catalogue = await loadCharsets()
+          if (!active) return
+          charsets = catalogue
+          catalogueFailed = false
+          if (!catalogue.some(set => set.id === selected)) throw new Error('Unknown character set')
+        }
+        const membership = selected ? await loadCharset(selected) : null
+        if (!active) return
+        if (!clues.length) {
+          const chars = selected ? await browseCharset(selected) : []
+          if (active) browsed = chars
+          return
+        }
+        const found = await Promise.all(clues.map(answer))
+        if (!active) return
+        const filtered = membership ? found.map(item => filterAnswer(item, membership)) : found
+        const kept = await intersect(filtered)
+        if (!active) return
+        answers = filtered
+        common = kept
+      } catch {
+        if (active) failed = true
+      } finally {
+        if (active) busy = false
+      }
+    })()
+    return () => { active = false }
   })
 
   const many = $derived(answers.length > 1)
@@ -51,7 +95,7 @@
       {@const method = methods.get(group.method)}
       <section class="ui-section">
         <h2 class="ui-label method">
-          <a href={link('m', { method: group.method, q: query })} onclick={event => { event.preventDefault(); go('m', group.method); setQuery(query) }}>{method ? nameOf(method.names) : group.method}</a>
+          <a href={link('m', { method: group.method, q: query })} onclick={event => { event.preventDefault(); const q = query; go('m', group.method); setQuery(q) }}>{method ? nameOf(method.names) : group.method}</a>
           <span class="ui-count">{group.total}</span>
         </h2>
         <div class="hits">
@@ -72,15 +116,29 @@
     <p class="ui-page-intro">{t('find.intro')}</p>
   </header>
 
-  <input class="ui-input box" data-primary type="search" lang="und-Hani" use:autofocus bind:value={query} aria-label={t('find.label')}
-    placeholder={t('find.placeholder')} spellcheck="false" autocomplete="off" autocapitalize="off" oninput={() => setQuery(query)}>
+  <input class="ui-input box" data-primary type="search" lang="und-Hani" use:autofocus value={query} aria-label={t('find.label')}
+    placeholder={t('find.placeholder')} spellcheck="false" autocomplete="off" autocapitalize="off" oninput={(/** @type {Event & { currentTarget: HTMLInputElement }} */ event) => setQuery(event.currentTarget.value)}>
+  <CharsetFilter {charsets} selected={route.set} onchange={setCharset} failed={catalogueFailed && !route.set} onretry={() => retry++} />
 
-  {#if !query.trim()}
+  {#if failed}
+    <div class="ui-section" role="alert">
+      <p class="ui-hint">{t('charset.error')}</p>
+      <button class="ui-button" data-size="sm" type="button" onclick={() => retry++}>{t('charset.retry')}</button>
+    </div>
+  {:else if busy}
+    <p class="ui-hint" role="status">{t('charset.loading')}</p>
+  {:else if !query.trim() && route.set}
+    <section class="ui-section">
+      <h2 class="ui-label">{t('find.characters')} <span class="ui-count">{browsed.length.toLocaleString()}</span></h2>
+      <Tiles chars={browsed} limit={240} label={chosen ? nameOf(chosen.names) : route.set} />
+      {#if !browsed.length}<p class="ui-hint">{t('find.none')}</p>{/if}
+    </section>
+  {:else if !query.trim()}
     <section class="ui-section">
       <h2 class="ui-label">{t('find.try')}</h2>
       <div class="examples">
         {#each EXAMPLES as example (example)}
-          <button class="ui-button" data-size="sm" type="button" onclick={() => { query = example; setQuery(example) }}>{example}</button>
+          <button class="ui-button" data-size="sm" type="button" onclick={() => setQuery(example)}>{example}</button>
         {/each}
       </div>
     </section>
@@ -97,7 +155,7 @@
       <Tiles chars={common} label={t('find.common', { count: common.length })} limit={240} />
     </section>
   {:else if single}
-    {#if single.clue.kind === 'text' || single.clue.kind === 'point'}
+    {#if single.chars.length && ['text', 'point', 'strokes'].includes(single.clue.kind)}
       <section class="ui-section">
         <h2 class="ui-label">{t('find.characters')}</h2>
         <Tiles chars={single.chars} size={72} label={t('find.characters')} />

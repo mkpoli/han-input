@@ -1,0 +1,9 @@
+# 臺灣客語用字
+# CNS source release: 20260805
+# 數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw
+# Sources: https://www.cns11643.gov.tw/opendata/Properties.zip ; https://www.cns11643.gov.tw/opendata/MapingTables.zip
+# Licence: https://www.cns11643.gov.tw/pageView.jsp?ID=59
+CNS	Unicode
+11-7D25	U+2C3DB
+11-7D2C	U+FFB1A
+11-7D2F	U+FFB19

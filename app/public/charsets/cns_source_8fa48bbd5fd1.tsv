@@ -1,0 +1,38 @@
+# CJK符號及標點(CJK symbol and punctuation), CNS 14649
+# CNS source release: 20260805
+# 數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw
+# Sources: https://www.cns11643.gov.tw/opendata/Properties.zip ; https://www.cns11643.gov.tw/opendata/MapingTables.zip
+# Licence: https://www.cns11643.gov.tw/pageView.jsp?ID=59
+CNS	Unicode
+8-7466	U+3004
+8-7467	U+3005
+8-7468	U+3006
+8-7469	U+3013
+8-746A	U+3016
+8-746B	U+3017
+8-746C	U+3018
+8-746D	U+3019
+8-746E	U+301A
+8-746F	U+301B
+8-7470	U+301C
+8-7471	U+301F
+8-7472	U+3020
+8-7473	U+302A
+8-7474	U+302B
+8-7475	U+302C
+8-7476	U+302D
+8-7477	U+302E
+8-7478	U+302F
+8-7479	U+3030
+8-747A	U+3031
+8-747B	U+3032
+8-747C	U+3033
+8-747D	U+3034
+8-747E	U+3035
+8-7521	U+3036
+8-7522	U+3037
+8-7526	U+303B
+8-7527	U+303C
+8-7528	U+303D
+8-7529	U+303E
+8-752A	U+303F

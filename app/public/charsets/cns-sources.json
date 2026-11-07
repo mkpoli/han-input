@@ -1,0 +1,709 @@
+{
+  "sourceUrl": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+  "mappingUrl": "https://www.cns11643.gov.tw/opendata/MapingTables.zip",
+  "licenseUrl": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+  "overviewUrl": "https://www.cns11643.gov.tw/searchSY.jsp",
+  "overviewLimitation": "The official symbol index lists symbol groups only. Han source groups are accessible through their category links in individual character records.",
+  "releaseUrl": "https://www.cns11643.gov.tw/opendata/release.txt",
+  "datasetVersion": "20260805",
+  "cnsCodeFormat": "Decimal plane number, hyphen, four hexadecimal row/cell digits. Official wordView ID = decimalPlane * 65536 + hexadecimalRowCell.",
+  "hasExtensionEWithdrawalCategory": false,
+  "description": "Exact distinct values in CNS_source.txt column 2, the source when each CNS code was included. Snapshot counts count CNS codes, not unique Unicode scalars. Labels retain edition qualifiers.",
+  "propertiesZipSha256": "3d56ef14cc8099893245dac58fe4718d2fa64812b9159352a98a4588ad3efa5c",
+  "sourceFileSha256": "57d0b2849a10f66868d34103e35fb9f47a45ad5b1798c0bf9ccfb587167a834a",
+  "sourceFileZipTimestamp": [
+    2026,
+    8,
+    5,
+    12,
+    0,
+    24
+  ],
+  "mappingZipSha256": "4502fcf7b433d679dee51127298929543ec7f4aa99be93cd219df1552bc3d2bf",
+  "rowCount": 104680,
+  "categoryCount": 123,
+  "officialCategoryUrlPattern": "https://www.cns11643.gov.tw/searchSY.jsp?ID={id}",
+  "verifiedOfficialCategoryIds": {
+    "常用國字標準字體表(《CNS 11643》96年公布)": 122,
+    "國中小教科書常用字(《CNS 11643》96年公布)": 121,
+    "異體國字字表(《CNS 11643》96年公布)": 125,
+    "次常用字國字標準字體表(《CNS 11643》96年公布)": 123,
+    "罕用國字標準字體表(《CNS 11643》96年公布)": 124,
+    "內政部戶政用字": 113,
+    "內政部戶政用字(《CNS 11643》96年公布)": 112,
+    "內政部地政用字": 114,
+    "內政部移民署用字": 115,
+    "財政部財稅用字": 117,
+    "經濟部工商登記用字": 116,
+    "元素、化學、符號用字": 137,
+    "香港地區及美國國會圖書館用字(《CNS 11643》96年公布)": 141,
+    "香港地區及美國國會圖書館用字": 142,
+    "文書及其他用字": 136,
+    "文獻用字": 139,
+    "文書及其他用字(本土語言)": 140,
+    "教育部《異體字字典》字": 128,
+    "教育部異體字典正字": 129,
+    "教育部異體字典異體字": 131,
+    "教育部臺灣客語用字": 127,
+    "教育部臺灣台語用字": 126,
+    "臺灣客語用字": 134,
+    "臺灣台語用字": 133
+  },
+  "categories": [
+    {
+      "label": "全形空格(《CNS 11643》96年公布)",
+      "count": 1,
+      "sampleCns": "1-2121"
+    },
+    {
+      "label": "全形標點符號(《CNS 11643》96年公布)",
+      "count": 28,
+      "sampleCns": "1-2122"
+    },
+    {
+      "label": "各種括號(《CNS 11643》96年公布)",
+      "count": 46,
+      "sampleCns": "1-213E"
+    },
+    {
+      "label": "註記符號(《CNS 11643》96年公布)",
+      "count": 19,
+      "sampleCns": "1-216C"
+    },
+    {
+      "label": "正字標記(《CNS 11643》96年公布)",
+      "count": 1,
+      "sampleCns": "1-2221"
+    },
+    {
+      "label": "轉信人符號(Care of)(《CNS 11643》96年公布)",
+      "count": 1,
+      "sampleCns": "1-2222"
+    },
+    {
+      "label": "標線符號(《CNS 11643》96年公布)",
+      "count": 19,
+      "sampleCns": "1-2223"
+    },
+    {
+      "label": "數學符號(《CNS 11643》96年公布)",
+      "count": 36,
+      "sampleCns": "1-222D"
+    },
+    {
+      "label": "性別符號(《CNS 11643》96年公布)",
+      "count": 2,
+      "sampleCns": "1-2251"
+    },
+    {
+      "label": "邏輯符號(《CNS 11643》96年公布)",
+      "count": 2,
+      "sampleCns": "1-2253"
+    },
+    {
+      "label": "箭頭符號(《CNS 11643》96年公布)",
+      "count": 8,
+      "sampleCns": "1-2255"
+    },
+    {
+      "label": "貨幣及單位符號(《CNS 11643》96年公布)",
+      "count": 32,
+      "sampleCns": "1-2263"
+    },
+    {
+      "label": "圖塊符號(《CNS 11643》96年公布)",
+      "count": 19,
+      "sampleCns": "1-2324"
+    },
+    {
+      "label": "製表符號(《CNS 11643》96年公布)",
+      "count": 21,
+      "sampleCns": "1-2333"
+    },
+    {
+      "label": "CNS正字標記",
+      "count": 1,
+      "sampleCns": "1-234F"
+    },
+    {
+      "label": "全形阿拉伯數字(《CNS 11643》96年公布)",
+      "count": 10,
+      "sampleCns": "1-2421"
+    },
+    {
+      "label": "全形羅馬數字(《CNS 11643》96年公布)",
+      "count": 10,
+      "sampleCns": "1-242B"
+    },
+    {
+      "label": "中國記帳數字(《CNS 11643》96年公布)",
+      "count": 12,
+      "sampleCns": "1-2435"
+    },
+    {
+      "label": "全形英文字母(《CNS 11643》96年公布)",
+      "count": 52,
+      "sampleCns": "1-2441"
+    },
+    {
+      "label": "全形希臘字母(《CNS 11643》96年公布)",
+      "count": 48,
+      "sampleCns": "1-2475"
+    },
+    {
+      "label": "國語注音符號",
+      "count": 47,
+      "sampleCns": "1-2547"
+    },
+    {
+      "label": "國語注音符號擴充",
+      "count": 27,
+      "sampleCns": "1-2576"
+    },
+    {
+      "label": "數字序列符號(《CNS 11643》96年公布)",
+      "count": 30,
+      "sampleCns": "1-2621"
+    },
+    {
+      "label": "康熙部首",
+      "count": 214,
+      "sampleCns": "1-2721"
+    },
+    {
+      "label": "CJK部首輔助(CJK radical supplement), CNS 14649",
+      "count": 108,
+      "sampleCns": "1-2940"
+    },
+    {
+      "label": "CNS 11643-2&3 中文字筆畫分類及基礎部件",
+      "count": 537,
+      "sampleCns": "1-2B21"
+    },
+    {
+      "label": "C0控制圖像",
+      "count": 38,
+      "sampleCns": "1-4221"
+    },
+    {
+      "label": "漢數字零",
+      "count": 1,
+      "sampleCns": "1-4243"
+    },
+    {
+      "label": "表意文字描述字元(ideographic description character), CNS 14649",
+      "count": 12,
+      "sampleCns": "1-4270"
+    },
+    {
+      "label": "常用國字標準字體表(《CNS 11643》96年公布)",
+      "count": 4808,
+      "sampleCns": "1-4421"
+    },
+    {
+      "label": "國中小教科書常用字(《CNS 11643》96年公布)",
+      "count": 587,
+      "sampleCns": "1-442A"
+    },
+    {
+      "label": "異體國字字表(《CNS 11643》96年公布)",
+      "count": 18486,
+      "sampleCns": "1-6D43"
+    },
+    {
+      "label": "次常用字國字標準字體表(《CNS 11643》96年公布)",
+      "count": 5768,
+      "sampleCns": "2-2121"
+    },
+    {
+      "label": "《CNS 11643》96年公布",
+      "count": 4,
+      "sampleCns": "2-2123"
+    },
+    {
+      "label": "罕用國字標準字體表(《CNS 11643》96年公布)",
+      "count": 18357,
+      "sampleCns": "2-2124"
+    },
+    {
+      "label": "內政部戶政用字",
+      "count": 13532,
+      "sampleCns": "3-3651"
+    },
+    {
+      "label": "教育部異體字典正字",
+      "count": 9,
+      "sampleCns": "3-6247"
+    },
+    {
+      "label": "元素、化學、符號用字",
+      "count": 16,
+      "sampleCns": "3-624C"
+    },
+    {
+      "label": "香港地區及美國國會圖書館用字(《CNS 11643》96年公布)",
+      "count": 131,
+      "sampleCns": "3-6448"
+    },
+    {
+      "label": "香港地區及美國國會圖書館用字",
+      "count": 116,
+      "sampleCns": "3-6449"
+    },
+    {
+      "label": "文書及其他用字",
+      "count": 4,
+      "sampleCns": "5-7C52"
+    },
+    {
+      "label": "文獻用字",
+      "count": 250,
+      "sampleCns": "5-7C53"
+    },
+    {
+      "label": "教育部異體字典異體字",
+      "count": 5,
+      "sampleCns": "5-7C57"
+    },
+    {
+      "label": "教育部《異體字字典》字",
+      "count": 2554,
+      "sampleCns": "5-7C58"
+    },
+    {
+      "label": "C0控制及基本拉丁字母(control and basic Latin), CNS 14649",
+      "count": 95,
+      "sampleCns": "8-2121"
+    },
+    {
+      "label": "基本拉丁字母1-輔助, CNS 14649",
+      "count": 90,
+      "sampleCns": "8-2222"
+    },
+    {
+      "label": "拉丁字母延伸A, CNS 14649",
+      "count": 128,
+      "sampleCns": "8-227C"
+    },
+    {
+      "label": "拉丁字母延伸B, CNS 14649",
+      "count": 183,
+      "sampleCns": "8-2440"
+    },
+    {
+      "label": "國際音標字母集(IPA)延伸, CNS 14649",
+      "count": 96,
+      "sampleCns": "8-263B"
+    },
+    {
+      "label": "間隔修飾符字母(spacing modifier letter), CNS 14649",
+      "count": 74,
+      "sampleCns": "8-273D"
+    },
+    {
+      "label": "組合讀音記號(combining diacritical mark), CNS 14649",
+      "count": 107,
+      "sampleCns": "8-282A"
+    },
+    {
+      "label": "希臘文及科普特文(Greek and Coptic), CNS 14649",
+      "count": 72,
+      "sampleCns": "8-2937"
+    },
+    {
+      "label": "西里爾字母(Cyrillic), CNS 14649",
+      "count": 246,
+      "sampleCns": "8-2A21"
+    },
+    {
+      "label": "西里爾字母輔助, CNS 14649",
+      "count": 16,
+      "sampleCns": "8-2C5B"
+    },
+    {
+      "label": "希伯來文(Hebrew), CNS 14649",
+      "count": 82,
+      "sampleCns": "8-2D63"
+    },
+    {
+      "label": "阿拉伯文(Arabic), CNS 14649",
+      "count": 227,
+      "sampleCns": "8-2E57"
+    },
+    {
+      "label": "泰文(Thai), CNS 14649",
+      "count": 87,
+      "sampleCns": "8-3B2C"
+    },
+    {
+      "label": "藏文(Tibetan), CNS 14649",
+      "count": 193,
+      "sampleCns": "8-3C66"
+    },
+    {
+      "label": "緬甸文(Myanmar), CNS 14649",
+      "count": 78,
+      "sampleCns": "8-3E6B"
+    },
+    {
+      "label": "韓語字母(Hangul Jamo), CNS 14649",
+      "count": 240,
+      "sampleCns": "8-404D"
+    },
+    {
+      "label": "日文平假名及片假名",
+      "count": 184,
+      "sampleCns": "8-4330"
+    },
+    {
+      "label": "平假名(Hiragana), CNS 14649",
+      "count": 3,
+      "sampleCns": "8-4426"
+    },
+    {
+      "label": "片假名(Katakana), CNS 14649",
+      "count": 2,
+      "sampleCns": "8-442F"
+    },
+    {
+      "label": "高棉文(Khmer), CNS 14649",
+      "count": 114,
+      "sampleCns": "8-5040"
+    },
+    {
+      "label": "蒙古文(Mongolian), CNS 14649",
+      "count": 155,
+      "sampleCns": "8-5154"
+    },
+    {
+      "label": "高棉符號(Khmer symbol), CNS 14649",
+      "count": 32,
+      "sampleCns": "8-543A"
+    },
+    {
+      "label": "音標延伸(phonetic extension), CNS 14649",
+      "count": 108,
+      "sampleCns": "8-545A"
+    },
+    {
+      "label": "拉丁字母延伸附加(Latin extended additional), CNS 14649",
+      "count": 246,
+      "sampleCns": "8-5568"
+    },
+    {
+      "label": "希臘文延伸(Greek extended), CNS 14649",
+      "count": 233,
+      "sampleCns": "8-5844"
+    },
+    {
+      "label": "一般標點 (General Punctuation), CNS 14649",
+      "count": 82,
+      "sampleCns": "8-5A71"
+    },
+    {
+      "label": "BMP拼音字",
+      "count": 1,
+      "sampleCns": "8-5B26"
+    },
+    {
+      "label": "上標及下標(superscript and subscript), CNS 14649",
+      "count": 29,
+      "sampleCns": "8-5B67"
+    },
+    {
+      "label": "貨幣符號(currency symbol), CNS 14649",
+      "count": 17,
+      "sampleCns": "8-5C26"
+    },
+    {
+      "label": "符號之組合附加記號(combining diacritical mark for symbol), CNS 14649",
+      "count": 27,
+      "sampleCns": "8-5C37"
+    },
+    {
+      "label": "似字母符號(letterlike symbol), CNS 14649",
+      "count": 72,
+      "sampleCns": "8-5C52"
+    },
+    {
+      "label": "數字形式 (Number Forms), CNS 14649",
+      "count": 29,
+      "sampleCns": "8-5D3C"
+    },
+    {
+      "label": "箭號 (Arrows), CNS 14649",
+      "count": 104,
+      "sampleCns": "8-5D59"
+    },
+    {
+      "label": "數學運算子(mathematical operator), CNS 14649",
+      "count": 233,
+      "sampleCns": "8-5E63"
+    },
+    {
+      "label": "雜項技術符號(miscellaneous technical), CNS 14649",
+      "count": 209,
+      "sampleCns": "8-6136"
+    },
+    {
+      "label": "光學字元辨識(optical character recognition), CNS 14649",
+      "count": 11,
+      "sampleCns": "8-6350"
+    },
+    {
+      "label": "包圍式文數字(enclosed alphanumeric), CNS 14649",
+      "count": 140,
+      "sampleCns": "8-635B"
+    },
+    {
+      "label": "框線(box drawing), CNS 14649",
+      "count": 105,
+      "sampleCns": "8-652B"
+    },
+    {
+      "label": "方塊元件(block element), CNS 14649",
+      "count": 15,
+      "sampleCns": "8-6637"
+    },
+    {
+      "label": "幾何形狀(geometric shape), CNS 14649",
+      "count": 81,
+      "sampleCns": "8-6646"
+    },
+    {
+      "label": "雜項符號(miscellaneous symbol), CNS 14649",
+      "count": 139,
+      "sampleCns": "8-6739"
+    },
+    {
+      "label": "雜項數學符號A (miscellaneous mathematical symbol-A), CNS 14649",
+      "count": 28,
+      "sampleCns": "8-6A58"
+    },
+    {
+      "label": "輔助箭號A (supplemental arrow-A), CNS 14649",
+      "count": 16,
+      "sampleCns": "8-6A74"
+    },
+    {
+      "label": "盲用點字型樣(Braille pattern), CNS 14649",
+      "count": 256,
+      "sampleCns": "8-6B26"
+    },
+    {
+      "label": "輔助箭號B (supplemental arrow-B), CNS 14649",
+      "count": 128,
+      "sampleCns": "8-6D6A"
+    },
+    {
+      "label": "雜項數學符號B (miscellaneous mathematical symbol-B), CNS 14649",
+      "count": 128,
+      "sampleCns": "8-6F2E"
+    },
+    {
+      "label": "輔助數學運算子(supplement mathematical operator), CNS 14649",
+      "count": 256,
+      "sampleCns": "8-7050"
+    },
+    {
+      "label": "雜項符號及箭號(miscellaneous symbol and arrow), CNS 14649",
+      "count": 14,
+      "sampleCns": "8-7336"
+    },
+    {
+      "label": "CJK符號及標點(CJK symbol and punctuation), CNS 14649",
+      "count": 32,
+      "sampleCns": "8-7466"
+    },
+    {
+      "label": "韓語相容字母(Hangul compatibility Jamo), CNS 14649",
+      "count": 94,
+      "sampleCns": "8-7533"
+    },
+    {
+      "label": "漢文訓讀(Kanbun), ISO/IEC 10646",
+      "count": 16,
+      "sampleCns": "8-7633"
+    },
+    {
+      "label": "片假名音標延伸(Katakana phonetic extension), CNS 14649",
+      "count": 16,
+      "sampleCns": "8-7643"
+    },
+    {
+      "label": "包圍式CJK字母及月分(enclosed CJK letter and month), CNS 14649",
+      "count": 240,
+      "sampleCns": "8-7653"
+    },
+    {
+      "label": "CJK相容字元(CJK compatibility), CNS 14649",
+      "count": 245,
+      "sampleCns": "8-7929"
+    },
+    {
+      "label": "易經六爻符號(Yijing hexagram symbol), CNS 14649",
+      "count": 64,
+      "sampleCns": "8-7B62"
+    },
+    {
+      "label": "經濟部工商登記用字",
+      "count": 421,
+      "sampleCns": "9-2121"
+    },
+    {
+      "label": "變異選擇符(variation selector), CNS 14649",
+      "count": 16,
+      "sampleCns": "9-323D"
+    },
+    {
+      "label": "組合半形記號(combing half mark), CNS 14649",
+      "count": 4,
+      "sampleCns": "9-324D"
+    },
+    {
+      "label": "CJK相容形式(CJK compatibility form), CNS 14649",
+      "count": 4,
+      "sampleCns": "9-3253"
+    },
+    {
+      "label": "小量形式變異(small form variant), CNS 14649",
+      "count": 1,
+      "sampleCns": "9-3258"
+    },
+    {
+      "label": "阿拉伯文表現形式B (Arabic presentation form B), CNS 14649",
+      "count": 141,
+      "sampleCns": "9-3259"
+    },
+    {
+      "label": "半形及全形(halfwidth and fullwidth form), CNS 14649",
+      "count": 133,
+      "sampleCns": "9-342A"
+    },
+    {
+      "label": "特殊字元(special), CNS 14649",
+      "count": 5,
+      "sampleCns": "9-3553"
+    },
+    {
+      "label": "韓語音節(Hangul Syllables), CNS 14649",
+      "count": 1,
+      "sampleCns": "9-3558"
+    },
+    {
+      "label": "CJK認同表意文字延伸B(《CNS 11643》96年公布)",
+      "count": 12506,
+      "sampleCns": "10-2121"
+    },
+    {
+      "label": "CJK認同表意文字延伸C, CNS 14649",
+      "count": 2346,
+      "sampleCns": "11-4841"
+    },
+    {
+      "label": "內政部地政用字",
+      "count": 3692,
+      "sampleCns": "11-4921"
+    },
+    {
+      "label": "教育部臺灣客語用字",
+      "count": 16,
+      "sampleCns": "11-723F"
+    },
+    {
+      "label": "教育部臺灣台語用字",
+      "count": 15,
+      "sampleCns": "11-7321"
+    },
+    {
+      "label": "CJK認同表意文字延伸D, CNS 14649",
+      "count": 172,
+      "sampleCns": "11-7350"
+    },
+    {
+      "label": "文書及其他用字(本土語言)",
+      "count": 99,
+      "sampleCns": "11-7C30"
+    },
+    {
+      "label": "臺灣客語用字",
+      "count": 3,
+      "sampleCns": "11-7D25"
+    },
+    {
+      "label": "臺灣台語用字",
+      "count": 3,
+      "sampleCns": "11-7D29"
+    },
+    {
+      "label": "內政部戶政用字(《CNS 11643》96年公布)",
+      "count": 8341,
+      "sampleCns": "12-2121"
+    },
+    {
+      "label": "財政部財稅用字",
+      "count": 1609,
+      "sampleCns": "12-6321"
+    },
+    {
+      "label": "CJK認同表意文字, CNS 14649",
+      "count": 2530,
+      "sampleCns": "14-4B6D"
+    },
+    {
+      "label": "CJK認同表意文字延伸A, CNS 14649",
+      "count": 689,
+      "sampleCns": "14-4B73"
+    },
+    {
+      "label": "內政部移民署用字",
+      "count": 5,
+      "sampleCns": "17-2128"
+    },
+    {
+      "label": "醫藥用字",
+      "count": 1,
+      "sampleCns": "24-2121"
+    }
+  ],
+  "mappingFiles": [
+    "Big5/CNS2BIG5.txt",
+    "Big5/CNS2BIG5_Big5E.txt",
+    "Big5/CNS2BIG5_七個倚天外字.txt",
+    "Big5/CNS2BIG5_符號.txt",
+    "CNS2DCI.txt",
+    "CNS2FIN.txt",
+    "CNS2INC.txt",
+    "CNS2TAX.txt",
+    "Unicode/CNS2UNICODE_Unicode 15.txt",
+    "Unicode/CNS2UNICODE_Unicode 2.txt",
+    "Unicode/CNS2UNICODE_Unicode 3.txt",
+    "Unicode/CNS2UNICODE_Unicode BMP.txt",
+    "全字庫中文對照表說明文件.txt",
+    "地政/南投縣.txt",
+    "地政/台中市.txt",
+    "地政/台中縣.txt",
+    "地政/台北市.txt",
+    "地政/台北縣.txt",
+    "地政/台南市.txt",
+    "地政/台南縣.txt",
+    "地政/台東縣.txt",
+    "地政/嘉義市.txt",
+    "地政/嘉義縣.txt",
+    "地政/基隆市.txt",
+    "地政/宜蘭縣.txt",
+    "地政/屏東縣.txt",
+    "地政/彰化縣.txt",
+    "地政/新竹市.txt",
+    "地政/新竹縣.txt",
+    "地政/桃園縣.txt",
+    "地政/澎湖縣.txt",
+    "地政/花蓮縣.txt",
+    "地政/苗栗縣.txt",
+    "地政/連江縣.txt",
+    "地政/金門縣.txt",
+    "地政/雲林縣.txt",
+    "地政/高雄市.txt",
+    "地政/高雄縣.txt"
+  ]
+}

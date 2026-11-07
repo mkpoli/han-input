@@ -1,0 +1,18 @@
+# 中國記帳數字(《CNS 11643》96年公布)
+# CNS source release: 20260805
+# 數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw
+# Sources: https://www.cns11643.gov.tw/opendata/Properties.zip ; https://www.cns11643.gov.tw/opendata/MapingTables.zip
+# Licence: https://www.cns11643.gov.tw/pageView.jsp?ID=59
+CNS	Unicode
+1-2435	U+3021
+1-2436	U+3022
+1-2437	U+3023
+1-2438	U+3024
+1-2439	U+3025
+1-243A	U+3026
+1-243B	U+3027
+1-243C	U+3028
+1-243D	U+3029
+1-243E	U+3038
+1-243F	U+3039
+1-2440	U+303A

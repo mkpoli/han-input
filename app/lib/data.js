@@ -6,7 +6,8 @@ import { charBucket, codeBucket, fold, partBucket, pinyinDigits, wordBucket } fr
 async function readGz(path) {
   const response = await fetch(`/data/${path}`)
   // A missing file is answered with the app's own page, so that is what a miss looks like.
-  if (!response.ok || (response.headers.get('content-type') ?? '').includes('text/html')) return ''
+  if (response.status === 404 || (response.ok && (response.headers.get('content-type') ?? '').includes('text/html'))) return ''
+  if (!response.ok) throw new Error(`Search data unavailable: ${path}`)
   const bytes = new Uint8Array(await response.arrayBuffer())
   if (bytes[0] !== 0x1f || bytes[1] !== 0x8b) return new TextDecoder().decode(bytes)
   const stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'))
@@ -19,7 +20,7 @@ function once(load) {
   const held = new Map()
   return (/** @type {string} */ key) => {
     let promise = held.get(key)
-    if (!promise) held.set(key, promise = load(key))
+    if (!promise) held.set(key, promise = load(key).catch(error => { held.delete(key); throw error }))
     return promise
   }
 }
@@ -105,7 +106,7 @@ export const loadChars = () => (charRows ??= readGz('chars.tsv.gz').then(body =>
     map.set(char, { rank: Number(rank), strokes: Number(strokes), radical })
   }
   return map
-}))
+}).catch(error => { charRows = null; throw error }))
 
 /** @typedef {{ code: string, folded: string, digits: string, chars: string[] }} SchemeRow */
 

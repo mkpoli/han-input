@@ -1,0 +1,21 @@
+# 教育部臺灣台語用字
+# CNS source release: 20260805
+# 數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw
+# Sources: https://www.cns11643.gov.tw/opendata/Properties.zip ; https://www.cns11643.gov.tw/opendata/MapingTables.zip
+# Licence: https://www.cns11643.gov.tw/pageView.jsp?ID=59
+CNS	Unicode
+11-7321	U+FB650
+11-7322	U+2B759
+11-7323	U+2B74F
+11-7324	U+2B77A
+11-7325	U+2B7E3
+11-7326	U+2B7BC
+11-7327	U+FB656
+11-7328	U+2B77B
+11-7329	U+FFAFC
+11-732A	U+FB62F
+11-732B	U+2B75B
+11-732C	U+2B75E
+11-732D	U+2B7CA
+11-732E	U+2B7B3
+11-7C6B	U+2B7C2

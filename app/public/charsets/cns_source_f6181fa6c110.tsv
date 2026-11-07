@@ -1,0 +1,17 @@
+# 光學字元辨識(optical character recognition), CNS 14649
+# CNS source release: 20260805
+# 數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw
+# Sources: https://www.cns11643.gov.tw/opendata/Properties.zip ; https://www.cns11643.gov.tw/opendata/MapingTables.zip
+# Licence: https://www.cns11643.gov.tw/pageView.jsp?ID=59
+CNS	Unicode
+8-6350	U+2440
+8-6351	U+2441
+8-6352	U+2442
+8-6353	U+2443
+8-6354	U+2444
+8-6355	U+2445
+8-6356	U+2446
+8-6357	U+2447
+8-6358	U+2448
+8-6359	U+2449
+8-635A	U+244A
