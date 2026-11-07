@@ -26,12 +26,12 @@ for (const [pua, char] of Object.entries(MOE_PUA.mappings)) {
 /**
  * A character's PUA codes: its own, then its variants'.
  * @param {string} char
- * @returns {{ code: string, char: string, relation: 'own' | string }[]}
+ * @returns {{ code: string, char: string, relation: string, source: string, relationSource?: string }[]}
  */
 export function puaOf(char) {
-  const own = (BY_CHAR.get(char) ?? []).map(code => ({ code: codePoint(code), char, relation: 'own' }))
+  const own = (BY_CHAR.get(char) ?? []).map(code => ({ code: codePoint(code), char, relation: 'own', source: 'moe' }))
   const related = (MOE_PUA_VARIANTS.byChar[char] ?? []).flatMap(({ char: variant, relation }) =>
-    (BY_CHAR.get(variant) ?? []).map(code => ({ code: codePoint(code), char: variant, relation })))
+    (BY_CHAR.get(variant) ?? []).map(code => ({ code: codePoint(code), char: variant, relation, source: 'moe', relationSource: 'unihan' })))
   return [...own, ...related]
 }
 

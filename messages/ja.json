@@ -115,6 +115,8 @@
   "convert.character": "文字",
   "convert.data": "対応データ",
   "pua.title": "私用領域コード",
+  "pua.source.moe": "教育部",
+  "pua.source.unihan": "Unihan",
   "pua.relation.simplified": "簡体字",
   "pua.relation.traditional": "繁体字",
   "pua.relation.semantic": "意味上の異体字",

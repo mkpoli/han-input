@@ -64,14 +64,14 @@ describe('lookup', () => {
     for (const hex of ['FFFFFF', '110000', '123456', 'U+FFFFFF']) expect(puaChar(hex)).toBe('')
   })
   test('lists a character’s own PUA codes', () => {
-    expect(puaOf('䀯')).toEqual([{ code: 'U+E43B', char: '䀯', relation: 'own' }])
-    expect(puaOf('雞')).toEqual([{ code: 'U+E463', char: '雞', relation: 'own' }])
+    expect(puaOf('䀯')).toEqual([{ code: 'U+E43B', char: '䀯', relation: 'own', source: 'moe' }])
+    expect(puaOf('雞')).toEqual([{ code: 'U+E463', char: '雞', relation: 'own', source: 'moe' }])
     expect(puaOf('字')).toEqual([])
   })
   test('lists the PUA codes of a variant, and the inverse relation from it', () => {
-    expect(puaOf('羶')).toEqual([{ code: 'U+E4DE', char: '羴', relation: 'semantic' }])
-    expect(puaOf('鸡')).toEqual([{ code: 'U+E463', char: '雞', relation: 'traditional' }])
-    expect(puaOf('鷄')).toEqual([{ code: 'U+E463', char: '雞', relation: 'semantic' }])
+    expect(puaOf('羶')).toEqual([{ code: 'U+E4DE', char: '羴', relation: 'semantic', source: 'moe', relationSource: 'unihan' }])
+    expect(puaOf('鸡')).toEqual([{ code: 'U+E463', char: '雞', relation: 'traditional', source: 'moe', relationSource: 'unihan' }])
+    expect(puaOf('鷄')).toEqual([{ code: 'U+E463', char: '雞', relation: 'semantic', source: 'moe', relationSource: 'unihan' }])
   })
   test('records the variant source', () => {
     expect(MOE_PUA_VARIANTS.source.version).toBe('18.0.0')

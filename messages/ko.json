@@ -115,6 +115,8 @@
   "convert.character": "글자",
   "convert.data": "대응 데이터",
   "pua.title": "사용자 정의 영역 코드",
+  "pua.source.moe": "교육부",
+  "pua.source.unihan": "Unihan",
   "pua.relation.simplified": "간체자",
   "pua.relation.traditional": "번체자",
   "pua.relation.semantic": "의미 이체자",

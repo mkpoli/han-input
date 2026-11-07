@@ -93,7 +93,7 @@
     {#if puaRows.length}
       <section class="family">
         <h3 class="ui-label">{t('pua.title')} <span class="ui-count">{puaRows.length}</span></h3>
-        <dl>
+        <dl class="pua">
           {#each puaRows as row (row.code + row.char + row.relation)}
             <div class="row">
               <dt class="ui-mono">{row.code}</dt>
@@ -103,6 +103,7 @@
                 {:else}
                   <a href={link(route.page, { method: route.method, c: row.char })} lang="und-Hani" onclick={event => follow(event, row.char)}>{row.char}</a> · {t(`pua.relation.${row.relation}`)}
                 {/if}
+                <span class="tags"><span class="tag">{t(`pua.source.${row.source}`)}</span>{#if row.relationSource}<span class="tag">{t(`pua.source.${row.relationSource}`)}</span>{/if}</span>
               </dd>
             </div>
           {/each}
@@ -178,4 +179,7 @@
   dt a{color:var(--ui-color-ink-soft);text-decoration:none}
   dt a:hover{color:var(--ui-color-ink);text-decoration:underline}
   dd{margin:0;font-size:var(--ui-text-xs);overflow-wrap:anywhere;font-family:'Han Ext',var(--ui-font-mono),var(--ui-font-sans),'Jigmo'}
+  .pua .row{grid-template-columns:max-content minmax(0,1fr);gap:var(--ui-space-sm)}
+  .tags{display:inline-flex;gap:3px;margin-inline-start:6px;vertical-align:1px}
+  .tag{padding:0 4px;border:1px solid var(--ui-color-border);border-radius:2px;font-size:10px;line-height:15px;color:var(--ui-color-ink-soft);white-space:nowrap}
 </style>

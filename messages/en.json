@@ -115,6 +115,8 @@
   "convert.character": "Character",
   "convert.data": "Mapping data",
   "pua.title": "Private-use codes",
+  "pua.source.moe": "MOE",
+  "pua.source.unihan": "Unihan",
   "pua.relation.simplified": "Simplified variant",
   "pua.relation.traditional": "Traditional variant",
   "pua.relation.semantic": "Semantic variant",

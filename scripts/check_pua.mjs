@@ -91,6 +91,7 @@ try {
       const ownCard = await page.locator('.card').innerText()
       assert.match(ownCard, /U\+E43B/)
       assert.match(ownCard, /䀯/)
+      assert.match(ownCard, /MOE/)
       assert.ok(!ownCard.includes('Ministry of Education'))
       await page.screenshot({ path: `shots/pua/card-own-${theme}.png`, fullPage: true })
       await page.goto(`${SITE}/?c=9E21`)
@@ -106,6 +107,7 @@ try {
       assert.match(variantCard, /羴/)
       assert.match(variantCard, /Semantic variant/)
       assert.match(variantCard, /U\+E4DE/)
+      assert.match(variantCard, /Unihan/)
       await page.screenshot({ path: `shots/pua/card-semantic-${theme}.png`, fullPage: true })
 
       await page.goto(`${SITE}/m/ashide?c=9E21`)
