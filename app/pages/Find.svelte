@@ -155,7 +155,7 @@
       <Tiles chars={common} label={t('find.common', { count: common.length })} limit={240} />
     </section>
   {:else if single}
-    {#if single.chars.length && ['text', 'point', 'strokes'].includes(single.clue.kind)}
+    {#if single.chars.length && ['text', 'point', 'strokes', 'pua'].includes(single.clue.kind)}
       <section class="ui-section">
         <h2 class="ui-label">{t('find.characters')}</h2>
         <Tiles chars={single.chars} size={72} label={t('find.characters')} />

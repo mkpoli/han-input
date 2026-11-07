@@ -113,5 +113,13 @@
   "convert.legacy": "原私用码位",
   "convert.standard": "Unicode码位",
   "convert.character": "文字",
-  "convert.data": "对照数据"
+  "convert.data": "对照数据",
+  "pua.title": "私用区码位",
+  "pua.source.moe": "教育部",
+  "pua.source.unihan": "Unihan",
+  "pua.relation.simplified": "简体字",
+  "pua.relation.traditional": "繁体字",
+  "pua.relation.semantic": "语义异体字",
+  "pua.relation.specialized": "专用语义异体字",
+  "pua.relation.z": "Z异体字"
 }
