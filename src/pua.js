@@ -10,7 +10,9 @@ export const codePoint = char => `U+${(char.codePointAt(0) ?? 0).toString(16).to
 /** The character an MOE PUA code point stands for, from hex without `U+`; empty if there is none. @param {string} hex */
 export function puaChar(hex) {
   if (!/^[0-9a-f]{4,6}$/i.test(hex)) return ''
-  return MOE_PUA.mappings[String.fromCodePoint(parseInt(hex, 16))] ?? ''
+  const point = parseInt(hex, 16)
+  if (point > 0x10FFFF) return ''
+  return MOE_PUA.mappings[String.fromCodePoint(point)] ?? ''
 }
 
 /** @type {Map<string, string[]>} */

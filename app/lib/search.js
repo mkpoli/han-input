@@ -95,10 +95,17 @@ async function lookUp(clue) {
   return out
 }
 
+/** The characters an answer contributes to an intersection. @param {Answer} item */
+export function answerChars(item) {
+  // A PUA clue can also be an ordinary code; both sides stay candidates.
+  const chars = [...item.chars, ...(item.clue.kind === 'pua' ? item.hits.flatMap(hit => hit.chars) : [])]
+  return chars.length ? chars : [...item.hits.flatMap(hit => hit.chars), ...item.parts, ...item.meaning]
+}
+
 /** The characters every answer names, commonest first. @param {Answer[]} answers */
 export async function intersect(answers) {
   const rows = await loadChars()
-  const sets = answers.map(item => new Set(item.chars.length ? item.chars : [...item.hits.flatMap(hit => hit.chars), ...item.parts, ...item.meaning]))
+  const sets = answers.map(item => new Set(answerChars(item)))
   const [first, ...rest] = sets
   const kept = [...(first ?? [])].filter(char => rest.every(set => set.has(char)))
   return kept.sort((a, b) => (rows.get(a)?.rank ?? 1e6) - (rows.get(b)?.rank ?? 1e6))
