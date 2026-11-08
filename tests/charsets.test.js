@@ -3,7 +3,7 @@ import { readFileSync, readdirSync } from 'node:fs'
 import { mappedMembers, iwdsMembers, scalarExpressions } from '../scripts/charset-members.mjs'
 import { filterAnswer, loadCharsets, loadCharset } from '../app/lib/charsets.js'
 import { loadChars, findMeaning } from '../app/lib/data.js'
-import { cnsSourceSets } from '../scripts/sources/charsets-cns.mjs'
+import { cnsSourceSets, unihanTSources } from '../scripts/sources/charsets-cns.mjs'
 
 describe('source glyph membership', () => {
   test('uses glyphs, never local draft slots or IDS operands', () => {
@@ -61,7 +61,7 @@ test('CNS categories preserve source labels, decimal planes and private-use evid
   expect(land.members).toBe('字𠀀')
   expect(land.records.map(row => row.cns)).toEqual(['11-4921', '11-4922'])
   const medicine = categories.find(set => set.label === '醫藥')
-  expect(medicine.members).toBe('')
+  expect(medicine.members).toBe('\u{F0000}')
   expect(medicine.records).toEqual([{ cns: '24-2121', unicode: ['F0000'] }])
   expect(categories.find(set => set.label === '常用(96年公布)').members).toBe('一')
   expect(cnsSourceSets('1-4421\t常用(96年公布)', ['1-4421\t4E00'])[0].id).toBe(categories.find(set => set.label === '常用(96年公布)').id)
@@ -69,6 +69,21 @@ test('CNS categories preserve source labels, decimal planes and private-use evid
   expect(() => cnsSourceSets('999-0000\t地政', [])).toThrow('Invalid CNS grid code')
   expect(() => cnsSourceSets('11-4921\t地政\textra', [])).toThrow('Invalid CNS table row')
   expect(() => cnsSourceSets('11-4921\t地政', ['11-4922\t110000'])).toThrow('Invalid CNS Unicode mapping')
+})
+
+test('CNS rows without an assigned scalar keep their private-use glyph slot', () => {
+  const categories = cnsSourceSets('11-7E4E\t臺灣台語用字\n11-7E4F\t臺灣台語用字\n', ['11-7E4E\tFFB0F\n11-7E4F\tFFB0E\n'], new Map(), new Set([0xFFB0F, 0xFFB0E]))
+  expect([...categories[0].members].map(char => char.codePointAt(0))).toEqual([0xFFB0E, 0xFFB0F])
+  expect([...categories[0].members]).toHaveLength(2)
+})
+
+test('Unihan kIRG_TSource fills a scalar assigned after the bulk release', () => {
+  const sources = unihanTSources('U+324D6\tkIRG_TSource\tTB-7D29\nU+2B759\tkIRG_TSource\tT11-7322\n')
+  expect(sources.get('TB-7D29')).toBe('324D6')
+  expect(sources.get('T11-7322')).toBeUndefined()
+  const categories = cnsSourceSets('11-7D29\t臺灣台語用字\n', ['11-7D29\tFFB1B\n'], sources, new Set([0x324D6, 0xFFB1B]))
+  expect(categories[0].members).toBe('𲓖')
+  expect(categories[0].records[0].crosswalk).toBe('324D6')
 })
 
 test('snapshot covers every source catalogue and counts match unique scalars', () => {
@@ -98,6 +113,9 @@ test('snapshot covers every source catalogue and counts match unique scalars', (
   const land = cns.find(row => row.label === '內政部地政用字')
   expect(land.total).toBe(3692)
   expect(land.source.url).toBe('https://www.cns11643.gov.tw/searchSY.jsp?ID=114')
+  const taiwan = cns.find(row => row.label === '臺灣台語用字')
+  expect(taiwan.chars).toBe(3)
+  expect([...readFileSync(new URL(`${taiwan.id}.txt`, base), 'utf8')].map(char => char.codePointAt(0))).toEqual([0x324D6, 0xFFB0E, 0xFFB0F])
   for (const row of catalogue) {
     const members = [...readFileSync(new URL(`${row.id}.txt`, base), 'utf8')]
     expect(new Set(members).size).toBe(row.chars)

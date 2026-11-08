@@ -1,7 +1,7 @@
 # CJK認同表意文字延伸A, CNS 14649
 # CNS source release: 20260805
 # 數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw
-# Sources: https://www.cns11643.gov.tw/opendata/Properties.zip ; https://www.cns11643.gov.tw/opendata/MapingTables.zip
+# Sources: https://www.cns11643.gov.tw/opendata/Properties.zip ; https://www.cns11643.gov.tw/opendata/MapingTables.zip ; https://www.unicode.org/Public/18.0.0/ucd/Unihan.zip (Unihan kIRG_TSource)
 # Licence: https://www.cns11643.gov.tw/pageView.jsp?ID=59
 CNS	Unicode
 14-4B73	U+3403

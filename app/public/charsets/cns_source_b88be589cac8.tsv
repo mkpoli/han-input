@@ -1,7 +1,7 @@
 # 貨幣及單位符號(《CNS 11643》96年公布)
 # CNS source release: 20260805
 # 數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw
-# Sources: https://www.cns11643.gov.tw/opendata/Properties.zip ; https://www.cns11643.gov.tw/opendata/MapingTables.zip
+# Sources: https://www.cns11643.gov.tw/opendata/Properties.zip ; https://www.cns11643.gov.tw/opendata/MapingTables.zip ; https://www.unicode.org/Public/18.0.0/ucd/Unihan.zip (Unihan kIRG_TSource)
 # Licence: https://www.cns11643.gov.tw/pageView.jsp?ID=59
 CNS	Unicode
 1-2263	U+FF04

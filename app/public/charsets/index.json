@@ -2135,7 +2135,7 @@
       "ja": "異體國字字表(《CNS 11643》96年公布)",
       "ko": "異體國字字表(《CNS 11643》96年公布)"
     },
-    "chars": 18483,
+    "chars": 18486,
     "total": 18486,
     "source": {
       "name": "CNS11643全字庫",
@@ -2157,12 +2157,34 @@
       "ja": "罕用國字標準字體表(《CNS 11643》96年公布)",
       "ko": "罕用國字標準字體表(《CNS 11643》96年公布)"
     },
-    "chars": 18356,
+    "chars": 18357,
     "total": 18357,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=124",
       "records": "/charsets/cns_source_25a5e103e53f.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_dd16ba5ac21b",
+    "group": "CNS sources",
+    "label": "內政部戶政用字",
+    "names": {
+      "en": "內政部戶政用字",
+      "zh": "內政部戶政用字",
+      "hans": "内政部户政用字",
+      "ja": "內政部戶政用字",
+      "ko": "內政部戶政用字"
+    },
+    "chars": 13531,
+    "total": 13532,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=113",
+      "records": "/charsets/cns_source_dd16ba5ac21b.tsv",
       "version": "2026-08-05",
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
@@ -2179,7 +2201,7 @@
       "ja": "CJK認同表意文字延伸B(《CNS 11643》96年公布)",
       "ko": "CJK認同表意文字延伸B(《CNS 11643》96年公布)"
     },
-    "chars": 12505,
+    "chars": 12506,
     "total": 12506,
     "source": {
       "name": "CNS11643全字庫",
@@ -2201,7 +2223,7 @@
       "ja": "內政部戶政用字(《CNS 11643》96年公布)",
       "ko": "內政部戶政用字(《CNS 11643》96年公布)"
     },
-    "chars": 7969,
+    "chars": 8341,
     "total": 8341,
     "source": {
       "name": "CNS11643全字庫",
@@ -2257,6 +2279,50 @@
     }
   },
   {
+    "id": "cns_source_9050f9dacd7a",
+    "group": "CNS sources",
+    "label": "內政部地政用字",
+    "names": {
+      "en": "內政部地政用字",
+      "zh": "內政部地政用字",
+      "hans": "内政部地政用字",
+      "ja": "內政部地政用字",
+      "ko": "內政部地政用字"
+    },
+    "chars": 3692,
+    "total": 3692,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=114",
+      "records": "/charsets/cns_source_9050f9dacd7a.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_cbdb277d3097",
+    "group": "CNS sources",
+    "label": "教育部《異體字字典》字",
+    "names": {
+      "en": "教育部《異體字字典》字",
+      "zh": "教育部《異體字字典》字",
+      "hans": "教育部《异体字字典》字",
+      "ja": "教育部《異體字字典》字",
+      "ko": "教育部《異體字字典》字"
+    },
+    "chars": 2554,
+    "total": 2554,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=128",
+      "records": "/charsets/cns_source_cbdb277d3097.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
     "id": "cns_source_8b5ed77ff338",
     "group": "CNS sources",
     "label": "CJK認同表意文字, CNS 14649",
@@ -2301,22 +2367,22 @@
     }
   },
   {
-    "id": "cns_source_dd16ba5ac21b",
+    "id": "cns_source_7d2f85d5af0b",
     "group": "CNS sources",
-    "label": "內政部戶政用字",
+    "label": "財政部財稅用字",
     "names": {
-      "en": "內政部戶政用字",
-      "zh": "內政部戶政用字",
-      "hans": "内政部户政用字",
-      "ja": "內政部戶政用字",
-      "ko": "內政部戶政用字"
+      "en": "財政部財稅用字",
+      "zh": "財政部財稅用字",
+      "hans": "财政部财税用字",
+      "ja": "財政部財稅用字",
+      "ko": "財政部財稅用字"
     },
-    "chars": 1762,
-    "total": 13532,
+    "chars": 1609,
+    "total": 1609,
     "source": {
       "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=113",
-      "records": "/charsets/cns_source_dd16ba5ac21b.tsv",
+      "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=117",
+      "records": "/charsets/cns_source_7d2f85d5af0b.tsv",
       "version": "2026-08-05",
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
@@ -2345,28 +2411,6 @@
     }
   },
   {
-    "id": "cns_source_cbdb277d3097",
-    "group": "CNS sources",
-    "label": "教育部《異體字字典》字",
-    "names": {
-      "en": "教育部《異體字字典》字",
-      "zh": "教育部《異體字字典》字",
-      "hans": "教育部《异体字字典》字",
-      "ja": "教育部《異體字字典》字",
-      "ko": "教育部《異體字字典》字"
-    },
-    "chars": 633,
-    "total": 2554,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=128",
-      "records": "/charsets/cns_source_cbdb277d3097.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
     "id": "cns_source_d22d507840f6",
     "group": "CNS sources",
     "label": "國中小教科書常用字(《CNS 11643》96年公布)",
@@ -2383,6 +2427,292 @@
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=121",
       "records": "/charsets/cns_source_d22d507840f6.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_40707d428e25",
+    "group": "CNS sources",
+    "label": "CNS 11643-2&3 中文字筆畫分類及基礎部件",
+    "names": {
+      "en": "CNS 11643-2&3 中文字筆畫分類及基礎部件",
+      "zh": "CNS 11643-2&3 中文字筆畫分類及基礎部件",
+      "hans": "CNS 11643-2&3 中文字笔画分类及基础部件",
+      "ja": "CNS 11643-2&3 中文字筆畫分類及基礎部件",
+      "ko": "CNS 11643-2&3 中文字筆畫分類及基礎部件"
+    },
+    "chars": 537,
+    "total": 537,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_40707d428e25.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_dc29a0f76dd1",
+    "group": "CNS sources",
+    "label": "經濟部工商登記用字",
+    "names": {
+      "en": "經濟部工商登記用字",
+      "zh": "經濟部工商登記用字",
+      "hans": "经济部工商登记用字",
+      "ja": "經濟部工商登記用字",
+      "ko": "經濟部工商登記用字"
+    },
+    "chars": 421,
+    "total": 421,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=116",
+      "records": "/charsets/cns_source_dc29a0f76dd1.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_5b8d51b01392",
+    "group": "CNS sources",
+    "label": "盲用點字型樣(Braille pattern), CNS 14649",
+    "names": {
+      "en": "盲用點字型樣(Braille pattern), CNS 14649",
+      "zh": "盲用點字型樣(Braille pattern), CNS 14649",
+      "hans": "盲用点字型样(Braille pattern), CNS 14649",
+      "ja": "盲用點字型樣(Braille pattern), CNS 14649",
+      "ko": "盲用點字型樣(Braille pattern), CNS 14649"
+    },
+    "chars": 256,
+    "total": 256,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_5b8d51b01392.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_c3d8a768cf9b",
+    "group": "CNS sources",
+    "label": "輔助數學運算子(supplement mathematical operator), CNS 14649",
+    "names": {
+      "en": "輔助數學運算子(supplement mathematical operator), CNS 14649",
+      "zh": "輔助數學運算子(supplement mathematical operator), CNS 14649",
+      "hans": "辅助数学运算子(supplement mathematical operator), CNS 14649",
+      "ja": "輔助數學運算子(supplement mathematical operator), CNS 14649",
+      "ko": "輔助數學運算子(supplement mathematical operator), CNS 14649"
+    },
+    "chars": 256,
+    "total": 256,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_c3d8a768cf9b.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_91c19d23d20f",
+    "group": "CNS sources",
+    "label": "文獻用字",
+    "names": {
+      "en": "文獻用字",
+      "zh": "文獻用字",
+      "hans": "文献用字",
+      "ja": "文獻用字",
+      "ko": "文獻用字"
+    },
+    "chars": 250,
+    "total": 250,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=139",
+      "records": "/charsets/cns_source_91c19d23d20f.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_fc6f8601f158",
+    "group": "CNS sources",
+    "label": "拉丁字母延伸附加(Latin extended additional), CNS 14649",
+    "names": {
+      "en": "拉丁字母延伸附加(Latin extended additional), CNS 14649",
+      "zh": "拉丁字母延伸附加(Latin extended additional), CNS 14649",
+      "hans": "拉丁字母延伸附加(Latin extended additional), CNS 14649",
+      "ja": "拉丁字母延伸附加(Latin extended additional), CNS 14649",
+      "ko": "拉丁字母延伸附加(Latin extended additional), CNS 14649"
+    },
+    "chars": 246,
+    "total": 246,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_fc6f8601f158.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_7279453d01e8",
+    "group": "CNS sources",
+    "label": "西里爾字母(Cyrillic), CNS 14649",
+    "names": {
+      "en": "西里爾字母(Cyrillic), CNS 14649",
+      "zh": "西里爾字母(Cyrillic), CNS 14649",
+      "hans": "西里尔字母(Cyrillic), CNS 14649",
+      "ja": "西里爾字母(Cyrillic), CNS 14649",
+      "ko": "西里爾字母(Cyrillic), CNS 14649"
+    },
+    "chars": 246,
+    "total": 246,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_7279453d01e8.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_82f49620efad",
+    "group": "CNS sources",
+    "label": "CJK相容字元(CJK compatibility), CNS 14649",
+    "names": {
+      "en": "CJK相容字元(CJK compatibility), CNS 14649",
+      "zh": "CJK相容字元(CJK compatibility), CNS 14649",
+      "hans": "CJK相容字元(CJK compatibility), CNS 14649",
+      "ja": "CJK相容字元(CJK compatibility), CNS 14649",
+      "ko": "CJK相容字元(CJK compatibility), CNS 14649"
+    },
+    "chars": 245,
+    "total": 245,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_82f49620efad.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_feaa2fb6fa4f",
+    "group": "CNS sources",
+    "label": "包圍式CJK字母及月分(enclosed CJK letter and month), CNS 14649",
+    "names": {
+      "en": "包圍式CJK字母及月分(enclosed CJK letter and month), CNS 14649",
+      "zh": "包圍式CJK字母及月分(enclosed CJK letter and month), CNS 14649",
+      "hans": "包围式CJK字母及月分(enclosed CJK letter and month), CNS 14649",
+      "ja": "包圍式CJK字母及月分(enclosed CJK letter and month), CNS 14649",
+      "ko": "包圍式CJK字母及月分(enclosed CJK letter and month), CNS 14649"
+    },
+    "chars": 240,
+    "total": 240,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_feaa2fb6fa4f.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_249e629bc51a",
+    "group": "CNS sources",
+    "label": "韓語字母(Hangul Jamo), CNS 14649",
+    "names": {
+      "en": "韓語字母(Hangul Jamo), CNS 14649",
+      "zh": "韓語字母(Hangul Jamo), CNS 14649",
+      "hans": "韩语字母(Hangul Jamo), CNS 14649",
+      "ja": "韓語字母(Hangul Jamo), CNS 14649",
+      "ko": "韓語字母(Hangul Jamo), CNS 14649"
+    },
+    "chars": 240,
+    "total": 240,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_249e629bc51a.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_0537ff1ed3f8",
+    "group": "CNS sources",
+    "label": "希臘文延伸(Greek extended), CNS 14649",
+    "names": {
+      "en": "希臘文延伸(Greek extended), CNS 14649",
+      "zh": "希臘文延伸(Greek extended), CNS 14649",
+      "hans": "希腊文延伸(Greek extended), CNS 14649",
+      "ja": "希臘文延伸(Greek extended), CNS 14649",
+      "ko": "希臘文延伸(Greek extended), CNS 14649"
+    },
+    "chars": 233,
+    "total": 233,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_0537ff1ed3f8.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_177cece364de",
+    "group": "CNS sources",
+    "label": "數學運算子(mathematical operator), CNS 14649",
+    "names": {
+      "en": "數學運算子(mathematical operator), CNS 14649",
+      "zh": "數學運算子(mathematical operator), CNS 14649",
+      "hans": "数学运算子(mathematical operator), CNS 14649",
+      "ja": "數學運算子(mathematical operator), CNS 14649",
+      "ko": "數學運算子(mathematical operator), CNS 14649"
+    },
+    "chars": 233,
+    "total": 233,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_177cece364de.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_b1118bdf0fb4",
+    "group": "CNS sources",
+    "label": "阿拉伯文(Arabic), CNS 14649",
+    "names": {
+      "en": "阿拉伯文(Arabic), CNS 14649",
+      "zh": "阿拉伯文(Arabic), CNS 14649",
+      "hans": "阿拉伯文(Arabic), CNS 14649",
+      "ja": "阿拉伯文(Arabic), CNS 14649",
+      "ko": "阿拉伯文(Arabic), CNS 14649"
+    },
+    "chars": 227,
+    "total": 227,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_b1118bdf0fb4.tsv",
       "version": "2026-08-05",
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
@@ -2411,6 +2741,50 @@
     }
   },
   {
+    "id": "cns_source_38378f43affd",
+    "group": "CNS sources",
+    "label": "雜項技術符號(miscellaneous technical), CNS 14649",
+    "names": {
+      "en": "雜項技術符號(miscellaneous technical), CNS 14649",
+      "zh": "雜項技術符號(miscellaneous technical), CNS 14649",
+      "hans": "杂项技术符号(miscellaneous technical), CNS 14649",
+      "ja": "雜項技術符號(miscellaneous technical), CNS 14649",
+      "ko": "雜項技術符號(miscellaneous technical), CNS 14649"
+    },
+    "chars": 209,
+    "total": 209,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_38378f43affd.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_8bde542fb100",
+    "group": "CNS sources",
+    "label": "藏文(Tibetan), CNS 14649",
+    "names": {
+      "en": "藏文(Tibetan), CNS 14649",
+      "zh": "藏文(Tibetan), CNS 14649",
+      "hans": "藏文(Tibetan), CNS 14649",
+      "ja": "藏文(Tibetan), CNS 14649",
+      "ko": "藏文(Tibetan), CNS 14649"
+    },
+    "chars": 193,
+    "total": 193,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_8bde542fb100.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
     "id": "cns_source_52e34b04097a",
     "group": "CNS sources",
     "label": "日文平假名及片假名",
@@ -2421,12 +2795,34 @@
       "ja": "日文平假名及片假名",
       "ko": "日文平假名及片假名"
     },
-    "chars": 178,
+    "chars": 184,
     "total": 184,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
       "records": "/charsets/cns_source_52e34b04097a.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_4b004c82d3a7",
+    "group": "CNS sources",
+    "label": "拉丁字母延伸B, CNS 14649",
+    "names": {
+      "en": "拉丁字母延伸B, CNS 14649",
+      "zh": "拉丁字母延伸B, CNS 14649",
+      "hans": "拉丁字母延伸B, CNS 14649",
+      "ja": "拉丁字母延伸B, CNS 14649",
+      "ko": "拉丁字母延伸B, CNS 14649"
+    },
+    "chars": 183,
+    "total": 183,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_4b004c82d3a7.tsv",
       "version": "2026-08-05",
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
@@ -2455,6 +2851,116 @@
     }
   },
   {
+    "id": "cns_source_0258d4d7ea7c",
+    "group": "CNS sources",
+    "label": "蒙古文(Mongolian), CNS 14649",
+    "names": {
+      "en": "蒙古文(Mongolian), CNS 14649",
+      "zh": "蒙古文(Mongolian), CNS 14649",
+      "hans": "蒙古文(Mongolian), CNS 14649",
+      "ja": "蒙古文(Mongolian), CNS 14649",
+      "ko": "蒙古文(Mongolian), CNS 14649"
+    },
+    "chars": 155,
+    "total": 155,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_0258d4d7ea7c.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_449de5307da0",
+    "group": "CNS sources",
+    "label": "阿拉伯文表現形式B (Arabic presentation form B), CNS 14649",
+    "names": {
+      "en": "阿拉伯文表現形式B (Arabic presentation form B), CNS 14649",
+      "zh": "阿拉伯文表現形式B (Arabic presentation form B), CNS 14649",
+      "hans": "阿拉伯文表现形式B (Arabic presentation form B), CNS 14649",
+      "ja": "阿拉伯文表現形式B (Arabic presentation form B), CNS 14649",
+      "ko": "阿拉伯文表現形式B (Arabic presentation form B), CNS 14649"
+    },
+    "chars": 141,
+    "total": 141,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_449de5307da0.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_5620915cb734",
+    "group": "CNS sources",
+    "label": "包圍式文數字(enclosed alphanumeric), CNS 14649",
+    "names": {
+      "en": "包圍式文數字(enclosed alphanumeric), CNS 14649",
+      "zh": "包圍式文數字(enclosed alphanumeric), CNS 14649",
+      "hans": "包围式文数字(enclosed alphanumeric), CNS 14649",
+      "ja": "包圍式文數字(enclosed alphanumeric), CNS 14649",
+      "ko": "包圍式文數字(enclosed alphanumeric), CNS 14649"
+    },
+    "chars": 140,
+    "total": 140,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_5620915cb734.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_797df52ff4f7",
+    "group": "CNS sources",
+    "label": "雜項符號(miscellaneous symbol), CNS 14649",
+    "names": {
+      "en": "雜項符號(miscellaneous symbol), CNS 14649",
+      "zh": "雜項符號(miscellaneous symbol), CNS 14649",
+      "hans": "杂项符号(miscellaneous symbol), CNS 14649",
+      "ja": "雜項符號(miscellaneous symbol), CNS 14649",
+      "ko": "雜項符號(miscellaneous symbol), CNS 14649"
+    },
+    "chars": 139,
+    "total": 139,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_797df52ff4f7.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_c5a0c4bc42e4",
+    "group": "CNS sources",
+    "label": "半形及全形(halfwidth and fullwidth form), CNS 14649",
+    "names": {
+      "en": "半形及全形(halfwidth and fullwidth form), CNS 14649",
+      "zh": "半形及全形(halfwidth and fullwidth form), CNS 14649",
+      "hans": "半形及全形(halfwidth and fullwidth form), CNS 14649",
+      "ja": "半形及全形(halfwidth and fullwidth form), CNS 14649",
+      "ko": "半形及全形(halfwidth and fullwidth form), CNS 14649"
+    },
+    "chars": 133,
+    "total": 133,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_c5a0c4bc42e4.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
     "id": "cns_source_c9dfb3a7217a",
     "group": "CNS sources",
     "label": "香港地區及美國國會圖書館用字(《CNS 11643》96年公布)",
@@ -2471,6 +2977,72 @@
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=141",
       "records": "/charsets/cns_source_c9dfb3a7217a.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_fecdff717fa8",
+    "group": "CNS sources",
+    "label": "拉丁字母延伸A, CNS 14649",
+    "names": {
+      "en": "拉丁字母延伸A, CNS 14649",
+      "zh": "拉丁字母延伸A, CNS 14649",
+      "hans": "拉丁字母延伸A, CNS 14649",
+      "ja": "拉丁字母延伸A, CNS 14649",
+      "ko": "拉丁字母延伸A, CNS 14649"
+    },
+    "chars": 128,
+    "total": 128,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_fecdff717fa8.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_7d0b3ae7f50c",
+    "group": "CNS sources",
+    "label": "輔助箭號B (supplemental arrow-B), CNS 14649",
+    "names": {
+      "en": "輔助箭號B (supplemental arrow-B), CNS 14649",
+      "zh": "輔助箭號B (supplemental arrow-B), CNS 14649",
+      "hans": "辅助箭号B (supplemental arrow-B), CNS 14649",
+      "ja": "輔助箭號B (supplemental arrow-B), CNS 14649",
+      "ko": "輔助箭號B (supplemental arrow-B), CNS 14649"
+    },
+    "chars": 128,
+    "total": 128,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_7d0b3ae7f50c.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_ced0b4cc8a14",
+    "group": "CNS sources",
+    "label": "雜項數學符號B (miscellaneous mathematical symbol-B), CNS 14649",
+    "names": {
+      "en": "雜項數學符號B (miscellaneous mathematical symbol-B), CNS 14649",
+      "zh": "雜項數學符號B (miscellaneous mathematical symbol-B), CNS 14649",
+      "hans": "杂项数学符号B (miscellaneous mathematical symbol-B), CNS 14649",
+      "ja": "雜項數學符號B (miscellaneous mathematical symbol-B), CNS 14649",
+      "ko": "雜項數學符號B (miscellaneous mathematical symbol-B), CNS 14649"
+    },
+    "chars": 128,
+    "total": 128,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_ced0b4cc8a14.tsv",
       "version": "2026-08-05",
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
@@ -2499,6 +3071,28 @@
     }
   },
   {
+    "id": "cns_source_eda25c5b293f",
+    "group": "CNS sources",
+    "label": "高棉文(Khmer), CNS 14649",
+    "names": {
+      "en": "高棉文(Khmer), CNS 14649",
+      "zh": "高棉文(Khmer), CNS 14649",
+      "hans": "高棉文(Khmer), CNS 14649",
+      "ja": "高棉文(Khmer), CNS 14649",
+      "ko": "高棉文(Khmer), CNS 14649"
+    },
+    "chars": 114,
+    "total": 114,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_eda25c5b293f.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
     "id": "cns_source_213ccf3d5ef3",
     "group": "CNS sources",
     "label": "CJK部首輔助(CJK radical supplement), CNS 14649",
@@ -2521,88 +3115,924 @@
     }
   },
   {
-    "id": "cns_source_82f49620efad",
+    "id": "cns_source_880ead07a4f5",
     "group": "CNS sources",
-    "label": "CJK相容字元(CJK compatibility), CNS 14649",
+    "label": "音標延伸(phonetic extension), CNS 14649",
     "names": {
-      "en": "CJK相容字元(CJK compatibility), CNS 14649",
-      "zh": "CJK相容字元(CJK compatibility), CNS 14649",
-      "hans": "CJK相容字元(CJK compatibility), CNS 14649",
-      "ja": "CJK相容字元(CJK compatibility), CNS 14649",
-      "ko": "CJK相容字元(CJK compatibility), CNS 14649"
+      "en": "音標延伸(phonetic extension), CNS 14649",
+      "zh": "音標延伸(phonetic extension), CNS 14649",
+      "hans": "音标延伸(phonetic extension), CNS 14649",
+      "ja": "音標延伸(phonetic extension), CNS 14649",
+      "ko": "音標延伸(phonetic extension), CNS 14649"
     },
-    "chars": 88,
-    "total": 245,
+    "chars": 108,
+    "total": 108,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_82f49620efad.tsv",
+      "records": "/charsets/cns_source_880ead07a4f5.tsv",
       "version": "2026-08-05",
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     }
   },
   {
-    "id": "cns_source_c5a0c4bc42e4",
+    "id": "cns_source_3a2780d062f5",
     "group": "CNS sources",
-    "label": "半形及全形(halfwidth and fullwidth form), CNS 14649",
+    "label": "組合讀音記號(combining diacritical mark), CNS 14649",
     "names": {
-      "en": "半形及全形(halfwidth and fullwidth form), CNS 14649",
-      "zh": "半形及全形(halfwidth and fullwidth form), CNS 14649",
-      "hans": "半形及全形(halfwidth and fullwidth form), CNS 14649",
-      "ja": "半形及全形(halfwidth and fullwidth form), CNS 14649",
-      "ko": "半形及全形(halfwidth and fullwidth form), CNS 14649"
+      "en": "組合讀音記號(combining diacritical mark), CNS 14649",
+      "zh": "組合讀音記號(combining diacritical mark), CNS 14649",
+      "hans": "组合读音记号(combining diacritical mark), CNS 14649",
+      "ja": "組合讀音記號(combining diacritical mark), CNS 14649",
+      "ko": "組合讀音記號(combining diacritical mark), CNS 14649"
     },
-    "chars": 55,
-    "total": 133,
+    "chars": 107,
+    "total": 107,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_c5a0c4bc42e4.tsv",
+      "records": "/charsets/cns_source_3a2780d062f5.tsv",
       "version": "2026-08-05",
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     }
   },
   {
-    "id": "cns_source_feaa2fb6fa4f",
+    "id": "cns_source_cbb4ee78526e",
     "group": "CNS sources",
-    "label": "包圍式CJK字母及月分(enclosed CJK letter and month), CNS 14649",
+    "label": "框線(box drawing), CNS 14649",
     "names": {
-      "en": "包圍式CJK字母及月分(enclosed CJK letter and month), CNS 14649",
-      "zh": "包圍式CJK字母及月分(enclosed CJK letter and month), CNS 14649",
-      "hans": "包围式CJK字母及月分(enclosed CJK letter and month), CNS 14649",
-      "ja": "包圍式CJK字母及月分(enclosed CJK letter and month), CNS 14649",
-      "ko": "包圍式CJK字母及月分(enclosed CJK letter and month), CNS 14649"
+      "en": "框線(box drawing), CNS 14649",
+      "zh": "框線(box drawing), CNS 14649",
+      "hans": "框线(box drawing), CNS 14649",
+      "ja": "框線(box drawing), CNS 14649",
+      "ko": "框線(box drawing), CNS 14649"
+    },
+    "chars": 105,
+    "total": 105,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_cbb4ee78526e.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_7cd38fefb908",
+    "group": "CNS sources",
+    "label": "箭號 (Arrows), CNS 14649",
+    "names": {
+      "en": "箭號 (Arrows), CNS 14649",
+      "zh": "箭號 (Arrows), CNS 14649",
+      "hans": "箭号 (Arrows), CNS 14649",
+      "ja": "箭號 (Arrows), CNS 14649",
+      "ko": "箭號 (Arrows), CNS 14649"
+    },
+    "chars": 104,
+    "total": 104,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_7cd38fefb908.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_07c84fb5e06d",
+    "group": "CNS sources",
+    "label": "文書及其他用字(本土語言)",
+    "names": {
+      "en": "文書及其他用字(本土語言)",
+      "zh": "文書及其他用字(本土語言)",
+      "hans": "文书及其他用字(本土语言)",
+      "ja": "文書及其他用字(本土語言)",
+      "ko": "文書及其他用字(本土語言)"
+    },
+    "chars": 99,
+    "total": 99,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=140",
+      "records": "/charsets/cns_source_07c84fb5e06d.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_ca919c529a9c",
+    "group": "CNS sources",
+    "label": "國際音標字母集(IPA)延伸, CNS 14649",
+    "names": {
+      "en": "國際音標字母集(IPA)延伸, CNS 14649",
+      "zh": "國際音標字母集(IPA)延伸, CNS 14649",
+      "hans": "国际音标字母集(IPA)延伸, CNS 14649",
+      "ja": "國際音標字母集(IPA)延伸, CNS 14649",
+      "ko": "國際音標字母集(IPA)延伸, CNS 14649"
+    },
+    "chars": 96,
+    "total": 96,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_ca919c529a9c.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_d246b62e66e8",
+    "group": "CNS sources",
+    "label": "C0控制及基本拉丁字母(control and basic Latin), CNS 14649",
+    "names": {
+      "en": "C0控制及基本拉丁字母(control and basic Latin), CNS 14649",
+      "zh": "C0控制及基本拉丁字母(control and basic Latin), CNS 14649",
+      "hans": "C0控制及基本拉丁字母(control and basic Latin), CNS 14649",
+      "ja": "C0控制及基本拉丁字母(control and basic Latin), CNS 14649",
+      "ko": "C0控制及基本拉丁字母(control and basic Latin), CNS 14649"
+    },
+    "chars": 95,
+    "total": 95,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_d246b62e66e8.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_4c6ccf173b80",
+    "group": "CNS sources",
+    "label": "韓語相容字母(Hangul compatibility Jamo), CNS 14649",
+    "names": {
+      "en": "韓語相容字母(Hangul compatibility Jamo), CNS 14649",
+      "zh": "韓語相容字母(Hangul compatibility Jamo), CNS 14649",
+      "hans": "韩语相容字母(Hangul compatibility Jamo), CNS 14649",
+      "ja": "韓語相容字母(Hangul compatibility Jamo), CNS 14649",
+      "ko": "韓語相容字母(Hangul compatibility Jamo), CNS 14649"
+    },
+    "chars": 94,
+    "total": 94,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_4c6ccf173b80.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_f65e09aa19fe",
+    "group": "CNS sources",
+    "label": "基本拉丁字母1-輔助, CNS 14649",
+    "names": {
+      "en": "基本拉丁字母1-輔助, CNS 14649",
+      "zh": "基本拉丁字母1-輔助, CNS 14649",
+      "hans": "基本拉丁字母1-辅助, CNS 14649",
+      "ja": "基本拉丁字母1-輔助, CNS 14649",
+      "ko": "基本拉丁字母1-輔助, CNS 14649"
+    },
+    "chars": 90,
+    "total": 90,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_f65e09aa19fe.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_efb37f9abf8d",
+    "group": "CNS sources",
+    "label": "泰文(Thai), CNS 14649",
+    "names": {
+      "en": "泰文(Thai), CNS 14649",
+      "zh": "泰文(Thai), CNS 14649",
+      "hans": "泰文(Thai), CNS 14649",
+      "ja": "泰文(Thai), CNS 14649",
+      "ko": "泰文(Thai), CNS 14649"
+    },
+    "chars": 87,
+    "total": 87,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_efb37f9abf8d.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_6907f4dcc559",
+    "group": "CNS sources",
+    "label": "一般標點 (General Punctuation), CNS 14649",
+    "names": {
+      "en": "一般標點 (General Punctuation), CNS 14649",
+      "zh": "一般標點 (General Punctuation), CNS 14649",
+      "hans": "一般标点 (General Punctuation), CNS 14649",
+      "ja": "一般標點 (General Punctuation), CNS 14649",
+      "ko": "一般標點 (General Punctuation), CNS 14649"
+    },
+    "chars": 82,
+    "total": 82,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_6907f4dcc559.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_6cfefdb0027b",
+    "group": "CNS sources",
+    "label": "希伯來文(Hebrew), CNS 14649",
+    "names": {
+      "en": "希伯來文(Hebrew), CNS 14649",
+      "zh": "希伯來文(Hebrew), CNS 14649",
+      "hans": "希伯来文(Hebrew), CNS 14649",
+      "ja": "希伯來文(Hebrew), CNS 14649",
+      "ko": "希伯來文(Hebrew), CNS 14649"
+    },
+    "chars": 82,
+    "total": 82,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_6cfefdb0027b.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_40ed70d1a4da",
+    "group": "CNS sources",
+    "label": "幾何形狀(geometric shape), CNS 14649",
+    "names": {
+      "en": "幾何形狀(geometric shape), CNS 14649",
+      "zh": "幾何形狀(geometric shape), CNS 14649",
+      "hans": "几何形状(geometric shape), CNS 14649",
+      "ja": "幾何形狀(geometric shape), CNS 14649",
+      "ko": "幾何形狀(geometric shape), CNS 14649"
+    },
+    "chars": 81,
+    "total": 81,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_40ed70d1a4da.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_fb848cc9ca84",
+    "group": "CNS sources",
+    "label": "緬甸文(Myanmar), CNS 14649",
+    "names": {
+      "en": "緬甸文(Myanmar), CNS 14649",
+      "zh": "緬甸文(Myanmar), CNS 14649",
+      "hans": "缅甸文(Myanmar), CNS 14649",
+      "ja": "緬甸文(Myanmar), CNS 14649",
+      "ko": "緬甸文(Myanmar), CNS 14649"
+    },
+    "chars": 78,
+    "total": 78,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_fb848cc9ca84.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_475361f2c57a",
+    "group": "CNS sources",
+    "label": "間隔修飾符字母(spacing modifier letter), CNS 14649",
+    "names": {
+      "en": "間隔修飾符字母(spacing modifier letter), CNS 14649",
+      "zh": "間隔修飾符字母(spacing modifier letter), CNS 14649",
+      "hans": "间隔修饰符字母(spacing modifier letter), CNS 14649",
+      "ja": "間隔修飾符字母(spacing modifier letter), CNS 14649",
+      "ko": "間隔修飾符字母(spacing modifier letter), CNS 14649"
+    },
+    "chars": 74,
+    "total": 74,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_475361f2c57a.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_244287a7fcab",
+    "group": "CNS sources",
+    "label": "似字母符號(letterlike symbol), CNS 14649",
+    "names": {
+      "en": "似字母符號(letterlike symbol), CNS 14649",
+      "zh": "似字母符號(letterlike symbol), CNS 14649",
+      "hans": "似字母符号(letterlike symbol), CNS 14649",
+      "ja": "似字母符號(letterlike symbol), CNS 14649",
+      "ko": "似字母符號(letterlike symbol), CNS 14649"
+    },
+    "chars": 72,
+    "total": 72,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_244287a7fcab.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_f0d3f7e2cae1",
+    "group": "CNS sources",
+    "label": "希臘文及科普特文(Greek and Coptic), CNS 14649",
+    "names": {
+      "en": "希臘文及科普特文(Greek and Coptic), CNS 14649",
+      "zh": "希臘文及科普特文(Greek and Coptic), CNS 14649",
+      "hans": "希腊文及科普特文(Greek and Coptic), CNS 14649",
+      "ja": "希臘文及科普特文(Greek and Coptic), CNS 14649",
+      "ko": "希臘文及科普特文(Greek and Coptic), CNS 14649"
+    },
+    "chars": 72,
+    "total": 72,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_f0d3f7e2cae1.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_2f943509eb76",
+    "group": "CNS sources",
+    "label": "易經六爻符號(Yijing hexagram symbol), CNS 14649",
+    "names": {
+      "en": "易經六爻符號(Yijing hexagram symbol), CNS 14649",
+      "zh": "易經六爻符號(Yijing hexagram symbol), CNS 14649",
+      "hans": "易经六爻符号(Yijing hexagram symbol), CNS 14649",
+      "ja": "易經六爻符號(Yijing hexagram symbol), CNS 14649",
+      "ko": "易經六爻符號(Yijing hexagram symbol), CNS 14649"
+    },
+    "chars": 64,
+    "total": 64,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_2f943509eb76.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_701dad9f9352",
+    "group": "CNS sources",
+    "label": "全形英文字母(《CNS 11643》96年公布)",
+    "names": {
+      "en": "全形英文字母(《CNS 11643》96年公布)",
+      "zh": "全形英文字母(《CNS 11643》96年公布)",
+      "hans": "全形英文字母(《CNS 11643》96年公布)",
+      "ja": "全形英文字母(《CNS 11643》96年公布)",
+      "ko": "全形英文字母(《CNS 11643》96年公布)"
+    },
+    "chars": 52,
+    "total": 52,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_701dad9f9352.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_ae8a4ccf06f0",
+    "group": "CNS sources",
+    "label": "全形希臘字母(《CNS 11643》96年公布)",
+    "names": {
+      "en": "全形希臘字母(《CNS 11643》96年公布)",
+      "zh": "全形希臘字母(《CNS 11643》96年公布)",
+      "hans": "全形希腊字母(《CNS 11643》96年公布)",
+      "ja": "全形希臘字母(《CNS 11643》96年公布)",
+      "ko": "全形希臘字母(《CNS 11643》96年公布)"
+    },
+    "chars": 48,
+    "total": 48,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_ae8a4ccf06f0.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_611db04bbd35",
+    "group": "CNS sources",
+    "label": "國語注音符號",
+    "names": {
+      "en": "國語注音符號",
+      "zh": "國語注音符號",
+      "hans": "国语注音符号",
+      "ja": "國語注音符號",
+      "ko": "國語注音符號"
     },
     "chars": 47,
-    "total": 240,
+    "total": 47,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_feaa2fb6fa4f.tsv",
+      "records": "/charsets/cns_source_611db04bbd35.tsv",
       "version": "2026-08-05",
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     }
   },
   {
-    "id": "cns_source_40707d428e25",
+    "id": "cns_source_f7a108996d44",
     "group": "CNS sources",
-    "label": "CNS 11643-2&3 中文字筆畫分類及基礎部件",
+    "label": "各種括號(《CNS 11643》96年公布)",
     "names": {
-      "en": "CNS 11643-2&3 中文字筆畫分類及基礎部件",
-      "zh": "CNS 11643-2&3 中文字筆畫分類及基礎部件",
-      "hans": "CNS 11643-2&3 中文字笔画分类及基础部件",
-      "ja": "CNS 11643-2&3 中文字筆畫分類及基礎部件",
-      "ko": "CNS 11643-2&3 中文字筆畫分類及基礎部件"
+      "en": "各種括號(《CNS 11643》96年公布)",
+      "zh": "各種括號(《CNS 11643》96年公布)",
+      "hans": "各种括号(《CNS 11643》96年公布)",
+      "ja": "各種括號(《CNS 11643》96年公布)",
+      "ko": "各種括號(《CNS 11643》96年公布)"
     },
-    "chars": 33,
-    "total": 537,
+    "chars": 46,
+    "total": 46,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_40707d428e25.tsv",
+      "records": "/charsets/cns_source_f7a108996d44.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_84b1dcc58ad7",
+    "group": "CNS sources",
+    "label": "C0控制圖像",
+    "names": {
+      "en": "C0控制圖像",
+      "zh": "C0控制圖像",
+      "hans": "C0控制图像",
+      "ja": "C0控制圖像",
+      "ko": "C0控制圖像"
+    },
+    "chars": 38,
+    "total": 38,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_84b1dcc58ad7.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_37f181f261f6",
+    "group": "CNS sources",
+    "label": "數學符號(《CNS 11643》96年公布)",
+    "names": {
+      "en": "數學符號(《CNS 11643》96年公布)",
+      "zh": "數學符號(《CNS 11643》96年公布)",
+      "hans": "数学符号(《CNS 11643》96年公布)",
+      "ja": "數學符號(《CNS 11643》96年公布)",
+      "ko": "數學符號(《CNS 11643》96年公布)"
+    },
+    "chars": 36,
+    "total": 36,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_37f181f261f6.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_8fa48bbd5fd1",
+    "group": "CNS sources",
+    "label": "CJK符號及標點(CJK symbol and punctuation), CNS 14649",
+    "names": {
+      "en": "CJK符號及標點(CJK symbol and punctuation), CNS 14649",
+      "zh": "CJK符號及標點(CJK symbol and punctuation), CNS 14649",
+      "hans": "CJK符号及标点(CJK symbol and punctuation), CNS 14649",
+      "ja": "CJK符號及標點(CJK symbol and punctuation), CNS 14649",
+      "ko": "CJK符號及標點(CJK symbol and punctuation), CNS 14649"
+    },
+    "chars": 32,
+    "total": 32,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_8fa48bbd5fd1.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_b88be589cac8",
+    "group": "CNS sources",
+    "label": "貨幣及單位符號(《CNS 11643》96年公布)",
+    "names": {
+      "en": "貨幣及單位符號(《CNS 11643》96年公布)",
+      "zh": "貨幣及單位符號(《CNS 11643》96年公布)",
+      "hans": "货币及单位符号(《CNS 11643》96年公布)",
+      "ja": "貨幣及單位符號(《CNS 11643》96年公布)",
+      "ko": "貨幣及單位符號(《CNS 11643》96年公布)"
+    },
+    "chars": 32,
+    "total": 32,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_b88be589cac8.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_e40804733bfc",
+    "group": "CNS sources",
+    "label": "高棉符號(Khmer symbol), CNS 14649",
+    "names": {
+      "en": "高棉符號(Khmer symbol), CNS 14649",
+      "zh": "高棉符號(Khmer symbol), CNS 14649",
+      "hans": "高棉符号(Khmer symbol), CNS 14649",
+      "ja": "高棉符號(Khmer symbol), CNS 14649",
+      "ko": "高棉符號(Khmer symbol), CNS 14649"
+    },
+    "chars": 32,
+    "total": 32,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_e40804733bfc.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_ea21f11bc86b",
+    "group": "CNS sources",
+    "label": "數字序列符號(《CNS 11643》96年公布)",
+    "names": {
+      "en": "數字序列符號(《CNS 11643》96年公布)",
+      "zh": "數字序列符號(《CNS 11643》96年公布)",
+      "hans": "数字序列符号(《CNS 11643》96年公布)",
+      "ja": "數字序列符號(《CNS 11643》96年公布)",
+      "ko": "數字序列符號(《CNS 11643》96年公布)"
+    },
+    "chars": 30,
+    "total": 30,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_ea21f11bc86b.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_a5799c3262f7",
+    "group": "CNS sources",
+    "label": "上標及下標(superscript and subscript), CNS 14649",
+    "names": {
+      "en": "上標及下標(superscript and subscript), CNS 14649",
+      "zh": "上標及下標(superscript and subscript), CNS 14649",
+      "hans": "上标及下标(superscript and subscript), CNS 14649",
+      "ja": "上標及下標(superscript and subscript), CNS 14649",
+      "ko": "上標及下標(superscript and subscript), CNS 14649"
+    },
+    "chars": 29,
+    "total": 29,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_a5799c3262f7.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_60f4b29d3d54",
+    "group": "CNS sources",
+    "label": "數字形式 (Number Forms), CNS 14649",
+    "names": {
+      "en": "數字形式 (Number Forms), CNS 14649",
+      "zh": "數字形式 (Number Forms), CNS 14649",
+      "hans": "数字形式 (Number Forms), CNS 14649",
+      "ja": "數字形式 (Number Forms), CNS 14649",
+      "ko": "數字形式 (Number Forms), CNS 14649"
+    },
+    "chars": 29,
+    "total": 29,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_60f4b29d3d54.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_802c97e8a5b3",
+    "group": "CNS sources",
+    "label": "全形標點符號(《CNS 11643》96年公布)",
+    "names": {
+      "en": "全形標點符號(《CNS 11643》96年公布)",
+      "zh": "全形標點符號(《CNS 11643》96年公布)",
+      "hans": "全形标点符号(《CNS 11643》96年公布)",
+      "ja": "全形標點符號(《CNS 11643》96年公布)",
+      "ko": "全形標點符號(《CNS 11643》96年公布)"
+    },
+    "chars": 28,
+    "total": 28,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_802c97e8a5b3.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_6a486c64d99f",
+    "group": "CNS sources",
+    "label": "雜項數學符號A (miscellaneous mathematical symbol-A), CNS 14649",
+    "names": {
+      "en": "雜項數學符號A (miscellaneous mathematical symbol-A), CNS 14649",
+      "zh": "雜項數學符號A (miscellaneous mathematical symbol-A), CNS 14649",
+      "hans": "杂项数学符号A (miscellaneous mathematical symbol-A), CNS 14649",
+      "ja": "雜項數學符號A (miscellaneous mathematical symbol-A), CNS 14649",
+      "ko": "雜項數學符號A (miscellaneous mathematical symbol-A), CNS 14649"
+    },
+    "chars": 28,
+    "total": 28,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_6a486c64d99f.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_29b0266abbdc",
+    "group": "CNS sources",
+    "label": "國語注音符號擴充",
+    "names": {
+      "en": "國語注音符號擴充",
+      "zh": "國語注音符號擴充",
+      "hans": "国语注音符号扩充",
+      "ja": "國語注音符號擴充",
+      "ko": "國語注音符號擴充"
+    },
+    "chars": 27,
+    "total": 27,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_29b0266abbdc.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_67ebcb192310",
+    "group": "CNS sources",
+    "label": "符號之組合附加記號(combining diacritical mark for symbol), CNS 14649",
+    "names": {
+      "en": "符號之組合附加記號(combining diacritical mark for symbol), CNS 14649",
+      "zh": "符號之組合附加記號(combining diacritical mark for symbol), CNS 14649",
+      "hans": "符号之组合附加记号(combining diacritical mark for symbol), CNS 14649",
+      "ja": "符號之組合附加記號(combining diacritical mark for symbol), CNS 14649",
+      "ko": "符號之組合附加記號(combining diacritical mark for symbol), CNS 14649"
+    },
+    "chars": 27,
+    "total": 27,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_67ebcb192310.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_fd7a7caf3388",
+    "group": "CNS sources",
+    "label": "製表符號(《CNS 11643》96年公布)",
+    "names": {
+      "en": "製表符號(《CNS 11643》96年公布)",
+      "zh": "製表符號(《CNS 11643》96年公布)",
+      "hans": "制表符号(《CNS 11643》96年公布)",
+      "ja": "製表符號(《CNS 11643》96年公布)",
+      "ko": "製表符號(《CNS 11643》96年公布)"
+    },
+    "chars": 21,
+    "total": 21,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_fd7a7caf3388.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_b6ceca6c0735",
+    "group": "CNS sources",
+    "label": "圖塊符號(《CNS 11643》96年公布)",
+    "names": {
+      "en": "圖塊符號(《CNS 11643》96年公布)",
+      "zh": "圖塊符號(《CNS 11643》96年公布)",
+      "hans": "图块符号(《CNS 11643》96年公布)",
+      "ja": "圖塊符號(《CNS 11643》96年公布)",
+      "ko": "圖塊符號(《CNS 11643》96年公布)"
+    },
+    "chars": 19,
+    "total": 19,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_b6ceca6c0735.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_1863fd6afb81",
+    "group": "CNS sources",
+    "label": "標線符號(《CNS 11643》96年公布)",
+    "names": {
+      "en": "標線符號(《CNS 11643》96年公布)",
+      "zh": "標線符號(《CNS 11643》96年公布)",
+      "hans": "标线符号(《CNS 11643》96年公布)",
+      "ja": "標線符號(《CNS 11643》96年公布)",
+      "ko": "標線符號(《CNS 11643》96年公布)"
+    },
+    "chars": 19,
+    "total": 19,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_1863fd6afb81.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_43e833fc781c",
+    "group": "CNS sources",
+    "label": "註記符號(《CNS 11643》96年公布)",
+    "names": {
+      "en": "註記符號(《CNS 11643》96年公布)",
+      "zh": "註記符號(《CNS 11643》96年公布)",
+      "hans": "注记符号(《CNS 11643》96年公布)",
+      "ja": "註記符號(《CNS 11643》96年公布)",
+      "ko": "註記符號(《CNS 11643》96年公布)"
+    },
+    "chars": 19,
+    "total": 19,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_43e833fc781c.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_1a3acef637d5",
+    "group": "CNS sources",
+    "label": "貨幣符號(currency symbol), CNS 14649",
+    "names": {
+      "en": "貨幣符號(currency symbol), CNS 14649",
+      "zh": "貨幣符號(currency symbol), CNS 14649",
+      "hans": "货币符号(currency symbol), CNS 14649",
+      "ja": "貨幣符號(currency symbol), CNS 14649",
+      "ko": "貨幣符號(currency symbol), CNS 14649"
+    },
+    "chars": 17,
+    "total": 17,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_1a3acef637d5.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_941a8e35ec7d",
+    "group": "CNS sources",
+    "label": "元素、化學、符號用字",
+    "names": {
+      "en": "元素、化學、符號用字",
+      "zh": "元素、化學、符號用字",
+      "hans": "元素、化学、符号用字",
+      "ja": "元素、化學、符號用字",
+      "ko": "元素、化學、符號用字"
+    },
+    "chars": 16,
+    "total": 16,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=137",
+      "records": "/charsets/cns_source_941a8e35ec7d.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_44a202bd3e1b",
+    "group": "CNS sources",
+    "label": "教育部臺灣客語用字",
+    "names": {
+      "en": "教育部臺灣客語用字",
+      "zh": "教育部臺灣客語用字",
+      "hans": "教育部台湾客语用字",
+      "ja": "教育部臺灣客語用字",
+      "ko": "教育部臺灣客語用字"
+    },
+    "chars": 16,
+    "total": 16,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=127",
+      "records": "/charsets/cns_source_44a202bd3e1b.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_9d093cbbe12a",
+    "group": "CNS sources",
+    "label": "漢文訓讀(Kanbun), ISO/IEC 10646",
+    "names": {
+      "en": "漢文訓讀(Kanbun), ISO/IEC 10646",
+      "zh": "漢文訓讀(Kanbun), ISO/IEC 10646",
+      "hans": "汉文训读(Kanbun), ISO/IEC 10646",
+      "ja": "漢文訓讀(Kanbun), ISO/IEC 10646",
+      "ko": "漢文訓讀(Kanbun), ISO/IEC 10646"
+    },
+    "chars": 16,
+    "total": 16,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_9d093cbbe12a.tsv",
       "version": "2026-08-05",
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
@@ -2631,44 +4061,132 @@
     }
   },
   {
-    "id": "cns_source_941a8e35ec7d",
+    "id": "cns_source_aed86848e891",
     "group": "CNS sources",
-    "label": "元素、化學、符號用字",
+    "label": "西里爾字母輔助, CNS 14649",
     "names": {
-      "en": "元素、化學、符號用字",
-      "zh": "元素、化學、符號用字",
-      "hans": "元素、化学、符号用字",
-      "ja": "元素、化學、符號用字",
-      "ko": "元素、化學、符號用字"
+      "en": "西里爾字母輔助, CNS 14649",
+      "zh": "西里爾字母輔助, CNS 14649",
+      "hans": "西里尔字母辅助, CNS 14649",
+      "ja": "西里爾字母輔助, CNS 14649",
+      "ko": "西里爾字母輔助, CNS 14649"
     },
-    "chars": 13,
+    "chars": 16,
     "total": 16,
     "source": {
       "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=137",
-      "records": "/charsets/cns_source_941a8e35ec7d.tsv",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_aed86848e891.tsv",
       "version": "2026-08-05",
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     }
   },
   {
-    "id": "cns_source_44a202bd3e1b",
+    "id": "cns_source_be9335bac67c",
     "group": "CNS sources",
-    "label": "教育部臺灣客語用字",
+    "label": "變異選擇符(variation selector), CNS 14649",
     "names": {
-      "en": "教育部臺灣客語用字",
-      "zh": "教育部臺灣客語用字",
-      "hans": "教育部台湾客语用字",
-      "ja": "教育部臺灣客語用字",
-      "ko": "教育部臺灣客語用字"
+      "en": "變異選擇符(variation selector), CNS 14649",
+      "zh": "變異選擇符(variation selector), CNS 14649",
+      "hans": "变异选择符(variation selector), CNS 14649",
+      "ja": "變異選擇符(variation selector), CNS 14649",
+      "ko": "變異選擇符(variation selector), CNS 14649"
     },
-    "chars": 12,
+    "chars": 16,
     "total": 16,
     "source": {
       "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=127",
-      "records": "/charsets/cns_source_44a202bd3e1b.tsv",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_be9335bac67c.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_bd0741719814",
+    "group": "CNS sources",
+    "label": "輔助箭號A (supplemental arrow-A), CNS 14649",
+    "names": {
+      "en": "輔助箭號A (supplemental arrow-A), CNS 14649",
+      "zh": "輔助箭號A (supplemental arrow-A), CNS 14649",
+      "hans": "辅助箭号A (supplemental arrow-A), CNS 14649",
+      "ja": "輔助箭號A (supplemental arrow-A), CNS 14649",
+      "ko": "輔助箭號A (supplemental arrow-A), CNS 14649"
+    },
+    "chars": 16,
+    "total": 16,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_bd0741719814.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_cc68216677f4",
+    "group": "CNS sources",
+    "label": "教育部臺灣台語用字",
+    "names": {
+      "en": "教育部臺灣台語用字",
+      "zh": "教育部臺灣台語用字",
+      "hans": "教育部台湾台语用字",
+      "ja": "教育部臺灣台語用字",
+      "ko": "教育部臺灣台語用字"
+    },
+    "chars": 15,
+    "total": 15,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=126",
+      "records": "/charsets/cns_source_cc68216677f4.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_38a239c10b04",
+    "group": "CNS sources",
+    "label": "方塊元件(block element), CNS 14649",
+    "names": {
+      "en": "方塊元件(block element), CNS 14649",
+      "zh": "方塊元件(block element), CNS 14649",
+      "hans": "方块元件(block element), CNS 14649",
+      "ja": "方塊元件(block element), CNS 14649",
+      "ko": "方塊元件(block element), CNS 14649"
+    },
+    "chars": 15,
+    "total": 15,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_38a239c10b04.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_c78127f1c605",
+    "group": "CNS sources",
+    "label": "雜項符號及箭號(miscellaneous symbol and arrow), CNS 14649",
+    "names": {
+      "en": "雜項符號及箭號(miscellaneous symbol and arrow), CNS 14649",
+      "zh": "雜項符號及箭號(miscellaneous symbol and arrow), CNS 14649",
+      "hans": "杂项符号及箭号(miscellaneous symbol and arrow), CNS 14649",
+      "ja": "雜項符號及箭號(miscellaneous symbol and arrow), CNS 14649",
+      "ko": "雜項符號及箭號(miscellaneous symbol and arrow), CNS 14649"
+    },
+    "chars": 14,
+    "total": 14,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_c78127f1c605.tsv",
       "version": "2026-08-05",
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
@@ -2697,110 +4215,220 @@
     }
   },
   {
-    "id": "cns_source_07c84fb5e06d",
+    "id": "cns_source_9ccf2c2482ce",
     "group": "CNS sources",
-    "label": "文書及其他用字(本土語言)",
+    "label": "表意文字描述字元(ideographic description character), CNS 14649",
     "names": {
-      "en": "文書及其他用字(本土語言)",
-      "zh": "文書及其他用字(本土語言)",
-      "hans": "文书及其他用字(本土语言)",
-      "ja": "文書及其他用字(本土語言)",
-      "ko": "文書及其他用字(本土語言)"
+      "en": "表意文字描述字元(ideographic description character), CNS 14649",
+      "zh": "表意文字描述字元(ideographic description character), CNS 14649",
+      "hans": "表意文字描述字元(ideographic description character), CNS 14649",
+      "ja": "表意文字描述字元(ideographic description character), CNS 14649",
+      "ko": "表意文字描述字元(ideographic description character), CNS 14649"
     },
-    "chars": 11,
-    "total": 99,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=140",
-      "records": "/charsets/cns_source_07c84fb5e06d.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_cc68216677f4",
-    "group": "CNS sources",
-    "label": "教育部臺灣台語用字",
-    "names": {
-      "en": "教育部臺灣台語用字",
-      "zh": "教育部臺灣台語用字",
-      "hans": "教育部台湾台语用字",
-      "ja": "教育部臺灣台語用字",
-      "ko": "教育部臺灣台語用字"
-    },
-    "chars": 11,
-    "total": 15,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=126",
-      "records": "/charsets/cns_source_cc68216677f4.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_b88be589cac8",
-    "group": "CNS sources",
-    "label": "貨幣及單位符號(《CNS 11643》96年公布)",
-    "names": {
-      "en": "貨幣及單位符號(《CNS 11643》96年公布)",
-      "zh": "貨幣及單位符號(《CNS 11643》96年公布)",
-      "hans": "货币及单位符号(《CNS 11643》96年公布)",
-      "ja": "貨幣及單位符號(《CNS 11643》96年公布)",
-      "ko": "貨幣及單位符號(《CNS 11643》96年公布)"
-    },
-    "chars": 9,
-    "total": 32,
+    "chars": 12,
+    "total": 12,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_b88be589cac8.tsv",
+      "records": "/charsets/cns_source_9ccf2c2482ce.tsv",
       "version": "2026-08-05",
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     }
   },
   {
-    "id": "cns_source_9050f9dacd7a",
+    "id": "cns_source_f6181fa6c110",
     "group": "CNS sources",
-    "label": "內政部地政用字",
+    "label": "光學字元辨識(optical character recognition), CNS 14649",
     "names": {
-      "en": "內政部地政用字",
-      "zh": "內政部地政用字",
-      "hans": "内政部地政用字",
-      "ja": "內政部地政用字",
-      "ko": "內政部地政用字"
+      "en": "光學字元辨識(optical character recognition), CNS 14649",
+      "zh": "光學字元辨識(optical character recognition), CNS 14649",
+      "hans": "光学字元辨识(optical character recognition), CNS 14649",
+      "ja": "光學字元辨識(optical character recognition), CNS 14649",
+      "ko": "光學字元辨識(optical character recognition), CNS 14649"
     },
-    "chars": 6,
-    "total": 3692,
+    "chars": 11,
+    "total": 11,
     "source": {
       "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=114",
-      "records": "/charsets/cns_source_9050f9dacd7a.tsv",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_f6181fa6c110.tsv",
       "version": "2026-08-05",
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     }
   },
   {
-    "id": "cns_source_91c19d23d20f",
+    "id": "cns_source_0fea6f81fd6f",
     "group": "CNS sources",
-    "label": "文獻用字",
+    "label": "全形羅馬數字(《CNS 11643》96年公布)",
     "names": {
-      "en": "文獻用字",
-      "zh": "文獻用字",
-      "hans": "文献用字",
-      "ja": "文獻用字",
-      "ko": "文獻用字"
+      "en": "全形羅馬數字(《CNS 11643》96年公布)",
+      "zh": "全形羅馬數字(《CNS 11643》96年公布)",
+      "hans": "全形罗马数字(《CNS 11643》96年公布)",
+      "ja": "全形羅馬數字(《CNS 11643》96年公布)",
+      "ko": "全形羅馬數字(《CNS 11643》96年公布)"
     },
-    "chars": 6,
-    "total": 250,
+    "chars": 10,
+    "total": 10,
     "source": {
       "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=139",
-      "records": "/charsets/cns_source_91c19d23d20f.tsv",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_0fea6f81fd6f.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_2758d40e8a45",
+    "group": "CNS sources",
+    "label": "全形阿拉伯數字(《CNS 11643》96年公布)",
+    "names": {
+      "en": "全形阿拉伯數字(《CNS 11643》96年公布)",
+      "zh": "全形阿拉伯數字(《CNS 11643》96年公布)",
+      "hans": "全形阿拉伯数字(《CNS 11643》96年公布)",
+      "ja": "全形阿拉伯數字(《CNS 11643》96年公布)",
+      "ko": "全形阿拉伯數字(《CNS 11643》96年公布)"
+    },
+    "chars": 10,
+    "total": 10,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_2758d40e8a45.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_d12c01937f95",
+    "group": "CNS sources",
+    "label": "教育部異體字典正字",
+    "names": {
+      "en": "教育部異體字典正字",
+      "zh": "教育部異體字典正字",
+      "hans": "教育部异体字典正字",
+      "ja": "教育部異體字典正字",
+      "ko": "教育部異體字典正字"
+    },
+    "chars": 9,
+    "total": 9,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=129",
+      "records": "/charsets/cns_source_d12c01937f95.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_26c9e3641278",
+    "group": "CNS sources",
+    "label": "箭頭符號(《CNS 11643》96年公布)",
+    "names": {
+      "en": "箭頭符號(《CNS 11643》96年公布)",
+      "zh": "箭頭符號(《CNS 11643》96年公布)",
+      "hans": "箭头符号(《CNS 11643》96年公布)",
+      "ja": "箭頭符號(《CNS 11643》96年公布)",
+      "ko": "箭頭符號(《CNS 11643》96年公布)"
+    },
+    "chars": 8,
+    "total": 8,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_26c9e3641278.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_ce8bd21c3987",
+    "group": "CNS sources",
+    "label": "內政部移民署用字",
+    "names": {
+      "en": "內政部移民署用字",
+      "zh": "內政部移民署用字",
+      "hans": "内政部移民署用字",
+      "ja": "內政部移民署用字",
+      "ko": "內政部移民署用字"
+    },
+    "chars": 5,
+    "total": 5,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=115",
+      "records": "/charsets/cns_source_ce8bd21c3987.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_4b228bb75113",
+    "group": "CNS sources",
+    "label": "教育部異體字典異體字",
+    "names": {
+      "en": "教育部異體字典異體字",
+      "zh": "教育部異體字典異體字",
+      "hans": "教育部异体字典异体字",
+      "ja": "教育部異體字典異體字",
+      "ko": "教育部異體字典異體字"
+    },
+    "chars": 5,
+    "total": 5,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=131",
+      "records": "/charsets/cns_source_4b228bb75113.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_4a276bfd96b1",
+    "group": "CNS sources",
+    "label": "特殊字元(special), CNS 14649",
+    "names": {
+      "en": "特殊字元(special), CNS 14649",
+      "zh": "特殊字元(special), CNS 14649",
+      "hans": "特殊字元(special), CNS 14649",
+      "ja": "特殊字元(special), CNS 14649",
+      "ko": "特殊字元(special), CNS 14649"
+    },
+    "chars": 5,
+    "total": 5,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_4a276bfd96b1.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_1706933ab176",
+    "group": "CNS sources",
+    "label": "CJK相容形式(CJK compatibility form), CNS 14649",
+    "names": {
+      "en": "CJK相容形式(CJK compatibility form), CNS 14649",
+      "zh": "CJK相容形式(CJK compatibility form), CNS 14649",
+      "hans": "CJK相容形式(CJK compatibility form), CNS 14649",
+      "ja": "CJK相容形式(CJK compatibility form), CNS 14649",
+      "ko": "CJK相容形式(CJK compatibility form), CNS 14649"
+    },
+    "chars": 4,
+    "total": 4,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_1706933ab176.tsv",
       "version": "2026-08-05",
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
@@ -2817,12 +4445,56 @@
       "ja": "《CNS 11643》96年公布",
       "ko": "《CNS 11643》96年公布"
     },
-    "chars": 3,
+    "chars": 4,
     "total": 4,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
       "records": "/charsets/cns_source_70ff00424cc8.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_2bfde7b85317",
+    "group": "CNS sources",
+    "label": "文書及其他用字",
+    "names": {
+      "en": "文書及其他用字",
+      "zh": "文書及其他用字",
+      "hans": "文书及其他用字",
+      "ja": "文書及其他用字",
+      "ko": "文書及其他用字"
+    },
+    "chars": 4,
+    "total": 4,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=136",
+      "records": "/charsets/cns_source_2bfde7b85317.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_38c252c93e07",
+    "group": "CNS sources",
+    "label": "組合半形記號(combing half mark), CNS 14649",
+    "names": {
+      "en": "組合半形記號(combing half mark), CNS 14649",
+      "zh": "組合半形記號(combing half mark), CNS 14649",
+      "hans": "组合半形记号(combing half mark), CNS 14649",
+      "ja": "組合半形記號(combing half mark), CNS 14649",
+      "ko": "組合半形記號(combing half mark), CNS 14649"
+    },
+    "chars": 4,
+    "total": 4,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_38c252c93e07.tsv",
       "version": "2026-08-05",
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
@@ -2851,66 +4523,22 @@
     }
   },
   {
-    "id": "cns_source_8fa48bbd5fd1",
+    "id": "cns_source_0797c3fa7908",
     "group": "CNS sources",
-    "label": "CJK符號及標點(CJK symbol and punctuation), CNS 14649",
+    "label": "臺灣台語用字",
     "names": {
-      "en": "CJK符號及標點(CJK symbol and punctuation), CNS 14649",
-      "zh": "CJK符號及標點(CJK symbol and punctuation), CNS 14649",
-      "hans": "CJK符号及标点(CJK symbol and punctuation), CNS 14649",
-      "ja": "CJK符號及標點(CJK symbol and punctuation), CNS 14649",
-      "ko": "CJK符號及標點(CJK symbol and punctuation), CNS 14649"
+      "en": "臺灣台語用字",
+      "zh": "臺灣台語用字",
+      "hans": "台湾台语用字",
+      "ja": "臺灣台語用字",
+      "ko": "臺灣台語用字"
     },
-    "chars": 2,
-    "total": 32,
+    "chars": 3,
+    "total": 3,
     "source": {
       "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_8fa48bbd5fd1.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_d12c01937f95",
-    "group": "CNS sources",
-    "label": "教育部異體字典正字",
-    "names": {
-      "en": "教育部異體字典正字",
-      "zh": "教育部異體字典正字",
-      "hans": "教育部异体字典正字",
-      "ja": "教育部異體字典正字",
-      "ko": "教育部異體字典正字"
-    },
-    "chars": 2,
-    "total": 9,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=129",
-      "records": "/charsets/cns_source_d12c01937f95.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_4b228bb75113",
-    "group": "CNS sources",
-    "label": "教育部異體字典異體字",
-    "names": {
-      "en": "教育部異體字典異體字",
-      "zh": "教育部異體字典異體字",
-      "hans": "教育部异体字典异体字",
-      "ja": "教育部異體字典異體字",
-      "ko": "教育部異體字典異體字"
-    },
-    "chars": 2,
-    "total": 5,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=131",
-      "records": "/charsets/cns_source_4b228bb75113.tsv",
+      "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=133",
+      "records": "/charsets/cns_source_0797c3fa7908.tsv",
       "version": "2026-08-05",
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
@@ -2927,12 +4555,34 @@
       "ja": "臺灣客語用字",
       "ko": "臺灣客語用字"
     },
-    "chars": 1,
+    "chars": 3,
     "total": 3,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=134",
       "records": "/charsets/cns_source_e3e11677763c.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_2b51e758c88a",
+    "group": "CNS sources",
+    "label": "性別符號(《CNS 11643》96年公布)",
+    "names": {
+      "en": "性別符號(《CNS 11643》96年公布)",
+      "zh": "性別符號(《CNS 11643》96年公布)",
+      "hans": "性别符号(《CNS 11643》96年公布)",
+      "ja": "性別符號(《CNS 11643》96年公布)",
+      "ko": "性別符號(《CNS 11643》96年公布)"
+    },
+    "chars": 2,
+    "total": 2,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_2b51e758c88a.tsv",
       "version": "2026-08-05",
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
@@ -2949,12 +4599,144 @@
       "ja": "片假名(Katakana), CNS 14649",
       "ko": "片假名(Katakana), CNS 14649"
     },
-    "chars": 1,
+    "chars": 2,
     "total": 2,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
       "records": "/charsets/cns_source_5f6b664b4511.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_750f2c563d3c",
+    "group": "CNS sources",
+    "label": "邏輯符號(《CNS 11643》96年公布)",
+    "names": {
+      "en": "邏輯符號(《CNS 11643》96年公布)",
+      "zh": "邏輯符號(《CNS 11643》96年公布)",
+      "hans": "逻辑符号(《CNS 11643》96年公布)",
+      "ja": "邏輯符號(《CNS 11643》96年公布)",
+      "ko": "邏輯符號(《CNS 11643》96年公布)"
+    },
+    "chars": 2,
+    "total": 2,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_750f2c563d3c.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_f0ebc864bec5",
+    "group": "CNS sources",
+    "label": "BMP拼音字",
+    "names": {
+      "en": "BMP拼音字",
+      "zh": "BMP拼音字",
+      "hans": "BMP拼音字",
+      "ja": "BMP拼音字",
+      "ko": "BMP拼音字"
+    },
+    "chars": 1,
+    "total": 1,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_f0ebc864bec5.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_ccf1c04f5d28",
+    "group": "CNS sources",
+    "label": "CNS正字標記",
+    "names": {
+      "en": "CNS正字標記",
+      "zh": "CNS正字標記",
+      "hans": "CNS正字标记",
+      "ja": "CNS正字標記",
+      "ko": "CNS正字標記"
+    },
+    "chars": 1,
+    "total": 1,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_ccf1c04f5d28.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_bc5ee31b4d0b",
+    "group": "CNS sources",
+    "label": "全形空格(《CNS 11643》96年公布)",
+    "names": {
+      "en": "全形空格(《CNS 11643》96年公布)",
+      "zh": "全形空格(《CNS 11643》96年公布)",
+      "hans": "全形空格(《CNS 11643》96年公布)",
+      "ja": "全形空格(《CNS 11643》96年公布)",
+      "ko": "全形空格(《CNS 11643》96年公布)"
+    },
+    "chars": 1,
+    "total": 1,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_bc5ee31b4d0b.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_e39f4a6b4c80",
+    "group": "CNS sources",
+    "label": "小量形式變異(small form variant), CNS 14649",
+    "names": {
+      "en": "小量形式變異(small form variant), CNS 14649",
+      "zh": "小量形式變異(small form variant), CNS 14649",
+      "hans": "小量形式变异(small form variant), CNS 14649",
+      "ja": "小量形式變異(small form variant), CNS 14649",
+      "ko": "小量形式變異(small form variant), CNS 14649"
+    },
+    "chars": 1,
+    "total": 1,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_e39f4a6b4c80.tsv",
+      "version": "2026-08-05",
+      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
+      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
+    }
+  },
+  {
+    "id": "cns_source_18fd2afb8573",
+    "group": "CNS sources",
+    "label": "正字標記(《CNS 11643》96年公布)",
+    "names": {
+      "en": "正字標記(《CNS 11643》96年公布)",
+      "zh": "正字標記(《CNS 11643》96年公布)",
+      "hans": "正字标记(《CNS 11643》96年公布)",
+      "ja": "正字標記(《CNS 11643》96年公布)",
+      "ko": "正字標記(《CNS 11643》96年公布)"
+    },
+    "chars": 1,
+    "total": 1,
+    "source": {
+      "name": "CNS11643全字庫",
+      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
+      "records": "/charsets/cns_source_18fd2afb8573.tsv",
       "version": "2026-08-05",
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
@@ -2983,1788 +4765,6 @@
     }
   },
   {
-    "id": "cns_source_7d2f85d5af0b",
-    "group": "CNS sources",
-    "label": "財政部財稅用字",
-    "names": {
-      "en": "財政部財稅用字",
-      "zh": "財政部財稅用字",
-      "hans": "财政部财税用字",
-      "ja": "財政部財稅用字",
-      "ko": "財政部財稅用字"
-    },
-    "chars": 0,
-    "total": 1609,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=117",
-      "records": "/charsets/cns_source_7d2f85d5af0b.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_dc29a0f76dd1",
-    "group": "CNS sources",
-    "label": "經濟部工商登記用字",
-    "names": {
-      "en": "經濟部工商登記用字",
-      "zh": "經濟部工商登記用字",
-      "hans": "经济部工商登记用字",
-      "ja": "經濟部工商登記用字",
-      "ko": "經濟部工商登記用字"
-    },
-    "chars": 0,
-    "total": 421,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=116",
-      "records": "/charsets/cns_source_dc29a0f76dd1.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_5b8d51b01392",
-    "group": "CNS sources",
-    "label": "盲用點字型樣(Braille pattern), CNS 14649",
-    "names": {
-      "en": "盲用點字型樣(Braille pattern), CNS 14649",
-      "zh": "盲用點字型樣(Braille pattern), CNS 14649",
-      "hans": "盲用点字型样(Braille pattern), CNS 14649",
-      "ja": "盲用點字型樣(Braille pattern), CNS 14649",
-      "ko": "盲用點字型樣(Braille pattern), CNS 14649"
-    },
-    "chars": 0,
-    "total": 256,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_5b8d51b01392.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_c3d8a768cf9b",
-    "group": "CNS sources",
-    "label": "輔助數學運算子(supplement mathematical operator), CNS 14649",
-    "names": {
-      "en": "輔助數學運算子(supplement mathematical operator), CNS 14649",
-      "zh": "輔助數學運算子(supplement mathematical operator), CNS 14649",
-      "hans": "辅助数学运算子(supplement mathematical operator), CNS 14649",
-      "ja": "輔助數學運算子(supplement mathematical operator), CNS 14649",
-      "ko": "輔助數學運算子(supplement mathematical operator), CNS 14649"
-    },
-    "chars": 0,
-    "total": 256,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_c3d8a768cf9b.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_fc6f8601f158",
-    "group": "CNS sources",
-    "label": "拉丁字母延伸附加(Latin extended additional), CNS 14649",
-    "names": {
-      "en": "拉丁字母延伸附加(Latin extended additional), CNS 14649",
-      "zh": "拉丁字母延伸附加(Latin extended additional), CNS 14649",
-      "hans": "拉丁字母延伸附加(Latin extended additional), CNS 14649",
-      "ja": "拉丁字母延伸附加(Latin extended additional), CNS 14649",
-      "ko": "拉丁字母延伸附加(Latin extended additional), CNS 14649"
-    },
-    "chars": 0,
-    "total": 246,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_fc6f8601f158.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_7279453d01e8",
-    "group": "CNS sources",
-    "label": "西里爾字母(Cyrillic), CNS 14649",
-    "names": {
-      "en": "西里爾字母(Cyrillic), CNS 14649",
-      "zh": "西里爾字母(Cyrillic), CNS 14649",
-      "hans": "西里尔字母(Cyrillic), CNS 14649",
-      "ja": "西里爾字母(Cyrillic), CNS 14649",
-      "ko": "西里爾字母(Cyrillic), CNS 14649"
-    },
-    "chars": 0,
-    "total": 246,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_7279453d01e8.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_249e629bc51a",
-    "group": "CNS sources",
-    "label": "韓語字母(Hangul Jamo), CNS 14649",
-    "names": {
-      "en": "韓語字母(Hangul Jamo), CNS 14649",
-      "zh": "韓語字母(Hangul Jamo), CNS 14649",
-      "hans": "韩语字母(Hangul Jamo), CNS 14649",
-      "ja": "韓語字母(Hangul Jamo), CNS 14649",
-      "ko": "韓語字母(Hangul Jamo), CNS 14649"
-    },
-    "chars": 0,
-    "total": 240,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_249e629bc51a.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_0537ff1ed3f8",
-    "group": "CNS sources",
-    "label": "希臘文延伸(Greek extended), CNS 14649",
-    "names": {
-      "en": "希臘文延伸(Greek extended), CNS 14649",
-      "zh": "希臘文延伸(Greek extended), CNS 14649",
-      "hans": "希腊文延伸(Greek extended), CNS 14649",
-      "ja": "希臘文延伸(Greek extended), CNS 14649",
-      "ko": "希臘文延伸(Greek extended), CNS 14649"
-    },
-    "chars": 0,
-    "total": 233,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_0537ff1ed3f8.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_177cece364de",
-    "group": "CNS sources",
-    "label": "數學運算子(mathematical operator), CNS 14649",
-    "names": {
-      "en": "數學運算子(mathematical operator), CNS 14649",
-      "zh": "數學運算子(mathematical operator), CNS 14649",
-      "hans": "数学运算子(mathematical operator), CNS 14649",
-      "ja": "數學運算子(mathematical operator), CNS 14649",
-      "ko": "數學運算子(mathematical operator), CNS 14649"
-    },
-    "chars": 0,
-    "total": 233,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_177cece364de.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_b1118bdf0fb4",
-    "group": "CNS sources",
-    "label": "阿拉伯文(Arabic), CNS 14649",
-    "names": {
-      "en": "阿拉伯文(Arabic), CNS 14649",
-      "zh": "阿拉伯文(Arabic), CNS 14649",
-      "hans": "阿拉伯文(Arabic), CNS 14649",
-      "ja": "阿拉伯文(Arabic), CNS 14649",
-      "ko": "阿拉伯文(Arabic), CNS 14649"
-    },
-    "chars": 0,
-    "total": 227,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_b1118bdf0fb4.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_38378f43affd",
-    "group": "CNS sources",
-    "label": "雜項技術符號(miscellaneous technical), CNS 14649",
-    "names": {
-      "en": "雜項技術符號(miscellaneous technical), CNS 14649",
-      "zh": "雜項技術符號(miscellaneous technical), CNS 14649",
-      "hans": "杂项技术符号(miscellaneous technical), CNS 14649",
-      "ja": "雜項技術符號(miscellaneous technical), CNS 14649",
-      "ko": "雜項技術符號(miscellaneous technical), CNS 14649"
-    },
-    "chars": 0,
-    "total": 209,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_38378f43affd.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_8bde542fb100",
-    "group": "CNS sources",
-    "label": "藏文(Tibetan), CNS 14649",
-    "names": {
-      "en": "藏文(Tibetan), CNS 14649",
-      "zh": "藏文(Tibetan), CNS 14649",
-      "hans": "藏文(Tibetan), CNS 14649",
-      "ja": "藏文(Tibetan), CNS 14649",
-      "ko": "藏文(Tibetan), CNS 14649"
-    },
-    "chars": 0,
-    "total": 193,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_8bde542fb100.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_4b004c82d3a7",
-    "group": "CNS sources",
-    "label": "拉丁字母延伸B, CNS 14649",
-    "names": {
-      "en": "拉丁字母延伸B, CNS 14649",
-      "zh": "拉丁字母延伸B, CNS 14649",
-      "hans": "拉丁字母延伸B, CNS 14649",
-      "ja": "拉丁字母延伸B, CNS 14649",
-      "ko": "拉丁字母延伸B, CNS 14649"
-    },
-    "chars": 0,
-    "total": 183,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_4b004c82d3a7.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_0258d4d7ea7c",
-    "group": "CNS sources",
-    "label": "蒙古文(Mongolian), CNS 14649",
-    "names": {
-      "en": "蒙古文(Mongolian), CNS 14649",
-      "zh": "蒙古文(Mongolian), CNS 14649",
-      "hans": "蒙古文(Mongolian), CNS 14649",
-      "ja": "蒙古文(Mongolian), CNS 14649",
-      "ko": "蒙古文(Mongolian), CNS 14649"
-    },
-    "chars": 0,
-    "total": 155,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_0258d4d7ea7c.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_449de5307da0",
-    "group": "CNS sources",
-    "label": "阿拉伯文表現形式B (Arabic presentation form B), CNS 14649",
-    "names": {
-      "en": "阿拉伯文表現形式B (Arabic presentation form B), CNS 14649",
-      "zh": "阿拉伯文表現形式B (Arabic presentation form B), CNS 14649",
-      "hans": "阿拉伯文表现形式B (Arabic presentation form B), CNS 14649",
-      "ja": "阿拉伯文表現形式B (Arabic presentation form B), CNS 14649",
-      "ko": "阿拉伯文表現形式B (Arabic presentation form B), CNS 14649"
-    },
-    "chars": 0,
-    "total": 141,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_449de5307da0.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_5620915cb734",
-    "group": "CNS sources",
-    "label": "包圍式文數字(enclosed alphanumeric), CNS 14649",
-    "names": {
-      "en": "包圍式文數字(enclosed alphanumeric), CNS 14649",
-      "zh": "包圍式文數字(enclosed alphanumeric), CNS 14649",
-      "hans": "包围式文数字(enclosed alphanumeric), CNS 14649",
-      "ja": "包圍式文數字(enclosed alphanumeric), CNS 14649",
-      "ko": "包圍式文數字(enclosed alphanumeric), CNS 14649"
-    },
-    "chars": 0,
-    "total": 140,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_5620915cb734.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_797df52ff4f7",
-    "group": "CNS sources",
-    "label": "雜項符號(miscellaneous symbol), CNS 14649",
-    "names": {
-      "en": "雜項符號(miscellaneous symbol), CNS 14649",
-      "zh": "雜項符號(miscellaneous symbol), CNS 14649",
-      "hans": "杂项符号(miscellaneous symbol), CNS 14649",
-      "ja": "雜項符號(miscellaneous symbol), CNS 14649",
-      "ko": "雜項符號(miscellaneous symbol), CNS 14649"
-    },
-    "chars": 0,
-    "total": 139,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_797df52ff4f7.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_fecdff717fa8",
-    "group": "CNS sources",
-    "label": "拉丁字母延伸A, CNS 14649",
-    "names": {
-      "en": "拉丁字母延伸A, CNS 14649",
-      "zh": "拉丁字母延伸A, CNS 14649",
-      "hans": "拉丁字母延伸A, CNS 14649",
-      "ja": "拉丁字母延伸A, CNS 14649",
-      "ko": "拉丁字母延伸A, CNS 14649"
-    },
-    "chars": 0,
-    "total": 128,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_fecdff717fa8.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_7d0b3ae7f50c",
-    "group": "CNS sources",
-    "label": "輔助箭號B (supplemental arrow-B), CNS 14649",
-    "names": {
-      "en": "輔助箭號B (supplemental arrow-B), CNS 14649",
-      "zh": "輔助箭號B (supplemental arrow-B), CNS 14649",
-      "hans": "辅助箭号B (supplemental arrow-B), CNS 14649",
-      "ja": "輔助箭號B (supplemental arrow-B), CNS 14649",
-      "ko": "輔助箭號B (supplemental arrow-B), CNS 14649"
-    },
-    "chars": 0,
-    "total": 128,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_7d0b3ae7f50c.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_ced0b4cc8a14",
-    "group": "CNS sources",
-    "label": "雜項數學符號B (miscellaneous mathematical symbol-B), CNS 14649",
-    "names": {
-      "en": "雜項數學符號B (miscellaneous mathematical symbol-B), CNS 14649",
-      "zh": "雜項數學符號B (miscellaneous mathematical symbol-B), CNS 14649",
-      "hans": "杂项数学符号B (miscellaneous mathematical symbol-B), CNS 14649",
-      "ja": "雜項數學符號B (miscellaneous mathematical symbol-B), CNS 14649",
-      "ko": "雜項數學符號B (miscellaneous mathematical symbol-B), CNS 14649"
-    },
-    "chars": 0,
-    "total": 128,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_ced0b4cc8a14.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_eda25c5b293f",
-    "group": "CNS sources",
-    "label": "高棉文(Khmer), CNS 14649",
-    "names": {
-      "en": "高棉文(Khmer), CNS 14649",
-      "zh": "高棉文(Khmer), CNS 14649",
-      "hans": "高棉文(Khmer), CNS 14649",
-      "ja": "高棉文(Khmer), CNS 14649",
-      "ko": "高棉文(Khmer), CNS 14649"
-    },
-    "chars": 0,
-    "total": 114,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_eda25c5b293f.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_880ead07a4f5",
-    "group": "CNS sources",
-    "label": "音標延伸(phonetic extension), CNS 14649",
-    "names": {
-      "en": "音標延伸(phonetic extension), CNS 14649",
-      "zh": "音標延伸(phonetic extension), CNS 14649",
-      "hans": "音标延伸(phonetic extension), CNS 14649",
-      "ja": "音標延伸(phonetic extension), CNS 14649",
-      "ko": "音標延伸(phonetic extension), CNS 14649"
-    },
-    "chars": 0,
-    "total": 108,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_880ead07a4f5.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_3a2780d062f5",
-    "group": "CNS sources",
-    "label": "組合讀音記號(combining diacritical mark), CNS 14649",
-    "names": {
-      "en": "組合讀音記號(combining diacritical mark), CNS 14649",
-      "zh": "組合讀音記號(combining diacritical mark), CNS 14649",
-      "hans": "组合读音记号(combining diacritical mark), CNS 14649",
-      "ja": "組合讀音記號(combining diacritical mark), CNS 14649",
-      "ko": "組合讀音記號(combining diacritical mark), CNS 14649"
-    },
-    "chars": 0,
-    "total": 107,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_3a2780d062f5.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_cbb4ee78526e",
-    "group": "CNS sources",
-    "label": "框線(box drawing), CNS 14649",
-    "names": {
-      "en": "框線(box drawing), CNS 14649",
-      "zh": "框線(box drawing), CNS 14649",
-      "hans": "框线(box drawing), CNS 14649",
-      "ja": "框線(box drawing), CNS 14649",
-      "ko": "框線(box drawing), CNS 14649"
-    },
-    "chars": 0,
-    "total": 105,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_cbb4ee78526e.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_7cd38fefb908",
-    "group": "CNS sources",
-    "label": "箭號 (Arrows), CNS 14649",
-    "names": {
-      "en": "箭號 (Arrows), CNS 14649",
-      "zh": "箭號 (Arrows), CNS 14649",
-      "hans": "箭号 (Arrows), CNS 14649",
-      "ja": "箭號 (Arrows), CNS 14649",
-      "ko": "箭號 (Arrows), CNS 14649"
-    },
-    "chars": 0,
-    "total": 104,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_7cd38fefb908.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_ca919c529a9c",
-    "group": "CNS sources",
-    "label": "國際音標字母集(IPA)延伸, CNS 14649",
-    "names": {
-      "en": "國際音標字母集(IPA)延伸, CNS 14649",
-      "zh": "國際音標字母集(IPA)延伸, CNS 14649",
-      "hans": "国际音标字母集(IPA)延伸, CNS 14649",
-      "ja": "國際音標字母集(IPA)延伸, CNS 14649",
-      "ko": "國際音標字母集(IPA)延伸, CNS 14649"
-    },
-    "chars": 0,
-    "total": 96,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_ca919c529a9c.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_d246b62e66e8",
-    "group": "CNS sources",
-    "label": "C0控制及基本拉丁字母(control and basic Latin), CNS 14649",
-    "names": {
-      "en": "C0控制及基本拉丁字母(control and basic Latin), CNS 14649",
-      "zh": "C0控制及基本拉丁字母(control and basic Latin), CNS 14649",
-      "hans": "C0控制及基本拉丁字母(control and basic Latin), CNS 14649",
-      "ja": "C0控制及基本拉丁字母(control and basic Latin), CNS 14649",
-      "ko": "C0控制及基本拉丁字母(control and basic Latin), CNS 14649"
-    },
-    "chars": 0,
-    "total": 95,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_d246b62e66e8.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_4c6ccf173b80",
-    "group": "CNS sources",
-    "label": "韓語相容字母(Hangul compatibility Jamo), CNS 14649",
-    "names": {
-      "en": "韓語相容字母(Hangul compatibility Jamo), CNS 14649",
-      "zh": "韓語相容字母(Hangul compatibility Jamo), CNS 14649",
-      "hans": "韩语相容字母(Hangul compatibility Jamo), CNS 14649",
-      "ja": "韓語相容字母(Hangul compatibility Jamo), CNS 14649",
-      "ko": "韓語相容字母(Hangul compatibility Jamo), CNS 14649"
-    },
-    "chars": 0,
-    "total": 94,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_4c6ccf173b80.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_f65e09aa19fe",
-    "group": "CNS sources",
-    "label": "基本拉丁字母1-輔助, CNS 14649",
-    "names": {
-      "en": "基本拉丁字母1-輔助, CNS 14649",
-      "zh": "基本拉丁字母1-輔助, CNS 14649",
-      "hans": "基本拉丁字母1-辅助, CNS 14649",
-      "ja": "基本拉丁字母1-輔助, CNS 14649",
-      "ko": "基本拉丁字母1-輔助, CNS 14649"
-    },
-    "chars": 0,
-    "total": 90,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_f65e09aa19fe.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_efb37f9abf8d",
-    "group": "CNS sources",
-    "label": "泰文(Thai), CNS 14649",
-    "names": {
-      "en": "泰文(Thai), CNS 14649",
-      "zh": "泰文(Thai), CNS 14649",
-      "hans": "泰文(Thai), CNS 14649",
-      "ja": "泰文(Thai), CNS 14649",
-      "ko": "泰文(Thai), CNS 14649"
-    },
-    "chars": 0,
-    "total": 87,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_efb37f9abf8d.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_6907f4dcc559",
-    "group": "CNS sources",
-    "label": "一般標點 (General Punctuation), CNS 14649",
-    "names": {
-      "en": "一般標點 (General Punctuation), CNS 14649",
-      "zh": "一般標點 (General Punctuation), CNS 14649",
-      "hans": "一般标点 (General Punctuation), CNS 14649",
-      "ja": "一般標點 (General Punctuation), CNS 14649",
-      "ko": "一般標點 (General Punctuation), CNS 14649"
-    },
-    "chars": 0,
-    "total": 82,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_6907f4dcc559.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_6cfefdb0027b",
-    "group": "CNS sources",
-    "label": "希伯來文(Hebrew), CNS 14649",
-    "names": {
-      "en": "希伯來文(Hebrew), CNS 14649",
-      "zh": "希伯來文(Hebrew), CNS 14649",
-      "hans": "希伯来文(Hebrew), CNS 14649",
-      "ja": "希伯來文(Hebrew), CNS 14649",
-      "ko": "希伯來文(Hebrew), CNS 14649"
-    },
-    "chars": 0,
-    "total": 82,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_6cfefdb0027b.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_40ed70d1a4da",
-    "group": "CNS sources",
-    "label": "幾何形狀(geometric shape), CNS 14649",
-    "names": {
-      "en": "幾何形狀(geometric shape), CNS 14649",
-      "zh": "幾何形狀(geometric shape), CNS 14649",
-      "hans": "几何形状(geometric shape), CNS 14649",
-      "ja": "幾何形狀(geometric shape), CNS 14649",
-      "ko": "幾何形狀(geometric shape), CNS 14649"
-    },
-    "chars": 0,
-    "total": 81,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_40ed70d1a4da.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_fb848cc9ca84",
-    "group": "CNS sources",
-    "label": "緬甸文(Myanmar), CNS 14649",
-    "names": {
-      "en": "緬甸文(Myanmar), CNS 14649",
-      "zh": "緬甸文(Myanmar), CNS 14649",
-      "hans": "缅甸文(Myanmar), CNS 14649",
-      "ja": "緬甸文(Myanmar), CNS 14649",
-      "ko": "緬甸文(Myanmar), CNS 14649"
-    },
-    "chars": 0,
-    "total": 78,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_fb848cc9ca84.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_475361f2c57a",
-    "group": "CNS sources",
-    "label": "間隔修飾符字母(spacing modifier letter), CNS 14649",
-    "names": {
-      "en": "間隔修飾符字母(spacing modifier letter), CNS 14649",
-      "zh": "間隔修飾符字母(spacing modifier letter), CNS 14649",
-      "hans": "间隔修饰符字母(spacing modifier letter), CNS 14649",
-      "ja": "間隔修飾符字母(spacing modifier letter), CNS 14649",
-      "ko": "間隔修飾符字母(spacing modifier letter), CNS 14649"
-    },
-    "chars": 0,
-    "total": 74,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_475361f2c57a.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_244287a7fcab",
-    "group": "CNS sources",
-    "label": "似字母符號(letterlike symbol), CNS 14649",
-    "names": {
-      "en": "似字母符號(letterlike symbol), CNS 14649",
-      "zh": "似字母符號(letterlike symbol), CNS 14649",
-      "hans": "似字母符号(letterlike symbol), CNS 14649",
-      "ja": "似字母符號(letterlike symbol), CNS 14649",
-      "ko": "似字母符號(letterlike symbol), CNS 14649"
-    },
-    "chars": 0,
-    "total": 72,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_244287a7fcab.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_f0d3f7e2cae1",
-    "group": "CNS sources",
-    "label": "希臘文及科普特文(Greek and Coptic), CNS 14649",
-    "names": {
-      "en": "希臘文及科普特文(Greek and Coptic), CNS 14649",
-      "zh": "希臘文及科普特文(Greek and Coptic), CNS 14649",
-      "hans": "希腊文及科普特文(Greek and Coptic), CNS 14649",
-      "ja": "希臘文及科普特文(Greek and Coptic), CNS 14649",
-      "ko": "希臘文及科普特文(Greek and Coptic), CNS 14649"
-    },
-    "chars": 0,
-    "total": 72,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_f0d3f7e2cae1.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_2f943509eb76",
-    "group": "CNS sources",
-    "label": "易經六爻符號(Yijing hexagram symbol), CNS 14649",
-    "names": {
-      "en": "易經六爻符號(Yijing hexagram symbol), CNS 14649",
-      "zh": "易經六爻符號(Yijing hexagram symbol), CNS 14649",
-      "hans": "易经六爻符号(Yijing hexagram symbol), CNS 14649",
-      "ja": "易經六爻符號(Yijing hexagram symbol), CNS 14649",
-      "ko": "易經六爻符號(Yijing hexagram symbol), CNS 14649"
-    },
-    "chars": 0,
-    "total": 64,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_2f943509eb76.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_701dad9f9352",
-    "group": "CNS sources",
-    "label": "全形英文字母(《CNS 11643》96年公布)",
-    "names": {
-      "en": "全形英文字母(《CNS 11643》96年公布)",
-      "zh": "全形英文字母(《CNS 11643》96年公布)",
-      "hans": "全形英文字母(《CNS 11643》96年公布)",
-      "ja": "全形英文字母(《CNS 11643》96年公布)",
-      "ko": "全形英文字母(《CNS 11643》96年公布)"
-    },
-    "chars": 0,
-    "total": 52,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_701dad9f9352.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_ae8a4ccf06f0",
-    "group": "CNS sources",
-    "label": "全形希臘字母(《CNS 11643》96年公布)",
-    "names": {
-      "en": "全形希臘字母(《CNS 11643》96年公布)",
-      "zh": "全形希臘字母(《CNS 11643》96年公布)",
-      "hans": "全形希腊字母(《CNS 11643》96年公布)",
-      "ja": "全形希臘字母(《CNS 11643》96年公布)",
-      "ko": "全形希臘字母(《CNS 11643》96年公布)"
-    },
-    "chars": 0,
-    "total": 48,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_ae8a4ccf06f0.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_611db04bbd35",
-    "group": "CNS sources",
-    "label": "國語注音符號",
-    "names": {
-      "en": "國語注音符號",
-      "zh": "國語注音符號",
-      "hans": "国语注音符号",
-      "ja": "國語注音符號",
-      "ko": "國語注音符號"
-    },
-    "chars": 0,
-    "total": 47,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_611db04bbd35.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_f7a108996d44",
-    "group": "CNS sources",
-    "label": "各種括號(《CNS 11643》96年公布)",
-    "names": {
-      "en": "各種括號(《CNS 11643》96年公布)",
-      "zh": "各種括號(《CNS 11643》96年公布)",
-      "hans": "各种括号(《CNS 11643》96年公布)",
-      "ja": "各種括號(《CNS 11643》96年公布)",
-      "ko": "各種括號(《CNS 11643》96年公布)"
-    },
-    "chars": 0,
-    "total": 46,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_f7a108996d44.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_84b1dcc58ad7",
-    "group": "CNS sources",
-    "label": "C0控制圖像",
-    "names": {
-      "en": "C0控制圖像",
-      "zh": "C0控制圖像",
-      "hans": "C0控制图像",
-      "ja": "C0控制圖像",
-      "ko": "C0控制圖像"
-    },
-    "chars": 0,
-    "total": 38,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_84b1dcc58ad7.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_37f181f261f6",
-    "group": "CNS sources",
-    "label": "數學符號(《CNS 11643》96年公布)",
-    "names": {
-      "en": "數學符號(《CNS 11643》96年公布)",
-      "zh": "數學符號(《CNS 11643》96年公布)",
-      "hans": "数学符号(《CNS 11643》96年公布)",
-      "ja": "數學符號(《CNS 11643》96年公布)",
-      "ko": "數學符號(《CNS 11643》96年公布)"
-    },
-    "chars": 0,
-    "total": 36,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_37f181f261f6.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_e40804733bfc",
-    "group": "CNS sources",
-    "label": "高棉符號(Khmer symbol), CNS 14649",
-    "names": {
-      "en": "高棉符號(Khmer symbol), CNS 14649",
-      "zh": "高棉符號(Khmer symbol), CNS 14649",
-      "hans": "高棉符号(Khmer symbol), CNS 14649",
-      "ja": "高棉符號(Khmer symbol), CNS 14649",
-      "ko": "高棉符號(Khmer symbol), CNS 14649"
-    },
-    "chars": 0,
-    "total": 32,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_e40804733bfc.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_ea21f11bc86b",
-    "group": "CNS sources",
-    "label": "數字序列符號(《CNS 11643》96年公布)",
-    "names": {
-      "en": "數字序列符號(《CNS 11643》96年公布)",
-      "zh": "數字序列符號(《CNS 11643》96年公布)",
-      "hans": "数字序列符号(《CNS 11643》96年公布)",
-      "ja": "數字序列符號(《CNS 11643》96年公布)",
-      "ko": "數字序列符號(《CNS 11643》96年公布)"
-    },
-    "chars": 0,
-    "total": 30,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_ea21f11bc86b.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_a5799c3262f7",
-    "group": "CNS sources",
-    "label": "上標及下標(superscript and subscript), CNS 14649",
-    "names": {
-      "en": "上標及下標(superscript and subscript), CNS 14649",
-      "zh": "上標及下標(superscript and subscript), CNS 14649",
-      "hans": "上标及下标(superscript and subscript), CNS 14649",
-      "ja": "上標及下標(superscript and subscript), CNS 14649",
-      "ko": "上標及下標(superscript and subscript), CNS 14649"
-    },
-    "chars": 0,
-    "total": 29,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_a5799c3262f7.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_60f4b29d3d54",
-    "group": "CNS sources",
-    "label": "數字形式 (Number Forms), CNS 14649",
-    "names": {
-      "en": "數字形式 (Number Forms), CNS 14649",
-      "zh": "數字形式 (Number Forms), CNS 14649",
-      "hans": "数字形式 (Number Forms), CNS 14649",
-      "ja": "數字形式 (Number Forms), CNS 14649",
-      "ko": "數字形式 (Number Forms), CNS 14649"
-    },
-    "chars": 0,
-    "total": 29,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_60f4b29d3d54.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_802c97e8a5b3",
-    "group": "CNS sources",
-    "label": "全形標點符號(《CNS 11643》96年公布)",
-    "names": {
-      "en": "全形標點符號(《CNS 11643》96年公布)",
-      "zh": "全形標點符號(《CNS 11643》96年公布)",
-      "hans": "全形标点符号(《CNS 11643》96年公布)",
-      "ja": "全形標點符號(《CNS 11643》96年公布)",
-      "ko": "全形標點符號(《CNS 11643》96年公布)"
-    },
-    "chars": 0,
-    "total": 28,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_802c97e8a5b3.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_6a486c64d99f",
-    "group": "CNS sources",
-    "label": "雜項數學符號A (miscellaneous mathematical symbol-A), CNS 14649",
-    "names": {
-      "en": "雜項數學符號A (miscellaneous mathematical symbol-A), CNS 14649",
-      "zh": "雜項數學符號A (miscellaneous mathematical symbol-A), CNS 14649",
-      "hans": "杂项数学符号A (miscellaneous mathematical symbol-A), CNS 14649",
-      "ja": "雜項數學符號A (miscellaneous mathematical symbol-A), CNS 14649",
-      "ko": "雜項數學符號A (miscellaneous mathematical symbol-A), CNS 14649"
-    },
-    "chars": 0,
-    "total": 28,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_6a486c64d99f.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_29b0266abbdc",
-    "group": "CNS sources",
-    "label": "國語注音符號擴充",
-    "names": {
-      "en": "國語注音符號擴充",
-      "zh": "國語注音符號擴充",
-      "hans": "国语注音符号扩充",
-      "ja": "國語注音符號擴充",
-      "ko": "國語注音符號擴充"
-    },
-    "chars": 0,
-    "total": 27,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_29b0266abbdc.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_67ebcb192310",
-    "group": "CNS sources",
-    "label": "符號之組合附加記號(combining diacritical mark for symbol), CNS 14649",
-    "names": {
-      "en": "符號之組合附加記號(combining diacritical mark for symbol), CNS 14649",
-      "zh": "符號之組合附加記號(combining diacritical mark for symbol), CNS 14649",
-      "hans": "符号之组合附加记号(combining diacritical mark for symbol), CNS 14649",
-      "ja": "符號之組合附加記號(combining diacritical mark for symbol), CNS 14649",
-      "ko": "符號之組合附加記號(combining diacritical mark for symbol), CNS 14649"
-    },
-    "chars": 0,
-    "total": 27,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_67ebcb192310.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_fd7a7caf3388",
-    "group": "CNS sources",
-    "label": "製表符號(《CNS 11643》96年公布)",
-    "names": {
-      "en": "製表符號(《CNS 11643》96年公布)",
-      "zh": "製表符號(《CNS 11643》96年公布)",
-      "hans": "制表符号(《CNS 11643》96年公布)",
-      "ja": "製表符號(《CNS 11643》96年公布)",
-      "ko": "製表符號(《CNS 11643》96年公布)"
-    },
-    "chars": 0,
-    "total": 21,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_fd7a7caf3388.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_b6ceca6c0735",
-    "group": "CNS sources",
-    "label": "圖塊符號(《CNS 11643》96年公布)",
-    "names": {
-      "en": "圖塊符號(《CNS 11643》96年公布)",
-      "zh": "圖塊符號(《CNS 11643》96年公布)",
-      "hans": "图块符号(《CNS 11643》96年公布)",
-      "ja": "圖塊符號(《CNS 11643》96年公布)",
-      "ko": "圖塊符號(《CNS 11643》96年公布)"
-    },
-    "chars": 0,
-    "total": 19,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_b6ceca6c0735.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_1863fd6afb81",
-    "group": "CNS sources",
-    "label": "標線符號(《CNS 11643》96年公布)",
-    "names": {
-      "en": "標線符號(《CNS 11643》96年公布)",
-      "zh": "標線符號(《CNS 11643》96年公布)",
-      "hans": "标线符号(《CNS 11643》96年公布)",
-      "ja": "標線符號(《CNS 11643》96年公布)",
-      "ko": "標線符號(《CNS 11643》96年公布)"
-    },
-    "chars": 0,
-    "total": 19,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_1863fd6afb81.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_43e833fc781c",
-    "group": "CNS sources",
-    "label": "註記符號(《CNS 11643》96年公布)",
-    "names": {
-      "en": "註記符號(《CNS 11643》96年公布)",
-      "zh": "註記符號(《CNS 11643》96年公布)",
-      "hans": "注记符号(《CNS 11643》96年公布)",
-      "ja": "註記符號(《CNS 11643》96年公布)",
-      "ko": "註記符號(《CNS 11643》96年公布)"
-    },
-    "chars": 0,
-    "total": 19,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_43e833fc781c.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_1a3acef637d5",
-    "group": "CNS sources",
-    "label": "貨幣符號(currency symbol), CNS 14649",
-    "names": {
-      "en": "貨幣符號(currency symbol), CNS 14649",
-      "zh": "貨幣符號(currency symbol), CNS 14649",
-      "hans": "货币符号(currency symbol), CNS 14649",
-      "ja": "貨幣符號(currency symbol), CNS 14649",
-      "ko": "貨幣符號(currency symbol), CNS 14649"
-    },
-    "chars": 0,
-    "total": 17,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_1a3acef637d5.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_9d093cbbe12a",
-    "group": "CNS sources",
-    "label": "漢文訓讀(Kanbun), ISO/IEC 10646",
-    "names": {
-      "en": "漢文訓讀(Kanbun), ISO/IEC 10646",
-      "zh": "漢文訓讀(Kanbun), ISO/IEC 10646",
-      "hans": "汉文训读(Kanbun), ISO/IEC 10646",
-      "ja": "漢文訓讀(Kanbun), ISO/IEC 10646",
-      "ko": "漢文訓讀(Kanbun), ISO/IEC 10646"
-    },
-    "chars": 0,
-    "total": 16,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_9d093cbbe12a.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_aed86848e891",
-    "group": "CNS sources",
-    "label": "西里爾字母輔助, CNS 14649",
-    "names": {
-      "en": "西里爾字母輔助, CNS 14649",
-      "zh": "西里爾字母輔助, CNS 14649",
-      "hans": "西里尔字母辅助, CNS 14649",
-      "ja": "西里爾字母輔助, CNS 14649",
-      "ko": "西里爾字母輔助, CNS 14649"
-    },
-    "chars": 0,
-    "total": 16,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_aed86848e891.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_be9335bac67c",
-    "group": "CNS sources",
-    "label": "變異選擇符(variation selector), CNS 14649",
-    "names": {
-      "en": "變異選擇符(variation selector), CNS 14649",
-      "zh": "變異選擇符(variation selector), CNS 14649",
-      "hans": "变异选择符(variation selector), CNS 14649",
-      "ja": "變異選擇符(variation selector), CNS 14649",
-      "ko": "變異選擇符(variation selector), CNS 14649"
-    },
-    "chars": 0,
-    "total": 16,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_be9335bac67c.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_bd0741719814",
-    "group": "CNS sources",
-    "label": "輔助箭號A (supplemental arrow-A), CNS 14649",
-    "names": {
-      "en": "輔助箭號A (supplemental arrow-A), CNS 14649",
-      "zh": "輔助箭號A (supplemental arrow-A), CNS 14649",
-      "hans": "辅助箭号A (supplemental arrow-A), CNS 14649",
-      "ja": "輔助箭號A (supplemental arrow-A), CNS 14649",
-      "ko": "輔助箭號A (supplemental arrow-A), CNS 14649"
-    },
-    "chars": 0,
-    "total": 16,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_bd0741719814.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_38a239c10b04",
-    "group": "CNS sources",
-    "label": "方塊元件(block element), CNS 14649",
-    "names": {
-      "en": "方塊元件(block element), CNS 14649",
-      "zh": "方塊元件(block element), CNS 14649",
-      "hans": "方块元件(block element), CNS 14649",
-      "ja": "方塊元件(block element), CNS 14649",
-      "ko": "方塊元件(block element), CNS 14649"
-    },
-    "chars": 0,
-    "total": 15,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_38a239c10b04.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_c78127f1c605",
-    "group": "CNS sources",
-    "label": "雜項符號及箭號(miscellaneous symbol and arrow), CNS 14649",
-    "names": {
-      "en": "雜項符號及箭號(miscellaneous symbol and arrow), CNS 14649",
-      "zh": "雜項符號及箭號(miscellaneous symbol and arrow), CNS 14649",
-      "hans": "杂项符号及箭号(miscellaneous symbol and arrow), CNS 14649",
-      "ja": "雜項符號及箭號(miscellaneous symbol and arrow), CNS 14649",
-      "ko": "雜項符號及箭號(miscellaneous symbol and arrow), CNS 14649"
-    },
-    "chars": 0,
-    "total": 14,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_c78127f1c605.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_9ccf2c2482ce",
-    "group": "CNS sources",
-    "label": "表意文字描述字元(ideographic description character), CNS 14649",
-    "names": {
-      "en": "表意文字描述字元(ideographic description character), CNS 14649",
-      "zh": "表意文字描述字元(ideographic description character), CNS 14649",
-      "hans": "表意文字描述字元(ideographic description character), CNS 14649",
-      "ja": "表意文字描述字元(ideographic description character), CNS 14649",
-      "ko": "表意文字描述字元(ideographic description character), CNS 14649"
-    },
-    "chars": 0,
-    "total": 12,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_9ccf2c2482ce.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_f6181fa6c110",
-    "group": "CNS sources",
-    "label": "光學字元辨識(optical character recognition), CNS 14649",
-    "names": {
-      "en": "光學字元辨識(optical character recognition), CNS 14649",
-      "zh": "光學字元辨識(optical character recognition), CNS 14649",
-      "hans": "光学字元辨识(optical character recognition), CNS 14649",
-      "ja": "光學字元辨識(optical character recognition), CNS 14649",
-      "ko": "光學字元辨識(optical character recognition), CNS 14649"
-    },
-    "chars": 0,
-    "total": 11,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_f6181fa6c110.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_0fea6f81fd6f",
-    "group": "CNS sources",
-    "label": "全形羅馬數字(《CNS 11643》96年公布)",
-    "names": {
-      "en": "全形羅馬數字(《CNS 11643》96年公布)",
-      "zh": "全形羅馬數字(《CNS 11643》96年公布)",
-      "hans": "全形罗马数字(《CNS 11643》96年公布)",
-      "ja": "全形羅馬數字(《CNS 11643》96年公布)",
-      "ko": "全形羅馬數字(《CNS 11643》96年公布)"
-    },
-    "chars": 0,
-    "total": 10,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_0fea6f81fd6f.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_2758d40e8a45",
-    "group": "CNS sources",
-    "label": "全形阿拉伯數字(《CNS 11643》96年公布)",
-    "names": {
-      "en": "全形阿拉伯數字(《CNS 11643》96年公布)",
-      "zh": "全形阿拉伯數字(《CNS 11643》96年公布)",
-      "hans": "全形阿拉伯数字(《CNS 11643》96年公布)",
-      "ja": "全形阿拉伯數字(《CNS 11643》96年公布)",
-      "ko": "全形阿拉伯數字(《CNS 11643》96年公布)"
-    },
-    "chars": 0,
-    "total": 10,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_2758d40e8a45.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_26c9e3641278",
-    "group": "CNS sources",
-    "label": "箭頭符號(《CNS 11643》96年公布)",
-    "names": {
-      "en": "箭頭符號(《CNS 11643》96年公布)",
-      "zh": "箭頭符號(《CNS 11643》96年公布)",
-      "hans": "箭头符号(《CNS 11643》96年公布)",
-      "ja": "箭頭符號(《CNS 11643》96年公布)",
-      "ko": "箭頭符號(《CNS 11643》96年公布)"
-    },
-    "chars": 0,
-    "total": 8,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_26c9e3641278.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_ce8bd21c3987",
-    "group": "CNS sources",
-    "label": "內政部移民署用字",
-    "names": {
-      "en": "內政部移民署用字",
-      "zh": "內政部移民署用字",
-      "hans": "内政部移民署用字",
-      "ja": "內政部移民署用字",
-      "ko": "內政部移民署用字"
-    },
-    "chars": 0,
-    "total": 5,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=115",
-      "records": "/charsets/cns_source_ce8bd21c3987.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_4a276bfd96b1",
-    "group": "CNS sources",
-    "label": "特殊字元(special), CNS 14649",
-    "names": {
-      "en": "特殊字元(special), CNS 14649",
-      "zh": "特殊字元(special), CNS 14649",
-      "hans": "特殊字元(special), CNS 14649",
-      "ja": "特殊字元(special), CNS 14649",
-      "ko": "特殊字元(special), CNS 14649"
-    },
-    "chars": 0,
-    "total": 5,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_4a276bfd96b1.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_1706933ab176",
-    "group": "CNS sources",
-    "label": "CJK相容形式(CJK compatibility form), CNS 14649",
-    "names": {
-      "en": "CJK相容形式(CJK compatibility form), CNS 14649",
-      "zh": "CJK相容形式(CJK compatibility form), CNS 14649",
-      "hans": "CJK相容形式(CJK compatibility form), CNS 14649",
-      "ja": "CJK相容形式(CJK compatibility form), CNS 14649",
-      "ko": "CJK相容形式(CJK compatibility form), CNS 14649"
-    },
-    "chars": 0,
-    "total": 4,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_1706933ab176.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_2bfde7b85317",
-    "group": "CNS sources",
-    "label": "文書及其他用字",
-    "names": {
-      "en": "文書及其他用字",
-      "zh": "文書及其他用字",
-      "hans": "文书及其他用字",
-      "ja": "文書及其他用字",
-      "ko": "文書及其他用字"
-    },
-    "chars": 0,
-    "total": 4,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=136",
-      "records": "/charsets/cns_source_2bfde7b85317.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_38c252c93e07",
-    "group": "CNS sources",
-    "label": "組合半形記號(combing half mark), CNS 14649",
-    "names": {
-      "en": "組合半形記號(combing half mark), CNS 14649",
-      "zh": "組合半形記號(combing half mark), CNS 14649",
-      "hans": "组合半形记号(combing half mark), CNS 14649",
-      "ja": "組合半形記號(combing half mark), CNS 14649",
-      "ko": "組合半形記號(combing half mark), CNS 14649"
-    },
-    "chars": 0,
-    "total": 4,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_38c252c93e07.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_0797c3fa7908",
-    "group": "CNS sources",
-    "label": "臺灣台語用字",
-    "names": {
-      "en": "臺灣台語用字",
-      "zh": "臺灣台語用字",
-      "hans": "台湾台语用字",
-      "ja": "臺灣台語用字",
-      "ko": "臺灣台語用字"
-    },
-    "chars": 0,
-    "total": 3,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=133",
-      "records": "/charsets/cns_source_0797c3fa7908.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_2b51e758c88a",
-    "group": "CNS sources",
-    "label": "性別符號(《CNS 11643》96年公布)",
-    "names": {
-      "en": "性別符號(《CNS 11643》96年公布)",
-      "zh": "性別符號(《CNS 11643》96年公布)",
-      "hans": "性别符号(《CNS 11643》96年公布)",
-      "ja": "性別符號(《CNS 11643》96年公布)",
-      "ko": "性別符號(《CNS 11643》96年公布)"
-    },
-    "chars": 0,
-    "total": 2,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_2b51e758c88a.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_750f2c563d3c",
-    "group": "CNS sources",
-    "label": "邏輯符號(《CNS 11643》96年公布)",
-    "names": {
-      "en": "邏輯符號(《CNS 11643》96年公布)",
-      "zh": "邏輯符號(《CNS 11643》96年公布)",
-      "hans": "逻辑符号(《CNS 11643》96年公布)",
-      "ja": "邏輯符號(《CNS 11643》96年公布)",
-      "ko": "邏輯符號(《CNS 11643》96年公布)"
-    },
-    "chars": 0,
-    "total": 2,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_750f2c563d3c.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_f0ebc864bec5",
-    "group": "CNS sources",
-    "label": "BMP拼音字",
-    "names": {
-      "en": "BMP拼音字",
-      "zh": "BMP拼音字",
-      "hans": "BMP拼音字",
-      "ja": "BMP拼音字",
-      "ko": "BMP拼音字"
-    },
-    "chars": 0,
-    "total": 1,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_f0ebc864bec5.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_ccf1c04f5d28",
-    "group": "CNS sources",
-    "label": "CNS正字標記",
-    "names": {
-      "en": "CNS正字標記",
-      "zh": "CNS正字標記",
-      "hans": "CNS正字标记",
-      "ja": "CNS正字標記",
-      "ko": "CNS正字標記"
-    },
-    "chars": 0,
-    "total": 1,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_ccf1c04f5d28.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_bc5ee31b4d0b",
-    "group": "CNS sources",
-    "label": "全形空格(《CNS 11643》96年公布)",
-    "names": {
-      "en": "全形空格(《CNS 11643》96年公布)",
-      "zh": "全形空格(《CNS 11643》96年公布)",
-      "hans": "全形空格(《CNS 11643》96年公布)",
-      "ja": "全形空格(《CNS 11643》96年公布)",
-      "ko": "全形空格(《CNS 11643》96年公布)"
-    },
-    "chars": 0,
-    "total": 1,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_bc5ee31b4d0b.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_e39f4a6b4c80",
-    "group": "CNS sources",
-    "label": "小量形式變異(small form variant), CNS 14649",
-    "names": {
-      "en": "小量形式變異(small form variant), CNS 14649",
-      "zh": "小量形式變異(small form variant), CNS 14649",
-      "hans": "小量形式变异(small form variant), CNS 14649",
-      "ja": "小量形式變異(small form variant), CNS 14649",
-      "ko": "小量形式變異(small form variant), CNS 14649"
-    },
-    "chars": 0,
-    "total": 1,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_e39f4a6b4c80.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
-    "id": "cns_source_18fd2afb8573",
-    "group": "CNS sources",
-    "label": "正字標記(《CNS 11643》96年公布)",
-    "names": {
-      "en": "正字標記(《CNS 11643》96年公布)",
-      "zh": "正字標記(《CNS 11643》96年公布)",
-      "hans": "正字标记(《CNS 11643》96年公布)",
-      "ja": "正字標記(《CNS 11643》96年公布)",
-      "ko": "正字標記(《CNS 11643》96年公布)"
-    },
-    "chars": 0,
-    "total": 1,
-    "source": {
-      "name": "CNS11643全字庫",
-      "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
-      "records": "/charsets/cns_source_18fd2afb8573.tsv",
-      "version": "2026-08-05",
-      "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
-      "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
-    }
-  },
-  {
     "id": "cns_source_560b97813b71",
     "group": "CNS sources",
     "label": "轉信人符號(Care of)(《CNS 11643》96年公布)",
@@ -4775,7 +4775,7 @@
       "ja": "轉信人符號(Care of)(《CNS 11643》96年公布)",
       "ko": "轉信人符號(Care of)(《CNS 11643》96年公布)"
     },
-    "chars": 0,
+    "chars": 1,
     "total": 1,
     "source": {
       "name": "CNS11643全字庫",
@@ -4797,7 +4797,7 @@
       "ja": "醫藥用字",
       "ko": "醫藥用字"
     },
-    "chars": 0,
+    "chars": 1,
     "total": 1,
     "source": {
       "name": "CNS11643全字庫",
@@ -4819,7 +4819,7 @@
       "ja": "韓語音節(Hangul Syllables), CNS 14649",
       "ko": "韓語音節(Hangul Syllables), CNS 14649"
     },
-    "chars": 0,
+    "chars": 1,
     "total": 1,
     "source": {
       "name": "CNS11643全字庫",

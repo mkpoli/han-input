@@ -1,20 +1,20 @@
 # 教育部臺灣客語用字
 # CNS source release: 20260805
 # 數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw
-# Sources: https://www.cns11643.gov.tw/opendata/Properties.zip ; https://www.cns11643.gov.tw/opendata/MapingTables.zip
+# Sources: https://www.cns11643.gov.tw/opendata/Properties.zip ; https://www.cns11643.gov.tw/opendata/MapingTables.zip ; https://www.unicode.org/Public/18.0.0/ucd/Unihan.zip (Unihan kIRG_TSource)
 # Licence: https://www.cns11643.gov.tw/pageView.jsp?ID=59
 CNS	Unicode
-11-723F	U+FFB29
+11-723F	U+31C7F U+FFB29
 11-732F	U+FB634
 11-7330	U+2B81B
 11-7331	U+2B804
 11-7332	U+2B7EE
 11-7333	U+2B7BB
-11-7334	U+FB639
+11-7334	U+2B74E U+FB639
 11-7335	U+2B77D
 11-7336	U+2B7D7
 11-7337	U+2B819
-11-7338	U+FB63D
+11-7338	U+2C816 U+FB63D
 11-7339	U+2B80E
 11-733A	U+2B7E7
 11-733B	U+2B7AD
