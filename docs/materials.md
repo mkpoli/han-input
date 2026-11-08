@@ -40,6 +40,7 @@ Discord discussion of 2026-10-27, and the works themselves were not read.
 | [Jigmo](https://kamichikoichi.github.io/jigmo/) 2025-09-12, 上地宏一 | glyphs for the extension blocks, cut by `scripts/build_fonts.py` | CC0-1.0 |
 | [全字庫正宋體 TW-Sung-Plus](https://www.cns11643.gov.tw/downloadList.jsp?ID=2), 數位發展部, `Fonts_Sung.zip` 20260805 | glyphs for the private-use slots of unencoded CNS source rows, cut by `scripts/build_fonts.py` | 政府資料開放授權條款第1版 (OGDL 1.0), attribution「數位發展部，CNS11643中文標準交換碼全字庫網站」 |
 | BabelStone Han PUA 1.472, Andrew West | glyphs for the numbered components IDS.TXT leaves without a fragment, cut to `app/public/fonts/IDSNumbered.woff2` | Arphic Public License, `LICENSE-BabelStoneHanPUA.txt` |
+| [han-compose](https://github.com/mkpoli/han-compose), MIT; outlines from Noto Sans CJK JP and Plangothic (SIL OFL 1.1), with KanjiVG-assisted cuts (CC BY-SA 3.0) | draws an IDS as sans-serif outlines; the three composed CNS rows in `app/public/fonts/cns-composed.woff2` | MIT code; the drawn glyphs carry the fonts' OFL and, for KanjiVG cuts, CC BY-SA 3.0 |
 
 BabelStone writes some parts by number. Where note 6 of its file gives the IDS that writes the
 number out, the card draws it ({12}, the right of 龍, as ⿷己三); a number the note leaves without a
