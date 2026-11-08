@@ -31,6 +31,7 @@ try {
       assert.match(await page.locator('main h1').innerText(), /Find a character/)
       assert.equal(await page.locator('main textarea').count(), 0)
     } else {
+      await page.selectOption('#convert-source', 'moe')
       // The converter's textareas are ordered source, result.
       const input = page.locator('main textarea').nth(0)
       const output = page.locator('main textarea').nth(1)
@@ -62,6 +63,9 @@ try {
       assert.equal(await input.inputValue(), '')
       assert.equal(await output.inputValue(), '')
       await page.locator('main details summary').click()
+      await page.selectOption('#convert-source', 'all')
+      await input.fill('\uF266\uE43B')
+      await page.waitForFunction(() => /** @type {HTMLTextAreaElement | undefined} */ (document.querySelectorAll('main textarea')[1])?.value === '䏰\uE43B')
       await page.selectOption('#convert-source', 'hkscs')
       await input.fill('\uF266')
       await page.waitForFunction(() => /** @type {HTMLTextAreaElement | undefined} */ (document.querySelectorAll('main textarea')[1])?.value === '䏰')
