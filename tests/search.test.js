@@ -28,6 +28,12 @@ describe('readClue', () => {
     expect(readClue('FFFFFF', true)).toEqual({ kind: 'code', text: 'FFFFFF' })
     expect(readClue('123456', true)).toEqual({ kind: 'code', text: '123456' })
   })
+  test('reads a 破字 formula as its own clue', () => {
+    expect(readClue('氵+飛', true)).toEqual({ kind: 'paja', text: '氵+飛' })
+    expect(readClue('▼{日/央}', true).kind).toBe('paja')
+    expect(readClue('cangjie5:jnd', false).kind).toBe('scoped')
+    expect(readClue('2026-11-09', true).kind).toBe('code')
+  })
 })
 
 describe('answerChars', () => {
