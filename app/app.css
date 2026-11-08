@@ -1,6 +1,7 @@
 /* The app layer: the design system, and the faces that reach the characters a system lacks. */
 @import '../design/index.css';
 @import './fonts.css';
+@font-face{font-family:'IDS Numbered';src:url('/fonts/IDSNumbered.woff2') format('woff2');font-display:swap;unicode-range:U+E000-F8FF}
 
 :root {
   --ui-font-script: 'Han Ext', 'CNS PUA', 'Noto Serif CJK JP', 'Noto Serif CJK SC', 'Source Han Serif', 'Songti SC', 'Hiragino Mincho ProN', 'Yu Mincho', serif, 'Jigmo';

@@ -12,6 +12,7 @@
   import { isHan } from '../../src/fold.js'
   import { puaOf } from '../../src/pua.js'
   import { characterVariants } from '../../src/variants.js'
+  import { pieces } from '../lib/notation.js'
 
   const char = $derived(route.c)
   const cp = $derived(char ? `U+${(char.codePointAt(0) ?? 0).toString(16).toUpperCase()}` : '')
@@ -38,11 +39,15 @@
   let writings = $state([])
   /** @type {import('../../src/variants.js').CharacterVariant[]} */
   let variants = $state([])
+  /** @type {Record<string, import('../lib/notation.js').Component>} */
+  let components = $state({})
   let filter = $state('')
 
   loadMethods().then(list => { methods = list })
   // The card is empty on most page loads, and the variety list is a megabyte; it waits for a
   // character to open.
+  fetch('/data/ids-components.json').then(response => response.ok ? response.json() : {})
+    .then(doc => { components = doc }).catch(() => {})
   $effect(() => {
     const at = char
     if (!at) return
@@ -56,12 +61,37 @@
   const needle = $derived(filter.trim().toLowerCase())
   const tree = $derived(readingTree(varieties, readings, needle, t('card.unclassed')))
 
+  /** A mark's hover text, from the message it names. @param {import('../lib/notation.js').Piece} piece */
+  const titleOf = piece => {
+    if (!piece.title) return undefined
+    const params = piece.title[1]
+    switch (piece.title[0]) {
+      case 'card.number': return t('card.number', params)
+      case 'card.numberUnknown': return t('card.numberUnknown', params)
+      case 'card.unnamed': return t('card.unnamed', params)
+      case 'card.entity': return t('card.entity', params)
+      default: return undefined
+    }
+  }
+
   const gloss = $derived(codes.get(':gloss')?.join(' ') ?? '')
   const families = $derived(FAMILIES.map(family => ({
     family,
     rows: methods.filter(method => method.family === family && codes.has(method.id)).map(method => ({ method, codes: codes.get(method.id) ?? [] })),
   })).filter(group => group.rows.length))
 </script>
+
+{#snippet draw(/** @type {import('../lib/notation.js').Piece[]} */ list)}
+  {#each list as piece}
+    {#if piece.children}
+      <span class="mark" title={titleOf(piece)}>{@render draw(piece.children)}</span>
+    {:else if piece.kind === 'plain'}
+      {piece.text}
+    {:else}
+      <span class="mark" class:pua={piece.pua} title={titleOf(piece)}>{piece.text}</span>
+    {/if}
+  {/each}
+{/snippet}
 
 {#if ui.sheet}
   <div class="back"><button class="ui-button" data-variant="quiet" data-size="sm" type="button" onclick={() => { ui.sheet = false }}>{t('card.back')}</button></div>
@@ -125,9 +155,9 @@
       <section class="family">
         <h3 class="ui-label">{t('card.writing')} <span class="ui-count">{writings.length}</span></h3>
         <dl class="writing">
-          {#each writings as row (row.text + row.regions)}
+          {#each writings as row (row.notation + row.regions)}
             <div class="row">
-              <dt class="seq" lang="und-Hani">{row.text}</dt>
+              <dt class="seq" lang="und-Hani">{@render draw(pieces(row.notation, components))}</dt>
               <dd>
                 {#if row.regions}<span class="regions" title={t('card.regions', { regions: row.regions })}>{row.regions}</span>{/if}
                 <span class="tags">{#each row.sources as source (source)}<span class="tag">{t(`ids.source.${source}`)}</span>{/each}</span>
@@ -220,6 +250,8 @@
   .writing .row{grid-template-columns:max-content minmax(0,1fr);gap:var(--ui-space-sm);align-items:baseline}
   .variant-char{font-family:var(--ui-font-script);font-size:20px;line-height:1.2}
   .writing .seq{font-size:18px;line-height:1.3;overflow-wrap:anywhere;font-family:var(--ui-font-script)}
+  .writing .mark{text-decoration:underline dotted;text-underline-offset:2px;text-decoration-color:var(--ui-color-accent);color:var(--ui-color-accent);cursor:help}
+  .writing .pua{font-family:'IDS Numbered','Han Ext',serif}
   .regions{margin-inline-end:4px;padding:0 4px;border-radius:2px;font-size:10px;letter-spacing:.08em;color:var(--ui-color-ink-soft);background:var(--ui-color-canvas);cursor:help}
   .code{color:inherit;text-decoration:none}
   .code:hover{text-decoration:underline}

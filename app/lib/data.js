@@ -89,7 +89,7 @@ export async function findMeaning(text) {
   return row ? [...row.split('\t')[1]] : []
 }
 
-/** @typedef {{ text: string, regions: string, sources: string[] }} Description */
+/** @typedef {{ notation: string, regions: string, sources: string[] }} Description */
 
 /** How a character is written, once per description, with the sources that give it. @param {string} char @returns {Promise<Description[]>} */
 export async function descriptionsOf(char) {
@@ -97,9 +97,9 @@ export async function descriptionsOf(char) {
   const out = []
   for (const line of body.split('\n')) {
     if (!line.startsWith(char)) continue
-    const [own, text, regions, sources] = line.split('\t')
-    if (own !== char || !text) continue
-    out.push({ text, regions: regions ?? '', sources: sources ? sources.split(',') : [] })
+    const [own, notation, regions, sources] = line.split('\t')
+    if (own !== char || !notation) continue
+    out.push({ notation, regions: regions ?? '', sources: sources ? sources.split(',') : [] })
   }
   return out
 }

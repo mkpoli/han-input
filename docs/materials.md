@@ -39,10 +39,13 @@ Discord discussion of 2026-10-27, and the works themselves were not read.
 | [Noto Sans Nushu and Noto Serif Hentaigana](https://github.com/notofonts) | glyphs for Nüshu and hentaigana | OFL-1.1 |
 | [Jigmo](https://kamichikoichi.github.io/jigmo/) 2025-09-12, 上地宏一 | glyphs for the extension blocks, cut by `scripts/build_fonts.py` | CC0-1.0 |
 | [全字庫正宋體 TW-Sung-Plus](https://www.cns11643.gov.tw/downloadList.jsp?ID=2), 數位發展部, `Fonts_Sung.zip` 20260805 | glyphs for the private-use slots of unencoded CNS source rows, cut by `scripts/build_fonts.py` | 政府資料開放授權條款第1版 (OGDL 1.0), attribution「數位發展部，CNS11643中文標準交換碼全字庫網站」 |
+| BabelStone Han PUA 1.472, Andrew West | glyphs for the numbered components IDS.TXT leaves without a fragment, cut to `app/public/fonts/IDSNumbered.woff2` | Arphic Public License, `LICENSE-BabelStoneHanPUA.txt` |
 
 BabelStone writes some parts by number. Where note 6 of its file gives the IDS that writes the
-number out, the description uses it ({12}, the right of 龍, as ⿷己三); a number the note leaves without
-a fragment stays as `{13}`, and its `？` for an unnamed part stays as written.
+number out, the card draws it ({12}, the right of 龍, as ⿷己三); a number the note leaves without a
+fragment is drawn from BabelStone Han PUA's glyph for it. A part drawn this way is underlined with
+dots and shows the number and note 6's description on hover. BabelStone's `？` for an unnamed part
+and CHISE's entity names have no character to draw, so they stay as written and carry the same mark.
 
 The research behind these choices, with every candidate and what was checked, is in
 [`research-input-methods.md`](research-input-methods.md) and
