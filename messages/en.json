@@ -94,6 +94,8 @@
   "about.sources": "{count} tables",
   "about.method": "Method",
   "about.pua": "PUA tables",
+  "about.gSources": "IRG G sources",
+  "about.gSourcesIntro": "The Chinese sources behind the G-source codes on character cards and proposal records.",
   "nav.readings": "Readings",
   "nav.rhymes": "Rhyme tables",
   "find.readings": "{chars} characters read so, across {count} varieties",

@@ -94,6 +94,8 @@
   "about.sources": "표 {count}개",
   "about.method": "입력법",
   "about.pua": "사용자 정의 문자 표",
+  "about.gSources": "IRG G 출처",
+  "about.gSourcesIntro": "글자 카드와 제안 기록의 G 출처 코드가 가리키는 중국 자료.",
   "nav.readings": "독음",
   "nav.rhymes": "운도",
   "find.readings": "{count}개 방언·언어에서 이렇게 읽는 {chars}자",

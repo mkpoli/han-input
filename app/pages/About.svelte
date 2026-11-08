@@ -1,7 +1,8 @@
 <script>
   // What the site is for, and where every table came from.
   import { loadMethods, loadVariants } from '../lib/data.js'
-  import { nameOf, t } from '../lib/i18n.svelte.js'
+  import { i18n, nameOf, t } from '../lib/i18n.svelte.js'
+  import { G_SOURCES, noteOf } from '../lib/sources.js'
   import { PUA_SOURCES } from '../../src/pua.js'
   /** @type {import('../lib/data.js').Method[]} */
   let methods = $state([])
@@ -71,6 +72,18 @@
       </div>
     </section>
   {/if}
+  <section class="ui-section">
+    <h2 class="ui-label">{t('about.gSources')}</h2>
+    <p class="ui-hint">{t('about.gSourcesIntro')} <a href="https://www.unicode.org/reports/tr38/#kIRG_GSource" target="_blank" rel="noopener noreferrer">UAX #38</a></p>
+    <dl class="glossary">
+      {#each Object.entries(G_SOURCES) as [code, source] (code)}
+        <div class="gloss-row">
+          <dt><span class="ui-mono">{code}</span> {nameOf(source.names)}</dt>
+          <dd>{noteOf(source, i18n.locale)}</dd>
+        </div>
+      {/each}
+    </dl>
+  </section>
   {#if writing.length}
     <section class="ui-section">
       <h2 class="ui-label">{t('about.writing')}</h2>
@@ -95,4 +108,9 @@
 <style>
   .table{inline-size:100%;border-collapse:collapse;font-size:var(--ui-text-sm)}
   th,td{padding:var(--ui-space-2xs) var(--ui-space-sm);border-bottom:1px solid var(--ui-color-border);text-align:start;vertical-align:top}
+  .glossary{display:grid;gap:0;margin:0;font-size:var(--ui-text-sm)}
+  .gloss-row{display:grid;grid-template-columns:minmax(160px,240px) minmax(0,1fr);gap:var(--ui-space-sm);padding-block:var(--ui-space-2xs);border-bottom:1px solid var(--ui-color-border)}
+  .gloss-row dt{margin:0}
+  .gloss-row dd{margin:0;color:var(--ui-color-ink-soft)}
+  @media (max-width:700px){.gloss-row{grid-template-columns:minmax(0,1fr);gap:2px}}
 </style>

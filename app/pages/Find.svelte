@@ -7,7 +7,8 @@
   import { loadMethods } from '../lib/data.js'
   import { loadGlyphs } from '../lib/fonts.js'
   import { autofocus } from '../lib/ui.svelte.js'
-  import { nameOf, t } from '../lib/i18n.svelte.js'
+  import { i18n, nameOf, t } from '../lib/i18n.svelte.js'
+  import { gSourceOf, noteOf } from '../lib/sources.js'
   import Tiles from '../ui/Tiles.svelte'
   import CharsetFilter from '../ui/CharsetFilter.svelte'
   import ProposalRecords from '../ui/ProposalRecords.svelte'
@@ -114,8 +115,9 @@
         </h2>
         <div class="hits">
           {#each group.hits.slice(0, 8) as hit (hit.code)}
+            {@const gsource = group.method === 'irg-g' ? gSourceOf(hit.code) : null}
             <div class="hit">
-              <span class="code ui-mono" class:exact={hit.exact}>{hit.code}</span>
+              <span class="code ui-mono" class:exact={hit.exact} title={gsource ? `${nameOf(gsource.names)} — ${noteOf(gsource, i18n.locale)}` : undefined}>{hit.code}</span>
               <Tiles chars={hit.chars} size={44} limit={24} label={hit.code} />
             </div>
           {/each}

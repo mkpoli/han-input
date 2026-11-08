@@ -2,7 +2,8 @@
   // The printed records behind a character set. Many were never encoded, so the only form a reader
   // can see is the glyph printed in the proposal; the record keeps its source or serial code.
   import { ui, showRecord } from '../lib/ui.svelte.js'
-  import { t } from '../lib/i18n.svelte.js'
+  import { nameOf, t } from '../lib/i18n.svelte.js'
+  import { gSourceOf } from '../lib/sources.js'
 
   /** @type {{ records: import('../lib/charsets.js').ProposalRecords, label: string }} */
   let { records, label } = $props()
@@ -10,6 +11,11 @@
 
   /** @param {import('../lib/charsets.js').ProposalRecord} record */
   const code = record => record.source ?? record.serial ?? ''
+  /** @param {import('../lib/charsets.js').ProposalRecord} record */
+  const sourceName = record => {
+    const source = gSourceOf(code(record))
+    return source ? nameOf(source.names) : ''
+  }
 </script>
 
 <section class="ui-section">
@@ -17,7 +23,7 @@
   <div class="ui-tiles records" role="listbox" aria-label={`${label} ${t('charset.records')}`}>
     {#each records.records as record, i (record.document + ':' + code(record) + ':' + i)}
       <button class="ui-tile" type="button" role="option" aria-selected={ui.record?.record === record}
-        title={[code(record), documents.get(record.document)?.document].filter(Boolean).join(' · ')}
+        title={[code(record), sourceName(record), documents.get(record.document)?.document].filter(Boolean).join(' · ')}
         onclick={() => { const doc = documents.get(record.document); if (doc) showRecord(record, doc) }}>
         {#if record.glyph}<img src={`/charsets/${record.glyph}`} alt="" width="128" height="128" decoding="async" />{:else}<span class="code ui-mono">{code(record)}</span>{/if}
       </button>

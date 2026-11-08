@@ -94,6 +94,8 @@
   "about.sources": "{count}份表",
   "about.method": "方法",
   "about.pua": "私用區對照表",
+  "about.gSources": "IRG G源",
+  "about.gSourcesIntro": "字形卡片與提案記錄中G源代碼所指的中國資料。",
   "nav.readings": "讀音",
   "nav.rhymes": "韻圖",
   "find.readings": "{count}種方言或語言中這樣讀的{chars}字",

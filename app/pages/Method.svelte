@@ -4,7 +4,8 @@
   import { route, setQuery } from '../lib/route.svelte.js'
   import { autofocus, choose, put } from '../lib/ui.svelte.js'
   import { backspace } from '../lib/text.svelte.js'
-  import { nameOf, t } from '../lib/i18n.svelte.js'
+  import { i18n, nameOf, t } from '../lib/i18n.svelte.js'
+  import { gSourceOf, noteOf } from '../lib/sources.js'
   import { fold } from '../../src/fold.js'
 
   // A variety's readings type the same way as a method's codes, so one page serves both.
@@ -92,9 +93,10 @@
     {#if shown.length}
       <ol class="cands">
         {#each shown as item, i (item.char + item.code)}
+          {@const gsource = route.method === 'irg-g' ? gSourceOf(item.code) : null}
           <li>
             <button class="cand" class:exact={item.exact} type="button" onclick={() => take(item.char)} oncontextmenu={event => { event.preventDefault(); choose(item.char) }} onmouseenter={() => choose(item.char)}>
-              <span class="num">{i + 1}</span><span class="ch ui-script" lang="und-Hani">{item.char}</span><span class="cd ui-mono">{item.code}</span>
+              <span class="num">{i + 1}</span><span class="ch ui-script" lang="und-Hani">{item.char}</span><span class="cd ui-mono" title={gsource ? `${nameOf(gsource.names)} — ${noteOf(gsource, i18n.locale)}` : undefined}>{item.code}</span>
             </button>
           </li>
         {/each}
