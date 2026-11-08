@@ -11,5 +11,5 @@
     "skipLibCheck": true,
     "resolveJsonModule": true
   },
-  "include": ["app/**/*.js", "app/**/*.svelte", "src/**/*.js", "scripts/**/*.mjs"]
+  "include": ["app/**/*.js", "app/**/*.svelte", "src/**/*.js", "scripts/**/*.mjs", "worker/**/*.js"]
 }

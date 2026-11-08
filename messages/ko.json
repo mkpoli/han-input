@@ -100,6 +100,8 @@
   "radicals.rest": "부수 외 {count}획",
   "about.title": "출처",
   "about.intro": "이 사이트는 글자를 찾는 곳입니다. 풀이와 항목은 카드에 링크한 사이트에 있고, 사전은 뜻 검색의 색인으로만 씁니다.",
+  "notfound.title": "페이지를 찾을 수 없습니다",
+  "notfound.intro": "이 주소에는 페이지가 없습니다. 찾기 화면으로 돌아가 다시 시작하세요.",
   "about.sources": "표 {count}개",
   "about.method": "입력법",
   "about.pua": "사용자 정의 문자 표",

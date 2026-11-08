@@ -1,10 +1,12 @@
 {
   "name": "han-input",
   "compatibility_date": "2026-10-30",
-  // A static site: the assets are the app, and a miss opens the app so a link can carry a query.
+  "main": "worker/index.js",
+  // The worker serves the app for known paths and keeps a 404 for everything else.
   "assets": {
     "directory": "./dist",
-    "not_found_handling": "single-page-application"
+    "binding": "ASSETS",
+    "not_found_handling": "none"
   },
   "routes": [{ "pattern": "han.mkpo.li", "custom_domain": true }],
   "workers_dev": false,

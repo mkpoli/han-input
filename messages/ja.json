@@ -100,6 +100,8 @@
   "radicals.rest": "部首外{count}画",
   "about.title": "出典",
   "about.intro": "このサイトは字を探すためのものです。字義や項目は各カードからリンクした先にあり、辞書はここでは意味検索の索引にだけ使います。",
+  "notfound.title": "ページが見つかりません",
+  "notfound.intro": "このアドレスにページはありません。探す画面からやり直してください。",
   "about.sources": "{count}の表",
   "about.method": "入力法",
   "about.pua": "外字表",

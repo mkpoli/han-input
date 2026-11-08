@@ -19,6 +19,7 @@
   import Radicals from './pages/Radicals.svelte'
   import About from './pages/About.svelte'
   import Convert from './pages/Convert.svelte'
+  import NotFound from './pages/NotFound.svelte'
 
   applyTheme()
   let settings = $state(false)
@@ -76,6 +77,7 @@
     {:else if route.page === 'rhymes'}<Rhymes />
     {:else if route.page === 'radicals'}<Radicals />
     {:else if route.page === 'convert'}<Convert />
+    {:else if route.page === 'notfound'}<NotFound />
     {:else}<About />{/if}
   </main>
 

@@ -100,6 +100,8 @@
   "radicals.rest": "部外{count}畫",
   "about.title": "來源",
   "about.intro": "本站用來找字。釋義和條目請看字卡連結的各網站；詞典在這裡只作意義檢索的索引。",
+  "notfound.title": "頁面不存在",
+  "notfound.intro": "此地址沒有頁面。請返回查找頁重新開始。",
   "about.sources": "{count}份表",
   "about.method": "方法",
   "about.pua": "私用區對照表",
