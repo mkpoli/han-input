@@ -46,18 +46,18 @@
     </div>
   </div>
 
-  <div class="ui-toolbar counts" role="status" aria-live="polite" aria-atomic="true">
-    <span>{t('convert.converted', { count: result.converted })}</span>
+  <div class="ui-toolbar counts">
+    <label class="ui-label" for="convert-source">{t('convert.source')}</label>
+    <select id="convert-source" class="ui-input" bind:value={sourceId}>
+      {#each PUA_SOURCES as item (item.id)}<option value={item.id}>{t(`pua.source.${item.id}`)}</option>{/each}
+    </select>
+    <span role="status" aria-live="polite">{t('convert.converted', { count: result.converted })}</span>
     <span>{t('convert.remaining', { count: result.unmapped })}</span>
   </div>
 
   <details class="mapping">
     <summary class="ui-label">{t('convert.mapping')} <span class="ui-count">{matches.length}</span></summary>
     <div class="tools">
-      <label class="ui-label" for="convert-source">{t('convert.source')}</label>
-      <select id="convert-source" class="ui-input" bind:value={sourceId}>
-        {#each PUA_SOURCES as item (item.id)}<option value={item.id}>{t(`pua.source.${item.id}`)}</option>{/each}
-      </select>
       <input class="ui-input" type="search" bind:value={filter} placeholder={t('convert.filter')} aria-label={t('convert.filter')}>
     </div>
     <div class="ui-table-wrap">
@@ -88,7 +88,8 @@
   .editors{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:var(--ui-space-lg)}
   .field-head{display:flex;align-items:center;justify-content:space-between;gap:var(--ui-space-sm)}
   textarea{font-size:var(--ui-text-lg);min-block-size:180px}
-  .counts{color:var(--ui-color-ink-soft);font-size:var(--ui-text-sm);font-variant-numeric:tabular-nums}
+  .counts{color:var(--ui-color-ink-soft);font-size:var(--ui-text-sm);font-variant-numeric:tabular-nums;gap:var(--ui-space-sm)}
+  .counts select{inline-size:auto}
   .mapping summary{cursor:pointer;padding-block:var(--ui-space-xs)}
   .tools{display:flex;align-items:center;gap:var(--ui-space-sm);flex-wrap:wrap;margin-block:var(--ui-space-sm)}
   .tools select{inline-size:auto}
