@@ -1,0 +1,43 @@
+{
+  "sources": [
+    {
+      "id": "ucd-kangxi",
+      "name": "Unicode 18.0.0 UnicodeData, Kangxi radical compatibility mappings",
+      "url": "https://www.unicode.org/Public/18.0.0/ucd/UnicodeData.txt",
+      "licence": "Unicode Licence v3"
+    },
+    {
+      "id": "ngwu-yoh",
+      "name": "NGWU YOH, personal communication",
+      "date": "2026-11-09",
+      "licence": "Private correspondence, cited with permission"
+    }
+  ],
+  "groups": [
+    {
+      "id": "seal-forms",
+      "components": [
+        "卩",
+        "⼙",
+        "𰆊"
+      ],
+      "note": "The seal shape: the unified 卩, the Kangxi radical ⼙ (U+2F19), and the Korean Idu -n mark 𰆊 (U+3018A), its longer form.",
+      "sources": [
+        "ucd-kangxi",
+        "ngwu-yoh"
+      ]
+    },
+    {
+      "id": "seal-similar",
+      "kind": "fuzzy",
+      "components": [
+        "卩",
+        "卪"
+      ],
+      "note": "卪 is a different character with a close shape, a fuzzy alternative for the seal radical.",
+      "sources": [
+        "ngwu-yoh"
+      ]
+    }
+  ]
+}

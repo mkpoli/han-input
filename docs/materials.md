@@ -56,6 +56,13 @@ name the spelling each group came from. A character's card and search result als
 Unicode calls the same character (叱 and 叱, through UnicodeData's compatibility decomposition) and the
 pairs IWDS marks as disunified variants.
 
+The seal radical has a group of its own: the unified 卩 and the Kangxi radical ⼙ (U+2F19), which
+UnicodeData maps to 卩 with a compatibility decomposition. 卪 is a different character whose shape is close;
+it is offered as a similar part in its own section, never merged into the results. The Korean Idu -n mark
+that prompted this is a longer form of 卩 with no encoded character of its own (NGWU YOH, personal
+communication, 2026-11-09). Groups are checked in at
+[data/variant-groups.json](../data/variant-groups.json), separately from IWDS.
+
 Both relations are readings of the sources, not proof that the forms are one character. IWDS calls most
 of its groups unifiable, and a compatibility mapping only states that one code point stands for another;
 neither makes the glyphs identical in every font.

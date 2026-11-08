@@ -12,7 +12,8 @@ It covers Han, extended sinographies such as Chữ Nôm and Sawndip, and kana an
 
 - **Find**: one box. A clue is tried as a code in every method, as a reading in every variety and as a
   word of meaning. Spaces separate clues: `氵 12畫`, `river ジ`, `cangjie5:jnd`. A part is also tried under
-  the spellings IWDS groups with it, so `口匕` brings characters sources write `口七`.
+  the spellings on record for it, so `口匕` brings characters sources write `口七`; the seal shape also
+  covers `⼙` (Kangxi radical) and `𰆊` (Idu -n mark), and offers `卪` as a look-alike.
   A [character-set filter](docs/character-sets.md) narrows the results or browses a set on its own.
 - **Methods**: every input method, each usable as an input method of its own.
 - **Readings**: every variety in 漢字音典, each typed the same way.
@@ -37,8 +38,9 @@ The Ext.E withdrawn set carries the glyphs printed in IRGN1841. `bun scripts/imp
 cuts them from the pinned PDF (poppler and ImageMagick), matches each to the serial and G source printed
 beside it, and writes `app/public/charsets/glyphs/ext-e/`.
 
-The part spellings and character variants come from the committed [IWDS snapshot](data/variants.json),
-built by `bun scripts/import_variants.mjs` from IWDS and UnicodeData.
+The part spellings and character variants come from the committed [variant snapshot](data/variants.json),
+built by `bun scripts/import_variants.mjs` from IWDS, the curated [Idu groups](data/variant-groups.json)
+and UnicodeData.
 
 The PUA converter uses the committed [MOE mapping snapshot](data/moe-pua.json), independently of the
 search tables. `bun scripts/import_moe_pua.mjs` imports the checksum-pinned official source;

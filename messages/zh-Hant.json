@@ -57,6 +57,8 @@
   "find.sameCharacter": "異體",
   "find.sameCharacterNote": "IWDS收錄的異體，以及Unicode對應到本字的碼位。",
   "find.variantOf": "也含{part}的字",
+  "find.similarPart": "形近的{part}",
+  "find.similarNote": "形近而不同的字。",
   "find.meaning": "意義「{word}」",
   "find.parts": "含{part}的字",
   "find.moreCodes": "還有{count}個編碼",
