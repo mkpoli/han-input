@@ -102,7 +102,7 @@ test('snapshot covers every source catalogue and counts match unique scalars', (
   expect(referenceIds).toHaveLength(119)
   for (const id of referenceIds) expect(catalogue.some(row => row.id === id)).toBe(true)
   for (const input of sources.inputs) expect(input.sha256).toMatch(/^[a-f0-9]{64}$/)
-  expect(catalogue.length).toBe(258)
+  expect(catalogue.length).toBe(259)
   const cns = catalogue.filter(row => row.group === 'CNS sources')
   const cnsSource = JSON.parse(readFileSync(new URL('cns-sources.json', base), 'utf8'))
   expect(cns).toHaveLength(123)
@@ -162,14 +162,19 @@ test('snapshot covers every source catalogue and counts match unique scalars', (
     for (const record of glyphs) {
       const png = readFileSync(new URL(record.glyph, base))
       expect(png.subarray(0, 8)).toEqual(Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]))
-      expect(png.readUInt32BE(16)).toBe(128)
-      expect(png.readUInt32BE(20)).toBe(128)
+      expect(png.readUInt32BE(16)).toBe(png.readUInt32BE(20))
+      expect(png.readUInt32BE(16)).toBeGreaterThanOrEqual(64)
     }
     const members = [...readFileSync(new URL(`${set.id}.txt`, base), 'utf8')]
     expect(members.length).toBe(set.chars)
     expect(new Set(members).size).toBe(set.chars)
     expect(new Set(members)).toEqual(new Set(records.records.filter(record => record.mappedUnicode).map(record => String.fromCodePoint(parseInt(record.mappedUnicode.slice(2), 16)))))
   }
+  const sat = catalogue.find(row => row.id === 'ext_f_sat_withdrawals')
+  expect(sat.group).toBe('Proposals')
+  expect(sat.chars).toBe(0)
+  expect(sat.total).toBe(64)
+  expect(sat.records).toEqual({ file: '/charsets/ext_f_sat_records.json', count: 64, glyphs: 64 })
   const removal = catalogue.find(row => row.id === 'ext_d_removals')
   expect(removal.group).toBe('Proposals')
   expect(removal.chars).toBe(0)

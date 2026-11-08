@@ -1,0 +1,480 @@
+{
+  "id": "ext_f_sat_withdrawals",
+  "group": "Proposals",
+  "label": "Ext.F withdrawn · SAT",
+  "names": {
+    "en": "Z_SAT characters withdrawn from CJK F",
+    "zh": "擴展F撤銷SAT源字",
+    "hans": "扩展F撤销SAT源字",
+    "ja": "拡張F撤回SAT源字",
+    "ko": "확장 F SAT 철회자"
+  },
+  "title": "Z_SAT sources withdrawn from the CJK F candidates",
+  "complete": false,
+  "scope": "The 64 Z_SAT source ideographs that IRGN1925 withdraws from the CJK F candidates after further research, with the sequence number and source id printed beside each glyph.",
+  "source": {
+    "name": "IRG",
+    "url": "https://www.unicode.org/irg/docs/n1925-SATWithdrawList.pdf"
+  },
+  "documents": [
+    {
+      "id": "n1925",
+      "document": "IRGN1925",
+      "title": "List of withdrawal Z_SAT sources from CJK F candidates",
+      "source": "SAT",
+      "date": "2013-04-02",
+      "url": "https://www.unicode.org/irg/docs/n1925-SATWithdrawList.pdf",
+      "status": "Withdraws 64 Z_SAT ideographs from the CJK F candidates after further research and asks the technical editor to act."
+    }
+  ],
+  "records": [
+    {
+      "serial": "1709",
+      "source": "Z_SAT04919",
+      "document": "n1925",
+      "page": 2,
+      "glyph": "glyphs/ext-f-sat/1709.png"
+    },
+    {
+      "serial": "181",
+      "source": "Z_SAT60006",
+      "document": "n1925",
+      "page": 2,
+      "glyph": "glyphs/ext-f-sat/181.png"
+    },
+    {
+      "serial": "1868",
+      "source": "Z_SAT02459",
+      "document": "n1925",
+      "page": 2,
+      "glyph": "glyphs/ext-f-sat/1868.png"
+    },
+    {
+      "serial": "1904",
+      "source": "Z_SAT01982",
+      "document": "n1925",
+      "page": 2,
+      "glyph": "glyphs/ext-f-sat/1904.png"
+    },
+    {
+      "serial": "2192",
+      "source": "Z_SAT02560",
+      "document": "n1925",
+      "page": 2,
+      "glyph": "glyphs/ext-f-sat/2192.png"
+    },
+    {
+      "serial": "2240",
+      "source": "Z_SAT02522",
+      "document": "n1925",
+      "page": 3,
+      "glyph": "glyphs/ext-f-sat/2240.png"
+    },
+    {
+      "serial": "253",
+      "source": "Z_SAT05108",
+      "document": "n1925",
+      "page": 2,
+      "glyph": "glyphs/ext-f-sat/253.png"
+    },
+    {
+      "serial": "2603",
+      "source": "Z_SAT60111",
+      "document": "n1925",
+      "page": 3,
+      "glyph": "glyphs/ext-f-sat/2603.png"
+    },
+    {
+      "serial": "2704",
+      "source": "Z_SAT02451",
+      "document": "n1925",
+      "page": 3,
+      "glyph": "glyphs/ext-f-sat/2704.png"
+    },
+    {
+      "serial": "3025",
+      "source": "Z_SAT60134",
+      "document": "n1925",
+      "page": 3,
+      "glyph": "glyphs/ext-f-sat/3025.png"
+    },
+    {
+      "serial": "3513",
+      "source": "Z_SAT03409",
+      "document": "n1925",
+      "page": 3,
+      "glyph": "glyphs/ext-f-sat/3513.png"
+    },
+    {
+      "serial": "3638",
+      "source": "Z_SAT01552",
+      "document": "n1925",
+      "page": 3,
+      "glyph": "glyphs/ext-f-sat/3638.png"
+    },
+    {
+      "serial": "3693",
+      "source": "Z_SAT05723",
+      "document": "n1925",
+      "page": 3,
+      "glyph": "glyphs/ext-f-sat/3693.png"
+    },
+    {
+      "serial": "3699",
+      "source": "Z_SAT02681",
+      "document": "n1925",
+      "page": 3,
+      "glyph": "glyphs/ext-f-sat/3699.png"
+    },
+    {
+      "serial": "3849",
+      "source": "Z_SAT03567",
+      "document": "n1925",
+      "page": 3,
+      "glyph": "glyphs/ext-f-sat/3849.png"
+    },
+    {
+      "serial": "3898",
+      "source": "Z_SAT01984",
+      "document": "n1925",
+      "page": 4,
+      "glyph": "glyphs/ext-f-sat/3898.png"
+    },
+    {
+      "serial": "3910",
+      "source": "Z_SAT60182",
+      "document": "n1925",
+      "page": 4,
+      "glyph": "glyphs/ext-f-sat/3910.png"
+    },
+    {
+      "serial": "4056",
+      "source": "Z_SAT00058",
+      "document": "n1925",
+      "page": 4,
+      "glyph": "glyphs/ext-f-sat/4056.png"
+    },
+    {
+      "serial": "4108",
+      "source": "Z_SAT08610",
+      "document": "n1925",
+      "page": 4,
+      "glyph": "glyphs/ext-f-sat/4108.png"
+    },
+    {
+      "serial": "427",
+      "source": "Z_SAT02826",
+      "document": "n1925",
+      "page": 2,
+      "glyph": "glyphs/ext-f-sat/427.png"
+    },
+    {
+      "serial": "4396",
+      "source": "Z_SAT02198",
+      "document": "n1925",
+      "page": 4,
+      "glyph": "glyphs/ext-f-sat/4396.png"
+    },
+    {
+      "serial": "4508",
+      "source": "Z_SAT01729",
+      "document": "n1925",
+      "page": 4,
+      "glyph": "glyphs/ext-f-sat/4508.png"
+    },
+    {
+      "serial": "4604",
+      "source": "Z_SAT04306",
+      "document": "n1925",
+      "page": 4,
+      "glyph": "glyphs/ext-f-sat/4604.png"
+    },
+    {
+      "serial": "4682",
+      "source": "Z_SAT03566",
+      "document": "n1925",
+      "page": 4,
+      "glyph": "glyphs/ext-f-sat/4682.png"
+    },
+    {
+      "serial": "4790",
+      "source": "Z_SAT05220",
+      "document": "n1925",
+      "page": 4,
+      "glyph": "glyphs/ext-f-sat/4790.png"
+    },
+    {
+      "serial": "4846",
+      "source": "Z_SAT60221",
+      "document": "n1925",
+      "page": 5,
+      "glyph": "glyphs/ext-f-sat/4846.png"
+    },
+    {
+      "serial": "4982",
+      "source": "Z_SAT01002",
+      "document": "n1925",
+      "page": 5,
+      "glyph": "glyphs/ext-f-sat/4982.png"
+    },
+    {
+      "serial": "4998",
+      "source": "Z_SAT02653",
+      "document": "n1925",
+      "page": 5,
+      "glyph": "glyphs/ext-f-sat/4998.png"
+    },
+    {
+      "serial": "5031",
+      "source": "Z_SAT60230",
+      "document": "n1925",
+      "page": 5,
+      "glyph": "glyphs/ext-f-sat/5031.png"
+    },
+    {
+      "serial": "5177",
+      "source": "Z_SAT01197",
+      "document": "n1925",
+      "page": 5,
+      "glyph": "glyphs/ext-f-sat/5177.png"
+    },
+    {
+      "serial": "5245",
+      "source": "Z_SAT60237",
+      "document": "n1925",
+      "page": 5,
+      "glyph": "glyphs/ext-f-sat/5245.png"
+    },
+    {
+      "serial": "5294",
+      "source": "Z_SAT60238",
+      "document": "n1925",
+      "page": 5,
+      "glyph": "glyphs/ext-f-sat/5294.png"
+    },
+    {
+      "serial": "5353",
+      "source": "Z_SAT07102",
+      "document": "n1925",
+      "page": 5,
+      "glyph": "glyphs/ext-f-sat/5353.png"
+    },
+    {
+      "serial": "5377",
+      "source": "Z_SAT05027",
+      "document": "n1925",
+      "page": 5,
+      "glyph": "glyphs/ext-f-sat/5377.png"
+    },
+    {
+      "serial": "5697",
+      "source": "Z_SAT60266",
+      "document": "n1925",
+      "page": 6,
+      "glyph": "glyphs/ext-f-sat/5697.png"
+    },
+    {
+      "serial": "5727",
+      "source": "Z_SAT60273",
+      "document": "n1925",
+      "page": 6,
+      "glyph": "glyphs/ext-f-sat/5727.png"
+    },
+    {
+      "serial": "5936",
+      "source": "Z_SAT03654",
+      "document": "n1925",
+      "page": 6,
+      "glyph": "glyphs/ext-f-sat/5936.png"
+    },
+    {
+      "serial": "5953",
+      "source": "Z_SAT60286",
+      "document": "n1925",
+      "page": 6,
+      "glyph": "glyphs/ext-f-sat/5953.png"
+    },
+    {
+      "serial": "6080",
+      "source": "Z_SAT05160",
+      "document": "n1925",
+      "page": 6,
+      "glyph": "glyphs/ext-f-sat/6080.png"
+    },
+    {
+      "serial": "6084",
+      "source": "Z_SAT01299",
+      "document": "n1925",
+      "page": 6,
+      "glyph": "glyphs/ext-f-sat/6084.png"
+    },
+    {
+      "serial": "6161",
+      "source": "Z_SAT60305",
+      "document": "n1925",
+      "page": 6,
+      "glyph": "glyphs/ext-f-sat/6161.png"
+    },
+    {
+      "serial": "6201",
+      "source": "Z_SAT00037",
+      "document": "n1925",
+      "page": 6,
+      "glyph": "glyphs/ext-f-sat/6201.png"
+    },
+    {
+      "serial": "6424",
+      "source": "Z_SAT60322",
+      "document": "n1925",
+      "page": 6,
+      "glyph": "glyphs/ext-f-sat/6424.png"
+    },
+    {
+      "serial": "6437",
+      "source": "Z_SAT60321",
+      "document": "n1925",
+      "page": 7,
+      "glyph": "glyphs/ext-f-sat/6437.png"
+    },
+    {
+      "serial": "6456",
+      "source": "Z_SAT04821",
+      "document": "n1925",
+      "page": 7,
+      "glyph": "glyphs/ext-f-sat/6456.png"
+    },
+    {
+      "serial": "6464",
+      "source": "Z_SAT60361",
+      "document": "n1925",
+      "page": 7,
+      "glyph": "glyphs/ext-f-sat/6464.png"
+    },
+    {
+      "serial": "6609",
+      "source": "Z_SAT60333",
+      "document": "n1925",
+      "page": 7,
+      "glyph": "glyphs/ext-f-sat/6609.png"
+    },
+    {
+      "serial": "6633",
+      "source": "Z_SAT60334",
+      "document": "n1925",
+      "page": 7,
+      "glyph": "glyphs/ext-f-sat/6633.png"
+    },
+    {
+      "serial": "7236",
+      "source": "Z_SAT60358",
+      "document": "n1925",
+      "page": 7,
+      "glyph": "glyphs/ext-f-sat/7236.png"
+    },
+    {
+      "serial": "7301",
+      "source": "Z_SAT01418",
+      "document": "n1925",
+      "page": 7,
+      "glyph": "glyphs/ext-f-sat/7301.png"
+    },
+    {
+      "serial": "7349",
+      "source": "Z_SAT02663",
+      "document": "n1925",
+      "page": 7,
+      "glyph": "glyphs/ext-f-sat/7349.png"
+    },
+    {
+      "serial": "7382",
+      "source": "Z_SAT60362",
+      "document": "n1925",
+      "page": 7,
+      "glyph": "glyphs/ext-f-sat/7382.png"
+    },
+    {
+      "serial": "7699",
+      "source": "Z_SAT04946",
+      "document": "n1925",
+      "page": 8,
+      "glyph": "glyphs/ext-f-sat/7699.png"
+    },
+    {
+      "serial": "7781",
+      "source": "Z_SAT60374",
+      "document": "n1925",
+      "page": 8,
+      "glyph": "glyphs/ext-f-sat/7781.png"
+    },
+    {
+      "serial": "8051",
+      "source": "Z_SAT01589",
+      "document": "n1925",
+      "page": 8,
+      "glyph": "glyphs/ext-f-sat/8051.png"
+    },
+    {
+      "serial": "8138",
+      "source": "Z_SAT06917",
+      "document": "n1925",
+      "page": 8,
+      "glyph": "glyphs/ext-f-sat/8138.png"
+    },
+    {
+      "serial": "8261",
+      "source": "Z_SAT02112",
+      "document": "n1925",
+      "page": 8,
+      "glyph": "glyphs/ext-f-sat/8261.png"
+    },
+    {
+      "serial": "8309",
+      "source": "Z_SAT01900",
+      "document": "n1925",
+      "page": 8,
+      "glyph": "glyphs/ext-f-sat/8309.png"
+    },
+    {
+      "serial": "8321",
+      "source": "Z_SAT02191",
+      "document": "n1925",
+      "page": 8,
+      "glyph": "glyphs/ext-f-sat/8321.png"
+    },
+    {
+      "serial": "8356",
+      "source": "Z_SAT60390",
+      "document": "n1925",
+      "page": 8,
+      "glyph": "glyphs/ext-f-sat/8356.png"
+    },
+    {
+      "serial": "8392",
+      "source": "Z_SAT60395",
+      "document": "n1925",
+      "page": 8,
+      "glyph": "glyphs/ext-f-sat/8392.png"
+    },
+    {
+      "serial": "8397",
+      "source": "Z_SAT60397",
+      "document": "n1925",
+      "page": 9,
+      "glyph": "glyphs/ext-f-sat/8397.png"
+    },
+    {
+      "serial": "846",
+      "source": "Z_SAT60041",
+      "document": "n1925",
+      "page": 2,
+      "glyph": "glyphs/ext-f-sat/846.png"
+    },
+    {
+      "serial": "8485",
+      "source": "Z_SAT01939",
+      "document": "n1925",
+      "page": 9,
+      "glyph": "glyphs/ext-f-sat/8485.png"
+    }
+  ]
+}

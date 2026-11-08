@@ -11,6 +11,7 @@ Find accepts one character-set filter at a time. An empty query browses its mapp
 | Unicode 18.0.0 | Literal compatibility, radical, stroke, kana and Nüshu blocks |
 | Extension E withdrawn | 134 glyphs printed in IRGN1841 and four further documented records; three verified Unicode correspondences |
 | Extension D removed | 78 J-source glyphs printed in IRGN1250, withdrawn from the CJK D candidate |
+| Ext.F withdrawn · SAT | 64 Z_SAT glyphs printed in IRGN1925, withdrawn from the CJK F candidates |
 | CNS11643全字庫 | All 123 exact registration-source labels from the 2026-08-05 bulk release, across Han, other scripts and symbols |
 
 Each set has a unique character count and a source-row count. A source row joins through its assigned scalars, or through its private-use glyph slot where no scalar is assigned. Repeated mappings, variation sequences and IDS descriptions can make the counts differ. Draft row numbers never establish Unicode assignments.
@@ -31,7 +32,7 @@ CNS plane numbers in these files are decimal. Source categories, planes and hist
 
 A proposed character that was never encoded has no scalar, so its set cannot be a list of characters. The proposal sets keep the printed record instead: the codes printed beside each glyph, and the glyph cut from the document's page. Records the documents explain without a glyph stay text-only, and a record with a verified correspondence links to that character's card.
 
-`bun scripts/import_irg_records.mjs` reads each pinned PDF with poppler's `pdftohtml`, which gives text and image boxes in one coordinate system. `scripts/sources/irg.mjs` pairs every glyph with the codes beside it: a serial stacked over its source (IRGN1841), or one line of two codes (IRGN1250). ImageMagick then draws the strokes black on a transparent ground, since the documents use both polarities. A set is written only when its record count matches and every serial and source is distinct. Regenerating needs poppler and ImageMagick.
+`bun scripts/import_irg_records.mjs` reads each pinned PDF with poppler's `pdftohtml`, which gives text and image boxes in one coordinate system. `scripts/sources/irg.mjs` pairs every glyph with the codes beside it: a serial stacked over its source (IRGN1841, IRGN1330) or beside it (IRGN1925), or one line of two codes (IRGN1250). ImageMagick then draws the strokes black on a transparent ground, since the documents use both polarities. A set is written only when its record count matches and every serial and source is distinct. Regenerating needs poppler and ImageMagick.
 
 These are proposal numbers, not scalar assignments. IRGN1841 lists characters for withdrawal while leaving later resubmission possible; IRGN1250 removes J sources from the CJK D candidate for lack of evidence, and some of its characters were proposed again.
 

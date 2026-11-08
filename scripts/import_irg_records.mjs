@@ -13,7 +13,7 @@ import { parsePages, rowsFor } from './sources/irg.mjs'
 /** @typedef {{id:string, document:string, title:string, source:string, date:string, url:string, status?:string}} CuratedDocument */
 /** @typedef {{serial?:string|null, source?:string|null, document:string, status?:string, mappedUnicode?:string|null, mappedCharacter?:string, mappingKind?:string, evidenceUrls?:string[], mappingEvidence?:string}} CuratedRecord */
 /** @typedef {import('./sources/irg.mjs').Matcher} Matcher */
-/** @typedef {{document:string, pages:number[], matcher:Matcher, count:number}} ExtractStep */
+/** @typedef {{document:string, pages:number[], matcher:Matcher, serialPattern:string, sourcePattern:string, leftGap?:number, count:number}} ExtractStep */
 /** @typedef {{id:string, file:string, group:string, label:string, glyphs:string, names:{en:string,zh?:string,hans?:string,ja?:string,ko?:string}, title:string, complete:boolean, scope:string, source:{name:string,url:string}, documents:CuratedDocument[], extract:ExtractStep[], additionalRecords:CuratedRecord[]}} CuratedSet */
 /** @typedef {{sets:CuratedSet[]}} Curated */
 /** @typedef {{serial:string, source:string, document:string, page:number, glyph:string, from:string}} Row */
@@ -61,7 +61,9 @@ try {
       for (const number of step.pages) {
         const page = pages.find(entry => entry.number === number)
         if (!page) throw new Error(`${document.document} has no page ${number}`)
-        for (const row of rowsFor(page, step.matcher)) found.push({ ...row, document: document.id, glyph: `${set.glyphs}/${row.serial}.png`, from: row.file })
+        let pageRows
+        try { pageRows = rowsFor(page, step.matcher, step) } catch (error) { throw new Error(`${set.id}/${document.document}: ${/** @type {Error} */ (error).message}`) }
+        for (const row of pageRows) found.push({ ...row, document: document.id, glyph: `${set.glyphs}/${row.serial}.png`, from: row.file })
       }
       if (found.length !== step.count) throw new Error(`${set.id}: ${found.length} glyphs for ${step.count} listed characters`)
       rows.push(...found)

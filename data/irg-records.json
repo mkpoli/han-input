@@ -70,7 +70,9 @@
             2,
             3
           ],
-          "matcher": "serial-source",
+          "matcher": "codes-left",
+          "serialPattern": "^\\d{5}$",
+          "sourcePattern": "^G_[A-Z0-9_.]+$",
           "count": 134
         }
       ],
@@ -165,7 +167,62 @@
             4
           ],
           "matcher": "code-text",
+          "serialPattern": "^\\d{5}$",
+          "sourcePattern": "^JMK\\d+$",
           "count": 78
+        }
+      ],
+      "additionalRecords": []
+    },
+    {
+      "id": "ext_f_sat_withdrawals",
+      "file": "ext_f_sat_records.json",
+      "group": "Proposals",
+      "label": "Ext.F withdrawn · SAT",
+      "glyphs": "glyphs/ext-f-sat",
+      "names": {
+        "en": "Z_SAT characters withdrawn from CJK F",
+        "zh": "擴展F撤銷SAT源字",
+        "hans": "扩展F撤销SAT源字",
+        "ja": "拡張F撤回SAT源字",
+        "ko": "확장 F SAT 철회자"
+      },
+      "source": {
+        "name": "IRG",
+        "url": "https://www.unicode.org/irg/docs/n1925-SATWithdrawList.pdf"
+      },
+      "title": "Z_SAT sources withdrawn from the CJK F candidates",
+      "complete": false,
+      "scope": "The 64 Z_SAT source ideographs that IRGN1925 withdraws from the CJK F candidates after further research, with the sequence number and source id printed beside each glyph.",
+      "documents": [
+        {
+          "id": "n1925",
+          "document": "IRGN1925",
+          "title": "List of withdrawal Z_SAT sources from CJK F candidates",
+          "source": "SAT",
+          "date": "2013-04-02",
+          "url": "https://www.unicode.org/irg/docs/n1925-SATWithdrawList.pdf",
+          "status": "Withdraws 64 Z_SAT ideographs from the CJK F candidates after further research and asks the technical editor to act."
+        }
+      ],
+      "extract": [
+        {
+          "document": "n1925",
+          "pages": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "matcher": "codes-left",
+          "serialPattern": "^\\d{1,5}$",
+          "sourcePattern": "^Z_SAT\\d+$",
+          "count": 64,
+          "leftGap": 320
         }
       ],
       "additionalRecords": []
