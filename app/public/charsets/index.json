@@ -2747,6 +2747,31 @@
     }
   },
   {
+    "id": "ext_c_pdam5_removals",
+    "group": "Proposals",
+    "label": "Ext.C PDAM5 removals",
+    "names": {
+      "en": "Characters removed from CJK C PDAM5",
+      "zh": "擴展C PDAM5刪除字",
+      "hans": "扩展C PDAM5删除字",
+      "ja": "拡張C PDAM5削除字",
+      "ko": "확장 C PDAM5 삭제자"
+    },
+    "chars": 0,
+    "total": 67,
+    "encoded": 0,
+    "unencoded": 67,
+    "source": {
+      "name": "IRG",
+      "url": "https://www.unicode.org/irg/docs/n1330-PDAM5ExtensionCRemovals.pdf"
+    },
+    "records": {
+      "file": "/charsets/ext_c_pdam5_records.json",
+      "count": 67,
+      "glyphs": 67
+    }
+  },
+  {
     "id": "ext_e_withdrawal_records",
     "group": "Proposals",
     "label": "Ext.E withdrawn",

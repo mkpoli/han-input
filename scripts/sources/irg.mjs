@@ -33,8 +33,9 @@ export function codesLeftRows(page, patterns) {
       && Math.abs(text.top + text.height / 2 - (image.top + image.height / 2)) <= 30)
     const serials = beside.filter(text => serial.test(text.value))
     const sources = beside.filter(text => source.test(text.value))
-    if (serials.length !== 1 || sources.length !== 1) throw new Error(`Page ${page.number}: glyph ${index} has ${serials.length} serial and ${sources.length} source candidates`)
-    return { serial: serials[0].value, source: sources[0].value, page: page.number, file: image.src }
+    if (serials.length !== 1 || !sources.length) throw new Error(`Page ${page.number}: glyph ${index} has ${serials.length} serial and ${sources.length} source candidates`)
+    const sourceValue = sources.sort((a, b) => a.top - b.top || a.left - b.left).map(text => text.value).join(' ')
+    return { serial: serials[0].value, source: sourceValue, page: page.number, file: image.src }
   })
 }
 

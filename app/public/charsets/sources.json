@@ -33,6 +33,10 @@
       "sha256": "8b5ec5b74b2ef081f2c96663f0b782b2f60a594a9e8ad4d39b8ba83790898762"
     },
     {
+      "url": "https://www.unicode.org/irg/docs/n1330-PDAM5ExtensionCRemovals.pdf",
+      "sha256": "999fe8c163c46754a2320800e3646e8979e758ae3b9559f9e4c772274f70ce31"
+    },
+    {
       "url": "https://www.unicode.org/irg/docs/n1596r-ExtensionEv6-Directions.pdf",
       "sha256": "a30d85b25b8902c758a9fc66080527083402a2e40f5747baf89d644b25c21339"
     },

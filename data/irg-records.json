@@ -368,6 +368,51 @@
         }
       ],
       "additionalRecords": []
+    },
+    {
+      "id": "ext_c_pdam5_removals",
+      "file": "ext_c_pdam5_records.json",
+      "group": "Proposals",
+      "label": "Ext.C PDAM5 removals",
+      "glyphs": "glyphs/ext-c-pdam5",
+      "names": {
+        "en": "Characters removed from CJK C PDAM5",
+        "zh": "擴展C PDAM5刪除字",
+        "hans": "扩展C PDAM5删除字",
+        "ja": "拡張C PDAM5削除字",
+        "ko": "확장 C PDAM5 삭제자"
+      },
+      "source": {
+        "name": "IRG",
+        "url": "https://www.unicode.org/irg/docs/n1330-PDAM5ExtensionCRemovals.pdf"
+      },
+      "title": "Characters removed from the CJK C PDAM5 ballot",
+      "complete": false,
+      "scope": "The 67 characters that IRGN1330 removed from the CJK C PDAM5 ballot before publication, with the code and source printed for each. The code is the PDAM5 number; the published Extension C scalar for the same character has not been checked.",
+      "documents": [
+        {
+          "id": "n1330",
+          "document": "IRGN1330",
+          "title": "Request for Removal of Characters in CJK C PDAM5",
+          "source": "IRG Meeting #28",
+          "date": "2007-07-16",
+          "url": "https://www.unicode.org/irg/docs/n1330-PDAM5ExtensionCRemovals.pdf",
+          "status": "Records the 67 characters removed from CJK C in PDAM5, with the decisions in Attachment B. The Ucode column is the amendment's number, not a verified published scalar."
+        }
+      ],
+      "extract": [
+        {
+          "document": "n1330",
+          "pages": [
+            2
+          ],
+          "matcher": "codes-left",
+          "serialPattern": "^[0-9A-F]{5}$",
+          "sourcePattern": "^(?:[A-Z]{2,3}\\d?-[0-9A-Z]{2,}|[A-Z][A-Z0-9]{4,}|G_[A-Z0-9]+)$",
+          "count": 67
+        }
+      ],
+      "additionalRecords": []
     }
   ]
 }

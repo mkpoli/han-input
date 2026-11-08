@@ -15,6 +15,7 @@ Find accepts one character-set filter at a time. An empty query browses its mapp
 | Ext.F withdrawn · JMJ | 26 MJ glyphs printed in IRGN1924 with their unification targets |
 | Ext.F1 · 50 SAT drops | 50 sequence and Z_SAT pairs from IRGN2041, a list without glyphs |
 | Ext.E Macao missing | 20 Macao glyphs from IRGN1854, 13 unified and seven missing from the Ext E list |
+| Ext.C PDAM5 removals | 67 glyphs from IRGN1330, keyed by the amendment's own code and source |
 | CNS11643全字庫 | All 123 exact registration-source labels from the 2026-08-05 bulk release, across Han, other scripts and symbols |
 
 Each set has a unique character count and a source-row count. A source row joins through its assigned scalars, or through its private-use glyph slot where no scalar is assigned. A row whose only glyph is an Ideographic Description Sequence stays out of the scalar count and is kept as a record on the set. Repeated mappings, variation sequences and IDS descriptions can make the counts differ. Draft row numbers never establish Unicode assignments.
