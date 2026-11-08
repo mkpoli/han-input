@@ -32,6 +32,10 @@ bun run verify          # unit tests, type check, messages
 `cache/mcpdict/x`. `bun scripts/build_wiktionary.mjs <dir>` builds the meaning index from Wiktionary dumps
 before `build:data` reads it. The generated `app/public/data/` is about 300 MB and is not committed.
 
+The Ext.E withdrawn set carries the glyphs printed in IRGN1841. `bun scripts/import_ext_e_glyphs.mjs`
+cuts them from the pinned PDF (poppler and ImageMagick), matches each to the serial and G source printed
+beside it, and writes `app/public/charsets/glyphs/ext-e/`.
+
 The PUA converter uses the committed [MOE mapping snapshot](data/moe-pua.json), independently of the
 search tables. `bun scripts/import_moe_pua.mjs` imports the checksum-pinned official source;
 `bun scripts/import_moe_pua_variants.mjs [Unihan_Variants.txt]` rebuilds the Unihan variant index from

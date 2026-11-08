@@ -94,17 +94,18 @@ for (const line of blocksBytes.toString('utf8').split('\n')) {
   writeFileSync(join(OUT, `${id}.txt`), members.join(''))
   catalogue.push({ id, group: 'Unicode blocks', label: name, names: { en: name }, chars: members.length, total: members.length, source: { name: 'Unicode 18.0.0', url: blocksUrl } })
 }
-const withdrawals = JSON.parse(readFileSync(join(OUT, 'ext_e_records.json'), 'utf8'))
-for (const url of new Set([withdrawals.n1841.sourceUrl, ...withdrawals.additionalRecords.flatMap((/** @type {{evidenceUrls:string[]}} */ row) => row.evidenceUrls)])) {
+const proposals = JSON.parse(readFileSync(join(OUT, 'ext_e_records.json'), 'utf8'))
+for (const url of new Set([...proposals.documents.map(/** @param {{url:string}} document */ document => document.url), ...proposals.records.flatMap(/** @param {{evidenceUrls?:string[]}} record */ record => record.evidenceUrls ?? [])])) {
   if (!inputs.some(input => input.url === url)) record(url, readFileSync(await fetchOnce(url)))
 }
-const withdrawalMembers = [...new Set(withdrawals.additionalRecords.filter((/** @type {{mappedUnicode?:string}} */ row) => row.mappedUnicode).map((/** @type {{mappedUnicode:string}} */ row) => String.fromCodePoint(parseInt(row.mappedUnicode.slice(2), 16))))].join('')
+const withdrawalMembers = [...new Set(proposals.records.filter(/** @param {{mappedUnicode?:string}} record */ record => record.mappedUnicode).map(/** @param {{mappedUnicode:string}} record */ record => String.fromCodePoint(parseInt(record.mappedUnicode.slice(2), 16))))].join('')
 writeFileSync(join(OUT, 'ext_e_withdrawal_records.txt'), withdrawalMembers)
 catalogue.push({
-  id: 'ext_e_withdrawal_records', group: 'Historical', label: 'Ext.E withdrawals · partial',
-  names: { en: 'Extension E withdrawal records (partial mappings)', zh: '擴展E撤銷記錄（部分對應）', hans: '扩展E撤销记录（部分对应）', ja: '拡張E撤回記録（一部対応）', ko: '확장 E 철회 기록 (일부 대응)' },
-  chars: [...withdrawalMembers].length, total: withdrawals.n1841.count + withdrawals.additionalRecords.length,
-  source: { name: 'IRG', url: 'https://www.unicode.org/irg/docs/n1896-EditorialReport.pdf', records: '/charsets/ext_e_records.json' },
+  id: 'ext_e_withdrawal_records', group: 'Proposals', label: 'Ext.E withdrawn',
+  names: { en: 'Extension E withdrawn characters', zh: '擴展E撤銷字', hans: '扩展E撤销字', ja: '拡張E撤回字', ko: '확장 E 철회자' },
+  chars: [...withdrawalMembers].length, total: proposals.records.length,
+  records: { file: '/charsets/ext_e_records.json', count: proposals.records.length, glyphs: proposals.records.filter(/** @param {{glyph?:string}} record */ record => record.glyph).length },
+  source: { name: 'IRG', url: 'https://www.unicode.org/irg/docs/n1841-ExtensionEWithdraw.pdf' },
 })
 const cns = JSON.parse(readFileSync(join(OUT, 'cns-sources.json'), 'utf8'))
 const propertiesPath = await fetchOnce(cns.sourceUrl)

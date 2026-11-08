@@ -51,6 +51,13 @@ export function go(page, method = '') {
   scrollTo(0, 0)
 }
 
+/** Close the open character, leaving a record card free to take its place. */
+export function close() {
+  if (!route.c) return
+  route.c = ''
+  history.replaceState(null, '', href(route))
+}
+
 /** @param {string} char */
 export function open(char) {
   if (route.c === char) return

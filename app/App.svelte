@@ -8,6 +8,7 @@
   import Writing from './ui/Writing.svelte'
   import SettingsRows from './ui/SettingsRows.svelte'
   import Card from './ui/Card.svelte'
+  import ProposalCard from './ui/ProposalCard.svelte'
   import SiteSelect from './ui/SiteSelect.svelte'
   import Find from './pages/Find.svelte'
   import Methods from './pages/Methods.svelte'
@@ -72,7 +73,7 @@
     {:else}<About />{/if}
   </main>
 
-  <aside class="card" class:open={ui.sheet} aria-label={t('card.label')}><Card /></aside>
+  <aside class="card" class:open={ui.sheet} aria-label={t('card.label')}>{#if ui.record && !route.c}<ProposalCard />{:else}<Card />{/if}</aside>
 
   <div class="dock"><Writing /></div>
 

@@ -2,13 +2,14 @@
   // Find: one box for whatever the reader has. A clue is tried as a code in every method at once and
   // as a word of meaning. Several clues, split by spaces, leave the characters that fit them all.
   import { route, setQuery, setCharset, link, go } from '../lib/route.svelte.js'
-  import { loadCharsets, loadCharset, filterAnswer, browseCharset } from '../lib/charsets.js'
+  import { loadCharsets, loadCharset, loadRecords, filterAnswer, browseCharset } from '../lib/charsets.js'
   import { answer, groupHits, intersect, readQuery, tallyReadings } from '../lib/search.js'
   import { loadMethods } from '../lib/data.js'
   import { autofocus } from '../lib/ui.svelte.js'
   import { nameOf, t } from '../lib/i18n.svelte.js'
   import Tiles from '../ui/Tiles.svelte'
   import CharsetFilter from '../ui/CharsetFilter.svelte'
+  import ProposalRecords from '../ui/ProposalRecords.svelte'
 
   const EXAMPLES = ['ユタヘヘミ', 'jnd', 'luong', '端一東平', '30407', 'tsɿ', '氵 12畫', 'river ジ', 'chữ', 'a-1', 'a672', 'U+5B57']
 
@@ -19,6 +20,8 @@
   let common = $state([])
   /** @type {string[]} */
   let browsed = $state([])
+  /** @type {import('../lib/charsets.js').ProposalRecords | null} */
+  let records = $state(null)
   /** @type {import('../lib/charsets.js').Charset[]} */
   let charsets = $state([])
   const chosen = $derived(charsets.find(set => set.id === route.set))
@@ -47,22 +50,26 @@
     answers = []
     common = []
     browsed = []
+    records = null
     failed = false
     busy = true
     ;(async () => {
       try {
+        let entry = null
         if (selected) {
           const catalogue = await loadCharsets()
           if (!active) return
           charsets = catalogue
           catalogueFailed = false
-          if (!catalogue.some(set => set.id === selected)) throw new Error('Unknown character set')
+          entry = catalogue.find(set => set.id === selected) ?? null
+          if (!entry) throw new Error('Unknown character set')
         }
         const membership = selected ? await loadCharset(selected) : null
         if (!active) return
         if (!clues.length) {
           const chars = selected ? await browseCharset(selected) : []
-          if (active) browsed = chars
+          const printed = selected && entry?.records ? await loadRecords(selected) : null
+          if (active) { browsed = chars; records = printed }
           return
         }
         const found = await Promise.all(clues.map(answer))
@@ -133,6 +140,7 @@
       <Tiles chars={browsed} limit={240} label={chosen ? nameOf(chosen.names) : route.set} />
       {#if !browsed.length}<p class="ui-hint">{t('find.none')}</p>{/if}
     </section>
+    {#if records}<ProposalRecords {records} label={chosen ? nameOf(chosen.names) : route.set} />{/if}
   {:else if !query.trim()}
     <section class="ui-section">
       <h2 class="ui-label">{t('find.try')}</h2>

@@ -1,7 +1,7 @@
 import { describe, test, expect, afterEach } from 'bun:test'
 import { readFileSync, readdirSync } from 'node:fs'
 import { mappedMembers, iwdsMembers, scalarExpressions } from '../scripts/charset-members.mjs'
-import { filterAnswer, loadCharsets, loadCharset } from '../app/lib/charsets.js'
+import { filterAnswer, loadCharsets, loadCharset, loadRecords } from '../app/lib/charsets.js'
 import { loadChars, findMeaning } from '../app/lib/data.js'
 import { cnsSourceSets, unihanTSources } from '../scripts/sources/charsets-cns.mjs'
 
@@ -125,10 +125,24 @@ test('snapshot covers every source catalogue and counts match unique scalars', (
   expect(catalogue.find(row => row.id === 'unicode_comp_a_tentative').chars).toBe(0)
   expect(readFileSync(new URL('unicode_ext_e.txt', base), 'utf8')).toContain('𫠠')
   expect(readFileSync(new URL('t1.txt', base), 'utf8')).toContain('字')
-  const withdrawals = JSON.parse(readFileSync(new URL('ext_e_records.json', base), 'utf8'))
-  expect(withdrawals.complete).toBe(false)
-  expect(withdrawals.n1841.rows).toHaveLength(134)
-  expect(new Set(withdrawals.n1841.rows.map(row => row.source)).size).toBe(134)
+  const proposals = JSON.parse(readFileSync(new URL('ext_e_records.json', base), 'utf8'))
+  expect(proposals.complete).toBe(false)
+  const n1841 = proposals.records.filter(record => record.document === 'n1841')
+  expect(n1841).toHaveLength(134)
+  expect(new Set(n1841.map(record => record.serial)).size).toBe(134)
+  expect(new Set(n1841.map(record => record.source)).size).toBe(134)
+  for (const record of n1841) {
+    const png = readFileSync(new URL(record.glyph, base))
+    expect(png.subarray(0, 8)).toEqual(Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]))
+    expect(png.readUInt32BE(16)).toBe(128)
+    expect(png.readUInt32BE(20)).toBe(128)
+  }
+  expect(proposals.records.filter(record => !record.glyph).map(record => record.source ?? record.serial)).toEqual(['V04-486A', 'G_K0642.17', '06721', '06728'])
+  const entry = catalogue.find(row => row.id === 'ext_e_withdrawal_records')
+  expect(entry.group).toBe('Proposals')
+  expect(entry.chars).toBe(3)
+  expect(entry.total).toBe(138)
+  expect(entry.records).toEqual({ file: '/charsets/ext_e_records.json', count: 138, glyphs: 134 })
   const mapped = new Set([...readFileSync(new URL('ext_e_withdrawal_records.txt', base), 'utf8')])
   expect(mapped).toEqual(new Set(['𦱳', String.fromCodePoint(0x2AC66), String.fromCodePoint(0x2AC69)]))
   expect(mapped.has('薓')).toBe(false) // A corrected proposal glyph is not an attested crosswalk.
@@ -140,13 +154,21 @@ afterEach(() => { globalThis.fetch = original })
 test('failed catalogue and payload loads can be retried', async () => {
   globalThis.fetch = async () => new Response('unavailable', { status: 503 })
   await expect(loadCharsets()).rejects.toThrow()
-  globalThis.fetch = async () => Response.json([{ id: 'test', names: { en: 'Test' }, chars: 1 }])
+  globalThis.fetch = async () => Response.json([{ id: 'test', names: { en: 'Test' }, chars: 1 }, { id: 'rec', names: { en: 'Records' }, chars: 0, total: 2, records: { file: '/charsets/rec.json', count: 2, glyphs: 1 } }])
   await loadCharsets()
   globalThis.fetch = async () => new Response('<html>', { headers: { 'content-type': 'text/html' } })
   await expect(loadCharset('test')).rejects.toThrow()
   globalThis.fetch = async () => new Response('字')
   expect([...(await loadCharset('test'))]).toEqual(['字'])
   await expect(loadCharset('../bad')).rejects.toThrow('Unknown character set')
+})
+
+test('printed records load only for a set that declares them and fail closed', async () => {
+  await expect(loadRecords('test')).rejects.toThrow('No records')
+  globalThis.fetch = async () => Response.json({ title: 'Records', complete: false, scope: '', documents: [], records: [{ document: 'n', serial: '1' }] })
+  await expect(loadRecords('rec')).rejects.toThrow('Incomplete')
+  globalThis.fetch = async () => Response.json({ title: 'Records', complete: false, scope: '', documents: [], records: [{ document: 'n', serial: '1' }, { document: 'n', serial: '2' }] })
+  expect((await loadRecords('rec')).records).toHaveLength(2)
 })
 
 test('search-data failures release caches for the Find retry button', async () => {

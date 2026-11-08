@@ -66,6 +66,7 @@
   "charset.error": "Search data could not be loaded.",
   "charset.retry": "Retry",
   "charset.records": "Records",
+  "proposal.page": "page {page}",
   "methods.title": "Every way in",
   "methods.intro": "Open a method to type in it.",
   "methods.filter": "Filter by name",
