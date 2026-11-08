@@ -118,6 +118,7 @@
   "convert.converted": "変換した文字：{count}字",
   "convert.remaining": "残っている私用文字：{count}字",
   "convert.ambiguous": "判定できない外字：{count}",
+  "convert.conflicts": "判定できない外字 {count}件",
   "convert.mapping": "対応表",
   "convert.legacy": "旧外字コード",
   "convert.standard": "Unicode",

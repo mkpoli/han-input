@@ -74,8 +74,11 @@ export function convertPua(text, sourceId = 'moe') {
   let unmapped = 0
   let ambiguous = 0
   let output = ''
+  /** @type {{ code: string, options: { char: string, source: string }[] }[]} */
+  const conflicts = []
   for (const char of text) {
-    const targets = new Set(sources.map(source => source.mappings[char]).filter(Boolean))
+    const options = sources.flatMap(source => char in source.mappings ? [{ char: source.mappings[char], source: source.id }] : [])
+    const targets = new Set(options.map(option => option.char))
     const [target] = targets
     if (targets.size === 1) { output += target; converted++ }
     else if (targets.size === 0) {
@@ -84,7 +87,8 @@ export function convertPua(text, sourceId = 'moe') {
     } else {
       output += char
       ambiguous++
+      conflicts.push({ code: char, options })
     }
   }
-  return { text: output, converted, unmapped, ambiguous }
+  return { text: output, converted, unmapped, ambiguous, conflicts }
 }

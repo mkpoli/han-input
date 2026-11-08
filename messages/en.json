@@ -118,6 +118,7 @@
   "convert.converted": "Converted: {count}",
   "convert.remaining": "Remaining PUA: {count}",
   "convert.ambiguous": "Ambiguous PUA: {count}",
+  "convert.conflicts": "{count} ambiguous codes",
   "convert.mapping": "Mapping table",
   "convert.legacy": "Legacy PUA",
   "convert.standard": "Unicode",
