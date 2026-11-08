@@ -1,0 +1,332 @@
+{
+  "id": "ext_f1_sat_drops",
+  "group": "Proposals",
+  "label": "Ext.F1 · 50 SAT drops",
+  "names": {
+    "en": "SAT characters dropped from CJK F1",
+    "zh": "擴展F1撤銷SAT源字",
+    "hans": "扩展F1撤销SAT源字",
+    "ja": "拡張F1撤回SAT源字",
+    "ko": "확장 F1 SAT 철회자"
+  },
+  "title": "SAT characters asked to be dropped from CJK F1",
+  "complete": false,
+  "scope": "The 50 saturation characters that IRGN2041 asks to drop from the CJK F1 proposal, with the sequence number and SAT source reference printed for each. The document carries no glyph column.",
+  "source": {
+    "name": "IRG",
+    "url": "https://www.unicode.org/irg/docs/n2041-ExtensionF1Withdraw.pdf"
+  },
+  "documents": [
+    {
+      "id": "n2041",
+      "document": "IRGN2041",
+      "title": "Request to drop 50 characters of the SAT proposal in CJK F1",
+      "source": "SAT",
+      "date": "2014-11-14",
+      "url": "https://www.unicode.org/irg/docs/n2041-ExtensionF1Withdraw.pdf",
+      "status": "Asks the IRG to drop 50 characters from CJK F1 in ISO/IEC 10646:2014/PDAM 2.2; one is unified with a G-source character."
+    }
+  ],
+  "records": [
+    {
+      "serial": "00047",
+      "source": "Z_SAT04335",
+      "document": "n2041",
+      "page": 2
+    },
+    {
+      "serial": "00069",
+      "source": "Z_SAT04345",
+      "document": "n2041",
+      "page": 2
+    },
+    {
+      "serial": "00204",
+      "source": "Z_SAT02160",
+      "document": "n2041",
+      "page": 2
+    },
+    {
+      "serial": "00265",
+      "source": "Z_SAT60012",
+      "document": "n2041",
+      "page": 3
+    },
+    {
+      "serial": "00276",
+      "source": "Z_SAT03966",
+      "document": "n2041",
+      "page": 2
+    },
+    {
+      "serial": "00480",
+      "source": "Z_SAT00307",
+      "document": "n2041",
+      "page": 1
+    },
+    {
+      "serial": "00572",
+      "source": "Z_SAT00332",
+      "document": "n2041",
+      "page": 2
+    },
+    {
+      "serial": "00883",
+      "source": "Z_SAT05701",
+      "document": "n2041",
+      "page": 3
+    },
+    {
+      "serial": "00917",
+      "source": "Z_SAT60046",
+      "document": "n2041",
+      "page": 3
+    },
+    {
+      "serial": "00984",
+      "source": "Z_SAT05796",
+      "document": "n2041",
+      "page": 3
+    },
+    {
+      "serial": "01070",
+      "source": "Z_SAT01366",
+      "document": "n2041",
+      "page": 2
+    },
+    {
+      "serial": "01243",
+      "source": "Z_SAT01778",
+      "document": "n2041",
+      "page": 2
+    },
+    {
+      "serial": "01372",
+      "source": "Z_SAT00856",
+      "document": "n2041",
+      "page": 2
+    },
+    {
+      "serial": "01659",
+      "source": "Z_SAT05302",
+      "document": "n2041",
+      "page": 3
+    },
+    {
+      "serial": "01744",
+      "source": "Z_SAT03388",
+      "document": "n2041",
+      "page": 2
+    },
+    {
+      "serial": "01895",
+      "source": "Z_SAT04810",
+      "document": "n2041",
+      "page": 3
+    },
+    {
+      "serial": "01945",
+      "source": "Z_SAT90141",
+      "document": "n2041",
+      "page": 3
+    },
+    {
+      "serial": "02054",
+      "source": "Z_SAT02486",
+      "document": "n2041",
+      "page": 2
+    },
+    {
+      "serial": "02156",
+      "source": "Z_SAT03840",
+      "document": "n2041",
+      "page": 2
+    },
+    {
+      "serial": "02184",
+      "source": "Z_SAT03564",
+      "document": "n2041",
+      "page": 2
+    },
+    {
+      "serial": "02251",
+      "source": "Z_SAT03076",
+      "document": "n2041",
+      "page": 2
+    },
+    {
+      "serial": "02255",
+      "source": "Z_SAT02802",
+      "document": "n2041",
+      "page": 2
+    },
+    {
+      "serial": "02342",
+      "source": "Z_SAT60095",
+      "document": "n2041",
+      "page": 3
+    },
+    {
+      "serial": "02520",
+      "source": "Z_SAT01869",
+      "document": "n2041",
+      "page": 2
+    },
+    {
+      "serial": "02520",
+      "source": "Z_SAT02396",
+      "document": "n2041",
+      "page": 2
+    },
+    {
+      "serial": "02706",
+      "source": "Z_SAT03777",
+      "document": "n2041",
+      "page": 2
+    },
+    {
+      "serial": "02720",
+      "source": "Z_SAT60123",
+      "document": "n2041",
+      "page": 3
+    },
+    {
+      "serial": "02793",
+      "source": "Z_SAT03807",
+      "document": "n2041",
+      "page": 2
+    },
+    {
+      "serial": "02941",
+      "source": "Z_SAT02889",
+      "document": "n2041",
+      "page": 2
+    },
+    {
+      "serial": "02970",
+      "source": "Z_SAT01556",
+      "document": "n2041",
+      "page": 2
+    },
+    {
+      "serial": "02979",
+      "source": "Z_SAT00313",
+      "document": "n2041",
+      "page": 2
+    },
+    {
+      "serial": "02982",
+      "source": "Z_SAT00055",
+      "document": "n2041",
+      "page": 1
+    },
+    {
+      "serial": "03048",
+      "source": "Z_SAT04803",
+      "document": "n2041",
+      "page": 3
+    },
+    {
+      "serial": "03252",
+      "source": "Z_SAT03855",
+      "document": "n2041",
+      "page": 2
+    },
+    {
+      "serial": "03398",
+      "source": "Z_SAT00998",
+      "document": "n2041",
+      "page": 2
+    },
+    {
+      "serial": "03402",
+      "source": "Z_SAT02114",
+      "document": "n2041",
+      "page": 2
+    },
+    {
+      "serial": "03445",
+      "source": "Z_SAT02066",
+      "document": "n2041",
+      "page": 2
+    },
+    {
+      "serial": "03514",
+      "source": "Z_SAT03431",
+      "document": "n2041",
+      "page": 2
+    },
+    {
+      "serial": "03527",
+      "source": "Z_SAT04809",
+      "document": "n2041",
+      "page": 3
+    },
+    {
+      "serial": "03592",
+      "source": "Z_SAT03899",
+      "document": "n2041",
+      "page": 2
+    },
+    {
+      "serial": "03623",
+      "source": "Z_SAT01373",
+      "document": "n2041",
+      "page": 2
+    },
+    {
+      "serial": "03819",
+      "source": "Z_SAT02590",
+      "document": "n2041",
+      "page": 2
+    },
+    {
+      "serial": "03879",
+      "source": "Z_SAT60177",
+      "document": "n2041",
+      "page": 3
+    },
+    {
+      "serial": "03908",
+      "source": "Z_SAT03090",
+      "document": "n2041",
+      "page": 2
+    },
+    {
+      "serial": "03952",
+      "source": "Z_SAT03269",
+      "document": "n2041",
+      "page": 2
+    },
+    {
+      "serial": "04168",
+      "source": "Z_SAT01739",
+      "document": "n2041",
+      "page": 2
+    },
+    {
+      "serial": "04187",
+      "source": "Z_SAT00268",
+      "document": "n2041",
+      "page": 1
+    },
+    {
+      "serial": "04310",
+      "source": "Z_SAT00966",
+      "document": "n2041",
+      "page": 2
+    },
+    {
+      "serial": "04458",
+      "source": "Z_SAT04194",
+      "document": "n2041",
+      "page": 2
+    },
+    {
+      "serial": "04473",
+      "source": "Z_SAT03483",
+      "document": "n2041",
+      "page": 2
+    }
+  ]
+}

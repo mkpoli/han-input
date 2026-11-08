@@ -168,7 +168,10 @@ try {
       }
     })
   }
-  const ids = catalogue.find(set => set.records && set.records.glyphs === 0)
+  const ids = catalogue.find(set => set.records && set.records.glyphs === 0 && (() => {
+    const data = JSON.parse(readFileSync(join(DIST, 'charsets', set.records.file.replace('/charsets/', '')), 'utf8'))
+    return data.records.some(/** @param {{kind?:string}} record */ record => record.kind === 'ids')
+  })())
   const idsRecords = ids?.records
   if (ids && idsRecords) {
     await check(`description records are listed as text: ${ids.id}`, async () => {

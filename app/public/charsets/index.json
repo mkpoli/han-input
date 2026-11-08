@@ -2697,6 +2697,31 @@
     }
   },
   {
+    "id": "ext_f1_sat_drops",
+    "group": "Proposals",
+    "label": "Ext.F1 · 50 SAT drops",
+    "names": {
+      "en": "SAT characters dropped from CJK F1",
+      "zh": "擴展F1撤銷SAT源字",
+      "hans": "扩展F1撤销SAT源字",
+      "ja": "拡張F1撤回SAT源字",
+      "ko": "확장 F1 SAT 철회자"
+    },
+    "chars": 0,
+    "total": 50,
+    "encoded": 0,
+    "unencoded": 50,
+    "source": {
+      "name": "IRG",
+      "url": "https://www.unicode.org/irg/docs/n2041-ExtensionF1Withdraw.pdf"
+    },
+    "records": {
+      "file": "/charsets/ext_f1_sat_records.json",
+      "count": 50,
+      "glyphs": 0
+    }
+  },
+  {
     "id": "ext_e_withdrawal_records",
     "group": "Proposals",
     "label": "Ext.E withdrawn",

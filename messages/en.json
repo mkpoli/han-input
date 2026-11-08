@@ -85,7 +85,7 @@
   "charset.encoded": "In Unicode",
   "charset.unencodedShort": "Unencoded",
   "charset.coverageLabel": "{percent}% unencoded: {encoded} in Unicode, {unencoded} unencoded.",
-  "charset.recordsNote": "Records are proposal entries; each glyph is the form the document printed.",
+  "charset.recordsNote": "Records are proposal entries; each row keeps the codes the document printed.",
   "proposal.unifiedWith": "Unified with",
   "proposal.page": "page {page}",
   "methods.title": "Every way in",
