@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'bun:test'
-import { addDescription, partsOf, runsOf, writeOut } from '../scripts/sources/ids.mjs'
+import { addDescription, alignDescriptions, partsOf, runsOf, writeOut } from '../scripts/sources/ids.mjs'
 
 /** @returns {Map<string, { text: string, notation: string, regions: string, sources: string[] }[]>} */
 const empty = () => new Map()
@@ -61,6 +61,20 @@ describe('runs', () => {
   })
   test('finds no run in a description shorter than the length', () => {
     expect(runsOf('口', [2, 3])).toEqual(new Set())
+  })
+})
+
+describe('equivalences', () => {
+  test('aligns a numbered component with the CHISE entity in its place', () => {
+    const pairs = alignDescriptions(
+      new Map([['惠', new Set(['⿱{7}心'])], ['專', new Set(['⿱{7}寸'])]]),
+      new Map([['惠', new Set(['⿱&CDP-8BD0;心'])], ['專', new Set(['⿱&CDP-8BD0;寸'])]]),
+    )
+    expect(pairs.get('CDP-8BD0').get(7)).toBe(2)
+  })
+  test('leaves descriptions that differ by more than one operand apart', () => {
+    const pairs = alignDescriptions(new Map([['惠', new Set(['⿱{7}心'])]]), new Map([['惠', new Set(['⿱&CDP-8BD0;日'])]]))
+    expect(pairs.get('CDP-8BD0')).toBeUndefined()
   })
 })
 

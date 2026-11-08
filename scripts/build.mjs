@@ -6,7 +6,8 @@
 //   p/<plane>.gz     parts to the characters written with them
 //   g/<bucket>.gz    runs of parts to the characters written with them, as sources spell them
 //   i/<plane>.gz     each character's descriptions as the source writes them, and the sources
-//   ids-components.json  BabelStone's numbered components: PUA character, description, fragment
+//   ids-components.json  BabelStone's numbered components: PUA character, description, fragment,
+//                        and the CHISE entities each aligns with
 //   chars.tsv.gz     code point, rank, strokes, radical
 //   methods.json     what the above were made from
 import { appendFileSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'

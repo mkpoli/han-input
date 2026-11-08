@@ -35,6 +35,7 @@
   "card.numberUnknown": "BabelStone 구성 요소 {n}",
   "card.unnamed": "BabelStone이 이름 붙일 수 없는 부분 표시",
   "card.entity": "CHISE 구성 요소 {name}",
+  "card.entityNumber": "CHISE 구성 요소 {name}, BabelStone 구성 요소 {n}: {description}",
   "ids.source.babelstone": "BabelStone",
   "ids.source.chise": "CHISE",
   "ids.source.project": "이 프로젝트",

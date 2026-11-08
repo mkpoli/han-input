@@ -40,14 +40,14 @@
   let writings = $state([])
   /** @type {import('../../src/variants.js').CharacterVariant[]} */
   let variants = $state([])
-  /** @type {Record<string, import('../lib/notation.js').Component>} */
-  let components = $state({})
+  /** @type {import('../lib/notation.js').Components} */
+  let components = $state({ numbers: {}, entities: {} })
   let filter = $state('')
 
   loadMethods().then(list => { methods = list })
   // The card is empty on most page loads, and the variety list is a megabyte; it waits for a
   // character to open.
-  fetch('/data/ids-components.json').then(response => response.ok ? response.json() : {})
+  fetch('/data/ids-components.json').then(response => response.ok ? response.json() : { numbers: {}, entities: {} })
     .then(doc => { components = doc }).catch(() => {})
   $effect(() => {
     const at = char
@@ -71,6 +71,7 @@
       case 'card.numberUnknown': return t('card.numberUnknown', params)
       case 'card.unnamed': return t('card.unnamed', params)
       case 'card.entity': return t('card.entity', params)
+      case 'card.entityNumber': return t('card.entityNumber', params)
       default: return undefined
     }
   }
