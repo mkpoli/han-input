@@ -66,14 +66,85 @@ const FRAGMENTS = (() => {
 const NOTE6 = new Map()
 const COMPONENT_LINE = /^#\t\{(\d+)\}\t(.+?) \(([0-9A-F]{4,6})(?: ([^)]*))?\)\t(.*)$/
 
-/** Every numbered component, its PUA character, description and the fragment that writes it out, for
- * the card to draw. Valid after `readDescriptions()` has read IDS.TXT.
- * @returns {Record<string, { pua: string, description: string, fragment?: string }>} */
+/** One token of a description: `{n}`, `&name;`, or one character. */
+const TOKEN = /\{(\d+)\}|&([^;]+);|[\s\S]/g
+
+/** @param {string} text @returns {string[]} */
+const tokenize = text => [...text.matchAll(TOKEN)].map(match => match[0])
+
+/** CHISE entities and the numbered components they aligned with, and how often. */
+let equivalents = new Map()
+
+/**
+ * Align BabelStone's and CHISE's descriptions of one character, token by token, and count the pairs
+ * where a single operand differs as `{n}` against `&name;`. A pair seen on several characters is one
+ * component under two names.
+ * @param {Map<string, Set<string>>} babel @param {Map<string, Set<string>>} chise
+ * @returns {Map<string, Map<number, number>>}
+ */
+export function alignDescriptions(babel, chise) {
+  /** @type {Map<string, Map<number, number>>} */
+  const pairs = new Map()
+  /** @param {string} entity @param {string} number */
+  const count = (entity, number) => {
+    let byNumber = pairs.get(entity)
+    if (!byNumber) pairs.set(entity, byNumber = new Map())
+    byNumber.set(Number(number), (byNumber.get(Number(number)) ?? 0) + 1)
+  }
+  for (const [char, written] of babel) {
+    const theirs = chise.get(char)
+    if (!theirs) continue
+    for (const b of written) {
+      const bt = tokenize(b)
+      for (const c of theirs) {
+        const ct = tokenize(c)
+        if (bt.length !== ct.length) continue
+        /** @type {[string, string][]} */
+        const diff = []
+        for (let i = 0; i < bt.length; i++) if (bt[i] !== ct[i]) diff.push([bt[i], ct[i]])
+        if (diff.length !== 1) continue
+        for (const [a, d] of [diff[0], [diff[0][1], diff[0][0]]]) {
+          const numbered = /^\{(\d+)\}$/.exec(a), entity = /^&([^;]+);$/.exec(d)
+          if (numbered && entity) count(entity[1], numbered[1])
+        }
+      }
+    }
+  }
+  return pairs
+}
+
+/**
+ * Every numbered component, its PUA character, description and the fragment that writes it out, and
+ * the CHISE entities it aligns with, for the card to draw. Valid after `readDescriptions()`.
+ * @returns {{ numbers: Record<string, { pua: string, description: string, fragment?: string, chise?: { name: string, count: number }[] }>,
+ *   entities: Record<string, { number: number, count: number }> }}
+ */
 export function components() {
-  /** @type {Record<string, { pua: string, description: string, fragment?: string }>} */
-  const out = {}
-  for (const [number, info] of NOTE6) out[number] = { pua: info.pua, description: info.description, fragment: FRAGMENTS.get(number) ?? info.fragment }
-  return out
+  /** @type {Map<number, { name: string, count: number }[]>} */
+  const byNumber = new Map()
+  for (const [entity, counts] of equivalents) {
+    for (const [number, count] of counts) {
+      const list = byNumber.get(number) ?? []
+      list.push({ name: entity, count })
+      byNumber.set(number, list)
+    }
+  }
+  /** @type {Record<string, { pua: string, description: string, fragment?: string, chise?: { name: string, count: number }[] }>} */
+  const numbers = {}
+  for (const [number, info] of NOTE6) {
+    const fragment = FRAGMENTS.get(number) ?? info.fragment
+    const chise = (byNumber.get(number) ?? []).sort((a, b) => b.count - a.count || a.name.localeCompare(b.name))
+    numbers[number] = { pua: info.pua, description: info.description, ...(fragment ? { fragment } : {}), ...(chise.length ? { chise } : {}) }
+  }
+  /** An entity maps to one component when its highest count is the only highest and at least two
+   * characters attest it; a tie or a single sighting is kept in the number's list, not drawn.
+   * @type {Record<string, { number: number, count: number }>} */
+  const entities = {}
+  for (const [entity, counts] of equivalents) {
+    const ranked = [...counts].sort((a, b) => b[1] - a[1] || a[0] - b[0])
+    if (ranked.length && ranked[0][1] >= 2 && (ranked.length === 1 || ranked[0][1] > ranked[1][1])) entities[entity] = { number: ranked[0][0], count: ranked[0][1] }
+  }
+  return { numbers, entities }
 }
 
 /** Write out the numbered components a sequence names, at any depth. A number note 6 gives no
@@ -113,6 +184,10 @@ export async function readDescriptions() {
   /** @type {Map<string, Description[]>} */
   const descriptions = new Map()
   const babel = readFileSync(await fetchOnce(BABELSTONE.url, 'babelstone-IDS.TXT'), 'utf8')
+  /** @type {Map<string, Set<string>>} */
+  const babelWritten = new Map()
+  /** @type {Map<string, Set<string>>} */
+  const chiseWritten = new Map()
   NOTE6.clear()
   for (const line of babel.split(/\r?\n/)) {
     const note = COMPONENT_LINE.exec(line)
@@ -126,6 +201,8 @@ export async function readDescriptions() {
       const match = BODY.exec(sequence)
       if (!match) continue
       addDescription(descriptions, char, writeOut(match[1]), match[1], match[2], 'babelstone')
+      if (!babelWritten.has(char)) babelWritten.set(char, new Set())
+      ;/** @type {Set<string>} */ (babelWritten.get(char)).add(match[1])
     }
   }
   for (const [file, digest] of CHISE.files) {
@@ -139,8 +216,11 @@ export async function readDescriptions() {
       // The character itself, or a single component, says nothing the parts index does not already know.
       if (![...text].some(c => OPERATORS.has(c))) continue
       addDescription(descriptions, char, writeOut(text), text, '', 'chise')
+      if (!chiseWritten.has(char)) chiseWritten.set(char, new Set())
+      ;/** @type {Set<string>} */ (chiseWritten.get(char)).add(text)
     }
   }
+  equivalents = alignDescriptions(babelWritten, chiseWritten)
   return descriptions
 }
 

@@ -44,8 +44,11 @@ Discord discussion of 2026-10-27, and the works themselves were not read.
 BabelStone writes some parts by number. Where note 6 of its file gives the IDS that writes the
 number out, the card draws it ({12}, the right of 龍, as ⿷己三); a number the note leaves without a
 fragment is drawn from BabelStone Han PUA's glyph for it. A part drawn this way is underlined with
-dots and shows the number and note 6's description on hover. BabelStone's `？` for an unnamed part
-and CHISE's entity names have no character to draw, so they stay as written and carry the same mark.
+dots and shows the number and note 6's description on hover. Where CHISE's description of a
+character differs from BabelStone's only in one operand, and that operand is a CHISE entity against a
+number, the two are taken for one component: the entity is drawn as that number's glyph and the
+hover text names both. BabelStone's `？` for an unnamed part, and an entity with no such alignment,
+have no character to draw, so they stay as written and carry the same mark.
 
 The research behind these choices, with every candidate and what was checked, is in
 [`research-input-methods.md`](research-input-methods.md) and

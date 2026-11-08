@@ -35,6 +35,7 @@
   "card.numberUnknown": "BabelStone の部品 {n}",
   "card.unnamed": "BabelStone が名づけられない部品のしるし",
   "card.entity": "CHISE の部品 {name}",
+  "card.entityNumber": "CHISE の部品 {name}、BabelStone の部品 {n}：{description}",
   "ids.source.babelstone": "BabelStone",
   "ids.source.chise": "CHISE",
   "ids.source.project": "このプロジェクト",
