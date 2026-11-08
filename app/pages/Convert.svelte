@@ -13,6 +13,12 @@
   const matches = $derived(puaTable(sourceId).filter(({ legacy, standard, source }) =>
     !needle || codePoint(legacy).toLowerCase().includes(needle) || codePoint(standard).toLowerCase().includes(needle) || standard.includes(needle) || source.includes(needle)))
   const rows = $derived(matches.slice(0, 100))
+  const puaInInput = $derived.by(() => {
+    /** @type {Map<string, number>} */
+    const counts = new Map()
+    for (const char of input) if (/\p{Co}/u.test(char)) counts.set(char, (counts.get(char) ?? 0) + 1)
+    return [...counts]
+  })
 
   /** @param {MouseEvent} event @param {string} char */
   function show(event, char) {
@@ -35,6 +41,13 @@
         <button class="ui-button" data-size="sm" type="button" disabled={!input} onclick={() => { input = '' }}>{t('writing.clear')}</button>
       </div>
       <textarea id="convert-input" class="ui-textarea" data-primary rows="7" bind:value={input} placeholder={t('convert.placeholder')} spellcheck="false" autocomplete="off" autocapitalize="off" dir="auto"></textarea>
+      {#if puaInInput.length}
+        <div class="pua-preview" aria-label={t('convert.puaInInput')}>
+          {#each puaInInput as [char, count] (char)}
+            <span class="pua-box"><span class="ui-mono">{codePoint(char)}</span>{#if count > 1}<span class="pua-count">×{count}</span>{/if}</span>
+          {/each}
+        </div>
+      {/if}
     </div>
     <div class="ui-field">
       <div class="field-head">
@@ -106,6 +119,9 @@
 <style>
   .editors{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:var(--ui-space-lg)}
   .field-head{display:flex;align-items:center;justify-content:space-between;gap:var(--ui-space-sm);flex-wrap:wrap}
+  .pua-preview{display:flex;flex-wrap:wrap;gap:4px;margin-block-start:var(--ui-space-2xs)}
+  .pua-box{display:inline-flex;align-items:center;gap:3px;padding:1px 6px;border:1px dashed var(--ui-color-border-strong);border-radius:3px;color:var(--ui-color-ink-soft);font-size:var(--ui-text-xs)}
+  .pua-count{font-size:10px;color:var(--ui-color-ink-muted)}
   .field-tools{display:flex;align-items:center;gap:var(--ui-space-2xs)}
   .field-tools select{inline-size:auto;font-size:var(--ui-text-xs);padding-block:2px}
   textarea{font-size:var(--ui-text-lg);min-block-size:180px}
