@@ -61,6 +61,10 @@
       "sha256": "8f2ad337c4748f679001b0bd6a5f0e6bc0129a7c95d91378e5fa247df796a804"
     },
     {
+      "url": "https://www.unicode.org/irg/docs/n2041-ExtensionF1Withdraw.pdf",
+      "sha256": "8712fff06b159de6b6af7aaa658193bd12ee6af490d2bfcf66515e24270a2210"
+    },
+    {
       "url": "https://zi.tools/api/ma/ma/1k8myqp9o8zxkvdpbqdhrfs6yfx5bk2t.json",
       "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
     },

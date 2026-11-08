@@ -11,6 +11,7 @@
   const LIMIT = 240
   const shown = $derived(records.records.slice(0, LIMIT))
   const idsMode = $derived(records.records.some(record => record.kind === 'ids'))
+  const textOnly = $derived(records.records.some(record => !record.glyph && record.kind !== 'ids'))
 
   /** @param {import('../lib/charsets.js').ProposalRecord} record */
   const code = record => record.source ?? record.serial ?? ''
@@ -30,7 +31,7 @@
       {/each}
     </ol>
   {:else}
-    <div class="ui-tiles records" role="listbox" aria-label={`${label} ${t('charset.records')}`}>
+    <div class="ui-tiles records" class:text-only={textOnly} role="listbox" aria-label={`${label} ${t('charset.records')}`}>
       {#each shown as record, i (record.document + ':' + code(record) + ':' + i)}
         <button class="ui-tile" type="button" role="option" aria-selected={ui.record?.record === record}
           title={[code(record), sourceName(record), documents.get(record.document)?.document].filter(Boolean).join(' · ')}
@@ -48,6 +49,8 @@
   .records .ui-tile{grid-template-rows:1fr;padding:3px}
   .records img{inline-size:100%;block-size:auto;min-inline-size:0}
   .code{font-size:var(--ui-text-2xs);overflow-wrap:anywhere}
+  .text-only{grid-template-columns:repeat(auto-fill,minmax(104px,1fr))}
+  .text-only .code{white-space:nowrap}
 .ids-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:4px;margin:0;padding:0;list-style:none}
 .ids-list li{font-family:'Han Ext','Noto Sans CJK JP','Source Han Sans JP',var(--ui-font-serif),serif;font-size:18px;line-height:1.35;padding:4px 6px;border:1px solid var(--ui-color-border);border-radius:var(--ui-radius-sm);overflow-wrap:anywhere}
   @media (prefers-color-scheme:dark){:global(:root:not([data-theme='light'])) .records img{filter:invert(1)}}

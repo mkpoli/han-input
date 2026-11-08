@@ -274,6 +274,53 @@
         }
       ],
       "additionalRecords": []
+    },
+    {
+      "id": "ext_f1_sat_drops",
+      "file": "ext_f1_sat_records.json",
+      "group": "Proposals",
+      "label": "Ext.F1 · 50 SAT drops",
+      "glyphs": "glyphs/ext-f1-sat",
+      "names": {
+        "en": "SAT characters dropped from CJK F1",
+        "zh": "擴展F1撤銷SAT源字",
+        "hans": "扩展F1撤销SAT源字",
+        "ja": "拡張F1撤回SAT源字",
+        "ko": "확장 F1 SAT 철회자"
+      },
+      "source": {
+        "name": "IRG",
+        "url": "https://www.unicode.org/irg/docs/n2041-ExtensionF1Withdraw.pdf"
+      },
+      "title": "SAT characters asked to be dropped from CJK F1",
+      "complete": false,
+      "scope": "The 50 saturation characters that IRGN2041 asks to drop from the CJK F1 proposal, with the sequence number and SAT source reference printed for each. The document carries no glyph column.",
+      "documents": [
+        {
+          "id": "n2041",
+          "document": "IRGN2041",
+          "title": "Request to drop 50 characters of the SAT proposal in CJK F1",
+          "source": "SAT",
+          "date": "2014-11-14",
+          "url": "https://www.unicode.org/irg/docs/n2041-ExtensionF1Withdraw.pdf",
+          "status": "Asks the IRG to drop 50 characters from CJK F1 in ISO/IEC 10646:2014/PDAM 2.2; one is unified with a G-source character."
+        }
+      ],
+      "extract": [
+        {
+          "document": "n2041",
+          "pages": [
+            1,
+            2,
+            3
+          ],
+          "matcher": "text-pairs",
+          "serialPattern": "^\\d{4,5}$",
+          "sourcePattern": "^Z_SAT\\d+$",
+          "count": 50
+        }
+      ],
+      "additionalRecords": []
     }
   ]
 }

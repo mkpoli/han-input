@@ -13,10 +13,10 @@ import { parsePages, rowsFor } from './sources/irg.mjs'
 /** @typedef {{id:string, document:string, title:string, source:string, date:string, url:string, status?:string}} CuratedDocument */
 /** @typedef {{serial?:string|null, source?:string|null, document:string, status?:string, mappedUnicode?:string|null, mappedCharacter?:string, mappingKind?:string, evidenceUrls?:string[], mappingEvidence?:string}} CuratedRecord */
 /** @typedef {import('./sources/irg.mjs').Matcher} Matcher */
-/** @typedef {{document:string, pages:number[], matcher:Matcher, serialPattern:string, sourcePattern:string, leftGap?:number, count:number}} ExtractStep */
+/** @typedef {{document:string, pages:number[], matcher:Matcher, serialPattern:string, sourcePattern:string, leftGap?:number, status?:string, count:number}} ExtractStep */
 /** @typedef {{id:string, file:string, group:string, label:string, glyphs:string, names:{en:string,zh?:string,hans?:string,ja?:string,ko?:string}, title:string, complete:boolean, scope:string, source:{name:string,url:string}, documents:CuratedDocument[], extract:ExtractStep[], additionalRecords:CuratedRecord[]}} CuratedSet */
 /** @typedef {{sets:CuratedSet[]}} Curated */
-/** @typedef {{serial:string, source:string, target?:string, document:string, page:number, glyph:string, from:string}} Row */
+/** @typedef {{serial:string|null, source:string, target?:string, document:string, page:number, glyph:string, from:string, status?:string}} Row */
 
 const ROOT = join(import.meta.dirname, '..')
 const OUT = join(ROOT, 'app/public/charsets')
@@ -63,19 +63,20 @@ try {
         if (!page) throw new Error(`${document.document} has no page ${number}`)
         let pageRows
         try { pageRows = rowsFor(page, step.matcher, step) } catch (error) { throw new Error(`${set.id}/${document.document}: ${/** @type {Error} */ (error).message}`) }
-        for (const row of pageRows) found.push({ ...row, document: document.id, glyph: `${set.glyphs}/${row.serial}.png`, from: row.file })
+        for (const row of pageRows) found.push({ ...row, document: document.id, glyph: row.file ? `${set.glyphs}/${row.serial ?? row.source}.png` : '', from: row.file, ...(step.status ? { status: step.status } : {}) })
       }
       if (found.length !== step.count) throw new Error(`${set.id}: ${found.length} glyphs for ${step.count} listed characters`)
       rows.push(...found)
     }
-    rows.sort((a, b) => a.serial.localeCompare(b.serial))
-    if (new Set(rows.map(row => row.serial)).size !== rows.length) throw new Error(`${set.id}: repeated serial`)
+    rows.sort((a, b) => (a.serial ?? a.source).localeCompare(b.serial ?? b.source))
+    const serials = rows.filter(row => row.from).map(row => row.serial).filter(Boolean)
+    if (new Set(serials).size !== serials.length) throw new Error(`${set.id}: repeated serial`)
     if (new Set(rows.map(row => row.source)).size !== rows.length) throw new Error(`${set.id}: repeated source`)
 
     const glyphDir = join(OUT, set.glyphs)
     rmSync(glyphDir, { recursive: true, force: true })
     mkdirSync(glyphDir, { recursive: true })
-    for (const row of rows) {
+    for (const row of rows.filter(entry => entry.from)) {
       const target = join(OUT, row.glyph)
       copyFileSync(row.from, target)
       const corner = Number(execFileSync('magick', ['identify', '-format', '%[fx:u.p{0,0}]', target]).toString().trim())
@@ -89,7 +90,7 @@ try {
       source: set.source,
       documents: set.documents,
       records: [
-        ...rows.map(({ serial, source, target, document, page, glyph }) => ({ serial, source, document, page, glyph, ...(target ? { unifiedWith: target } : {}) })),
+        ...rows.map(({ serial, source, target, document, page, glyph, status }) => ({ ...(serial ? { serial } : {}), source, document, page, ...(glyph ? { glyph } : {}), ...(target ? { unifiedWith: target } : {}), ...(status ? { status } : {}) })),
         ...set.additionalRecords,
       ],
     }

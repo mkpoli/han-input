@@ -85,7 +85,7 @@
   "charset.encoded": "収録済み",
   "charset.unencodedShort": "未収録",
   "charset.coverageLabel": "{percent}% 未収録：収録済み {encoded} 字、未収録 {unencoded} 字。",
-  "charset.recordsNote": "記録は提案項目で、字形は文書に印刷されたものです。",
+  "charset.recordsNote": "記録は提案項目で、文書に印刷された符号を保ちます。",
   "proposal.unifiedWith": "統合先",
   "proposal.page": "{page}ページ",
   "methods.title": "すべての入力法",

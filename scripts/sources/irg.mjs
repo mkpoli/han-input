@@ -4,7 +4,7 @@
 /** @typedef {{top:number, left:number, width:number, height:number, value:string}} TextBox */
 /** @typedef {{top:number, left:number, width:number, height:number, src:string}} ImageBox */
 /** @typedef {{number:number, text:TextBox[], images:ImageBox[]}} PageBoxes */
-/** @typedef {{serial:string, source:string, target?:string, page:number, file:string}} Row */
+/** @typedef {{serial:string|null, source:string, target?:string, page:number, file:string}} Row */
 /** @typedef {{serialPattern:string, sourcePattern:string, leftGap?:number}} Patterns */
 
 /** @param {string} xml @returns {PageBoxes[]} */
@@ -55,7 +55,43 @@ export function codeTextRows(page, patterns) {
   })
 }
 
-/** @typedef {'codes-left' | 'code-text' | 'glyph-pairs'} Matcher */
+/** @typedef {'codes-left' | 'code-text' | 'code-only' | 'text-pairs' | 'glyph-pairs'} Matcher */
+
+/**
+ * A list without glyphs: every row prints a sequence number and a source id on one line.
+ * @param {PageBoxes} page @param {Patterns} patterns @returns {Row[]}
+ */
+export function textPairRows(page, patterns) {
+  const serial = new RegExp(`^${patterns.serialPattern}$`)
+  const source = new RegExp(`^${patterns.sourcePattern}$`)
+  const rows = []
+  const tops = [...new Set(page.text.map(text => text.top))].sort((a, b) => a - b)
+  for (const top of tops) {
+    const line = page.text.filter(text => Math.abs(text.top - top) <= 6)
+    const serials = line.filter(text => serial.test(text.value))
+    const sources = line.filter(text => source.test(text.value))
+    if (!serials.length && !sources.length) continue
+    if (serials.length !== 1 || sources.length !== 1) throw new Error(`Page ${page.number}: line at ${top} has ${serials.length} serial and ${sources.length} source candidates`)
+    rows.push({ serial: serials[0].value, source: sources[0].value, page: page.number, file: '' })
+  }
+  return [...new Map(rows.map(row => [row.source, row])).values()]
+}
+
+/**
+ * One code printed to the left of the glyph, with no separate sequence number: IRGN1854 numbers
+ * Macao characters as MAC00024 and nothing else.
+ * @param {PageBoxes} page @param {Patterns} patterns @returns {Row[]}
+ */
+export function codeOnlyRows(page, patterns) {
+  const source = new RegExp(`^${patterns.sourcePattern}$`)
+  return page.images.map((image, index) => {
+    const beside = page.text.filter(text => text.value && source.test(text.value)
+      && image.left - text.left >= 20 && image.left - text.left <= (patterns.leftGap ?? 210)
+      && Math.abs(text.top + text.height / 2 - (image.top + image.height / 2)) <= 30)
+    if (beside.length !== 1) throw new Error(`Page ${page.number}: glyph ${index} has ${beside.length} code candidates`)
+    return { serial: null, source: beside[0].value, page: page.number, file: image.src }
+  })
+}
 
 /**
  * Two glyphs per row with their codes printed underneath: IRGN1924 puts a source glyph and the
@@ -93,6 +129,8 @@ export function glyphPairRows(page) {
 export function rowsFor(page, matcher, patterns) {
   if (matcher === 'codes-left') return codesLeftRows(page, patterns)
   if (matcher === 'code-text') return codeTextRows(page, patterns)
+  if (matcher === 'code-only') return codeOnlyRows(page, patterns)
+  if (matcher === 'text-pairs') return textPairRows(page, patterns)
   if (matcher === 'glyph-pairs') return glyphPairRows(page)
   throw new Error(`Unknown matcher: ${matcher}`)
 }
