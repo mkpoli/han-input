@@ -114,7 +114,6 @@
   "convert.input": "Original text",
   "convert.output": "Converted text",
   "convert.placeholder": "Paste legacy-font text",
-  "convert.puaInInput": "PUA in the text",
   "convert.source": "Source",
   "convert.filter": "Filter by code or character",
   "convert.converted": "Converted: {count}",

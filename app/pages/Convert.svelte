@@ -13,11 +13,107 @@
   const matches = $derived(puaTable(sourceId).filter(({ legacy, standard, source }) =>
     !needle || codePoint(legacy).toLowerCase().includes(needle) || codePoint(standard).toLowerCase().includes(needle) || standard.includes(needle) || source.includes(needle)))
   const rows = $derived(matches.slice(0, 100))
-  const puaInInput = $derived.by(() => {
-    /** @type {Map<string, number>} */
-    const counts = new Map()
-    for (const char of input) if (/\p{Co}/u.test(char)) counts.set(char, (counts.get(char) ?? 0) + 1)
-    return [...counts]
+  /** @type {HTMLDivElement | null} */
+  let editor = null
+  /** @type {HTMLDivElement | null} */
+  let outputEditor = null
+  let composing = false
+
+  /** @param {HTMLDivElement} el @param {string} text */
+  function renderEditor(el, text) {
+    const fragment = document.createDocumentFragment()
+    let run = ''
+    for (const char of text) {
+      if (/\p{Co}/u.test(char)) {
+        if (run) { fragment.append(document.createTextNode(run)); run = '' }
+        const span = document.createElement('span')
+        span.className = 'pua-inline'
+        span.dataset.code = codePoint(char)
+        span.textContent = char
+        fragment.append(span)
+      } else run += char
+    }
+    if (run) fragment.append(document.createTextNode(run))
+    el.replaceChildren(fragment)
+  }
+
+  /** @param {HTMLElement} el */
+  function caretOffset(el) {
+    const selection = getSelection()
+    if (!selection?.rangeCount) return 0
+    const range = selection.getRangeAt(0).cloneRange()
+    const before = range.cloneRange()
+    before.selectNodeContents(el)
+    before.setEnd(range.endContainer, range.endOffset)
+    return before.toString().length
+  }
+
+  /** @param {HTMLElement} el @param {number} offset */
+  function setCaret(el, offset) {
+    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT)
+    let left = offset
+    /** @type {Node | null} */
+    let node = walker.nextNode()
+    while (node) {
+      const length = node.textContent?.length ?? 0
+      if (left <= length) {
+        const range = document.createRange()
+        range.setStart(node, left)
+        range.collapse(true)
+        const selection = getSelection()
+        selection?.removeAllRanges()
+        selection?.addRange(range)
+        return
+      }
+      left -= length
+      node = walker.nextNode()
+    }
+    const range = document.createRange()
+    range.selectNodeContents(el)
+    range.collapse(false)
+    const selection = getSelection()
+    selection?.removeAllRanges()
+    selection?.addRange(range)
+  }
+
+  /** @param {Event} event */
+  function edited(event) {
+    if (composing) return
+    const el = /** @type {HTMLDivElement} */ (event.currentTarget)
+    const caret = caretOffset(el)
+    const next = el.innerText.replace(/\n$/, '')
+    if (next === input) return
+    input = next
+    renderEditor(el, next)
+    setCaret(el, Math.min(caret, next.length))
+  }
+
+  function composingStart() {
+    composing = true
+  }
+
+  /** @param {Event} event */
+  function composingEnd(event) {
+    composing = false
+    edited(event)
+  }
+
+  /** @param {ClipboardEvent} event */
+  function pasted(event) {
+    event.preventDefault()
+    document.execCommand('insertText', false, event.clipboardData?.getData('text/plain') ?? '')
+  }
+
+  $effect(() => {
+    const value = input
+    if (!editor || composing) return
+    if (editor.textContent !== value) renderEditor(editor, value)
+  })
+
+  $effect(() => {
+    const value = result.text
+    if (!outputEditor) return
+    if (outputEditor.textContent !== value) renderEditor(outputEditor, value)
   })
 
   /** @param {MouseEvent} event @param {string} char */
@@ -40,14 +136,9 @@
         <label class="ui-label" for="convert-input">{t('convert.input')}</label>
         <button class="ui-button" data-size="sm" type="button" disabled={!input} onclick={() => { input = '' }}>{t('writing.clear')}</button>
       </div>
-      <textarea id="convert-input" class="ui-textarea" data-primary rows="7" bind:value={input} placeholder={t('convert.placeholder')} spellcheck="false" autocomplete="off" autocapitalize="off" dir="auto"></textarea>
-      {#if puaInInput.length}
-        <div class="pua-preview" aria-label={t('convert.puaInInput')}>
-          {#each puaInInput as [char, count] (char)}
-            <span class="pua-box"><span class="ui-mono">{codePoint(char)}</span>{#if count > 1}<span class="pua-count">×{count}</span>{/if}</span>
-          {/each}
-        </div>
-      {/if}
+      <div id="convert-input" class="ui-textarea editor" data-primary bind:this={editor} contenteditable="true" role="textbox" aria-multiline="true" aria-label={t('convert.input')}
+        data-placeholder={t('convert.placeholder')} spellcheck="false" dir="auto"
+        oninput={edited} oncompositionstart={composingStart} oncompositionend={composingEnd} onpaste={pasted}></div>
     </div>
     <div class="ui-field">
       <div class="field-head">
@@ -60,7 +151,7 @@
           <button class="ui-button" data-size="sm" type="button" disabled={!result.text} onclick={() => copy(result.text, t('convert.output'))}>{t('common.copy')}</button>
         </span>
       </div>
-      <textarea id="convert-output" class="ui-textarea" rows="7" value={result.text} readonly spellcheck="false" dir="auto"></textarea>
+      <div id="convert-output" class="ui-textarea editor output" bind:this={outputEditor} role="textbox" aria-readonly="true" aria-label={t('convert.output')} spellcheck="false" dir="auto"></div>
     </div>
   </div>
 
@@ -74,7 +165,7 @@
     <details class="conflicts">
       <summary class="ui-label">{t('convert.conflicts', { count: result.conflicts.length })}</summary>
       <ul>
-        {#each result.conflicts as conflict (conflict.code)}
+        {#each result.conflicts as conflict, index (index)}
           <li>
             <span class="ui-mono">{codePoint(conflict.code)}</span>
             {#each conflict.options as option (option.source)}
@@ -119,12 +210,14 @@
 <style>
   .editors{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:var(--ui-space-lg)}
   .field-head{display:flex;align-items:center;justify-content:space-between;gap:var(--ui-space-sm);flex-wrap:wrap}
-  .pua-preview{display:flex;flex-wrap:wrap;gap:4px;margin-block-start:var(--ui-space-2xs)}
-  .pua-box{display:inline-flex;align-items:center;gap:3px;padding:1px 6px;border:1px dashed var(--ui-color-border-strong);border-radius:3px;color:var(--ui-color-ink-soft);font-size:var(--ui-text-xs)}
-  .pua-count{font-size:10px;color:var(--ui-color-ink-muted)}
+  .editor{font-size:var(--ui-text-lg);min-block-size:180px;max-block-size:420px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;outline:none;cursor:text}
+  .editor:focus-visible{outline:2px solid var(--ui-color-accent);outline-offset:1px}
+  .output{cursor:default;background:var(--ui-color-surface-sunken)}
+  .editor:empty::before{content:attr(data-placeholder);color:var(--ui-color-ink-muted);pointer-events:none}
+  :global(.pua-inline){font-size:0;color:transparent;white-space:nowrap}
+  :global(.pua-inline)::before{content:attr(data-code);display:inline-block;font-size:10px;line-height:1.4;padding:0 4px;border:1px dashed var(--ui-color-border-strong);border-radius:2px;color:var(--ui-color-ink-soft);font-family:var(--ui-font-mono),monospace;vertical-align:1px}
   .field-tools{display:flex;align-items:center;gap:var(--ui-space-2xs)}
   .field-tools select{inline-size:auto;font-size:var(--ui-text-xs);padding-block:2px}
-  textarea{font-size:var(--ui-text-lg);min-block-size:180px}
   .counts{color:var(--ui-color-ink-soft);font-size:var(--ui-text-sm);font-variant-numeric:tabular-nums}
   .mapping summary{cursor:pointer;padding-block:var(--ui-space-xs)}
   .tools{display:flex;align-items:center;gap:var(--ui-space-sm);margin-block:var(--ui-space-sm)}
