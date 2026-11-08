@@ -36,6 +36,9 @@ describe('numbered components', () => {
   test('reports a number the note leaves unrepresentable', () => {
     expect(writeOut('⿰{12}{999}')).toEqual({ text: '⿰⿷己三{999}', unresolved: true })
   })
+  test("reports BabelStone's sign for a part it cannot name", () => {
+    expect(writeOut('⿱𠂉？')).toEqual({ text: '⿱𠂉？', unresolved: true })
+  })
 })
 
 describe('parts', () => {

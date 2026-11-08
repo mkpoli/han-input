@@ -68,7 +68,8 @@ const FRAGMENTS = (() => {
  * @returns {{ text: string, unresolved: boolean }}
  */
 export function writeOut(sequence, seen = new Set()) {
-  let unresolved = false
+  // BabelStone writes ？ where it cannot name a part, as it numbers the ones note 6 writes out.
+  let unresolved = sequence.includes('？')
   const text = sequence.replace(/\{(\d+)\}/g, (whole, digits) => {
     const number = Number(digits), fragment = FRAGMENTS.get(number)
     if (fragment === undefined || seen.has(number)) { unresolved = true; return whole }

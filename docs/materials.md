@@ -38,7 +38,8 @@ Discord discussion of 2026-10-27, and the works themselves were not read.
 
 BabelStone writes some parts by number. Where note 6 of its file gives the IDS that writes the
 number out, the description uses it ({12}, the right of 龍, as ⿷己三); a description whose number the
-note leaves unrepresentable is left out, as a CHISE entity is.
+note leaves unrepresentable, and a description whose part is BabelStone's `？`, are left out, as a
+CHISE entity is.
 
 The research behind these choices, with every candidate and what was checked, is in
 [`research-input-methods.md`](research-input-methods.md) and
