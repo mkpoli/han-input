@@ -3,13 +3,13 @@
 import { hanIn, inScope, isHan, isRareKana } from '../../src/fold.js'
 import { puaChars } from '../../src/pua.js'
 import { findCodes, findMeaning, findPart, findReadings, findRun, loadChars, loadVariants } from './data.js'
-import { characterVariants, spellings } from '../../src/variants.js'
+import { fuzzyComponents, characterVariants, spellings } from '../../src/variants.js'
 
 /**
  * @typedef {{ kind: 'code' | 'scoped' | 'strokes' | 'point' | 'pua' | 'text' | 'part', text: string, method?: string, code?: string, value?: number, char?: string, chars?: string[] }} Clue
  * @typedef {{ text: string, chars: string[], exact: boolean }} Shape
  * @typedef {{ char: string, relation: string, source: string, group?: string }} VariantRow
- * @typedef {{ clue: Clue, hits: import('./data.js').CodeHit[], readings: import('./data.js').ReadingHit[], meaning: string[], parts: string[], partVariants: Shape[], shapes: Shape[], variants: VariantRow[], chars: string[] }} Answer
+ * @typedef {{ clue: Clue, hits: import('./data.js').CodeHit[], readings: import('./data.js').ReadingHit[], meaning: string[], parts: string[], partVariants: Shape[], similarParts: Shape[], shapes: Shape[], variants: VariantRow[], chars: string[] }} Answer
  */
 
 /** @param {string} term @param {boolean} alone @returns {Clue} */
@@ -47,14 +47,14 @@ export async function answer(clue) {
   const rows = await loadChars()
   const rank = (/** @type {string} */ char) => rows.get(char)?.rank ?? 1e6
   for (const hit of [...found.hits, ...found.readings]) hit.chars.sort((a, b) => rank(a) - rank(b))
-  for (const shape of [...found.shapes, ...found.partVariants]) shape.chars.sort((a, b) => rank(a) - rank(b))
+  for (const shape of [...found.shapes, ...found.partVariants, ...found.similarParts]) shape.chars.sort((a, b) => rank(a) - rank(b))
   return found
 }
 
 /** @param {Clue} clue @returns {Promise<Answer>} */
 async function lookUp(clue) {
   /** @type {Answer} */
-  const out = { clue, hits: [], readings: [], meaning: [], parts: [], partVariants: [], shapes: [], variants: [], chars: [] }
+  const out = { clue, hits: [], readings: [], meaning: [], parts: [], partVariants: [], similarParts: [], shapes: [], variants: [], chars: [] }
   if (clue.kind === 'point') {
     if (clue.value !== undefined && clue.value <= 0x10FFFF) out.chars = [String.fromCodePoint(clue.value)]
     return out
@@ -75,7 +75,9 @@ async function lookUp(clue) {
     const [parts, hits, variants] = await Promise.all([findPart(clue.text), findCodes(clue.text), loadVariants()])
     out.parts = parts
     out.variants = characterVariants(clue.text, variants)
-    out.partVariants = await variantParts(clue.text, parts, variants)
+    const groups = await partGroups(clue.text, parts, variants)
+    out.partVariants = groups.parts
+    out.similarParts = groups.similar
     out.hits = hits.filter(hit => hit.exact)
     out.chars = [...new Set([...parts, ...out.partVariants.flatMap(group => group.chars), ...out.hits.flatMap(hit => hit.chars)])]
     return out
@@ -92,7 +94,9 @@ async function lookUp(clue) {
     const variants = await loadVariants()
     if (chars.length === 1) {
       out.parts = await findPart(clue.text)
-      out.partVariants = await variantParts(clue.text, out.parts, variants)
+      const groups = await partGroups(clue.text, out.parts, variants)
+      out.partVariants = groups.parts
+      out.similarParts = groups.similar
       out.variants = characterVariants(clue.text, variants)
     } else if (chars.length <= 3 && chars.every(isHan)) {
       // Two or three parts in a row are also a way of writing a character; the run is shown beside
@@ -140,19 +144,23 @@ export function groupHits(hits) {
   }).sort((a, b) => Number(b.literal) - Number(a.literal) || Number(b.exact) - Number(a.exact) || a.total - b.total)
 }
 
-/** The other spellings of a part, each with the characters written with it. @param {string} part @param {string[]} exact @param {import('../../src/variants.js').Variants} variants */
-async function variantParts(part, exact, variants) {
+/** The other spellings of a part, then the parts that only resemble it. @param {string} part @param {string[]} exact @param {import('../../src/variants.js').Variants} variants */
+async function partGroups(part, exact, variants) {
   const seen = new Set(exact)
-  /** @type {Shape[]} */
-  const out = []
-  const rows = [...(variants.component[part] ?? [])].sort((a, b) => (a.component.codePointAt(0) ?? 0) - (b.component.codePointAt(0) ?? 0))
-  for (const row of rows) {
-    const chars = (await findPart(row.component)).filter(char => !seen.has(char))
-    if (!chars.length) continue
-    for (const char of chars) seen.add(char)
-    out.push({ text: row.component, chars, exact: false })
+  /** @param {import('../../src/variants.js').ComponentVariant[]} rows @returns {Promise<Shape[]>} */
+  const gather = async rows => {
+    /** @type {Shape[]} */
+    const out = []
+    const sorted = [...rows].sort((a, b) => (a.component.codePointAt(0) ?? 0) - (b.component.codePointAt(0) ?? 0))
+    for (const row of sorted) {
+      const chars = (await findPart(row.component)).filter(char => !seen.has(char))
+      if (!chars.length) continue
+      for (const char of chars) seen.add(char)
+      out.push({ text: row.component, chars, exact: false })
+    }
+    return out
   }
-  return out
+  return { parts: await gather(variants.component[part] ?? []), similar: await gather(fuzzyComponents(part, variants)) }
 }
 
 /** The characters sources write with a run of parts, one group per spelling. @param {string} text @param {import('../../src/variants.js').Variants} variants */

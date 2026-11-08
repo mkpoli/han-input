@@ -19,6 +19,7 @@ const XML = `<ucv>
 
 const UCD = [
   '2F83A;CJK COMPATIBILITY IDEOGRAPH-2F83A;Lo;0;L;53F1;;;;N;;;;;',
+  '2F19;KANGXI RADICAL SEAL;So;0;ON;<compat> 5369;;;;N;;;;;',
   '53F1;CJK UNIFIED IDEOGRAPH-53F1;Lo;0;L;;;;;N;;;;;',
 ].join('\n')
 
@@ -36,7 +37,7 @@ describe('IWDS', () => {
 
 describe('Unicode compatibility', () => {
   test('reads the unified form a compatibility ideograph names', () => {
-    expect(readCompat(UCD)).toEqual(new Map([['叱', '叱']]))
+    expect(readCompat(UCD)).toEqual(new Map([['叱', '叱'], ['⼙', '卩']]))
   })
   test('files both spellings of a group under each other', () => {
     const { component, character } = variantIndex(readIwds(XML), readCompat(UCD))
@@ -65,6 +66,14 @@ describe('the checked-in table', () => {
     const rows = data.character['叱']
     expect(rows.map(row => row.char)).toContain('𠮟')
     expect(rows.map(row => row.char)).toContain('叱')
+  })
+  test('treats the seal radical and its Kangxi form as one shape', () => {
+    expect(data.component['卩']).toEqual([{ component: '⼙', group: 'seal-forms' }, { component: '𰆊', group: 'seal-forms' }])
+    expect(data.character['卩']).toContainEqual({ char: '⼙', relation: 'compatibility', source: 'unicode' })
+  })
+  test('keeps 卪 as a fuzzy neighbour of 卩, not a spelling', () => {
+    expect(data.fuzzy['卩']).toEqual([{ component: '卪', group: 'seal-similar' }])
+    expect(data.component['卩']?.some(row => row.component === '卪')).toBe(false)
   })
   test('names a source for every row', () => {
     expect(data.sources.map(source => source.url)).toContain('https://raw.githubusercontent.com/yi-bai/iwds/master/iwds.xml')

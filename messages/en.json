@@ -62,6 +62,8 @@
   "find.sameCharacter": "Variants",
   "find.sameCharacterNote": "Variants IWDS records, and code points Unicode maps to this character.",
   "find.variantOf": "Also written with {part}",
+  "find.similarPart": "Similar part: {part}",
+  "find.similarNote": "A different character whose shape is close.",
   "find.meaning": "Meaning “{word}”",
   "find.parts": "Written with {part}",
   "find.moreCodes": "{count} more codes",

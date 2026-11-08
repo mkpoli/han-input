@@ -3,7 +3,7 @@
 
 /** @typedef {{ component: string, group: string }} ComponentVariant */
 /** @typedef {{ char: string, relation: string, source: string, group?: string }} CharacterVariant */
-/** @typedef {{ sources: { name: string, url: string, licence: string, retrieved?: string }[], component: Record<string, ComponentVariant[]>, character: Record<string, CharacterVariant[]> }} Variants */
+/** @typedef {{ sources: { name: string, url: string, licence: string, retrieved?: string }[], component: Record<string, ComponentVariant[]>, character: Record<string, CharacterVariant[]>, fuzzy?: Record<string, ComponentVariant[]> }} Variants */
 
 /** Every spelling of a run of parts, the run itself first. @param {string[]} parts @param {Variants} variants @param {number} [cap] */
 export function spellings(parts, variants, cap = 32) {
@@ -29,3 +29,6 @@ export function spellings(parts, variants, cap = 32) {
 
 /** @param {string} char @param {Variants} variants @returns {CharacterVariant[]} */
 export const characterVariants = (char, variants) => variants.character[char] ?? []
+
+/** Parts that resemble this one without being it. @param {string} part @param {Variants} variants @returns {ComponentVariant[]} */
+export const fuzzyComponents = (part, variants) => variants.fuzzy?.[part] ?? []

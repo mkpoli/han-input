@@ -101,6 +101,16 @@ for (const [name, query, char] of FINDS) {
   await check(`find ${name}: ${query} → ${char}`, async () => assert.ok((await find(query)).includes(char)))
 }
 
+await check('the seal radical is searched through its Kangxi form', async () => {
+  assert.ok((await find('⼙')).includes('節'))
+})
+await check('the Idu -n mark is searched as the seal shape', async () => {
+  assert.ok((await find('𰆊')).includes('節'))
+})
+await check('a look-alike part is shown as a similar part', async () => {
+  assert.ok((await find('卪')).includes('節'))
+  assert.match(await page.locator('main').innerText(), /Similar part/i)
+})
 await check('a part is also searched under its variant spellings', async () => {
   for (const query of ['七 5畫', '匕 5畫']) {
     const found = await find(query)

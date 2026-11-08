@@ -63,7 +63,7 @@
           <tbody>
             {#each variantSources as entry (entry.url)}
               <tr>
-                <td><a href={entry.url} target="_blank" rel="noopener noreferrer">{entry.name}</a></td>
+                <td>{#if entry.url}<a href={entry.url} target="_blank" rel="noopener noreferrer">{entry.name}</a>{:else}{entry.name}{/if}</td>
                 <td class="ui-hint">{entry.licence}</td>
               </tr>
             {/each}

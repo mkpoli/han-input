@@ -218,6 +218,13 @@
         <Tiles chars={group.chars} limit={48} label={t('find.variantOf', { part: group.text })} />
       </section>
     {/each}
+    {#if single.similarParts.length}<p class="ui-hint">{t('find.similarNote')}</p>{/if}
+    {#each single.similarParts as group (group.text)}
+      <section class="ui-section">
+        <h2 class="ui-label">{t('find.similarPart', { part: group.text })} <span class="ui-count">{group.chars.length}</span></h2>
+        <Tiles chars={group.chars} limit={48} label={t('find.similarPart', { part: group.text })} />
+      </section>
+    {/each}
     {#if tally.length}
       <section class="ui-section">
         <h2 class="ui-label">{t('find.readings', { count: varieties, chars: tally.length })}</h2>

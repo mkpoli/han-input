@@ -19,8 +19,10 @@ const UCD = {
 }
 
 const OPERATORS = new Set('⿰⿱⿲⿳⿴⿵⿶⿷⿸⿹⿺⿻⿼⿽⿾⿿〾㇯')
-/** Compatibility ideographs name their unified form in the decomposition field. */
+/** Compatibility ideographs name their unified form in the decomposition field; Kangxi radicals
+ * tag it. */
 const COMPAT = 'CJK COMPATIBILITY IDEOGRAPH-'
+const COMPAT_TAG = '<compat> '
 
 /** @param {string} text @returns {string[] | null} the single glyphs, or null for a description */
 export function plainComponents(text) {
@@ -58,36 +60,52 @@ export function readCompat(body) {
   const map = new Map()
   for (const line of body.split('\n')) {
     const [hex, name, , , , decomposition] = line.split(';')
-    if (!hex || !name.startsWith(COMPAT) || !decomposition) continue
-    const unified = parseInt(decomposition, 16)
-    if (Number.isNaN(unified)) continue
-    map.set(String.fromCodePoint(parseInt(hex, 16)), String.fromCodePoint(unified))
+    if (!hex || !decomposition) continue
+    const target = name.startsWith(COMPAT) ? decomposition : decomposition.startsWith(COMPAT_TAG) ? decomposition.slice(COMPAT_TAG.length) : ''
+    const unified = Number.parseInt(target, 16)
+    if (!target || !/^[0-9A-F]+$/.test(target) || Number.isNaN(unified)) continue
+    const from = String.fromCodePoint(parseInt(hex, 16))
+    const to = String.fromCodePoint(unified)
+    // Only forms this site shows: a Kangxi radical and its ideograph, or two ideographs.
+    if (!isEncodedGlyph(from) || !isEncodedGlyph(to)) continue
+    map.set(from, to)
   }
   return map
 }
 
-/** @param {{ id: string, components: string[], pairs?: [string, string][] }[]} groups @param {Map<string, string>} compat */
+/** Groups outside IWDS, with the sources that state them. @param {string} path */
+export function readCurated(path) {
+  /** @type {{ sources?: Record<string, string>[], groups?: { id: string, components: string[], note?: string, sources?: string[] }[] }} */
+  const doc = JSON.parse(readFileSync(path, 'utf8'))
+  return { sources: doc.sources ?? [], groups: (doc.groups ?? []).map(group => ({ ...group, curated: true })) }
+}
+
+/** @param {{ id: string, components: string[], pairs?: [string, string][], curated?: boolean }[]} groups @param {Map<string, string>} compat */
 export function variantIndex(groups, compat) {
   /** @type {Record<string, { component: string, group: string }[]>} */
   const component = {}
   /** @type {Record<string, { char: string, relation: string, source: string, group?: string }[]>} */
   const character = {}
+  /** @type {Record<string, { component: string, group: string }[]>} */
+  const fuzzy = {}
   /** @param {string} char @param {{ char: string, relation: string, source: string, group?: string }} row */
   const add = (char, row) => {
     const rows = character[char] ??= []
     if (!rows.some(other => other.char === row.char && other.relation === row.relation)) rows.push(row)
   }
   for (const group of groups) {
-    // An entry with no example pair only calls two shapes similar; it does not show a character
-    // written either way, so it does not widen a search.
-    if (!group.pairs?.length) continue
+    // An IWDS entry with no example pair only calls two shapes similar; it does not show a character
+    // written either way, so it does not widen a search. A curated group states its own evidence.
+    if (!group.curated && !group.pairs?.length) continue
+    const fuzzyGroup = /** @type {{ kind?: string }} */ (group).kind === 'fuzzy'
     for (const part of group.components) {
       for (const other of group.components) {
         if (other === part) continue
-        const rows = component[part] ??= []
-        if (!rows.some(row => row.component === other)) rows.push({ component: other, group: group.id })
+        const into = fuzzyGroup ? (fuzzy[part] ??= []) : (component[part] ??= [])
+        if (!into.some(row => row.component === other)) into.push({ component: other, group: group.id })
       }
     }
+    if (fuzzyGroup) continue
     for (const [a, b] of group.pairs ?? []) {
       add(a, { char: b, relation: 'variant', source: 'iwds', group: group.id })
       add(b, { char: a, relation: 'variant', source: 'iwds', group: group.id })
@@ -98,7 +116,7 @@ export function variantIndex(groups, compat) {
     add(compatChar, { char: unified, relation: 'compatibility', source: 'unicode' })
     add(unified, { char: compatChar, relation: 'compatibility', source: 'unicode' })
   }
-  return { component, character }
+  return { component, character, fuzzy }
 }
 
 async function main() {
@@ -106,16 +124,19 @@ async function main() {
   const xml = readFileSync(xmlPath, 'utf8')
   const ucdPath = await fetchOnce(UCD.url, 'UnicodeData-18.txt')
   const ucd = readFileSync(ucdPath, 'utf8')
-  const groups = readIwds(xml)
-  const { component, character } = variantIndex(groups, readCompat(ucd))
+  const curated = readCurated(join(import.meta.dirname, '..', 'data', 'variant-groups.json'))
+  const groups = [...readIwds(xml), ...curated.groups]
+  const { component, character, fuzzy } = variantIndex(groups, readCompat(ucd))
   const data = {
     sources: [
       { ...IWDS, sha256: sha256(xmlPath) },
       { ...UCD, sha256: sha256(ucdPath) },
+      ...curated.sources,
     ],
     groups,
     component,
     character,
+    fuzzy,
   }
   writeFileSync(join(import.meta.dirname, '..', 'data', 'variants.json'), JSON.stringify(data) + '\n')
   console.log(`${groups.length} IWDS groups, ${Object.keys(component).length} parts, ${Object.keys(character).length} characters`)
