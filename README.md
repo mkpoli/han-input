@@ -19,6 +19,7 @@ It covers Han, extended sinographies such as Chữ Nôm and Sawndip, and kana an
 - **Rhyme tables**: the Guangyun by rhyme, initial, grade and tone.
 - **Radicals**: the 214 Kangxi radicals by residual strokes.
 - **PUA conversion**: convert text from the Ministry of Education's Taiwanese/Hakka fonts to Unicode and browse the mappings. Each character's card lists its own PUA codes and those of its Unihan variants.
+- **Composition**: convert Taiwan's pre-IDS 構字式 (Big5 8DF1–8DFD) to IDS. The thirteen symbols are a palette; a shape marker gives its parts in writing order.
 
 ## Development
 
@@ -39,6 +40,11 @@ and writes `app/public/charsets/glyphs/` plus one records file per set.
 
 The part spellings and character variants come from the committed [IWDS snapshot](data/variants.json),
 built by `bun scripts/import_variants.mjs` from IWDS and UnicodeData.
+
+The composition converter uses the thirteen symbols of the 漢字構形資料庫, read from old text at
+U+F6A3–U+F6AF. `uv run scripts/build_composition_font.py` draws them after table 1 of the
+[CDP handout](https://cdp.sinica.edu.tw/service/documents/T960419.pdf) and writes
+`app/public/fonts/cdp-composition.woff2`.
 
 The PUA converter uses the committed [MOE mapping snapshot](data/moe-pua.json), independently of the
 search tables. `bun scripts/import_moe_pua.mjs` imports the checksum-pinned official source;

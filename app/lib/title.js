@@ -7,6 +7,7 @@ const PAGES = /** @type {Record<string, [string, string]>} */ ({
   rhymes: ['rhymes.title', 'rhymes.intro'],
   radicals: ['radicals.title', 'radicals.intro'],
   convert: ['convert.title', 'convert.intro'],
+  composition: ['composition.title', 'composition.intro'],
   about: ['about.title', 'about.intro'],
   notfound: ['notfound.title', 'notfound.intro'],
   m: ['methods.title', 'methods.intro'],

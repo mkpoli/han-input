@@ -1,0 +1,4 @@
+/* The thirteen composition symbols of Taiwan's 漢字構形資料庫, at the Big5 user-area code points
+   old text uses (U+F6A3–U+F6AF). The drawings follow table 1 of 莊德明, 〈構字式的處理技巧〉 (2007);
+   scripts/build_composition_font.py draws them for this project. */
+@font-face { font-family: 'CDP Composition'; src: url('/fonts/cdp-composition.woff2') format('woff2'); font-display: swap; unicode-range: U+F6A3-F6AF; }
