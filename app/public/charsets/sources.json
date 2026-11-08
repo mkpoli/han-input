@@ -53,6 +53,10 @@
       "sha256": "5083135d812fa730222bc9fc721465178af11c13235edb5a061a2467014c3ffa"
     },
     {
+      "url": "https://www.unicode.org/irg/docs/n1924-JMJWithdrawList.pdf",
+      "sha256": "d8e435e05f8436499f89e60ecad39e7f02ba3cf0a91bda4681891e9257a1d352"
+    },
+    {
       "url": "https://www.unicode.org/irg/docs/n1925-SATWithdrawList.pdf",
       "sha256": "8f2ad337c4748f679001b0bd6a5f0e6bc0129a7c95d91378e5fa247df796a804"
     },

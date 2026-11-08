@@ -11,6 +11,8 @@
   const document = $derived(held?.document ?? null)
   const code = $derived(record ? record.source ?? record.serial ?? '' : '')
   const mapped = $derived(record?.mappedUnicode ? String.fromCodePoint(parseInt(record.mappedUnicode.slice(2), 16)) : '')
+  const unified = $derived(record?.unifiedWith ?? '')
+  const unifiedChar = $derived(unified.startsWith('U+') ? String.fromCodePoint(parseInt(unified.slice(2), 16)) : '')
 </script>
 
 {#if record && document}
@@ -29,6 +31,14 @@
       </div>
     </header>
     {#if record.status}<p class="ui-hint">{record.status}</p>{/if}
+    {#if unified}
+      <p class="unified"><span class="ui-hint">{t('proposal.unifiedWith')}</span>
+        {#if unifiedChar}
+          <a href={link('', { c: unifiedChar })} lang="und-Hani" onclick={event => { event.preventDefault(); choose(unifiedChar) }}>{unifiedChar}</a>
+        {/if}
+        <span class="ui-mono ui-hint">{unified}</span>
+      </p>
+    {/if}
     {#if mapped}
       <p class="mapped"><a href={link('', { c: mapped })} lang="und-Hani" onclick={event => { event.preventDefault(); choose(mapped) }}>{mapped}</a> <span class="ui-mono ui-hint">{record.mappedUnicode}</span></p>
     {/if}
@@ -49,7 +59,8 @@
   .facts{display:grid;gap:var(--ui-space-2xs);min-inline-size:0}
   .name{margin:0;font-size:var(--ui-text-sm);overflow-wrap:anywhere}
   .facts a{color:var(--ui-color-accent-ink);font-size:var(--ui-text-sm);overflow-wrap:anywhere}
-  .mapped{margin:0}
+  .mapped,.unified{margin:0}
+  .unified a{font-size:24px;line-height:1;color:var(--ui-color-ink);text-decoration:none}
   .mapped a{font-size:56px;line-height:1;color:var(--ui-color-ink);text-decoration:none}
   .links{display:flex;flex-wrap:wrap;gap:var(--ui-space-2xs)}
   .links a{padding:2px var(--ui-space-sm);border:1px solid var(--ui-color-border);border-radius:var(--ui-radius-sm);font-size:var(--ui-text-xs);color:var(--ui-color-ink);text-decoration:none;overflow-wrap:anywhere}

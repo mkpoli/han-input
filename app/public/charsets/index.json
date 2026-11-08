@@ -2672,6 +2672,31 @@
     }
   },
   {
+    "id": "ext_f_jmj_withdrawals",
+    "group": "Proposals",
+    "label": "Ext.F withdrawn · JMJ",
+    "names": {
+      "en": "MJ characters withdrawn from CJK F",
+      "zh": "擴展F撤銷MJ源字",
+      "hans": "扩展F撤销MJ源字",
+      "ja": "拡張F撤回MJ源字",
+      "ko": "확장 F MJ 철회자"
+    },
+    "chars": 0,
+    "total": 26,
+    "encoded": 0,
+    "unencoded": 26,
+    "source": {
+      "name": "IRG",
+      "url": "https://www.unicode.org/irg/docs/n1924-JMJWithdrawList.pdf"
+    },
+    "records": {
+      "file": "/charsets/ext_f_jmj_records.json",
+      "count": 26,
+      "glyphs": 26
+    }
+  },
+  {
     "id": "ext_e_withdrawal_records",
     "group": "Proposals",
     "label": "Ext.E withdrawn",

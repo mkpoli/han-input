@@ -226,6 +226,54 @@
         }
       ],
       "additionalRecords": []
+    },
+    {
+      "id": "ext_f_jmj_withdrawals",
+      "file": "ext_f_jmj_records.json",
+      "group": "Proposals",
+      "label": "Ext.F withdrawn · JMJ",
+      "glyphs": "glyphs/ext-f-jmj",
+      "names": {
+        "en": "MJ characters withdrawn from CJK F",
+        "zh": "擴展F撤銷MJ源字",
+        "hans": "扩展F撤销MJ源字",
+        "ja": "拡張F撤回MJ源字",
+        "ko": "확장 F MJ 철회자"
+      },
+      "source": {
+        "name": "IRG",
+        "url": "https://www.unicode.org/irg/docs/n1924-JMJWithdrawList.pdf"
+      },
+      "title": "MJ sources withdrawn from the CJK F candidates",
+      "complete": false,
+      "scope": "The 26 MJ characters that IRGN1924 withdraws from the CJK F candidates, each with the source id and the character it is unified with as the document prints them. List 1 unifies with standardized ideographs, List 2 with Extension E, List 3 with another character from the same source.",
+      "documents": [
+        {
+          "id": "n1924",
+          "document": "IRGN1924",
+          "title": "List of withdrawal JMJ sources from CJK F candidates",
+          "source": "Japan",
+          "date": "2013-03-15",
+          "url": "https://www.unicode.org/irg/docs/n1924-JMJWithdrawList.pdf",
+          "status": "Withdraws 26 candidate characters from CJK F after the MJ project's further review, in three lists of unification targets."
+        }
+      ],
+      "extract": [
+        {
+          "document": "n1924",
+          "pages": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "matcher": "glyph-pairs",
+          "serialPattern": "^\\d{5}$",
+          "sourcePattern": "^JMJ-\\d+$",
+          "count": 26
+        }
+      ],
+      "additionalRecords": []
     }
   ]
 }

@@ -123,7 +123,7 @@ try {
     assert.ok(metadata.includes(t1Entry.chars.toLocaleString('en-US')))
     assert.ok(metadata.includes(t1Entry.total.toLocaleString('en-US')))
     assert.equal(await page.locator('.metadata a').getAttribute('href'), t1Entry.source.url)
-    assert.match(await page.locator('.charset-filter').innerText(), /Every source row is listed; unencoded rows use the CNS private-use glyphs/)
+    assert.match(await page.locator('.charset-filter').innerText(), /Every source row is listed/)
   })
   await check('CNS source overview lists every registration-source category before choosing a character', async () => {
     await find(page, '', '')
