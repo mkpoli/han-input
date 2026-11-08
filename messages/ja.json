@@ -99,6 +99,8 @@
   "about.sources": "{count}の表",
   "about.method": "入力法",
   "about.pua": "外字表",
+  "about.gSources": "IRG G源",
+  "about.gSourcesIntro": "字形カードと提案記録のG源コードが指す中国側の資料。",
   "nav.readings": "読み",
   "nav.rhymes": "韻図",
   "find.readings": "この読みの字{chars}、言語・方言{count}",

@@ -4,6 +4,7 @@
   import { ui, choose, closeRecord } from '../lib/ui.svelte.js'
   import { link } from '../lib/route.svelte.js'
   import { t } from '../lib/i18n.svelte.js'
+  import SourceCode from './SourceCode.svelte'
 
   const held = $derived(ui.record)
   const record = $derived(held?.record ?? null)
@@ -22,7 +23,7 @@
         {#if record.glyph}<img src={`/charsets/${record.glyph}`} alt="" width="128" height="128" />{:else}<span class="ui-mono">{code}</span>{/if}
       </div>
       <div class="facts">
-        <p class="name ui-mono">{code}</p>
+        <p class="name"><SourceCode code={code} /></p>
         <p class="ui-hint">{document.title} · {document.source}</p>
         <a href={`${document.url}#page=${record.page ?? 1}`} target="_blank" rel="noopener noreferrer">{document.document}{record.page ? ` · ${t('proposal.page', { page: record.page })}` : ''}</a>
       </div>

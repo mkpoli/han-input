@@ -9,6 +9,7 @@
   import { copy } from '../lib/clip.svelte.js'
   import { nameOf, t } from '../lib/i18n.svelte.js'
   import { FAMILIES } from '../lib/families.js'
+  import SourceCode from './SourceCode.svelte'
   import { isHan } from '../../src/fold.js'
   import { puaOf } from '../../src/pua.js'
   import { characterVariants } from '../../src/variants.js'
@@ -182,7 +183,16 @@
           {#each group.rows as row (row.method.id)}
             <div class="row">
               <dt><a href={link('m', { method: row.method.id, c: char })} onclick={event => { event.preventDefault(); go('m', row.method.id) }}>{nameOf(row.method.names)}</a></dt>
-              <dd class="ui-mono">{row.codes.join(' · ')}</dd>
+              <dd class="ui-mono">
+                {#if row.method.id === 'irg-g'}
+                  {#each row.codes as code, i (code)}
+                    {#if i}<span class="sep" aria-hidden="true"> · </span>{/if}
+                    <SourceCode {code} />
+                  {/each}
+                {:else}
+                  {row.codes.join(' · ')}
+                {/if}
+              </dd>
             </div>
           {/each}
         </dl>

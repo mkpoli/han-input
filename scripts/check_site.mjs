@@ -190,6 +190,24 @@ for (const [name, hex] of [['Extension B', '20000'], ['Extension G', '30000'], [
     assert.ok(fonts.some(font => font.isCustomFont), fonts.map(font => font.familyName).join())
   })
 }
+await check('an IRG G source names itself', async () => {
+  await page.goto(`${SITE}/?c=206C5`)
+  await page.waitForLoadState('networkidle')
+  const trigger = page.locator('.source-code .trigger').first()
+  await trigger.hover()
+  const tip = page.getByRole('tooltip').first()
+  await tip.waitFor()
+  assert.match(await tip.innerText(), /Cihai/)
+})
+await check('an Extension E record names its G source', async () => {
+  await page.goto(`${SITE}/?set=ext_e_withdrawal_records`)
+  await page.waitForLoadState('networkidle')
+  const tile = page.locator('.records .ui-tile[title*="G_GJZ"]').first()
+  assert.equal(await tile.count(), 1)
+  await tile.click()
+  await page.locator('aside.card .source-code .trigger').first().waitFor()
+  assert.match(await page.locator('aside.card').innerText(), /Commercial Press/)
+})
 await check('no script errors', async () => assert.equal(errors.join(' | '), ''))
 
 const SHOTS = [['find', '/?q=lung4&c=9F8D'], ['clues', '/?q=%E6%B0%B5+12%E7%95%AB&c=6E56'], ['methods', '/methods'], ['ashide', '/m/ashide?q=%E3%83%A6%E3%82%BF'], ['readings', '/readings'], ['rhymes', '/rhymes?q=%E6%9D%B1&c=6771'], ['radicals', '/radicals?q=85'], ['rare', '/?c=33473'], ['nushu', '/?q=%E4%B8%80&c=1B170'], ['hentaigana', '/?q=%E5%AE%89&c=1B002'], ['about', '/about']]
