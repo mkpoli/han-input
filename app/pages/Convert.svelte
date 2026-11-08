@@ -1,5 +1,5 @@
 <script>
-  import { PUA_SOURCES, convertPua, codePoint, puaTable } from '../../src/pua.js'
+  import { PUA_SOURCES, convertPua, codePoint, codePoints, puaTable } from '../../src/pua.js'
   import { copy } from '../lib/clip.svelte.js'
   import { t } from '../lib/i18n.svelte.js'
   import { link } from '../lib/route.svelte.js'
@@ -69,8 +69,8 @@
           {#each rows as row (row.legacy + row.source)}
             <tr>
               <td class="ui-mono">{codePoint(row.legacy)}</td>
-              <td class="ui-mono">{codePoint(row.standard)}</td>
-              <td><a class="glyph ui-script" lang="und-Hani" href={link('convert', { c: row.standard })} title={codePoint(row.standard)} onclick={event => show(event, row.standard)}>{row.standard}</a></td>
+              <td class="ui-mono">{codePoints(row.standard)}</td>
+              <td>{#if [...row.standard].length === 1}<a class="glyph ui-script" lang="und-Hani" href={link('convert', { c: row.standard })} title={codePoint(row.standard)} onclick={event => show(event, row.standard)}>{row.standard}</a>{:else}<span class="ui-mono">{row.standard}</span>{/if}</td>
               <td><span class="tag">{t(`pua.source.${row.source}`)}</span></td>
             </tr>
           {/each}
