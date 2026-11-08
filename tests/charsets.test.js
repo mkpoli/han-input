@@ -174,8 +174,8 @@ test('snapshot covers every source catalogue and counts match unique scalars', (
     for (const record of glyphs) {
       const png = readFileSync(new URL(record.glyph, base))
       expect(png.subarray(0, 8)).toEqual(Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]))
-      expect(png.readUInt32BE(16)).toBeGreaterThanOrEqual(64)
-      expect(png.readUInt32BE(20)).toBeGreaterThanOrEqual(64)
+      expect(png.readUInt32BE(16)).toBe(128)
+      expect(png.readUInt32BE(20)).toBe(128)
     }
     const members = [...readFileSync(new URL(`${set.id}.txt`, base), 'utf8')]
     expect(members.length).toBe(set.chars)

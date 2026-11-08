@@ -82,6 +82,7 @@ try {
       const corner = Number(execFileSync('magick', ['identify', '-format', '%[fx:u.p{0,0}]', target]).toString().trim())
       if (corner === 0) execFileSync('magick', [target, '-negate', target])
       execFileSync('magick', [target, '-transparent', 'white', target])
+      execFileSync('magick', [target, '-resize', '120x120', '-background', 'none', '-gravity', 'center', '-extent', '128x128', target])
     }
 
     const data = {
