@@ -1,5 +1,12 @@
 import { describe, expect, test } from 'bun:test'
 import { pageMetadata } from '../app/lib/title.js'
+import en from '../messages/en.json' with { type: 'json' }
+import ja from '../messages/ja.json' with { type: 'json' }
+import zhHans from '../messages/zh-Hans.json' with { type: 'json' }
+import zhHant from '../messages/zh-Hant.json' with { type: 'json' }
+import ko from '../messages/ko.json' with { type: 'json' }
+
+const CATALOGUES = { en, ja, 'zh-Hans': zhHans, 'zh-Hant': zhHant, ko }
 
 describe('page metadata', () => {
   test('gives every top-level route its own title and description', () => {
@@ -17,5 +24,17 @@ describe('page metadata', () => {
   })
   test('falls back to the finder for an unknown route', () => {
     expect(pageMetadata('nope')).toEqual(pageMetadata(''))
+  })
+})
+
+describe('catalogues', () => {
+  test('holds every title and description key in every language', () => {
+    for (const page of ['', 'methods', 'readings', 'rhymes', 'radicals', 'convert', 'about', 'm', 'v']) {
+      const { title, description } = pageMetadata(page)
+      for (const [locale, catalogue] of Object.entries(CATALOGUES)) {
+        expect(title in catalogue, `${locale} ${title}`).toBe(true)
+        expect(description in catalogue, `${locale} ${description}`).toBe(true)
+      }
+    }
   })
 })
