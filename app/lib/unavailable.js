@@ -1,4 +1,4 @@
-// Ways in that are known to exist and whose tables could not be found, so they cannot be searched here.
+// Ways in that are known to exist and are not searchable here.
 
 /** @typedef {{ family: string, names: string }} Unavailable */
 

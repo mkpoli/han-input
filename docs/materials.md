@@ -21,7 +21,7 @@ Discord discussion of 2026-10-27, and the works themselves were not read.
 | [TshetUinh.js](https://github.com/nk2028/tshet-uinh-js) 0.15.4 and [tshet-uinh-examples](https://github.com/nk2028/tshet-uinh-examples) 20260629.0.1 by nk2028, over [tshet-uinh-data](https://github.com/nk2028/tshet-uinh-data) | Guangyun positions and fanqie, and romanizations and reconstructions computed from them | MIT; data CC0-1.0 |
 | [葦手入力](https://ashide.otodo.net/) version 5, 中山春明, 2021-12-10 | kana shape codes | None stated for version 5; the [2018 repository](https://github.com/haruakira/Ashide) is GPL-3.0 |
 | [cin-tables](https://github.com/chinese-opendesktop/cin-tables) | 106 `.cin` tables | Per file; the header line is shown on each method's page. Repository CC0-1.0 |
-| [宇浩輸入法 Yuhao](https://github.com/forfudan/yuhao-ime-release) v3.13.0, 朱宇浩, retrieved 2026-11-08 | the five schemes’ full and short codes, 123,380 characters each | CC BY-NC-ND 4.0: non-commercial use, and modified works may not be distributed. Indexed for search, with the licence shown on each method’s page |
+| [宇浩輸入法 Yuhao](https://github.com/forfudan/yuhao-ime-release) v3.13.0, 朱宇浩, retrieved 2026-11-08 | the five schemes’ full and short codes: 123,380 characters before scope filtering, 103,964 indexed | CC BY-NC-ND 4.0: non-commercial use, and modified works may not be distributed. Indexed for search, with the licence shown on each method’s page |
 | Rime tables named in `scripts/sources/index.mjs` | codes and spellings | Per repository |
 | [UnicodeData.txt and NushuSources.txt](https://www.unicode.org/Public/18.0.0/ucd/), Unicode 18.0 | kana names, Nüshu readings and Nüshu Duben positions | Unicode License v3 |
 | [hentaigana.el](https://github.com/kawabata/hentaigana) 1.170817, 川幡太一 | the Han character each hiragana and hentaigana form was written from, and hentaigana by modern kana | GPL-3.0-or-later |
@@ -71,5 +71,6 @@ links open the site's search page.
 - The readings of a variety lose their notes (文白 and usage) in this index; 音典 keeps them.
 - CHISE describes some characters with parts that have no code point. The description keeps the source's entity name (`&CDP-88CD;`), as BabelStone's `{13}` and `？` stay.
 - Some tables grant only non-commercial use (表形碼, 導碼, E碼, 華象, 嘸蝦米, the 通用 Hakka tables), and
-  some carry terms that do not permit redistribution (中易拼形, 宇浩). Their terms are shown on each
-  method’s page, and the site uses them to answer a code query rather than to print the table.
+  some carry terms that do not permit redistribution (中易拼形, 宇浩). The build writes every indexed table
+  as search shards under `app/public/data`, which the browser fetches to answer a query; the method page
+  shows the terms. Whether that use is permitted is for each rights holder.

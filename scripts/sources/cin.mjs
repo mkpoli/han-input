@@ -5,7 +5,7 @@ import { fetchOnce } from '../lib.mjs'
 import { byWeight, readCin } from './rime.mjs'
 import RAW_TABLES from './cin-tables.json' with { type: 'json' }
 
-/** @type {{ file: string, zh: string, en: string, family: string, licence?: string, attribution?: string }[]} */
+/** @type {{ file: string, zh: string, en: string, family: string, licence?: string, attribution?: string, note?: string }[]} */
 const TABLES = /** @type {any} */ (RAW_TABLES)
 
 const REPO = 'https://github.com/chinese-opendesktop/cin-tables'
@@ -30,7 +30,7 @@ export async function cinMethods() {
     out.push({
       id: `cin-${table.file.replace(/[^\w-]/g, '_')}`, family: /** @type {import('../lib.mjs').Family} */ (table.family),
       names: { en: table.en, zh: table.zh },
-      source: { name: `${table.file}.cin, cin-tables`, url: `${REPO}/blob/HEAD/${table.file}.cin`, licence: table.licence ?? termsOf(text), attribution: table.attribution },
+      source: { name: `${table.file}.cin, cin-tables`, url: `${REPO}/blob/HEAD/${table.file}.cin`, licence: table.licence ?? termsOf(text), attribution: table.attribution, note: table.note },
       entries: byWeight(readCin(text)),
     })
   }

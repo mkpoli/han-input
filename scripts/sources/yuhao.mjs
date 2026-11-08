@@ -1,9 +1,8 @@
 // The five Yuhao schemes. Each release zip carries the full-code and short-code tables; the repository
 // itself holds only the Rime settings, so the zips are the source.
 import { execFileSync } from 'node:child_process'
-import { readFileSync } from 'node:fs'
 import { fetchOnce } from '../lib.mjs'
-import { readRimeDict } from './rime.mjs'
+import { byWeight, readRimeDict } from './rime.mjs'
 
 const VERSION = 'v3.13.0'
 const BASE = `https://github.com/forfudan/yuhao-ime-release/releases/download/${VERSION}`
@@ -29,15 +28,13 @@ export async function yuhaoMethods() {
   for (const [asset, id, en, zh, tables] of SCHEMES) {
     const url = `${BASE}/${asset}_${VERSION}.zip`
     const zip = await fetchOnce(url)
-    /** @type {[string, string][]} */
-    const entries = []
-    for (const table of tables) {
-      for (const { char, code } of readRimeDict(unzipText(zip, `schema/yuhao/${table}.dict.yaml`))) entries.push([code, char])
-    }
+    const rows = []
+    for (const table of tables) rows.push(...readRimeDict(unzipText(zip, `schema/yuhao/${table}.dict.yaml`)))
+    const entries = byWeight(rows)
     out.push({
       id, family: 'shape', keys: 'a–z',
       names: { en, zh },
-      about: 'Full codes are two to four letters; shorter codes for common characters are included too.',
+      about: 'Full codes run to five letters; shorter codes for common characters are included too.',
       source: { name: `forfudan/yuhao-ime-release, ${asset}_${VERSION}.zip`, url, licence: LICENCE, attribution: ATTRIBUTION, version: VERSION },
       entries,
     })
