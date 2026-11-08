@@ -78,6 +78,8 @@ export function cnsSourceSets(sourceText, mappings, unihan = new Map(), assigned
     : (/** @type {number} */ point) => /\p{Script=Han}|\p{Script=Hiragana}|\p{Script=Katakana}|\p{Script=Nushu}/u.test(String.fromCodePoint(point))
   return [...categories].map(([label, records]) => {
     const chars = new Set()
+    let encoded = 0
+    let unencoded = 0
     for (const record of records) {
       const scalar = (/** @type {string} */ hex) => {
         const point = parseInt(hex, 16)
@@ -93,11 +95,13 @@ export function cnsSourceSets(sourceText, mappings, unihan = new Map(), assigned
           if (!isPrivateUse(point) && assignedPoint(point)) real = [point]
         }
       }
+      if (real.length) encoded++
+      else unencoded++
       const glyphs = real.length ? real : record.unicode.map(scalar).filter(isPrivateUse)
       for (const point of glyphs) chars.add(String.fromCodePoint(point))
     }
     const members = [...chars].sort((a, b) => a.codePointAt(0) - b.codePointAt(0)).join('')
-    return { id: `cns_source_${createHash('sha256').update(label).digest('hex').slice(0, 12)}`, label, members, records }
+    return { id: `cns_source_${createHash('sha256').update(label).digest('hex').slice(0, 12)}`, label, members, records, encoded, unencoded }
   }).sort((a, b) => [...b.members].length - [...a.members].length || b.records.length - a.records.length || a.label.localeCompare(b.label))
 }
 

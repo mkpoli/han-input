@@ -10,7 +10,7 @@ describe('source glyph membership', () => {
     expect(mappedMembers({ rows: [
       ['2FA20', '⿱一木', {}], ['00001', '字', {}], ['00002', '𠀀', {}],
       ['00003', '字', {}], ['00004', '\uE000', {}], ['00005', '字\u{E0100}', {}], ['2FADC', 'リ', {}],
-    ] })).toEqual({ members: 'リ字𠀀', total: 7 })
+    ] })).toEqual({ members: 'リ字𠀀', total: 7, encoded: 3, unencoded: 2 })
   })
   test('IWDS keeps example roles and skips IDS operands and variation sequences', () => {
     expect(scalarExpressions('⿰歹又字⿱木木𠀀字\u{E0100}')).toEqual(['字', '𠀀'])
@@ -60,9 +60,11 @@ test('CNS categories preserve source labels, decimal planes and private-use evid
   const land = categories.find(set => set.label === '地政')
   expect(land.members).toBe('字𠀀')
   expect(land.records.map(row => row.cns)).toEqual(['11-4921', '11-4922'])
+  expect([land.encoded, land.unencoded]).toEqual([2, 0])
   const medicine = categories.find(set => set.label === '醫藥')
   expect(medicine.members).toBe('\u{F0000}')
   expect(medicine.records).toEqual([{ cns: '24-2121', unicode: ['F0000'] }])
+  expect([medicine.encoded, medicine.unencoded]).toEqual([0, 1])
   expect(categories.find(set => set.label === '常用(96年公布)').members).toBe('一')
   expect(cnsSourceSets('1-4421\t常用(96年公布)', ['1-4421\t4E00'])[0].id).toBe(categories.find(set => set.label === '常用(96年公布)').id)
   expect(cnsSourceSets('11-492a\t地政', ['11-492A\t5B57'])[0].members).toBe('字')
@@ -75,6 +77,7 @@ test('CNS rows without an assigned scalar keep their private-use glyph slot', ()
   const categories = cnsSourceSets('11-7E4E\t臺灣台語用字\n11-7E4F\t臺灣台語用字\n', ['11-7E4E\tFFB0F\n11-7E4F\tFFB0E\n'], new Map(), new Set([0xFFB0F, 0xFFB0E]))
   expect([...categories[0].members].map(char => char.codePointAt(0))).toEqual([0xFFB0E, 0xFFB0F])
   expect([...categories[0].members]).toHaveLength(2)
+  expect([categories[0].encoded, categories[0].unencoded]).toEqual([0, 2])
 })
 
 test('Unihan kIRG_TSource fills a scalar assigned after the bulk release', () => {
@@ -84,6 +87,7 @@ test('Unihan kIRG_TSource fills a scalar assigned after the bulk release', () =>
   const categories = cnsSourceSets('11-7D29\t臺灣台語用字\n', ['11-7D29\tFFB1B\n'], sources, new Set([0x324D6, 0xFFB1B]))
   expect(categories[0].members).toBe('𲓖')
   expect(categories[0].records[0].crosswalk).toBe('324D6')
+  expect([categories[0].encoded, categories[0].unencoded]).toEqual([1, 0])
 })
 
 test('snapshot covers every source catalogue and counts match unique scalars', () => {
@@ -115,14 +119,33 @@ test('snapshot covers every source catalogue and counts match unique scalars', (
   expect(land.source.url).toBe('https://www.cns11643.gov.tw/searchSY.jsp?ID=114')
   const taiwan = cns.find(row => row.label === '臺灣台語用字')
   expect(taiwan.chars).toBe(3)
+  expect([taiwan.encoded, taiwan.unencoded]).toEqual([1, 2])
   expect([...readFileSync(new URL(`${taiwan.id}.txt`, base), 'utf8')].map(char => char.codePointAt(0))).toEqual([0x324D6, 0xFFB0E, 0xFFB0F])
+  const isPrivateUse = point => point >= 0xE000 && point <= 0xF8FF || point >= 0xF0000 && point <= 0xFFFFD || point >= 0x100000 && point <= 0x10FFFD
   for (const row of catalogue) {
     const members = [...readFileSync(new URL(`${row.id}.txt`, base), 'utf8')]
     expect(new Set(members).size).toBe(row.chars)
     expect(members.length).toBe(row.chars)
     expect(row.source.url).toMatch(/^https:\/\//)
+    expect(Number.isInteger(row.encoded)).toBe(true)
+    expect(Number.isInteger(row.unencoded)).toBe(true)
+    // IWDS counts entries for `total`, not example characters.
+    if (row.id !== 'iwds') expect(row.encoded + row.unencoded).toBeLessThanOrEqual(row.total)
+    if (row.group === 'CNS sources') {
+      const lines = readFileSync(new URL(row.source.records.replace('/charsets/', ''), base), 'utf8').split('\n').filter(line => line && !line.startsWith('#')).slice(1)
+      let encoded = 0
+      let unencoded = 0
+      for (const line of lines) {
+        const points = (line.split('\t')[1] ?? '').split(/\s+/).filter(Boolean).map(token => parseInt(token.slice(2), 16))
+        if (points.some(point => !isPrivateUse(point))) encoded++
+        else unencoded++
+      }
+      expect([row.encoded, row.unencoded]).toEqual([encoded, unencoded])
+    }
   }
   expect(catalogue.find(row => row.id === 'unicode_comp_a_tentative').chars).toBe(0)
+  const iwds = catalogue.find(row => row.id === 'iwds')
+  expect([iwds.encoded, iwds.unencoded]).toEqual([iwds.chars, 0])
   expect(readFileSync(new URL('unicode_ext_e.txt', base), 'utf8')).toContain('𫠠')
   expect(readFileSync(new URL('t1.txt', base), 'utf8')).toContain('字')
   const proposals = JSON.parse(readFileSync(new URL('ext_e_records.json', base), 'utf8'))
@@ -142,6 +165,7 @@ test('snapshot covers every source catalogue and counts match unique scalars', (
   expect(entry.group).toBe('Proposals')
   expect(entry.chars).toBe(3)
   expect(entry.total).toBe(138)
+  expect([entry.encoded, entry.unencoded]).toEqual([3, 135])
   expect(entry.records).toEqual({ file: '/charsets/ext_e_records.json', count: 138, glyphs: 134 })
   const mapped = new Set([...readFileSync(new URL('ext_e_withdrawal_records.txt', base), 'utf8')])
   expect(mapped).toEqual(new Set(['𦱳', String.fromCodePoint(0x2AC66), String.fromCodePoint(0x2AC69)]))

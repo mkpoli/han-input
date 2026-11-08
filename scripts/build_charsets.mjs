@@ -48,12 +48,14 @@ await Promise.all(Array.from({ length: 4 }, async () => {
     const payload = await get(url)
     if (!Array.isArray(payload.rows) && !entry.hidden) throw new Error(`Missing rows: ${entry.id}`)
     // Hidden document registries have empty endpoints; retain their catalogue identity.
-    const { members, total } = payload.rows ? mappedMembers(payload) : { members: '', total: 0 }
+    const { members, total, encoded, unencoded } = payload.rows
+      ? mappedMembers(payload)
+      : { members: '', total: 0, encoded: 0, unencoded: 0 }
     writeFileSync(join(OUT, `${entry.id}.txt`), members)
     catalogue[i] = {
       id: entry.id, group: entry.source, label: entry.abbr,
       names: { en: entry.name_en || entry.abbr, zh: hant(entry.name_zh || entry.abbr), hans: hans(entry.name_zh || entry.abbr) },
-      chars: [...members].length, total,
+      chars: [...members].length, total, encoded, unencoded,
       source: { name: '字統網', url, note: payload.rows ? undefined : 'The source endpoint supplies no membership rows.' },
     }
     console.log(`${entry.id}: ${[...members].length} characters / ${total} rows`)
@@ -65,7 +67,7 @@ record(iwdsUrl, iwdsBytes)
 const iwds = iwdsMembers(iwdsBytes.toString('utf8'))
 writeFileSync(join(OUT, 'iwds.txt'), iwds.members)
 writeFileSync(join(OUT, 'iwds-evidence.json'), JSON.stringify(iwds.evidence) + '\n')
-catalogue.push({ id: 'iwds', group: 'Unicode', label: 'IWDS', names: { en: 'IWDS · encoded examples', zh: 'IWDS·已編碼例字', hans: 'IWDS·已编码例字' }, chars: [...iwds.members].length, total: iwds.total, source: { name: 'yi-bai/iwds', url: iwdsUrl } })
+catalogue.push({ id: 'iwds', group: 'Unicode', label: 'IWDS', names: { en: 'IWDS · encoded examples', zh: 'IWDS·已編碼例字', hans: 'IWDS·已编码例字' }, chars: [...iwds.members].length, total: iwds.total, encoded: iwds.encoded, unencoded: iwds.unencoded, source: { name: 'yi-bai/iwds', url: iwdsUrl } })
 
 // Literal block membership also covers the site's kana and Nüshu, and keeps compatibility scalars.
 const ucdUrl = 'https://www.unicode.org/Public/18.0.0/ucd/UnicodeData.txt'
@@ -92,7 +94,7 @@ for (const line of blocksBytes.toString('utf8').split('\n')) {
   for (let cp = parseInt(start, 16); cp <= parseInt(end, 16); cp++) if (assigned.has(cp)) members.push(String.fromCodePoint(cp))
   const id = `block_${name.toLowerCase().replaceAll(' ', '_').replaceAll('-', '_')}`
   writeFileSync(join(OUT, `${id}.txt`), members.join(''))
-  catalogue.push({ id, group: 'Unicode blocks', label: name, names: { en: name }, chars: members.length, total: members.length, source: { name: 'Unicode 18.0.0', url: blocksUrl } })
+  catalogue.push({ id, group: 'Unicode blocks', label: name, names: { en: name }, chars: members.length, total: members.length, encoded: members.length, unencoded: 0, source: { name: 'Unicode 18.0.0', url: blocksUrl } })
 }
 const proposals = JSON.parse(readFileSync(join(OUT, 'ext_e_records.json'), 'utf8'))
 for (const url of new Set([...proposals.documents.map(/** @param {{url:string}} document */ document => document.url), ...proposals.records.flatMap(/** @param {{evidenceUrls?:string[]}} record */ record => record.evidenceUrls ?? [])])) {
@@ -104,6 +106,8 @@ catalogue.push({
   id: 'ext_e_withdrawal_records', group: 'Proposals', label: 'Ext.E withdrawn',
   names: { en: 'Extension E withdrawn characters', zh: '擴展E撤銷字', hans: '扩展E撤销字', ja: '拡張E撤回字', ko: '확장 E 철회자' },
   chars: [...withdrawalMembers].length, total: proposals.records.length,
+  encoded: [...withdrawalMembers].length,
+  unencoded: proposals.records.filter(/** @param {{mappedUnicode?:string}} record */ record => !record.mappedUnicode).length,
   records: { file: '/charsets/ext_e_records.json', count: proposals.records.length, glyphs: proposals.records.filter(/** @param {{glyph?:string}} record */ record => record.glyph).length },
   source: { name: 'IRG', url: 'https://www.unicode.org/irg/docs/n1841-ExtensionEWithdraw.pdf' },
 })
@@ -130,7 +134,7 @@ for (const set of cnsSets) {
     'CNS\tUnicode', ...set.records.map(row => `${row.cns}\t${[...new Set([...(row.crosswalk ? [row.crosswalk] : []), ...row.unicode])].map(hex => `U+${hex}`).join(' ')}`),
   ].join('\n') + '\n')
   catalogue.push({ id: set.id, group: 'CNS sources', label: set.label, names: { en: set.label, zh: set.label, hans: hans(set.label), ja: set.label, ko: set.label },
-    chars: [...set.members].length, total: set.records.length,
+    chars: [...set.members].length, total: set.records.length, encoded: set.encoded, unencoded: set.unencoded,
     source: { name: 'CNS11643全字庫', url: sourceUrl, records, version: cns.datasetVersion.replace(/^(\d{4})(\d{2})(\d{2})$/, '$1-$2-$3'), licence: cns.licenseUrl, attribution },
   })
 }

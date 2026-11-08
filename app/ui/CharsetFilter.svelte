@@ -1,6 +1,8 @@
 <script>
   import { tick } from 'svelte'
-  import { nameOf, t } from '../lib/i18n.svelte.js'
+  import { i18n, nameOf, t } from '../lib/i18n.svelte.js'
+  import CoverageChart from './CoverageChart.svelte'
+  import CoverageDot from './CoverageDot.svelte'
 
   const CNS_GROUP = 'CNS sources'
 
@@ -17,6 +19,7 @@
   const chosen = $derived(charsets.find(set => set.id === selected))
   const recordsFile = $derived(chosen ? chosen.records?.file ?? chosen.source.records : '')
   const needle = $derived(search.trim().toLowerCase())
+  const percentFormat = $derived(new Intl.NumberFormat(i18n.locale, { maximumFractionDigits: 1 }))
   const groups = $derived([...new Set(charsets.map(set => set.group))].map(group => ({
     name: group,
     sets: charsets.filter(set => set.group === group && (!needle
@@ -30,6 +33,20 @@
     await tick()
     groupList?.scrollTo({ top: 0 })
     searchInput?.focus()
+  }
+
+  /** @param {import('../lib/charsets.js').Charset} set */
+  function coverageOf(set) {
+    if (!set.unencoded) return ''
+    const encoded = set.encoded ?? set.chars
+    const total = encoded + set.unencoded
+    if (!total) return ''
+    const percent = percentFormat.format(set.unencoded / total * 100)
+    return t('charset.coverageLabel', {
+      percent,
+      encoded: encoded.toLocaleString(i18n.locale),
+      unencoded: set.unencoded.toLocaleString(i18n.locale),
+    })
   }
 
   /** @param {string} id */
@@ -57,8 +74,13 @@
             {#if group.name === CNS_GROUP}<p class="ui-hint cns-note">{t('charset.cnsIntro')}</p>{/if}
             <div class="sets">
               {#each group.sets as set (set.id)}
-                <button class="ui-button set" data-size="sm" data-charset={set.id} type="button" title={nameOf(set.names)} aria-pressed={selected === set.id} onclick={() => choose(set.id)}>
-                  <span>{set.label}</span><span class="ui-count">{set.chars.toLocaleString()}</span>
+                {@const coverage = coverageOf(set)}
+                <button class="ui-button set" data-size="sm" data-charset={set.id} type="button" title={coverage ? `${nameOf(set.names)} · ${coverage}` : nameOf(set.names)} aria-pressed={selected === set.id} onclick={() => choose(set.id)}>
+                  <span>{set.label}</span>
+                  <span class="set-end">
+                    {#if coverage}<CoverageDot encoded={set.encoded ?? set.chars} unencoded={set.unencoded ?? 0} />{/if}
+                    <span class="ui-count">{set.chars.toLocaleString()}</span>
+                  </span>
                 </button>
               {/each}
             </div>
@@ -84,6 +106,9 @@
       {#if recordsFile}<a href={recordsFile} target="_blank" rel="noopener noreferrer">{t('charset.records')}</a>{/if}
     </div>
     <p class="set-name">{nameOf(chosen.names)}</p>
+    {#if chosen.unencoded !== undefined && (chosen.encoded ?? chosen.chars) + chosen.unencoded > 0}
+      <CoverageChart encoded={chosen.encoded ?? chosen.chars} unencoded={chosen.unencoded} />
+    {/if}
     <p class="ui-hint">{t('charset.unencoded')}</p>
     {#if chosen.source.note}<p class="ui-hint">{chosen.source.note}</p>{/if}
   {/if}
@@ -102,6 +127,7 @@
   .sets{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:var(--ui-space-2xs)}
   .set{justify-content:space-between;gap:var(--ui-space-sm);white-space:normal;text-align:start;block-size:auto;min-block-size:32px}
   .set span:first-child{overflow-wrap:anywhere}
+  .set-end{display:flex;align-items:center;gap:var(--ui-space-xs);flex:none}
   button[aria-pressed='true']{border-color:var(--ui-color-accent-ink);color:var(--ui-color-accent-ink)}
   .metadata{display:flex;flex-wrap:wrap;gap:var(--ui-space-2xs) var(--ui-space-md);margin-block-start:var(--ui-space-sm);font-size:var(--ui-text-sm);color:var(--ui-color-ink-soft)}
   .set-name{font-size:var(--ui-text-sm);color:var(--ui-color-ink-soft)}
