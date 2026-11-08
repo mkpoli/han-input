@@ -128,6 +128,7 @@
   "pua.source.all": "전체",
   "pua.source.unihan": "Unihan",
   "pua.source.hkscs": "HKSCS",
+  "pua.source.hanyang": "Hanyang",
   "pua.relation.simplified": "간체자",
   "pua.relation.traditional": "번체자",
   "pua.relation.semantic": "의미 이체자",

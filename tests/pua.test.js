@@ -73,11 +73,11 @@ describe('HKSCS', () => {
 
 describe('all sources', () => {
   test('converts where the sources agree and leaves conflicts', () => {
-    expect(convertPua('\uF266\uE43B', 'all')).toEqual({ text: '䏰\uE43B', converted: 1, unmapped: 0, ambiguous: 1 })
+    expect(convertPua('\uF266\uE43B', 'all')).toEqual({ text: '\uF266\uE43B', converted: 0, unmapped: 0, ambiguous: 2 })
     expect(convertPua('\uE43B\uE51F', 'all')).toEqual({ text: '\uE43B\uE51F', converted: 0, unmapped: 0, ambiguous: 2 })
   })
   test('lists every row with its source', () => {
-    expect(puaTable('all')).toHaveLength(2412)
+    expect(puaTable('all')).toHaveLength(8073)
     expect(puaTable('moe')).toHaveLength(59)
     expect(puaTable('hkscs').every(row => row.source === 'hkscs')).toBe(true)
   })
