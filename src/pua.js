@@ -17,6 +17,13 @@ export const puaSource = id => PUA_SOURCES.find(source => source.id === id)
 /** @param {string} id */
 export const puaEntries = id => Object.entries(puaSource(id)?.mappings ?? {})
 
+/** Every row of one source, or of all sources. @param {string} id */
+export function puaTable(id) {
+  const sources = id === 'all' ? PUA_SOURCES : PUA_SOURCES.filter(source => source.id === id)
+  return sources.flatMap(source => Object.entries(source.mappings).map(([legacy, standard]) => ({ legacy, standard, source: source.id })))
+    .sort((a, b) => /** @type {number} */ (a.legacy.codePointAt(0)) - /** @type {number} */ (b.legacy.codePointAt(0)) || a.source.localeCompare(b.source))
+}
+
 /** A character's code point. @param {string} char */
 export const codePoint = char => `U+${(char.codePointAt(0) ?? 0).toString(16).toUpperCase().padStart(4, '0')}`
 
@@ -54,19 +61,24 @@ export function puaOf(char) {
   return [...own, ...related]
 }
 
-/** Convert one source's assignments, leaving other text as it is. @param {string} text @param {string} [sourceId] */
+/** Convert one source, or every source where they agree. @param {string} text @param {string} [sourceId] */
 export function convertPua(text, sourceId = 'moe') {
-  const mappings = puaSource(sourceId)?.mappings ?? MOE_PUA.mappings
+  const sources = sourceId === 'all' ? PUA_SOURCES : PUA_SOURCES.filter(source => source.id === sourceId)
   let converted = 0
   let unmapped = 0
+  let ambiguous = 0
   let output = ''
   for (const char of text) {
-    const mapped = mappings[char]
-    if (mapped) { output += mapped; converted++ }
-    else {
+    const targets = new Set(sources.map(source => source.mappings[char]).filter(Boolean))
+    const [target] = targets
+    if (targets.size === 1) { output += target; converted++ }
+    else if (targets.size === 0) {
       output += char
       if (/\p{Co}/u.test(char)) unmapped++
+    } else {
+      output += char
+      ambiguous++
     }
   }
-  return { text: output, converted, unmapped }
+  return { text: output, converted, unmapped, ambiguous }
 }
