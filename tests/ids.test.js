@@ -70,11 +70,20 @@ describe('equivalences', () => {
       new Map([['惠', new Set(['⿱{7}心'])], ['專', new Set(['⿱{7}寸'])]]),
       new Map([['惠', new Set(['⿱&CDP-8BD0;心'])], ['專', new Set(['⿱&CDP-8BD0;寸'])]]),
     )
-    expect(pairs.get('CDP-8BD0').get(7)).toBe(2)
+    expect(pairs.get('CDP-8BD0').get(7).size).toBe(2)
   })
-  test('leaves descriptions that differ by more than one operand apart', () => {
-    const pairs = alignDescriptions(new Map([['惠', new Set(['⿱{7}心'])]]), new Map([['惠', new Set(['⿱&CDP-8BD0;日'])]]))
-    expect(pairs.get('CDP-8BD0')).toBeUndefined()
+  test('records every differing operand while the operators agree', () => {
+    const pairs = alignDescriptions(new Map([['惠', new Set(['⿰{7}{5}'])]]), new Map([['惠', new Set(['⿰&E1;&E2;'])]]))
+    expect(pairs.get('E1').get(7).size).toBe(1)
+    expect(pairs.get('E2').get(5).size).toBe(1)
+  })
+  test('compares a number with a known fragment as that fragment', () => {
+    const pairs = alignDescriptions(new Map([['免', new Set(['⿱{2}心'])]]), new Map([['免', new Set(['⿱&E1;心'])]]))
+    expect(pairs.get('E1')).toBeUndefined()
+  })
+  test('skips descriptions whose operators differ', () => {
+    const pairs = alignDescriptions(new Map([['惠', new Set(['⿱{7}心'])]]), new Map([['惠', new Set(['⿰&E1;心'])]]))
+    expect(pairs.get('E1')).toBeUndefined()
   })
 })
 
