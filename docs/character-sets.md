@@ -34,7 +34,7 @@ These are proposal numbers, not scalar assignments, and IRGN1841 lists the chara
 
 ## G source labels
 
-Character cards and printed records show the G source beside its code: GCH 辭海, GCYY 中國測繪科學研究院用字, GBK 中國大百科全書, GJZ 商務印書館用字, GZFY 漢語方言大詞典, GH GB/T 15564 and GKX 康熙字典. The code stays text; the source name opens a note with the edition or institution. The notes live in [sources.js](../app/lib/sources.js). [UAX #38](https://www.unicode.org/reports/tr38/#kIRG_GSource) defines the codes and the edition behind GCH; the institutional dates come from [CASM](https://www.casm.ac.cn/chbyjj/chyjj/index.html), the [Commercial Press](http://cpem.cp.com.cn/home/aboutcpem) and [Cihai](https://www.cihai.com.cn).
+Character cards show the G source beside its code, and a printed record card does the same; the record grid puts the source in the tile title. The glossary lists GCH 辭海, GCYY 中國測繪科學研究院用字, GBK 中國大百科全書, GJZ 商務印書館用字, GZFY 漢語方言大詞典, GH GB/T 15564 and GKX 康熙字典; a code outside these stays plain. The code stays text; the source name opens a note with the edition or institution. The notes live in [sources.js](../app/lib/sources.js). [UAX #38](https://www.unicode.org/reports/tr38/#kIRG_GSource) defines the codes and the edition behind GCH; the institutional dates come from [CASM](https://www.casm.ac.cn/chbyjj/chyjj/index.html), the [Commercial Press](http://cpem.cp.com.cn/home/aboutcpem) and [Cihai](https://www.cihai.com.cn).
 
 ## Sources
 

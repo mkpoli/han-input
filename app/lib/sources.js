@@ -9,7 +9,7 @@
 /** @type {Record<string, GSource>} */
 export const G_SOURCES = {
   GCH: {
-    names: { en: 'Cihai', zh: '辭海', hans: '辞海', ja: '辞海', ko: '자해' },
+    names: { en: 'Cihai', zh: '辭海', hans: '辞海', ja: '辞海', ko: '사해' },
     note: {
       en: 'A large comprehensive dictionary. The IRG source is the 1999 popular edition, Shanghai Lexicographical Publishing House.',
       zh: '大型綜合辭書；IRG採用1999年版普及本（上海辭書出版社）。',
@@ -111,7 +111,8 @@ export function gSourceOf(code) {
 }
 
 /**
- * A source note in the reader's language, falling back to the traditional and English text.
+ * A source note in the reader's language. Japanese and Korean fall back to English when the
+ * source has no note of its own; Chinese locales fall back to the other script.
  * @param {GSource} source
  * @param {string} locale
  * @returns {string}
@@ -119,5 +120,8 @@ export function gSourceOf(code) {
 export function noteOf(source, locale) {
   if (!source.note) return ''
   const key = locale === 'zh-Hant' ? 'zh' : locale
-  return source.note[key] ?? source.note.hans ?? source.note.zh ?? source.note.en ?? ''
+  const fallback = locale === 'ja' || locale === 'ko'
+    ? source.note.en
+    : source.note.hans ?? source.note.zh ?? source.note.en
+  return source.note[key] ?? fallback ?? ''
 }

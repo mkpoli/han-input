@@ -81,16 +81,25 @@
       if (!wrap || !(event.target instanceof Node) || wrap.contains(event.target)) return
       hide()
     }
-    const close = () => hide()
+    /** @param {KeyboardEvent} event */
+    const key = event => {
+      if (event.key === 'Escape') hide()
+    }
+    const follow = () => {
+      if (!trigger) return
+      const rect = trigger.getBoundingClientRect()
+      if (rect.bottom < 0 || rect.top > window.innerHeight) { hide(); return }
+      place()
+    }
     window.addEventListener('pointerdown', outside, true)
-    window.addEventListener('wheel', close, { capture: true, passive: true })
-    window.addEventListener('touchmove', close, { capture: true, passive: true })
-    window.addEventListener('resize', close)
+    window.addEventListener('keydown', key)
+    window.addEventListener('scroll', follow, true)
+    window.addEventListener('resize', follow)
     return () => {
       window.removeEventListener('pointerdown', outside, true)
-      window.removeEventListener('wheel', close, true)
-      window.removeEventListener('touchmove', close, true)
-      window.removeEventListener('resize', close)
+      window.removeEventListener('keydown', key)
+      window.removeEventListener('scroll', follow, true)
+      window.removeEventListener('resize', follow)
     }
   })
 
@@ -99,9 +108,12 @@
 
 <span class="source-code" bind:this={wrap}>
   <code class="code" title={source ? [name, note].filter(Boolean).join(' — ') : undefined}>{code}</code>
+  {#if source}
+    <span class="ui-visually-hidden" id={`${id}-desc`}>{name}{#if note}. {note}{/if}</span>
+  {/if}
   {#if source && showName}
     <button class="trigger" type="button" bind:this={trigger}
-      aria-describedby={open ? `${id}-tip` : undefined}
+      aria-describedby={`${id}-desc`}
       onclick={show} onmouseenter={enter} onmouseleave={leave} onfocus={show} onblur={hide} onkeydown={escape}>{name}</button>
   {/if}
   {#if open && source}
