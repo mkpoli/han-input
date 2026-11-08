@@ -114,6 +114,7 @@
   "convert.input": "원문",
   "convert.output": "변환 결과",
   "convert.placeholder": "예전 글꼴 텍스트를 붙여 넣으세요",
+  "convert.puaInInput": "텍스트의 사용자 정의 문자",
   "convert.source": "출처",
   "convert.filter": "코드나 글자로 거르기",
   "convert.converted": "변환한 문자: {count}자",

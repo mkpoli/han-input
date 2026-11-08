@@ -114,6 +114,7 @@
   "convert.input": "元のテキスト",
   "convert.output": "変換後のテキスト",
   "convert.placeholder": "旧字体のテキストを貼り付け",
+  "convert.puaInInput": "テキスト内の外字",
   "convert.source": "出典",
   "convert.filter": "コードや文字で絞り込む",
   "convert.converted": "変換した文字：{count}字",
