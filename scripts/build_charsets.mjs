@@ -2,6 +2,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { createHash } from 'node:crypto'
+import { execFileSync } from 'node:child_process'
 import { fetchOnce } from './lib.mjs'
 import { mappedMembers, iwdsMembers } from './charset-members.mjs'
 import * as OpenCC from 'opencc-js'
@@ -110,7 +111,11 @@ const propertiesPath = await fetchOnce(cns.sourceUrl)
 const mappingPath = await fetchOnce(cns.mappingUrl)
 record(cns.sourceUrl, readFileSync(propertiesPath))
 record(cns.mappingUrl, readFileSync(mappingPath))
-const cnsSets = readCnsSourceSets(propertiesPath, mappingPath)
+const unihanUrl = 'https://www.unicode.org/Public/18.0.0/ucd/Unihan.zip'
+const unihanPath = await fetchOnce(unihanUrl, 'Unihan.zip')
+record(unihanUrl, readFileSync(unihanPath))
+const unihanText = execFileSync('unzip', ['-p', unihanPath, 'Unihan_IRGSources.txt'], { encoding: 'utf8', maxBuffer: 32 * 1024 * 1024 })
+const cnsSets = readCnsSourceSets(propertiesPath, mappingPath, unihanText, assigned)
 if (cnsSets.length !== cns.categoryCount || cnsSets.reduce((sum, set) => sum + set.records.length, 0) !== cns.rowCount) throw new Error('CNS catalogue count changed')
 for (const set of cnsSets) {
   writeFileSync(join(OUT, `${set.id}.txt`), set.members)
@@ -120,8 +125,8 @@ for (const set of cnsSets) {
   const attribution = '數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw'
   writeFileSync(join(OUT, `${set.id}.tsv`), [
     `# ${set.label}`, `# CNS source release: ${cns.datasetVersion}`, `# ${attribution}`,
-    `# Sources: ${cns.sourceUrl} ; ${cns.mappingUrl}`, `# Licence: ${cns.licenseUrl}`,
-    'CNS\tUnicode', ...set.records.map(row => `${row.cns}\t${row.unicode.map(hex => `U+${hex}`).join(' ')}`),
+    `# Sources: ${cns.sourceUrl} ; ${cns.mappingUrl} ; ${unihanUrl} (Unihan kIRG_TSource)`, `# Licence: ${cns.licenseUrl}`,
+    'CNS\tUnicode', ...set.records.map(row => `${row.cns}\t${[...new Set([...(row.crosswalk ? [row.crosswalk] : []), ...row.unicode])].map(hex => `U+${hex}`).join(' ')}`),
   ].join('\n') + '\n')
   catalogue.push({ id: set.id, group: 'CNS sources', label: set.label, names: { en: set.label, zh: set.label, hans: hans(set.label), ja: set.label, ko: set.label },
     chars: [...set.members].length, total: set.records.length,
@@ -132,6 +137,6 @@ writeFileSync(join(OUT, 'index.json'), JSON.stringify(catalogue, null, 2) + '\n'
 writeFileSync(join(OUT, 'sources.json'), JSON.stringify({
   catalogue: `${BASE}metadata.json`, retrieved: new Date().toISOString().slice(0, 10),
   attribution: '字統網, character-set catalogue and glyph mappings. Editorial mappings; original standards and proposal documents remain authoritative. Reuse terms are unspecified at these endpoints.',
-  policy: 'Source-row sets index single Unicode glyph mappings within the site’s Han, kana and Nüshu scope, plus radicals and strokes. Literal Unicode block sets contain assigned scalars. Local row numbers, IDS components, private-use glyphs and variation sequences do not establish scalar membership. OTHER follows the source’s unified substitutions, rather than literal Unicode block membership.',
+  policy: 'Source-row sets index every row through its assigned Unicode scalars, or its private-use glyph slots where no scalar is assigned; Unihan kIRG_TSource fills assignments newer than the bulk release. Literal Unicode block sets contain assigned scalars. Local row numbers, IDS components and variation sequences do not establish scalar membership. OTHER follows the source’s unified substitutions, rather than literal Unicode block membership.',
   inputs: inputs.sort((a, b) => a.url.localeCompare(b.url)),
 }, null, 2) + '\n')

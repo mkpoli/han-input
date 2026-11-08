@@ -1,7 +1,7 @@
 # 經濟部工商登記用字
 # CNS source release: 20260805
 # 數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw
-# Sources: https://www.cns11643.gov.tw/opendata/Properties.zip ; https://www.cns11643.gov.tw/opendata/MapingTables.zip
+# Sources: https://www.cns11643.gov.tw/opendata/Properties.zip ; https://www.cns11643.gov.tw/opendata/MapingTables.zip ; https://www.unicode.org/Public/18.0.0/ucd/Unihan.zip (Unihan kIRG_TSource)
 # Licence: https://www.cns11643.gov.tw/pageView.jsp?ID=59
 CNS	Unicode
 9-2121	U+FF835
@@ -43,7 +43,7 @@ CNS	Unicode
 11-7A3E	U+F9018
 11-7A3F	U+F9019
 11-7A40	U+F901A
-11-7A41	U+F901B
+11-7A41	U+2EC01 U+F901B
 11-7A43	U+F901D
 11-7A44	U+F901E
 11-7A45	U+F901F
@@ -224,7 +224,7 @@ CNS	Unicode
 11-7C4A	U+F90E0
 11-7C4B	U+F90E1
 11-7C4C	U+F90E2
-11-7C4D	U+F90E3
+11-7C4D	U+30828 U+F90E3
 11-7C4E	U+F90E4
 11-7C4F	U+F90E5
 11-7C50	U+F90E6
@@ -233,7 +233,7 @@ CNS	Unicode
 11-7C53	U+F90E9
 11-7C54	U+F90EA
 11-7C55	U+F90EB
-11-7C56	U+F90EC
+11-7C56	U+30876 U+F90EC
 11-7C57	U+F90ED
 11-7C58	U+F90EE
 11-7C59	U+F90EF
@@ -298,7 +298,7 @@ CNS	Unicode
 11-7D40	U+F9134
 11-7D41	U+F9135
 11-7D42	U+F9136
-11-7D43	U+F9137
+11-7D43	U+2ED92 U+F9137
 11-7D44	U+F9138
 11-7D45	U+F9139
 11-7D46	U+F913A
@@ -314,7 +314,7 @@ CNS	Unicode
 11-7D52	U+F9146
 11-7D53	U+F9147
 11-7D54	U+F9148
-11-7D55	U+F9149
+11-7D55	U+31F55 U+F9149
 11-7D56	U+F914A
 11-7D57	U+F914B
 11-7D58	U+F914C

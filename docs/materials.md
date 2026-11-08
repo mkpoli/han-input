@@ -35,6 +35,7 @@ Discord discussion of 2026-10-27, and the works themselves were not read.
 | [CHISE IDS](https://www.chise.org/ids/), the eighteen `IDS-UCS-*.txt` files at `chise/ids` `main@2026-11-04` | further descriptions of the same, including characters BabelStone leaves out | GPL-2.0-or-later; the build copies the descriptions, so the generated site data carries that licence |
 | [Noto Sans Nushu and Noto Serif Hentaigana](https://github.com/notofonts) | glyphs for Nüshu and hentaigana | OFL-1.1 |
 | [Jigmo](https://kamichikoichi.github.io/jigmo/) 2025-09-12, 上地宏一 | glyphs for the extension blocks, cut by `scripts/build_fonts.py` | CC0-1.0 |
+| [全字庫正宋體 TW-Sung-Plus](https://www.cns11643.gov.tw/downloadList.jsp?ID=2), 數位發展部, `Fonts_Sung.zip` 20260805 | glyphs for the private-use slots of unencoded CNS source rows, cut by `scripts/build_fonts.py` | 政府資料開放授權條款第1版 (OGDL 1.0), attribution「數位發展部，CNS11643中文標準交換碼全字庫網站」 |
 
 BabelStone writes some parts by number. Where note 6 of its file gives the IDS that writes the
 number out, the description uses it ({12}, the right of 龍, as ⿷己三); a description whose number the

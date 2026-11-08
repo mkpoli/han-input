@@ -2,7 +2,7 @@
   "catalogue": "https://zi.tools/api/ma/ma/metadata.json",
   "retrieved": "2026-11-07",
   "attribution": "字統網, character-set catalogue and glyph mappings. Editorial mappings; original standards and proposal documents remain authoritative. Reuse terms are unspecified at these endpoints.",
-  "policy": "Source-row sets index single Unicode glyph mappings within the site’s Han, kana and Nüshu scope, plus radicals and strokes. Literal Unicode block sets contain assigned scalars. Local row numbers, IDS components, private-use glyphs and variation sequences do not establish scalar membership. OTHER follows the source’s unified substitutions, rather than literal Unicode block membership.",
+  "policy": "Source-row sets index every row through its assigned Unicode scalars, or its private-use glyph slots where no scalar is assigned; Unihan kIRG_TSource fills assignments newer than the bulk release. Literal Unicode block sets contain assigned scalars. Local row numbers, IDS components and variation sequences do not establish scalar membership. OTHER follows the source’s unified substitutions, rather than literal Unicode block membership.",
   "inputs": [
     {
       "url": "https://raw.githubusercontent.com/yi-bai/iwds/master/iwds.xml",
@@ -15,6 +15,18 @@
     {
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
       "sha256": "3d56ef14cc8099893245dac58fe4718d2fa64812b9159352a98a4588ad3efa5c"
+    },
+    {
+      "url": "https://www.unicode.org/Public/18.0.0/ucd/Blocks.txt",
+      "sha256": "a58f8d322f3c5e254f9f97b1cbf76a454a7e02de6ac35619a5e4f27aaabfd553"
+    },
+    {
+      "url": "https://www.unicode.org/Public/18.0.0/ucd/UnicodeData.txt",
+      "sha256": "0736451de439ae7baf1425136617da495e09ee5afbe6e394374db7009ea08950"
+    },
+    {
+      "url": "https://www.unicode.org/Public/18.0.0/ucd/Unihan.zip",
+      "sha256": "4c93ea9c1f636451729a840978f1667a53886af37ba854fdcce109721c63d43e"
     },
     {
       "url": "https://www.unicode.org/irg/docs/n1596r-ExtensionEv6-Directions.pdf",
@@ -37,14 +49,6 @@
       "sha256": "5083135d812fa730222bc9fc721465178af11c13235edb5a061a2467014c3ffa"
     },
     {
-      "url": "https://www.unicode.org/Public/18.0.0/ucd/Blocks.txt",
-      "sha256": "a58f8d322f3c5e254f9f97b1cbf76a454a7e02de6ac35619a5e4f27aaabfd553"
-    },
-    {
-      "url": "https://www.unicode.org/Public/18.0.0/ucd/UnicodeData.txt",
-      "sha256": "0736451de439ae7baf1425136617da495e09ee5afbe6e394374db7009ea08950"
-    },
-    {
       "url": "https://zi.tools/api/ma/ma/1k8myqp9o8zxkvdpbqdhrfs6yfx5bk2t.json",
       "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
     },
@@ -55,6 +59,38 @@
     {
       "url": "https://zi.tools/api/ma/ma/compatibility.json",
       "sha256": "21215fb06a6f918e26d17c88c8d8ab43e06884201bd2c6201699c903fab8bf49"
+    },
+    {
+      "url": "https://zi.tools/api/ma/ma/g0.json",
+      "sha256": "d863b013eb30eb24169b8b3e55fb2fc343bb40bb4d536ff5e85948c75a994e21"
+    },
+    {
+      "url": "https://zi.tools/api/ma/ma/g1.json",
+      "sha256": "9178fa6fe4dbeb275eb5c3a5427d9e3dca97146c44df3ca206e4d05614256289"
+    },
+    {
+      "url": "https://zi.tools/api/ma/ma/g2.json",
+      "sha256": "b5790e981039dffca2710575b2e9ff23264842b4f0271e0a9db653365a4c5915"
+    },
+    {
+      "url": "https://zi.tools/api/ma/ma/g3.json",
+      "sha256": "f47575a3390ec7cfc5f1d4f6e0a623d1722516588fbe33d3fc0dc6ab73b6b451"
+    },
+    {
+      "url": "https://zi.tools/api/ma/ma/g4.json",
+      "sha256": "c934dbe21f9947c111656273ecf2f56794b16da644e074dfd63c40af8eb6ebb1"
+    },
+    {
+      "url": "https://zi.tools/api/ma/ma/g5.json",
+      "sha256": "16c969d3f05be637cdeecb1c7d86029f212cb70efa1dfabd4e822f34ad66bf98"
+    },
+    {
+      "url": "https://zi.tools/api/ma/ma/g7.json",
+      "sha256": "b4d0526dd73b0a36a67dbe1d1326de85eed72e690bc18fa8486cfd7d830c5be3"
+    },
+    {
+      "url": "https://zi.tools/api/ma/ma/g8.json",
+      "sha256": "98628f0fb325605901dabe95bfa7f78149706762651f0ec544574770e7730424"
     },
     {
       "url": "https://zi.tools/api/ma/ma/g_1j.json",
@@ -101,44 +137,12 @@
       "sha256": "28f5aba5b57a595bf98957edeac1d4f58b797c9253e1d06962217adccf2ef832"
     },
     {
-      "url": "https://zi.tools/api/ma/ma/g0.json",
-      "sha256": "d863b013eb30eb24169b8b3e55fb2fc343bb40bb4d536ff5e85948c75a994e21"
-    },
-    {
-      "url": "https://zi.tools/api/ma/ma/g1.json",
-      "sha256": "9178fa6fe4dbeb275eb5c3a5427d9e3dca97146c44df3ca206e4d05614256289"
-    },
-    {
-      "url": "https://zi.tools/api/ma/ma/g2.json",
-      "sha256": "b5790e981039dffca2710575b2e9ff23264842b4f0271e0a9db653365a4c5915"
-    },
-    {
-      "url": "https://zi.tools/api/ma/ma/g3.json",
-      "sha256": "f47575a3390ec7cfc5f1d4f6e0a623d1722516588fbe33d3fc0dc6ab73b6b451"
-    },
-    {
-      "url": "https://zi.tools/api/ma/ma/g4.json",
-      "sha256": "c934dbe21f9947c111656273ecf2f56794b16da644e074dfd63c40af8eb6ebb1"
-    },
-    {
-      "url": "https://zi.tools/api/ma/ma/g5.json",
-      "sha256": "16c969d3f05be637cdeecb1c7d86029f212cb70efa1dfabd4e822f34ad66bf98"
-    },
-    {
-      "url": "https://zi.tools/api/ma/ma/g7.json",
-      "sha256": "b4d0526dd73b0a36a67dbe1d1326de85eed72e690bc18fa8486cfd7d830c5be3"
-    },
-    {
-      "url": "https://zi.tools/api/ma/ma/g8.json",
-      "sha256": "98628f0fb325605901dabe95bfa7f78149706762651f0ec544574770e7730424"
+      "url": "https://zi.tools/api/ma/ma/gb_a.json",
+      "sha256": "b5c86efd8711ab78db4cddc3bfdfba967c200d36d9d93d8398fd3f48ecab4e78"
     },
     {
       "url": "https://zi.tools/api/ma/ma/gb_a_v1.json",
       "sha256": "e867959da7501c3be06bec35a59b2ba7c76b5bddeb8d2c18a0fdc53047da5fe8"
-    },
-    {
-      "url": "https://zi.tools/api/ma/ma/gb_a.json",
-      "sha256": "b5c86efd8711ab78db4cddc3bfdfba967c200d36d9d93d8398fd3f48ecab4e78"
     },
     {
       "url": "https://zi.tools/api/ma/ma/gce.json",
@@ -193,16 +197,16 @@
       "sha256": "f580ca51cb063e81902dccc1a40e7a1165041890ac83579d9587c2858f745033"
     },
     {
+      "url": "https://zi.tools/api/ma/ma/h.json",
+      "sha256": "be136694a724531a1fd52602d9d3e163e1c68d4dbf8487f7f253fd33b96a1e05"
+    },
+    {
       "url": "https://zi.tools/api/ma/ma/h_.json",
       "sha256": "dd1a9f966e81aeca8098776b4e5a1fc69f9fcec8590251daf21f9ffa29fa2cfa"
     },
     {
       "url": "https://zi.tools/api/ma/ma/h_cy.json",
       "sha256": "f330da38dbcaa04c4c3f6b2f0b97cd110b1903dd2f2ed776e3514bade675b795"
-    },
-    {
-      "url": "https://zi.tools/api/ma/ma/h.json",
-      "sha256": "be136694a724531a1fd52602d9d3e163e1c68d4dbf8487f7f253fd33b96a1e05"
     },
     {
       "url": "https://zi.tools/api/ma/ma/hb1.json",
@@ -215,18 +219,6 @@
     {
       "url": "https://zi.tools/api/ma/ma/irgn.json",
       "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
-    },
-    {
-      "url": "https://zi.tools/api/ma/ma/j_hg.json",
-      "sha256": "3739ae9ee1bb3cdf3f0a1337fa24fecf0bd9fa2f80215808c92fcfd5ab3209b0"
-    },
-    {
-      "url": "https://zi.tools/api/ma/ma/j_jm.json",
-      "sha256": "ce6eae68f281ebcefc82721a167c9d0a3825a635a8e8a83726760e30d5795a29"
-    },
-    {
-      "url": "https://zi.tools/api/ma/ma/j_jy.json",
-      "sha256": "4d1e3bb82b2e924d2ec133445baa99afc930622462698001ad70b07b147a4107"
     },
     {
       "url": "https://zi.tools/api/ma/ma/j0.json",
@@ -245,6 +237,18 @@
       "sha256": "a9406b2772c57b72aca4efc882804486a6cbf95f13b3683dd9f52c44a0e3e1aa"
     },
     {
+      "url": "https://zi.tools/api/ma/ma/j_hg.json",
+      "sha256": "3739ae9ee1bb3cdf3f0a1337fa24fecf0bd9fa2f80215808c92fcfd5ab3209b0"
+    },
+    {
+      "url": "https://zi.tools/api/ma/ma/j_jm.json",
+      "sha256": "ce6eae68f281ebcefc82721a167c9d0a3825a635a8e8a83726760e30d5795a29"
+    },
+    {
+      "url": "https://zi.tools/api/ma/ma/j_jy.json",
+      "sha256": "4d1e3bb82b2e924d2ec133445baa99afc930622462698001ad70b07b147a4107"
+    },
+    {
       "url": "https://zi.tools/api/ma/ma/jk.json",
       "sha256": "f14c7769e18a9feef9abab797dd8eabb36d5a5a61e4e0f43681a6b2d3cc2d4e1"
     },
@@ -255,14 +259,6 @@
     {
       "url": "https://zi.tools/api/ma/ma/jmjp.json",
       "sha256": "de380824b0c317a76e8ee3d97e30aea188f7bdce48e17f347c9b712153016c97"
-    },
-    {
-      "url": "https://zi.tools/api/ma/ma/k_gy.json",
-      "sha256": "bb4bd3cbc3db21384c30f6a7420b827761d2e0cde8c8915a074d7bb1c11a485d"
-    },
-    {
-      "url": "https://zi.tools/api/ma/ma/k_jm.json",
-      "sha256": "ceee6ee47e88b91973ada14f3b7e9821be6670fafa75a3e150833338286ec5f9"
     },
     {
       "url": "https://zi.tools/api/ma/ma/k0.json",
@@ -291,6 +287,14 @@
     {
       "url": "https://zi.tools/api/ma/ma/k6.json",
       "sha256": "56043e87c3b2de841a3da270b865026d327361819cfacc88c82c166641b4dfae"
+    },
+    {
+      "url": "https://zi.tools/api/ma/ma/k_gy.json",
+      "sha256": "bb4bd3cbc3db21384c30f6a7420b827761d2e0cde8c8915a074d7bb1c11a485d"
+    },
+    {
+      "url": "https://zi.tools/api/ma/ma/k_jm.json",
+      "sha256": "ceee6ee47e88b91973ada14f3b7e9821be6670fafa75a3e150833338286ec5f9"
     },
     {
       "url": "https://zi.tools/api/ma/ma/kc.json",
@@ -327,22 +331,6 @@
     {
       "url": "https://zi.tools/api/ma/ma/swjz.json",
       "sha256": "59111256fd268a842dabdfc3509b65cfb34081d43366e9372639bef77f1753ff"
-    },
-    {
-      "url": "https://zi.tools/api/ma/ma/t_a.json",
-      "sha256": "c70b8aeeb200e0657351e2506965f3a0d9b48f8d7a12ff60809c85944c267e8a"
-    },
-    {
-      "url": "https://zi.tools/api/ma/ma/t_b.json",
-      "sha256": "a69cdd69cce5c9381686d14c61eb54d1445243d69b728b4ba163f028be3c9a2f"
-    },
-    {
-      "url": "https://zi.tools/api/ma/ma/t_bt.json",
-      "sha256": "2d06667516936d8b5b97c1a6bd05b98bd891ca2ff88b0243542a4254b66a30ec"
-    },
-    {
-      "url": "https://zi.tools/api/ma/ma/t_c.json",
-      "sha256": "d45c7e1522b747a92d6aeb3e5ede366c2288c89fb6365c0489e6bd77b04ab37f"
     },
     {
       "url": "https://zi.tools/api/ma/ma/t1.json",
@@ -395,6 +383,22 @@
     {
       "url": "https://zi.tools/api/ma/ma/t9.json",
       "sha256": "a0e47b13bcf486d686a96c4a08b8ae28d1a9c4326c036ceef59eb3c449190905"
+    },
+    {
+      "url": "https://zi.tools/api/ma/ma/t_a.json",
+      "sha256": "c70b8aeeb200e0657351e2506965f3a0d9b48f8d7a12ff60809c85944c267e8a"
+    },
+    {
+      "url": "https://zi.tools/api/ma/ma/t_b.json",
+      "sha256": "a69cdd69cce5c9381686d14c61eb54d1445243d69b728b4ba163f028be3c9a2f"
+    },
+    {
+      "url": "https://zi.tools/api/ma/ma/t_bt.json",
+      "sha256": "2d06667516936d8b5b97c1a6bd05b98bd891ca2ff88b0243542a4254b66a30ec"
+    },
+    {
+      "url": "https://zi.tools/api/ma/ma/t_c.json",
+      "sha256": "d45c7e1522b747a92d6aeb3e5ede366c2288c89fb6365c0489e6bd77b04ab37f"
     },
     {
       "url": "https://zi.tools/api/ma/ma/ta.json",
