@@ -35,6 +35,7 @@
   "card.numberUnknown": "BabelStone 部件 {n}",
   "card.unnamed": "BabelStone 无法命名的部件符号",
   "card.entity": "CHISE 部件 {name}",
+  "card.entityNumber": "CHISE 部件 {name}，BabelStone 部件 {n}：{description}",
   "ids.source.babelstone": "BabelStone",
   "ids.source.chise": "CHISE",
   "ids.source.project": "本项目",
