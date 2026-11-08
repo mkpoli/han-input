@@ -4,7 +4,7 @@ import { join } from 'node:path'
 import { createHash } from 'node:crypto'
 import { execFileSync } from 'node:child_process'
 import { fetchOnce } from './lib.mjs'
-import { mappedMembers, iwdsMembers } from './charset-members.mjs'
+import { mappedMembers, iwdsMembers, idsRecords } from './charset-members.mjs'
 import * as OpenCC from 'opencc-js'
 import { readCnsSourceSets } from './sources/charsets-cns.mjs'
 
@@ -51,11 +51,23 @@ await Promise.all(Array.from({ length: 4 }, async () => {
     const { members, total, encoded, unencoded } = payload.rows
       ? mappedMembers(payload)
       : { members: '', total: 0, encoded: 0, unencoded: 0 }
+    const ids = payload.rows ? idsRecords(payload) : []
     writeFileSync(join(OUT, `${entry.id}.txt`), members)
+    let records
+    if (ids.length) {
+      writeFileSync(join(OUT, `${entry.id}.ids.json`), JSON.stringify({
+        title: `${entry.abbr} IDS descriptions`,
+        complete: true,
+        scope: 'Rows whose only glyph is an Ideographic Description Sequence; no Unicode scalar is assigned.',
+        documents: [],
+        records: ids.map(source => ({ document: 'ids', source, kind: 'ids' })),
+      }) + '\n')
+      records = { file: `/charsets/${entry.id}.ids.json`, count: ids.length, glyphs: 0 }
+    }
     catalogue[i] = {
       id: entry.id, group: entry.source, label: entry.abbr,
       names: { en: entry.name_en || entry.abbr, zh: hant(entry.name_zh || entry.abbr), hans: hans(entry.name_zh || entry.abbr) },
-      chars: [...members].length, total, encoded, unencoded,
+      chars: [...members].length, total, encoded, unencoded, records,
       source: { name: '字統網', url, note: payload.rows ? undefined : 'The source endpoint supplies no membership rows.' },
     }
     console.log(`${entry.id}: ${[...members].length} characters / ${total} rows`)

@@ -213,6 +213,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/unicode_comp_a_tentative.json"
+    },
+    "records": {
+      "file": "/charsets/unicode_comp_a_tentative.ids.json",
+      "count": 119,
+      "glyphs": 0
     }
   },
   {
@@ -231,6 +236,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/unicode_comp_b_tentative.json"
+    },
+    "records": {
+      "file": "/charsets/unicode_comp_b_tentative.ids.json",
+      "count": 197,
+      "glyphs": 0
     }
   },
   {
@@ -249,6 +259,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/compatibility.json"
+    },
+    "records": {
+      "file": "/charsets/compatibility.ids.json",
+      "count": 187,
+      "glyphs": 0
     }
   },
   {
@@ -267,6 +282,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/ws2015.json"
+    },
+    "records": {
+      "file": "/charsets/ws2015.ids.json",
+      "count": 338,
+      "glyphs": 0
     }
   },
   {
@@ -285,6 +305,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/ws2017.json"
+    },
+    "records": {
+      "file": "/charsets/ws2017.ids.json",
+      "count": 539,
+      "glyphs": 0
     }
   },
   {
@@ -303,6 +328,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/ws2021.json"
+    },
+    "records": {
+      "file": "/charsets/ws2021.ids.json",
+      "count": 538,
+      "glyphs": 0
     }
   },
   {
@@ -321,6 +351,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/ws2024.json"
+    },
+    "records": {
+      "file": "/charsets/ws2024.ids.json",
+      "count": 4646,
+      "glyphs": 0
     }
   },
   {
@@ -339,6 +374,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/utc.json"
+    },
+    "records": {
+      "file": "/charsets/utc.ids.json",
+      "count": 740,
+      "glyphs": 0
     }
   },
   {
@@ -467,6 +507,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/g2.json"
+    },
+    "records": {
+      "file": "/charsets/g2.ids.json",
+      "count": 496,
+      "glyphs": 0
     }
   },
   {
@@ -503,6 +548,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/g4.json"
+    },
+    "records": {
+      "file": "/charsets/g4.ids.json",
+      "count": 995,
+      "glyphs": 0
     }
   },
   {
@@ -521,6 +571,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/g5.json"
+    },
+    "records": {
+      "file": "/charsets/g5.ids.json",
+      "count": 24,
+      "glyphs": 0
     }
   },
   {
@@ -539,6 +594,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/g7.json"
+    },
+    "records": {
+      "file": "/charsets/g7.ids.json",
+      "count": 28,
+      "glyphs": 0
     }
   },
   {
@@ -557,6 +617,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/g8.json"
+    },
+    "records": {
+      "file": "/charsets/g8.ids.json",
+      "count": 2,
+      "glyphs": 0
     }
   },
   {
@@ -593,6 +658,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/gk.json"
+    },
+    "records": {
+      "file": "/charsets/gk.ids.json",
+      "count": 2,
+      "glyphs": 0
     }
   },
   {
@@ -629,6 +699,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/gb_a.json"
+    },
+    "records": {
+      "file": "/charsets/gb_a.ids.json",
+      "count": 14,
+      "glyphs": 0
     }
   },
   {
@@ -647,6 +722,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/gb_a_v1.json"
+    },
+    "records": {
+      "file": "/charsets/gb_a_v1.ids.json",
+      "count": 174,
+      "glyphs": 0
     }
   },
   {
@@ -683,6 +763,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/gkx.json"
+    },
+    "records": {
+      "file": "/charsets/gkx.ids.json",
+      "count": 23,
+      "glyphs": 0
     }
   },
   {
@@ -701,6 +786,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/ghzr.json"
+    },
+    "records": {
+      "file": "/charsets/ghzr.ids.json",
+      "count": 1809,
+      "glyphs": 0
     }
   },
   {
@@ -719,6 +809,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/gzfy.json"
+    },
+    "records": {
+      "file": "/charsets/gzfy.ids.json",
+      "count": 96,
+      "glyphs": 0
     }
   },
   {
@@ -737,6 +832,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/gzjw.json"
+    },
+    "records": {
+      "file": "/charsets/gzjw.ids.json",
+      "count": 180,
+      "glyphs": 0
     }
   },
   {
@@ -773,6 +873,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/gz.json"
+    },
+    "records": {
+      "file": "/charsets/gz.ids.json",
+      "count": 2680,
+      "glyphs": 0
     }
   },
   {
@@ -791,6 +896,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/ghf.json"
+    },
+    "records": {
+      "file": "/charsets/ghf.ids.json",
+      "count": 329,
+      "glyphs": 0
     }
   },
   {
@@ -809,6 +919,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/g_8f.json"
+    },
+    "records": {
+      "file": "/charsets/g_8f.ids.json",
+      "count": 636,
+      "glyphs": 0
     }
   },
   {
@@ -827,6 +942,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/g_tg.json"
+    },
+    "records": {
+      "file": "/charsets/g_tg.ids.json",
+      "count": 1,
+      "glyphs": 0
     }
   },
   {
@@ -881,6 +1001,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/g_bujian.json"
+    },
+    "records": {
+      "file": "/charsets/g_bujian.ids.json",
+      "count": 27,
+      "glyphs": 0
     }
   },
   {
@@ -899,6 +1024,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/g_2j.json"
+    },
+    "records": {
+      "file": "/charsets/g_2j.ids.json",
+      "count": 410,
+      "glyphs": 0
     }
   },
   {
@@ -917,6 +1047,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/g_roc1j.json"
+    },
+    "records": {
+      "file": "/charsets/g_roc1j.ids.json",
+      "count": 42,
+      "glyphs": 0
     }
   },
   {
@@ -935,6 +1070,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/bouyei.json"
+    },
+    "records": {
+      "file": "/charsets/bouyei.ids.json",
+      "count": 885,
+      "glyphs": 0
     }
   },
   {
@@ -953,6 +1093,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/gin.json"
+    },
+    "records": {
+      "file": "/charsets/gin.ids.json",
+      "count": 992,
+      "glyphs": 0
     }
   },
   {
@@ -989,6 +1134,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/gzhs.json"
+    },
+    "records": {
+      "file": "/charsets/gzhs.ids.json",
+      "count": 21800,
+      "glyphs": 0
     }
   },
   {
@@ -1026,6 +1176,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/g_gzw.json"
+    },
+    "records": {
+      "file": "/charsets/g_gzw.ids.json",
+      "count": 5144,
+      "glyphs": 0
     }
   },
   {
@@ -1044,6 +1199,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/g_fkzz.json"
+    },
+    "records": {
+      "file": "/charsets/g_fkzz.ids.json",
+      "count": 6760,
+      "glyphs": 0
     }
   },
   {
@@ -1152,6 +1312,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/mac.json"
+    },
+    "records": {
+      "file": "/charsets/mac.ids.json",
+      "count": 2,
+      "glyphs": 0
     }
   },
   {
@@ -1206,6 +1371,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/t3.json"
+    },
+    "records": {
+      "file": "/charsets/t3.ids.json",
+      "count": 1,
+      "glyphs": 0
     }
   },
   {
@@ -1224,6 +1394,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/t4.json"
+    },
+    "records": {
+      "file": "/charsets/t4.ids.json",
+      "count": 1,
+      "glyphs": 0
     }
   },
   {
@@ -1242,6 +1417,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/t5.json"
+    },
+    "records": {
+      "file": "/charsets/t5.ids.json",
+      "count": 1,
+      "glyphs": 0
     }
   },
   {
@@ -1260,6 +1440,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/t6.json"
+    },
+    "records": {
+      "file": "/charsets/t6.ids.json",
+      "count": 1,
+      "glyphs": 0
     }
   },
   {
@@ -1278,6 +1463,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/t7.json"
+    },
+    "records": {
+      "file": "/charsets/t7.ids.json",
+      "count": 2,
+      "glyphs": 0
     }
   },
   {
@@ -1296,6 +1486,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/t9.json"
+    },
+    "records": {
+      "file": "/charsets/t9.ids.json",
+      "count": 710,
+      "glyphs": 0
     }
   },
   {
@@ -1332,6 +1527,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/tb.json"
+    },
+    "records": {
+      "file": "/charsets/tb.ids.json",
+      "count": 3503,
+      "glyphs": 0
     }
   },
   {
@@ -1350,6 +1550,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/tc.json"
+    },
+    "records": {
+      "file": "/charsets/tc.ids.json",
+      "count": 4233,
+      "glyphs": 0
     }
   },
   {
@@ -1368,6 +1573,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/td.json"
+    },
+    "records": {
+      "file": "/charsets/td.ids.json",
+      "count": 3638,
+      "glyphs": 0
     }
   },
   {
@@ -1386,6 +1596,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/te.json"
+    },
+    "records": {
+      "file": "/charsets/te.ids.json",
+      "count": 2405,
+      "glyphs": 0
     }
   },
   {
@@ -1404,6 +1619,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/tf.json"
+    },
+    "records": {
+      "file": "/charsets/tf.ids.json",
+      "count": 22,
+      "glyphs": 0
     }
   },
   {
@@ -1422,6 +1642,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/t10.json"
+    },
+    "records": {
+      "file": "/charsets/t10.ids.json",
+      "count": 5,
+      "glyphs": 0
     }
   },
   {
@@ -1440,6 +1665,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/t11.json"
+    },
+    "records": {
+      "file": "/charsets/t11.ids.json",
+      "count": 40,
+      "glyphs": 0
     }
   },
   {
@@ -1476,6 +1706,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/t13.json"
+    },
+    "records": {
+      "file": "/charsets/t13.ids.json",
+      "count": 1208,
+      "glyphs": 0
     }
   },
   {
@@ -1494,6 +1729,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/t18.json"
+    },
+    "records": {
+      "file": "/charsets/t18.ids.json",
+      "count": 1,
+      "glyphs": 0
     }
   },
   {
@@ -1656,6 +1896,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/jk.json"
+    },
+    "records": {
+      "file": "/charsets/jk.ids.json",
+      "count": 73,
+      "glyphs": 0
     }
   },
   {
@@ -1692,6 +1937,11 @@
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/jmjp.json"
+    },
+    "records": {
+      "file": "/charsets/jmjp.ids.json",
+      "count": 6427,
+      "glyphs": 0
     }
   },
   {

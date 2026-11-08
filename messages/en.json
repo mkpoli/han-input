@@ -70,7 +70,7 @@
   "charset.none": "No matching sets.",
   "charset.mapped": "{count} characters",
   "charset.rows": "{count} source rows",
-  "charset.unencoded": "Every source row is listed; unencoded rows use a composed or source glyph.",
+  "charset.unencoded": "Every source row is listed; unencoded rows use a composed glyph, IDS, or source glyph.",
   "charset.cnsOverview": "CNS source categories",
   "charset.cnsSources": "CNS source categories",
   "charset.cnsIntro": "Categories reflect the source recorded when each CNS code was added.",

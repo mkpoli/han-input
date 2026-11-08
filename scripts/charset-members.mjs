@@ -79,6 +79,18 @@ function isVariationSequence(glyph) {
   return parts.length === 2 && /^[\uFE00-\uFE0F\u{E0100}-\u{E01EF}]$/u.test(parts[1])
 }
 
+/** Rows whose only glyph is an Ideographic Description Sequence, in source order.
+ * @param {unknown} input @returns {string[]} */
+export function idsRecords(input) {
+  if (!input || typeof input !== 'object' || !('rows' in input) || !Array.isArray(input.rows)) throw new Error('Invalid character-set rows')
+  const records = []
+  for (const row of input.rows) {
+    if (!Array.isArray(row) || typeof row[1] !== 'string') throw new Error('Invalid character-set member')
+    if (/[\u2FF0-\u2FFF\u31EF]/u.test(row[1])) records.push(row[1])
+  }
+  return records
+}
+
 /** @param {string} glyph */
 export function isEncodedGlyph(glyph) {
   const cp = glyph.codePointAt(0) ?? 0
