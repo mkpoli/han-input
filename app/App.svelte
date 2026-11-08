@@ -73,7 +73,7 @@
     {:else}<About />{/if}
   </main>
 
-  <aside class="card" class:open={ui.sheet} aria-label={t('card.label')}>{#if ui.record}<ProposalCard />{:else}<Card />{/if}</aside>
+  <aside class="card" class:open={ui.sheet} aria-label={t('card.label')}>{#if ui.record && !route.c}<ProposalCard />{:else}<Card />{/if}</aside>
 
   <div class="dock"><Writing /></div>
 

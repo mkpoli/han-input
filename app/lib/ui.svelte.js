@@ -1,5 +1,5 @@
 // The few view states that are not worth an address: the phone's card sheet and the theme.
-import { open } from './route.svelte.js'
+import { close, open } from './route.svelte.js'
 import { insert } from './text.svelte.js'
 import { say } from './clip.svelte.js'
 import { t } from './i18n.svelte.js'
@@ -23,6 +23,7 @@ export function choose(char) {
 
 /** @param {import('./charsets.js').ProposalRecord} record @param {import('./charsets.js').ProposalDocument} document */
 export function showRecord(record, document) {
+  close()
   ui.record = { record, document }
   if (matchMedia('(max-width: 900px)').matches) ui.sheet = true
 }
