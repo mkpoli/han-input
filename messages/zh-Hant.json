@@ -71,7 +71,7 @@
   "charset.none": "沒有符合的字元集。",
   "charset.mapped": "{count} 個字",
   "charset.rows": "來源條目{count}項",
-  "charset.unencoded": "列出全部來源記錄；未編碼的字用合成或來源字形顯示。",
+  "charset.unencoded": "列出全部來源記錄；未編碼的字用合成字形、IDS 或來源字形顯示。",
   "charset.cnsOverview": "全字庫來源分類一覽",
   "charset.cnsSources": "全字庫來源分類",
   "charset.cnsIntro": "依字碼收錄時的來源分類。",

@@ -71,7 +71,7 @@
   "charset.none": "該当する文字集合はありません。",
   "charset.mapped": "{count} 字",
   "charset.rows": "出典の項目数{count}",
-  "charset.unencoded": "出典の全項目を表示します。未符号化の字は合成字形または出典字形で表示します。",
+  "charset.unencoded": "出典の全項目を表示します。未符号化の字は合成字形、IDS、または出典字形で表示します。",
   "charset.cnsOverview": "全字庫の収録元一覧",
   "charset.cnsSources": "全字庫の収録元",
   "charset.cnsIntro": "CNSに字を収録した際の出典による分類です。",

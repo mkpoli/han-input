@@ -73,8 +73,12 @@
           const chars = selected ? await browseCharset(selected) : []
           if (!active) return
           await loadGlyphs(chars.slice(0, GRID_LIMIT))
-          const printed = selected && entry?.records ? await loadRecords(selected) : null
-          if (active) { browsed = chars; records = printed }
+          if (!active) return
+          browsed = chars
+          busy = false
+          if (selected && entry?.records) {
+            loadRecords(selected).then(data => { if (active) records = data }).catch(() => {})
+          }
           return
         }
         const found = await Promise.all(clues.map(answer))

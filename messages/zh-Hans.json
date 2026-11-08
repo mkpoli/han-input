@@ -71,7 +71,7 @@
   "charset.none": "没有匹配的字符集。",
   "charset.mapped": "{count} 个字",
   "charset.rows": "来源条目{count}项",
-  "charset.unencoded": "列出全部来源记录；未编码的字用合成或来源字形显示。",
+  "charset.unencoded": "列出全部来源记录；未编码的字用合成字形、IDS 或来源字形显示。",
   "charset.cnsOverview": "全字库来源分类一览",
   "charset.cnsSources": "全字库来源分类",
   "charset.cnsIntro": "依字码收录时的来源分类。",

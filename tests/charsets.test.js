@@ -1,6 +1,6 @@
 import { describe, test, expect, afterEach } from 'bun:test'
 import { readFileSync, readdirSync } from 'node:fs'
-import { mappedMembers, iwdsMembers, scalarExpressions } from '../scripts/charset-members.mjs'
+import { mappedMembers, iwdsMembers, scalarExpressions, idsRecords } from '../scripts/charset-members.mjs'
 import { filterAnswer, loadCharsets, loadCharset, loadRecords } from '../app/lib/charsets.js'
 import { loadChars, findMeaning } from '../app/lib/data.js'
 import { cnsSourceSets, unihanTSources } from '../scripts/sources/charsets-cns.mjs'
@@ -25,6 +25,10 @@ describe('source glyph membership', () => {
   test('rejects malformed data', () => {
     expect(() => mappedMembers({})).toThrow()
     expect(() => mappedMembers({ rows: [['id', null]] })).toThrow()
+    expect(() => idsRecords({})).toThrow()
+  })
+  test('keeps IDS descriptions as records, not as scalar members', () => {
+    expect(idsRecords({ rows: [['1', '⿰亻哥'], ['2', '字'], ['3', '⿱一木']] })).toEqual(['⿰亻哥', '⿱一木'])
   })
 })
 
@@ -122,6 +126,13 @@ test('snapshot covers every source catalogue and counts match unique scalars', (
   expect([taiwan.encoded, taiwan.unencoded]).toEqual([1, 2])
   expect([...readFileSync(new URL(`${taiwan.id}.txt`, base), 'utf8')].map(char => char.codePointAt(0))).toEqual([0x324D6, 0xFFB0E, 0xFFB0F])
   const isPrivateUse = point => point >= 0xE000 && point <= 0xF8FF || point >= 0xF0000 && point <= 0xFFFFD || point >= 0x100000 && point <= 0x10FFFD
+  const idsSets = catalogue.filter(row => row.records)
+  expect(idsSets.length).toBeGreaterThan(40)
+  const gzhs = catalogue.find(row => row.id === 'gzhs')
+  expect(gzhs.records.count).toBeGreaterThan(1000)
+  const idsFile = JSON.parse(readFileSync(new URL(gzhs.records.file.replace('/charsets/', ''), base), 'utf8'))
+  expect(idsFile.records).toHaveLength(gzhs.records.count)
+  expect(idsFile.records[0].kind).toBe('ids')
   for (const row of catalogue) {
     const members = [...readFileSync(new URL(`${row.id}.txt`, base), 'utf8')]
     expect(new Set(members).size).toBe(row.chars)

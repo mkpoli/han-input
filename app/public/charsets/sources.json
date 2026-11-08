@@ -2,7 +2,7 @@
   "catalogue": "https://zi.tools/api/ma/ma/metadata.json",
   "retrieved": "2026-11-07",
   "attribution": "字統網, character-set catalogue and glyph mappings. Editorial mappings; original standards and proposal documents remain authoritative. Reuse terms are unspecified at these endpoints.",
-  "policy": "Source-row sets index every row through its assigned Unicode scalars, or its private-use glyph slots where no scalar is assigned; Unihan kIRG_TSource fills assignments newer than the bulk release. Literal Unicode block sets contain assigned scalars. Local row numbers, IDS components and variation sequences do not establish scalar membership. OTHER follows the source’s unified substitutions, rather than literal Unicode block membership.",
+  "policy": "Source-row sets index every row through its assigned Unicode scalars, or its private-use glyph slots where no scalar is assigned; rows described only by an IDS are kept as records, not scalar members; Unihan kIRG_TSource fills assignments newer than the bulk release. Literal Unicode block sets contain assigned scalars. Local row numbers, IDS components and variation sequences do not establish scalar membership. OTHER follows the source’s unified substitutions, rather than literal Unicode block membership.",
   "inputs": [
     {
       "url": "https://raw.githubusercontent.com/yi-bai/iwds/master/iwds.xml",
