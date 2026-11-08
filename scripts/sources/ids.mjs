@@ -67,10 +67,18 @@ const NOTE6 = new Map()
 const COMPONENT_LINE = /^#\t\{(\d+)\}\t(.+?) \(([0-9A-F]{4,6})(?: ([^)]*))?\)\t(.*)$/
 
 /** One token of a description: `{n}`, `&name;`, or one character. */
-const TOKEN = /\{(\d+)\}|&([^;]+);|[\s\S]/g
+const TOKEN = /\{(\d+)\}|&([^;]+);|./gsu
+
+/** A numbered component with a note 6 fragment is compared as that fragment.
+ * @param {string} text @param {Set<number>} [seen] @returns {string} */
+const expand = (text, seen = new Set()) => text.replace(/\{(\d+)\}/g, (whole, digits) => {
+  const number = Number(digits), fragment = FRAGMENTS.get(number)
+  if (fragment === undefined || seen.has(number)) return whole
+  return expand(fragment, new Set([...seen, number]))
+})
 
 /** @param {string} text @returns {string[]} */
-const tokenize = text => [...text.matchAll(TOKEN)].map(match => match[0])
+const tokenize = text => [...expand(text).matchAll(TOKEN)].map(match => match[0])
 
 /** What the alignment counts: a CHISE entity against a BabelStone number, and each against a
  * character. A pair seen on several characters is stronger than one seen once. */
@@ -82,20 +90,22 @@ let entityChars = new Map()
  * Align BabelStone's and CHISE's descriptions of one character, operator by operator, and count the
  * names that stand for one part at each operand position where the two differ.
  * @param {Map<string, Set<string>>} babel @param {Map<string, Set<string>>} chise
- * @returns {{ entityNumbers: Map<string, Map<number, number>>, numberChars: Map<number, Map<string, number>>, entityChars: Map<string, Map<string, number>> }}
+ * @returns {{ entityNumbers: Map<string, Map<number, Set<string>>>, numberChars: Map<number, Map<string, Set<string>>>, entityChars: Map<string, Map<string, Set<string>>> }}
  */
 export function alignDescriptions(babel, chise) {
-  /** @type {Map<string, Map<number, number>>} */
+  /** @type {Map<string, Map<number, Set<string>>>} */
   const numbers = new Map()
-  /** @type {Map<number, Map<string, number>>} */
+  /** @type {Map<number, Map<string, Set<string>>>} */
   const chars = new Map()
-  /** @type {Map<string, Map<string, number>>} */
+  /** @type {Map<string, Map<string, Set<string>>>} */
   const entities = new Map()
-  /** @param {Map<any, Map<any, number>>} into @param {any} key @param {any} value */
-  const bump = (into, key, value) => {
+  /** @param {Map<any, Map<any, Set<string>>>} into @param {any} key @param {any} value @param {string} char */
+  const bump = (into, key, value, char) => {
     let counts = into.get(key)
     if (!counts) into.set(key, counts = new Map())
-    counts.set(value, (counts.get(value) ?? 0) + 1)
+    let characters = counts.get(value)
+    if (!characters) counts.set(value, characters = new Set())
+    characters.add(char)
   }
   for (const [char, written] of babel) {
     const theirs = chise.get(char)
@@ -118,9 +128,9 @@ export function alignDescriptions(babel, chise) {
           const pairs = [[x, y], [y, x]]
           for (const [a, d] of pairs) {
             const numbered = /^\{(\d+)\}$/.exec(a), entity = /^&([^;]+);$/.exec(d)
-            if (numbered && entity) { bump(numbers, entity[1], Number(numbered[1])); continue }
-            if (numbered && [...d].length === 1 && !OPERATORS.has(d)) { bump(chars, Number(numbered[1]), d); continue }
-            if (entity && [...d].length === 1 && !OPERATORS.has(d)) bump(entities, entity[1], d)
+            if (numbered && entity) { bump(numbers, entity[1], Number(numbered[1]), char); continue }
+            if (numbered && [...d].length === 1 && !OPERATORS.has(d)) { bump(chars, Number(numbered[1]), d, char); continue }
+            if (entity && [...d].length === 1 && !OPERATORS.has(d)) bump(entities, entity[1], d, char)
           }
         }
       }
@@ -139,9 +149,9 @@ export function components() {
   /** @type {Map<number, { name: string, count: number }[]>} */
   const byNumber = new Map()
   for (const [entity, counts] of entityNumbers) {
-    for (const [number, count] of counts) {
+    for (const [number, characters] of counts) {
       const list = byNumber.get(number) ?? []
-      list.push({ name: entity, count })
+      list.push({ name: entity, count: characters.size })
       byNumber.set(number, list)
     }
   }
@@ -156,12 +166,13 @@ export function components() {
   const entities = {}
   /** The value with the only highest count, at least two: a value that several characters attest.
    * @template T
-   * @param {Map<T, number> | undefined} counts
+   * @param {Map<T, Set<string>> | undefined} counts
    * @returns {[T, number] | null} */
   const best = counts => {
     if (!counts) return null
-    const ranked = [...counts].sort((a, b) => b[1] - a[1] || String(a[0]).localeCompare(String(b[0])))
-    return ranked.length && ranked[0][1] >= 2 && (ranked.length === 1 || ranked[0][1] > ranked[1][1]) ? ranked[0] : null
+    const ranked = [...counts].map(([value, characters]) => ({ value, count: characters.size }))
+      .sort((a, b) => b.count - a.count || String(a.value).localeCompare(String(b.value)))
+    return ranked.length && ranked[0].count >= 2 && (ranked.length === 1 || ranked[0].count > ranked[1].count) ? [ranked[0].value, ranked[0].count] : null
   }
   for (const [number, info] of Object.entries(numbers)) {
     const character = best(numberChars.get(Number(number)))

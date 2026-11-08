@@ -70,12 +70,12 @@ describe('equivalences', () => {
       new Map([['惠', new Set(['⿱{7}心'])], ['專', new Set(['⿱{7}寸'])]]),
       new Map([['惠', new Set(['⿱&CDP-8BD0;心'])], ['專', new Set(['⿱&CDP-8BD0;寸'])]]),
     )
-    expect(pairs.entityNumbers.get('CDP-8BD0').get(7)).toBe(2)
+    expect(pairs.entityNumbers.get('CDP-8BD0').get(7).size).toBe(2)
   })
   test('records every differing operand when the operators agree', () => {
-    const pairs = alignDescriptions(new Map([['惠', new Set(['⿰{7}{8}'])]]), new Map([['惠', new Set(['⿰&CDP-8BD0;&CDP-8C78;'])]]))
-    expect(pairs.entityNumbers.get('CDP-8BD0').get(7)).toBe(1)
-    expect(pairs.entityNumbers.get('CDP-8C78').get(8)).toBe(1)
+    const pairs = alignDescriptions(new Map([['惠', new Set(['⿰{7}{5}'])]]), new Map([['惠', new Set(['⿰&CDP-8BD0;&CDP-8C78;'])]]))
+    expect(pairs.entityNumbers.get('CDP-8BD0').get(7).size).toBe(1)
+    expect(pairs.entityNumbers.get('CDP-8C78').get(5).size).toBe(1)
   })
   test('skips descriptions whose operators differ', () => {
     const pairs = alignDescriptions(new Map([['惠', new Set(['⿱{7}心'])]]), new Map([['惠', new Set(['⿰&CDP-8BD0;心'])]]))
