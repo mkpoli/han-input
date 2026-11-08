@@ -1,6 +1,6 @@
 <script>
   // What the site is for, and where every table came from.
-  import { loadMethods } from '../lib/data.js'
+  import { loadMethods, loadVariants } from '../lib/data.js'
   import { nameOf, t } from '../lib/i18n.svelte.js'
   import { PUA_SOURCES } from '../../src/pua.js'
   /** @type {import('../lib/data.js').Method[]} */
@@ -10,6 +10,9 @@
   loadMethods().then(list => { methods = list })
   fetch('/data/ids.json').then(response => response.ok ? response.json() : { sources: [] })
     .then(doc => { writing = doc.sources ?? [] }).catch(() => {})
+  /** @type {{ name: string, url: string, licence: string }[]} */
+  let variantSources = $state([])
+  loadVariants().then(doc => { variantSources = doc.sources }).catch(() => {})
 </script>
 
 <div class="ui-page" data-width="wide">
@@ -50,6 +53,24 @@
       </table>
     </div>
   </section>
+  {#if variantSources.length}
+    <section class="ui-section">
+      <h2 class="ui-label">{t('about.variants')}</h2>
+      <div class="ui-table-wrap">
+        <table class="table">
+          <thead><tr><th>{t('method.source')}</th><th>{t('method.licence')}</th></tr></thead>
+          <tbody>
+            {#each variantSources as entry (entry.url)}
+              <tr>
+                <td><a href={entry.url} target="_blank" rel="noopener noreferrer">{entry.name}</a></td>
+                <td class="ui-hint">{entry.licence}</td>
+              </tr>
+            {/each}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  {/if}
   {#if writing.length}
     <section class="ui-section">
       <h2 class="ui-label">{t('about.writing')}</h2>

@@ -4,15 +4,16 @@
 //   x/<plane>.gz     every code of every character, by code point: character, method, then one code per column
 //   m/<bucket>.gz    meaning words to characters
 //   p/<plane>.gz     parts to the characters written with them
+//   g/<bucket>.gz    runs of parts to the characters written with them, as sources spell them
 //   i/<plane>.gz     each character's descriptions, and the sources that give them
 //   chars.tsv.gz     code point, rank, strokes, radical
 //   methods.json     what the above were made from
 import { appendFileSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { gzipSync } from 'node:zlib'
-import { charBucket, codeBucket, fold, inScope, isHan, partBucket, pinyinDigits, wordBucket } from '../src/fold.js'
+import { charBucket, codeBucket, fold, inScope, isHan, partBucket, pinyinDigits, runBucket, wordBucket } from '../src/fold.js'
 import { readUnihan, unihanMethods, rankChars } from './sources/unihan.mjs'
-import { IDS_SOURCES, partsOf, readDescriptions } from './sources/ids.mjs'
+import { IDS_SOURCES, partsOf, readDescriptions, runsOf } from './sources/ids.mjs'
 import { allMethods } from './sources/index.mjs'
 import { meaningWords } from './sources/meaning.mjs'
 import { rhymeTable } from './sources/qieyun.mjs'
@@ -21,9 +22,9 @@ import * as OpenCC from 'opencc-js'
 
 const OUT = join(import.meta.dirname, '..', 'app', 'public', 'data')
 const SPOOL = join(CACHE, 'spool')
-for (const dir of ['s', 'c', 'x', 'm', 'p', 'i']) rmSync(join(OUT, dir), { recursive: true, force: true })
+for (const dir of ['s', 'c', 'x', 'm', 'p', 'i', 'g']) rmSync(join(OUT, dir), { recursive: true, force: true })
 rmSync(SPOOL, { recursive: true, force: true })
-for (const dir of ['s', 'c', 'x', 'm', 'p', 'i']) mkdirSync(join(OUT, dir), { recursive: true })
+for (const dir of ['s', 'c', 'x', 'm', 'p', 'i', 'g']) mkdirSync(join(OUT, dir), { recursive: true })
 for (const dir of ['c', 'x', 'm']) mkdirSync(join(SPOOL, dir), { recursive: true })
 
 const gz = (/** @type {string} */ text) => gzipSync(text, { level: 9 })
@@ -136,6 +137,28 @@ for (const [part, list] of partsOf(descriptions)) {
   ;/** @type {string[]} */ (partFiles.get(bucket)).push(`${part}\t${list.join('')}`)
 }
 for (const [bucket, rows] of partFiles) writeFileSync(join(OUT, 'p', `${bucket}.gz`), gz(rows.join('\n')))
+
+console.log('shapes')
+/** @type {Map<string, Set<string>>} */
+const shapes = new Map()
+for (const [char, rows] of descriptions) {
+  for (const { text } of rows) {
+    for (const run of runsOf(text, [2, 3])) {
+      let chars = shapes.get(run)
+      if (!chars) shapes.set(run, chars = new Set())
+      chars.add(char)
+    }
+  }
+}
+/** @type {Map<string, string[]>} */
+const shapeFiles = new Map()
+for (const [run, chars] of shapes) {
+  const bucket = runBucket(run)
+  if (!shapeFiles.has(bucket)) shapeFiles.set(bucket, [])
+  ;/** @type {string[]} */ (shapeFiles.get(bucket)).push(`${run}\t${[...chars].join('')}`)
+}
+for (const [bucket, rows] of shapeFiles) writeFileSync(join(OUT, 'g', `${bucket}.gz`), gz(rows.join('\n')))
+writeFileSync(join(OUT, 'variants.json.gz'), gz(readFileSync(join(import.meta.dirname, '..', 'data', 'variants.json'), 'utf8')))
 
 // Modern kana come among the commonest characters, and hentaigana and Nüshu after every block of Han.
 const derivedRows = [...derived].map(char => [char, /[\u3040-\u30FF]/.test(char) ? 500 : 7000, 0, ''])
