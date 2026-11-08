@@ -1,14 +1,19 @@
 <script>
-  import { MOE_PUA, convertMoePua, codePoint } from '../../src/pua.js'
+  import { PUA_SOURCES, convertPua, codePoint, puaEntries } from '../../src/pua.js'
   import { copy } from '../lib/clip.svelte.js'
   import { t } from '../lib/i18n.svelte.js'
   import { link } from '../lib/route.svelte.js'
   import { choose } from '../lib/ui.svelte.js'
 
   let input = $state('')
-  const result = $derived(convertMoePua(input))
-  const mappings = Object.entries(MOE_PUA.mappings)
-  const source = MOE_PUA.source
+  let sourceId = $state('moe')
+  let filter = $state('')
+  const source = $derived(PUA_SOURCES.find(item => item.id === sourceId) ?? PUA_SOURCES[0])
+  const result = $derived(convertPua(input, sourceId))
+  const needle = $derived(filter.trim().toLowerCase())
+  const matches = $derived(puaEntries(sourceId).filter(([legacy, standard]) =>
+    !needle || codePoint(legacy).toLowerCase().includes(needle) || codePoint(standard).toLowerCase().includes(needle) || standard.includes(needle)))
+  const rows = $derived(matches.slice(0, 100))
 
   /** @param {MouseEvent} event @param {string} char */
   function show(event, char) {
@@ -22,7 +27,6 @@
   <header class="ui-page-head">
     <h1 class="ui-page-title">{t('convert.title')}</h1>
     <p class="ui-page-intro">{t('convert.intro')}</p>
-    <p class="ui-hint">{t('convert.local')}</p>
   </header>
 
   <div class="editors">
@@ -48,12 +52,19 @@
   </div>
 
   <details class="mapping">
-    <summary class="ui-label">{t('convert.mapping')} <span class="ui-count">{mappings.length}</span></summary>
+    <summary class="ui-label">{t('convert.mapping')} <span class="ui-count">{matches.length}</span></summary>
+    <div class="tools">
+      <label class="ui-label" for="convert-source">{t('convert.source')}</label>
+      <select id="convert-source" class="ui-input" bind:value={sourceId}>
+        {#each PUA_SOURCES as item (item.id)}<option value={item.id}>{t(`pua.source.${item.id}`)}</option>{/each}
+      </select>
+      <input class="ui-input" type="search" bind:value={filter} placeholder={t('convert.filter')} aria-label={t('convert.filter')}>
+    </div>
     <div class="ui-table-wrap">
       <table class="ui-table">
         <thead><tr><th scope="col">{t('convert.legacy')}</th><th scope="col">{t('convert.standard')}</th><th scope="col">{t('convert.character')}</th></tr></thead>
         <tbody>
-          {#each mappings as [legacy, standard] (legacy)}
+          {#each rows as [legacy, standard] (legacy)}
             <tr>
               <td class="ui-mono">{codePoint(legacy)}</td>
               <td class="ui-mono">{codePoint(standard)}</td>
@@ -63,11 +74,13 @@
         </tbody>
       </table>
     </div>
+    {#if matches.length > rows.length}<p class="ui-hint">{t('common.cut', { shown: rows.length, total: matches.length })}</p>{/if}
   </details>
 
   <footer class="ui-section attribution">
-    <p><span class="ui-label">{t('method.source')}</span> <a href={source.url} target="_blank" rel="noopener noreferrer" lang="zh-Hant">{source.name}</a> · <a href={source.dataUrl} target="_blank" rel="noopener noreferrer">{t('convert.data')}</a></p>
-    <p><a href={source.url} target="_blank" rel="noopener noreferrer">{t('method.licence')}</a>: <span lang="en">{source.licence}</span></p>
+    {#each PUA_SOURCES as item (item.id)}
+      <p><a href={item.source.url} target="_blank" rel="noopener noreferrer">{item.source.name}</a> · <a href={item.source.dataUrl} target="_blank" rel="noopener noreferrer">{t('convert.data')}</a> <span class="ui-hint">{item.source.licence}</span></p>
+    {/each}
   </footer>
 </div>
 
@@ -77,7 +90,10 @@
   textarea{font-size:var(--ui-text-lg);min-block-size:180px}
   .counts{color:var(--ui-color-ink-soft);font-size:var(--ui-text-sm);font-variant-numeric:tabular-nums}
   .mapping summary{cursor:pointer;padding-block:var(--ui-space-xs)}
-  .mapping .ui-table-wrap{margin-block-start:var(--ui-space-sm)}
+  .tools{display:flex;align-items:center;gap:var(--ui-space-sm);flex-wrap:wrap;margin-block:var(--ui-space-sm)}
+  .tools select{inline-size:auto}
+  .tools input{flex:1;min-inline-size:160px}
+  .mapping .ui-table-wrap{margin-block-start:0}
   .glyph{display:inline-grid;place-items:center;min-inline-size:44px;min-block-size:44px;text-decoration:none}
   .glyph:hover{background:var(--ui-color-accent-soft)}
   .ui-table td{vertical-align:middle}

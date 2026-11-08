@@ -1,11 +1,11 @@
 // A query is one or more clues, split on spaces. Each clue names a set of characters; several clues
 // leave the characters in all of them.
 import { hanIn, inScope, isHan, isRareKana } from '../../src/fold.js'
-import { puaChar } from '../../src/pua.js'
+import { puaChars } from '../../src/pua.js'
 import { findCodes, findMeaning, findPart, findReadings, loadChars } from './data.js'
 
 /**
- * @typedef {{ kind: 'code' | 'scoped' | 'strokes' | 'point' | 'pua' | 'text' | 'part', text: string, method?: string, code?: string, value?: number, char?: string }} Clue
+ * @typedef {{ kind: 'code' | 'scoped' | 'strokes' | 'point' | 'pua' | 'text' | 'part', text: string, method?: string, code?: string, value?: number, char?: string, chars?: string[] }} Clue
  * @typedef {{ clue: Clue, hits: import('./data.js').CodeHit[], readings: import('./data.js').ReadingHit[], meaning: string[], parts: string[], chars: string[] }} Answer
  */
 
@@ -13,8 +13,8 @@ import { findCodes, findMeaning, findPart, findReadings, loadChars } from './dat
 export function readClue(term, alone) {
   const point = term.match(/^[uU]\+?([0-9a-fA-F]{4,6})$/)
   if (point) {
-    const char = puaChar(point[1])
-    return char ? { kind: 'pua', text: term, value: parseInt(point[1], 16), char } : { kind: 'point', text: term, value: parseInt(point[1], 16) }
+    const chars = puaChars(point[1]).map(hit => hit.char)
+    return chars.length ? { kind: 'pua', text: term, value: parseInt(point[1], 16), char: chars[0], chars } : { kind: 'point', text: term, value: parseInt(point[1], 16) }
   }
   const strokes = term.match(/^(\d{1,2})[畫画劃划]$/)
   if (strokes) return { kind: 'strokes', text: term, value: Number(strokes[1]) }
@@ -25,8 +25,8 @@ export function readClue(term, alone) {
   if (hanIn(term).length === [...term].length) return { kind: 'text', text: term }
   const hex = term.match(/^[0-9a-fA-F]{4,6}$/)
   if (hex) {
-    const char = puaChar(hex[0])
-    if (char) return { kind: 'pua', text: term, value: parseInt(hex[0], 16), char }
+    const chars = puaChars(hex[0]).map(hit => hit.char)
+    if (chars.length) return { kind: 'pua', text: term, value: parseInt(hex[0], 16), char: chars[0], chars }
   }
   return { kind: 'code', text: term }
 }
@@ -56,7 +56,7 @@ async function lookUp(clue) {
     return out
   }
   if (clue.kind === 'pua') {
-    out.chars = clue.char ? [clue.char] : []
+    out.chars = clue.chars ?? (clue.char ? [clue.char] : [])
     out.hits = await findCodes(clue.text)
     return out
   }
