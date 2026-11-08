@@ -10,6 +10,7 @@ import { cinMethods } from './cin.mjs'
 import { extendedMethods } from './extended.mjs'
 import { extraMethods } from './extra.mjs'
 import { kanaMethods } from './kana.mjs'
+import { mojikyoMethod } from './mojikyo.mjs'
 
 /** @type {[string, string, string, string, string, import('../lib.mjs').Family, string?][]} repo, file, id, English, 漢字 name, family, licence */
 const RIME = [
@@ -67,6 +68,7 @@ export async function allMethods() {
       entries: table.map(row => /** @type {[string, string]} */ ([row.code, row.char])) },
     ...await extendedMethods(),
     ...await kanaMethods(),
+    await mojikyoMethod(),
     ...await cinMethods(),
     ...await extraMethods(),
   ]
