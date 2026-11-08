@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'bun:test'
-import { classificationOf, NORTHERN_MANDARIN, readingTree } from '../app/lib/classification.js'
+import { classificationOf, NORTHERN_MANDARIN, readingTree, varietyTree } from '../app/lib/classification.js'
 
 /** @param {number} n @param {string} short @param {string} atlas @param {string} order */
 const variety = (n, short, atlas, order) => ({ n, short, name: short, atlas, order, version: '', region: '', place: '', at: '', source: '', refs: '', author: '', chars: 0 })
@@ -83,5 +83,53 @@ describe('reading tree', () => {
     const readings = varieties.map(variety => ({ n: variety.n, forms: ['x'] }))
     const tree = readingTree(varieties, readings, '', '未分類')
     expect(tree.map(node => node.name)).toEqual(['道江小片', '方言島'])
+  })
+})
+
+describe('variety tree', () => {
+  test('lists every variety in the same branches as the readings', () => {
+    const tree = varietyTree([...MANDARIN, WU], '', '未分類')
+    expect(tree.map(node => node.name)).toEqual(['官話', '吳語'])
+    expect(tree[0].count).toBe(3)
+    const north = tree[0].children[0]
+    expect(north.name).toBe(NORTHERN_MANDARIN)
+    expect(north.children.map(node => node.name)).toEqual(['現代標準漢語', '北京官話', '東北官話'])
+    expect(north.children[0].items.map(variety => variety.name)).toEqual(['普通話'])
+  })
+  test('keeps only matching varieties and their branches', () => {
+    const tree = varietyTree([...MANDARIN, WU], '蘇州', '未分類')
+    expect(tree.map(node => node.name)).toEqual(['吳語'])
+    expect(tree[0].count).toBe(1)
+    const lake = tree[0].children[0]
+    expect(lake.items).toEqual([])
+    expect(lake.children[0].items.map(variety => variety.name)).toEqual(['蘇州'])
+  })
+  test('sorts varieties inside a branch by the atlas', () => {
+    const tianjin = variety(8, '天津', '北京官話－京承片－京師小片', 'BAAB')
+    const tree = varietyTree([...MANDARIN, tianjin], '', '未分類')
+    const city = tree[0].children[0].children[1].children[0].children[0]
+    expect(city.items.map(variety => variety.name)).toEqual(['北京', '天津'])
+  })
+  test('finds the varieties under a branch label the page shows', () => {
+    const page = varietyTree([...MANDARIN, WU], NORTHERN_MANDARIN, '未分類')
+    expect(page.map(node => node.name)).toEqual(['官話'])
+    expect(page[0].count).toBe(3)
+    const readings = MANDARIN.map(variety => ({ n: variety.n, forms: ['x'] }))
+    const card = readingTree(MANDARIN, readings, NORTHERN_MANDARIN, '未分類')
+    expect(card.map(node => node.name)).toEqual(['官話'])
+    expect(card[0].count).toBe(3)
+  })
+  test('keeps direct varieties at a branch that also has children', () => {
+    const direct = variety(30, '官話點', '官話', 'B')
+    const tree = varietyTree([...MANDARIN, direct], '', '未分類')
+    const root = tree[0]
+    expect(root.items.map(variety => variety.name)).toEqual(['官話點'])
+    expect(root.count).toBe(4)
+  })
+  test('counts a variety without a branch under the fallback', () => {
+    const tree = varietyTree([variety(31, '未詳', '', '')], '', '未分類')
+    expect(tree[0].name).toBe('未分類')
+    expect(tree[0].count).toBe(1)
+    expect(tree[0].items[0].name).toBe('未詳')
   })
 })
