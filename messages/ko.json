@@ -133,6 +133,7 @@
   "pua.source.hkscs": "HKSCS",
   "pua.source.hanyang": "Hanyang",
   "pua.source.cns": "CNS",
+  "pua.source.gb18030": "GB 18030",
   "pua.relation.simplified": "간체자",
   "pua.relation.traditional": "번체자",
   "pua.relation.semantic": "의미 이체자",

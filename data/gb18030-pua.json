@@ -1,0 +1,36 @@
+{
+  "source": {
+    "name": "GB 18030-2005 PUA remappings, L2/06-394",
+    "url": "http://www.unicode.org/L2/L2006/06394-gb18030-2005.txt",
+    "dataUrl": "http://www.unicode.org/L2/L2006/06394-gb18030-2005.txt",
+    "retrieved": "2026-11-08",
+    "sha256": "eef77189966159ee82e1207856c86a0b36818dfb7b61bd7462bfeea0bd88a3f3",
+    "licence": "Unicode UTC document L2/06-394 by Ken Lunde, Adobe Systems; the code-point mapping is treated here as factual data."
+  },
+  "mappings": {
+    "": "︐",
+    "": "︒",
+    "": "︑",
+    "": "︓",
+    "": "︔",
+    "": "︕",
+    "": "︖",
+    "": "︗",
+    "": "︘",
+    "": "︙",
+    "": "𠂇",
+    "": "𠂉",
+    "": "𠃌",
+    "": "龴",
+    "": "龵",
+    "": "龶",
+    "": "龷",
+    "": "𡗗",
+    "": "龸",
+    "": "𢦏",
+    "": "龹",
+    "": "龺",
+    "": "𤇾",
+    "": "龻"
+  }
+}
