@@ -10,12 +10,26 @@ export const ui = $state({
   sheet: false,
   /** @type {'auto' | 'light' | 'dark'} */
   theme: /** @type {'auto' | 'light' | 'dark'} */ ((typeof localStorage !== 'undefined' && localStorage.getItem(THEME)) || 'auto'),
+  /** A printed proposal record shown in place of the character card, with its document. */
+  record: /** @type {{ record: import('./charsets.js').ProposalRecord, document: import('./charsets.js').ProposalDocument } | null} */ (null),
 })
 
 /** @param {string} char */
 export function choose(char) {
+  ui.record = null
   open(char)
   if (matchMedia('(max-width: 900px)').matches) ui.sheet = true
+}
+
+/** @param {import('./charsets.js').ProposalRecord} record @param {import('./charsets.js').ProposalDocument} document */
+export function showRecord(record, document) {
+  ui.record = { record, document }
+  if (matchMedia('(max-width: 900px)').matches) ui.sheet = true
+}
+
+export function closeRecord() {
+  ui.record = null
+  ui.sheet = false
 }
 
 /** @param {string} char */

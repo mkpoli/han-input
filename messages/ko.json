@@ -66,6 +66,7 @@
   "charset.error": "검색 데이터를 불러올 수 없습니다.",
   "charset.retry": "다시 시도",
   "charset.records": "기록",
+  "proposal.page": "{page}쪽",
   "methods.title": "모든 입력법",
   "methods.intro": "열면 그 방식으로 입력합니다.",
   "methods.filter": "이름으로 거르기",

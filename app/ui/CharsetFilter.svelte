@@ -15,6 +15,7 @@
   let search = $state('')
   let expanded = $state(false)
   const chosen = $derived(charsets.find(set => set.id === selected))
+  const recordsFile = $derived(chosen ? chosen.records?.file ?? chosen.source.records : '')
   const needle = $derived(search.trim().toLowerCase())
   const groups = $derived([...new Set(charsets.map(set => set.group))].map(group => ({
     name: group,
@@ -80,7 +81,7 @@
       <span>{t('charset.rows', { count: chosen.total.toLocaleString() })}</span>
       {#if chosen.source.version}<span class="ui-count">{chosen.source.version}</span>{/if}
       <a href={chosen.source.url} target="_blank" rel="noopener noreferrer">{t('method.source')}: {chosen.source.name}</a>
-      {#if chosen.source.records}<a href={chosen.source.records} target="_blank" rel="noopener noreferrer">{t('charset.records')}</a>{/if}
+      {#if recordsFile}<a href={recordsFile} target="_blank" rel="noopener noreferrer">{t('charset.records')}</a>{/if}
     </div>
     <p class="set-name">{nameOf(chosen.names)}</p>
     <p class="ui-hint">{t('charset.unencoded')}</p>

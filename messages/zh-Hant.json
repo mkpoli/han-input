@@ -66,6 +66,7 @@
   "charset.error": "無法載入搜尋資料。",
   "charset.retry": "重試",
   "charset.records": "記錄",
+  "proposal.page": "第{page}頁",
   "methods.title": "所有輸入方法",
   "methods.intro": "打開即可用它輸入。",
   "methods.filter": "按名稱篩選",

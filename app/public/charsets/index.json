@@ -2107,21 +2107,25 @@
   },
   {
     "id": "ext_e_withdrawal_records",
-    "group": "Historical",
-    "label": "Ext.E withdrawals · partial",
+    "group": "Proposals",
+    "label": "Ext.E withdrawn",
     "names": {
-      "en": "Extension E withdrawal records (partial mappings)",
-      "zh": "擴展E撤銷記錄（部分對應）",
-      "hans": "扩展E撤销记录（部分对应）",
-      "ja": "拡張E撤回記録（一部対応）",
-      "ko": "확장 E 철회 기록 (일부 대응)"
+      "en": "Extension E withdrawn characters",
+      "zh": "擴展E撤銷字",
+      "hans": "扩展E撤销字",
+      "ja": "拡張E撤回字",
+      "ko": "확장 E 철회자"
     },
     "chars": 3,
     "total": 138,
     "source": {
       "name": "IRG",
-      "url": "https://www.unicode.org/irg/docs/n1896-EditorialReport.pdf",
-      "records": "/charsets/ext_e_records.json"
+      "url": "https://www.unicode.org/irg/docs/n1841-ExtensionEWithdraw.pdf"
+    },
+    "records": {
+      "file": "/charsets/ext_e_records.json",
+      "count": 138,
+      "glyphs": 134
     }
   },
   {
