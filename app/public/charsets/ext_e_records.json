@@ -1,7 +1,21 @@
 {
+  "id": "ext_e_withdrawal_records",
+  "group": "Proposals",
+  "label": "Ext.E withdrawn",
+  "names": {
+    "en": "Extension E withdrawn characters",
+    "zh": "擴展E撤銷字",
+    "hans": "扩展E撤销字",
+    "ja": "拡張E撤回字",
+    "ko": "확장 E 철회자"
+  },
   "title": "Selected historical Extension E withdrawal and unification records",
   "complete": false,
   "scope": "The 134 source records in IRGN1841, plus four separately evidenced historical records. This is not a complete Extension E withdrawal history or a Unicode character membership list.",
+  "source": {
+    "name": "IRG",
+    "url": "https://www.unicode.org/irg/docs/n1841-ExtensionEWithdraw.pdf"
+  },
   "documents": [
     {
       "id": "n1841",
@@ -201,6 +215,13 @@
       "glyph": "glyphs/ext-e/01919.png"
     },
     {
+      "serial": "01944",
+      "source": "G_GJZ00028",
+      "document": "n1841",
+      "page": 2,
+      "glyph": "glyphs/ext-e/01944.png"
+    },
+    {
       "serial": "01959",
       "source": "G_GJZ00029",
       "document": "n1841",
@@ -213,13 +234,6 @@
       "document": "n1841",
       "page": 2,
       "glyph": "glyphs/ext-e/01962.png"
-    },
-    {
-      "serial": "01944",
-      "source": "G_GJZ00028",
-      "document": "n1841",
-      "page": 2,
-      "glyph": "glyphs/ext-e/01944.png"
     },
     {
       "serial": "01972",

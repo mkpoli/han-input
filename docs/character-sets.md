@@ -10,6 +10,7 @@ Find accepts one character-set filter at a time. An empty query browses its mapp
 | IWDS | Explicit encoded component forms and examples, with entry IDs and field roles |
 | Unicode 18.0.0 | Literal compatibility, radical, stroke, kana and Nüshu blocks |
 | Extension E withdrawn | 134 glyphs printed in IRGN1841 and four further documented records; three verified Unicode correspondences |
+| Extension D removed | 78 J-source glyphs printed in IRGN1250, withdrawn from the CJK D candidate |
 | CNS11643全字庫 | All 123 exact registration-source labels from the 2026-08-05 bulk release, across Han, other scripts and symbols |
 
 Each set has a unique character count and a source-row count. A source row joins through its assigned scalars, or through its private-use glyph slot where no scalar is assigned. Repeated mappings, variation sequences and IDS descriptions can make the counts differ. Draft row numbers never establish Unicode assignments.
@@ -28,11 +29,11 @@ CNS plane numbers in these files are decimal. Source categories, planes and hist
 
 ## Printed proposal records
 
-A proposed character that was never encoded has no scalar, so its set cannot be a list of characters. The **Ext.E withdrawn** set keeps the printed record instead: the serial and G-source codes printed beside each glyph, and the glyph cut from the document's page. Records the documents explain without a glyph stay text-only, and a record with a verified correspondence links to that character's card.
+A proposed character that was never encoded has no scalar, so its set cannot be a list of characters. The proposal sets keep the printed record instead: the codes printed beside each glyph, and the glyph cut from the document's page. Records the documents explain without a glyph stay text-only, and a record with a verified correspondence links to that character's card.
 
-`bun scripts/import_ext_e_glyphs.mjs` reads the pinned IRGN1841 PDF with poppler: `pdftohtml` supplies the coordinates of the serial, G source and image boxes on each page, and `pdfimages` the 128×128 stencils. Each glyph is matched to the serial printed to its left and the G source directly below it; ImageMagick then normalises the two polarities the document uses and clears the ground. The script writes one image per record under `charsets/glyphs/ext-e/` and refuses to write unless it finds exactly 134 records with distinct serials and G sources. Regenerating needs poppler and ImageMagick.
+`bun scripts/import_irg_records.mjs` reads each pinned PDF with poppler's `pdftohtml`, which gives text and image boxes in one coordinate system. `scripts/sources/irg.mjs` pairs every glyph with the codes beside it: a serial stacked over its source (IRGN1841), or one line of two codes (IRGN1250). ImageMagick then draws the strokes black on a transparent ground, since the documents use both polarities. A set is written only when its record count matches and every serial and source is distinct. Regenerating needs poppler and ImageMagick.
 
-These are proposal numbers, not scalar assignments, and IRGN1841 lists the characters for withdrawal while leaving later resubmission possible.
+These are proposal numbers, not scalar assignments. IRGN1841 lists characters for withdrawal while leaving later resubmission possible; IRGN1250 removes J sources from the CJK D candidate for lack of evidence, and some of its characters were proposed again.
 
 ## Sources
 
@@ -51,7 +52,7 @@ The checked-in [catalogue](../app/public/charsets/index.json), per-set text file
 
 ```sh
 bun scripts/build_charsets.mjs
-bun scripts/import_ext_e_glyphs.mjs
+bun scripts/import_irg_records.mjs
 bun run verify
 bun run build
 bun scripts/check_charsets.mjs

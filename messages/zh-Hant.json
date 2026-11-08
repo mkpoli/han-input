@@ -78,6 +78,7 @@
   "charset.encoded": "已編碼",
   "charset.unencodedShort": "未編碼",
   "charset.coverageLabel": "{percent}% 未編碼：{encoded} 個已編碼，{unencoded} 個未編碼。",
+  "charset.recordsNote": "記錄為提案條目，字形取自文件所印。",
   "proposal.page": "第{page}頁",
   "methods.title": "所有輸入方法",
   "methods.intro": "打開即可用它輸入。",

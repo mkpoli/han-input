@@ -2372,6 +2372,31 @@
     }
   },
   {
+    "id": "ext_d_removals",
+    "group": "Proposals",
+    "label": "Ext.D removed",
+    "names": {
+      "en": "J-source characters removed from CJK D",
+      "zh": "擴展D撤銷J源字",
+      "hans": "扩展D撤销J源字",
+      "ja": "拡張D撤回J源字",
+      "ko": "확장 D J 출처 철회자"
+    },
+    "chars": 0,
+    "total": 78,
+    "records": {
+      "file": "/charsets/ext_d_records.json",
+      "count": 78,
+      "glyphs": 78
+    },
+    "source": {
+      "name": "IRG",
+      "url": "https://www.unicode.org/irg/docs/n1250-ExtensionDWithdraw.pdf"
+    },
+    "encoded": 0,
+    "unencoded": 78
+  },
+  {
     "id": "ext_e_withdrawal_records",
     "group": "Proposals",
     "label": "Ext.E withdrawn",

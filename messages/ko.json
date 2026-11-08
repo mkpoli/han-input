@@ -78,6 +78,7 @@
   "charset.encoded": "수록됨",
   "charset.unencodedShort": "미수록",
   "charset.coverageLabel": "{percent}% 미수록: 수록 {encoded}자, 미수록 {unencoded}자.",
+  "charset.recordsNote": "기록은 제안 항목이며, 자형은 문서에 인쇄된 형태입니다.",
   "proposal.page": "{page}쪽",
   "methods.title": "모든 입력법",
   "methods.intro": "열면 그 방식으로 입력합니다.",
