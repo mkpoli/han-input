@@ -143,7 +143,7 @@ try {
     assert.match(await page.locator('.metadata').innerText(), /2026-08-05/)
     assert.equal(await page.getByRole('link', { name: 'Records', exact: true }).getAttribute('href'), land.source.records)
   })
-  for (const proposal of catalogue.filter(set => set.records)) {
+  for (const proposal of catalogue.filter(set => set.records?.glyphs)) {
     await check(`printed records browse and open a card: ${proposal.id}`, async () => {
       assert.ok(proposal.records)
       const data = JSON.parse(readFileSync(join(DIST, 'charsets', proposal.records.file.replace('/charsets/', '')), 'utf8'))
@@ -166,6 +166,15 @@ try {
         assert.match(text, /U\+[0-9A-F]{4,5}/)
         assert.ok(!text.includes(first.source), 'the character card must replace the record card')
       }
+    })
+  }
+  const ids = catalogue.find(set => set.records && set.records.glyphs === 0)
+  const idsRecords = ids?.records
+  if (ids && idsRecords) {
+    await check(`description records are listed as text: ${ids.id}`, async () => {
+      await find(page, '', ids.id)
+      assert.equal(await page.locator('main .ids-list li').count(), Math.min(240, idsRecords.count))
+      assert.ok((await page.locator('main .ids-list li').first().innerText()).length > 0)
     })
   }
   const recorded = catalogue.find(set => set.source.records)
@@ -359,7 +368,7 @@ try {
         await tab.screenshot({ path: join(SHOTS, `${name}-cns.png`) })
         assert.equal(await tab.locator('main details .set').count(), 123)
         assert.equal(await tab.evaluate(() => document.documentElement.scrollWidth - innerWidth), 0)
-        for (const proposal of catalogue.filter(set => set.records)) {
+        for (const proposal of catalogue.filter(set => set.records?.glyphs)) {
           await find(tab, '', proposal.id)
           await tab.locator('main .records .ui-tile').first().click()
           await tab.screenshot({ path: join(SHOTS, `${name}-${proposal.id}.png`) })
