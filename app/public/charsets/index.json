@@ -2722,6 +2722,31 @@
     }
   },
   {
+    "id": "ext_e_macao_missing",
+    "group": "Proposals",
+    "label": "Ext.E Macao missing",
+    "names": {
+      "en": "Macao characters missing from the Extension E list",
+      "zh": "擴展E澳門缺字",
+      "hans": "扩展E澳门缺字",
+      "ja": "拡張Eマカオ欠字",
+      "ko": "확장 E 마카오 누락자"
+    },
+    "chars": 0,
+    "total": 20,
+    "encoded": 0,
+    "unencoded": 20,
+    "source": {
+      "name": "IRG",
+      "url": "https://www.unicode.org/irg/docs/n1854-MissingMacaoSARIdeographs.pdf"
+    },
+    "records": {
+      "file": "/charsets/ext_e_macao_records.json",
+      "count": 20,
+      "glyphs": 20
+    }
+  },
+  {
     "id": "ext_e_withdrawal_records",
     "group": "Proposals",
     "label": "Ext.E withdrawn",
