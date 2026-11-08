@@ -1,0 +1,8 @@
+{
+  "note": "Editorial IDS for the three CNS records. 11-7D29 is U+324D6 / ⿰勿愛 in Unicode; 11-7E4E and 11-7E4F follow the CNS component rows and the official glyph. Drawn with han-compose in GenZui Sans.",
+  "rows": {
+    "11-7D29": "⿰勿愛",
+    "11-7E4E": "⿰身丑",
+    "11-7E4F": "⿰身牚"
+  }
+}
