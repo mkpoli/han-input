@@ -57,6 +57,22 @@
     {#if result.ambiguous}<span>{t('convert.ambiguous', { count: result.ambiguous })}</span>{/if}
   </div>
 
+  {#if result.conflicts.length}
+    <details class="conflicts">
+      <summary class="ui-label">{t('convert.conflicts', { count: result.conflicts.length })}</summary>
+      <ul>
+        {#each result.conflicts as conflict (conflict.code)}
+          <li>
+            <span class="ui-mono">{codePoint(conflict.code)}</span>
+            {#each conflict.options as option (option.source)}
+              <span class="option">{option.char} <span class="tag">{t(`pua.source.${option.source}`)}</span></span>
+            {/each}
+          </li>
+        {/each}
+      </ul>
+    </details>
+  {/if}
+
   <details class="mapping">
     <summary class="ui-label">{t('convert.mapping')} <span class="ui-count">{matches.length}</span></summary>
     <div class="tools">
@@ -82,7 +98,7 @@
 
   <footer class="ui-section attribution">
     {#each PUA_SOURCES as item (item.id)}
-      <p><a href={item.source.url} target="_blank" rel="noopener noreferrer">{item.source.name}</a> · <a href={item.source.dataUrl} target="_blank" rel="noopener noreferrer">{t('convert.data')}</a> <span class="ui-hint">{item.source.licence}</span></p>
+      <p><a href={item.source.url} target="_blank" rel="noopener noreferrer">{item.source.name}</a> · <a href={item.source.dataUrl} target="_blank" rel="noopener noreferrer">{t('convert.data')}</a></p>
     {/each}
   </footer>
 </div>
@@ -101,6 +117,9 @@
   .glyph{display:inline-grid;place-items:center;min-inline-size:44px;min-block-size:44px;text-decoration:none}
   .glyph:hover{background:var(--ui-color-accent-soft)}
   .ui-table td{vertical-align:middle}
+  .conflicts ul{list-style:none;display:grid;gap:4px;margin:var(--ui-space-xs) 0 0;padding:0}
+  .conflicts li{display:flex;flex-wrap:wrap;align-items:center;gap:var(--ui-space-xs)}
+  .option{display:inline-flex;align-items:center;gap:4px}
   .tag{padding:0 4px;border:1px solid var(--ui-color-border);border-radius:2px;font-size:10px;line-height:15px;color:var(--ui-color-ink-soft);white-space:nowrap}
   .attribution{gap:var(--ui-space-xs);padding-block-start:var(--ui-space-lg);border-block-start:1px solid var(--ui-color-border);color:var(--ui-color-ink-muted);font-size:var(--ui-text-xs);overflow-wrap:anywhere}
 </style>

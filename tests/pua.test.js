@@ -20,14 +20,14 @@ describe('MOE PUA snapshot', () => {
     expect(parseMoeWordbooks(original.toString('utf8'))).toEqual(MOE_PUA.mappings)
   })
   test('converts the official example', () => {
-    expect(convertPua('\uE43B')).toEqual({ text: '䀯', converted: 1, unmapped: 0, ambiguous: 0 })
+    expect(convertPua('\uE43B')).toEqual({ text: '䀯', converted: 1, unmapped: 0, ambiguous: 0, conflicts: [] })
   })
   test('covers every assignment, including supplementary PUA and Han', () => {
     for (const [alias, char] of Object.entries(MOE_PUA.mappings)) {
       expect(alias).toMatch(/^\p{Co}$/u)
       expect([...char]).toHaveLength(1)
       expect(char).not.toMatch(/\p{Co}/u)
-      expect(convertPua(alias)).toEqual({ text: char, converted: 1, unmapped: 0, ambiguous: 0 })
+      expect(convertPua(alias)).toEqual({ text: char, converted: 1, unmapped: 0, ambiguous: 0, conflicts: [] })
     }
     expect(convertPua('\u{F8FAF}').text).toBe('𰹬')
     expect(convertPua('\uE51F').text).toBe('𠊎')
@@ -35,15 +35,15 @@ describe('MOE PUA snapshot', () => {
   test('preserves whitespace, line endings, combining marks, HTML, and unmapped PUA', () => {
     const input = 'a\u0301\t字\r\n\uE43B <script> & 😀\uE000\u{FFFFD}\u{100000}'
     expect(convertPua(input)).toEqual({
-      text: 'a\u0301\t字\r\n䀯 <script> & 😀\uE000\u{FFFFD}\u{100000}', converted: 1, unmapped: 3, ambiguous: 0,
+      text: 'a\u0301\t字\r\n䀯 <script> & 😀\uE000\u{FFFFD}\u{100000}', converted: 1, unmapped: 3, ambiguous: 0, conflicts: [],
     })
   })
   test('counts occurrences and leaves converted text unchanged on repetition', () => {
-    expect(convertPua('\uE43B\uE43B')).toEqual({ text: '䀯䀯', converted: 2, unmapped: 0, ambiguous: 0 })
+    expect(convertPua('\uE43B\uE43B')).toEqual({ text: '䀯䀯', converted: 2, unmapped: 0, ambiguous: 0, conflicts: [] })
     const result = convertPua(Object.keys(MOE_PUA.mappings).join(''))
     expect(result.converted).toBe(59)
-    expect(convertPua(result.text)).toEqual({ text: result.text, converted: 0, unmapped: 0, ambiguous: 0 })
-    expect(convertPua('')).toEqual({ text: '', converted: 0, unmapped: 0, ambiguous: 0 })
+    expect(convertPua(result.text)).toEqual({ text: result.text, converted: 0, unmapped: 0, ambiguous: 0, conflicts: [] })
+    expect(convertPua('')).toEqual({ text: '', converted: 0, unmapped: 0, ambiguous: 0, conflicts: [] })
   })
   test('formats BMP and supplementary code points', () => {
     expect(codePoint('\uE43B')).toBe('U+E43B')
@@ -54,9 +54,9 @@ describe('MOE PUA snapshot', () => {
 
 describe('HKSCS', () => {
   test('converts the 1993 PUA assignments, apart from the MOE table', () => {
-    expect(convertPua('\uF266', 'hkscs')).toEqual({ text: '䏰', converted: 1, unmapped: 0, ambiguous: 0 })
-    expect(convertPua('\uF266')).toEqual({ text: '\uF266', converted: 0, unmapped: 1, ambiguous: 0 })
-    expect(convertPua('\u{F8FAF}', 'hkscs')).toEqual({ text: '\u{F8FAF}', converted: 0, unmapped: 1, ambiguous: 0 })
+    expect(convertPua('\uF266', 'hkscs')).toEqual({ text: '䏰', converted: 1, unmapped: 0, ambiguous: 0, conflicts: [] })
+    expect(convertPua('\uF266')).toEqual({ text: '\uF266', converted: 0, unmapped: 1, ambiguous: 0, conflicts: [] })
+    expect(convertPua('\u{F8FAF}', 'hkscs')).toEqual({ text: '\u{F8FAF}', converted: 0, unmapped: 1, ambiguous: 0, conflicts: [] })
   })
   test('records the table and its provenance', () => {
     expect(HKSCS_PUA.source.sha256).toBe('f52001a4452cc2c790ac5f255b26be3d8d6e24c9a3867f0d271e21f4359bb266')
@@ -73,8 +73,8 @@ describe('HKSCS', () => {
 
 describe('all sources', () => {
   test('converts where the sources agree and leaves conflicts', () => {
-    expect(convertPua('\uF266\uE43B', 'all')).toEqual({ text: '\uF266\uE43B', converted: 0, unmapped: 0, ambiguous: 2 })
-    expect(convertPua('\uE43B\uE51F', 'all')).toEqual({ text: '\uE43B\uE51F', converted: 0, unmapped: 0, ambiguous: 2 })
+    expect(convertPua('\uF266\uE43B', 'all')).toMatchObject({ text: '\uF266\uE43B', converted: 0, unmapped: 0, ambiguous: 2 })
+    expect(convertPua('\uE43B\uE51F', 'all')).toMatchObject({ text: '\uE43B\uE51F', converted: 0, unmapped: 0, ambiguous: 2 })
   })
   test('lists every row with its source', () => {
     expect(puaTable('all')).toHaveLength(8073)

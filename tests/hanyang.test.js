@@ -11,8 +11,8 @@ describe('Hanyang import', () => {
     expect(HANYANG_PUA.source.sha256).toBe('6f7b71bc8a22bb3fcffb7a420c1282e555501db4f84cbeeb7d6c227529db7be9')
   })
   test('converts jamo sequences and does not feed the character lookup', () => {
-    expect(convertPua('\uE0BD', 'hanyang')).toEqual({ text: '\u115F\u1161\uD7CD', converted: 1, unmapped: 0, ambiguous: 0 })
-    expect(convertPua('\uE0BC', 'all')).toEqual({ text: '\uE0BC', converted: 0, unmapped: 0, ambiguous: 1 })
+    expect(convertPua('\uE0BD', 'hanyang')).toEqual({ text: '\u115F\u1161\uD7CD', converted: 1, unmapped: 0, ambiguous: 0, conflicts: [] })
+    expect(convertPua('\uE0BC', 'all')).toMatchObject({ text: '\uE0BC', converted: 0, unmapped: 0, ambiguous: 1 })
     expect(puaChars('E0BC')).toEqual([{ char: '𡉏', source: 'hkscs' }])
   })
 })

@@ -118,6 +118,7 @@
   "convert.converted": "已转换：{count}个字符",
   "convert.remaining": "剩余私用字符：{count}个",
   "convert.ambiguous": "无法判定的私用字符：{count}",
+  "convert.conflicts": "无法判定的码位 {count} 个",
   "convert.mapping": "字码对照表",
   "convert.legacy": "原私用码位",
   "convert.standard": "Unicode码位",
