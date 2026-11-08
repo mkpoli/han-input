@@ -38,10 +38,12 @@
   let filter = $state('')
 
   loadMethods().then(list => { methods = list })
-  loadVarieties().then(list => { varieties = list })
+  // The card is empty on most page loads, and the variety list is a megabyte; it waits for a
+  // character to open.
   $effect(() => {
     const at = char
     if (!at) return
+    loadVarieties().then(list => { if (at === char) varieties = list })
     codesOf(at).then(found => { if (at === char) codes = found })
     readingsOf(at).then(found => { if (at === char) readings = found })
     descriptionsOf(at).then(found => { if (at === char) writings = found })
