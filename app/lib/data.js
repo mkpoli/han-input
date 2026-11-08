@@ -144,7 +144,7 @@ async function loadTable(path) {
 }
 
 /**
- * @typedef {{ n: number, name: string, short: string, version: string, atlas: string, region: string, place: string, at: string, source: string, refs: string, author: string, chars: number }} Variety
+ * @typedef {{ n: number, name: string, short: string, version: string, atlas: string, order: string, region: string, place: string, at: string, source: string, refs: string, author: string, chars: number }} Variety
  */
 /** @type {Promise<Variety[]> | null} */
 let varieties = null
