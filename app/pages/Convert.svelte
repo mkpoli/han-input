@@ -5,8 +5,9 @@
   import { link } from '../lib/route.svelte.js'
   import { choose } from '../lib/ui.svelte.js'
 
-  let input = $state('')
-  let sourceId = $state('all')
+  const params = new URLSearchParams(location.search)
+  let input = $state(params.get('q') ?? '')
+  let sourceId = $state(PUA_SOURCES.some(item => item.id === params.get('s')) ? /** @type {string} */ (params.get('s')) : 'all')
   let filter = $state('')
   const result = $derived(convertPua(input, sourceId))
   const needle = $derived(filter.trim().toLowerCase())

@@ -14,6 +14,8 @@
   const char = $derived(route.c)
   const cp = $derived(char ? `U+${(char.codePointAt(0) ?? 0).toString(16).toUpperCase()}` : '')
   const puaRows = $derived(char ? puaOf(char) : [])
+  /** @param {string} code */
+  const puaText = code => String.fromCodePoint(parseInt(code.slice(2), 16))
 
   /** @param {MouseEvent} event @param {string} to */
   function follow(event, to) {
@@ -99,7 +101,7 @@
         <dl class="pua">
           {#each puaRows as row (row.code + row.char + row.relation)}
             <div class="row">
-              <dt class="ui-mono">{row.code}</dt>
+              <dt class="ui-mono"><a class="code" href={`/convert?q=${encodeURIComponent(puaText(row.code))}&s=${row.source}`}>{row.code}</a></dt>
               <dd>
                 {#if row.relation === 'own'}
                   {row.char}
@@ -203,6 +205,8 @@
   .writing .row{grid-template-columns:max-content minmax(0,1fr);gap:var(--ui-space-sm);align-items:baseline}
   .writing .seq{font-size:18px;line-height:1.3;overflow-wrap:anywhere;font-family:var(--ui-font-script)}
   .regions{margin-inline-end:4px;padding:0 4px;border-radius:2px;font-size:10px;letter-spacing:.08em;color:var(--ui-color-ink-soft);background:var(--ui-color-canvas);cursor:help}
+  .code{color:inherit;text-decoration:none}
+  .code:hover{text-decoration:underline}
   .tags{display:inline-flex;gap:3px;margin-inline-start:6px;vertical-align:1px}
   .tag{padding:0 4px;border:1px solid var(--ui-color-border);border-radius:2px;font-size:10px;line-height:15px;color:var(--ui-color-ink-soft);white-space:nowrap}
 </style>
