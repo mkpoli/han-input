@@ -1,18 +1,17 @@
 <script>
-  import { PUA_SOURCES, convertPua, codePoint, puaEntries } from '../../src/pua.js'
+  import { PUA_SOURCES, convertPua, codePoint, puaTable } from '../../src/pua.js'
   import { copy } from '../lib/clip.svelte.js'
   import { t } from '../lib/i18n.svelte.js'
   import { link } from '../lib/route.svelte.js'
   import { choose } from '../lib/ui.svelte.js'
 
   let input = $state('')
-  let sourceId = $state('moe')
+  let sourceId = $state('all')
   let filter = $state('')
-  const source = $derived(PUA_SOURCES.find(item => item.id === sourceId) ?? PUA_SOURCES[0])
   const result = $derived(convertPua(input, sourceId))
   const needle = $derived(filter.trim().toLowerCase())
-  const matches = $derived(puaEntries(sourceId).filter(([legacy, standard]) =>
-    !needle || codePoint(legacy).toLowerCase().includes(needle) || codePoint(standard).toLowerCase().includes(needle) || standard.includes(needle)))
+  const matches = $derived(puaTable(sourceId).filter(({ legacy, standard, source }) =>
+    !needle || codePoint(legacy).toLowerCase().includes(needle) || codePoint(standard).toLowerCase().includes(needle) || standard.includes(needle) || source.includes(needle)))
   const rows = $derived(matches.slice(0, 100))
 
   /** @param {MouseEvent} event @param {string} char */
@@ -40,19 +39,22 @@
     <div class="ui-field">
       <div class="field-head">
         <label class="ui-label" for="convert-output">{t('convert.output')}</label>
-        <button class="ui-button" data-size="sm" type="button" disabled={!result.text} onclick={() => copy(result.text, t('convert.output'))}>{t('common.copy')}</button>
+        <span class="field-tools">
+          <select id="convert-source" class="ui-input" aria-label={t('convert.source')} bind:value={sourceId}>
+            <option value="all">{t('pua.source.all')}</option>
+            {#each PUA_SOURCES as item (item.id)}<option value={item.id}>{t(`pua.source.${item.id}`)}</option>{/each}
+          </select>
+          <button class="ui-button" data-size="sm" type="button" disabled={!result.text} onclick={() => copy(result.text, t('convert.output'))}>{t('common.copy')}</button>
+        </span>
       </div>
       <textarea id="convert-output" class="ui-textarea" rows="7" value={result.text} readonly spellcheck="false" dir="auto"></textarea>
     </div>
   </div>
 
-  <div class="ui-toolbar counts">
-    <label class="ui-label" for="convert-source">{t('convert.source')}</label>
-    <select id="convert-source" class="ui-input" bind:value={sourceId}>
-      {#each PUA_SOURCES as item (item.id)}<option value={item.id}>{t(`pua.source.${item.id}`)}</option>{/each}
-    </select>
-    <span role="status" aria-live="polite">{t('convert.converted', { count: result.converted })}</span>
+  <div class="ui-toolbar counts" role="status" aria-live="polite" aria-atomic="true">
+    <span>{t('convert.converted', { count: result.converted })}</span>
     <span>{t('convert.remaining', { count: result.unmapped })}</span>
+    {#if result.ambiguous}<span>{t('convert.ambiguous', { count: result.ambiguous })}</span>{/if}
   </div>
 
   <details class="mapping">
@@ -62,13 +64,14 @@
     </div>
     <div class="ui-table-wrap">
       <table class="ui-table">
-        <thead><tr><th scope="col">{t('convert.legacy')}</th><th scope="col">{t('convert.standard')}</th><th scope="col">{t('convert.character')}</th></tr></thead>
+        <thead><tr><th scope="col">{t('convert.legacy')}</th><th scope="col">{t('convert.standard')}</th><th scope="col">{t('convert.character')}</th><th scope="col">{t('convert.source')}</th></tr></thead>
         <tbody>
-          {#each rows as [legacy, standard] (legacy)}
+          {#each rows as row (row.legacy + row.source)}
             <tr>
-              <td class="ui-mono">{codePoint(legacy)}</td>
-              <td class="ui-mono">{codePoint(standard)}</td>
-              <td><a class="glyph ui-script" lang="und-Hani" href={link('convert', { c: standard })} title={codePoint(standard)} onclick={event => show(event, standard)}>{standard}</a></td>
+              <td class="ui-mono">{codePoint(row.legacy)}</td>
+              <td class="ui-mono">{codePoint(row.standard)}</td>
+              <td><a class="glyph ui-script" lang="und-Hani" href={link('convert', { c: row.standard })} title={codePoint(row.standard)} onclick={event => show(event, row.standard)}>{row.standard}</a></td>
+              <td><span class="tag">{t(`pua.source.${row.source}`)}</span></td>
             </tr>
           {/each}
         </tbody>
@@ -86,17 +89,18 @@
 
 <style>
   .editors{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:var(--ui-space-lg)}
-  .field-head{display:flex;align-items:center;justify-content:space-between;gap:var(--ui-space-sm)}
+  .field-head{display:flex;align-items:center;justify-content:space-between;gap:var(--ui-space-sm);flex-wrap:wrap}
+  .field-tools{display:flex;align-items:center;gap:var(--ui-space-2xs)}
+  .field-tools select{inline-size:auto;font-size:var(--ui-text-xs);padding-block:2px}
   textarea{font-size:var(--ui-text-lg);min-block-size:180px}
-  .counts{color:var(--ui-color-ink-soft);font-size:var(--ui-text-sm);font-variant-numeric:tabular-nums;gap:var(--ui-space-sm)}
-  .counts select{inline-size:auto}
+  .counts{color:var(--ui-color-ink-soft);font-size:var(--ui-text-sm);font-variant-numeric:tabular-nums}
   .mapping summary{cursor:pointer;padding-block:var(--ui-space-xs)}
-  .tools{display:flex;align-items:center;gap:var(--ui-space-sm);flex-wrap:wrap;margin-block:var(--ui-space-sm)}
-  .tools select{inline-size:auto}
-  .tools input{flex:1;min-inline-size:160px}
+  .tools{display:flex;align-items:center;gap:var(--ui-space-sm);margin-block:var(--ui-space-sm)}
+  .tools input{flex:1}
   .mapping .ui-table-wrap{margin-block-start:0}
   .glyph{display:inline-grid;place-items:center;min-inline-size:44px;min-block-size:44px;text-decoration:none}
   .glyph:hover{background:var(--ui-color-accent-soft)}
   .ui-table td{vertical-align:middle}
+  .tag{padding:0 4px;border:1px solid var(--ui-color-border);border-radius:2px;font-size:10px;line-height:15px;color:var(--ui-color-ink-soft);white-space:nowrap}
   .attribution{gap:var(--ui-space-xs);padding-block-start:var(--ui-space-lg);border-block-start:1px solid var(--ui-color-border);color:var(--ui-color-ink-muted);font-size:var(--ui-text-xs);overflow-wrap:anywhere}
 </style>
