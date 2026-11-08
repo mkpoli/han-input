@@ -12,7 +12,7 @@
 <div class="ui-tiles" style:--ui-tile-size="{size}px" role="listbox" aria-label={label}>
   {#each shown as char (char)}
     {@const note = notes?.get(char)}
-    <button class="ui-tile" type="button" role="option" aria-selected={route.c === char} data-note={note ? undefined : 'none'} title={char}
+    <button class="ui-tile" type="button" role="option" aria-selected={route.c === char} data-note={note ? undefined : 'none'} title={note ? `${char} ${note}` : char}
       onclick={() => choose(char)} ondblclick={() => put(char)}>
       <span class="ui-tile-glyph ui-script" lang="und-Hani">{char}</span>{#if note}<span class="ui-tile-note">{note}</span>{/if}
     </button>
