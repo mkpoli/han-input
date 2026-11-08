@@ -21,8 +21,9 @@ ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "app/public/fonts"
 OUT.mkdir(parents=True, exist_ok=True)
 for old in OUT.glob("*.woff2"):
-    if old.name != "cns-composed.woff2":
-        old.unlink()
+    if old.name in {"cns-composed.woff2", "cdp-composition.woff2"}:
+        continue
+    old.unlink()
 
 
 def cut(source: Path, codes: list[int], name: str) -> None:
