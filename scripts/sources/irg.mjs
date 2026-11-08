@@ -4,7 +4,7 @@
 /** @typedef {{top:number, left:number, width:number, height:number, value:string}} TextBox */
 /** @typedef {{top:number, left:number, width:number, height:number, src:string}} ImageBox */
 /** @typedef {{number:number, text:TextBox[], images:ImageBox[]}} PageBoxes */
-/** @typedef {{serial:string, source:string, page:number, file:string}} Row */
+/** @typedef {{serial:string, source:string, target?:string, page:number, file:string}} Row */
 /** @typedef {{serialPattern:string, sourcePattern:string, leftGap?:number}} Patterns */
 
 /** @param {string} xml @returns {PageBoxes[]} */
@@ -55,11 +55,44 @@ export function codeTextRows(page, patterns) {
   })
 }
 
-/** @typedef {'codes-left' | 'code-text'} Matcher */
+/** @typedef {'codes-left' | 'code-text' | 'glyph-pairs'} Matcher */
+
+/**
+ * Two glyphs per row with their codes printed underneath: IRGN1924 puts a source glyph and the
+ * character it is unified with side by side, each labelled below, and the sequence number to the left.
+ * @param {PageBoxes} page @returns {Row[]}
+ */
+export function glyphPairRows(page) {
+  /** @param {import('./irg.mjs').ImageBox} image */
+  const codeOf = image => page.text.find(text => /^(JMJ-\d+|U\+[0-9A-F]{4,6})$/.test(text.value)
+    && Math.abs(text.left - image.left) < 60
+    && text.top - (image.top + image.height) >= -6 && text.top - (image.top + image.height) <= 45)
+  const groups = new Map()
+  for (const image of page.images) {
+    const key = Math.round(image.top / 10)
+    const group = groups.get(key)
+    if (group) group.push(image)
+    else groups.set(key, [image])
+  }
+  const rows = []
+  for (const [, images] of groups) {
+    if (images.length !== 2) throw new Error(`Page ${page.number}: a row has ${images.length} glyphs`)
+    const [left, right] = [...images].sort((a, b) => a.left - b.left)
+    const source = codeOf(left)
+    const target = codeOf(right)
+    if (!source || !/^JMJ-\d+$/.test(source.value)) throw new Error(`Page ${page.number}: the source glyph has no JMJ code`)
+    if (!target) throw new Error(`Page ${page.number}: the target glyph has no code`)
+    const serial = page.text.find(text => /^\d{5}$/.test(text.value) && text.left < left.left && Math.abs(text.top + text.height / 2 - (left.top + left.height / 2)) <= 40)
+    if (!serial) throw new Error(`Page ${page.number}: a row has no sequence number`)
+    rows.push({ serial: serial.value, source: source.value, target: target.value, page: page.number, file: left.src })
+  }
+  return rows
+}
 
 /** @param {PageBoxes} page @param {Matcher} matcher @param {Patterns} patterns @returns {Row[]} */
 export function rowsFor(page, matcher, patterns) {
   if (matcher === 'codes-left') return codesLeftRows(page, patterns)
   if (matcher === 'code-text') return codeTextRows(page, patterns)
+  if (matcher === 'glyph-pairs') return glyphPairRows(page)
   throw new Error(`Unknown matcher: ${matcher}`)
 }

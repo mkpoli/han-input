@@ -16,7 +16,7 @@ import { parsePages, rowsFor } from './sources/irg.mjs'
 /** @typedef {{document:string, pages:number[], matcher:Matcher, serialPattern:string, sourcePattern:string, leftGap?:number, count:number}} ExtractStep */
 /** @typedef {{id:string, file:string, group:string, label:string, glyphs:string, names:{en:string,zh?:string,hans?:string,ja?:string,ko?:string}, title:string, complete:boolean, scope:string, source:{name:string,url:string}, documents:CuratedDocument[], extract:ExtractStep[], additionalRecords:CuratedRecord[]}} CuratedSet */
 /** @typedef {{sets:CuratedSet[]}} Curated */
-/** @typedef {{serial:string, source:string, document:string, page:number, glyph:string, from:string}} Row */
+/** @typedef {{serial:string, source:string, target?:string, document:string, page:number, glyph:string, from:string}} Row */
 
 const ROOT = join(import.meta.dirname, '..')
 const OUT = join(ROOT, 'app/public/charsets')
@@ -89,7 +89,7 @@ try {
       source: set.source,
       documents: set.documents,
       records: [
-        ...rows.map(({ serial, source, document, page, glyph }) => ({ serial, source, document, page, glyph })),
+        ...rows.map(({ serial, source, target, document, page, glyph }) => ({ serial, source, document, page, glyph, ...(target ? { unifiedWith: target } : {}) })),
         ...set.additionalRecords,
       ],
     }
