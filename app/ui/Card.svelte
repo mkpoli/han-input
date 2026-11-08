@@ -71,6 +71,7 @@
       case 'card.numberUnknown': return t('card.numberUnknown', params)
       case 'card.unnamed': return t('card.unnamed', params)
       case 'card.entity': return t('card.entity', params)
+      case 'card.entityChar': return t('card.entityChar', params)
       case 'card.entityNumber': return t('card.entityNumber', params)
       default: return undefined
     }

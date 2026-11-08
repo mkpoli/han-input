@@ -3,8 +3,8 @@
 // that is not a character marked so a reader can see what the source wrote.
 
 /**
- * @typedef {{ pua: string, description: string, fragment?: string, chise?: { name: string, count: number }[] }} Component
- * @typedef {{ numbers: Record<string, Component>, entities: Record<string, { number: number, count: number }> }} Components
+ * @typedef {{ pua: string, description: string, fragment?: string, chise?: { name: string, count: number }[], ucs?: string }} Component
+ * @typedef {{ numbers: Record<string, Component>, entities: Record<string, { number?: number, count?: number, char?: string }> }} Components
  */
 /** @typedef {[string, Record<string, string>]} Title A message key and its parameters. */
 /**
@@ -36,6 +36,8 @@ export function pieces(notation, components, seen = new Set()) {
     const component = components.numbers[number]
     if (component?.fragment && !seen.has(Number(number))) {
       out.push({ kind: 'part', text: component.fragment, title, children: pieces(component.fragment, components, new Set([...seen, Number(number)])) })
+    } else if (component?.ucs) {
+      out.push({ kind: 'part', text: component.ucs, title })
     } else if (component?.pua) {
       out.push({ kind: 'part', text: component.pua, pua: true, title })
     } else {
@@ -56,7 +58,9 @@ export function pieces(notation, components, seen = new Set()) {
       draw(match[1], /** @type {Title} */ (['card.number', { n: match[1], description: components.numbers[match[1]]?.description ?? '' }]))
     } else if (match[2] !== undefined) {
       const name = match[2], same = components.entities[name]
-      if (same) {
+      if (same?.char) {
+        out.push({ kind: 'part', text: same.char, title: /** @type {Title} */ (['card.entityChar', { name, char: same.char }]) })
+      } else if (same?.number !== undefined) {
         const component = components.numbers[String(same.number)]
         draw(String(same.number), /** @type {Title} */ (['card.entityNumber', { name, n: String(same.number), description: component?.description ?? '' }]))
       } else {

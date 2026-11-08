@@ -36,6 +36,7 @@
   "card.unnamed": "BabelStone's sign for a part it cannot name",
   "card.entity": "CHISE component {name}",
   "card.entityNumber": "CHISE component {name}, BabelStone component {n}: {description}",
+  "card.entityChar": "CHISE component {name}: {char}",
   "ids.source.babelstone": "BabelStone",
   "ids.source.chise": "CHISE",
   "ids.source.project": "This project",

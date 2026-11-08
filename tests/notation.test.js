@@ -3,11 +3,11 @@ import { pieces } from '../app/lib/notation.js'
 
 const components = {
   numbers: {
-    7: { pua: '\u{F4F3}', description: 'top of 專惠', chise: [{ name: 'CDP-8BD0', count: 7 }] },
+    7: { pua: '\u{F4F3}', description: 'top of 專惠', chise: [{ name: 'CDP-8BD0', count: 7 }], ucs: '叀' },
     12: { pua: '\u{F4AE}', description: 'right of 龍', fragment: '⿷己三' },
     82: { pua: '\u{F4E2}', description: 'top of 書', fragment: '聿' },
   },
-  entities: { 'CDP-8BD0': { number: 7, count: 7 } },
+  entities: { 'CDP-8BD0': { number: 7, count: 7 }, 'CDP-8C78': { char: '月' } },
 }
 
 describe('card notation', () => {
@@ -16,13 +16,16 @@ describe('card notation', () => {
     expect(part).toMatchObject({ kind: 'part', text: '聿', title: ['card.number', { n: '82', description: 'top of 書' }] })
     expect(part.children).toEqual([{ kind: 'plain', text: '聿' }])
   })
-  test('draws a number with no fragment from its PUA character', () => {
-    expect(pieces('⿱{7}心', components)).toContainEqual({ kind: 'part', text: '\u{F4F3}', pua: true, title: ['card.number', { n: '7', description: 'top of 專惠' }] })
+  test('draws a number with no fragment from its character, before its PUA glyph', () => {
+    expect(pieces('⿱{7}心', components)).toContainEqual({ kind: 'part', text: '叀', title: ['card.number', { n: '7', description: 'top of 專惠' }] })
   })
   test('draws an entity its numbered component was aligned with the same way', () => {
     expect(pieces('⿱&CDP-8BD0;心', components)[1]).toMatchObject({
-      kind: 'part', text: '\u{F4F3}', pua: true, title: ['card.entityNumber', { name: 'CDP-8BD0', n: '7', description: 'top of 專惠' }],
+      kind: 'part', text: '叀', title: ['card.entityNumber', { name: 'CDP-8BD0', n: '7', description: 'top of 專惠' }],
     })
+  })
+  test('draws an entity its character was aligned with', () => {
+    expect(pieces('⿰&CDP-8C78;木', components)[1]).toMatchObject({ kind: 'part', text: '月', title: ['card.entityChar', { name: 'CDP-8C78', char: '月' }] })
   })
   test('keeps an unknown number, the unnamed sign and an unaligned CHISE entity, marked', () => {
     expect(pieces('{99}？&UNKNOWN-1;', components)).toEqual([
