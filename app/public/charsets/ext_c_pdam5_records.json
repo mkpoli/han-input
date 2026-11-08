@@ -1,0 +1,501 @@
+{
+  "id": "ext_c_pdam5_removals",
+  "group": "Proposals",
+  "label": "Ext.C PDAM5 removals",
+  "names": {
+    "en": "Characters removed from CJK C PDAM5",
+    "zh": "擴展C PDAM5刪除字",
+    "hans": "扩展C PDAM5删除字",
+    "ja": "拡張C PDAM5削除字",
+    "ko": "확장 C PDAM5 삭제자"
+  },
+  "title": "Characters removed from the CJK C PDAM5 ballot",
+  "complete": false,
+  "scope": "The 67 characters that IRGN1330 removed from the CJK C PDAM5 ballot before publication, with the code and source printed for each. The code is the PDAM5 number; the published Extension C scalar for the same character has not been checked.",
+  "source": {
+    "name": "IRG",
+    "url": "https://www.unicode.org/irg/docs/n1330-PDAM5ExtensionCRemovals.pdf"
+  },
+  "documents": [
+    {
+      "id": "n1330",
+      "document": "IRGN1330",
+      "title": "Request for Removal of Characters in CJK C PDAM5",
+      "source": "IRG Meeting #28",
+      "date": "2007-07-16",
+      "url": "https://www.unicode.org/irg/docs/n1330-PDAM5ExtensionCRemovals.pdf",
+      "status": "Records the 67 characters removed from CJK C in PDAM5, with the decisions in Attachment B. The Ucode column is the amendment's number, not a verified published scalar."
+    }
+  ],
+  "records": [
+    {
+      "serial": "2A702",
+      "source": "TC-214E",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2A702.png"
+    },
+    {
+      "serial": "2A7F5",
+      "source": "TC-2D27",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2A7F5.png"
+    },
+    {
+      "serial": "2A84A",
+      "source": "G_ZFY00754",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2A84A.png"
+    },
+    {
+      "serial": "2A8BA",
+      "source": "TC-297B",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2A8BA.png"
+    },
+    {
+      "serial": "2A8C3",
+      "source": "CYY00225",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2A8C3.png"
+    },
+    {
+      "serial": "2A8DB",
+      "source": "TC-4574",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2A8DB.png"
+    },
+    {
+      "serial": "2A938",
+      "source": "TC-257C",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2A938.png"
+    },
+    {
+      "serial": "2A939",
+      "source": "TC-4631",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2A939.png"
+    },
+    {
+      "serial": "2A93F",
+      "source": "TC-2623",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2A93F.png"
+    },
+    {
+      "serial": "2A97F",
+      "source": "TC-466C",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2A97F.png"
+    },
+    {
+      "serial": "2A9D0",
+      "source": "JK-75314",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2A9D0.png"
+    },
+    {
+      "serial": "2AA06",
+      "source": "TC-556C",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2AA06.png"
+    },
+    {
+      "serial": "2AA14",
+      "source": "TC-2137",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2AA14.png"
+    },
+    {
+      "serial": "2AA17",
+      "source": "TD-3944",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2AA17.png"
+    },
+    {
+      "serial": "2AA35",
+      "source": "TC-2A7A",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2AA35.png"
+    },
+    {
+      "serial": "2AA39",
+      "source": "TC-2A68",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2AA39.png"
+    },
+    {
+      "serial": "2AA6F",
+      "source": "TE-2B6A",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2AA6F.png"
+    },
+    {
+      "serial": "2AA76",
+      "source": "TC-3142",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2AA76.png"
+    },
+    {
+      "serial": "2AA77",
+      "source": "TC-5647",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2AA77.png"
+    },
+    {
+      "serial": "2AA83",
+      "source": "TD-2623",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2AA83.png"
+    },
+    {
+      "serial": "2AACF",
+      "source": "TC-223F",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2AACF.png"
+    },
+    {
+      "serial": "2AAD0",
+      "source": "TC-2378",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2AAD0.png"
+    },
+    {
+      "serial": "2ABBB",
+      "source": "TD-5C4B",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2ABBB.png"
+    },
+    {
+      "serial": "2ABE6",
+      "source": "G_ZJW00399",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2ABE6.png"
+    },
+    {
+      "serial": "2AC0B",
+      "source": "JK-65202",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2AC0B.png"
+    },
+    {
+      "serial": "2AC49",
+      "source": "TD-286B",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2AC49.png"
+    },
+    {
+      "serial": "2AC55",
+      "source": "TD-4C59",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2AC55.png"
+    },
+    {
+      "serial": "2AC78",
+      "source": "TC-3C7A",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2AC78.png"
+    },
+    {
+      "serial": "2AC83",
+      "source": "TD-4421",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2AC83.png"
+    },
+    {
+      "serial": "2AC85",
+      "source": "TD-3C3C",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2AC85.png"
+    },
+    {
+      "serial": "2AC87",
+      "source": "TD-4D2B",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2AC87.png"
+    },
+    {
+      "serial": "2AC98",
+      "source": "TC-3336",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2AC98.png"
+    },
+    {
+      "serial": "2ACAD",
+      "source": "KP1-4B50",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2ACAD.png"
+    },
+    {
+      "serial": "2AD0B",
+      "source": "TD-5D5B",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2AD0B.png"
+    },
+    {
+      "serial": "2AD73",
+      "source": "TD-6B6D",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2AD73.png"
+    },
+    {
+      "serial": "2AD94",
+      "source": "TC-3376",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2AD94.png"
+    },
+    {
+      "serial": "2AE47",
+      "source": "G_CH200843",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2AE47.png"
+    },
+    {
+      "serial": "2AE5D",
+      "source": "TD-2C3B",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2AE5D.png"
+    },
+    {
+      "serial": "2AE68",
+      "source": "TD-2C54",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2AE68.png"
+    },
+    {
+      "serial": "2AE77",
+      "source": "TD-3F3B",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2AE77.png"
+    },
+    {
+      "serial": "2AEDF",
+      "source": "G_HC100308",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2AEDF.png"
+    },
+    {
+      "serial": "2AEE3",
+      "source": "TC-4658",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2AEE3.png"
+    },
+    {
+      "serial": "2AF0F",
+      "source": "TC-5C2E",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2AF0F.png"
+    },
+    {
+      "serial": "2AF11",
+      "source": "TC-5B6E",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2AF11.png"
+    },
+    {
+      "serial": "2AF2F",
+      "source": "TD-4045",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2AF2F.png"
+    },
+    {
+      "serial": "2AFAB",
+      "source": "TC-5C4F",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2AFAB.png"
+    },
+    {
+      "serial": "2B02C",
+      "source": "TE-364E",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2B02C.png"
+    },
+    {
+      "serial": "2B0B6",
+      "source": "TD-5274",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2B0B6.png"
+    },
+    {
+      "serial": "2B129",
+      "source": "TD-6239",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2B129.png"
+    },
+    {
+      "serial": "2B1B9",
+      "source": "TD-4374",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2B1B9.png"
+    },
+    {
+      "serial": "2B1BD",
+      "source": "TD-626C",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2B1BD.png"
+    },
+    {
+      "serial": "2B224",
+      "source": "TC-4172",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2B224.png"
+    },
+    {
+      "serial": "2B236",
+      "source": "TC-5F53",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2B236.png"
+    },
+    {
+      "serial": "2B247",
+      "source": "TD-3128",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2B247.png"
+    },
+    {
+      "serial": "2B25C",
+      "source": "TD-452A",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2B25C.png"
+    },
+    {
+      "serial": "2B265",
+      "source": "K5H00029",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2B265.png"
+    },
+    {
+      "serial": "2B29E",
+      "source": "HC101428",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2B29E.png"
+    },
+    {
+      "serial": "2B460",
+      "source": "TC-425E",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2B460.png"
+    },
+    {
+      "serial": "2B488",
+      "source": "BK101916",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2B488.png"
+    },
+    {
+      "serial": "2B497",
+      "source": "TC-2D59 G_XC201924",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2B497.png"
+    },
+    {
+      "serial": "2B561",
+      "source": "TD-716B",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2B561.png"
+    },
+    {
+      "serial": "2B58F",
+      "source": "TD-4740",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2B58F.png"
+    },
+    {
+      "serial": "2B597",
+      "source": "TD-7176",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2B597.png"
+    },
+    {
+      "serial": "2B5CA",
+      "source": "UTC00249",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2B5CA.png"
+    },
+    {
+      "serial": "2B5D9",
+      "source": "G_KX139614",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2B5D9.png"
+    },
+    {
+      "serial": "2B611",
+      "source": "TD-3840",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2B611.png"
+    },
+    {
+      "serial": "2B68F",
+      "source": "TD-666B",
+      "document": "n1330",
+      "page": 2,
+      "glyph": "glyphs/ext-c-pdam5/2B68F.png"
+    }
+  ]
+}
