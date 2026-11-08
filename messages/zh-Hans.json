@@ -114,7 +114,6 @@
   "convert.input": "原始文字",
   "convert.output": "转换后文字",
   "convert.placeholder": "粘贴旧字体文字",
-  "convert.puaInInput": "文字中的私用字符",
   "convert.source": "来源",
   "convert.filter": "按码位或文字筛选",
   "convert.converted": "已转换：{count}个字符",
