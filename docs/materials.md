@@ -37,6 +37,7 @@ Discord discussion of 2026-10-27, and the works themselves were not read.
 | [BabelStone IDS](https://www.babelstone.co.uk/CJK/IDS.TXT), Andrew West | which parts each character is written with | As stated in the file |
 | [CHISE IDS](https://www.chise.org/ids/), the eighteen `IDS-UCS-*.txt` files at `chise/ids` `main@2026-11-04` | further descriptions of the same, including characters BabelStone leaves out | GPL-2.0-or-later; the build copies the descriptions, so the generated site data carries that licence |
 | [漢字構形資料庫](https://cdp.sinica.edu.tw/cdphanzi/), 莊德明, 〈[構字式的處理技巧](https://cdp.sinica.edu.tw/service/documents/T960419.pdf)〉, 中央研究院資訊科學研究所, 2007 | the thirteen composition symbols (Big5 8DF1–8DFD, Unicode U+F6A3–U+F6AF) and their meanings; table 1 is the reference for the shapes redrawn into `cdp-composition.woff2` | No licence is stated for the handout. The font's drawings are this project's own, under the repository's MIT licence |
+| [Korean History Database, 파자 검색 help](https://db.history.go.kr/resources/unicode/help/help07.jsp), 국사편찬위원회 | the 破字 signs `+` (left-right), `-` (delete), `/` (top-bottom), `*` (combine), grouping, and the database's `▼` variant mark | A public help page; no separate data licence is stated. The rules are implemented; no records are copied |
 | [Noto Sans Nushu and Noto Serif Hentaigana](https://github.com/notofonts) | glyphs for Nüshu and hentaigana | OFL-1.1 |
 | [Jigmo](https://kamichikoichi.github.io/jigmo/) 2025-09-12, 上地宏一 | glyphs for the extension blocks, cut by `scripts/build_fonts.py` | CC0-1.0 |
 | [全字庫正宋體 TW-Sung-Plus](https://www.cns11643.gov.tw/downloadList.jsp?ID=2), 數位發展部, `Fonts_Sung.zip` 20260805 | glyphs for the private-use slots of unencoded CNS source rows, cut by `scripts/build_fonts.py` | 政府資料開放授權條款第1版 (OGDL 1.0), attribution「數位發展部，CNS11643中文標準交換碼全字庫網站」 |
@@ -46,6 +47,13 @@ Discord discussion of 2026-10-27, and the works themselves were not read.
 The 構字式 converter (`src/legacy.js`) reads the thirteen symbols and writes IDS; a shape marker yields
 its parts joined by `·`, since the writing order it records does not give their arrangement. The font
 draws the symbols after the handout's table; it does not reuse the handout's embedded font.
+
+The 破字 converter (`src/paja.js`) reads the Korean History Database's arithmetic notation. `*` says only
+that two parts combine, so it becomes IDS overlap `⿻`; `-` becomes the IDS subtraction sign `㇯`. The
+`▼` mark is recorded as a variant and left out of the IDS. Precedence is read from the arithmetic signs
+(`*` and `/` before `+` and `-`, with `()` overriding); the help states only that `()` comes first. Search converts the formula to its parts and
+asks the same part index the finder uses. The example `▼(乙*車)` and the report that the database's
+rendering is not deterministic come from [@sebansios's post of 2026-07-26](https://x.com/sebansios/status/2081348644020916467).
 
 BabelStone writes some parts by number. Where note 6 of its file gives the IDS that writes the
 number out, the card draws it ({12}, the right of 龍, as ⿷己三); a number the note leaves without a

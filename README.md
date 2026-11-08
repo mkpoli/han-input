@@ -20,7 +20,7 @@ It covers Han, extended sinographies such as Chữ Nôm and Sawndip, and kana an
 - **Rhyme tables**: the Guangyun by rhyme, initial, grade and tone.
 - **Radicals**: the 214 Kangxi radicals by residual strokes.
 - **PUA conversion**: convert text from the Ministry of Education's Taiwanese/Hakka fonts to Unicode and browse the mappings. Each character's card lists its own PUA codes and those of its Unihan variants.
-- **Composition**: convert Taiwan's pre-IDS 構字式 (Big5 8DF1–8DFD) to IDS. The thirteen symbols are a palette; a shape marker gives its parts in writing order.
+- **Composition**: convert Taiwan's pre-IDS 構字式 (Big5 8DF1–8DFD) and Korean 破字 to IDS. The thirteen symbols and the four arithmetic signs are palettes; a 構字式 shape marker gives its parts in writing order.
 
 ## Development
 

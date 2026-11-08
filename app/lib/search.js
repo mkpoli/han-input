@@ -2,11 +2,12 @@
 // leave the characters in all of them.
 import { hanIn, inScope, isHan, isRareKana } from '../../src/fold.js'
 import { puaChars } from '../../src/pua.js'
+import { convertPaja, isPaja } from '../../src/paja.js'
 import { findCodes, findMeaning, findPart, findReadings, findRun, loadChars, loadVariants } from './data.js'
 import { fuzzyComponents, characterVariants, spellings } from '../../src/variants.js'
 
 /**
- * @typedef {{ kind: 'code' | 'scoped' | 'strokes' | 'point' | 'pua' | 'text' | 'part', text: string, method?: string, code?: string, value?: number, char?: string, chars?: string[] }} Clue
+ * @typedef {{ kind: 'code' | 'scoped' | 'strokes' | 'point' | 'pua' | 'paja' | 'text' | 'part', text: string, method?: string, code?: string, value?: number, char?: string, chars?: string[] }} Clue
  * @typedef {{ text: string, chars: string[], exact: boolean }} Shape
  * @typedef {{ char: string, relation: string, source: string, group?: string }} VariantRow
  * @typedef {{ clue: Clue, hits: import('./data.js').CodeHit[], readings: import('./data.js').ReadingHit[], meaning: string[], parts: string[], partVariants: Shape[], similarParts: Shape[], shapes: Shape[], variants: VariantRow[], chars: string[] }} Answer
@@ -21,6 +22,7 @@ export function readClue(term, alone) {
   }
   const strokes = term.match(/^(\d{1,2})[畫画劃划]$/)
   if (strokes) return { kind: 'strokes', text: term, value: Number(strokes[1]) }
+  if (isPaja(term)) return { kind: 'paja', text: term }
   const scoped = term.match(/^([a-z][\w-]*):(.+)$/)
   if (scoped) return { kind: 'scoped', text: term, method: scoped[1], code: scoped[2] }
   if (isHan(term)) return { kind: alone ? 'text' : 'part', text: term }
@@ -62,6 +64,25 @@ async function lookUp(clue) {
   if (clue.kind === 'pua') {
     out.chars = clue.chars ?? (clue.char ? [clue.char] : [])
     out.hits = await findCodes(clue.text)
+    return out
+  }
+  if (clue.kind === 'paja') {
+    const formula = convertPaja(clue.text)
+    if (!formula.ids) return out
+    const parts = formula.parts
+    const runs = []
+    if (parts.length >= 2 && parts.length <= 3) runs.push(parts.join(''))
+    else for (const length of [2, 3]) for (let at = 0; at + length <= parts.length; at++) runs.push(parts.slice(at, at + length).join(''))
+    const runSets = (await Promise.all([...new Set(runs)].map(run => findRun(run)))).map(list => new Set(list))
+    let chars = runSets.length ? [...(runSets[0] ?? [])].filter(char => runSets.every(set => set.has(char))) : []
+    const unique = [...new Set(parts)]
+    if (!chars.length) {
+      const partSets = (await Promise.all(unique.map(part => findPart(part)))).map(list => new Set(list))
+      chars = partSets.length ? [...(partSets[0] ?? [])].filter(char => partSets.every(set => set.has(char))) : []
+    }
+    if (!chars.length && parts.length === 1 && isHan(parts[0])) chars = [parts[0]]
+    out.shapes = chars.length ? [{ text: parts.join(''), chars, exact: true }] : []
+    out.chars = chars
     return out
   }
   if (clue.kind === 'strokes') {

@@ -13,7 +13,7 @@
   import CharsetFilter from '../ui/CharsetFilter.svelte'
   import ProposalRecords from '../ui/ProposalRecords.svelte'
 
-  const EXAMPLES = ['ユタヘヘミ', 'jnd', 'luong', '端一東平', '30407', 'tsɿ', '氵 12畫', '口匕', 'river ジ', 'chữ', 'a-1', 'a672', 'U+5B57']
+  const EXAMPLES = ['ユタヘヘミ', 'jnd', 'luong', '端一東平', '30407', 'tsɿ', '氵 12畫', '口匕', 'river ジ', 'chữ', 'a-1', 'a672', 'U+5B57', '氵+青']
   const GRID_LIMIT = 240
 
   const query = $derived(route.q)
