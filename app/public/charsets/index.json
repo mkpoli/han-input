@@ -10,6 +10,8 @@
     },
     "chars": 20992,
     "total": 20992,
+    "encoded": 20992,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/unicode_basic.json"
@@ -26,6 +28,8 @@
     },
     "chars": 6592,
     "total": 6592,
+    "encoded": 6592,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/unicode_ext_a.json"
@@ -42,6 +46,8 @@
     },
     "chars": 42720,
     "total": 42720,
+    "encoded": 42720,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/unicode_ext_b.json"
@@ -58,6 +64,8 @@
     },
     "chars": 4160,
     "total": 4160,
+    "encoded": 4160,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/unicode_ext_c.json"
@@ -74,6 +82,8 @@
     },
     "chars": 223,
     "total": 223,
+    "encoded": 223,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/unicode_ext_d.json"
@@ -90,6 +100,8 @@
     },
     "chars": 5774,
     "total": 5774,
+    "encoded": 5774,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/unicode_ext_e.json"
@@ -106,6 +118,8 @@
     },
     "chars": 7473,
     "total": 7473,
+    "encoded": 7473,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/unicode_ext_f.json"
@@ -122,6 +136,8 @@
     },
     "chars": 4939,
     "total": 4939,
+    "encoded": 4939,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/unicode_ext_g.json"
@@ -138,6 +154,8 @@
     },
     "chars": 4192,
     "total": 4192,
+    "encoded": 4192,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/unicode_ext_h.json"
@@ -154,6 +172,8 @@
     },
     "chars": 622,
     "total": 622,
+    "encoded": 622,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/unicode_ext_i.json"
@@ -170,6 +190,8 @@
     },
     "chars": 4298,
     "total": 4298,
+    "encoded": 4298,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/unicode_ext_j.json"
@@ -186,6 +208,8 @@
     },
     "chars": 0,
     "total": 119,
+    "encoded": 0,
+    "unencoded": 119,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/unicode_comp_a_tentative.json"
@@ -202,6 +226,8 @@
     },
     "chars": 151,
     "total": 375,
+    "encoded": 151,
+    "unencoded": 200,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/unicode_comp_b_tentative.json"
@@ -218,6 +244,8 @@
     },
     "chars": 1057,
     "total": 1381,
+    "encoded": 1057,
+    "unencoded": 187,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/compatibility.json"
@@ -234,6 +262,8 @@
     },
     "chars": 5149,
     "total": 5547,
+    "encoded": 5149,
+    "unencoded": 338,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/ws2015.json"
@@ -250,6 +280,8 @@
     },
     "chars": 4385,
     "total": 5039,
+    "encoded": 4385,
+    "unencoded": 539,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/ws2017.json"
@@ -266,6 +298,8 @@
     },
     "chars": 4301,
     "total": 4952,
+    "encoded": 4301,
+    "unencoded": 539,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/ws2021.json"
@@ -282,6 +316,8 @@
     },
     "chars": 28,
     "total": 4674,
+    "encoded": 28,
+    "unencoded": 4646,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/ws2024.json"
@@ -298,6 +334,8 @@
     },
     "chars": 2898,
     "total": 3689,
+    "encoded": 2898,
+    "unencoded": 742,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/utc.json"
@@ -314,6 +352,8 @@
     },
     "chars": 11067,
     "total": 11108,
+    "encoded": 11067,
+    "unencoded": 1,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/swjz.json"
@@ -330,6 +370,8 @@
     },
     "chars": 102998,
     "total": 103461,
+    "encoded": 102998,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/unicode_rad_str.json"
@@ -346,6 +388,8 @@
     },
     "chars": 0,
     "total": 0,
+    "encoded": 0,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/irgn.json",
@@ -363,6 +407,8 @@
     },
     "chars": 0,
     "total": 0,
+    "encoded": 0,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/l2.json",
@@ -380,6 +426,8 @@
     },
     "chars": 6763,
     "total": 6763,
+    "encoded": 6763,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/g0.json"
@@ -396,6 +444,8 @@
     },
     "chars": 6866,
     "total": 6866,
+    "encoded": 6866,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/g1.json"
@@ -412,6 +462,8 @@
     },
     "chars": 6741,
     "total": 7237,
+    "encoded": 6741,
+    "unencoded": 496,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/g2.json"
@@ -428,6 +480,8 @@
     },
     "chars": 7237,
     "total": 7237,
+    "encoded": 7237,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/g3.json"
@@ -444,6 +498,8 @@
     },
     "chars": 6039,
     "total": 7039,
+    "encoded": 6039,
+    "unencoded": 995,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/g4.json"
@@ -460,6 +516,8 @@
     },
     "chars": 7008,
     "total": 7039,
+    "encoded": 7008,
+    "unencoded": 24,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/g5.json"
@@ -476,6 +534,8 @@
     },
     "chars": 2174,
     "total": 2214,
+    "encoded": 2174,
+    "unencoded": 28,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/g7.json"
@@ -492,6 +552,8 @@
     },
     "chars": 634,
     "total": 636,
+    "encoded": 634,
+    "unencoded": 2,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/g8.json"
@@ -508,6 +570,8 @@
     },
     "chars": 3778,
     "total": 3778,
+    "encoded": 3778,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/ge.json"
@@ -524,6 +588,8 @@
     },
     "chars": 92,
     "total": 94,
+    "encoded": 92,
+    "unencoded": 2,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/gk.json"
@@ -540,6 +606,8 @@
     },
     "chars": 111,
     "total": 111,
+    "encoded": 111,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/gh.json"
@@ -556,6 +624,8 @@
     },
     "chars": 600,
     "total": 614,
+    "encoded": 600,
+    "unencoded": 14,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/gb_a.json"
@@ -572,6 +642,8 @@
     },
     "chars": 723,
     "total": 897,
+    "encoded": 723,
+    "unencoded": 174,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/gb_a_v1.json"
@@ -588,6 +660,8 @@
     },
     "chars": 7079,
     "total": 7079,
+    "encoded": 7079,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/gt.json"
@@ -604,6 +678,8 @@
     },
     "chars": 40500,
     "total": 42716,
+    "encoded": 40500,
+    "unencoded": 23,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/gkx.json"
@@ -620,6 +696,8 @@
     },
     "chars": 58430,
     "total": 60367,
+    "encoded": 58430,
+    "unencoded": 1809,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/ghzr.json"
@@ -636,6 +714,8 @@
     },
     "chars": 11527,
     "total": 11632,
+    "encoded": 11527,
+    "unencoded": 96,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/gzfy.json"
@@ -652,6 +732,8 @@
     },
     "chars": 5611,
     "total": 7118,
+    "encoded": 5612,
+    "unencoded": 180,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/gzjw.json"
@@ -668,6 +750,8 @@
     },
     "chars": 118,
     "total": 118,
+    "encoded": 118,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/gce.json"
@@ -684,6 +768,8 @@
     },
     "chars": 7964,
     "total": 13383,
+    "encoded": 7964,
+    "unencoded": 2680,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/gz.json"
@@ -700,6 +786,8 @@
     },
     "chars": 1082,
     "total": 1429,
+    "encoded": 1082,
+    "unencoded": 329,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/ghf.json"
@@ -716,6 +804,8 @@
     },
     "chars": 1863,
     "total": 2501,
+    "encoded": 1863,
+    "unencoded": 636,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/g_8f.json"
@@ -732,6 +822,8 @@
     },
     "chars": 11640,
     "total": 11701,
+    "encoded": 11640,
+    "unencoded": 1,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/g_tg.json"
@@ -748,6 +840,8 @@
     },
     "chars": 3500,
     "total": 3500,
+    "encoded": 3500,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/g_cy.json"
@@ -764,6 +858,8 @@
     },
     "chars": 2285,
     "total": 2439,
+    "encoded": 2285,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/g_1j.json"
@@ -780,6 +876,8 @@
     },
     "chars": 482,
     "total": 514,
+    "encoded": 482,
+    "unencoded": 27,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/g_bujian.json"
@@ -796,6 +894,8 @@
     },
     "chars": 452,
     "total": 891,
+    "encoded": 452,
+    "unencoded": 410,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/g_2j.json"
@@ -812,6 +912,8 @@
     },
     "chars": 282,
     "total": 324,
+    "encoded": 282,
+    "unencoded": 42,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/g_roc1j.json"
@@ -828,6 +930,8 @@
     },
     "chars": 2059,
     "total": 3336,
+    "encoded": 2059,
+    "unencoded": 886,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/bouyei.json"
@@ -844,6 +948,8 @@
     },
     "chars": 4579,
     "total": 7197,
+    "encoded": 4579,
+    "unencoded": 992,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/gin.json"
@@ -860,6 +966,8 @@
     },
     "chars": 14250,
     "total": 14250,
+    "encoded": 14250,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/g_guji.json"
@@ -876,6 +984,8 @@
     },
     "chars": 5880,
     "total": 27939,
+    "encoded": 5880,
+    "unencoded": 21808,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/gzhs.json"
@@ -892,6 +1002,8 @@
     },
     "chars": 0,
     "total": 0,
+    "encoded": 0,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/g_fzk.json",
@@ -909,6 +1021,8 @@
     },
     "chars": 6930,
     "total": 12539,
+    "encoded": 6931,
+    "unencoded": 5146,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/g_gzw.json"
@@ -925,6 +1039,8 @@
     },
     "chars": 4391,
     "total": 11189,
+    "encoded": 4392,
+    "unencoded": 6761,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/g_fkzz.json"
@@ -941,6 +1057,8 @@
     },
     "chars": 5401,
     "total": 5401,
+    "encoded": 5401,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/hb1.json"
@@ -957,6 +1075,8 @@
     },
     "chars": 7651,
     "total": 7652,
+    "encoded": 7651,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/hb2.json"
@@ -973,6 +1093,8 @@
     },
     "chars": 4617,
     "total": 4623,
+    "encoded": 4617,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/h.json"
@@ -989,6 +1111,8 @@
     },
     "chars": 36,
     "total": 36,
+    "encoded": 36,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/h_.json"
@@ -1005,6 +1129,8 @@
     },
     "chars": 4762,
     "total": 4762,
+    "encoded": 4762,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/h_cy.json"
@@ -1021,6 +1147,8 @@
     },
     "chars": 95,
     "total": 97,
+    "encoded": 95,
+    "unencoded": 2,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/mac.json"
@@ -1037,6 +1165,8 @@
     },
     "chars": 5413,
     "total": 5413,
+    "encoded": 5413,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/t1.json"
@@ -1053,6 +1183,8 @@
     },
     "chars": 7651,
     "total": 7651,
+    "encoded": 7651,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/t2.json"
@@ -1069,6 +1201,8 @@
     },
     "chars": 6387,
     "total": 6396,
+    "encoded": 6387,
+    "unencoded": 1,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/t3.json"
@@ -1085,6 +1219,8 @@
     },
     "chars": 7293,
     "total": 7299,
+    "encoded": 7293,
+    "unencoded": 1,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/t4.json"
@@ -1101,6 +1237,8 @@
     },
     "chars": 8606,
     "total": 8608,
+    "encoded": 8606,
+    "unencoded": 1,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/t5.json"
@@ -1117,6 +1255,8 @@
     },
     "chars": 6361,
     "total": 6389,
+    "encoded": 6361,
+    "unencoded": 1,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/t6.json"
@@ -1133,6 +1273,8 @@
     },
     "chars": 6533,
     "total": 6546,
+    "encoded": 6533,
+    "unencoded": 2,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/t7.json"
@@ -1149,6 +1291,8 @@
     },
     "chars": 259,
     "total": 978,
+    "encoded": 260,
+    "unencoded": 710,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/t9.json"
@@ -1165,6 +1309,8 @@
     },
     "chars": 8836,
     "total": 8836,
+    "encoded": 8836,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/ta.json"
@@ -1181,6 +1327,8 @@
     },
     "chars": 5140,
     "total": 8666,
+    "encoded": 5141,
+    "unencoded": 3504,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/tb.json"
@@ -1197,6 +1345,8 @@
     },
     "chars": 2124,
     "total": 6399,
+    "encoded": 2125,
+    "unencoded": 4233,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/tc.json"
@@ -1213,6 +1363,8 @@
     },
     "chars": 2190,
     "total": 5891,
+    "encoded": 2191,
+    "unencoded": 3638,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/td.json"
@@ -1229,6 +1381,8 @@
     },
     "chars": 4647,
     "total": 7096,
+    "encoded": 4648,
+    "unencoded": 2405,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/te.json"
@@ -1245,6 +1399,8 @@
     },
     "chars": 8468,
     "total": 8499,
+    "encoded": 8468,
+    "unencoded": 22,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/tf.json"
@@ -1261,6 +1417,8 @@
     },
     "chars": 4,
     "total": 9,
+    "encoded": 4,
+    "unencoded": 5,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/t10.json"
@@ -1277,6 +1435,8 @@
     },
     "chars": 38,
     "total": 79,
+    "encoded": 38,
+    "unencoded": 40,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/t11.json"
@@ -1293,6 +1453,8 @@
     },
     "chars": 8,
     "total": 8,
+    "encoded": 8,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/t12.json"
@@ -1309,6 +1471,8 @@
     },
     "chars": 567,
     "total": 1790,
+    "encoded": 567,
+    "unencoded": 1210,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/t13.json"
@@ -1325,6 +1489,8 @@
     },
     "chars": 2,
     "total": 3,
+    "encoded": 2,
+    "unencoded": 1,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/t18.json"
@@ -1341,6 +1507,8 @@
     },
     "chars": 4808,
     "total": 4808,
+    "encoded": 4808,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/t_a.json"
@@ -1357,6 +1525,8 @@
     },
     "chars": 6334,
     "total": 6334,
+    "encoded": 6334,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/t_b.json"
@@ -1373,6 +1543,8 @@
     },
     "chars": 18317,
     "total": 18327,
+    "encoded": 18317,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/t_c.json"
@@ -1389,6 +1561,8 @@
     },
     "chars": 6792,
     "total": 6792,
+    "encoded": 6792,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/t_bt.json"
@@ -1405,6 +1579,8 @@
     },
     "chars": 6356,
     "total": 6356,
+    "encoded": 6356,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/j0.json"
@@ -1421,6 +1597,8 @@
     },
     "chars": 5801,
     "total": 5801,
+    "encoded": 5801,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/j1.json"
@@ -1437,6 +1615,8 @@
     },
     "chars": 1258,
     "total": 1259,
+    "encoded": 1258,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/j3.json"
@@ -1453,6 +1633,8 @@
     },
     "chars": 2432,
     "total": 2436,
+    "encoded": 2432,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/j4.json"
@@ -1469,6 +1651,8 @@
     },
     "chars": 1479,
     "total": 1553,
+    "encoded": 1479,
+    "unencoded": 73,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/jk.json"
@@ -1485,6 +1669,8 @@
     },
     "chars": 52517,
     "total": 58862,
+    "encoded": 52518,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/jmj.json"
@@ -1501,6 +1687,8 @@
     },
     "chars": 2666,
     "total": 9420,
+    "encoded": 2667,
+    "unencoded": 6427,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/jmjp.json"
@@ -1517,6 +1705,8 @@
     },
     "chars": 2439,
     "total": 2500,
+    "encoded": 2439,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/j_jy.json"
@@ -1533,6 +1723,8 @@
     },
     "chars": 1049,
     "total": 1049,
+    "encoded": 1049,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/j_hg.json"
@@ -1549,6 +1741,8 @@
     },
     "chars": 858,
     "total": 863,
+    "encoded": 858,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/j_jm.json"
@@ -1565,6 +1759,8 @@
     },
     "chars": 4620,
     "total": 4888,
+    "encoded": 4620,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/k0.json"
@@ -1581,6 +1777,8 @@
     },
     "chars": 2856,
     "total": 2856,
+    "encoded": 2856,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/k1.json"
@@ -1597,6 +1795,8 @@
     },
     "chars": 7911,
     "total": 7911,
+    "encoded": 7911,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/k2.json"
@@ -1613,6 +1813,8 @@
     },
     "chars": 1834,
     "total": 1834,
+    "encoded": 1834,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/k3.json"
@@ -1629,6 +1831,8 @@
     },
     "chars": 172,
     "total": 172,
+    "encoded": 172,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/k4.json"
@@ -1645,6 +1849,8 @@
     },
     "chars": 404,
     "total": 404,
+    "encoded": 404,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/k5.json"
@@ -1661,6 +1867,8 @@
     },
     "chars": 152,
     "total": 152,
+    "encoded": 152,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/k6.json"
@@ -1677,6 +1885,8 @@
     },
     "chars": 5407,
     "total": 11925,
+    "encoded": 5407,
+    "unencoded": 6107,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/kc.json"
@@ -1693,6 +1903,8 @@
     },
     "chars": 1800,
     "total": 1800,
+    "encoded": 1800,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/k_gy.json"
@@ -1709,6 +1921,8 @@
     },
     "chars": 6366,
     "total": 6479,
+    "encoded": 6366,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/k_jm.json"
@@ -1725,6 +1939,8 @@
     },
     "chars": 3024,
     "total": 14218,
+    "encoded": 3024,
+    "unencoded": 11024,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/kwhj.json"
@@ -1741,6 +1957,8 @@
     },
     "chars": 4653,
     "total": 4653,
+    "encoded": 4653,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/kp0.json"
@@ -1757,6 +1975,8 @@
     },
     "chars": 19434,
     "total": 19559,
+    "encoded": 19434,
+    "unencoded": 53,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/kp1.json"
@@ -1773,6 +1993,8 @@
     },
     "chars": 2336,
     "total": 2336,
+    "encoded": 2336,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/v0.json"
@@ -1789,6 +2011,8 @@
     },
     "chars": 3308,
     "total": 3308,
+    "encoded": 3308,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/v1.json"
@@ -1805,6 +2029,8 @@
     },
     "chars": 3195,
     "total": 3195,
+    "encoded": 3195,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/v2.json"
@@ -1821,6 +2047,8 @@
     },
     "chars": 533,
     "total": 533,
+    "encoded": 533,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/v3.json"
@@ -1837,6 +2065,8 @@
     },
     "chars": 2012,
     "total": 2149,
+    "encoded": 2012,
+    "unencoded": 137,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/v4.json"
@@ -1853,6 +2083,8 @@
     },
     "chars": 2451,
     "total": 6453,
+    "encoded": 2451,
+    "unencoded": 3994,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/vn.json"
@@ -1869,6 +2101,8 @@
     },
     "chars": 1713,
     "total": 1855,
+    "encoded": 1713,
+    "unencoded": 142,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/uk.json"
@@ -1885,6 +2119,8 @@
     },
     "chars": 5350,
     "total": 7915,
+    "encoded": 5350,
+    "unencoded": 2221,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/sat.json"
@@ -1901,6 +2137,8 @@
     },
     "chars": 0,
     "total": 0,
+    "encoded": 0,
+    "unencoded": 0,
     "source": {
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/1k8myqp9o8zxkvdpbqdhrfs6yfx5bk2t.json",
@@ -1918,6 +2156,8 @@
     },
     "chars": 5360,
     "total": 613,
+    "encoded": 5360,
+    "unencoded": 0,
     "source": {
       "name": "yi-bai/iwds",
       "url": "https://raw.githubusercontent.com/yi-bai/iwds/master/iwds.xml"
@@ -1932,6 +2172,8 @@
     },
     "chars": 115,
     "total": 115,
+    "encoded": 115,
+    "unencoded": 0,
     "source": {
       "name": "Unicode 18.0.0",
       "url": "https://www.unicode.org/Public/18.0.0/ucd/Blocks.txt"
@@ -1946,6 +2188,8 @@
     },
     "chars": 214,
     "total": 214,
+    "encoded": 214,
+    "unencoded": 0,
     "source": {
       "name": "Unicode 18.0.0",
       "url": "https://www.unicode.org/Public/18.0.0/ucd/Blocks.txt"
@@ -1960,6 +2204,8 @@
     },
     "chars": 93,
     "total": 93,
+    "encoded": 93,
+    "unencoded": 0,
     "source": {
       "name": "Unicode 18.0.0",
       "url": "https://www.unicode.org/Public/18.0.0/ucd/Blocks.txt"
@@ -1974,6 +2220,8 @@
     },
     "chars": 96,
     "total": 96,
+    "encoded": 96,
+    "unencoded": 0,
     "source": {
       "name": "Unicode 18.0.0",
       "url": "https://www.unicode.org/Public/18.0.0/ucd/Blocks.txt"
@@ -1988,6 +2236,8 @@
     },
     "chars": 39,
     "total": 39,
+    "encoded": 39,
+    "unencoded": 0,
     "source": {
       "name": "Unicode 18.0.0",
       "url": "https://www.unicode.org/Public/18.0.0/ucd/Blocks.txt"
@@ -2002,6 +2252,8 @@
     },
     "chars": 16,
     "total": 16,
+    "encoded": 16,
+    "unencoded": 0,
     "source": {
       "name": "Unicode 18.0.0",
       "url": "https://www.unicode.org/Public/18.0.0/ucd/Blocks.txt"
@@ -2016,6 +2268,8 @@
     },
     "chars": 472,
     "total": 472,
+    "encoded": 472,
+    "unencoded": 0,
     "source": {
       "name": "Unicode 18.0.0",
       "url": "https://www.unicode.org/Public/18.0.0/ucd/Blocks.txt"
@@ -2030,6 +2284,8 @@
     },
     "chars": 13,
     "total": 13,
+    "encoded": 13,
+    "unencoded": 0,
     "source": {
       "name": "Unicode 18.0.0",
       "url": "https://www.unicode.org/Public/18.0.0/ucd/Blocks.txt"
@@ -2044,6 +2300,8 @@
     },
     "chars": 256,
     "total": 256,
+    "encoded": 256,
+    "unencoded": 0,
     "source": {
       "name": "Unicode 18.0.0",
       "url": "https://www.unicode.org/Public/18.0.0/ucd/Blocks.txt"
@@ -2058,6 +2316,8 @@
     },
     "chars": 41,
     "total": 41,
+    "encoded": 41,
+    "unencoded": 0,
     "source": {
       "name": "Unicode 18.0.0",
       "url": "https://www.unicode.org/Public/18.0.0/ucd/Blocks.txt"
@@ -2072,6 +2332,8 @@
     },
     "chars": 10,
     "total": 10,
+    "encoded": 10,
+    "unencoded": 0,
     "source": {
       "name": "Unicode 18.0.0",
       "url": "https://www.unicode.org/Public/18.0.0/ucd/Blocks.txt"
@@ -2086,6 +2348,8 @@
     },
     "chars": 396,
     "total": 396,
+    "encoded": 396,
+    "unencoded": 0,
     "source": {
       "name": "Unicode 18.0.0",
       "url": "https://www.unicode.org/Public/18.0.0/ucd/Blocks.txt"
@@ -2100,6 +2364,8 @@
     },
     "chars": 542,
     "total": 542,
+    "encoded": 542,
+    "unencoded": 0,
     "source": {
       "name": "Unicode 18.0.0",
       "url": "https://www.unicode.org/Public/18.0.0/ucd/Blocks.txt"
@@ -2118,6 +2384,8 @@
     },
     "chars": 3,
     "total": 138,
+    "encoded": 3,
+    "unencoded": 135,
     "source": {
       "name": "IRG",
       "url": "https://www.unicode.org/irg/docs/n1841-ExtensionEWithdraw.pdf"
@@ -2141,6 +2409,8 @@
     },
     "chars": 18486,
     "total": 18486,
+    "encoded": 18483,
+    "unencoded": 3,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=125",
@@ -2163,6 +2433,8 @@
     },
     "chars": 18357,
     "total": 18357,
+    "encoded": 18356,
+    "unencoded": 1,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=124",
@@ -2185,6 +2457,8 @@
     },
     "chars": 13531,
     "total": 13532,
+    "encoded": 2702,
+    "unencoded": 10830,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=113",
@@ -2207,6 +2481,8 @@
     },
     "chars": 12506,
     "total": 12506,
+    "encoded": 12505,
+    "unencoded": 1,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -2229,6 +2505,8 @@
     },
     "chars": 8341,
     "total": 8341,
+    "encoded": 8026,
+    "unencoded": 315,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=112",
@@ -2251,6 +2529,8 @@
     },
     "chars": 5768,
     "total": 5768,
+    "encoded": 5768,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=123",
@@ -2273,6 +2553,8 @@
     },
     "chars": 4808,
     "total": 4808,
+    "encoded": 4808,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=122",
@@ -2295,6 +2577,8 @@
     },
     "chars": 3692,
     "total": 3692,
+    "encoded": 91,
+    "unencoded": 3601,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=114",
@@ -2317,6 +2601,8 @@
     },
     "chars": 2554,
     "total": 2554,
+    "encoded": 633,
+    "unencoded": 1921,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=128",
@@ -2339,6 +2625,8 @@
     },
     "chars": 2530,
     "total": 2530,
+    "encoded": 2530,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -2361,6 +2649,8 @@
     },
     "chars": 2346,
     "total": 2346,
+    "encoded": 2346,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -2383,6 +2673,8 @@
     },
     "chars": 1609,
     "total": 1609,
+    "encoded": 25,
+    "unencoded": 1584,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=117",
@@ -2405,6 +2697,8 @@
     },
     "chars": 689,
     "total": 689,
+    "encoded": 689,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -2427,6 +2721,8 @@
     },
     "chars": 587,
     "total": 587,
+    "encoded": 587,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=121",
@@ -2449,6 +2745,8 @@
     },
     "chars": 537,
     "total": 537,
+    "encoded": 33,
+    "unencoded": 504,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -2471,6 +2769,8 @@
     },
     "chars": 421,
     "total": 421,
+    "encoded": 5,
+    "unencoded": 416,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=116",
@@ -2493,6 +2793,8 @@
     },
     "chars": 256,
     "total": 256,
+    "encoded": 256,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -2515,6 +2817,8 @@
     },
     "chars": 256,
     "total": 256,
+    "encoded": 256,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -2537,6 +2841,8 @@
     },
     "chars": 250,
     "total": 250,
+    "encoded": 7,
+    "unencoded": 243,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=139",
@@ -2559,6 +2865,8 @@
     },
     "chars": 246,
     "total": 246,
+    "encoded": 246,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -2581,6 +2889,8 @@
     },
     "chars": 246,
     "total": 246,
+    "encoded": 246,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -2603,6 +2913,8 @@
     },
     "chars": 245,
     "total": 245,
+    "encoded": 245,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -2625,6 +2937,8 @@
     },
     "chars": 240,
     "total": 240,
+    "encoded": 240,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -2647,6 +2961,8 @@
     },
     "chars": 240,
     "total": 240,
+    "encoded": 240,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -2669,6 +2985,8 @@
     },
     "chars": 233,
     "total": 233,
+    "encoded": 233,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -2691,6 +3009,8 @@
     },
     "chars": 233,
     "total": 233,
+    "encoded": 233,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -2713,6 +3033,8 @@
     },
     "chars": 227,
     "total": 227,
+    "encoded": 227,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -2735,6 +3057,8 @@
     },
     "chars": 214,
     "total": 214,
+    "encoded": 214,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -2757,6 +3081,8 @@
     },
     "chars": 209,
     "total": 209,
+    "encoded": 209,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -2779,6 +3105,8 @@
     },
     "chars": 193,
     "total": 193,
+    "encoded": 193,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -2801,6 +3129,8 @@
     },
     "chars": 184,
     "total": 184,
+    "encoded": 184,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -2823,6 +3153,8 @@
     },
     "chars": 183,
     "total": 183,
+    "encoded": 183,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -2845,6 +3177,8 @@
     },
     "chars": 172,
     "total": 172,
+    "encoded": 172,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -2867,6 +3201,8 @@
     },
     "chars": 155,
     "total": 155,
+    "encoded": 155,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -2889,6 +3225,8 @@
     },
     "chars": 141,
     "total": 141,
+    "encoded": 141,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -2911,6 +3249,8 @@
     },
     "chars": 140,
     "total": 140,
+    "encoded": 140,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -2933,6 +3273,8 @@
     },
     "chars": 139,
     "total": 139,
+    "encoded": 139,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -2955,6 +3297,8 @@
     },
     "chars": 133,
     "total": 133,
+    "encoded": 133,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -2977,6 +3321,8 @@
     },
     "chars": 131,
     "total": 131,
+    "encoded": 131,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=141",
@@ -2999,6 +3345,8 @@
     },
     "chars": 128,
     "total": 128,
+    "encoded": 128,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3021,6 +3369,8 @@
     },
     "chars": 128,
     "total": 128,
+    "encoded": 128,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3043,6 +3393,8 @@
     },
     "chars": 128,
     "total": 128,
+    "encoded": 128,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3065,6 +3417,8 @@
     },
     "chars": 116,
     "total": 116,
+    "encoded": 116,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=142",
@@ -3087,6 +3441,8 @@
     },
     "chars": 114,
     "total": 114,
+    "encoded": 114,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3109,6 +3465,8 @@
     },
     "chars": 108,
     "total": 108,
+    "encoded": 108,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3131,6 +3489,8 @@
     },
     "chars": 108,
     "total": 108,
+    "encoded": 108,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3153,6 +3513,8 @@
     },
     "chars": 107,
     "total": 107,
+    "encoded": 107,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3175,6 +3537,8 @@
     },
     "chars": 105,
     "total": 105,
+    "encoded": 105,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3197,6 +3561,8 @@
     },
     "chars": 104,
     "total": 104,
+    "encoded": 104,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3219,6 +3585,8 @@
     },
     "chars": 99,
     "total": 99,
+    "encoded": 11,
+    "unencoded": 88,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=140",
@@ -3241,6 +3609,8 @@
     },
     "chars": 96,
     "total": 96,
+    "encoded": 96,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3263,6 +3633,8 @@
     },
     "chars": 95,
     "total": 95,
+    "encoded": 95,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3285,6 +3657,8 @@
     },
     "chars": 94,
     "total": 94,
+    "encoded": 94,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3307,6 +3681,8 @@
     },
     "chars": 90,
     "total": 90,
+    "encoded": 90,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3329,6 +3705,8 @@
     },
     "chars": 87,
     "total": 87,
+    "encoded": 87,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3351,6 +3729,8 @@
     },
     "chars": 82,
     "total": 82,
+    "encoded": 82,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3373,6 +3753,8 @@
     },
     "chars": 82,
     "total": 82,
+    "encoded": 82,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3395,6 +3777,8 @@
     },
     "chars": 81,
     "total": 81,
+    "encoded": 81,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3417,6 +3801,8 @@
     },
     "chars": 78,
     "total": 78,
+    "encoded": 78,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3439,6 +3825,8 @@
     },
     "chars": 74,
     "total": 74,
+    "encoded": 74,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3461,6 +3849,8 @@
     },
     "chars": 72,
     "total": 72,
+    "encoded": 72,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3483,6 +3873,8 @@
     },
     "chars": 72,
     "total": 72,
+    "encoded": 72,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3505,6 +3897,8 @@
     },
     "chars": 64,
     "total": 64,
+    "encoded": 64,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3527,6 +3921,8 @@
     },
     "chars": 52,
     "total": 52,
+    "encoded": 52,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3549,6 +3945,8 @@
     },
     "chars": 48,
     "total": 48,
+    "encoded": 48,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3571,6 +3969,8 @@
     },
     "chars": 47,
     "total": 47,
+    "encoded": 46,
+    "unencoded": 1,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3593,6 +3993,8 @@
     },
     "chars": 46,
     "total": 46,
+    "encoded": 46,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3615,6 +4017,8 @@
     },
     "chars": 38,
     "total": 38,
+    "encoded": 38,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3637,6 +4041,8 @@
     },
     "chars": 36,
     "total": 36,
+    "encoded": 36,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3659,6 +4065,8 @@
     },
     "chars": 32,
     "total": 32,
+    "encoded": 32,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3681,6 +4089,8 @@
     },
     "chars": 32,
     "total": 32,
+    "encoded": 32,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3703,6 +4113,8 @@
     },
     "chars": 32,
     "total": 32,
+    "encoded": 32,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3725,6 +4137,8 @@
     },
     "chars": 30,
     "total": 30,
+    "encoded": 30,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3747,6 +4161,8 @@
     },
     "chars": 29,
     "total": 29,
+    "encoded": 29,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3769,6 +4185,8 @@
     },
     "chars": 29,
     "total": 29,
+    "encoded": 29,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3791,6 +4209,8 @@
     },
     "chars": 28,
     "total": 28,
+    "encoded": 28,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3813,6 +4233,8 @@
     },
     "chars": 28,
     "total": 28,
+    "encoded": 28,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3835,6 +4257,8 @@
     },
     "chars": 27,
     "total": 27,
+    "encoded": 27,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3857,6 +4281,8 @@
     },
     "chars": 27,
     "total": 27,
+    "encoded": 27,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3879,6 +4305,8 @@
     },
     "chars": 21,
     "total": 21,
+    "encoded": 21,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3901,6 +4329,8 @@
     },
     "chars": 19,
     "total": 19,
+    "encoded": 19,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3923,6 +4353,8 @@
     },
     "chars": 19,
     "total": 19,
+    "encoded": 19,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3945,6 +4377,8 @@
     },
     "chars": 19,
     "total": 19,
+    "encoded": 19,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3967,6 +4401,8 @@
     },
     "chars": 17,
     "total": 17,
+    "encoded": 17,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -3989,6 +4425,8 @@
     },
     "chars": 16,
     "total": 16,
+    "encoded": 13,
+    "unencoded": 3,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=137",
@@ -4011,6 +4449,8 @@
     },
     "chars": 16,
     "total": 16,
+    "encoded": 15,
+    "unencoded": 1,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=127",
@@ -4033,6 +4473,8 @@
     },
     "chars": 16,
     "total": 16,
+    "encoded": 16,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -4055,6 +4497,8 @@
     },
     "chars": 16,
     "total": 16,
+    "encoded": 16,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -4077,6 +4521,8 @@
     },
     "chars": 16,
     "total": 16,
+    "encoded": 16,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -4099,6 +4545,8 @@
     },
     "chars": 16,
     "total": 16,
+    "encoded": 16,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -4121,6 +4569,8 @@
     },
     "chars": 16,
     "total": 16,
+    "encoded": 16,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -4143,6 +4593,8 @@
     },
     "chars": 15,
     "total": 15,
+    "encoded": 11,
+    "unencoded": 4,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=126",
@@ -4165,6 +4617,8 @@
     },
     "chars": 15,
     "total": 15,
+    "encoded": 15,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -4187,6 +4641,8 @@
     },
     "chars": 14,
     "total": 14,
+    "encoded": 14,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -4209,6 +4665,8 @@
     },
     "chars": 12,
     "total": 12,
+    "encoded": 12,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -4231,6 +4689,8 @@
     },
     "chars": 12,
     "total": 12,
+    "encoded": 12,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -4253,6 +4713,8 @@
     },
     "chars": 11,
     "total": 11,
+    "encoded": 11,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -4275,6 +4737,8 @@
     },
     "chars": 10,
     "total": 10,
+    "encoded": 10,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -4297,6 +4761,8 @@
     },
     "chars": 10,
     "total": 10,
+    "encoded": 10,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -4319,6 +4785,8 @@
     },
     "chars": 9,
     "total": 9,
+    "encoded": 2,
+    "unencoded": 7,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=129",
@@ -4341,6 +4809,8 @@
     },
     "chars": 8,
     "total": 8,
+    "encoded": 8,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -4363,6 +4833,8 @@
     },
     "chars": 5,
     "total": 5,
+    "encoded": 0,
+    "unencoded": 5,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=115",
@@ -4385,6 +4857,8 @@
     },
     "chars": 5,
     "total": 5,
+    "encoded": 2,
+    "unencoded": 3,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=131",
@@ -4407,6 +4881,8 @@
     },
     "chars": 5,
     "total": 5,
+    "encoded": 5,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -4429,6 +4905,8 @@
     },
     "chars": 4,
     "total": 4,
+    "encoded": 4,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -4451,6 +4929,8 @@
     },
     "chars": 4,
     "total": 4,
+    "encoded": 3,
+    "unencoded": 1,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -4473,6 +4953,8 @@
     },
     "chars": 4,
     "total": 4,
+    "encoded": 0,
+    "unencoded": 4,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=136",
@@ -4495,6 +4977,8 @@
     },
     "chars": 4,
     "total": 4,
+    "encoded": 4,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -4517,6 +5001,8 @@
     },
     "chars": 3,
     "total": 3,
+    "encoded": 3,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -4539,6 +5025,8 @@
     },
     "chars": 3,
     "total": 3,
+    "encoded": 1,
+    "unencoded": 2,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=133",
@@ -4561,6 +5049,8 @@
     },
     "chars": 3,
     "total": 3,
+    "encoded": 3,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/searchSY.jsp?ID=134",
@@ -4583,6 +5073,8 @@
     },
     "chars": 2,
     "total": 2,
+    "encoded": 2,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -4605,6 +5097,8 @@
     },
     "chars": 2,
     "total": 2,
+    "encoded": 2,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -4627,6 +5121,8 @@
     },
     "chars": 2,
     "total": 2,
+    "encoded": 2,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -4649,6 +5145,8 @@
     },
     "chars": 1,
     "total": 1,
+    "encoded": 1,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -4671,6 +5169,8 @@
     },
     "chars": 1,
     "total": 1,
+    "encoded": 0,
+    "unencoded": 1,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -4693,6 +5193,8 @@
     },
     "chars": 1,
     "total": 1,
+    "encoded": 1,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -4715,6 +5217,8 @@
     },
     "chars": 1,
     "total": 1,
+    "encoded": 1,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -4737,6 +5241,8 @@
     },
     "chars": 1,
     "total": 1,
+    "encoded": 1,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -4759,6 +5265,8 @@
     },
     "chars": 1,
     "total": 1,
+    "encoded": 1,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -4781,6 +5289,8 @@
     },
     "chars": 1,
     "total": 1,
+    "encoded": 1,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -4803,6 +5313,8 @@
     },
     "chars": 1,
     "total": 1,
+    "encoded": 0,
+    "unencoded": 1,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",
@@ -4825,6 +5337,8 @@
     },
     "chars": 1,
     "total": 1,
+    "encoded": 1,
+    "unencoded": 0,
     "source": {
       "name": "CNS11643全字庫",
       "url": "https://www.cns11643.gov.tw/opendata/Properties.zip",

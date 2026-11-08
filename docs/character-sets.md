@@ -14,6 +14,8 @@ Find accepts one character-set filter at a time. An empty query browses its mapp
 
 Each set has a unique character count and a source-row count. A source row joins through its assigned scalars, or through its private-use glyph slot where no scalar is assigned. Repeated mappings, variation sequences and IDS descriptions can make the counts differ. Draft row numbers never establish Unicode assignments.
 
+A selected set also shows its source coverage: `encoded` counts source characters that resolve to an assigned, non-private-use Unicode scalar, including characters outside the search scope. It counts distinct glyphs for 字統 and Ext.E, and rows for CNS. `unencoded` counts rows without such a scalar, including IDS descriptions and private-use slots. Repeated 字統 scalars and variation sequences are not counted, so the two totals need not add up to the source-row count. `chars` remains the browsable count, which includes CNS private-use slots, and IWDS `total` counts entries rather than its example characters. Catalogue pies mark sets with unencoded rows, and their title gives the exact numbers.
+
 The four hidden 字統 entries currently return empty objects. Their catalogue entries retain zero mapped characters and a source-unavailable note. Proposal sets with unencoded forms link to their source rows.
 
 ## CNS source categories

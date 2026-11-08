@@ -4,14 +4,29 @@ import { inScope } from '../src/fold.js'
 export function mappedMembers(input) {
   if (!input || typeof input !== 'object' || !('rows' in input) || !Array.isArray(input.rows)) throw new Error('Invalid character-set rows')
   const members = new Set()
+  const encoded = new Set()
+  let unencoded = 0
   for (const row of input.rows) {
     if (!Array.isArray(row) || typeof row[1] !== 'string') throw new Error('Invalid character-set member')
     const glyph = row[1]
-    // IDS strings, variation sequences, replacement markers and PUA slots have no scalar membership.
-    if ([...glyph].length !== 1 || !isEncodedGlyph(glyph)) continue
-    members.add(glyph)
+    const parts = [...glyph]
+    if (parts.length === 1) {
+      // IDS strings, variation sequences, replacement markers and PUA slots have no scalar membership.
+      if (isPrivateUse(parts[0].codePointAt(0) ?? 0)) unencoded++
+      else encoded.add(glyph)
+      if (isEncodedGlyph(glyph)) members.add(glyph)
+    } else if (isVariationSequence(glyph)) {
+      encoded.add(parts[0])
+    } else {
+      unencoded++
+    }
   }
-  return { members: [...members].sort((a, b) => a.codePointAt(0) - b.codePointAt(0)).join(''), total: input.rows.length }
+  return {
+    members: [...members].sort((a, b) => a.codePointAt(0) - b.codePointAt(0)).join(''),
+    total: input.rows.length,
+    encoded: encoded.size,
+    unencoded,
+  }
 }
 
 /** Explicit example glyphs in IWDS; components expressed as IDS are not whole characters.
@@ -51,6 +66,17 @@ export function scalarExpressions(value) {
     i = end
   }
   return forms
+}
+
+/** A private-use code point is a slot, not a character. @param {number} cp */
+export function isPrivateUse(cp) {
+  return cp >= 0xE000 && cp <= 0xF8FF || cp >= 0xF0000 && cp <= 0xFFFFD || cp >= 0x100000 && cp <= 0x10FFFD
+}
+
+/** A base character followed by a variation selector still denotes that character. @param {string} glyph */
+function isVariationSequence(glyph) {
+  const parts = [...glyph]
+  return parts.length === 2 && /^[\uFE00-\uFE0F\u{E0100}-\u{E01EF}]$/u.test(parts[1])
 }
 
 /** @param {string} glyph */
