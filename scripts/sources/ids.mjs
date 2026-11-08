@@ -62,7 +62,11 @@ const FRAGMENTS = (() => {
   return map
 })()
 
-/** Write out the numbered components a sequence names, at any depth; `unresolved` when one has no fragment. */
+/** Write out the numbered components a sequence names, at any depth; `unresolved` when one has no fragment.
+ * @param {string} sequence
+ * @param {Set<number>} [seen]
+ * @returns {{ text: string, unresolved: boolean }}
+ */
 export function writeOut(sequence, seen = new Set()) {
   let unresolved = false
   const text = sequence.replace(/\{(\d+)\}/g, (whole, digits) => {
