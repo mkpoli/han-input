@@ -5,6 +5,7 @@
   import { loadCharsets, loadCharset, loadRecords, filterAnswer, browseCharset } from '../lib/charsets.js'
   import { answer, groupHits, intersect, readQuery, tallyReadings } from '../lib/search.js'
   import { loadMethods } from '../lib/data.js'
+  import { loadGlyphs } from '../lib/fonts.js'
   import { autofocus } from '../lib/ui.svelte.js'
   import { nameOf, t } from '../lib/i18n.svelte.js'
   import Tiles from '../ui/Tiles.svelte'
@@ -12,6 +13,7 @@
   import ProposalRecords from '../ui/ProposalRecords.svelte'
 
   const EXAMPLES = ['ユタヘヘミ', 'jnd', 'luong', '端一東平', '30407', 'tsɿ', '氵 12畫', 'river ジ', 'chữ', 'a-1', 'a672', 'U+5B57']
+  const GRID_LIMIT = 240
 
   const query = $derived(route.q)
   /** @type {import('../lib/search.js').Answer[]} */
@@ -68,6 +70,8 @@
         if (!active) return
         if (!clues.length) {
           const chars = selected ? await browseCharset(selected) : []
+          if (!active) return
+          await loadGlyphs(chars.slice(0, GRID_LIMIT))
           const printed = selected && entry?.records ? await loadRecords(selected) : null
           if (active) { browsed = chars; records = printed }
           return
@@ -76,6 +80,9 @@
         if (!active) return
         const filtered = membership ? found.map(item => filterAnswer(item, membership)) : found
         const kept = await intersect(filtered)
+        if (!active) return
+        // `kept` is a grid only when several clues remain; one clue renders its hits instead.
+        if (filtered.length > 1) await loadGlyphs(kept.slice(0, GRID_LIMIT))
         if (!active) return
         answers = filtered
         common = kept
@@ -137,7 +144,7 @@
   {:else if !query.trim() && route.set}
     <section class="ui-section">
       <h2 class="ui-label">{t('find.characters')} <span class="ui-count">{browsed.length.toLocaleString()}</span></h2>
-      <Tiles chars={browsed} limit={240} label={chosen ? nameOf(chosen.names) : route.set} />
+      <Tiles chars={browsed} limit={GRID_LIMIT} label={chosen ? nameOf(chosen.names) : route.set} />
       {#if !browsed.length}<p class="ui-hint">{t('find.none')}</p>{/if}
     </section>
     {#if records}<ProposalRecords {records} label={chosen ? nameOf(chosen.names) : route.set} />{/if}
@@ -160,7 +167,7 @@
           <span class="clue">{item.clue.text} <span class="ui-count">{item.chars.length}</span></span>
         {/each}
       </p>
-      <Tiles chars={common} label={t('find.common', { count: common.length })} limit={240} />
+      <Tiles chars={common} label={t('find.common', { count: common.length })} limit={GRID_LIMIT} />
     </section>
   {:else if single}
     {#if single.chars.length && ['text', 'point', 'strokes', 'pua'].includes(single.clue.kind)}
