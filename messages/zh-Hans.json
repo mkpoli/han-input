@@ -84,6 +84,7 @@
   "about.intro": "本站用来找字。释义和条目请看字卡链接的各网站；词典在这里只作意义检索的索引。",
   "about.sources": "{count}份表",
   "about.method": "方法",
+  "about.pua": "私用区对照表",
   "nav.readings": "读音",
   "nav.rhymes": "韵图",
   "find.readings": "{count}种方言或语言中这样读的{chars}字",
