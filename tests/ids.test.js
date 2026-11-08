@@ -30,14 +30,23 @@ describe('description sources', () => {
 
 describe('numbered components', () => {
   test('writes out the fragment BabelStone note 6 gives', () => {
-    expect(writeOut('⿰𦚏{12}')).toEqual({ text: '⿰𦚏⿷己三', unresolved: false })
-    expect(writeOut('⿱{82}日')).toEqual({ text: '⿱聿日', unresolved: false })
+    expect(writeOut('⿰𦚏{12}')).toBe('⿰𦚏⿷己三')
+    expect(writeOut('⿱{82}日')).toBe('⿱聿日')
   })
-  test('reports a number the note leaves unrepresentable', () => {
-    expect(writeOut('⿰{12}{999}')).toEqual({ text: '⿰⿷己三{999}', unresolved: true })
+  test('keeps a number the note leaves without a fragment', () => {
+    expect(writeOut('⿰{12}{999}')).toBe('⿰⿷己三{999}')
   })
-  test("reports BabelStone's sign for a part it cannot name", () => {
-    expect(writeOut('⿱𠂉？')).toEqual({ text: '⿱𠂉？', unresolved: true })
+  test("keeps BabelStone's sign for a part it cannot name", () => {
+    expect(writeOut('⿱𠂉？')).toBe('⿱𠂉？')
+  })
+  test('stores a description the source writes with its own notation', () => {
+    const into = empty()
+    addDescription(into, '惠', '⿱{7}心', 'GHTJKPV', 'babelstone')
+    addDescription(into, '惠', '⿱&CDP-8BD0;心', '', 'chise')
+    expect(into.get('惠')).toEqual([
+      { text: '⿱{7}心', regions: 'GHTJKPV', sources: ['babelstone'] },
+      { text: '⿱&CDP-8BD0;心', regions: '', sources: ['chise'] },
+    ])
   })
 })
 
