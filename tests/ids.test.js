@@ -39,6 +39,15 @@ describe('numbered components', () => {
   test("keeps BabelStone's sign for a part it cannot name", () => {
     expect(writeOut('⿱𠂉？')).toBe('⿱𠂉？')
   })
+  test('stores a description the source writes with its own notation', () => {
+    const into = empty()
+    addDescription(into, '惠', '⿱{7}心', 'GHTJKPV', 'babelstone')
+    addDescription(into, '惠', '⿱&CDP-8BD0;心', '', 'chise')
+    expect(into.get('惠')).toEqual([
+      { text: '⿱{7}心', regions: 'GHTJKPV', sources: ['babelstone'] },
+      { text: '⿱&CDP-8BD0;心', regions: '', sources: ['chise'] },
+    ])
+  })
 })
 
 describe('parts', () => {
