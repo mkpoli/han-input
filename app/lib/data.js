@@ -1,6 +1,7 @@
 // The static files, each fetched once when first needed. Gzip is undone here, since the hosting
 // serves the .gz files as they are.
 import { charBucket, codeBucket, fold, partBucket, pinyinDigits, runBucket, wordBucket } from '../../src/fold.js'
+import { hasHan, SIMPLIFIED } from '../../src/script.js'
 
 /** @param {string} path @returns {Promise<string>} empty for a file that does not exist */
 async function readGz(path) {
@@ -81,12 +82,39 @@ export async function codesOf(char) {
   return out
 }
 
-/** The characters whose gloss uses a word. @param {string} text @returns {Promise<string[]>} */
+/** @type {((text: string) => string) | null} */
+let toSimplified = null
+
+/** A Han query's simplified form, loaded only when a Han meaning is searched. @param {string} text */
+async function simplified(text) {
+  if (!hasHan(text)) return text
+  try {
+    const convert = toSimplified ??= (await import('opencc-js/t2cn')).Converter(SIMPLIFIED)
+    return convert(text)
+  } catch {
+    return text
+  }
+}
+
+/** The characters whose gloss uses a word, in either script. @param {string} text @returns {Promise<string[]>} */
 export async function findMeaning(text) {
   const word = text.toLowerCase()
-  const body = await wordFile(wordBucket(word))
-  const row = body.split('\n').find(line => line.startsWith(`${word}\t`))
-  return row ? [...row.split('\t')[1]] : []
+  const simple = await simplified(word)
+  const queries = simple === word ? [word] : [word, simple]
+  const bodies = await Promise.all(queries.map(query => wordFile(wordBucket(query))))
+  /** @type {string[]} */
+  const out = []
+  const seen = new Set()
+  for (let i = 0; i < queries.length; i++) {
+    const row = bodies[i].split('\n').find(line => line.startsWith(`${queries[i]}\t`))
+    if (!row) continue
+    for (const char of row.split('\t')[1]) {
+      if (seen.has(char)) continue
+      seen.add(char)
+      out.push(char)
+    }
+  }
+  return out
 }
 
 /** @typedef {{ notation: string, regions: string, sources: string[] }} Description */
