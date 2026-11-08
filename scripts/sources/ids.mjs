@@ -49,6 +49,32 @@ export const IDS_SOURCES = [BABELSTONE, { id: CHISE.id, name: CHISE.name, url: C
 const OPERATORS = new Set('⿰⿱⿲⿳⿴⿵⿶⿷⿸⿹⿺⿻⿼⿽⿾⿿〾㇯')
 const BODY = /^\^(.+)\$\(([^()]*)\)$/
 
+/** BabelStone's numbered components ({12}, the right of 龍) and the IDS fragments that write them out. */
+const FRAGMENTS = (() => {
+  /** @type {Map<number, string>} */
+  const map = new Map()
+  for (const line of readFileSync(new URL('../../data/ids-components.tsv', import.meta.url), 'utf8').split(/\r?\n/)) {
+    if (!line || line.startsWith('#')) continue
+    const [name, , fragment] = line.split('\t')
+    const number = Number(name?.slice(1, -1))
+    if (fragment && Number.isInteger(number)) map.set(number, fragment)
+  }
+  return map
+})()
+
+/** Write out the numbered components a sequence names, at any depth; `unresolved` when one has no fragment. */
+export function writeOut(sequence, seen = new Set()) {
+  let unresolved = false
+  const text = sequence.replace(/\{(\d+)\}/g, (whole, digits) => {
+    const number = Number(digits), fragment = FRAGMENTS.get(number)
+    if (fragment === undefined || seen.has(number)) { unresolved = true; return whole }
+    const inner = writeOut(fragment, new Set([...seen, number]))
+    if (inner.unresolved) unresolved = true
+    return inner.text
+  })
+  return { text, unresolved }
+}
+
 /** A character's descriptions, keyed by character; one description keeps every source that gives it.
  * @param {Map<string, Description[]>} into
  * @param {string} char @param {string} text @param {string} regions @param {string} source */
@@ -78,7 +104,8 @@ export async function readDescriptions() {
     for (const sequence of sequences) {
       const match = BODY.exec(sequence)
       if (!match) continue
-      addDescription(descriptions, char, match[1], match[2], 'babelstone')
+      const { text, unresolved } = writeOut(match[1])
+      if (!unresolved) addDescription(descriptions, char, text, match[2], 'babelstone')
     }
   }
   for (const [file, digest] of CHISE.files) {
@@ -91,7 +118,8 @@ export async function readDescriptions() {
       if (!/^U[+-][0-9A-F]+$/i.test(code) || !char || [...char].length !== 1 || !text) continue
       // A description naming a part with no code point cannot be shown by a site of code points.
       if (text.includes('&') || ![...text].some(c => OPERATORS.has(c))) continue
-      addDescription(descriptions, char, text, '', 'chise')
+      const written = writeOut(text)
+      if (!written.unresolved) addDescription(descriptions, char, written.text, '', 'chise')
     }
   }
   return descriptions

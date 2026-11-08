@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'bun:test'
-import { addDescription, partsOf } from '../scripts/sources/ids.mjs'
+import { addDescription, partsOf, writeOut } from '../scripts/sources/ids.mjs'
 
 /** @returns {Map<string, { text: string, regions: string, sources: string[] }[]>} */
 const empty = () => new Map()
@@ -25,6 +25,16 @@ describe('description sources', () => {
     addDescription(into, '林', '⿰木木', 'GHTJKPV', 'babelstone')
     addDescription(into, '林', '⿰木木', 'J', 'zitools')
     expect(into.get('林')).toHaveLength(2)
+  })
+})
+
+describe('numbered components', () => {
+  test('writes out the fragment BabelStone note 6 gives', () => {
+    expect(writeOut('⿰𦚏{12}')).toEqual({ text: '⿰𦚏⿷己三', unresolved: false })
+    expect(writeOut('⿱{82}日')).toEqual({ text: '⿱聿日', unresolved: false })
+  })
+  test('reports a number the note leaves unrepresentable', () => {
+    expect(writeOut('⿰{12}{999}')).toEqual({ text: '⿰⿷己三{999}', unresolved: true })
   })
 })
 
