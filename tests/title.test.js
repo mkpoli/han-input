@@ -17,6 +17,7 @@ describe('page metadata', () => {
     expect(pageMetadata('radicals')).toEqual({ title: 'radicals.title', description: 'radicals.intro' })
     expect(pageMetadata('convert')).toEqual({ title: 'convert.title', description: 'convert.intro' })
     expect(pageMetadata('about')).toEqual({ title: 'about.title', description: 'about.intro' })
+    expect(pageMetadata('notfound')).toEqual({ title: 'notfound.title', description: 'notfound.intro' })
   })
   test('borrows the page a detail route belongs to', () => {
     expect(pageMetadata('m')).toEqual(pageMetadata('methods'))
@@ -29,7 +30,7 @@ describe('page metadata', () => {
 
 describe('catalogues', () => {
   test('holds every title and description key in every language', () => {
-    for (const page of ['', 'methods', 'readings', 'rhymes', 'radicals', 'convert', 'about', 'm', 'v']) {
+    for (const page of ['', 'methods', 'readings', 'rhymes', 'radicals', 'convert', 'about', 'notfound', 'm', 'v']) {
       const { title, description } = pageMetadata(page)
       for (const [locale, catalogue] of Object.entries(CATALOGUES)) {
         expect(title in catalogue, `${locale} ${title}`).toBe(true)

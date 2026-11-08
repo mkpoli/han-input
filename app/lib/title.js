@@ -8,6 +8,7 @@ const PAGES = /** @type {Record<string, [string, string]>} */ ({
   radicals: ['radicals.title', 'radicals.intro'],
   convert: ['convert.title', 'convert.intro'],
   about: ['about.title', 'about.intro'],
+  notfound: ['notfound.title', 'notfound.intro'],
   m: ['methods.title', 'methods.intro'],
   v: ['readings.title', 'readings.intro'],
 })

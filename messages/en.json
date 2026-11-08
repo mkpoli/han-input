@@ -95,6 +95,8 @@
   "radicals.rest": "{count} more strokes",
   "about.title": "Sources",
   "about.intro": "This site finds characters. Entries and definitions stay with the sites linked from each card; dictionaries here only feed the search by meaning.",
+  "notfound.title": "Page not found",
+  "notfound.intro": "No page exists at this address. Return to Find to start again.",
   "about.sources": "{count} tables",
   "about.method": "Method",
   "about.pua": "PUA tables",

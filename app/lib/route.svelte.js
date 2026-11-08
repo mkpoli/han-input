@@ -1,15 +1,8 @@
 // Where the reader is: the page in the path, the open character in `?c=` (its code point in hex),
 // the page's query in `?q=`, and Find's character set in `?set=`.
 
-export const NAV = /** @type {const} */ ([
-  { path: '', label: 'nav.find' },
-  { path: 'methods', label: 'nav.methods' },
-  { path: 'readings', label: 'nav.readings' },
-  { path: 'rhymes', label: 'nav.rhymes' },
-  { path: 'radicals', label: 'nav.radicals' },
-  { path: 'convert', label: 'nav.convert' },
-  { path: 'about', label: 'nav.about' },
-])
+import { NAV } from './paths.js'
+export { NAV }
 
 /** @typedef {{ page: string, method: string, q: string, c: string, set: string }} Route */
 
@@ -18,13 +11,14 @@ const hex = (/** @type {string} */ char) => (char.codePointAt(0) ?? 0).toString(
 /** @returns {Route} */
 function read() {
   const path = location.pathname.replace(/^\/+|\/+$/g, '')
+  const pagePath = path === 'index.html' ? '' : path
   const params = new URLSearchParams(location.search)
   const c = params.get('c') ?? ''
   const q = params.get('q') ?? ''
   const char = /^[0-9a-f]{4,5}$/i.test(c) ? String.fromCodePoint(parseInt(c, 16)) : ''
-  const inner = path.match(/^([mv])\/([\w-]+)$/)
-  const known = NAV.some(entry => entry.path === path)
-  const page = inner ? inner[1] : known ? path : ''
+  const inner = pagePath.match(/^([mv])\/([\w-]+)$/)
+  const known = NAV.some(entry => entry.path === pagePath)
+  const page = inner ? inner[1] : known ? pagePath : pagePath ? 'notfound' : ''
   return { page, method: inner?.[2] ?? '', q, c: char, set: page === '' ? params.get('set') ?? '' : '' }
 }
 
