@@ -84,6 +84,7 @@
   "about.intro": "이 사이트는 글자를 찾는 곳입니다. 풀이와 항목은 카드에 링크한 사이트에 있고, 사전은 뜻 검색의 색인으로만 씁니다.",
   "about.sources": "표 {count}개",
   "about.method": "입력법",
+  "about.pua": "사용자 정의 문자 표",
   "nav.readings": "독음",
   "nav.rhymes": "운도",
   "find.readings": "{count}개 방언·언어에서 이렇게 읽는 {chars}자",

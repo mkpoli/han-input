@@ -84,6 +84,7 @@
   "about.intro": "このサイトは字を探すためのものです。字義や項目は各カードからリンクした先にあり、辞書はここでは意味検索の索引にだけ使います。",
   "about.sources": "{count}の表",
   "about.method": "入力法",
+  "about.pua": "外字表",
   "nav.readings": "読み",
   "nav.rhymes": "韻図",
   "find.readings": "この読みの字{chars}、言語・方言{count}",

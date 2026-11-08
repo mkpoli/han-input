@@ -84,6 +84,7 @@
   "about.intro": "This site finds characters. Entries and definitions stay with the sites linked from each card; dictionaries here only feed the search by meaning.",
   "about.sources": "{count} tables",
   "about.method": "Method",
+  "about.pua": "PUA tables",
   "nav.readings": "Readings",
   "nav.rhymes": "Rhyme tables",
   "find.readings": "{chars} characters read so, across {count} varieties",
