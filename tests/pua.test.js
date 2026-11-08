@@ -77,7 +77,7 @@ describe('all sources', () => {
     expect(convertPua('\uE43B\uE51F', 'all')).toMatchObject({ text: '\uE43B\uE51F', converted: 0, unmapped: 0, ambiguous: 2 })
   })
   test('lists every row with its source', () => {
-    expect(puaTable('all')).toHaveLength(8073)
+    expect(puaTable('all')).toHaveLength(8589)
     expect(puaTable('moe')).toHaveLength(59)
     expect(puaTable('hkscs').every(row => row.source === 'hkscs')).toBe(true)
   })

@@ -1,17 +1,20 @@
 import moe from '../data/moe-pua.json' with { type: 'json' }
 import hkscs from '../data/hkscs-pua.json' with { type: 'json' }
 import hanyang from '../data/hanyang-pua.json' with { type: 'json' }
+import cns from '../data/cns-pua.json' with { type: 'json' }
 import variants from '../data/moe-pua-variants.json' with { type: 'json' }
 
 export const MOE_PUA = /** @type {{ source: typeof moe.source, mappings: Record<string, string> }} */ (moe)
 export const HKSCS_PUA = /** @type {{ source: typeof hkscs.source, mappings: Record<string, string> }} */ (hkscs)
 export const HANYANG_PUA = /** @type {{ source: typeof hanyang.source, mappings: Record<string, string> }} */ (hanyang)
+export const CNS_PUA = /** @type {{ source: typeof cns.source, mappings: Record<string, string> }} */ (cns)
 export const MOE_PUA_VARIANTS = /** @type {{ source: typeof variants.source, byChar: Record<string, { char: string, relation: string }[]> }} */ (variants)
 
 export const PUA_SOURCES = [
   { id: 'moe', source: MOE_PUA.source, mappings: MOE_PUA.mappings },
   { id: 'hkscs', source: HKSCS_PUA.source, mappings: HKSCS_PUA.mappings },
   { id: 'hanyang', source: HANYANG_PUA.source, mappings: HANYANG_PUA.mappings },
+  { id: 'cns', source: CNS_PUA.source, mappings: CNS_PUA.mappings },
 ]
 
 /** @param {string} id */
