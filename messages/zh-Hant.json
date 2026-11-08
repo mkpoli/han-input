@@ -131,6 +131,7 @@
   "pua.source.unihan": "Unihan",
   "pua.source.hkscs": "HKSCS",
   "pua.source.hanyang": "Hanyang",
+  "pua.source.cns": "CNS",
   "pua.relation.simplified": "簡體字",
   "pua.relation.traditional": "繁體字",
   "pua.relation.semantic": "語義異體字",

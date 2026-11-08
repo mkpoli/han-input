@@ -131,6 +131,7 @@
   "pua.source.unihan": "Unihan",
   "pua.source.hkscs": "HKSCS",
   "pua.source.hanyang": "Hanyang",
+  "pua.source.cns": "CNS",
   "pua.relation.simplified": "Simplified variant",
   "pua.relation.traditional": "Traditional variant",
   "pua.relation.semantic": "Semantic variant",
