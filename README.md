@@ -33,9 +33,9 @@ bun run verify          # unit tests, type check, messages
 `cache/mcpdict/x`. `bun scripts/build_wiktionary.mjs <dir>` builds the meaning index from Wiktionary dumps
 before `build:data` reads it. The generated `app/public/data/` is about 300 MB and is not committed.
 
-The Ext.E withdrawn set carries the glyphs printed in IRGN1841. `bun scripts/import_ext_e_glyphs.mjs`
-cuts them from the pinned PDF (poppler and ImageMagick), matches each to the serial and G source printed
-beside it, and writes `app/public/charsets/glyphs/ext-e/`.
+The proposal sets carry the glyphs printed in their IRG documents. `bun scripts/import_irg_records.mjs`
+cuts them from the pinned PDFs (poppler and ImageMagick), matches each to the codes printed beside it,
+and writes `app/public/charsets/glyphs/` plus one records file per set.
 
 The part spellings and character variants come from the committed [IWDS snapshot](data/variants.json),
 built by `bun scripts/import_variants.mjs` from IWDS and UnicodeData.

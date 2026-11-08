@@ -79,7 +79,7 @@
                   <span>{set.label}</span>
                   <span class="set-end">
                     {#if coverage}<CoverageDot encoded={set.encoded ?? set.chars} unencoded={set.unencoded ?? 0} />{/if}
-                    <span class="ui-count">{set.chars.toLocaleString()}</span>
+                    <span class="ui-count">{(set.records?.count ?? set.chars).toLocaleString()}</span>
                   </span>
                 </button>
               {/each}
@@ -109,7 +109,7 @@
     {#if chosen.unencoded !== undefined && (chosen.encoded ?? chosen.chars) + chosen.unencoded > 0}
       <CoverageChart encoded={chosen.encoded ?? chosen.chars} unencoded={chosen.unencoded} />
     {/if}
-    <p class="ui-hint">{t('charset.unencoded')}</p>
+    <p class="ui-hint">{chosen.records ? t('charset.recordsNote') : t('charset.unencoded')}</p>
     {#if chosen.source.note}<p class="ui-hint">{chosen.source.note}</p>{/if}
   {/if}
 </div>

@@ -1,5 +1,5 @@
 // Refresh the pinned, offline character-set catalogue. No browser-time requests to source sites.
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { createHash } from 'node:crypto'
 import { execFileSync } from 'node:child_process'
@@ -96,21 +96,22 @@ for (const line of blocksBytes.toString('utf8').split('\n')) {
   writeFileSync(join(OUT, `${id}.txt`), members.join(''))
   catalogue.push({ id, group: 'Unicode blocks', label: name, names: { en: name }, chars: members.length, total: members.length, encoded: members.length, unencoded: 0, source: { name: 'Unicode 18.0.0', url: blocksUrl } })
 }
-const proposals = JSON.parse(readFileSync(join(OUT, 'ext_e_records.json'), 'utf8'))
-for (const url of new Set([...proposals.documents.map(/** @param {{url:string}} document */ document => document.url), ...proposals.records.flatMap(/** @param {{evidenceUrls?:string[]}} record */ record => record.evidenceUrls ?? [])])) {
-  if (!inputs.some(input => input.url === url)) record(url, readFileSync(await fetchOnce(url)))
+for (const name of readdirSync(OUT).filter(/** @param {string} name */ name => name.endsWith('_records.json')).sort()) {
+  const set = JSON.parse(readFileSync(join(OUT, name), 'utf8'))
+  for (const url of new Set([...set.documents.map(/** @param {{url:string}} document */ document => document.url), ...set.records.flatMap(/** @param {{evidenceUrls?:string[]}} record */ record => record.evidenceUrls ?? [])])) {
+    if (!inputs.some(input => input.url === url)) record(url, readFileSync(await fetchOnce(url)))
+  }
+  const members = [...new Set(set.records.filter(/** @param {{mappedUnicode?:string}} record */ record => record.mappedUnicode).map(/** @param {{mappedUnicode:string}} record */ record => String.fromCodePoint(parseInt(record.mappedUnicode.slice(2), 16))))].join('')
+  writeFileSync(join(OUT, `${set.id}.txt`), members)
+  catalogue.push({
+    id: set.id, group: set.group, label: set.label, names: set.names,
+    chars: [...members].length, total: set.records.length,
+    encoded: [...members].length,
+    unencoded: set.records.filter(/** @param {{mappedUnicode?:string}} record */ record => !record.mappedUnicode).length,
+    records: { file: `/charsets/${name}`, count: set.records.length, glyphs: set.records.filter(/** @param {{glyph?:string}} record */ record => record.glyph).length },
+    source: set.source,
+  })
 }
-const withdrawalMembers = [...new Set(proposals.records.filter(/** @param {{mappedUnicode?:string}} record */ record => record.mappedUnicode).map(/** @param {{mappedUnicode:string}} record */ record => String.fromCodePoint(parseInt(record.mappedUnicode.slice(2), 16))))].join('')
-writeFileSync(join(OUT, 'ext_e_withdrawal_records.txt'), withdrawalMembers)
-catalogue.push({
-  id: 'ext_e_withdrawal_records', group: 'Proposals', label: 'Ext.E withdrawn',
-  names: { en: 'Extension E withdrawn characters', zh: '擴展E撤銷字', hans: '扩展E撤销字', ja: '拡張E撤回字', ko: '확장 E 철회자' },
-  chars: [...withdrawalMembers].length, total: proposals.records.length,
-  encoded: [...withdrawalMembers].length,
-  unencoded: proposals.records.filter(/** @param {{mappedUnicode?:string}} record */ record => !record.mappedUnicode).length,
-  records: { file: '/charsets/ext_e_records.json', count: proposals.records.length, glyphs: proposals.records.filter(/** @param {{glyph?:string}} record */ record => record.glyph).length },
-  source: { name: 'IRG', url: 'https://www.unicode.org/irg/docs/n1841-ExtensionEWithdraw.pdf' },
-})
 const cns = JSON.parse(readFileSync(join(OUT, 'cns-sources.json'), 'utf8'))
 const propertiesPath = await fetchOnce(cns.sourceUrl)
 const mappingPath = await fetchOnce(cns.mappingUrl)

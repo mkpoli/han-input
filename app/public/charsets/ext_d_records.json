@@ -1,0 +1,578 @@
+{
+  "id": "ext_d_removals",
+  "group": "Proposals",
+  "label": "Ext.D removed",
+  "names": {
+    "en": "J-source characters removed from CJK D",
+    "zh": "擴展D撤銷J源字",
+    "hans": "扩展D撤销J源字",
+    "ja": "拡張D撤回J源字",
+    "ko": "확장 D J 출처 철회자"
+  },
+  "title": "J-source characters removed from the CJK D candidate",
+  "complete": false,
+  "scope": "The 78 J-source characters that IRGN1250 asks to remove from the CJK D candidate, with the serial and source printed beside each glyph. The request leaves later resubmission open, and some of the characters were proposed again.",
+  "source": {
+    "name": "IRG",
+    "url": "https://www.unicode.org/irg/docs/n1250-ExtensionDWithdraw.pdf"
+  },
+  "documents": [
+    {
+      "id": "n1250",
+      "document": "IRGN1250",
+      "title": "Request to Remove 78 J-Source from CJK D candidate",
+      "source": "Japan",
+      "date": "2006-11-27",
+      "url": "https://www.unicode.org/irg/docs/n1250-ExtensionDWithdraw.pdf",
+      "status": "Asks the IRG to remove 78 J-source characters from the CJK D candidate for lack of evidence or unsettled shapes; some may return in a later extension proposal."
+    }
+  ],
+  "records": [
+    {
+      "serial": "00225",
+      "source": "JMK65005",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/00225.png"
+    },
+    {
+      "serial": "00294",
+      "source": "JMK65006",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/00294.png"
+    },
+    {
+      "serial": "00325",
+      "source": "JMK65008",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/00325.png"
+    },
+    {
+      "serial": "00672",
+      "source": "JMK65015",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/00672.png"
+    },
+    {
+      "serial": "01917",
+      "source": "JMK65038",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/01917.png"
+    },
+    {
+      "serial": "02047",
+      "source": "JMK65039",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/02047.png"
+    },
+    {
+      "serial": "02621",
+      "source": "JMK65042",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/02621.png"
+    },
+    {
+      "serial": "02652",
+      "source": "JMK65045",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/02652.png"
+    },
+    {
+      "serial": "03123",
+      "source": "JMK66115",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/03123.png"
+    },
+    {
+      "serial": "04239",
+      "source": "JMK65062",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/04239.png"
+    },
+    {
+      "serial": "06346",
+      "source": "JMK66119",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/06346.png"
+    },
+    {
+      "serial": "06807",
+      "source": "JMK66121",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/06807.png"
+    },
+    {
+      "serial": "07085",
+      "source": "JMK65124",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/07085.png"
+    },
+    {
+      "serial": "07147",
+      "source": "JMK66122",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/07147.png"
+    },
+    {
+      "serial": "08018",
+      "source": "JMK65147",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/08018.png"
+    },
+    {
+      "serial": "08127",
+      "source": "JMK65152",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/08127.png"
+    },
+    {
+      "serial": "08276",
+      "source": "JMK65159",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/08276.png"
+    },
+    {
+      "serial": "08604",
+      "source": "JMK65162",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/08604.png"
+    },
+    {
+      "serial": "08822",
+      "source": "JMK65168",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/08822.png"
+    },
+    {
+      "serial": "09575",
+      "source": "JMK65186",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/09575.png"
+    },
+    {
+      "serial": "10550",
+      "source": "JMK65213",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/10550.png"
+    },
+    {
+      "serial": "11012",
+      "source": "JMK65258",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/11012.png"
+    },
+    {
+      "serial": "11069",
+      "source": "JMK65277",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/11069.png"
+    },
+    {
+      "serial": "11175",
+      "source": "JMK65295",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/11175.png"
+    },
+    {
+      "serial": "11310",
+      "source": "JMK65285",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/11310.png"
+    },
+    {
+      "serial": "11376",
+      "source": "JMK65312",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/11376.png"
+    },
+    {
+      "serial": "11501",
+      "source": "JMK65337",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/11501.png"
+    },
+    {
+      "serial": "11672",
+      "source": "JMK65349",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/11672.png"
+    },
+    {
+      "serial": "12178",
+      "source": "JMK65355",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/12178.png"
+    },
+    {
+      "serial": "12765",
+      "source": "JMK65363",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/12765.png"
+    },
+    {
+      "serial": "13141",
+      "source": "JMK65369",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/13141.png"
+    },
+    {
+      "serial": "13326",
+      "source": "JMK65374",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/13326.png"
+    },
+    {
+      "serial": "14180",
+      "source": "JMK65409",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/14180.png"
+    },
+    {
+      "serial": "14720",
+      "source": "JMK65439",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/14720.png"
+    },
+    {
+      "serial": "14803",
+      "source": "JMK65447",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/14803.png"
+    },
+    {
+      "serial": "15648",
+      "source": "JMK65477",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/15648.png"
+    },
+    {
+      "serial": "16173",
+      "source": "JMK65504",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/16173.png"
+    },
+    {
+      "serial": "17288",
+      "source": "JMK65530",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/17288.png"
+    },
+    {
+      "serial": "17316",
+      "source": "JMK65531",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/17316.png"
+    },
+    {
+      "serial": "17470",
+      "source": "JMK65544",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/17470.png"
+    },
+    {
+      "serial": "17636",
+      "source": "JMK66137",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/17636.png"
+    },
+    {
+      "serial": "17655",
+      "source": "JMK65556",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/17655.png"
+    },
+    {
+      "serial": "18265",
+      "source": "JMK65585",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/18265.png"
+    },
+    {
+      "serial": "18269",
+      "source": "JMK66138",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/18269.png"
+    },
+    {
+      "serial": "18327",
+      "source": "JMK65614",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/18327.png"
+    },
+    {
+      "serial": "18470",
+      "source": "JMK65637",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/18470.png"
+    },
+    {
+      "serial": "18629",
+      "source": "JMK65608",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/18629.png"
+    },
+    {
+      "serial": "18636",
+      "source": "JMK66140",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/18636.png"
+    },
+    {
+      "serial": "18822",
+      "source": "JMK65689",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/18822.png"
+    },
+    {
+      "serial": "18955",
+      "source": "JMK65713",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/18955.png"
+    },
+    {
+      "serial": "18979",
+      "source": "JMK65706",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/18979.png"
+    },
+    {
+      "serial": "19145",
+      "source": "JMK66142",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/19145.png"
+    },
+    {
+      "serial": "19249",
+      "source": "JMK65732",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/19249.png"
+    },
+    {
+      "serial": "19760",
+      "source": "JMK65753",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/19760.png"
+    },
+    {
+      "serial": "20991",
+      "source": "JMK65800",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/20991.png"
+    },
+    {
+      "serial": "21069",
+      "source": "JMK65812",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/21069.png"
+    },
+    {
+      "serial": "21313",
+      "source": "JMK66144",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/21313.png"
+    },
+    {
+      "serial": "21336",
+      "source": "JMK65854",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/21336.png"
+    },
+    {
+      "serial": "21738",
+      "source": "JMK66146",
+      "document": "n1250",
+      "page": 4,
+      "glyph": "glyphs/ext-d/21738.png"
+    },
+    {
+      "serial": "22235",
+      "source": "JMK66147",
+      "document": "n1250",
+      "page": 4,
+      "glyph": "glyphs/ext-d/22235.png"
+    },
+    {
+      "serial": "22300",
+      "source": "JMK65894",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/22300.png"
+    },
+    {
+      "serial": "22387",
+      "source": "JMK65970",
+      "document": "n1250",
+      "page": 4,
+      "glyph": "glyphs/ext-d/22387.png"
+    },
+    {
+      "serial": "22423",
+      "source": "JMK65901",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/22423.png"
+    },
+    {
+      "serial": "22822",
+      "source": "JMK65917",
+      "document": "n1250",
+      "page": 4,
+      "glyph": "glyphs/ext-d/22822.png"
+    },
+    {
+      "serial": "23129",
+      "source": "JMK66148",
+      "document": "n1250",
+      "page": 4,
+      "glyph": "glyphs/ext-d/23129.png"
+    },
+    {
+      "serial": "23328",
+      "source": "JMK66004",
+      "document": "n1250",
+      "page": 4,
+      "glyph": "glyphs/ext-d/23328.png"
+    },
+    {
+      "serial": "23335",
+      "source": "JMK66012",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/23335.png"
+    },
+    {
+      "serial": "23376",
+      "source": "JMK66031",
+      "document": "n1250",
+      "page": 4,
+      "glyph": "glyphs/ext-d/23376.png"
+    },
+    {
+      "serial": "23410",
+      "source": "JMK50671",
+      "document": "n1250",
+      "page": 4,
+      "glyph": "glyphs/ext-d/23410.png"
+    },
+    {
+      "serial": "23426",
+      "source": "JMK66016",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/23426.png"
+    },
+    {
+      "serial": "23765",
+      "source": "JMK66073",
+      "document": "n1250",
+      "page": 4,
+      "glyph": "glyphs/ext-d/23765.png"
+    },
+    {
+      "serial": "23771",
+      "source": "JMK66074",
+      "document": "n1250",
+      "page": 4,
+      "glyph": "glyphs/ext-d/23771.png"
+    },
+    {
+      "serial": "23833",
+      "source": "JMK66078",
+      "document": "n1250",
+      "page": 4,
+      "glyph": "glyphs/ext-d/23833.png"
+    },
+    {
+      "serial": "23855",
+      "source": "JMK66101",
+      "document": "n1250",
+      "page": 4,
+      "glyph": "glyphs/ext-d/23855.png"
+    },
+    {
+      "serial": "23858",
+      "source": "JMK66102",
+      "document": "n1250",
+      "page": 4,
+      "glyph": "glyphs/ext-d/23858.png"
+    },
+    {
+      "serial": "24112",
+      "source": "JMK66106",
+      "document": "n1250",
+      "page": 4,
+      "glyph": "glyphs/ext-d/24112.png"
+    },
+    {
+      "serial": "24143",
+      "source": "JMK66108",
+      "document": "n1250",
+      "page": 3,
+      "glyph": "glyphs/ext-d/24143.png"
+    },
+    {
+      "serial": "24260",
+      "source": "JMK66110",
+      "document": "n1250",
+      "page": 4,
+      "glyph": "glyphs/ext-d/24260.png"
+    }
+  ]
+}

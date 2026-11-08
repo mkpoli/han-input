@@ -1,0 +1,174 @@
+{
+  "sets": [
+    {
+      "id": "ext_e_withdrawal_records",
+      "file": "ext_e_records.json",
+      "group": "Proposals",
+      "label": "Ext.E withdrawn",
+      "glyphs": "glyphs/ext-e",
+      "names": {
+        "en": "Extension E withdrawn characters",
+        "zh": "擴展E撤銷字",
+        "hans": "扩展E撤销字",
+        "ja": "拡張E撤回字",
+        "ko": "확장 E 철회자"
+      },
+      "source": {
+        "name": "IRG",
+        "url": "https://www.unicode.org/irg/docs/n1841-ExtensionEWithdraw.pdf"
+      },
+      "title": "Selected historical Extension E withdrawal and unification records",
+      "complete": false,
+      "scope": "The 134 source records in IRGN1841, plus four separately evidenced historical records. This is not a complete Extension E withdrawal history or a Unicode character membership list.",
+      "documents": [
+        {
+          "id": "n1841",
+          "document": "IRGN1841",
+          "title": "More Evidences for CJK_E characters",
+          "source": "China",
+          "date": "2012-01-01",
+          "url": "https://www.unicode.org/irg/docs/n1841-ExtensionEWithdraw.pdf",
+          "status": "Lists 134 G-source characters proposed for withdrawal from CJK_E; later resubmission remains possible. No final per-record disposition or Unicode crosswalk is asserted here."
+        },
+        {
+          "id": "n1881",
+          "document": "IRGN1881",
+          "title": "Withdraw V04-486A (03098)",
+          "source": "Vietnam",
+          "date": "2012-08-28",
+          "url": "https://www.unicode.org/irg/docs/n1881-ExtensionEWithdraw.pdf"
+        },
+        {
+          "id": "n1896",
+          "document": "IRGN1896",
+          "title": "Editorial report",
+          "source": "IRG editors",
+          "date": "2012",
+          "url": "https://www.unicode.org/irg/docs/n1896-EditorialReport.pdf"
+        },
+        {
+          "id": "n1910",
+          "document": "IRGN1910",
+          "title": "Resolutions of IRG#39, M39.3",
+          "source": "IRG",
+          "date": "2012",
+          "url": "https://www.unicode.org/irg/docs/n1910-Resolutions.pdf"
+        },
+        {
+          "id": "n1596r",
+          "document": "IRGN1596",
+          "title": "CJK_Ev60 Directions",
+          "source": "Chen Zhuang",
+          "date": "2009-08-07",
+          "url": "https://www.unicode.org/irg/docs/n1596r-ExtensionEv6-Directions.pdf"
+        }
+      ],
+      "extract": [
+        {
+          "document": "n1841",
+          "pages": [
+            2,
+            3
+          ],
+          "matcher": "serial-source",
+          "count": 134
+        }
+      ],
+      "additionalRecords": [
+        {
+          "serial": "03098",
+          "source": "V04-486A",
+          "document": "n1881",
+          "status": "Withdrawal proposed in IRGN1881 and accepted in IRGN1896; IRGN1896 reports deletion from CJK_E version 8.1 because the submitted glyph was unsupported by source evidence.",
+          "mappedUnicode": null,
+          "evidenceUrls": [
+            "https://www.unicode.org/irg/docs/n1881-ExtensionEWithdraw.pdf",
+            "https://www.unicode.org/irg/docs/n1896-EditorialReport.pdf",
+            "https://www.unicode.org/irg/docs/n1910-Resolutions.pdf"
+          ]
+        },
+        {
+          "serial": null,
+          "source": "G_K0642.17",
+          "document": "n1896",
+          "status": "Temporarily withdrawn from CJK_E for further study; IRGN1896 confirms unification with existing U+26C73. The scalar is a current unification target, not final Extension E membership.",
+          "mappedUnicode": "U+26C73",
+          "mappedCharacter": "𦱳",
+          "mappingKind": "unified-to-existing-character",
+          "evidenceUrls": [
+            "https://www.unicode.org/irg/docs/n1896-EditorialReport.pdf",
+            "https://www.unicode.org/irg/docs/n1910-Resolutions.pdf",
+            "https://zi.tools/api/ma/ma/gkx.json"
+          ],
+          "mappingEvidence": "The zi.tools Kangxi dataset contains the exact row [\"0642.17\",\"𦱳\",{\"注\":\"古文\"}]."
+        },
+        {
+          "serial": "06721",
+          "source": null,
+          "document": "n1596r",
+          "status": "Listed in IRGN1596R Part 2, Withdrawn or Deleted Characters, with the explicit explanation already encoded in Extension C as U+2AC66.",
+          "mappedUnicode": "U+2AC66",
+          "mappingKind": "already-encoded-in-extension-c",
+          "evidenceUrls": [
+            "https://www.unicode.org/irg/docs/n1596r-ExtensionEv6-Directions.pdf"
+          ]
+        },
+        {
+          "serial": "06728",
+          "source": null,
+          "document": "n1596r",
+          "status": "Listed in IRGN1596R Part 2, Withdrawn or Deleted Characters, with the explicit explanation already encoded in Extension C as U+2AC69.",
+          "mappedUnicode": "U+2AC69",
+          "mappingKind": "already-encoded-in-extension-c",
+          "evidenceUrls": [
+            "https://www.unicode.org/irg/docs/n1596r-ExtensionEv6-Directions.pdf"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ext_d_removals",
+      "file": "ext_d_records.json",
+      "group": "Proposals",
+      "label": "Ext.D removed",
+      "glyphs": "glyphs/ext-d",
+      "names": {
+        "en": "J-source characters removed from CJK D",
+        "zh": "擴展D撤銷J源字",
+        "hans": "扩展D撤销J源字",
+        "ja": "拡張D撤回J源字",
+        "ko": "확장 D J 출처 철회자"
+      },
+      "source": {
+        "name": "IRG",
+        "url": "https://www.unicode.org/irg/docs/n1250-ExtensionDWithdraw.pdf"
+      },
+      "title": "J-source characters removed from the CJK D candidate",
+      "complete": false,
+      "scope": "The 78 J-source characters that IRGN1250 asks to remove from the CJK D candidate, with the serial and source printed beside each glyph. The request leaves later resubmission open, and some of the characters were proposed again.",
+      "documents": [
+        {
+          "id": "n1250",
+          "document": "IRGN1250",
+          "title": "Request to Remove 78 J-Source from CJK D candidate",
+          "source": "Japan",
+          "date": "2006-11-27",
+          "url": "https://www.unicode.org/irg/docs/n1250-ExtensionDWithdraw.pdf",
+          "status": "Asks the IRG to remove 78 J-source characters from the CJK D candidate for lack of evidence or unsettled shapes; some may return in a later extension proposal."
+        }
+      ],
+      "extract": [
+        {
+          "document": "n1250",
+          "pages": [
+            3,
+            4
+          ],
+          "matcher": "code-text",
+          "count": 78
+        }
+      ],
+      "additionalRecords": []
+    }
+  ]
+}

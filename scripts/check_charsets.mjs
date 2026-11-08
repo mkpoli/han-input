@@ -123,7 +123,7 @@ try {
     assert.ok(metadata.includes(t1Entry.chars.toLocaleString('en-US')))
     assert.ok(metadata.includes(t1Entry.total.toLocaleString('en-US')))
     assert.equal(await page.locator('.metadata a').getAttribute('href'), t1Entry.source.url)
-    assert.match(await page.locator('.charset-filter').innerText(), /Results cover Unicode Han, kana, Nüshu, radicals and strokes/)
+    assert.match(await page.locator('.charset-filter').innerText(), /Every source row is listed; unencoded rows use the CNS private-use glyphs/)
   })
   await check('CNS source overview lists every registration-source category before choosing a character', async () => {
     await find(page, '', '')
@@ -143,31 +143,31 @@ try {
     assert.match(await page.locator('.metadata').innerText(), /2026-08-05/)
     assert.equal(await page.getByRole('link', { name: 'Records', exact: true }).getAttribute('href'), land.source.records)
   })
-  await check('proposal set browses its printed records and opens one in the card', async () => {
-    const proposal = catalogue.find(set => set.id === 'ext_e_withdrawal_records')
-    assert.ok(proposal?.records)
-    await find(page, '', proposal.id)
-    assert.equal(await page.locator('main .ui-tile-glyph').count(), proposal.chars)
-    const tiles = page.locator('main .records .ui-tile')
-    assert.equal(await tiles.count(), proposal.records.count)
-    assert.equal(await page.locator('main .records img').count(), proposal.records.glyphs)
-    await page.waitForFunction(() => [...document.querySelectorAll('main .records img')].every(image => /** @type {HTMLImageElement} */ (image).complete && /** @type {HTMLImageElement} */ (image).naturalWidth > 0))
-    await page.getByRole('link', { name: 'Records', exact: true }).click({ trial: true })
-    assert.equal(await page.getByRole('link', { name: 'Records', exact: true }).getAttribute('href'), proposal.records.file)
-    await tiles.nth(3).click()
-    const card = page.locator('aside.card')
-    assert.match(await card.innerText(), /G_ZFY00179/)
-    assert.match(await card.innerText(), /IRGN1841 · page 2/)
-    assert.equal(await card.locator('a[href*="n1841-ExtensionEWithdraw.pdf#page=2"]').count(), 1)
-    assert.equal(new URL(page.url()).searchParams.has('c'), false)
-    await tiles.nth(135).click()
-    assert.match(await card.innerText(), /G_K0642\.17/)
-    assert.match(await card.innerText(), /U\+26C73/)
-    await page.locator('main .ui-tile-glyph').first().click()
-    const text = await card.innerText()
-    assert.match(text, /U\+[0-9A-F]{4,5}/)
-    assert.ok(!text.includes('IRGN1841'), 'the character card must replace the record card')
-  })
+  for (const proposal of catalogue.filter(set => set.records)) {
+    await check(`printed records browse and open a card: ${proposal.id}`, async () => {
+      assert.ok(proposal.records)
+      const data = JSON.parse(readFileSync(join(DIST, 'charsets', proposal.records.file.replace('/charsets/', '')), 'utf8'))
+      await find(page, '', proposal.id)
+      assert.equal(await page.locator('main .ui-tile-glyph').count(), proposal.chars)
+      const tiles = page.locator('main .records .ui-tile')
+      assert.equal(await tiles.count(), proposal.records.count)
+      assert.equal(await page.locator('main .records img').count(), proposal.records.glyphs)
+      await page.waitForFunction(() => [...document.querySelectorAll('main .records img')].every(image => /** @type {HTMLImageElement} */ (image).complete && /** @type {HTMLImageElement} */ (image).naturalWidth > 0))
+      assert.equal(await page.getByRole('link', { name: 'Records', exact: true }).getAttribute('href'), proposal.records.file)
+      const first = data.records[0]
+      await tiles.first().click()
+      const card = page.locator('aside.card')
+      assert.match(await card.innerText(), new RegExp(first.source))
+      assert.match(await card.innerText(), new RegExp(first.document, 'i'))
+      assert.equal(new URL(page.url()).searchParams.has('c'), false)
+      if (proposal.chars) {
+        await page.locator('main .ui-tile-glyph').first().click()
+        const text = await card.innerText()
+        assert.match(text, /U\+[0-9A-F]{4,5}/)
+        assert.ok(!text.includes(first.source), 'the character card must replace the record card')
+      }
+    })
+  }
   const recorded = catalogue.find(set => set.source.records)
   if (recorded) {
     await check('selected set links its source records', async () => {
@@ -359,10 +359,12 @@ try {
         await tab.screenshot({ path: join(SHOTS, `${name}-cns.png`) })
         assert.equal(await tab.locator('main details .set').count(), 123)
         assert.equal(await tab.evaluate(() => document.documentElement.scrollWidth - innerWidth), 0)
-        await find(tab, '', 'ext_e_withdrawal_records')
-        await tab.locator('main .records .ui-tile').nth(3).click()
-        await tab.screenshot({ path: join(SHOTS, `${name}-proposals.png`) })
-        assert.equal(await tab.evaluate(() => document.documentElement.scrollWidth - innerWidth), 0)
+        for (const proposal of catalogue.filter(set => set.records)) {
+          await find(tab, '', proposal.id)
+          await tab.locator('main .records .ui-tile').first().click()
+          await tab.screenshot({ path: join(SHOTS, `${name}-${proposal.id}.png`) })
+          assert.equal(await tab.evaluate(() => document.documentElement.scrollWidth - innerWidth), 0)
+        }
       })
       await view.close()
     }

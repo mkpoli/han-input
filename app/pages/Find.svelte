@@ -142,11 +142,13 @@
   {:else if busy}
     <p class="ui-hint" role="status">{t('charset.loading')}</p>
   {:else if !query.trim() && route.set}
-    <section class="ui-section">
-      <h2 class="ui-label">{t('find.characters')} <span class="ui-count">{browsed.length.toLocaleString()}</span></h2>
-      <Tiles chars={browsed} limit={GRID_LIMIT} label={chosen ? nameOf(chosen.names) : route.set} />
-      {#if !browsed.length}<p class="ui-hint">{t('find.none')}</p>{/if}
-    </section>
+    {#if browsed.length || !records}
+      <section class="ui-section">
+        <h2 class="ui-label">{t('find.characters')} <span class="ui-count">{browsed.length.toLocaleString()}</span></h2>
+        <Tiles chars={browsed} limit={GRID_LIMIT} label={chosen ? nameOf(chosen.names) : route.set} />
+        {#if !browsed.length}<p class="ui-hint">{t('find.none')}</p>{/if}
+      </section>
+    {/if}
     {#if records}<ProposalRecords {records} label={chosen ? nameOf(chosen.names) : route.set} />{/if}
   {:else if !query.trim()}
     <section class="ui-section">
