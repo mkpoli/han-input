@@ -110,4 +110,26 @@ describe('variety tree', () => {
     const city = tree[0].children[0].children[1].children[0].children[0]
     expect(city.items.map(variety => variety.name)).toEqual(['北京', '天津'])
   })
+  test('finds the varieties under a branch label the page shows', () => {
+    const page = varietyTree([...MANDARIN, WU], NORTHERN_MANDARIN, '未分類')
+    expect(page.map(node => node.name)).toEqual(['官話'])
+    expect(page[0].count).toBe(3)
+    const readings = MANDARIN.map(variety => ({ n: variety.n, forms: ['x'] }))
+    const card = readingTree(MANDARIN, readings, NORTHERN_MANDARIN, '未分類')
+    expect(card.map(node => node.name)).toEqual(['官話'])
+    expect(card[0].count).toBe(3)
+  })
+  test('keeps direct varieties at a branch that also has children', () => {
+    const direct = variety(30, '官話點', '官話', 'B')
+    const tree = varietyTree([...MANDARIN, direct], '', '未分類')
+    const root = tree[0]
+    expect(root.items.map(variety => variety.name)).toEqual(['官話點'])
+    expect(root.count).toBe(4)
+  })
+  test('counts a variety without a branch under the fallback', () => {
+    const tree = varietyTree([variety(31, '未詳', '', '')], '', '未分類')
+    expect(tree[0].name).toBe('未分類')
+    expect(tree[0].count).toBe(1)
+    expect(tree[0].items[0].name).toBe('未詳')
+  })
 })

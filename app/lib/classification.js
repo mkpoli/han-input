@@ -25,6 +25,7 @@ function pathOf(variety, fallback) {
   return path.length ? path : [fallback]
 }
 
+/** Keyed by the loaded array; callers replace this array when new varieties arrive. */
 /** @type {WeakMap<import('./data.js').Variety[], Map<string, Map<string, string>>>} */
 const ORDERS = new WeakMap()
 
@@ -90,6 +91,7 @@ function byAtlas(order, left, right) {
  * @returns {ReadingNode[]}
  */
 export function readingTree(varieties, readings, needle, unclassed) {
+  const query = needle.trim().toLowerCase()
   const byN = new Map(varieties.map(variety => [variety.n, variety]))
   const order = orderOf(varieties, unclassed)
 
@@ -98,9 +100,9 @@ export function readingTree(varieties, readings, needle, unclassed) {
   for (const reading of readings) {
     const variety = byN.get(reading.n)
     if (!variety) continue
-    const haystack = `${variety.name} ${variety.short} ${variety.atlas} ${reading.forms.join(' ')}`.toLowerCase()
-    if (needle && !haystack.includes(needle)) continue
     const path = pathOf(variety, unclassed)
+    const haystack = `${variety.name} ${variety.short} ${variety.atlas} ${path.join(' ')} ${reading.forms.join(' ')}`.toLowerCase()
+    if (query && !haystack.includes(query)) continue
     let node = root
     for (let depth = 1; depth <= path.length; depth++) {
       const key = path.slice(0, depth).join('－')
@@ -137,13 +139,14 @@ export function readingTree(varieties, readings, needle, unclassed) {
  * @returns {VarietyNode[]}
  */
 export function varietyTree(varieties, needle, unclassed) {
+  const query = needle.trim().toLowerCase()
   const order = orderOf(varieties, unclassed)
   /** @type {{ path: string, name: string, items: Variety[], children: Map<string, any> }} */
   const root = { path: '', name: '', items: [], children: new Map() }
   for (const variety of varieties) {
-    const haystack = `${variety.name} ${variety.short} ${variety.atlas} ${variety.region} ${variety.place}`.toLowerCase()
-    if (needle && !haystack.includes(needle)) continue
     const path = pathOf(variety, unclassed)
+    const haystack = `${variety.name} ${variety.short} ${variety.atlas} ${path.join(' ')} ${variety.region} ${variety.place}`.toLowerCase()
+    if (query && !haystack.includes(query)) continue
     let node = root
     for (let depth = 1; depth <= path.length; depth++) {
       const key = path.slice(0, depth).join('－')
