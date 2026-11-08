@@ -23,8 +23,9 @@ const COLUMNS = '語言,簡稱,版本,文件名,網站,網址,方言島,地圖�
 const at = (/** @type {string} */ name) => `c${COLUMNS.indexOf(name)}`
 const strip = (/** @type {unknown} */ html) => String(html ?? '').replace(/<[^>]+>/g, ' ').replace(/#/g, '').replace(/\s+/g, ' ').trim()
 
-const rows = /** @type {Record<string, unknown>[]} */ (db.query(`select ${['語言', '簡稱', '版本', '地圖集二分區', '音典分區', '音典排序', '地點', '經緯度', '字表來源', '參考文獻', '作者', '字數'].map(n => `${at(n)} as "${n}"`).join(',')} from info_content`).all())
+const rows = /** @type {Record<string, unknown>[]} */ (db.query(`select ${['語言', '簡稱', '版本', '地圖集二排序', '地圖集二分區', '音典分區', '音典排序', '地點', '經緯度', '字表來源', '參考文獻', '作者', '字數'].map(n => `${at(n)} as "${n}"`).join(',')} from info_content`).all())
 const varieties = rows.filter(row => row['簡稱'] && row['簡稱'] !== '漢字').sort((a, b) => String(a['音典排序'] ?? '~').localeCompare(String(b['音典排序'] ?? '~')))
+if (varieties.length && !varieties.some(row => String(row['地圖集二排序'] ?? '').trim())) throw new Error('the atlas order column is missing from the query')
 /** @type {Map<string, number>} */
 const indexOf = new Map(varieties.map((row, i) => [String(row['簡稱']), i]))
 
@@ -111,7 +112,7 @@ for (const dir of ['y', 'r']) {
 }
 
 writeFileSync(join(OUT, 'varieties.json'), JSON.stringify(varieties.map((row, n) => ({
-  n, name: row['語言'], short: row['簡稱'], version: row['版本'], atlas: row['地圖集二分區'] || '', region: row['音典分區'] || '',
+  n, name: row['語言'], short: row['簡稱'], version: row['版本'], atlas: row['地圖集二分區'] || '', order: String(row['地圖集二排序'] ?? ''), region: row['音典分區'] || '',
   place: row['地點'] || '', at: row['經緯度'] || '', source: strip(row['字表來源']), refs: strip(row['參考文獻']), author: strip(row['作者']), chars: Number(row['字數']) || 0,
 }))))
 rmSync(SPOOL, { recursive: true, force: true })

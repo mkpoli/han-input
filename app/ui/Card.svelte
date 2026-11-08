@@ -2,6 +2,7 @@
   // What a character is called: its code in every method, then the sites that say more. Definitions
   // live with those sites, so the card carries one line of gloss and no entry.
   import { codesOf, descriptionsOf, loadMethods, loadVarieties, readingsOf } from '../lib/data.js'
+  import { readingTree } from '../lib/classification.js'
   import { LINKS } from '../lib/links.js'
   import { link, route, go, open } from '../lib/route.svelte.js'
   import { put, ui } from '../lib/ui.svelte.js'
@@ -47,23 +48,7 @@
   })
 
   const needle = $derived(filter.trim().toLowerCase())
-  /** Readings by the top level of the atlas's classification. */
-  const regions = $derived.by(() => {
-    /** @type {Map<string, { n: number, name: string, forms: string[] }[]>} */
-    const out = new Map()
-    for (const row of readings) {
-      const variety = varieties[row.n]
-      if (!variety) continue
-      const haystack = `${variety.name} ${variety.short} ${variety.atlas} ${row.forms.join(' ')}`.toLowerCase()
-      if (needle && !haystack.includes(needle)) continue
-      const region = variety.atlas.split('－')[0] || t('card.unclassed')
-      const list = out.get(region)
-      const item = { n: row.n, name: variety.short, forms: row.forms }
-      if (list) list.push(item)
-      else out.set(region, [item])
-    }
-    return [...out]
-  })
+  const tree = $derived(readingTree(varieties, readings, needle, t('card.unclassed')))
 
   const gloss = $derived(codes.get(':gloss')?.join(' ') ?? '')
   const families = $derived(FAMILIES.map(family => ({
@@ -146,18 +131,26 @@
       <section class="family">
         <h3 class="ui-label">{t('card.readings', { count: readings.length })}</h3>
         <input class="ui-input" type="search" bind:value={filter} placeholder={t('card.readingsFilter')} aria-label={t('card.readingsFilter')}>
-        {#each regions as [region, rows] (region)}
-          <details class="region" open={needle !== ''}>
-            <summary><span>{region}</span> <span class="ui-count">{rows.length}</span></summary>
-            <dl>
-              {#each rows as row (row.n)}
-                <div class="row">
-                  <dt><a href={link('v', { method: String(row.n), c: char })} onclick={event => { event.preventDefault(); go('v', String(row.n)) }}>{row.name}</a></dt>
-                  <dd class="ui-mono">{row.forms.join(' · ')}</dd>
-                </div>
-              {/each}
-            </dl>
+        {#snippet branch(/** @type {import('../lib/classification.js').ReadingNode} */ node)}
+          <details class="branch" open={needle !== ''}>
+            <summary><span>{node.name}</span> <span class="ui-count">{node.count}</span></summary>
+            {#if node.rows.length}
+              <dl class="rows">
+                {#each node.rows as row (row.n)}
+                  <div class="row">
+                    <dt><a href={link('v', { method: String(row.n), c: char })} onclick={event => { event.preventDefault(); go('v', String(row.n)) }}>{row.name}</a></dt>
+                    <dd class="ui-mono">{row.forms.join(' · ')}</dd>
+                  </div>
+                {/each}
+              </dl>
+            {/if}
+            {#each node.children as child (child.path)}
+              {@render branch(child)}
+            {/each}
           </details>
+        {/snippet}
+        {#each tree as node (node.path)}
+          {@render branch(node)}
         {/each}
       </section>
     {/if}
@@ -194,7 +187,9 @@
   .links a{padding:2px var(--ui-space-sm);border:1px solid var(--ui-color-border);border-radius:var(--ui-radius-sm);font-size:var(--ui-text-xs);color:var(--ui-color-ink);text-decoration:none;white-space:nowrap}
   .links a:hover{background:var(--ui-color-surface-hover)}
   .links a.first{background:var(--ui-color-accent);border-color:var(--ui-color-accent);color:var(--ui-color-on-accent)}
-  .region summary{cursor:pointer;padding-block:3px;font-size:var(--ui-text-sm);border-bottom:1px solid var(--ui-color-border)}
+  .branch summary{cursor:pointer;padding-block:3px;font-size:var(--ui-text-sm);border-bottom:1px solid var(--ui-color-border)}
+  .branch .branch{margin-inline-start:var(--ui-space-sm);padding-inline-start:var(--ui-space-2xs);border-inline-start:1px solid var(--ui-color-border)}
+  .rows{margin-inline-start:var(--ui-space-sm)}
   dl{display:grid;margin:0}
   .row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--ui-space-sm);padding-block:3px;border-bottom:1px solid var(--ui-color-border)}
   dt{font-size:var(--ui-text-xs);min-inline-size:0}
