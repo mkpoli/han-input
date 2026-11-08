@@ -77,6 +77,9 @@
     selection?.addRange(range)
   }
 
+  /** @param {string} text */
+  const puaKey = text => [...text].filter(char => /\p{Co}/u.test(char)).join('')
+
   /** @param {Event} event */
   function edited(event) {
     if (composing) return
@@ -84,7 +87,9 @@
     const caret = caretOffset(el)
     const next = el.innerText.replace(/\n$/, '')
     if (next === input) return
+    const redraw = puaKey(next) !== puaKey(input)
     input = next
+    if (!redraw) return
     renderEditor(el, next)
     setCaret(el, Math.min(caret, next.length))
   }
