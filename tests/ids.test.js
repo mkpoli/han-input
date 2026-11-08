@@ -30,14 +30,14 @@ describe('description sources', () => {
 
 describe('numbered components', () => {
   test('writes out the fragment BabelStone note 6 gives', () => {
-    expect(writeOut('⿰𦚏{12}')).toEqual({ text: '⿰𦚏⿷己三', unresolved: false })
-    expect(writeOut('⿱{82}日')).toEqual({ text: '⿱聿日', unresolved: false })
+    expect(writeOut('⿰𦚏{12}')).toBe('⿰𦚏⿷己三')
+    expect(writeOut('⿱{82}日')).toBe('⿱聿日')
   })
-  test('reports a number the note leaves unrepresentable', () => {
-    expect(writeOut('⿰{12}{999}')).toEqual({ text: '⿰⿷己三{999}', unresolved: true })
+  test('keeps a number the note leaves without a fragment', () => {
+    expect(writeOut('⿰{12}{999}')).toBe('⿰⿷己三{999}')
   })
-  test("reports BabelStone's sign for a part it cannot name", () => {
-    expect(writeOut('⿱𠂉？')).toEqual({ text: '⿱𠂉？', unresolved: true })
+  test("keeps BabelStone's sign for a part it cannot name", () => {
+    expect(writeOut('⿱𠂉？')).toBe('⿱𠂉？')
   })
 })
 

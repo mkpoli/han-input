@@ -62,22 +62,18 @@ const FRAGMENTS = (() => {
   return map
 })()
 
-/** Write out the numbered components a sequence names, at any depth; `unresolved` when one has no fragment.
+/** Write out the numbered components a sequence names, at any depth. A number note 6 gives no
+ * fragment for stays as `{13}`, and BabelStone's `？` for an unnamed part stays as written.
  * @param {string} sequence
  * @param {Set<number>} [seen]
- * @returns {{ text: string, unresolved: boolean }}
+ * @returns {string}
  */
 export function writeOut(sequence, seen = new Set()) {
-  // BabelStone writes ？ where it cannot name a part, as it numbers the ones note 6 writes out.
-  let unresolved = sequence.includes('？')
-  const text = sequence.replace(/\{(\d+)\}/g, (whole, digits) => {
+  return sequence.replace(/\{(\d+)\}/g, (whole, digits) => {
     const number = Number(digits), fragment = FRAGMENTS.get(number)
-    if (fragment === undefined || seen.has(number)) { unresolved = true; return whole }
-    const inner = writeOut(fragment, new Set([...seen, number]))
-    if (inner.unresolved) unresolved = true
-    return inner.text
+    if (fragment === undefined || seen.has(number)) return whole
+    return writeOut(fragment, new Set([...seen, number]))
   })
-  return { text, unresolved }
 }
 
 /** A character's descriptions, keyed by character; one description keeps every source that gives it.
@@ -109,8 +105,7 @@ export async function readDescriptions() {
     for (const sequence of sequences) {
       const match = BODY.exec(sequence)
       if (!match) continue
-      const { text, unresolved } = writeOut(match[1])
-      if (!unresolved) addDescription(descriptions, char, text, match[2], 'babelstone')
+      addDescription(descriptions, char, writeOut(match[1]), match[2], 'babelstone')
     }
   }
   for (const [file, digest] of CHISE.files) {
@@ -121,10 +116,9 @@ export async function readDescriptions() {
       const [code, char, text] = line.split('\t')
       // Some files write the character as U+4E00, others as U-0002A700.
       if (!/^U[+-][0-9A-F]+$/i.test(code) || !char || [...char].length !== 1 || !text) continue
-      // A description naming a part with no code point cannot be shown by a site of code points.
-      if (text.includes('&') || ![...text].some(c => OPERATORS.has(c))) continue
-      const written = writeOut(text)
-      if (!written.unresolved) addDescription(descriptions, char, written.text, '', 'chise')
+      // The character itself, or a single component, says nothing the parts index does not already know.
+      if (![...text].some(c => OPERATORS.has(c))) continue
+      addDescription(descriptions, char, writeOut(text), '', 'chise')
     }
   }
   return descriptions

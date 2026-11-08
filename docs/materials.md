@@ -37,9 +37,8 @@ Discord discussion of 2026-10-27, and the works themselves were not read.
 | [Jigmo](https://kamichikoichi.github.io/jigmo/) 2025-09-12, 上地宏一 | glyphs for the extension blocks, cut by `scripts/build_fonts.py` | CC0-1.0 |
 
 BabelStone writes some parts by number. Where note 6 of its file gives the IDS that writes the
-number out, the description uses it ({12}, the right of 龍, as ⿷己三); a description whose number the
-note leaves unrepresentable, and a description whose part is BabelStone's `？`, are left out, as a
-CHISE entity is.
+number out, the description uses it ({12}, the right of 龍, as ⿷己三); a number the note leaves without
+a fragment stays as `{13}`, and its `？` for an unnamed part stays as written.
 
 The research behind these choices, with every candidate and what was checked, is in
 [`research-input-methods.md`](research-input-methods.md) and
@@ -67,6 +66,6 @@ links open the site's search page.
 - Katakana have no source characters: `hentaigana.el` gives them for hiragana and hentaigana only.
 - 26 kana have no bundled glyph, among them the Minnan letters (U+1AFF0–U+1AFFF) and U+1B150, and depend on the reader's system fonts.
 - The readings of a variety lose their notes (文白 and usage) in this index; 音典 keeps them.
-- CHISE describes some characters with parts that have no code point. Those descriptions are left out, since this site lists characters only.
+- CHISE describes some characters with parts that have no code point. The description keeps the source's entity name (`&CDP-88CD;`), as BabelStone's `{13}` and `？` stay.
 - Tables with no stated terms are published with that fact shown, as are the non-commercial ones (表形碼,
   導碼, E碼, 華象, the 通用 Hakka tables).
