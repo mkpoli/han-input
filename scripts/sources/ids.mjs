@@ -44,7 +44,7 @@ const CHISE = {
 
 export const IDS_SOURCES = [BABELSTONE, { id: CHISE.id, name: CHISE.name, url: CHISE.url, licence: CHISE.licence, attribution: CHISE.attribution, version: CHISE.version }]
 
-/** @typedef {{ text: string, regions: string, sources: string[] }} Description */
+/** @typedef {{ text: string, notation: string, regions: string, sources: string[] }} Description */
 
 export const OPERATORS = new Set('⿰⿱⿲⿳⿴⿵⿶⿷⿸⿹⿺⿻⿼⿽⿾⿿〾㇯')
 const BODY = /^\^(.+)\$\(([^()]*)\)$/
@@ -62,6 +62,20 @@ const FRAGMENTS = (() => {
   return map
 })()
 
+/** Note 6 of IDS.TXT: each numbered component's PUA code point and description, read with the file. */
+const NOTE6 = new Map()
+const COMPONENT_LINE = /^#\t\{(\d+)\}\t(.+?) \(([0-9A-F]{4,6})(?: ([^)]*))?\)\t(.*)$/
+
+/** Every numbered component, its PUA character, description and the fragment that writes it out, for
+ * the card to draw. Valid after `readDescriptions()` has read IDS.TXT.
+ * @returns {Record<string, { pua: string, description: string, fragment?: string }>} */
+export function components() {
+  /** @type {Record<string, { pua: string, description: string, fragment?: string }>} */
+  const out = {}
+  for (const [number, info] of NOTE6) out[number] = { pua: info.pua, description: info.description, fragment: FRAGMENTS.get(number) ?? info.fragment }
+  return out
+}
+
 /** Write out the numbered components a sequence names, at any depth. A number note 6 gives no
  * fragment for stays as `{13}`, and BabelStone's `？` for an unnamed part stays as written.
  * @param {string} sequence
@@ -78,8 +92,8 @@ export function writeOut(sequence, seen = new Set()) {
 
 /** A character's descriptions, keyed by character; one description keeps every source that gives it.
  * @param {Map<string, Description[]>} into
- * @param {string} char @param {string} text @param {string} regions @param {string} source */
-export function addDescription(into, char, text, regions, source) {
+ * @param {string} char @param {string} text @param {string} notation @param {string} regions @param {string} source */
+export function addDescription(into, char, text, notation, regions, source) {
   const rows = into.get(char) ?? []
   const exact = rows.findIndex(row => row.text === text && row.regions === regions)
   if (exact >= 0) {
@@ -89,8 +103,8 @@ export function addDescription(into, char, text, regions, source) {
     const same = rows.map((row, i) => row.text === text ? i : -1).filter(i => i >= 0)
     if (same.length) {
       for (const i of same) if (!rows[i].sources.includes(source)) rows[i].sources.push(source)
-    } else rows.push({ text, regions, sources: [source] })
-  } else rows.push({ text, regions, sources: [source] })
+    } else rows.push({ text, notation, regions, sources: [source] })
+  } else rows.push({ text, notation, regions, sources: [source] })
   into.set(char, rows)
 }
 
@@ -99,13 +113,19 @@ export async function readDescriptions() {
   /** @type {Map<string, Description[]>} */
   const descriptions = new Map()
   const babel = readFileSync(await fetchOnce(BABELSTONE.url, 'babelstone-IDS.TXT'), 'utf8')
+  NOTE6.clear()
+  for (const line of babel.split(/\r?\n/)) {
+    const note = COMPONENT_LINE.exec(line)
+    if (!note) continue
+    NOTE6.set(Number(note[1]), { pua: String.fromCodePoint(parseInt(note[3], 16)), description: note[2].trim(), fragment: note[5].trim() === '？' ? undefined : note[5].trim() })
+  }
   for (const line of babel.split(/\r?\n/)) {
     if (!line.startsWith('U+')) continue
     const [, char, ...sequences] = line.split('\t')
     for (const sequence of sequences) {
       const match = BODY.exec(sequence)
       if (!match) continue
-      addDescription(descriptions, char, writeOut(match[1]), match[2], 'babelstone')
+      addDescription(descriptions, char, writeOut(match[1]), match[1], match[2], 'babelstone')
     }
   }
   for (const [file, digest] of CHISE.files) {
@@ -118,7 +138,7 @@ export async function readDescriptions() {
       if (!/^U[+-][0-9A-F]+$/i.test(code) || !char || [...char].length !== 1 || !text) continue
       // The character itself, or a single component, says nothing the parts index does not already know.
       if (![...text].some(c => OPERATORS.has(c))) continue
-      addDescription(descriptions, char, writeOut(text), '', 'chise')
+      addDescription(descriptions, char, writeOut(text), text, '', 'chise')
     }
   }
   return descriptions

@@ -5,7 +5,8 @@
 //   m/<bucket>.gz    meaning words to characters
 //   p/<plane>.gz     parts to the characters written with them
 //   g/<bucket>.gz    runs of parts to the characters written with them, as sources spell them
-//   i/<plane>.gz     each character's descriptions, and the sources that give them
+//   i/<plane>.gz     each character's descriptions as the source writes them, and the sources
+//   ids-components.json  BabelStone's numbered components: PUA character, description, fragment
 //   chars.tsv.gz     code point, rank, strokes, radical
 //   methods.json     what the above were made from
 import { appendFileSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
@@ -13,7 +14,7 @@ import { join } from 'node:path'
 import { gzipSync } from 'node:zlib'
 import { charBucket, codeBucket, fold, inScope, isHan, partBucket, pinyinDigits, runBucket, wordBucket } from '../src/fold.js'
 import { readUnihan, unihanMethods, rankChars } from './sources/unihan.mjs'
-import { IDS_SOURCES, partsOf, readDescriptions, runsOf } from './sources/ids.mjs'
+import { IDS_SOURCES, components, partsOf, readDescriptions, runsOf } from './sources/ids.mjs'
 import { allMethods } from './sources/index.mjs'
 import { meaningWords } from './sources/meaning.mjs'
 import { rhymeTable } from './sources/qieyun.mjs'
@@ -123,10 +124,11 @@ const writingFiles = new Map()
 for (const [char, rows] of descriptions) {
   const bucket = charBucket(char)
   if (!writingFiles.has(bucket)) writingFiles.set(bucket, [])
-  for (const row of rows) /** @type {string[]} */ (writingFiles.get(bucket)).push(`${char}\t${row.text}\t${row.regions}\t${row.sources.join(',')}`)
+  for (const row of rows) /** @type {string[]} */ (writingFiles.get(bucket)).push(`${char}\t${row.notation}\t${row.regions}\t${row.sources.join(',')}`)
 }
 for (const [bucket, rows] of writingFiles) writeFileSync(join(OUT, 'i', `${bucket}.gz`), gz(rows.join('\n')))
 writeFileSync(join(OUT, 'ids.json'), JSON.stringify({ sources: IDS_SOURCES }))
+writeFileSync(join(OUT, 'ids-components.json'), JSON.stringify(components()))
 
 console.log('parts')
 /** @type {Map<string, string[]>} */
