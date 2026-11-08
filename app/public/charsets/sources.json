@@ -53,6 +53,10 @@
       "sha256": "5083135d812fa730222bc9fc721465178af11c13235edb5a061a2467014c3ffa"
     },
     {
+      "url": "https://www.unicode.org/irg/docs/n1925-SATWithdrawList.pdf",
+      "sha256": "8f2ad337c4748f679001b0bd6a5f0e6bc0129a7c95d91378e5fa247df796a804"
+    },
+    {
       "url": "https://zi.tools/api/ma/ma/1k8myqp9o8zxkvdpbqdhrfs6yfx5bk2t.json",
       "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
     },

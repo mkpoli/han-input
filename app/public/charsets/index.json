@@ -2397,6 +2397,31 @@
     "unencoded": 78
   },
   {
+    "id": "ext_f_sat_withdrawals",
+    "group": "Proposals",
+    "label": "Ext.F withdrawn · SAT",
+    "names": {
+      "en": "Z_SAT characters withdrawn from CJK F",
+      "zh": "擴展F撤銷SAT源字",
+      "hans": "扩展F撤销SAT源字",
+      "ja": "拡張F撤回SAT源字",
+      "ko": "확장 F SAT 철회자"
+    },
+    "chars": 0,
+    "total": 64,
+    "encoded": 0,
+    "unencoded": 64,
+    "source": {
+      "name": "IRG",
+      "url": "https://www.unicode.org/irg/docs/n1925-SATWithdrawList.pdf"
+    },
+    "records": {
+      "file": "/charsets/ext_f_sat_records.json",
+      "count": 64,
+      "glyphs": 64
+    }
+  },
+  {
     "id": "ext_e_withdrawal_records",
     "group": "Proposals",
     "label": "Ext.E withdrawn",
