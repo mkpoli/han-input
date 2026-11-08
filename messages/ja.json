@@ -107,8 +107,6 @@
   "family.extended": "漢字系文字",
   "methods.unavailable": "存在は確認済み、ここでは検索不可",
   "methods.unavailableIntro": "これらは実在します。表が手に入れば検索できるようになります。",
-  "methods.reason.terms": "表の公開が許諾されていない",
-  "methods.reason.none": "表が見つからない",
   "nav.convert": "変換",
   "convert.title": "教育部の外字をUnicodeに変換",
   "convert.intro": "旧字体の外字コードをUnicodeに変換します。対応表にないコードはそのまま残ります。",

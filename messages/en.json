@@ -107,8 +107,6 @@
   "family.extended": "Extended and derived scripts",
   "methods.unavailable": "Known, and not searchable here",
   "methods.unavailableIntro": "These exist. A table for any of them would make it searchable.",
-  "methods.reason.terms": "Terms do not allow publishing the table",
-  "methods.reason.none": "No table found",
   "nav.convert": "Convert",
   "convert.title": "PUA conversion",
   "convert.intro": "Convert legacy private-use codes to Unicode. Codes not listed stay unchanged.",
