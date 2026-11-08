@@ -20,7 +20,7 @@ The four hidden 字統 entries currently return empty objects. Their catalogue e
 
 The **CNS source categories** shortcut opens the source list without choosing a character first. Categories include 常用國字標準字體表、次常用字國字標準字體表、罕用國字標準字體表、異體國字字表、戶政、地政、財稅、工商登記、文獻 and local-language collections. Edition qualifiers remain part of each exact source label.
 
-`CNS_source.txt` records the source at registration for each CNS code. The catalogue lists every source row: an assigned scalar is browsable as that character, and a row with only a private-use mapping is browsable as its PUA-A glyph slot, drawn by the bundled TW-Sung-Plus slice. Unihan 18 `kIRG_TSource` supplies scalars assigned after the bulk release (TB-7D29 is U+324D6), while the row keeps its earlier private-use mapping. The bulk release is dated 2026-08-05; individual pages on the live CNS site can contain later changes.
+`CNS_source.txt` records the source at registration for each CNS code. The catalogue lists every source row: an assigned scalar is browsable as that character, and a row with only a private-use mapping is browsable as its PUA-A glyph slot, drawn from its IDS by han-compose where one is recorded and otherwise by the bundled TW-Sung-Plus slice. Unihan 18 `kIRG_TSource` supplies scalars assigned after the bulk release (TB-7D29 is U+324D6), while the row keeps its earlier private-use mapping. The bulk release is dated 2026-08-05; individual pages on the live CNS site can contain later changes.
 
 CNS plane numbers in these files are decimal. Source categories, planes and historical provisional status have separate meanings. The source table has no Extension E withdrawal category.
 

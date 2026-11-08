@@ -58,7 +58,7 @@
   "charset.none": "일치하는 문자 집합이 없습니다.",
   "charset.mapped": "{count}자",
   "charset.rows": "원본 항목 {count}개",
-  "charset.unencoded": "모든 출처 항목을 표시합니다. 미부호화 글자는 CNS11643 사설 영역 글꼴로 표시합니다.",
+  "charset.unencoded": "모든 출처 항목을 표시합니다. 미부호화 글자는 조합 자형 또는 출처 글꼴로 표시합니다.",
   "charset.cnsOverview": "CNS 출처 분류 보기",
   "charset.cnsSources": "CNS 출처 분류",
   "charset.cnsIntro": "CNS에 글자를 수록할 때 기록한 출처에 따른 분류입니다.",
