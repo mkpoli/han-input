@@ -1,7 +1,7 @@
 <script>
   // What a character is called: its code in every method, then the sites that say more. Definitions
   // live with those sites, so the card carries one line of gloss and no entry.
-  import { codesOf, loadMethods, loadVarieties, readingsOf } from '../lib/data.js'
+  import { codesOf, descriptionsOf, loadMethods, loadVarieties, readingsOf } from '../lib/data.js'
   import { LINKS } from '../lib/links.js'
   import { link, route, go, open } from '../lib/route.svelte.js'
   import { put, ui } from '../lib/ui.svelte.js'
@@ -30,6 +30,8 @@
   let varieties = $state([])
   /** @type {{ n: number, forms: string[] }[]} */
   let readings = $state([])
+  /** @type {import('../lib/data.js').Description[]} */
+  let writings = $state([])
   let filter = $state('')
 
   loadMethods().then(list => { methods = list })
@@ -39,6 +41,7 @@
     if (!at) return
     codesOf(at).then(found => { if (at === char) codes = found })
     readingsOf(at).then(found => { if (at === char) readings = found })
+    descriptionsOf(at).then(found => { if (at === char) writings = found })
   })
 
   const needle = $derived(filter.trim().toLowerCase())
@@ -104,6 +107,23 @@
                   <a href={link(route.page, { method: route.method, c: row.char })} lang="und-Hani" onclick={event => follow(event, row.char)}>{row.char}</a> · {t(`pua.relation.${row.relation}`)}
                 {/if}
                 <span class="tags"><span class="tag">{t(`pua.source.${row.source}`)}</span>{#if row.relationSource}<span class="tag">{t(`pua.source.${row.relationSource}`)}</span>{/if}</span>
+              </dd>
+            </div>
+          {/each}
+        </dl>
+      </section>
+    {/if}
+
+    {#if writings.length}
+      <section class="family">
+        <h3 class="ui-label">{t('card.writing')} <span class="ui-count">{writings.length}</span></h3>
+        <dl class="writing">
+          {#each writings as row (row.text + row.regions)}
+            <div class="row">
+              <dt class="seq" lang="und-Hani">{row.text}</dt>
+              <dd>
+                {#if row.regions}<span class="regions" title={t('card.regions', { regions: row.regions })}>{row.regions}</span>{/if}
+                <span class="tags">{#each row.sources as source (source)}<span class="tag">{t(`ids.source.${source}`)}</span>{/each}</span>
               </dd>
             </div>
           {/each}
@@ -180,6 +200,9 @@
   dt a:hover{color:var(--ui-color-ink);text-decoration:underline}
   dd{margin:0;font-size:var(--ui-text-xs);overflow-wrap:anywhere;font-family:'Han Ext',var(--ui-font-mono),var(--ui-font-sans),'Jigmo'}
   .pua .row{grid-template-columns:max-content minmax(0,1fr);gap:var(--ui-space-sm)}
+  .writing .row{grid-template-columns:max-content minmax(0,1fr);gap:var(--ui-space-sm);align-items:baseline}
+  .writing .seq{font-size:18px;line-height:1.3;overflow-wrap:anywhere;font-family:var(--ui-font-script)}
+  .regions{margin-inline-end:4px;padding:0 4px;border-radius:2px;font-size:10px;letter-spacing:.08em;color:var(--ui-color-ink-soft);background:var(--ui-color-canvas);cursor:help}
   .tags{display:inline-flex;gap:3px;margin-inline-start:6px;vertical-align:1px}
   .tag{padding:0 4px;border:1px solid var(--ui-color-border);border-radius:2px;font-size:10px;line-height:15px;color:var(--ui-color-ink-soft);white-space:nowrap}
 </style>

@@ -5,7 +5,11 @@
   import { MOE_PUA } from '../../src/pua.js'
   /** @type {import('../lib/data.js').Method[]} */
   let methods = $state([])
+  /** @type {{ id: string, name: string, url: string, licence: string, attribution?: string, version?: string }[]} */
+  let writing = $state([])
   loadMethods().then(list => { methods = list })
+  fetch('/data/ids.json').then(response => response.ok ? response.json() : { sources: [] })
+    .then(doc => { writing = doc.sources ?? [] }).catch(() => {})
 </script>
 
 <div class="ui-page" data-width="wide">
@@ -35,6 +39,25 @@
       </table>
     </div>
   </section>
+  {#if writing.length}
+    <section class="ui-section">
+      <h2 class="ui-label">{t('about.writing')}</h2>
+      <p class="ui-hint">{t('about.writingIntro')}</p>
+      <div class="ui-table-wrap">
+        <table class="table">
+          <thead><tr><th>{t('method.source')}</th><th>{t('method.licence')}</th></tr></thead>
+          <tbody>
+            {#each writing as entry (entry.id)}
+              <tr>
+                <td><a href={entry.url} target="_blank" rel="noopener noreferrer">{entry.name}</a>{#if entry.attribution}<br><span class="ui-hint">{entry.attribution}{#if entry.version} · {entry.version}{/if}</span>{/if}</td>
+                <td class="ui-hint">{entry.licence}</td>
+              </tr>
+            {/each}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  {/if}
 </div>
 
 <style>

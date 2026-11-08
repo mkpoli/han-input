@@ -39,6 +39,7 @@ const codeFile = once(bucket => readGz(`c/${bucket}.gz`))
 const charFile = once(bucket => readGz(`x/${bucket}.gz`))
 const wordFile = once(bucket => readGz(`m/${bucket}.gz`))
 const partFile = once(bucket => readGz(`p/${bucket}.gz`))
+const writingFile = once(bucket => readGz(`i/${bucket}.gz`))
 const schemeFile = once(path => readGz(path))
 const readingFile = once(bucket => readGz(`r/${bucket}.gz`))
 const charReadingFile = once(shard => readGz(`y/${shard}.gz`))
@@ -85,6 +86,21 @@ export async function findMeaning(text) {
   const body = await wordFile(wordBucket(word))
   const row = body.split('\n').find(line => line.startsWith(`${word}\t`))
   return row ? [...row.split('\t')[1]] : []
+}
+
+/** @typedef {{ text: string, regions: string, sources: string[] }} Description */
+
+/** How a character is written, once per description, with the sources that give it. @param {string} char @returns {Promise<Description[]>} */
+export async function descriptionsOf(char) {
+  const body = await writingFile(charBucket(char))
+  const out = []
+  for (const line of body.split('\n')) {
+    if (!line.startsWith(char)) continue
+    const [own, text, regions, sources] = line.split('\t')
+    if (own !== char || !text) continue
+    out.push({ text, regions: regions ?? '', sources: sources ? sources.split(',') : [] })
+  }
+  return out
 }
 
 /** The characters written with a part. @param {string} part @returns {Promise<string[]>} */
