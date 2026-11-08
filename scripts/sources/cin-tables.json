@@ -36,6 +36,14 @@
 "family": "shape"
 },
 {
+"file": "boshiamy",
+"zh": "嘸蝦米",
+"en": "Boshiamy",
+"family": "shape",
+"licence": "授權方式: Free for non-commercial use",
+"attribution": "劉重次; © 行易有限公司"
+},
+{
 "file": "bxm",
 "zh": "表形碼",
 "en": "Biaoxingma",
@@ -46,6 +54,13 @@
 "zh": "正體倉頡",
 "en": "Cangjie (CNS-based)",
 "family": "shape"
+},
+{
+"file": "cbs",
+"zh": "中易拼形",
+"en": "Chinese Easy (CBS)",
+"family": "shape",
+"attribution": "戚桐欣"
 },
 {
 "file": "cj5",
@@ -256,6 +271,13 @@
 "zh": "太極",
 "en": "Taiji code (two-stroke)",
 "family": "shape"
+},
+{
+"file": "uniliu",
+"zh": "萬國蝦米",
+"en": "Wanguo Xiami (uniliu)",
+"family": "shape",
+"note": "Boshiamy-compatible codes"
 },
 {
 "file": "wbx",

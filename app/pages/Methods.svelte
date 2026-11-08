@@ -44,8 +44,8 @@
     <dl class="none">
       {#each UNAVAILABLE as item (item.names)}
         <div>
-          <dt class="ui-label">{t(`family.${item.family}`)} · {t(`methods.reason.${item.reason}`)}</dt>
-          <dd>{#if item.url}<a href={item.url} target="_blank" rel="noopener noreferrer">{item.names}</a>{:else}{item.names}{/if}{#if item.note} <span class="ui-hint">({item.note})</span>{/if}</dd>
+          <dt class="ui-label">{t(`family.${item.family}`)}</dt>
+          <dd>{item.names}</dd>
         </div>
       {/each}
     </dl>

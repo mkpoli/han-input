@@ -11,6 +11,7 @@ import { extendedMethods } from './extended.mjs'
 import { extraMethods } from './extra.mjs'
 import { kanaMethods } from './kana.mjs'
 import { mojikyoMethod } from './mojikyo.mjs'
+import { yuhaoMethods } from './yuhao.mjs'
 
 /** @type {[string, string, string, string, string, import('../lib.mjs').Family, string?][]} repo, file, id, English, 漢字 name, family, licence */
 const RIME = [
@@ -69,6 +70,7 @@ export async function allMethods() {
     ...await extendedMethods(),
     ...await kanaMethods(),
     await mojikyoMethod(),
+    ...await yuhaoMethods(),
     ...await cinMethods(),
     ...await extraMethods(),
   ]

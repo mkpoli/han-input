@@ -115,8 +115,6 @@
   "family.extended": "汉字系文字",
   "methods.unavailable": "已知但无法在此检索",
   "methods.unavailableIntro": "这些方法确实存在，有了码表就能检索。",
-  "methods.reason.terms": "条款不允许公开码表",
-  "methods.reason.none": "未找到码表",
   "nav.convert": "转码",
   "convert.title": "教育部自造字转Unicode",
   "convert.intro": "将旧字体的自造字码位转为Unicode。未收录的码位保持原样。",
