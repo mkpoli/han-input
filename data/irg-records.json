@@ -321,6 +321,53 @@
         }
       ],
       "additionalRecords": []
+    },
+    {
+      "id": "ext_e_macao_missing",
+      "file": "ext_e_macao_records.json",
+      "group": "Proposals",
+      "label": "Ext.E Macao missing",
+      "glyphs": "glyphs/ext-e-macao",
+      "names": {
+        "en": "Macao characters missing from the Extension E list",
+        "zh": "擴展E澳門缺字",
+        "hans": "扩展E澳门缺字",
+        "ja": "拡張Eマカオ欠字",
+        "ko": "확장 E 마카오 누락자"
+      },
+      "source": {
+        "name": "IRG",
+        "url": "https://www.unicode.org/irg/docs/n1854-MissingMacaoSARIdeographs.pdf"
+      },
+      "title": "Macao characters missing from the CJK E list",
+      "complete": false,
+      "scope": "The 13 Macao characters unified before IRGN1830 and the seven that the document finds missing from the Extension E v7.1 list, with the Macao code printed beside each glyph.",
+      "documents": [
+        {
+          "id": "n1854",
+          "document": "IRGN1854",
+          "title": "Macao Characters Missing in IRGN 1830",
+          "source": "Macao SAR",
+          "date": "2012-06-29",
+          "url": "https://www.unicode.org/irg/docs/n1854-MissingMacaoSARIdeographs.pdf",
+          "status": "Reports 13 characters unified after IRGN1791 and seven Macao characters missing from the Extension E v7.1 list in IRGN1830."
+        }
+      ],
+      "extract": [
+        {
+          "document": "n1854",
+          "pages": [
+            1,
+            2
+          ],
+          "matcher": "code-only",
+          "serialPattern": "",
+          "sourcePattern": "^MAC\\d{5}$",
+          "skipUnmatched": true,
+          "count": 20
+        }
+      ],
+      "additionalRecords": []
     }
   ]
 }

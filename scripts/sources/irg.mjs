@@ -5,7 +5,7 @@
 /** @typedef {{top:number, left:number, width:number, height:number, src:string}} ImageBox */
 /** @typedef {{number:number, text:TextBox[], images:ImageBox[]}} PageBoxes */
 /** @typedef {{serial:string|null, source:string, target?:string, page:number, file:string}} Row */
-/** @typedef {{serialPattern:string, sourcePattern:string, leftGap?:number}} Patterns */
+/** @typedef {{serialPattern:string, sourcePattern:string, leftGap?:number, skipUnmatched?:boolean}} Patterns */
 
 /** @param {string} xml @returns {PageBoxes[]} */
 export function parsePages(xml) {
@@ -84,13 +84,14 @@ export function textPairRows(page, patterns) {
  */
 export function codeOnlyRows(page, patterns) {
   const source = new RegExp(`^${patterns.sourcePattern}$`)
-  return page.images.map((image, index) => {
+  return page.images.map(/** @returns {Row | null} */ (image, index) => {
     const beside = page.text.filter(text => text.value && source.test(text.value)
       && image.left - text.left >= 20 && image.left - text.left <= (patterns.leftGap ?? 210)
       && Math.abs(text.top + text.height / 2 - (image.top + image.height / 2)) <= 30)
+    if (!beside.length && patterns.skipUnmatched) return null
     if (beside.length !== 1) throw new Error(`Page ${page.number}: glyph ${index} has ${beside.length} code candidates`)
     return { serial: null, source: beside[0].value, page: page.number, file: image.src }
-  })
+  }).filter(/** @returns {row is Row} */ row => row !== null)
 }
 
 /**

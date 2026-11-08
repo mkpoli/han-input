@@ -41,6 +41,10 @@
       "sha256": "c3582db9d74c7d032149d957009ec0ccfa2c0a2dca16fc4f19ec1811892cd24b"
     },
     {
+      "url": "https://www.unicode.org/irg/docs/n1854-MissingMacaoSARIdeographs.pdf",
+      "sha256": "fa8e3d2cec44f660cb872cdded60da9d749e90b5e1c7a824a5cac3d54b105780"
+    },
+    {
       "url": "https://www.unicode.org/irg/docs/n1881-ExtensionEWithdraw.pdf",
       "sha256": "bf8bda8b15f286659bccd7ef82b476468ab34e603d3f83b2215b2895700c3037"
     },
