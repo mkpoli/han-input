@@ -30,8 +30,13 @@ Discord discussion of 2026-10-27, and the works themselves were not read.
 | [Unicode-今昔文字鏡番号対照表](https://www.seiwatei.net/info/chtucmj/), 青蛙亭漢語塾 | 今昔文字鏡 numbers for 28,934 BMP characters | Free download and use. The author states it is unofficial, made without permission from 文字鏡研究会, and covers the BMP only |
 | [HKSCS-2008 mapping table](https://www.ccli.gov.hk/en/archive/mapping_table_2008.html), [file](https://www.ccli.gov.hk/doc/hkscs-2008-big5-iso.txt) | 2,353 PUA-to-Unicode assignments, from the ISO/IEC 10646-1:1993 PUA to the 2003 characters | CCLI Terms of Use; the code-point mapping is treated here as factual data |
 | [BabelStone IDS](https://www.babelstone.co.uk/CJK/IDS.TXT), Andrew West | which parts each character is written with | As stated in the file |
+| [CHISE IDS](https://www.chise.org/ids/), the eighteen `IDS-UCS-*.txt` files at `chise/ids` `main@2026-11-04` | further descriptions of the same, including characters BabelStone leaves out | GPL-2.0-or-later; the build copies the descriptions, so the generated site data carries that licence |
 | [Noto Sans Nushu and Noto Serif Hentaigana](https://github.com/notofonts) | glyphs for Nüshu and hentaigana | OFL-1.1 |
 | [Jigmo](https://kamichikoichi.github.io/jigmo/) 2025-09-12, 上地宏一 | glyphs for the extension blocks, cut by `scripts/build_fonts.py` | CC0-1.0 |
+
+BabelStone writes some parts by number. Where note 6 of its file gives the IDS that writes the
+number out, the description uses it ({12}, the right of 龍, as ⿷己三); a description whose number the
+note leaves unrepresentable is left out, as a CHISE entity is.
 
 The research behind these choices, with every candidate and what was checked, is in
 [`research-input-methods.md`](research-input-methods.md) and
@@ -48,7 +53,7 @@ semantic similarity, so a synonym the gloss does not use will not be found.
 ## Linked, not copied
 
 字統網 zi.tools, 漢典 zdic, 葉典 yedict, 韻典網 ytenx, 古音小鏡 kaom, Web韻圖 (鈴木慎吾), Glyph Atlas, IDS
-Workshop, GlyphWiki, CHISE. Ytenx's `DATA_LICENSE.md` grants nothing for its data, and no bulk data was
+Workshop, GlyphWiki. Ytenx's `DATA_LICENSE.md` grants nothing for its data, and no bulk data was
 found for kaom, so both stay links. Web韻圖 and kaom have no address for a single character, and those
 links open the site's search page.
 
@@ -59,5 +64,6 @@ links open the site's search page.
 - Katakana have no source characters: `hentaigana.el` gives them for hiragana and hentaigana only.
 - 26 kana have no bundled glyph, among them the Minnan letters (U+1AFF0–U+1AFFF) and U+1B150, and depend on the reader's system fonts.
 - The readings of a variety lose their notes (文白 and usage) in this index; 音典 keeps them.
+- CHISE describes some characters with parts that have no code point. Those descriptions are left out, since this site lists characters only.
 - Tables with no stated terms are published with that fact shown, as are the non-commercial ones (表形碼,
   導碼, E碼, 華象, the 通用 Hakka tables).

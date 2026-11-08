@@ -4,6 +4,7 @@
 //   x/<plane>.gz     every code of every character, by code point: character, method, then one code per column
 //   m/<bucket>.gz    meaning words to characters
 //   p/<plane>.gz     parts to the characters written with them
+//   i/<plane>.gz     each character's descriptions, and the sources that give them
 //   chars.tsv.gz     code point, rank, strokes, radical
 //   methods.json     what the above were made from
 import { appendFileSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
@@ -11,7 +12,7 @@ import { join } from 'node:path'
 import { gzipSync } from 'node:zlib'
 import { charBucket, codeBucket, fold, inScope, isHan, partBucket, pinyinDigits, wordBucket } from '../src/fold.js'
 import { readUnihan, unihanMethods, rankChars } from './sources/unihan.mjs'
-import { buildParts } from './sources/ids.mjs'
+import { IDS_SOURCES, partsOf, readDescriptions } from './sources/ids.mjs'
 import { allMethods } from './sources/index.mjs'
 import { meaningWords } from './sources/meaning.mjs'
 import { rhymeTable } from './sources/qieyun.mjs'
@@ -20,9 +21,9 @@ import * as OpenCC from 'opencc-js'
 
 const OUT = join(import.meta.dirname, '..', 'app', 'public', 'data')
 const SPOOL = join(CACHE, 'spool')
-for (const dir of ['s', 'c', 'x', 'm', 'p']) rmSync(join(OUT, dir), { recursive: true, force: true })
+for (const dir of ['s', 'c', 'x', 'm', 'p', 'i']) rmSync(join(OUT, dir), { recursive: true, force: true })
 rmSync(SPOOL, { recursive: true, force: true })
-for (const dir of ['s', 'c', 'x', 'm', 'p']) mkdirSync(join(OUT, dir), { recursive: true })
+for (const dir of ['s', 'c', 'x', 'm', 'p', 'i']) mkdirSync(join(OUT, dir), { recursive: true })
 for (const dir of ['c', 'x', 'm']) mkdirSync(join(SPOOL, dir), { recursive: true })
 
 const gz = (/** @type {string} */ text) => gzipSync(text, { level: 9 })
@@ -114,10 +115,22 @@ for (const [word, list] of words) {
 }
 for (const [bucket, rows] of wordFiles) writeFileSync(join(OUT, 'm', `${bucket}.gz`), gz(rows.join('\n')))
 
+console.log('writing')
+const descriptions = await readDescriptions()
+/** @type {Map<string, string[]>} */
+const writingFiles = new Map()
+for (const [char, rows] of descriptions) {
+  const bucket = charBucket(char)
+  if (!writingFiles.has(bucket)) writingFiles.set(bucket, [])
+  for (const row of rows) /** @type {string[]} */ (writingFiles.get(bucket)).push(`${char}\t${row.text}\t${row.regions}\t${row.sources.join(',')}`)
+}
+for (const [bucket, rows] of writingFiles) writeFileSync(join(OUT, 'i', `${bucket}.gz`), gz(rows.join('\n')))
+writeFileSync(join(OUT, 'ids.json'), JSON.stringify({ sources: IDS_SOURCES }))
+
 console.log('parts')
 /** @type {Map<string, string[]>} */
 const partFiles = new Map()
-for (const [part, list] of await buildParts()) {
+for (const [part, list] of partsOf(descriptions)) {
   const bucket = partBucket(part)
   if (!partFiles.has(bucket)) partFiles.set(bucket, [])
   ;/** @type {string[]} */ (partFiles.get(bucket)).push(`${part}\t${list.join('')}`)
