@@ -2,6 +2,7 @@
   // The frame: a dark rail of pages down the side, the finder in the middle, the card of the open
   // character on the right (a sheet on a phone), and the text being written docked along the bottom.
   import { NAV, go, route } from './lib/route.svelte.js'
+  import { pageMetadata } from './lib/title.js'
   import { ui, applyTheme } from './lib/ui.svelte.js'
   import { toast } from './lib/clip.svelte.js'
   import { t } from './lib/i18n.svelte.js'
@@ -21,6 +22,11 @@
 
   applyTheme()
   let settings = $state(false)
+  $effect(() => {
+    const { title, description } = pageMetadata(route.page)
+    document.title = `${t(title)} — ${t('app.name')}`
+    document.querySelector('meta[name="description"]')?.setAttribute('content', t(description))
+  })
   const OWNER = /** @type {Record<string, string>} */ ({ m: 'methods', v: 'readings' })
   const current = $derived(OWNER[route.page] ?? route.page)
 
