@@ -1,22 +1,23 @@
 <script>
-  // Old composition formulas: Taiwan's 漢字構形資料庫 wrote characters with thirteen Big5 symbols
-  // before IDS. A formula converts to IDS; a shape marker can only give its parts in writing order.
+  // Old descriptions of how a character is written: Taiwan's 漢字構形資料庫 symbols and the
+  // arithmetic signs used by the Korean History Database and CBETA. Each converts to IDS.
   import { tick } from 'svelte'
   import { LEGACY_SYMBOLS, convertLegacy, repeatExample } from '../../src/legacy.js'
-  import { PAJA_OPERATORS, convertPaja } from '../../src/paja.js'
+  import { convertArithmetic } from '../../src/arithmetic.js'
   import { copy } from '../lib/clip.svelte.js'
   import { t } from '../lib/i18n.svelte.js'
   import { link } from '../lib/route.svelte.js'
 
   const params = new URLSearchParams(location.search)
   let input = $state(params.get('q') ?? '')
-  let pajaInput = $state('')
+  let arithmeticInput = $state('')
+  let notation = $state(/** @type {'korean' | 'general'} */ ('korean'))
   const result = $derived(convertLegacy(input))
-  const paja = $derived(convertPaja(pajaInput))
+  const arithmetic = $derived(convertArithmetic(arithmeticInput, notation))
   /** @type {HTMLTextAreaElement | null} */
   let field = null
   /** @type {HTMLTextAreaElement | null} */
-  let pajaField = null
+  let arithmeticField = null
 
   /** @param {string} char */
   async function insert(char) {
@@ -32,13 +33,13 @@
   }
 
   /** @param {string} char */
-  async function insertPaja(char) {
-    const element = pajaField
+  async function insertArithmetic(char) {
+    const element = arithmeticField
     if (!element) return
     const focused = document.activeElement === element
-    const start = focused ? element.selectionStart ?? pajaInput.length : pajaInput.length
+    const start = focused ? element.selectionStart ?? arithmeticInput.length : arithmeticInput.length
     const end = focused ? element.selectionEnd ?? start : start
-    pajaInput = pajaInput.slice(0, start) + char + pajaInput.slice(end)
+    arithmeticInput = arithmeticInput.slice(0, start) + char + arithmeticInput.slice(end)
     await tick()
     element.focus()
     element.setSelectionRange(start + 1, start + 1)
@@ -54,19 +55,17 @@
     input = `髟${symbol('ud')}八`
   }
 
-  function pajaExample() {
-    pajaInput = '氵+飛'
+  const PALETTES = {
+    korean: ['+', '-', '/', '*', '(', ')', '▼'],
+    general: ['*', '/', '@', '-', '+', '?', '(', ')'],
   }
 
-  const PAJA_PALETTE = [
-    ...PAJA_OPERATORS.map(item => ({ char: item.char, label: `composition.paja.${item.id}` })),
-    { char: '(', label: 'composition.paja.open' },
-    { char: ')', label: 'composition.paja.close' },
-    { char: '▼', label: 'composition.paja.marker' },
-  ]
+  function arithmeticExample() {
+    arithmeticInput = notation === 'korean' ? '石+(毁-殳)' : '間-日+月'
+  }
 
-  function searchPaja() {
-    location.assign(link('', { q: pajaInput.replace(/\s+/g, '') }))
+  function searchArithmetic() {
+    location.assign(link('', { q: arithmeticInput.replace(/\s+/g, '') }))
   }
 </script>
 
@@ -148,14 +147,19 @@
     </div>
   </details>
 
-  <section class="paja-section">
-    <h2 class="ui-label">{t('composition.paja.title')}</h2>
-    <p class="ui-hint">{t('composition.paja.intro')}</p>
-    <div class="paja-palette" role="group" aria-label={t('composition.paja.palette')}>
-      {#each PAJA_PALETTE as item (item.char)}
-        <button class="key" type="button" onmousedown={event => event.preventDefault()} onclick={() => insertPaja(item.char)} title={t(item.label)} aria-label={t(item.label)}>
-          <span class="paja-sign" aria-hidden="true">{item.char}</span>
-          <span class="key-label">{t(item.label)}</span>
+  <section class="arithmetic-section">
+    <h2 class="ui-label">{t('composition.arithmetic.title')}</h2>
+    <p class="ui-hint">{t('composition.arithmetic.intro')}</p>
+
+    <div class="notation" role="group" aria-label={t('composition.arithmetic.notation')}>
+      <button class="ui-button" data-size="sm" type="button" aria-pressed={notation === 'korean'} onclick={() => { notation = 'korean' }}>{t('composition.arithmetic.notation.korean')}</button>
+      <button class="ui-button" data-size="sm" type="button" aria-pressed={notation === 'general'} onclick={() => { notation = 'general' }}>{t('composition.arithmetic.notation.general')}</button>
+    </div>
+
+    <div class="arithmetic-palette" role="group" aria-label={t('composition.arithmetic.palette')}>
+      {#each PALETTES[notation] as sign (sign)}
+        <button class="key" type="button" onmousedown={event => event.preventDefault()} onclick={() => insertArithmetic(sign)} title={t('composition.arithmetic.insert', { sign })} aria-label={t('composition.arithmetic.insert', { sign })}>
+          <span class="arith-sign" aria-hidden="true">{sign}</span>
         </button>
       {/each}
     </div>
@@ -163,71 +167,82 @@
     <div class="editors">
       <div class="ui-field">
         <div class="field-head">
-          <label class="ui-label" for="paja-input">{t('composition.paja.input')}</label>
+          <label class="ui-label" for="arithmetic-input">{t('composition.arithmetic.input')}</label>
           <span class="field-tools">
-            <button class="ui-button" data-size="sm" type="button" disabled={!!pajaInput} onclick={pajaExample}>{t('composition.example')}</button>
-            <button class="ui-button" data-size="sm" type="button" disabled={!pajaInput} onclick={() => { pajaInput = '' }}>{t('writing.clear')}</button>
+            <button class="ui-button" data-size="sm" type="button" disabled={!!arithmeticInput} onclick={arithmeticExample}>{t('composition.example')}</button>
+            <button class="ui-button" data-size="sm" type="button" disabled={!arithmeticInput} onclick={() => { arithmeticInput = '' }}>{t('writing.clear')}</button>
           </span>
         </div>
-        <textarea id="paja-input" class="ui-textarea paja-formula" rows="5" bind:value={pajaInput} bind:this={pajaField} placeholder={t('composition.paja.placeholder')} spellcheck="false" autocomplete="off" autocapitalize="off" dir="auto"></textarea>
+        <textarea id="arithmetic-input" class="ui-textarea arithmetic-formula" rows="5" bind:value={arithmeticInput} bind:this={arithmeticField} placeholder={t('composition.arithmetic.placeholder')} spellcheck="false" autocomplete="off" autocapitalize="off" dir="auto"></textarea>
       </div>
       <div class="ui-field">
         <div class="field-head">
-          <label class="ui-label" for="paja-output">{t('composition.output')}</label>
+          <label class="ui-label" for="arithmetic-output">{t('composition.output')}</label>
           <span class="field-tools">
-            <button class="ui-button" data-size="sm" type="button" disabled={!paja.ids || !pajaInput} onclick={searchPaja}>{t('composition.paja.search')}</button>
-            <button class="ui-button" data-size="sm" type="button" disabled={!paja.ids} onclick={() => copy(paja.ids, t('composition.output'))}>{t('common.copy')}</button>
+            <button class="ui-button" data-size="sm" type="button" disabled={!arithmetic.ids || !arithmeticInput} onclick={searchArithmetic}>{t('composition.arithmetic.search')}</button>
+            <button class="ui-button" data-size="sm" type="button" disabled={!arithmetic.ids} onclick={() => copy(arithmetic.ids, t('composition.output'))}>{t('common.copy')}</button>
           </span>
         </div>
-        <textarea id="paja-output" class="ui-textarea ids" rows="5" value={paja.ids} readonly spellcheck="false" dir="auto"></textarea>
+        <textarea id="arithmetic-output" class="ui-textarea ids" rows="5" value={arithmetic.ids} readonly spellcheck="false" dir="auto"></textarea>
       </div>
     </div>
 
     <div class="ui-toolbar counts" role="status" aria-live="polite" aria-atomic="true">
-      {#if paja.ids}<span>{t('composition.paja.converted')}</span>{/if}
-      {#if paja.problems.length}<span>{t('composition.problems', { count: paja.problems.length })}</span>{/if}
+      {#if arithmetic.ids}<span>{t('composition.arithmetic.converted')}</span>{/if}
+      {#if arithmetic.problems.length}<span>{t('composition.problems', { count: arithmetic.problems.length })}</span>{/if}
     </div>
 
-    {#if paja.notes.length}
-      <ul class="paja-notes">
-        {#each paja.notes as note (note)}<li>{t(`composition.paja.note.${note}`)}</li>{/each}
+    {#if arithmetic.notes.length}
+      <ul class="arithmetic-notes">
+        {#each arithmetic.notes as note (note)}<li>{t(`composition.arithmetic.note.${note}`)}</li>{/each}
       </ul>
     {/if}
-    {#if paja.ids}<p class="ui-hint">{t('composition.paja.searchHint')}</p>{/if}
+    {#if arithmetic.ids}<p class="ui-hint">{t('composition.arithmetic.searchHint')}</p>{/if}
 
-    {#if paja.problems.length}
+    {#if arithmetic.problems.length}
       <details class="issues">
-        <summary class="ui-label">{t('composition.problems', { count: paja.problems.length })}</summary>
+        <summary class="ui-label">{t('composition.problems', { count: arithmetic.problems.length })}</summary>
         <ul>
-          {#each paja.problems as problem, index (index)}<li>{t(`composition.paja.problem.${problem.code}`)}</li>{/each}
+          {#each arithmetic.problems as problem, index (index)}<li>{t(`composition.arithmetic.problem.${problem.code}`)}</li>{/each}
         </ul>
       </details>
     {/if}
 
     <details class="legend">
-      <summary class="ui-label">{t('composition.paja.rules')}</summary>
+      <summary class="ui-label">{t('composition.arithmetic.rules')}</summary>
       <div class="ui-table-wrap">
         <table class="ui-table">
-          <thead><tr><th scope="col">{t('composition.paja.sign')}</th><th scope="col">{t('composition.paja.relation')}</th><th scope="col">{t('composition.paja.example')}</th><th scope="col">{t('composition.legend.ids')}</th></tr></thead>
+          <thead><tr><th scope="col">{t('composition.arithmetic.sign')}</th><th scope="col">{t('composition.arithmetic.relation')}</th><th scope="col">{t('composition.arithmetic.example')}</th><th scope="col">{t('composition.legend.ids')}</th></tr></thead>
           <tbody>
-            <tr><td class="ui-mono">+</td><td>{t('composition.paja.plus')}</td><td class="ui-mono">氵+飛</td><td class="ui-mono">⿰</td></tr>
-            <tr><td class="ui-mono">-</td><td>{t('composition.paja.minus')}</td><td class="ui-mono">石+(毁-殳)</td><td class="ui-mono">㇯</td></tr>
-            <tr><td class="ui-mono">/</td><td>{t('composition.paja.slash')}</td><td class="ui-mono">髟/目</td><td class="ui-mono">⿱</td></tr>
-            <tr><td class="ui-mono">*</td><td>{t('composition.paja.star')}</td><td class="ui-mono">(臼*米)/皿</td><td class="ui-mono">⿻</td></tr>
-            <tr><td class="ui-mono">()</td><td>{t('composition.paja.group')}</td><td class="ui-mono">穴/(爿+未)</td><td class="ui-mono">—</td></tr>
-            <tr><td class="ui-mono">▼</td><td>{t('composition.paja.marker')}</td><td class="ui-mono">{"▼{日/央}"}</td><td class="ui-mono">⿱日央</td></tr>
+            {#if notation === 'korean'}
+              <tr><td class="ui-mono">+</td><td>{t('composition.arithmetic.relation.horizontal')}</td><td class="ui-mono">氵+飛</td><td class="ui-mono">⿰</td></tr>
+              <tr><td class="ui-mono">-</td><td>{t('composition.arithmetic.relation.delete')}</td><td class="ui-mono">請-言</td><td class="ui-mono">㇯</td></tr>
+              <tr><td class="ui-mono">/</td><td>{t('composition.arithmetic.relation.vertical')}</td><td class="ui-mono">髟/目</td><td class="ui-mono">⿱</td></tr>
+              <tr><td class="ui-mono">*</td><td>{t('composition.arithmetic.relation.combine')}</td><td class="ui-mono">(臼*米)/皿</td><td class="ui-mono">⿻</td></tr>
+              <tr><td class="ui-mono">()</td><td>{t('composition.arithmetic.relation.group')}</td><td class="ui-mono">穴/(爿+未)</td><td class="ui-mono">—</td></tr>
+              <tr><td class="ui-mono">▼</td><td>{t('composition.arithmetic.relation.marker')}</td><td class="ui-mono">{"▼{日/央}"}</td><td class="ui-mono">⿱日央</td></tr>
+            {:else}
+              <tr><td class="ui-mono">*</td><td>{t('composition.arithmetic.relation.horizontal')}</td><td class="ui-mono">日*月</td><td class="ui-mono">⿰</td></tr>
+              <tr><td class="ui-mono">/</td><td>{t('composition.arithmetic.relation.vertical')}</td><td class="ui-mono">立/日</td><td class="ui-mono">⿱</td></tr>
+              <tr><td class="ui-mono">@</td><td>{t('composition.arithmetic.relation.contain')}</td><td class="ui-mono">囗@大</td><td class="ui-mono">⿴</td></tr>
+              <tr><td class="ui-mono">-</td><td>{t('composition.arithmetic.relation.delete')}</td><td class="ui-mono">請-言</td><td class="ui-mono">㇯</td></tr>
+              <tr><td class="ui-mono">-+</td><td>{t('composition.arithmetic.relation.replace')}</td><td class="ui-mono">間-日+月</td><td class="ui-mono">⿻</td></tr>
+              <tr><td class="ui-mono">?</td><td>{t('composition.arithmetic.relation.unknown')}</td><td class="ui-mono">(?*匕)/月</td><td class="ui-mono">?</td></tr>
+              <tr><td class="ui-mono">()</td><td>{t('composition.arithmetic.relation.group')}</td><td class="ui-mono">穴/(爿+未)</td><td class="ui-mono">—</td></tr>
+              <tr><td class="ui-mono">[]</td><td>{t('composition.arithmetic.relation.separator')}</td><td class="ui-mono">羅[目*侯]</td><td class="ui-mono">—</td></tr>
+            {/if}
           </tbody>
         </table>
       </div>
-      <p class="ui-hint">{t('composition.paja.precedence')}</p>
+      <p class="ui-hint">{t('composition.arithmetic.precedence')}</p>
     </details>
   </section>
 
   <footer class="ui-section attribution">
     <p><a href="https://cdp.sinica.edu.tw/cdphanzi/" target="_blank" rel="noopener noreferrer">{t('composition.source.database')}</a> · <a href="https://cdp.sinica.edu.tw/service/documents/T960419.pdf" target="_blank" rel="noopener noreferrer">{t('composition.source.paper')}</a></p>
     <p>{t('composition.source.citation')}</p>
-    <p><a href="https://db.history.go.kr/resources/unicode/help/help07.jsp" target="_blank" rel="noopener noreferrer">{t('composition.paja.source')}</a></p>
-    <p>{t('composition.paja.citation')}</p>
+    <p><a href="https://db.history.go.kr/resources/unicode/help/help07.jsp" target="_blank" rel="noopener noreferrer">{t('composition.arithmetic.source.korean')}</a> · <a href="https://cbetaonline.dila.edu.tw/doc/en/02-04_create_word.php" target="_blank" rel="noopener noreferrer">{t('composition.arithmetic.source.general')}</a></p>
+    <p>{t('composition.arithmetic.citation')}</p>
   </footer>
 </div>
 
@@ -251,15 +266,17 @@
   .legend .ui-table-wrap{margin-block-start:0}
   .sign-cell{font-family:'CDP Composition',serif;font-size:26px;line-height:1;text-align:center}
   .issues ul{margin:var(--ui-space-xs) 0 0;padding-inline-start:1.4em;color:var(--ui-color-ink-soft);font-size:var(--ui-text-sm)}
-  .paja-section{margin-block-start:var(--ui-space-2xl);padding-block-start:var(--ui-space-lg);border-block-start:1px solid var(--ui-color-border)}
-  .paja-palette{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:var(--ui-space-2xs);margin-block-end:var(--ui-space-md)}
-  .paja-sign{font-family:var(--ui-font-mono),monospace;font-size:24px;line-height:1}
-  .paja-formula{font-family:var(--ui-font-script);line-height:1.6}
-  .paja-notes{margin:var(--ui-space-xs) 0 0;padding-inline-start:1.4em;color:var(--ui-color-ink-soft);font-size:var(--ui-text-sm)}
+  .arithmetic-section{margin-block-start:var(--ui-space-2xl);padding-block-start:var(--ui-space-lg);border-block-start:1px solid var(--ui-color-border)}
+  .notation{display:flex;flex-wrap:wrap;gap:var(--ui-space-2xs);margin-block:var(--ui-space-sm)}
+  .notation [aria-pressed='true']{border-color:var(--ui-color-accent);background:var(--ui-color-accent-soft);font-weight:var(--ui-weight-semibold)}
+  .arithmetic-palette{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:var(--ui-space-2xs);margin-block-end:var(--ui-space-md)}
+  .arith-sign{font-family:var(--ui-font-mono),monospace;font-size:24px;line-height:1}
+  .arithmetic-formula{font-family:var(--ui-font-script);line-height:1.6}
+  .arithmetic-notes{margin:var(--ui-space-xs) 0 0;padding-inline-start:1.4em;color:var(--ui-color-ink-soft);font-size:var(--ui-text-sm)}
   .attribution{gap:var(--ui-space-xs);padding-block-start:var(--ui-space-lg);border-block-start:1px solid var(--ui-color-border);color:var(--ui-color-ink-muted);font-size:var(--ui-text-xs);overflow-wrap:anywhere}
   @media (max-width:800px){
     .palette{grid-template-columns:repeat(5,minmax(0,1fr))}
-    .paja-palette{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .arithmetic-palette{grid-template-columns:repeat(4,minmax(0,1fr))}
     .sign{font-size:28px}
     .key{padding-block:var(--ui-space-2xs)}
     .key-label{font-size:9px}
