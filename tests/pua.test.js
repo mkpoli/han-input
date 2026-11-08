@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'bun:test'
 import { createHash } from 'node:crypto'
 import { readFileSync } from 'node:fs'
-import { MOE_PUA, MOE_PUA_VARIANTS, codePoint, convertMoePua, puaChar, puaOf } from '../src/pua.js'
+import { HKSCS_PUA, MOE_PUA, MOE_PUA_VARIANTS, codePoint, convertPua, puaChar, puaChars, puaOf } from '../src/pua.js'
 import { parseMoeWordbooks } from '../scripts/import_moe_pua.mjs'
 import { variantIndex } from '../scripts/import_moe_pua_variants.mjs'
 
@@ -20,35 +20,54 @@ describe('MOE PUA snapshot', () => {
     expect(parseMoeWordbooks(original.toString('utf8'))).toEqual(MOE_PUA.mappings)
   })
   test('converts the official example', () => {
-    expect(convertMoePua('\uE43B')).toEqual({ text: '䀯', converted: 1, unmapped: 0 })
+    expect(convertPua('\uE43B')).toEqual({ text: '䀯', converted: 1, unmapped: 0 })
   })
   test('covers every assignment, including supplementary PUA and Han', () => {
     for (const [alias, char] of Object.entries(MOE_PUA.mappings)) {
       expect(alias).toMatch(/^\p{Co}$/u)
       expect([...char]).toHaveLength(1)
       expect(char).not.toMatch(/\p{Co}/u)
-      expect(convertMoePua(alias)).toEqual({ text: char, converted: 1, unmapped: 0 })
+      expect(convertPua(alias)).toEqual({ text: char, converted: 1, unmapped: 0 })
     }
-    expect(convertMoePua('\u{F8FAF}').text).toBe('𰹬')
-    expect(convertMoePua('\uE51F').text).toBe('𠊎')
+    expect(convertPua('\u{F8FAF}').text).toBe('𰹬')
+    expect(convertPua('\uE51F').text).toBe('𠊎')
   })
   test('preserves whitespace, line endings, combining marks, HTML, and unmapped PUA', () => {
     const input = 'a\u0301\t字\r\n\uE43B <script> & 😀\uE000\u{FFFFD}\u{100000}'
-    expect(convertMoePua(input)).toEqual({
+    expect(convertPua(input)).toEqual({
       text: 'a\u0301\t字\r\n䀯 <script> & 😀\uE000\u{FFFFD}\u{100000}', converted: 1, unmapped: 3,
     })
   })
   test('counts occurrences and leaves converted text unchanged on repetition', () => {
-    expect(convertMoePua('\uE43B\uE43B')).toEqual({ text: '䀯䀯', converted: 2, unmapped: 0 })
-    const result = convertMoePua(Object.keys(MOE_PUA.mappings).join(''))
+    expect(convertPua('\uE43B\uE43B')).toEqual({ text: '䀯䀯', converted: 2, unmapped: 0 })
+    const result = convertPua(Object.keys(MOE_PUA.mappings).join(''))
     expect(result.converted).toBe(59)
-    expect(convertMoePua(result.text)).toEqual({ text: result.text, converted: 0, unmapped: 0 })
-    expect(convertMoePua('')).toEqual({ text: '', converted: 0, unmapped: 0 })
+    expect(convertPua(result.text)).toEqual({ text: result.text, converted: 0, unmapped: 0 })
+    expect(convertPua('')).toEqual({ text: '', converted: 0, unmapped: 0 })
   })
   test('formats BMP and supplementary code points', () => {
     expect(codePoint('\uE43B')).toBe('U+E43B')
     expect(codePoint('𠊎')).toBe('U+2028E')
     expect(codePoint('\u{F8FAF}')).toBe('U+F8FAF')
+  })
+})
+
+describe('HKSCS', () => {
+  test('converts the 1993 PUA assignments, apart from the MOE table', () => {
+    expect(convertPua('\uF266', 'hkscs')).toEqual({ text: '䏰', converted: 1, unmapped: 0 })
+    expect(convertPua('\uF266')).toEqual({ text: '\uF266', converted: 0, unmapped: 1 })
+    expect(convertPua('\u{F8FAF}', 'hkscs')).toEqual({ text: '\u{F8FAF}', converted: 0, unmapped: 1 })
+  })
+  test('records the table and its provenance', () => {
+    expect(HKSCS_PUA.source.sha256).toBe('f52001a4452cc2c790ac5f255b26be3d8d6e24c9a3867f0d271e21f4359bb266')
+    expect(Object.keys(HKSCS_PUA.mappings)).toHaveLength(2353)
+  })
+  test('keeps both characters where a code has two font assignments', () => {
+    expect(puaChars('E35C')).toEqual([{ char: '𫝛', source: 'moe' }, { char: '𦀩', source: 'hkscs' }])
+    expect(puaChars('F5E7')).toHaveLength(2)
+  })
+  test('lists a character’s HKSCS code', () => {
+    expect(puaOf('䏰')).toEqual([{ code: 'U+F266', char: '䏰', relation: 'own', source: 'hkscs' }])
   })
 })
 
