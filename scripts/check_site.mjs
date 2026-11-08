@@ -90,6 +90,8 @@ const FINDS = [
   ['A kana newer than the runtime', 'alternate-ne', '\u{1B127}'],
   ['A Han character newer than the runtime', 'U+2B81E', '\u{2B81E}'],
   ['Nüshu by a traditional Han character', '錯', '\u{1B172}'],
+  ['A part in a sequence, either spelling', '口匕', '叱'],
+  ['The same sequence written with 七', '口七', '叱'],
   ['A pasted kana', 'あ', 'あ'],
   ['Nüshu by reading', 'na33', '\u{1B171}'],
   ['Nüshu by Han character', '一', '\u{1B170}'],
@@ -99,6 +101,26 @@ for (const [name, query, char] of FINDS) {
   await check(`find ${name}: ${query} → ${char}`, async () => assert.ok((await find(query)).includes(char)))
 }
 
+await check('a part is also searched under its variant spellings', async () => {
+  for (const query of ['七 5畫', '匕 5畫']) {
+    const found = await find(query)
+    for (const char of ['叱', '叱']) assert.ok(found.includes(char), `${query} ${char}`)
+  }
+})
+await check('a run of parts finds both spellings of a part', async () => {
+  const found = await find('口匕')
+  for (const char of ['叱', '叱', '𫜸']) assert.ok(found.includes(char), char)
+  const other = await find('口七')
+  for (const char of ['叱', '叱']) assert.ok(other.includes(char), char)
+})
+await check('the card names the other code point of a character', async () => {
+  for (const [code, other] of [['53F1', '叱'], ['2F83A', '叱']]) {
+    await page.goto(`${SITE}/?c=${code}`)
+    await page.waitForLoadState('networkidle')
+    await page.waitForFunction((/** @type {string} */ char) => (document.querySelector('.card')?.textContent ?? '').includes(char), other)
+    assert.match(await page.locator('.card').innerText(), new RegExp(other))
+  }
+})
 await check('clues narrow: 氵 with 12 strokes leaves 湖 and not 河', async () => {
   const found = await find('氵 12畫')
   assert.ok(found.includes('湖'))

@@ -76,3 +76,6 @@ export const wordBucket = word => (hash(word) % 1024).toString(16).padStart(3, '
 
 /** The file under `p/` holding the characters a part appears in. @param {string} part */
 export const partBucket = part => ((part.codePointAt(0) ?? 0) >> 8).toString(16)
+
+/** The file under `g/` holding the characters written with a run of parts. @param {string} run */
+export const runBucket = run => (hash(run) % BUCKETS).toString(16).padStart(3, '0')

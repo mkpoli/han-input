@@ -1,6 +1,6 @@
 // The static files, each fetched once when first needed. Gzip is undone here, since the hosting
 // serves the .gz files as they are.
-import { charBucket, codeBucket, fold, partBucket, pinyinDigits, wordBucket } from '../../src/fold.js'
+import { charBucket, codeBucket, fold, partBucket, pinyinDigits, runBucket, wordBucket } from '../../src/fold.js'
 
 /** @param {string} path @returns {Promise<string>} empty for a file that does not exist */
 async function readGz(path) {
@@ -40,6 +40,7 @@ const charFile = once(bucket => readGz(`x/${bucket}.gz`))
 const wordFile = once(bucket => readGz(`m/${bucket}.gz`))
 const partFile = once(bucket => readGz(`p/${bucket}.gz`))
 const writingFile = once(bucket => readGz(`i/${bucket}.gz`))
+const runFile = once(bucket => readGz(`g/${bucket}.gz`))
 const schemeFile = once(path => readGz(path))
 const readingFile = once(bucket => readGz(`r/${bucket}.gz`))
 const charReadingFile = once(shard => readGz(`y/${shard}.gz`))
@@ -109,6 +110,24 @@ export async function findPart(part) {
   const row = body.split('\n').find(line => line.startsWith(`${part}\t`))
   return row ? [...row.split('\t')[1]] : []
 }
+
+/**
+ * The characters a source writes with this run of parts. Each source spells a part its own way, so
+ * the caller asks for every spelling it knows.
+ * @param {string} run @returns {Promise<string[]>} */
+export async function findRun(run) {
+  const body = await runFile(runBucket(run))
+  const row = body.split('\n').find(line => line.startsWith(`${run}\t`))
+  return row ? [...row.split('\t')[1]] : []
+}
+
+/** @typedef {import('../../src/variants.js').Variants} Variants */
+/** @type {Promise<Variants> | null} */
+let variants = null
+/** Spellings of a part, and the characters Unicode calls the same. @returns {Promise<Variants>} */
+export const loadVariants = () => (variants ??= readGz('variants.json.gz').then(body => body
+  ? JSON.parse(body)
+  : { sources: [], component: {}, character: {} }).catch(error => { variants = null; throw error }))
 
 /** @typedef {{ rank: number, strokes: number, radical: string }} CharRow */
 /** @type {Promise<Map<string, CharRow>> | null} */

@@ -12,7 +12,7 @@
   import CharsetFilter from '../ui/CharsetFilter.svelte'
   import ProposalRecords from '../ui/ProposalRecords.svelte'
 
-  const EXAMPLES = ['ユタヘヘミ', 'jnd', 'luong', '端一東平', '30407', 'tsɿ', '氵 12畫', 'river ジ', 'chữ', 'a-1', 'a672', 'U+5B57']
+  const EXAMPLES = ['ユタヘヘミ', 'jnd', 'luong', '端一東平', '30407', 'tsɿ', '氵 12畫', '口匕', 'river ジ', 'chữ', 'a-1', 'a672', 'U+5B57']
   const GRID_LIMIT = 240
 
   const query = $derived(route.q)
@@ -170,10 +170,25 @@
       <Tiles chars={common} label={t('find.common', { count: common.length })} limit={GRID_LIMIT} />
     </section>
   {:else if single}
-    {#if single.chars.length && ['text', 'point', 'strokes', 'pua'].includes(single.clue.kind)}
+    {#if single.chars.length && !single.shapes.some(shape => shape.exact) && ['text', 'point', 'strokes', 'pua'].includes(single.clue.kind)}
       <section class="ui-section">
         <h2 class="ui-label">{t('find.characters')}</h2>
         <Tiles chars={single.chars} size={72} label={t('find.characters')} />
+      </section>
+    {/if}
+    {#each single.shapes as shape, at (shape.text)}
+      {#if at === 1}<p class="ui-hint">{t('find.structureNote')}</p>{/if}
+      {@const title = shape.exact ? t('find.structure', { parts: shape.text }) : t('find.structureVariant', { parts: shape.text })}
+      <section class="ui-section">
+        <h2 class="ui-label">{title} <span class="ui-count">{shape.chars.length}</span></h2>
+        <Tiles chars={shape.chars} limit={48} label={title} />
+      </section>
+    {/each}
+    {#if single.variants.length}
+      <section class="ui-section">
+        <h2 class="ui-label">{t('find.sameCharacter')} <span class="ui-count">{single.variants.length}</span></h2>
+        <p class="ui-hint">{t('find.sameCharacterNote')}</p>
+        <Tiles chars={single.variants.map(row => row.char)} limit={48} label={t('find.sameCharacter')} />
       </section>
     {/if}
     {#each groups.filter(group => group.literal) as group (group.method)}{@render methodGroup(group)}{/each}
@@ -189,6 +204,12 @@
         <Tiles chars={single.parts} limit={48} label={t('find.parts', { part: single.clue.text })} />
       </section>
     {/if}
+    {#each single.partVariants as group (group.text)}
+      <section class="ui-section">
+        <h2 class="ui-label">{t('find.variantOf', { part: group.text })} <span class="ui-count">{group.chars.length}</span></h2>
+        <Tiles chars={group.chars} limit={48} label={t('find.variantOf', { part: group.text })} />
+      </section>
+    {/each}
     {#if tally.length}
       <section class="ui-section">
         <h2 class="ui-label">{t('find.readings', { count: varieties, chars: tally.length })}</h2>

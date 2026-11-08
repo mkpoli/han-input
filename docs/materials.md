@@ -32,6 +32,7 @@ Discord discussion of 2026-10-27, and the works themselves were not read.
 | [hypua-unicoder](https://github.com/SaschaNaz/hypua-unicoder), Kagami Sascha Rosylight | 5,661 Hanyang PUA codes to Hangul jamo sequences | ISC. The table was obtained via hypua2jamo and the KTUG HanyangPuaTableProject; terms for the upstream table are not stated |
 | [CNS 11643 open data](https://data.gov.tw/dataset/5961), plane 15 table via a [mirror](https://github.com/qundao/backup-cns11643), crossed with Unihan `kIRG_TSource` | 516 PUA-A codes to their Unicode characters | Open Government Data License 1.0; Unicode License v3 for Unihan |
 | [L2/06-394](http://www.unicode.org/L2/L2006/06394-gb18030-2005.txt), Ken Lunde, Adobe Systems, 2006 | 24 PUA-to-Unicode assignments kept by GB 18030-2005 | Unicode UTC document; the code-point mapping is treated as factual data |
+| [yi-bai/iwds](https://github.com/yi-bai/iwds), `iwds.xml`, fetched 2026-11-08, SHA-256 `886b426ea3d1d329749e02b32cccd5082d31d6cf1b996ea37bdae5ac593ca491` | which spellings of a part count as one, and the character pairs they disunify | No repository-wide licence was located |
 | [BabelStone IDS](https://www.babelstone.co.uk/CJK/IDS.TXT), Andrew West | which parts each character is written with | As stated in the file |
 | [CHISE IDS](https://www.chise.org/ids/), the eighteen `IDS-UCS-*.txt` files at `chise/ids` `main@2026-11-04` | further descriptions of the same, including characters BabelStone leaves out | GPL-2.0-or-later; the build copies the descriptions, so the generated site data carries that licence |
 | [Noto Sans Nushu and Noto Serif Hentaigana](https://github.com/notofonts) | glyphs for Nüshu and hentaigana | OFL-1.1 |
@@ -46,6 +47,17 @@ The research behind these choices, with every candidate and what was checked, is
 [`research-input-methods.md`](research-input-methods.md) and
 [`research-extended-sinography.md`](research-extended-sinography.md). Those tables record uncertainty row
 by row and were compiled by a delegated research pass, so a row marked uncertain has not been reconfirmed.
+
+## Variant spellings
+
+A part is searched under every spelling IWDS groups with it: `口匕` also asks for `口七`, and the results
+name the spelling each group came from. A character's card and search result also list the code points
+Unicode calls the same character (叱 and 叱, through UnicodeData's compatibility decomposition) and the
+pairs IWDS marks as disunified variants.
+
+Both relations are readings of the sources, not proof that the forms are one character. IWDS calls most
+of its groups unifiable, and a compatibility mapping only states that one code point stands for another;
+neither makes the glyphs identical in every font.
 
 ## Search by meaning
 

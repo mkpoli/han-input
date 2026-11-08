@@ -46,7 +46,7 @@ export const IDS_SOURCES = [BABELSTONE, { id: CHISE.id, name: CHISE.name, url: C
 
 /** @typedef {{ text: string, regions: string, sources: string[] }} Description */
 
-const OPERATORS = new Set('⿰⿱⿲⿳⿴⿵⿶⿷⿸⿹⿺⿻⿼⿽⿾⿿〾㇯')
+export const OPERATORS = new Set('⿰⿱⿲⿳⿴⿵⿶⿷⿸⿹⿺⿻⿼⿽⿾⿿〾㇯')
 const BODY = /^\^(.+)\$\(([^()]*)\)$/
 
 /** BabelStone's numbered components ({12}, the right of 龍) and the IDS fragments that write them out. */
@@ -122,6 +122,15 @@ export async function readDescriptions() {
     }
   }
   return descriptions
+}
+
+/** Runs of parts a description writes, operators dropped: 夫口, 口匕 for ⿱夫⿰口匕.
+ * @param {string} text @param {number[]} lengths @returns {Set<string>} */
+export function runsOf(text, lengths) {
+  const parts = [...text].filter(c => !OPERATORS.has(c))
+  const runs = new Set()
+  for (const length of lengths) for (let at = 0; at + length <= parts.length; at++) runs.add(parts.slice(at, at + length).join(''))
+  return runs
 }
 
 /** Parts at any depth, keyed by part, from every description given. @param {Map<string, Description[]>} descriptions */

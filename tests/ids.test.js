@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'bun:test'
-import { addDescription, partsOf, writeOut } from '../scripts/sources/ids.mjs'
+import { addDescription, partsOf, runsOf, writeOut } from '../scripts/sources/ids.mjs'
 
 /** @returns {Map<string, { text: string, regions: string, sources: string[] }[]>} */
 const empty = () => new Map()
@@ -47,6 +47,15 @@ describe('numbered components', () => {
       { text: '⿱{7}心', regions: 'GHTJKPV', sources: ['babelstone'] },
       { text: '⿱&CDP-8BD0;心', regions: '', sources: ['chise'] },
     ])
+  })
+})
+
+describe('runs', () => {
+  test('drops the operators and keeps every run of the asked lengths', () => {
+    expect(runsOf('⿱夫⿰口匕', [2, 3])).toEqual(new Set(['夫口', '口匕', '夫口匕']))
+  })
+  test('finds no run in a description shorter than the length', () => {
+    expect(runsOf('口', [2, 3])).toEqual(new Set())
   })
 })
 
