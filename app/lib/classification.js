@@ -67,6 +67,13 @@ function orderOf(varieties, unclassed) {
   return order
 }
 
+/** @param {Map<string, string>} order @param {{ path: string, name: string }} left @param {{ path: string, name: string }} right */
+function byAtlas(order, left, right) {
+  const a = order.get(left.path) ?? '~'
+  const b = order.get(right.path) ?? '~'
+  return a < b ? -1 : a > b ? 1 : left.name < right.name ? -1 : left.name > right.name ? 1 : 0
+}
+
 /**
  * @typedef {{ n: number, forms: string[] }} Reading
  * @typedef {{ n: number, name: string, forms: string[], order: string }} VarietyReading
@@ -110,17 +117,56 @@ export function readingTree(varieties, readings, needle, unclassed) {
   /** @param {{ path: string, name: string, rows: VarietyReading[], children: Map<string, any> }} node @returns {ReadingNode} */
   const finish = node => {
     node.rows.sort((a, b) => a.order < b.order ? -1 : a.order > b.order ? 1 : a.n - b.n)
-    const children = [...node.children.values()].map(finish).sort((a, b) => {
-      const left = order.get(a.path) ?? '~'
-      const right = order.get(b.path) ?? '~'
-      return left < right ? -1 : left > right ? 1 : a.name < b.name ? -1 : a.name > b.name ? 1 : 0
-    })
+    const children = [...node.children.values()].map(finish).sort((a, b) => byAtlas(order, a, b))
     const count = node.rows.length + children.reduce((sum, child) => sum + child.count, 0)
     return { path: node.path, name: node.name, count, rows: node.rows, children }
   }
-  return [...root.children.values()].map(finish).sort((a, b) => {
-    const left = order.get(a.path) ?? '~'
-    const right = order.get(b.path) ?? '~'
-    return left < right ? -1 : left > right ? 1 : a.name < b.name ? -1 : a.name > b.name ? 1 : 0
-  })
+  return [...root.children.values()].map(finish).sort((a, b) => byAtlas(order, a, b))
+}
+
+/**
+ * @typedef {import('./data.js').Variety} Variety
+ * @typedef {{ path: string, name: string, count: number, items: Variety[], children: VarietyNode[] }} VarietyNode
+ */
+
+/**
+ * Every variety in a tree, in atlas order. Branches without a matching variety are left out.
+ * @param {Variety[]} varieties
+ * @param {string} needle
+ * @param {string} unclassed
+ * @returns {VarietyNode[]}
+ */
+export function varietyTree(varieties, needle, unclassed) {
+  const order = orderOf(varieties, unclassed)
+  /** @type {{ path: string, name: string, items: Variety[], children: Map<string, any> }} */
+  const root = { path: '', name: '', items: [], children: new Map() }
+  for (const variety of varieties) {
+    const haystack = `${variety.name} ${variety.short} ${variety.atlas} ${variety.region} ${variety.place}`.toLowerCase()
+    if (needle && !haystack.includes(needle)) continue
+    const path = pathOf(variety, unclassed)
+    let node = root
+    for (let depth = 1; depth <= path.length; depth++) {
+      const key = path.slice(0, depth).join('－')
+      let child = node.children.get(key)
+      if (!child) {
+        child = { path: key, name: path[depth - 1], items: [], children: new Map() }
+        node.children.set(key, child)
+      }
+      node = child
+    }
+    node.items.push(variety)
+  }
+
+  /** @param {{ path: string, name: string, items: Variety[], children: Map<string, any> }} node @returns {VarietyNode} */
+  const finish = node => {
+    node.items.sort((a, b) => {
+      const left = a.order || '~'
+      const right = b.order || '~'
+      return left < right ? -1 : left > right ? 1 : a.n - b.n
+    })
+    const children = [...node.children.values()].map(finish).sort((a, b) => byAtlas(order, a, b))
+    const count = node.items.length + children.reduce((sum, child) => sum + child.count, 0)
+    return { path: node.path, name: node.name, count, items: node.items, children }
+  }
+  return [...root.children.values()].map(finish).sort((a, b) => byAtlas(order, a, b))
 }
