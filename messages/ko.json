@@ -121,6 +121,7 @@
   "charset.printedRecords": "인쇄 기록 {glyphs}건 가운데 Unicode 부호 위치가 있는 것은 {mapped}건. {unmatched}건은 비교에 들어가지 않습니다.",
   "charset.sharedRecordsLabel": "겹침 {percent}%: 기록 {total}건 가운데 {shared}건. Unicode 부호 위치가 있는 {mapped}건을 {name}와 비교했습니다. {name}의 {otherPercent}%({otherTotal}건 가운데 {shared}건).",
   "charset.blocks": "Unicode 블록",
+  "charset.versions": "Unicode 버전",
   "charset.blockOther": "기타",
   "proposal.unifiedWith": "통합 대상",
   "proposal.page": "{page}쪽",

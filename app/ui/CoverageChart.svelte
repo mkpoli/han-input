@@ -15,8 +15,8 @@
    * @property {number} otherTotal Characters listed by the other set.
    */
 
-  /** @type {{ encoded: number, unencoded: number, compared?: Compared | null, blocks?: import('../lib/blocks.js').BlockRow[] }} */
-  let { encoded, unencoded, compared = null, blocks = [] } = $props()
+  /** @type {{ encoded: number, unencoded: number, compared?: Compared | null, blocks?: import('../lib/blocks.js').BlockRow[], versions?: import('../lib/ages.js').VersionRow[] }} */
+  let { encoded, unencoded, compared = null, blocks = [], versions = [] } = $props()
   const total = $derived(encoded + unencoded)
   const share = $derived(total ? unencoded / total : 0)
   const format = (/** @type {number} */ share) =>
@@ -26,6 +26,13 @@
     minimumFractionDigits: 1,
     maximumFractionDigits: share > 0 && share < 0.001 ? 2 : 1,
   }).format(share * 100)
+  const formatVersionShare = (/** @type {number} */ share) => new Intl.NumberFormat(i18n.locale, {
+    minimumFractionDigits: 1,
+    maximumFractionDigits: share > 0.999 ? 2 : share < 0.0001 ? 4 : share < 0.001 ? 3 : 1,
+  }).format(share * 100)
+  const hex = (/** @type {number} */ point) => `U+${point.toString(16).toUpperCase()}`
+  const rangeLabel = (/** @type {import('../lib/ages.js').VersionRow['ranges']} */ ranges) =>
+    ranges.map(range => range.start === range.end ? hex(range.start) : `${hex(range.start)}–${hex(range.end)}`).join(', ')
   const radius = 27
   const circumference = 2 * Math.PI * radius
   const arc = $derived(circumference * share)
@@ -133,6 +140,25 @@
       </ol>
     </div>
   {/if}
+  {#if versions.length}
+    <div class="versions">
+      <p class="caption">{t('charset.versions')}</p>
+      <ol>
+        {#each versions as row (row.version)}
+          <li>
+            <span class="name">{row.version}</span>
+            {#if row.ranges.length <= 2}
+              <span class="range" title={rangeLabel(row.ranges)}>{rangeLabel(row.ranges)}</span>
+            {:else}
+              <span class="range"></span>
+            {/if}
+            <span class="count">{row.count.toLocaleString(i18n.locale)}</span>
+            <b>{formatVersionShare(row.share)}%</b>
+          </li>
+        {/each}
+      </ol>
+    </div>
+  {/if}
 </div>
 
 <style>
@@ -163,4 +189,12 @@
   .blocks .name{color:var(--ui-color-ink-soft);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .blocks .count{color:var(--ui-color-ink-muted);font-variant-numeric:tabular-nums}
   .blocks b{font-weight:var(--ui-weight-medium);color:var(--ui-color-ink);font-variant-numeric:tabular-nums}
+  .versions{flex:1 0 100%;padding-block-start:var(--ui-space-sm);border-block-start:1px solid var(--ui-color-border)}
+  .versions .caption{margin:0 0 var(--ui-space-2xs)}
+  .versions ol{display:grid;gap:2px;margin:0;padding:0;list-style:none}
+  .versions li{display:grid;grid-template-columns:minmax(38px,auto) minmax(0,1fr) auto auto;align-items:baseline;gap:var(--ui-space-xs);font-size:var(--ui-text-xs);line-height:var(--ui-leading-tight)}
+  .versions .name{color:var(--ui-color-ink-soft);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .versions .range{color:var(--ui-color-ink-muted);font-family:var(--ui-font-mono);font-size:10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .versions .count{color:var(--ui-color-ink-muted);font-variant-numeric:tabular-nums}
+  .versions b{font-weight:var(--ui-weight-medium);color:var(--ui-color-ink);font-variant-numeric:tabular-nums}
 </style>

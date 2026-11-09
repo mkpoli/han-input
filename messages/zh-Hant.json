@@ -121,6 +121,7 @@
   "charset.printedRecords": "印刷記錄{glyphs}條，其中{mapped}條有Unicode碼位；{unmatched}條不進入比較。",
   "charset.sharedRecordsLabel": "重合{percent}%：{total}條記錄中有{shared}條。以{mapped}條有Unicode碼位的記錄與{name}比較。占{name}的{otherPercent}%（{otherTotal}條中{shared}條）。",
   "charset.blocks": "Unicode區塊",
+  "charset.versions": "Unicode 版本",
   "charset.blockOther": "其他",
   "proposal.unifiedWith": "合併至",
   "proposal.page": "第{page}頁",

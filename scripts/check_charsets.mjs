@@ -551,6 +551,16 @@ try {
     assert.match(await metric.locator('svg').getAttribute('aria-label') ?? '', /1 of 138 records/)
     await page.screenshot({ path: join(SHOTS, 'overlap-ext-e-8f-light.png') })
   })
+  await check('an Extension B set reports its Unicode version shares', async () => {
+    await find(page, '', 'unicode_ext_b')
+    const versions = page.locator('.versions')
+    await versions.waitFor()
+    const text = await versions.innerText()
+    assert.match(text, /13\.0/)
+    assert.match(text, /0\.016%/)
+    assert.match(text, /U\+2A6D7/)
+    assert.match(text, /U\+2A6DD/)
+  })
   for (const theme of /** @type {const} */ (['light', 'dark'])) {
     for (const phone of [false, true]) {
       const view = await browser.newContext({ viewport: phone ? { width: 390, height: 844 } : { width: 1360, height: 900 }, deviceScaleFactor: 2, colorScheme: theme, locale: 'en-US' })
@@ -574,6 +584,10 @@ try {
         await tab.locator('#charset-compare').selectOption('g_8f')
         await tab.locator('.coverage .metric').nth(1).waitFor()
         await tab.screenshot({ path: join(SHOTS, `${name}-overlap.png`) })
+        assert.equal(await tab.evaluate(() => document.documentElement.scrollWidth - innerWidth), 0)
+        await find(tab, '', 'unicode_ext_b')
+        await tab.locator('.versions').waitFor()
+        await tab.screenshot({ path: join(SHOTS, `${name}-versions.png`) })
         assert.equal(await tab.evaluate(() => document.documentElement.scrollWidth - innerWidth), 0)
         for (const proposal of catalogue.filter(set => set.records?.glyphs)) {
           await find(tab, '', proposal.id)
