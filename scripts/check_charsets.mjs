@@ -125,6 +125,27 @@ try {
     assert.equal(await page.locator('.metadata a').getAttribute('href'), t1Entry.source.url)
     assert.match(await page.locator('.charset-filter').innerText(), /Every source row is listed/)
   })
+  await check('a browsed set turns by 240 characters, with the last page short', async () => {
+    const all = [...t1]
+    const pageCount = Math.ceil(all.length / 240)
+    await find(page)
+    const summary = await page.locator('.pager').first().innerText()
+    assert.match(summary, new RegExp(`Page 1 of ${pageCount}, ${all.length.toLocaleString('en-US')} characters`))
+    assert.equal(await page.locator('[data-page="prev"]').first().isDisabled(), true)
+    await page.locator('[data-page="next"]').first().click()
+    await page.waitForFunction(expected => document.querySelector('main .ui-tile-glyph')?.textContent === expected, all[240])
+    assert.deepEqual(await page.locator('main .ui-tile-glyph').allTextContents(), all.slice(240, 480))
+    assert.match(await page.locator('.pager').first().innerText(), new RegExp(`Page 2 of ${pageCount}`))
+    for (let at = 2; at < pageCount; at++) {
+      await page.locator('[data-page="next"]').last().click()
+      await page.waitForFunction(wanted => document.querySelector('.pager')?.textContent?.includes(`Page ${wanted} of`), at + 1)
+    }
+    await page.waitForFunction(expected => document.querySelector('main .ui-tile-glyph')?.textContent === expected, all[(pageCount - 1) * 240])
+    assert.deepEqual(await page.locator('main .ui-tile-glyph').allTextContents(), all.slice((pageCount - 1) * 240))
+    assert.equal(await page.locator('[data-page="next"]').last().isDisabled(), true)
+    await page.locator('[data-page="prev"]').first().click()
+    await page.waitForFunction(expected => document.querySelector('main .ui-tile-glyph')?.textContent === expected, all[(pageCount - 2) * 240])
+  })
   await check('CNS source overview lists every registration-source category before choosing a character', async () => {
     await find(page, '', '')
     await page.getByRole('button', { name: 'CNS source categories', exact: true }).click()
