@@ -215,17 +215,17 @@ try {
       assert.ok((await page.locator('main .ids-list li').first().innerText()).length > 0)
     })
   }
-  const textOnly = catalogue.find(set => set.id === 'ext_d_v_withdrawals')
-  const textOnlyRecords = textOnly?.records
-  if (textOnly && textOnlyRecords) {
+  for (const textOnly of catalogue.filter(set => set.group === 'Proposals' && set.records?.glyphs === 0)) {
+    const textOnlyRecords = textOnly.records
+    assert.ok(textOnlyRecords)
     await check(`text-only proposal records are listed: ${textOnly.id}`, async () => {
       const data = JSON.parse(readFileSync(join(DIST, 'charsets', textOnlyRecords.file.replace('/charsets/', '')), 'utf8'))
       await find(page, '', textOnly.id)
       assert.equal(await page.locator('main .records .ui-tile').count(), textOnlyRecords.count)
       assert.equal(await page.locator('main .records img').count(), 0)
-      assert.ok((await page.locator('main .records').innerText()).includes(data.records[0].source))
+      assert.ok((await page.locator('main .records').innerText()).includes(data.records[0].source ?? data.records[0].serial))
       await page.locator('main .records .ui-tile').first().click()
-      assert.match(await page.locator('aside.card').innerText(), new RegExp(data.records[0].source))
+      assert.match(await page.locator('aside.card').innerText(), new RegExp(data.records[0].source ?? data.records[0].serial))
     })
   }
   const recorded = catalogue.find(set => set.source.records)
@@ -420,6 +420,12 @@ try {
         assert.equal(await tab.locator('main details .set').count(), 123)
         assert.equal(await tab.evaluate(() => document.documentElement.scrollWidth - innerWidth), 0)
         for (const proposal of catalogue.filter(set => set.records?.glyphs)) {
+          await find(tab, '', proposal.id)
+          await tab.locator('main .records .ui-tile').first().click()
+          await tab.screenshot({ path: join(SHOTS, `${name}-${proposal.id}.png`) })
+          assert.equal(await tab.evaluate(() => document.documentElement.scrollWidth - innerWidth), 0)
+        }
+        for (const proposal of catalogue.filter(set => set.group === 'Proposals' && set.records?.glyphs === 0)) {
           await find(tab, '', proposal.id)
           await tab.locator('main .records .ui-tile').first().click()
           await tab.screenshot({ path: join(SHOTS, `${name}-${proposal.id}.png`) })
