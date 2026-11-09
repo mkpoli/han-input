@@ -1,9 +1,10 @@
 import { describe, test, expect, afterEach } from 'bun:test'
 import { readFileSync, readdirSync } from 'node:fs'
 import { mappedMembers, iwdsMembers, scalarExpressions, idsRecords } from '../scripts/charset-members.mjs'
-import { filterAnswer, loadCharsets, loadCharset, loadRecords, sharedCharacters } from '../app/lib/charsets.js'
+import { compareCodes, filterAnswer, loadCharsets, loadCharset, loadRecords, sharedCharacters } from '../app/lib/charsets.js'
 import { loadChars, findMeaning } from '../app/lib/data.js'
 import { cnsSourceSets, unihanTSources } from '../scripts/sources/charsets-cns.mjs'
+import { cnsRowCodes, codeText, evidenceCodes, rowCodes } from '../scripts/charset-codes.mjs'
 
 describe('source glyph membership', () => {
   test('uses glyphs, never local draft slots or IDS operands', () => {
@@ -65,6 +66,52 @@ test('selected literal scalars remain searchable outside the general script pars
     expect(filterAnswer(answer, new Set([...char])).chars).toEqual([...char])
     expect(filterAnswer(answer, new Set(['字'])).chars).toEqual([])
   }
+})
+
+test('code order reads code points as numbers and other codes as source numbers', () => {
+  expect(compareCodes('U+2F800', 'U+F900')).toBeGreaterThan(0)
+  expect(compareCodes('U+4E00', 'U+5B57')).toBeLessThan(0)
+  expect(compareCodes('1601', '8909')).toBeLessThan(0)
+  expect(compareCodes('1-0289', '1-4421')).toBeLessThan(0)
+  expect(compareCodes('U+2F800', 'U+F900')).toBe(-compareCodes('U+F900', 'U+2F800'))
+})
+
+test('a set code is the source index under its glyph', () => {
+  expect(rowCodes([
+    ['2B740', '𫝀'], ['0001', '⿰一木'], ['2B740', '𫝀'],
+  ], { index: 'hex', source: 'Unicode' }, '𫝀')).toEqual([{ char: '𫝀', code: 'U+2B740' }])
+  expect(rowCodes([['A440', '一']], { index: 'hex', source: 'H' }, '一')[0].code).toBe('A440')
+  expect(rowCodes([['1601', '一']], { index: 'kuten' }, '一')[0].code).toBe('1601')
+  expect(cnsRowCodes([{ cns: '1-4421', unicode: ['4E00', '5B57'] }], '一')).toEqual([{ char: '一', code: '1-4421' }])
+  expect(evidenceCodes([{ entry: '1', char: '字' }, { entry: '2', char: '一' }], '字')).toEqual([{ char: '字', code: '1' }])
+  expect(codeText([{ char: '字', code: '1-4773' }])).toBe('字\t1-4773\n')
+})
+
+test('the snapshot keeps one code per member where the set defines one', () => {
+  const base = new URL('../app/public/charsets/', import.meta.url)
+  const catalogue = JSON.parse(readFileSync(new URL('index.json', base), 'utf8'))
+  const coded = catalogue.filter(row => row.codes)
+  expect(coded.length).toBeGreaterThan(240)
+  for (const row of coded) {
+    const members = new Set([...readFileSync(new URL(`${row.id}.txt`, base), 'utf8')])
+    const lines = readFileSync(new URL(row.codes.replace('/charsets/', ''), base), 'utf8').split('\n').filter(Boolean)
+    expect(lines.length).toBeGreaterThan(0)
+    const seen = new Set()
+    for (const line of lines) {
+      const at = line.indexOf('\t')
+      const char = line.slice(0, at)
+      expect(members.has(char)).toBe(true)
+      expect(line.slice(at + 1)).toBeTruthy()
+      expect(seen.has(char)).toBe(false)
+      seen.add(char)
+    }
+  }
+  const line = (/** @type {string} */ id, /** @type {string} */ char) => readFileSync(new URL(`${id}.codes.tsv`, base), 'utf8').split('\n').find(row => row.startsWith(`${char}\t`))
+  expect(line('t1', '字')).toBe('字\t3983')
+  expect(line('cns_source_f8744b5cf664', '字')).toBe('字\t1-4773')
+  expect(line('hb1', '字')).toBe('字\tA672')
+  expect(line('unicode_basic', '字')).toBe('字\tU+5B57')
+  expect(line('ext_e_withdrawal_records', '𦱳')).toBe('𦱳\tG_K0642.17')
 })
 
 test('CNS categories preserve source labels, decimal planes and private-use evidence', () => {

@@ -14,7 +14,9 @@ It covers Han, extended sinographies such as Chữ Nôm and Sawndip, and kana an
   word of meaning. Spaces separate clues: `氵 12畫`, `river ジ`, `cangjie5:jnd`. A part is also tried under
   the spellings on record for it, so `口匕` brings characters sources write `口七`; the seal shape also
   covers `⼙` (Kangxi radical) and `𰆊` (Idu -n mark), and offers `卪` as a look-alike.
-  A [character-set filter](docs/character-sets.md) narrows the results or browses a set on its own.
+  A [character-set filter](docs/character-sets.md) narrows the results or browses a set on its own. A browsed set
+  prints each character's code in that set under it, orders by that code or by character, and can show only
+  encoded or only unencoded members.
 - **Methods**: every input method, each usable as an input method of its own.
 - **Readings**: every variety in 漢字音典, each typed the same way.
 - **Rhyme tables**: the Guangyun by rhyme, initial, grade and tone.

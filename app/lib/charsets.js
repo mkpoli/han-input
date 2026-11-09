@@ -1,5 +1,5 @@
 // Character-set membership is a scalar glyph mapping, independent of the search corpus.
-/** @typedef {{id:string, group:string, label:string, names:{en:string,zh?:string,hans?:string,ja?:string,ko?:string}, chars:number, total:number, encoded?:number, unencoded?:number, records?:{file:string, count:number, glyphs:number}, source:{name:string,url:string,note?:string,records?:string,version?:string,licence?:string,attribution?:string}}} Charset */
+/** @typedef {{id:string, group:string, label:string, names:{en:string,zh?:string,hans?:string,ja?:string,ko?:string}, chars:number, total:number, encoded?:number, unencoded?:number, codes?:string, records?:{file:string, count:number, glyphs:number}, source:{name:string,url:string,note?:string,records?:string,version?:string,licence?:string,attribution?:string}}} Charset */
 /** @typedef {{id:string, document:string, title:string, source:string, date:string, url:string, status?:string}} ProposalDocument */
 /** @typedef {{serial?:string|null, sequence?:string, source?:string|null, document:string, page?:number, glyph?:string, status?:string, mappedUnicode?:string, mappedCharacter?:string, unifiedWith?:string, mappingKind?:string, mappingEvidence?:string, evidenceUrls?:string[], kind?:'ids', ids?:string}} ProposalRecord */
 /** @typedef {{title:string, complete:boolean, scope:string, documents:ProposalDocument[], records:ProposalRecord[]}} ProposalRecords */
@@ -38,6 +38,50 @@ export function loadCharset(id) {
 
 /** @param {string} id */
 export async function browseCharset(id) { return [...await loadCharset(id)] }
+
+const collator = new Intl.Collator('en', { numeric: true })
+/** Code order across mixed systems: code points first, then the source's own numbering. @param {string} a @param {string} b */
+export function compareCodes(a, b) {
+  if (a.startsWith('U+') && b.startsWith('U+')) {
+    const left = parseInt(a.slice(2), 16)
+    const right = parseInt(b.slice(2), 16)
+    if (Number.isFinite(left) && Number.isFinite(right) && left !== right) return left - right
+  }
+  return collator.compare(a, b)
+}
+
+/** A private-use slot stands for a glyph without an assigned scalar. @param {string} char */
+export function isPrivateUse(char) {
+  const cp = char.codePointAt(0) ?? 0
+  return cp >= 0xE000 && cp <= 0xF8FF || cp >= 0xF0000 && cp <= 0xFFFFD || cp >= 0x100000 && cp <= 0x10FFFD
+}
+
+/** @type {Map<string, Promise<Map<string, string>>>} */
+const coded = new Map()
+/** The code each member carries in its own set, in source row order. @param {string} id @returns {Promise<Map<string, string>>} */
+export function loadCharsetCodes(id) {
+  let pending = coded.get(id)
+  if (!pending) {
+    pending = (async () => {
+      const entry = (await loadCharsets()).find(set => set.id === id)
+      if (!entry?.codes) return new Map()
+      const response = await fetch(entry.codes)
+      if (response.status === 404) return new Map()
+      if (!response.ok || (response.headers.get('content-type') ?? '').includes('text/html')) throw new Error('Character-set codes unavailable')
+      /** @type {Map<string, string>} */
+      const codes = new Map()
+      for (const line of (await response.text()).split('\n')) {
+        const at = line.indexOf('\t')
+        if (at < 0) continue
+        const char = line.slice(0, at)
+        if (char && !codes.has(char)) codes.set(char, line.slice(at + 1))
+      }
+      return codes
+    })().catch(error => { coded.delete(id); throw error })
+    coded.set(id, pending)
+  }
+  return pending
+}
 
 /** Characters listed by both sets, counted once. A private-use slot matches only the same slot.
  * @param {Set<string>} a @param {Set<string>} b */

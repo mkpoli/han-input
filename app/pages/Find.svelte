@@ -3,7 +3,7 @@
   // as a word of meaning. Several clues, split by spaces, leave the characters that fit them all.
   import { tick, untrack } from 'svelte'
   import { route, setQuery, setCharset, setPage, pageHref, link, go } from '../lib/route.svelte.js'
-  import { loadCharsets, loadCharset, loadRecords, filterAnswer, browseCharset } from '../lib/charsets.js'
+  import { loadCharsets, loadCharset, loadCharsetCodes, loadRecords, filterAnswer, browseCharset, compareCodes, isPrivateUse } from '../lib/charsets.js'
   import { answer, groupHits, intersect, readQuery, tallyReadings } from '../lib/search.js'
   import { loadMethods } from '../lib/data.js'
   import { loadGlyphs } from '../lib/fonts.js'
@@ -27,6 +27,11 @@
   let common = $state([])
   /** @type {string[]} */
   let browsed = $state([])
+  /** @type {Map<string, string>} */
+  let codes = $state(new Map())
+  /** @type {'all' | 'encoded' | 'unencoded'} */
+  let show = $state('all')
+  let byCode = $state(false)
   /** @type {import('../lib/charsets.js').ProposalRecords | null} */
   let records = $state(null)
   /** @type {import('../lib/charsets.js').Charset[]} */
@@ -41,9 +46,26 @@
   let turning = $state(false)
   /** @type {HTMLElement | null} */
   let browseTop = $state(null)
-  const pages = $derived(Math.max(1, Math.ceil(browsed.length / GRID_LIMIT)))
+  /** @param {string[]} list @param {Map<string, string>} codeOf @param {'all' | 'encoded' | 'unencoded'} mode @param {boolean} sorted */
+  function arrange(list, codeOf, mode, sorted) {
+    let out = mode === 'all' ? list : list.filter(char => mode === 'unencoded' ? isPrivateUse(char) : !isPrivateUse(char))
+    if (sorted) {
+      out = [...out].sort((a, b) => {
+        const left = codeOf.get(a)
+        const right = codeOf.get(b)
+        if (left && right) return compareCodes(left, right)
+        if (left) return -1
+        if (right) return 1
+        return (a.codePointAt(0) ?? 0) - (b.codePointAt(0) ?? 0)
+      })
+    }
+    return out
+  }
+  const arranged = $derived(arrange(browsed, codes, show, byCode && codes.size > 0))
+  const longCodes = $derived([...codes.values()].some(code => code.length > 7))
+  const pages = $derived(Math.max(1, Math.ceil(arranged.length / GRID_LIMIT)))
   const page = $derived(Math.min(pages - 1, Math.max(0, route.p - 1)))
-  const pageChars = $derived(browsed.slice(page * GRID_LIMIT, (page + 1) * GRID_LIMIT))
+  const pageChars = $derived(arranged.slice(page * GRID_LIMIT, (page + 1) * GRID_LIMIT))
 
   loadMethods().then(list => { methods = new Map(list.map(method => [method.id, method])) }).catch(() => {})
 
@@ -63,6 +85,7 @@
     answers = []
     common = []
     browsed = []
+    codes = new Map()
     records = null
     failed = false
     busy = true
@@ -82,11 +105,15 @@
         if (!clues.length) {
           const chars = selected ? await browseCharset(selected) : []
           if (!active) return
-          const requested = untrack(() => route.p)
-          const wanted = Math.min(Math.max(1, Math.ceil(chars.length / GRID_LIMIT)), Math.max(1, requested))
-          const start = (wanted - 1) * GRID_LIMIT
-          await loadGlyphs(chars.slice(start, start + GRID_LIMIT))
+          const setCodes = selected && entry?.codes ? await loadCharsetCodes(selected) : new Map()
           if (!active) return
+          const visible = arrange(chars, setCodes, untrack(() => show), untrack(() => byCode))
+          const requested = untrack(() => route.p)
+          const wanted = Math.min(Math.max(1, Math.ceil(visible.length / GRID_LIMIT)), Math.max(1, requested))
+          const start = (wanted - 1) * GRID_LIMIT
+          await loadGlyphs(visible.slice(start, start + GRID_LIMIT))
+          if (!active) return
+          codes = setCodes
           browsed = chars
           if (wanted !== requested) setPage(wanted, { replace: true })
           busy = false
@@ -128,17 +155,35 @@
    * @param {number} next */
   async function turnTo(next) {
     if (turning) return
-    const from = browsed
+    const from = arranged
     next = Math.max(0, Math.min(pages - 1, next))
     if (next === page) return
     turning = true
     try {
       await loadGlyphs(from.slice(next * GRID_LIMIT, (next + 1) * GRID_LIMIT))
-      if (browsed !== from) return
+      if (arranged !== from) return
       setPage(next + 1)
       await tick()
       browseTop?.scrollIntoView({ block: 'start' })
     } finally { turning = false }
+  }
+
+  /** A filter or an order starts at the first page of the new list. @param {'all' | 'encoded' | 'unencoded'} next */
+  async function setShow(next) {
+    if (show === next) return
+    show = next
+    setPage(1, { replace: true })
+    await tick()
+    await loadGlyphs(arranged.slice(0, GRID_LIMIT))
+  }
+
+  /** @param {boolean} next */
+  async function setOrder(next) {
+    if (byCode === next) return
+    byCode = next
+    setPage(1, { replace: true })
+    await tick()
+    await loadGlyphs(arranged.slice(0, GRID_LIMIT))
   }
 </script>
 
@@ -182,10 +227,22 @@
   {:else if !query.trim() && route.set}
     {#if browsed.length || !records}
       <section class="ui-section" bind:this={browseTop}>
-        <h2 class="ui-label">{t('find.characters')} <span class="ui-count">{browsed.length.toLocaleString()}</span></h2>
+        <h2 class="ui-label">{t('find.characters')} <span class="ui-count">{arranged.length.toLocaleString()}</span></h2>
+        {#if chosen && chosen.group !== 'Proposals'}
+          <div class="browse-tools">
+            {#if chosen.codes}
+              <button class="ui-button" data-size="sm" type="button" aria-pressed={byCode} onclick={() => setOrder(!byCode)}>{t('find.codeOrder')}</button>
+            {/if}
+            <div class="seg" role="group" aria-label={t('find.showLabel')}>
+              <button class="ui-button" data-size="sm" type="button" aria-pressed={show === 'all'} onclick={() => setShow('all')}>{t('find.showAll')}</button>
+              <button class="ui-button" data-size="sm" type="button" aria-pressed={show === 'encoded'} onclick={() => setShow('encoded')}>{t('find.showEncoded')}</button>
+              <button class="ui-button" data-size="sm" type="button" aria-pressed={show === 'unencoded'} onclick={() => setShow('unencoded')}>{t('find.showUnencoded')}</button>
+            </div>
+          </div>
+        {/if}
         <Pager page={page + 1} {pages} disabled={turning} href={pageHref} onchange={next => turnTo(next - 1)} />
-        <Tiles chars={pageChars} limit={GRID_LIMIT} label={chosen ? nameOf(chosen.names) : route.set} />
-        {#if !browsed.length}<p class="ui-hint">{t('find.none')}</p>{/if}
+        <Tiles chars={pageChars} notes={codes} limit={GRID_LIMIT} codeNotes={longCodes} label={chosen ? nameOf(chosen.names) : route.set} />
+        {#if !arranged.length}<p class="ui-hint">{t('find.none')}</p>{/if}
         <Pager page={page + 1} {pages} disabled={turning} href={pageHref} onchange={next => turnTo(next - 1)} />
       </section>
     {/if}
@@ -275,6 +332,9 @@
   .clues{display:flex;flex-wrap:wrap;gap:var(--ui-space-xs)}
   .clue{padding:2px var(--ui-space-sm);border:1px solid var(--ui-color-border);border-radius:var(--ui-radius-sm)}
   .method a{color:inherit}
+  .browse-tools{display:flex;flex-wrap:wrap;align-items:center;gap:var(--ui-space-2xs)}
+  .seg{display:flex;flex-wrap:wrap;gap:var(--ui-space-2xs)}
+  .browse-tools button[aria-pressed='true']{border-color:var(--ui-color-accent);background:var(--ui-color-accent-soft);color:var(--ui-color-accent-ink)}
   .hits{display:grid;gap:var(--ui-space-xs)}
   .hit{display:grid;grid-template-columns:minmax(72px,auto) minmax(0,1fr);gap:var(--ui-space-md);align-items:center}
   .code{font-size:var(--ui-text-sm);color:var(--ui-color-ink-soft);font-family:'Han Ext',var(--ui-font-mono),var(--ui-font-sans),'Jigmo'}
