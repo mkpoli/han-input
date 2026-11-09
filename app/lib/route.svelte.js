@@ -86,6 +86,9 @@ export function setPage(p, mode = {}) {
   else history.pushState(null, '', href(route))
 }
 
+/** A link to one page of the current browsed set, for the pager's own anchors. @param {number} p */
+export const pageHref = p => href({ ...route, p })
+
 /** A link into the site. @param {string} page @param {{ method?: string, c?: string, q?: string, set?: string, p?: number }} [at] */
 export const link = (page, at = {}) => href({ page, method: at.method ?? '', c: at.c ?? '', q: at.q ?? '', set: at.set ?? '', p: at.p ?? 1 })
 
