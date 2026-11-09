@@ -15,8 +15,8 @@
    * @property {number} otherTotal Characters listed by the other set.
    */
 
-  /** @type {{ encoded: number, unencoded: number, compared?: Compared | null, blocks?: import('../lib/blocks.js').BlockRow[], versions?: import('../lib/ages.js').VersionRow[] }} */
-  let { encoded, unencoded, compared = null, blocks = [], versions = [] } = $props()
+  /** @type {{ encoded: number, unencoded: number, compared?: Compared | null, blocks?: import('../lib/blocks.js').BlockRow[], versions?: import('../lib/ages.js').VersionRow[], occupancy?: import('../lib/blocks.js').BlockOccupancy[] }} */
+  let { encoded, unencoded, compared = null, blocks = [], versions = [], occupancy = [] } = $props()
   const total = $derived(encoded + unencoded)
   const share = $derived(total ? unencoded / total : 0)
   const format = (/** @type {number} */ share) =>
@@ -29,6 +29,10 @@
   const formatVersionShare = (/** @type {number} */ share) => new Intl.NumberFormat(i18n.locale, {
     minimumFractionDigits: 1,
     maximumFractionDigits: share > 0.999 ? 2 : share < 0.0001 ? 4 : share < 0.001 ? 3 : 1,
+  }).format(share * 100)
+  const formatOccupancyShare = (/** @type {number} */ share) => new Intl.NumberFormat(i18n.locale, {
+    minimumFractionDigits: 3,
+    maximumFractionDigits: 3,
   }).format(share * 100)
   const hex = (/** @type {number} */ point) => `U+${point.toString(16).toUpperCase()}`
   const rangeLabel = (/** @type {import('../lib/ages.js').VersionRow['ranges']} */ ranges) =>
@@ -159,6 +163,31 @@
       </ol>
     </div>
   {/if}
+  {#if occupancy.length}
+    <div class="occupancy">
+      <p class="caption">{t('charset.occupancy')}</p>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">{t('charset.block')}</th>
+            <th scope="col">{t('charset.total')}</th>
+            <th scope="col">{t('charset.empty')}</th>
+            <th scope="col">{t('charset.emptyShare')}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {#each occupancy as row (row.id)}
+            <tr>
+              <th scope="row">{row.label}</th>
+              <td>{row.total.toLocaleString(i18n.locale)}</td>
+              <td>{row.empty.toLocaleString(i18n.locale)}</td>
+              <td>{formatOccupancyShare(row.share)}%</td>
+            </tr>
+          {/each}
+        </tbody>
+      </table>
+    </div>
+  {/if}
 </div>
 
 <style>
@@ -197,4 +226,11 @@
   .versions .range{color:var(--ui-color-ink-muted);font-family:var(--ui-font-mono);font-size:10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .versions .count{color:var(--ui-color-ink-muted);font-variant-numeric:tabular-nums}
   .versions b{font-weight:var(--ui-weight-medium);color:var(--ui-color-ink);font-variant-numeric:tabular-nums}
+  .occupancy{flex:1 0 100%;padding-block-start:var(--ui-space-sm);border-block-start:1px solid var(--ui-color-border)}
+  .occupancy .caption{margin:0 0 var(--ui-space-2xs)}
+  .occupancy table{inline-size:100%;border-collapse:collapse;font-size:var(--ui-text-xs);line-height:var(--ui-leading-tight)}
+  .occupancy th,.occupancy td{padding:2px 0;text-align:end;font-weight:var(--ui-weight-normal);font-variant-numeric:tabular-nums}
+  .occupancy th:first-child{text-align:start;color:var(--ui-color-ink-soft)}
+  .occupancy thead th{color:var(--ui-color-ink-muted);font-size:var(--ui-text-2xs);text-transform:uppercase;letter-spacing:var(--ui-tracking-caps)}
+  .occupancy tbody tr+tr{border-block-start:1px solid var(--ui-color-border)}
 </style>

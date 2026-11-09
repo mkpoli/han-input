@@ -45,3 +45,23 @@ function order(id) {
   if (id === 'other') return BLOCKS.length
   return BLOCKS.findIndex(block => block.id === id)
 }
+
+/** @typedef {{id: string, label: string, start: number, end: number, total: number, assigned: number, empty: number, share: number}} BlockOccupancy */
+
+/** Assigned and empty code points of each block, from the age ranges and the block ranges.
+ * Extensions come first, then the remaining CJK blocks.
+ * @param {import('./ages.js').AgeRange[]} ages @param {Block[]} [blocks] @returns {BlockOccupancy[]} */
+export function blockOccupancy(ages, blocks = BLOCKS) {
+  const order = ['ext_a', 'ext_b', 'ext_c', 'ext_d', 'ext_e', 'ext_f', 'ext_g', 'ext_h', 'ext_i', 'ext_j', 'uro', 'compat', 'compat_supp']
+  const rank = (/** @type {string} */ id) => { const index = order.indexOf(id); return index < 0 ? order.length : index }
+  return blocks.map(block => {
+    const total = block.end - block.start + 1
+    let assigned = 0
+    for (const [start, end] of ages) {
+      const from = Math.max(start, block.start)
+      const to = Math.min(end, block.end)
+      if (from <= to) assigned += to - from + 1
+    }
+    return { id: block.id, label: block.label, start: block.start, end: block.end, total, assigned, empty: total - assigned, share: total ? (total - assigned) / total : 0 }
+  }).sort((a, b) => rank(a.id) - rank(b.id) || a.start - b.start)
+}
