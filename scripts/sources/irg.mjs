@@ -3,14 +3,17 @@
 
 /** @typedef {{top:number, left:number, width:number, height:number, value:string}} TextBox */
 /** @typedef {{top:number, left:number, width:number, height:number, src:string}} ImageBox */
-/** @typedef {{number:number, text:TextBox[], images:ImageBox[]}} PageBoxes */
-/** @typedef {{serial:string|null, source:string, target?:string, sequence?:string, page:number, file:string}} Row */
+/** @typedef {{number:number, width:number, height:number, text:TextBox[], images:ImageBox[]}} PageBoxes */
+/** @typedef {{left:number, top:number, width:number, height:number}} TextGlyphBox */
+/** @typedef {{serial:string|null, source:string, target?:string, sequence?:string, char?:string, box?:TextGlyphBox, page:number, file:string}} Row */
 /** @typedef {{serialPattern:string, sourcePattern:string, sequencePattern?:string, draftPattern?:string, stopPattern?:string, leftGap?:number, skipUnmatched?:boolean}} Patterns */
 
 /** @param {string} xml @returns {PageBoxes[]} */
 export function parsePages(xml) {
   return [...xml.matchAll(/<page number="(\d+)"([\s\S]*?)(?=<page number="|<\/pdf2xml>)/g)].map(([, number, body]) => ({
     number: +number,
+    width: +(body.match(/width="(\d+)"/)?.[1] ?? 0),
+    height: +(body.match(/height="(\d+)"/)?.[1] ?? 0),
     text: [...body.matchAll(/<text top="(\d+)" left="(\d+)" width="(\d+)" height="(\d+)"[^>]*>(.*?)<\/text>/g)]
       .map(([, top, left, width, height, value]) => ({ top: +top, left: +left, width: +width, height: +height, value: value.replace(/<[^>]+>/g, '').trim() })),
     images: [...body.matchAll(/<image top="(\d+)" left="(\d+)" width="(\d+)" height="(\d+)" src="([^"]+)"/g)]
@@ -121,7 +124,7 @@ export function numberedCodeRows(page, patterns) {
   return rows
 }
 
-/** @typedef {'codes-left' | 'code-text' | 'code-only' | 'text-pairs' | 'dual-code-cells' | 'numbered-code-rows' | 'glyph-pairs' | 'source-lines'} Matcher */
+/** @typedef {'codes-left' | 'code-text' | 'code-only' | 'text-pairs' | 'text-glyphs' | 'dual-code-cells' | 'numbered-code-rows' | 'glyph-pairs' | 'source-lines'} Matcher */
 
 /**
  * A list without glyphs: every row prints a sequence number and a source id on one line.
@@ -158,6 +161,42 @@ export function codeOnlyRows(page, patterns) {
     if (beside.length !== 1) throw new Error(`Page ${page.number}: glyph ${index} has ${beside.length} code candidates`)
     return { serial: null, source: beside[0].value, page: page.number, file: image.src }
   }).filter(/** @returns {row is Row} */ row => row !== null)
+}
+
+/**
+ * A running list whose glyph is printed as text in a private-use slot: IRGN1525 prints "UTC00291"
+ * and then the character in the document's own font. The glyph box is a single private-use
+ * character, and its code is the source token in the nearest box to its left on the same line. An
+ * optional stop pattern ends the list before the paragraph that opens the next one.
+ * @param {PageBoxes} page @param {Patterns} patterns @returns {Row[]}
+ */
+export function textGlyphRows(page, patterns) {
+  const source = new RegExp(patterns.sourcePattern)
+  const stop = patterns.stopPattern ? new RegExp(patterns.stopPattern) : null
+  const privateUse = (/** @type {string} */ value) => {
+    const point = value.codePointAt(0) ?? 0
+    return (point >= 0xE000 && point <= 0xF8FF) || (point >= 0xF0000 && point <= 0xFFFFD) || (point >= 0x100000 && point <= 0x10FFFD)
+  }
+  const tokens = (/** @type {string} */ value) => value.split(/[\s,;]+/).filter(token => source.test(token))
+  const stopTop = stop ? page.text.find(text => stop.test(text.value))?.top : null
+  const rows = []
+  for (const glyph of page.text) {
+    if ([...glyph.value].length !== 1 || !privateUse(glyph.value)) continue
+    if (stopTop !== null && stopTop !== undefined && glyph.top >= stopTop) continue
+    const beside = page.text.filter(text => text.value && text.left < glyph.left
+      && glyph.left - text.left <= (patterns.leftGap ?? 220)
+      && Math.abs(text.top + text.height / 2 - (glyph.top + glyph.height / 2)) <= 8)
+      .sort((a, b) => (b.left + b.width) - (a.left + a.width))
+    if (!beside.length) throw new Error(`Page ${page.number}: glyph at ${glyph.top} has no code candidates`)
+    const codes = tokens(beside[0].value)
+    if (codes.length !== 1) throw new Error(`Page ${page.number}: glyph at ${glyph.top} has ${codes.length} code candidates`)
+    rows.push({
+      serial: null, source: codes[0], char: glyph.value,
+      box: { left: glyph.left, top: glyph.top, width: glyph.width, height: glyph.height },
+      page: page.number, file: '',
+    })
+  }
+  return rows
 }
 
 /**
@@ -216,6 +255,7 @@ export function rowsFor(page, matcher, patterns) {
   if (matcher === 'code-text') return codeTextRows(page, patterns)
   if (matcher === 'code-only') return codeOnlyRows(page, patterns)
   if (matcher === 'text-pairs') return textPairRows(page, patterns)
+  if (matcher === 'text-glyphs') return textGlyphRows(page, patterns)
   if (matcher === 'dual-code-cells') return dualCodeCellRows(page, patterns)
   if (matcher === 'numbered-code-rows') return numberedCodeRows(page, patterns)
   if (matcher === 'glyph-pairs') return glyphPairRows(page)

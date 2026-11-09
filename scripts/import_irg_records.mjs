@@ -28,12 +28,38 @@ const pinned = JSON.parse(readFileSync(join(OUT, 'sources.json'), 'utf8')).input
 const work = mkdtempSync(join(ROOT, 'cache/irg-'))
 /** @type {Map<string, import('./sources/irg.mjs').PageBoxes[]>} */
 const parsed = new Map()
+/** @type {Map<string, string>} */
+const pdfs = new Map()
+
+/**
+ * IRGN1525 prints its glyphs as private-use text instead of stencils. Render just the glyph box
+ * from the pinned PDF and keep the strokes black on white, so the copy step can make white
+ * transparent like the stencil glyphs.
+ * @param {CuratedDocument} document @param {import('./sources/irg.mjs').PageBoxes} page @param {import('./sources/irg.mjs').Row} row
+ */
+function textGlyphPng(document, page, row) {
+  const pdf = pdfs.get(document.url)
+  if (!pdf || !row.box) throw new Error(`${document.document}: no page source for a text glyph`)
+  // pdftohtml writes 1.5 pt per coordinate unit; pdftocairo -x/-y/-W/-H take pixels at the dpi.
+  const scale = 600 / 72 / 1.5
+  const pageWidth = Math.round(page.width * scale)
+  const pageHeight = Math.round(page.height * scale)
+  const x = Math.max(0, Math.round(row.box.left * scale))
+  const y = Math.max(0, Math.round(row.box.top * scale) - 2)
+  const width = Math.min(pageWidth - x, Math.round(row.box.width * scale))
+  const height = Math.min(pageHeight - y, Math.round(row.box.height * scale) + 4)
+  const png = join(work, `${document.id}-${row.page}-${row.source.replace(/[^\w-]+/g, '_')}.png`)
+  execFileSync('pdftocairo', ['-png', '-r', '600', '-x', String(x), '-y', String(y), '-W', String(width), '-H', String(height), '-singlefile', pdf, png.replace(/\.png$/, '')], { stdio: 'ignore' })
+  execFileSync('magick', [png, '-colorspace', 'gray', '-threshold', '50%', '-trim', '+repage', '-bordercolor', 'white', '-border', '2', png])
+  return png
+}
 
 /** @param {CuratedDocument} document */
 async function pagesOf(document) {
   const cached = parsed.get(document.url)
   if (cached) return cached
   const pdf = await fetchOnce(document.url)
+  pdfs.set(document.url, pdf)
   const digest = createHash('sha256').update(readFileSync(pdf)).digest('hex')
   const expected = pinned.find(input => input.url === document.url)?.sha256
   if (!expected) throw new Error(`${document.document} is not pinned in sources.json`)
@@ -63,7 +89,10 @@ try {
         if (!page) throw new Error(`${document.document} has no page ${number}`)
         let pageRows
         try { pageRows = rowsFor(page, step.matcher, step) } catch (error) { throw new Error(`${set.id}/${document.document}: ${/** @type {Error} */ (error).message}`) }
-        for (const row of pageRows) found.push({ ...row, document: document.id, glyph: row.file ? `${set.glyphs}/${row.serial ?? row.source}.png` : '', from: row.file, ...(step.status ? { status: step.status } : {}) })
+        for (const row of pageRows) {
+          if (row.char && row.box) row.file = textGlyphPng(document, page, row)
+          found.push({ ...row, document: document.id, glyph: row.file ? `${set.glyphs}/${row.serial ?? row.source}.png` : '', from: row.file, ...(step.status ? { status: step.status } : {}) })
+        }
       }
       if (found.length !== step.count) throw new Error(`${set.id}: ${found.length} glyphs for ${step.count} listed characters`)
       rows.push(...found)
