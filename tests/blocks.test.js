@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'bun:test'
 import { versionRows } from '../app/lib/ages.js'
-import { blockOccupancy, blockRows } from '../app/lib/blocks.js'
+import { blockOccupancy, blockRows, planeRows } from '../app/lib/blocks.js'
 
 const char = (/** @type {number} */ point) => String.fromCodePoint(point)
 
@@ -69,5 +69,18 @@ describe('block occupancy', () => {
   test('clips age ranges to the block', () => {
     const rows = blockOccupancy([[0xF0, 0x110, '1.1']], blocks)
     expect(rows.map(row => [row.id, row.assigned])).toEqual([['a', 4], ['b', 2]])
+  })
+})
+
+describe('plane shares', () => {
+  const point = (/** @type {number} */ value) => String.fromCodePoint(value)
+  test('counts planes 0 to 3 and keeps higher planes apart', () => {
+    const rows = planeRows(new Set([point(0x5B57), point(0x1B170), point(0x20000), point(0x30000), point(0xF0000)]))
+    expect(rows.map(row => [row.plane, row.count])).toEqual([[0, 1], [1, 1], [2, 1], [3, 1], [null, 1]])
+    expect(rows.every(row => row.share === 1 / 5)).toBe(true)
+  })
+  test('keeps all four planes for a set in one plane', () => {
+    const rows = planeRows(new Set([point(0x5B57)]))
+    expect(rows.map(row => [row.plane, row.count, row.share])).toEqual([[0, 1, 1], [1, 0, 0], [2, 0, 0], [3, 0, 0]])
   })
 })

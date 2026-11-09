@@ -15,8 +15,8 @@
    * @property {number} otherTotal Characters listed by the other set.
    */
 
-  /** @type {{ encoded: number, unencoded: number, compared?: Compared | null, blocks?: import('../lib/blocks.js').BlockRow[], versions?: import('../lib/ages.js').VersionRow[], occupancy?: import('../lib/blocks.js').BlockOccupancy[] }} */
-  let { encoded, unencoded, compared = null, blocks = [], versions = [], occupancy = [] } = $props()
+  /** @type {{ encoded: number, unencoded: number, compared?: Compared | null, blocks?: import('../lib/blocks.js').BlockRow[], versions?: import('../lib/ages.js').VersionRow[], occupancy?: import('../lib/blocks.js').BlockOccupancy[], planes?: import('../lib/blocks.js').PlaneRow[] }} */
+  let { encoded, unencoded, compared = null, blocks = [], versions = [], occupancy = [], planes = [] } = $props()
   const total = $derived(encoded + unencoded)
   const share = $derived(total ? unencoded / total : 0)
   const format = (/** @type {number} */ share) =>
@@ -28,7 +28,7 @@
   }).format(share * 100)
   const formatVersionShare = (/** @type {number} */ share) => new Intl.NumberFormat(i18n.locale, {
     minimumFractionDigits: 1,
-    maximumFractionDigits: share > 0.999 ? 2 : share < 0.0001 ? 4 : share < 0.001 ? 3 : 1,
+    maximumFractionDigits: share > 0.999 ? 3 : share < 0.0001 ? 4 : share < 0.001 ? 3 : 1,
   }).format(share * 100)
   const formatOccupancyShare = (/** @type {number} */ share) => new Intl.NumberFormat(i18n.locale, {
     minimumFractionDigits: 3,
@@ -130,6 +130,16 @@
       </figcaption>
     </figure>
   {/if}
+  {#if planes.length}
+    <div class="planes">
+      <p class="caption">{t('charset.planes')}</p>
+      <p class="plane-chips">
+        {#each planes as row (row.plane ?? 'other')}
+          <span class="plane-chip"><b>{row.plane === null ? t('charset.blockOther') : `P${row.plane}`}</b>{formatVersionShare(row.share)}%</span>
+        {/each}
+      </p>
+    </div>
+  {/if}
   {#if blocks.length}
     <div class="blocks">
       <p class="caption">{t('charset.blocks')}</p>
@@ -218,6 +228,10 @@
   .blocks .name{color:var(--ui-color-ink-soft);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .blocks .count{color:var(--ui-color-ink-muted);font-variant-numeric:tabular-nums}
   .blocks b{font-weight:var(--ui-weight-medium);color:var(--ui-color-ink);font-variant-numeric:tabular-nums}
+  .planes{flex:1 0 100%;padding-block-start:var(--ui-space-sm);border-block-start:1px solid var(--ui-color-border)}
+  .planes .caption{margin:0 0 var(--ui-space-2xs)}
+  .plane-chips{display:flex;flex-wrap:wrap;gap:var(--ui-space-2xs) var(--ui-space-md);margin:0;font-size:var(--ui-text-xs);color:var(--ui-color-ink-soft);font-variant-numeric:tabular-nums}
+  .plane-chip b{font-weight:var(--ui-weight-medium);color:var(--ui-color-ink);margin-inline-end:4px}
   .versions{flex:1 0 100%;padding-block-start:var(--ui-space-sm);border-block-start:1px solid var(--ui-color-border)}
   .versions .caption{margin:0 0 var(--ui-space-2xs)}
   .versions ol{display:grid;gap:2px;margin:0;padding:0;list-style:none}

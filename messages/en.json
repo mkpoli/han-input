@@ -123,6 +123,7 @@
   "charset.blocks": "Unicode blocks",
   "charset.versions": "Unicode versions",
   "charset.occupancy": "Empty code points",
+  "charset.planes": "Planes",
   "charset.block": "Block",
   "charset.total": "Code points",
   "charset.empty": "Empty",
