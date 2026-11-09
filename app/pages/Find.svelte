@@ -2,7 +2,7 @@
   // Find: one box for whatever the reader has. A clue is tried as a code in every method at once and
   // as a word of meaning. Several clues, split by spaces, leave the characters that fit them all.
   import { tick, untrack } from 'svelte'
-  import { route, setQuery, setCharset, setPage, link, go } from '../lib/route.svelte.js'
+  import { route, setQuery, setCharset, setPage, pageHref, link, go } from '../lib/route.svelte.js'
   import { loadCharsets, loadCharset, loadRecords, filterAnswer, browseCharset } from '../lib/charsets.js'
   import { answer, groupHits, intersect, readQuery, tallyReadings } from '../lib/search.js'
   import { loadMethods } from '../lib/data.js'
@@ -12,11 +12,12 @@
   import { gSourceOf, noteOf } from '../lib/sources.js'
   import Tiles from '../ui/Tiles.svelte'
   import Pager from '../ui/Pager.svelte'
+  import PaginatedTiles from '../ui/PaginatedTiles.svelte'
   import CharsetFilter from '../ui/CharsetFilter.svelte'
   import ProposalRecords from '../ui/ProposalRecords.svelte'
 
   const EXAMPLES = ['ユタヘヘミ', 'jnd', 'luong', '端一東平', '30407', 'tsɿ', '氵 12畫', '口匕', 'river ジ', 'chữ', 'a-1', 'a672', 'U+5B57', '氵+青', '日*月']
-  // A browsed set turns one page of 240 characters at a time; the search grids keep their own caps.
+  // A browsed set and the common-results grid turn 240 characters at a time; other grids use 96.
   const GRID_LIMIT = 240
 
   const query = $derived(route.q)
@@ -118,6 +119,7 @@
   const groups = $derived(single ? groupHits(single.hits) : [])
   const tally = $derived(single ? tallyReadings(single.readings) : [])
   const tallyChars = $derived(tally.map(([char]) => char))
+  const variantChars = $derived(single ? single.variants.map(row => row.char) : [])
   const tallyNotes = $derived(new Map(tally.map(([char, count]) => [char, String(count)])))
   const varieties = $derived(single ? new Set(single.readings.map(hit => hit.n)).size : 0)
   const empty = $derived(!busy && answers.length > 0 && !common.length && !groups.length)
@@ -181,10 +183,10 @@
     {#if browsed.length || !records}
       <section class="ui-section" bind:this={browseTop}>
         <h2 class="ui-label">{t('find.characters')} <span class="ui-count">{browsed.length.toLocaleString()}</span></h2>
-        <Pager page={page + 1} {pages} disabled={turning} onchange={next => turnTo(next - 1)} />
+        <Pager page={page + 1} {pages} disabled={turning} href={pageHref} onchange={next => turnTo(next - 1)} />
         <Tiles chars={pageChars} limit={GRID_LIMIT} label={chosen ? nameOf(chosen.names) : route.set} />
         {#if !browsed.length}<p class="ui-hint">{t('find.none')}</p>{/if}
-        <Pager page={page + 1} {pages} disabled={turning} onchange={next => turnTo(next - 1)} />
+        <Pager page={page + 1} {pages} disabled={turning} href={pageHref} onchange={next => turnTo(next - 1)} />
       </section>
     {/if}
     {#if records}<ProposalRecords {records} label={chosen ? nameOf(chosen.names) : route.set} />{/if}
@@ -207,13 +209,13 @@
           <span class="clue">{item.clue.text} <span class="ui-count">{item.chars.length}</span></span>
         {/each}
       </p>
-      <Tiles chars={common} label={t('find.common', { count: common.length })} limit={GRID_LIMIT} />
+      <PaginatedTiles chars={common} perPage={GRID_LIMIT} label={t('find.common', { count: common.length })} />
     </section>
   {:else if single}
     {#if single.chars.length && !single.shapes.some(shape => shape.exact) && ['text', 'point', 'strokes', 'pua'].includes(single.clue.kind)}
       <section class="ui-section">
         <h2 class="ui-label">{t('find.characters')}</h2>
-        <Tiles chars={single.chars} size={72} label={t('find.characters')} />
+        <PaginatedTiles chars={single.chars} size={72} label={t('find.characters')} />
       </section>
     {/if}
     {#each single.shapes as shape, at (shape.text)}
@@ -221,46 +223,46 @@
       {@const title = shape.exact ? t('find.structure', { parts: shape.text }) : t('find.structureVariant', { parts: shape.text })}
       <section class="ui-section">
         <h2 class="ui-label">{title} <span class="ui-count">{shape.chars.length}</span></h2>
-        <Tiles chars={shape.chars} limit={48} label={title} />
+        <PaginatedTiles chars={shape.chars} label={title} />
       </section>
     {/each}
     {#if single.variants.length}
       <section class="ui-section">
         <h2 class="ui-label">{t('find.sameCharacter')} <span class="ui-count">{single.variants.length}</span></h2>
         <p class="ui-hint">{t('find.sameCharacterNote')}</p>
-        <Tiles chars={single.variants.map(row => row.char)} limit={48} label={t('find.sameCharacter')} />
+        <PaginatedTiles chars={variantChars} label={t('find.sameCharacter')} />
       </section>
     {/if}
     {#each groups.filter(group => group.literal) as group (group.method)}{@render methodGroup(group)}{/each}
     {#if single.meaning.length}
       <section class="ui-section">
         <h2 class="ui-label">{t('find.meaning', { word: single.clue.text })} <span class="ui-count">{single.meaning.length}</span></h2>
-        <Tiles chars={single.meaning} limit={48} label={t('find.meaning', { word: single.clue.text })} />
+        <PaginatedTiles chars={single.meaning} label={t('find.meaning', { word: single.clue.text })} />
       </section>
     {/if}
     {#if single.parts.length}
       <section class="ui-section">
         <h2 class="ui-label">{t('find.parts', { part: single.clue.text })} <span class="ui-count">{single.parts.length}</span></h2>
-        <Tiles chars={single.parts} limit={48} label={t('find.parts', { part: single.clue.text })} />
+        <PaginatedTiles chars={single.parts} label={t('find.parts', { part: single.clue.text })} />
       </section>
     {/if}
     {#each single.partVariants as group (group.text)}
       <section class="ui-section">
         <h2 class="ui-label">{t('find.variantOf', { part: group.text })} <span class="ui-count">{group.chars.length}</span></h2>
-        <Tiles chars={group.chars} limit={48} label={t('find.variantOf', { part: group.text })} />
+        <PaginatedTiles chars={group.chars} label={t('find.variantOf', { part: group.text })} />
       </section>
     {/each}
     {#if single.similarParts.length}<p class="ui-hint">{t('find.similarNote')}</p>{/if}
     {#each single.similarParts as group (group.text)}
       <section class="ui-section">
         <h2 class="ui-label">{t('find.similarPart', { part: group.text })} <span class="ui-count">{group.chars.length}</span></h2>
-        <Tiles chars={group.chars} limit={48} label={t('find.similarPart', { part: group.text })} />
+        <PaginatedTiles chars={group.chars} label={t('find.similarPart', { part: group.text })} />
       </section>
     {/each}
     {#if tally.length}
       <section class="ui-section">
         <h2 class="ui-label">{t('find.readings', { count: varieties, chars: tally.length })}</h2>
-        <Tiles chars={tallyChars} notes={tallyNotes} limit={48} label={t('find.readings', { count: varieties, chars: tally.length })} />
+        <PaginatedTiles chars={tallyChars} notes={tallyNotes} label={t('find.readings', { count: varieties, chars: tally.length })} />
       </section>
     {/if}
     {#each groups.filter(group => !group.literal) as group (group.method)}{@render methodGroup(group)}{/each}
