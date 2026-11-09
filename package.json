@@ -6,7 +6,7 @@
     "dev": "vite app",
     "build": "vite build app",
     "preview": "vite preview app",
-    "test": "bun test tests",
+    "test": "cd tests && bun test .",
     "check": "svelte-check --tsconfig ./tsconfig.json --threshold warning",
     "i18n": "x18n check --skip key-conflict",
     "verify": "bun run test && bun run check && bun run i18n",
