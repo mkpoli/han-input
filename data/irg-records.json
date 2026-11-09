@@ -648,6 +648,47 @@
         }
       ],
       "additionalRecords": []
+    },
+    {
+      "id": "ext_c1_jmk_withdrawals",
+      "file": "ext_c1_jmk_withdrawals_records.json",
+      "group": "Proposals",
+      "label": "Ext.C1 withdrawn · J",
+      "glyphs": "glyphs/ext-c1",
+      "names": {
+        "en": "J-source character withdrawn from CJK C1",
+        "zh": "擴展C1撤銷J源字",
+        "hans": "扩展C1撤销J源字",
+        "ja": "拡張C1撤回J源字",
+        "ko": "확장 C1 J 출처 철회자"
+      },
+      "source": {
+        "name": "IRG",
+        "url": "https://www.unicode.org/irg/docs/n1198-ExtensionC1Withdraw.pdf"
+      },
+      "title": "The J-source character dropped from the CJK C1 candidate",
+      "complete": false,
+      "scope": "The single J-source character that IRGN1198 asks to drop from the CJK C1 v6 candidate. The document prints the C1 v6 number 08772 and the J source JMK65904 in prose and prints no glyph for the dropped character. The two glyph images on page 2 show the idiom 僥倖, not a per-record stencil. No published Unicode scalar is claimed.",
+      "documents": [
+        {
+          "id": "n1198",
+          "document": "IRGN1198",
+          "title": "Proposition to drop one Japan's character from C1 candidate",
+          "source": "Japan",
+          "date": "2006-05-22",
+          "url": "https://www.unicode.org/irg/docs/n1198-ExtensionC1Withdraw.pdf",
+          "status": "Asks the IRG to drop JMK65904 (C1 no. 08772) because it has no lone usage. The cover prints “N 1198”; IRGN1198 comes from the IRG document filename. No published scalar is claimed."
+        }
+      ],
+      "extract": [],
+      "additionalRecords": [
+        {
+          "serial": "08772",
+          "source": "JMK65904",
+          "document": "n1198",
+          "status": "C1 v6 number 08772 and J source JMK65904, printed in the proposal's prose on page 2. The document asks to drop this character from the CJK C1 candidate; the two glyphs beside the idiom 僥倖 do not identify which one is JMK65904."
+        }
+      ]
     }
   ]
 }

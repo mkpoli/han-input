@@ -2872,6 +2872,31 @@
     }
   },
   {
+    "id": "ext_c1_jmk_withdrawals",
+    "group": "Proposals",
+    "label": "Ext.C1 withdrawn · J",
+    "names": {
+      "en": "J-source character withdrawn from CJK C1",
+      "zh": "擴展C1撤銷J源字",
+      "hans": "扩展C1撤销J源字",
+      "ja": "拡張C1撤回J源字",
+      "ko": "확장 C1 J 출처 철회자"
+    },
+    "chars": 0,
+    "total": 1,
+    "encoded": 0,
+    "unencoded": 1,
+    "records": {
+      "file": "/charsets/ext_c1_jmk_withdrawals_records.json",
+      "count": 1,
+      "glyphs": 0
+    },
+    "source": {
+      "name": "IRG",
+      "url": "https://www.unicode.org/irg/docs/n1198-ExtensionC1Withdraw.pdf"
+    }
+  },
+  {
     "id": "cns_source_c36ad76b3200",
     "group": "CNS sources",
     "label": "異體國字字表(《CNS 11643》96年公布)",

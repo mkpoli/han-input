@@ -29,6 +29,10 @@
       "sha256": "4c93ea9c1f636451729a840978f1667a53886af37ba854fdcce109721c63d43e"
     },
     {
+      "url": "https://www.unicode.org/irg/docs/n1198-ExtensionC1Withdraw.pdf",
+      "sha256": "0849bb34331646b8eecc416df7a0cc9f6ce70e39451fcc4eb85dea4aab137b1e"
+    },
+    {
       "url": "https://www.unicode.org/irg/docs/n1250-ExtensionDWithdraw.pdf",
       "sha256": "8b5ec5b74b2ef081f2c96663f0b782b2f60a594a9e8ad4d39b8ba83790898762"
     },

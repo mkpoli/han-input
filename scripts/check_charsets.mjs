@@ -253,7 +253,7 @@ try {
       assert.ok((await page.locator('main .records').innerText()).includes(data.records[0].source))
       if (listed.count > 240) assert.match(await page.locator('main .ui-hint').last().innerText(), new RegExp(`240 of ${listed.count}`))
       await page.locator('main .records .ui-tile').first().click()
-      assert.match(await page.locator('aside.card').innerText(), new RegExp(data.records[0].source))
+      assert.match(await page.locator('aside.card').innerText(), new RegExp(data.records[0].source ?? data.records[0].serial))
     })
   }
   const recorded = catalogue.find(set => set.source.records)
@@ -448,6 +448,12 @@ try {
         assert.equal(await tab.locator('main details .set').count(), 123)
         assert.equal(await tab.evaluate(() => document.documentElement.scrollWidth - innerWidth), 0)
         for (const proposal of catalogue.filter(set => set.records?.glyphs)) {
+          await find(tab, '', proposal.id)
+          await tab.locator('main .records .ui-tile').first().click()
+          await tab.screenshot({ path: join(SHOTS, `${name}-${proposal.id}.png`) })
+          assert.equal(await tab.evaluate(() => document.documentElement.scrollWidth - innerWidth), 0)
+        }
+        for (const proposal of catalogue.filter(set => set.group === 'Proposals' && set.records?.glyphs === 0)) {
           await find(tab, '', proposal.id)
           await tab.locator('main .records .ui-tile').first().click()
           await tab.screenshot({ path: join(SHOTS, `${name}-${proposal.id}.png`) })
