@@ -2,6 +2,8 @@
 
 Find accepts one character-set filter at a time. An empty query browses its mapped characters, 240 to a page; a query intersects the set with every result channel. The address stores the selection in `?set=`, alongside `?q=`, `?c=` and the browsed page in `?p=`.
 
+A browsed character carries the code its own set gives it, printed under the glyph. The code is the source's index — a CNS grid position such as `1-4421`, a kuten position, a code point or a serial. It is not a scalar assignment. The grid can follow that code order instead of code-point order, and can show only members with an assigned scalar or only private-use slots and other unencoded forms.
+
 ## Catalogue
 
 | Collection | Coverage |
@@ -43,7 +45,7 @@ CNS plane numbers in these files are decimal. Source categories, planes and hist
 
 ## Printed proposal records
 
-A proposed character that was never encoded has no scalar, so its set cannot be a list of characters. The proposal sets keep the printed record instead: the codes printed beside each glyph, and the glyph cut from the document's page. Records the documents explain without a glyph stay text-only, and a record with a verified correspondence links to that character's card.
+A proposed character that was never encoded has no scalar, so its set cannot be a list of characters. The proposal sets keep the printed record instead: the codes printed beside each glyph, and the glyph cut from the document's page. Records the documents explain without a glyph stay text-only, and a record with a verified correspondence links to that character's card. The record grid prints each code under its glyph, can follow the printed code order, and can show only records with a verified correspondence or only those without one.
 
 `bun scripts/import_irg_records.mjs` reads each pinned PDF with poppler's `pdftohtml`, which gives text and image boxes in one coordinate system. `scripts/sources/irg.mjs` pairs every glyph with the codes beside it: a serial stacked over its source (IRGN1531, IRGN1841, IRGN1330) or beside it (IRGN1925), one line of two codes (IRGN1250), or a serial and draft code point in one cell with the source beside it (IRGN1567). A table without glyphs reads a row number and working number in one cell with the source in the next column (IRGN1306). A prose list prints its ids as tokens, read in printed order until the paragraph that opens the next list (IRGN424). ImageMagick then draws the strokes black on a transparent ground, since the documents use both polarities. A set is written only when its record count matches; glyph rows must have distinct serials, and sources must be distinct unless the step allows a document's repeats. IRGN1306 has no glyph rows and repeats one working number and two sources, which its step accepts rather than dropping rows. Regenerating needs poppler and ImageMagick.
 
@@ -51,7 +53,7 @@ These are proposal numbers, not scalar assignments. IRGN1841 lists characters fo
 
 ## G source labels
 
-Character cards show the G source beside its code, and a printed record card does the same; the record grid puts the source in the tile title. The glossary lists GCH 辭海, GCYY 中國測繪科學研究院用字, GBK 中國大百科全書, GJZ 商務印書館用字, GZFY 漢語方言大詞典, GH GB/T 15564 and GKX 康熙字典; a code outside these stays plain. The code stays text; the source name opens a note with the edition or institution. The notes live in [sources.js](../app/lib/sources.js). [UAX #38](https://www.unicode.org/reports/tr38/#kIRG_GSource) defines the codes and the edition behind GCH; the institutional dates come from [CASM](https://www.casm.ac.cn/chbyjj/chyjj/index.html), the [Commercial Press](http://cpem.cp.com.cn/home/aboutcpem) and [Cihai](https://www.cihai.com.cn).
+Character cards show the G source beside its code, and a printed record card does the same; the record grid puts the source under the glyph and in the tile title. The glossary lists GCH 辭海, GCYY 中國測繪科學研究院用字, GBK 中國大百科全書, GJZ 商務印書館用字, GZFY 漢語方言大詞典, GH GB/T 15564 and GKX 康熙字典; a code outside these stays plain. The code stays text; the source name opens a note with the edition or institution. The notes live in [sources.js](../app/lib/sources.js). [UAX #38](https://www.unicode.org/reports/tr38/#kIRG_GSource) defines the codes and the edition behind GCH; the institutional dates come from [CASM](https://www.casm.ac.cn/chbyjj/chyjj/index.html), the [Commercial Press](http://cpem.cp.com.cn/home/aboutcpem) and [Cihai](https://www.cihai.com.cn).
 
 ## Sources
 
@@ -71,7 +73,7 @@ Character cards show the G source beside its code, and a printed record card doe
 
 ## Data and checks
 
-The checked-in [catalogue](../app/public/charsets/index.json), per-set text files and [source digests](../app/public/charsets/sources.json) work without requests to external services. The generator checks downloaded bytes against recorded SHA-256 values. Source files are cached under `cache/`; changed inputs require a reviewed digest update.
+The checked-in [catalogue](../app/public/charsets/index.json), per-set text files, `.codes.tsv` files and [source digests](../app/public/charsets/sources.json) work without requests to external services. Each code file has one `character<TAB>code` line for each member the source gives a code, in the set's source order; the catalogue's `codes` field points to it. A member without a source code keeps no line. `bun scripts/build_charset_codes.mjs` refreshes those files from the pinned payloads in `cache/` without refetching the catalogue. The generator checks downloaded bytes against recorded SHA-256 values. Source files are cached under `cache/`; changed inputs require a reviewed digest update.
 
 ```sh
 bun scripts/build_charsets.mjs

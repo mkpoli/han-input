@@ -4,14 +4,17 @@
   import { ui, showRecord } from '../lib/ui.svelte.js'
   import { nameOf, t } from '../lib/i18n.svelte.js'
   import { gSourceOf } from '../lib/sources.js'
+  import { compareCodes } from '../lib/charsets.js'
 
   /** @type {{ records: import('../lib/charsets.js').ProposalRecords, label: string }} */
   let { records, label } = $props()
   const documents = $derived(new Map(records.documents.map(doc => /** @type {[string, import('../lib/charsets.js').ProposalDocument]} */ ([doc.id, doc]))))
   const LIMIT = 240
-  const shown = $derived(records.records.slice(0, LIMIT))
   const idsMode = $derived(records.records.some(record => record.kind === 'ids'))
   const textOnly = $derived(records.records.some(record => !record.glyph && record.kind !== 'ids'))
+  /** @type {'all' | 'encoded' | 'unencoded'} */
+  let show = $state('all')
+  let byCode = $state(false)
 
   /** @param {import('../lib/charsets.js').ProposalRecord} record */
   const code = record => record.source ?? record.serial ?? ''
@@ -20,10 +23,26 @@
     const source = gSourceOf(code(record))
     return source ? nameOf(source.names) : ''
   }
+  const arranged = $derived.by(() => {
+    let list = show === 'all' ? records.records : records.records.filter(record => show === 'encoded' ? record.mappedUnicode : !record.mappedUnicode)
+    if (byCode) list = [...list].sort((a, b) => compareCodes(code(a), code(b)))
+    return list
+  })
+  const shown = $derived(arranged.slice(0, LIMIT))
 </script>
 
 <section class="ui-section">
-  <h2 class="ui-label">{t('charset.records')} <span class="ui-count">{records.records.length.toLocaleString()}</span></h2>
+  <h2 class="ui-label">{t('charset.records')} <span class="ui-count">{arranged.length.toLocaleString()}</span></h2>
+  {#if !idsMode}
+    <div class="records-tools">
+      <button class="ui-button" data-size="sm" type="button" aria-pressed={byCode} onclick={() => { byCode = !byCode }}>{t('find.codeOrder')}</button>
+      <div class="seg" role="group" aria-label={t('find.showLabel')}>
+        <button class="ui-button" data-size="sm" type="button" aria-pressed={show === 'all'} onclick={() => { show = 'all' }}>{t('find.showAll')}</button>
+        <button class="ui-button" data-size="sm" type="button" aria-pressed={show === 'encoded'} onclick={() => { show = 'encoded' }}>{t('find.showEncoded')}</button>
+        <button class="ui-button" data-size="sm" type="button" aria-pressed={show === 'unencoded'} onclick={() => { show = 'unencoded' }}>{t('find.showUnencoded')}</button>
+      </div>
+    </div>
+  {/if}
   {#if idsMode}
     <ol class="ids-list" aria-label={`${label} ${t('charset.records')}`}>
       {#each shown as record, i (record.document + ':' + code(record) + ':' + i)}
@@ -36,18 +55,26 @@
         <button class="ui-tile" type="button" role="option" aria-selected={ui.record?.record === record}
           title={[code(record), sourceName(record), documents.get(record.document)?.document].filter(Boolean).join(' · ')}
           onclick={() => { const doc = documents.get(record.document); if (doc) showRecord(record, doc) }}>
-          {#if record.glyph}<img src={`/charsets/${record.glyph}`} alt="" width="128" height="128" decoding="async" />{:else}<span class="code ui-mono">{code(record)}</span>{/if}
+          {#if record.glyph}
+            <img src={`/charsets/${record.glyph}`} alt="" width="128" height="128" decoding="async" />
+            <span class="ui-tile-note ui-mono">{code(record)}</span>
+          {:else}<span class="code ui-mono">{code(record)}</span>{/if}
         </button>
       {/each}
     </div>
+    {#if !arranged.length}<p class="ui-hint">{t('find.none')}</p>{/if}
   {/if}
 </section>
-{#if records.records.length > LIMIT}<p class="ui-hint">{t('common.cut', { shown: LIMIT, total: records.records.length })}</p>{/if}
+{#if arranged.length > LIMIT}<p class="ui-hint">{t('common.cut', { shown: LIMIT, total: arranged.length })}</p>{/if}
 
 <style>
-  .records{grid-template-columns:repeat(auto-fill,minmax(56px,1fr))}
-  .records .ui-tile{grid-template-rows:1fr;padding:3px}
-  .records img{inline-size:100%;block-size:auto;min-inline-size:0}
+  .records{grid-template-columns:repeat(auto-fill,minmax(72px,1fr))}
+  .records .ui-tile{grid-template-rows:1fr auto;padding:3px}
+  .records img{inline-size:100%;block-size:100%;min-inline-size:0;object-fit:contain}
+  .records .ui-tile-note{font-size:9px;line-height:1.2;white-space:normal;overflow-wrap:anywhere;text-align:center}
+  .records-tools{display:flex;flex-wrap:wrap;align-items:center;gap:var(--ui-space-2xs)}
+  .seg{display:flex;flex-wrap:wrap;gap:var(--ui-space-2xs)}
+  .records-tools button[aria-pressed='true']{border-color:var(--ui-color-accent);background:var(--ui-color-accent-soft);color:var(--ui-color-accent-ink)}
   .code{font-size:var(--ui-text-2xs);overflow-wrap:anywhere}
   .text-only{grid-template-columns:repeat(auto-fill,minmax(104px,1fr))}
   .text-only .code{white-space:nowrap}

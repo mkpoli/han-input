@@ -16,6 +16,17 @@ const catalogue = JSON.parse(readFileSync(join(DIST, 'charsets/index.json'), 'ut
 const members = (/** @type {string} */ id) => new Set([...readFileSync(join(DIST, 'charsets', `${id}.txt`), 'utf8')])
 const t1 = members('t1')
 const g0 = members('g0')
+/** @param {string} char */
+const isPrivateUse = char => {
+  const cp = char.codePointAt(0) ?? 0
+  return cp >= 0xE000 && cp <= 0xF8FF || cp >= 0xF0000 && cp <= 0xFFFFD || cp >= 0x100000 && cp <= 0x10FFFD
+}
+/** @param {string} id */
+const codesOf = id => new Map(readFileSync(join(DIST, 'charsets', `${id}.codes.tsv`), 'utf8').trim().split('\n').filter(Boolean).map(line => {
+  const at = line.indexOf('\t')
+  return [line.slice(0, at), line.slice(at + 1)]
+}))
+const collator = new Intl.Collator('en', { numeric: true })
 const t1Entry = catalogue.find(set => set.id === 't1')
 assert.ok(t1Entry)
 
@@ -125,6 +136,41 @@ try {
     assert.equal(await page.locator('.metadata a').getAttribute('href'), t1Entry.source.url)
     assert.match(await page.locator('.charset-filter').innerText(), /Every source row is listed/)
   })
+  await check('every browsed character shows its code, and code order reorders the grid', async () => {
+    const codes = codesOf('t1')
+    await find(page)
+    const glyphs = await page.locator('main .ui-tile-glyph').allTextContents()
+    assert.ok(glyphs.every(char => codes.has(char)))
+    assert.deepEqual(await page.locator('main .ui-tile-note').allTextContents(), glyphs.map(char => codes.get(char)))
+    const sorted = [...t1].sort((a, b) => collator.compare(codes.get(a) ?? '', codes.get(b) ?? ''))
+    await page.locator('main .browse-tools').getByRole('button', { name: 'Code order', exact: true }).click()
+    await page.waitForFunction(expected => document.querySelector('main .ui-tile-glyph')?.textContent === expected, sorted[0])
+    assert.deepEqual(await page.locator('main .ui-tile-glyph').allTextContents(), sorted.slice(0, 240))
+    assert.deepEqual(await page.locator('main .ui-tile-note').allTextContents(), sorted.slice(0, 240).map(char => codes.get(char)))
+    assert.equal(await page.locator('main .browse-tools').getByRole('button', { name: 'Code order', exact: true }).getAttribute('aria-pressed'), 'true')
+    assert.equal(new URL(page.url()).searchParams.has('p'), false)
+  })
+  await check('a browse shows only encoded or only unencoded members on demand', async () => {
+    const land = catalogue.find(set => set.group === 'CNS sources' && set.label === '內政部地政用字')
+    assert.ok(land)
+    const all = [...members(land.id)]
+    const unencoded = all.filter(isPrivateUse)
+    assert.ok(unencoded.length)
+    await find(page, '', land.id)
+    const tools = page.locator('main .browse-tools')
+    await tools.getByRole('button', { name: 'Unencoded', exact: true }).click()
+    await page.waitForFunction(expected => document.querySelectorAll('main .ui-tile-glyph').length === expected, Math.min(240, unencoded.length))
+    const onlyUnencoded = await page.locator('main .ui-tile-glyph').allTextContents()
+    assert.ok(onlyUnencoded.every(isPrivateUse))
+    assert.deepEqual(onlyUnencoded, unencoded.slice(0, 240))
+    await tools.getByRole('button', { name: 'Encoded', exact: true }).click()
+    await page.waitForFunction(expected => document.querySelectorAll('main .ui-tile-glyph').length === expected, Math.min(240, all.length - unencoded.length))
+    const onlyEncoded = await page.locator('main .ui-tile-glyph').allTextContents()
+    assert.ok(onlyEncoded.every(char => !isPrivateUse(char)))
+    await tools.getByRole('button', { name: 'All', exact: true }).click()
+    await page.waitForFunction(expected => document.querySelectorAll('main .ui-tile-glyph').length === expected, Math.min(240, all.length))
+    assert.deepEqual(await page.locator('main .ui-tile-glyph').allTextContents(), all.slice(0, 240))
+  })
   await check('a browsed set pages by number, end and jump, with a short last page', async () => {
     const all = [...t1]
     const pageCount = Math.ceil(all.length / 240)
@@ -215,11 +261,25 @@ try {
       const visible = Math.min(240, proposal.records.count)
       assert.equal(await tiles.count(), visible)
       assert.equal(await page.locator('main .records img').count(), Math.min(visible, proposal.records.glyphs))
+      assert.equal(await page.locator('main .records .ui-tile-note').count(), Math.min(visible, proposal.records.glyphs))
+      if (proposal.records.glyphs) {
+        const firstGlyph = data.records.find(/** @param {{glyph?:string}} record */ record => record.glyph)
+        assert.equal(await page.locator('main .records .ui-tile-note').first().innerText(), firstGlyph.source ?? firstGlyph.serial)
+      }
       if (proposal.records.count > 240) assert.match(await page.locator('main .ui-hint').last().innerText(), new RegExp(`240 of ${proposal.records.count}`))
       await page.waitForFunction(() => [...document.querySelectorAll('main .records img')].every(image => /** @type {HTMLImageElement} */ (image).complete && /** @type {HTMLImageElement} */ (image).naturalWidth > 0))
       assert.equal(await page.getByRole('link', { name: 'Records', exact: true }).getAttribute('href'), proposal.records.file)
       const first = data.records[0]
       await tiles.first().click()
+      if (proposal.encoded && proposal.unencoded) {
+        const tools = page.locator('main .records-tools')
+        await tools.getByRole('button', { name: 'Encoded', exact: true }).click()
+        await page.waitForFunction(expected => document.querySelectorAll('main .records .ui-tile').length === expected, Math.min(240, proposal.encoded))
+        await tools.getByRole('button', { name: 'Unencoded', exact: true }).click()
+        await page.waitForFunction(expected => document.querySelectorAll('main .records .ui-tile').length === expected, Math.min(240, proposal.unencoded))
+        await tools.getByRole('button', { name: 'All', exact: true }).click()
+        await page.waitForFunction(expected => document.querySelectorAll('main .records .ui-tile').length === expected, visible)
+      }
       const card = page.locator('aside.card')
       assert.match(await card.innerText(), new RegExp(first.source))
       assert.match(await card.innerText(), new RegExp(first.document, 'i'))
