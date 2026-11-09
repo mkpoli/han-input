@@ -1,8 +1,8 @@
 <script>
   // Find: one box for whatever the reader has. A clue is tried as a code in every method at once and
   // as a word of meaning. Several clues, split by spaces, leave the characters that fit them all.
-  import { tick } from 'svelte'
-  import { route, setQuery, setCharset, link, go } from '../lib/route.svelte.js'
+  import { tick, untrack } from 'svelte'
+  import { route, setQuery, setCharset, setPage, link, go } from '../lib/route.svelte.js'
   import { loadCharsets, loadCharset, loadRecords, filterAnswer, browseCharset } from '../lib/charsets.js'
   import { answer, groupHits, intersect, readQuery, tallyReadings } from '../lib/search.js'
   import { loadMethods } from '../lib/data.js'
@@ -37,11 +37,11 @@
   let retry = $state(0)
   /** @type {Map<string, import('../lib/data.js').Method>} */
   let methods = $state(new Map())
-  let page = $state(0)
   let turning = $state(false)
   /** @type {HTMLElement | null} */
   let browseTop = $state(null)
   const pages = $derived(Math.max(1, Math.ceil(browsed.length / GRID_LIMIT)))
+  const page = $derived(Math.min(pages - 1, Math.max(0, route.p - 1)))
   const pageChars = $derived(browsed.slice(page * GRID_LIMIT, (page + 1) * GRID_LIMIT))
 
   loadMethods().then(list => { methods = new Map(list.map(method => [method.id, method])) }).catch(() => {})
@@ -63,7 +63,6 @@
     common = []
     browsed = []
     records = null
-    page = 0
     failed = false
     busy = true
     ;(async () => {
@@ -82,9 +81,13 @@
         if (!clues.length) {
           const chars = selected ? await browseCharset(selected) : []
           if (!active) return
-          await loadGlyphs(chars.slice(0, GRID_LIMIT))
+          const requested = untrack(() => route.p)
+          const wanted = Math.min(Math.max(1, Math.ceil(chars.length / GRID_LIMIT)), Math.max(1, requested))
+          const start = (wanted - 1) * GRID_LIMIT
+          await loadGlyphs(chars.slice(start, start + GRID_LIMIT))
           if (!active) return
           browsed = chars
+          if (wanted !== requested) setPage(wanted, { replace: true })
           busy = false
           if (selected && entry?.records) {
             loadRecords(selected).then(data => { if (active) records = data }).catch(() => {})
@@ -130,7 +133,7 @@
     try {
       await loadGlyphs(from.slice(next * GRID_LIMIT, (next + 1) * GRID_LIMIT))
       if (browsed !== from) return
-      page = next
+      setPage(next + 1)
       await tick()
       browseTop?.scrollIntoView({ block: 'start' })
     } finally { turning = false }
