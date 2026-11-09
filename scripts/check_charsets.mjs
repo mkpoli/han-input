@@ -158,6 +158,32 @@ try {
     await pager.locator('[data-page="last"]').click()
     await page.waitForFunction(expected => document.querySelector('main .ui-tile-glyph')?.textContent === expected, all[(pageCount - 1) * 240])
   })
+  await check('a browsed page lives in the address, survives reload and Back, and clamps', async () => {
+    const all = [...t1]
+    const pageCount = Math.ceil(all.length / 240)
+    const first = (/** @type {number} */ at) => all[at * 240]
+    await page.goto(`${SITE}/?set=t1&p=3`)
+    await ready(page)
+    assert.deepEqual(await page.locator('main .ui-tile-glyph').allTextContents(), all.slice(480, 720))
+    assert.equal(new URL(page.url()).searchParams.get('p'), '3')
+    const pager = page.locator('.pager').first()
+    await pager.locator('[data-page="next"]').click()
+    await page.waitForFunction(expected => document.querySelector('main .ui-tile-glyph')?.textContent === expected, first(3))
+    assert.equal(new URL(page.url()).searchParams.get('p'), '4')
+    await page.goBack()
+    await page.waitForFunction(expected => document.querySelector('main .ui-tile-glyph')?.textContent === expected, first(2))
+    assert.equal(new URL(page.url()).searchParams.get('p'), '3')
+    await page.goForward()
+    await page.waitForFunction(expected => document.querySelector('main .ui-tile-glyph')?.textContent === expected, first(3))
+    await page.goto(`${SITE}/?set=t1&p=999`)
+    await ready(page)
+    assert.match(await page.locator('.pager').first().innerText(), new RegExp(`Page ${pageCount} of ${pageCount}`))
+    assert.equal(new URL(page.url()).searchParams.get('p'), String(pageCount))
+    assert.deepEqual(await page.locator('main .ui-tile-glyph').allTextContents(), all.slice((pageCount - 1) * 240))
+    await page.locator('.pager').first().locator('[data-page="first"]').click()
+    await page.waitForFunction(expected => document.querySelector('main .ui-tile-glyph')?.textContent === expected, first(0))
+    assert.equal(new URL(page.url()).searchParams.has('p'), false)
+  })
   await check('CNS source overview lists every registration-source category before choosing a character', async () => {
     await find(page, '', '')
     await page.getByRole('button', { name: 'CNS source categories', exact: true }).click()
@@ -215,15 +241,17 @@ try {
       assert.ok((await page.locator('main .ids-list li').first().innerText()).length > 0)
     })
   }
-  for (const textOnly of catalogue.filter(set => set.group === 'Proposals' && set.records?.glyphs === 0)) {
-    const textOnlyRecords = textOnly.records
-    assert.ok(textOnlyRecords)
+  for (const textOnly of catalogue.filter(set => set.records && set.records.glyphs === 0 && !set.records.file.endsWith('.ids.json'))) {
+    const listed = textOnly.records
+    if (!listed) continue
     await check(`text-only proposal records are listed: ${textOnly.id}`, async () => {
-      const data = JSON.parse(readFileSync(join(DIST, 'charsets', textOnlyRecords.file.replace('/charsets/', '')), 'utf8'))
+      const data = JSON.parse(readFileSync(join(DIST, 'charsets', listed.file.replace('/charsets/', '')), 'utf8'))
       await find(page, '', textOnly.id)
-      assert.equal(await page.locator('main .records .ui-tile').count(), textOnlyRecords.count)
+      const visible = Math.min(240, listed.count)
+      assert.equal(await page.locator('main .records .ui-tile').count(), visible)
       assert.equal(await page.locator('main .records img').count(), 0)
-      assert.ok((await page.locator('main .records').innerText()).includes(data.records[0].source ?? data.records[0].serial))
+      assert.ok((await page.locator('main .records').innerText()).includes(data.records[0].source))
+      if (listed.count > 240) assert.match(await page.locator('main .ui-hint').last().innerText(), new RegExp(`240 of ${listed.count}`))
       await page.locator('main .records .ui-tile').first().click()
       assert.match(await page.locator('aside.card').innerText(), new RegExp(data.records[0].source ?? data.records[0].serial))
     })

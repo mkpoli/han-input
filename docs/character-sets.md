@@ -1,6 +1,6 @@
 # Character sets
 
-Find accepts one character-set filter at a time. An empty query browses its mapped characters, 240 to a page; a query intersects the set with every result channel. The address stores the selection in `?set=`, alongside `?q=` and `?c=`.
+Find accepts one character-set filter at a time. An empty query browses its mapped characters, 240 to a page; a query intersects the set with every result channel. The address stores the selection in `?set=`, alongside `?q=`, `?c=` and the browsed page in `?p=`.
 
 ## Catalogue
 
@@ -18,6 +18,7 @@ Find accepts one character-set filter at a time. An empty query browses its mapp
 | Ext.F1 · 50 SAT drops | 50 sequence and Z_SAT pairs from IRGN2041, a list without glyphs |
 | Ext.E Macao missing | 20 Macao glyphs from IRGN1854, 13 unified and seven missing from the Ext E list |
 | Ext.C PDAM5 removals | 67 glyphs from IRGN1330, keyed by the amendment's own code and source |
+| Ext.D withdrawn · T | 6,545 T-source rows from IRGN1306, keyed by the C1_V20 working number and T source; the document prints no glyphs |
 | Ext.C1 withdrawn · J | One J-source character dropped from the CJK C1 candidate by IRGN1198, printed as C1 no. 08772 and JMK65904 without a glyph |
 | CNS11643全字庫 | All 123 exact registration-source labels from the 2026-08-05 bulk release, across Han, other scripts and symbols |
 
@@ -39,7 +40,7 @@ CNS plane numbers in these files are decimal. Source categories, planes and hist
 
 A proposed character that was never encoded has no scalar, so its set cannot be a list of characters. The proposal sets keep the printed record instead: the codes printed beside each glyph, and the glyph cut from the document's page. Records the documents explain without a glyph stay text-only, and a record with a verified correspondence links to that character's card.
 
-`bun scripts/import_irg_records.mjs` reads each pinned PDF with poppler's `pdftohtml`, which gives text and image boxes in one coordinate system. `scripts/sources/irg.mjs` pairs every glyph with the codes beside it: a serial stacked over its source (IRGN1531, IRGN1841, IRGN1330) or beside it (IRGN1925), one line of two codes (IRGN1250), or a serial and draft code point in one cell with the source beside it (IRGN1567). ImageMagick then draws the strokes black on a transparent ground, since the documents use both polarities. A set is written only when its record count matches and every serial and source is distinct. Regenerating needs poppler and ImageMagick.
+`bun scripts/import_irg_records.mjs` reads each pinned PDF with poppler's `pdftohtml`, which gives text and image boxes in one coordinate system. `scripts/sources/irg.mjs` pairs every glyph with the codes beside it: a serial stacked over its source (IRGN1531, IRGN1841, IRGN1330) or beside it (IRGN1925), one line of two codes (IRGN1250), or a serial and draft code point in one cell with the source beside it (IRGN1567). A table without glyphs reads a row number and working number in one cell with the source in the next column (IRGN1306). ImageMagick then draws the strokes black on a transparent ground, since the documents use both polarities. A set is written only when its record count matches; glyph rows must have distinct serials, and sources must be distinct unless the step allows a document's repeats. IRGN1306 has no glyph rows and repeats one working number and two sources, which its step accepts rather than dropping rows. Regenerating needs poppler and ImageMagick.
 
 These are proposal numbers, not scalar assignments. IRGN1841 lists characters for withdrawal while leaving later resubmission possible; IRGN1250 removes J sources from the CJK D candidate for lack of evidence, and some of its characters were proposed again.
 
@@ -58,6 +59,7 @@ Character cards show the G source beside its code, and a printed record card doe
 - **Vietnam**, [IRGN1881,2012-08-28](https://www.unicode.org/irg/docs/n1881-ExtensionEWithdraw.pdf); **IRG editorial group**, [IRGN1896](https://www.unicode.org/irg/docs/n1896-EditorialReport.pdf), accepted through [IRGN1910, M39.3](https://www.unicode.org/irg/docs/n1910-Resolutions.pdf). V04-486A was deleted from version 8.1. G_K0642.17 was temporarily withdrawn after unification with U+26C73. The [withdrawal records](../app/public/charsets/ext_e_records.json) distinguish requests, dispositions and mapped targets.
 - **China**, [IRGN1531,2008-11-07](https://www.unicode.org/irg/docs/n1531-ExtensionDWithdraw.pdf). Requests the withdrawal of 3,215 G-source characters from CJK D because the evidence could not be collected in time; the PDF itself prints the draft number “IRG N xxxx”. The set's glyphs are cut from pages 2–26 and matched to the D V20 working number and G source printed beside each one. Neither number is a published scalar, and the document states no reuse terms for its images.
 - **Vietnam**, [IRGN1567,2009-01-13](https://www.unicode.org/irg/docs/n1567-ExtensionDWithdraw.pdf). Prints 107 rows of d_v20, a draft code point (ucs_tmp) and a V source, with scanned evidence on pages 2–15. The d_v20 number is a working number and ucs_tmp is a draft code point; neither is a published scalar. The request leaves later resubmission open.
+- **TCA**, [IRGN1306,2007-05-30](https://www.unicode.org/irg/docs/n1306-ExtensionDWithdraw.pdf). Asks the IRG to withdraw 6,545 T sources from the CJK D candidate after the 2006 ID-card replacement, leaving 1,614. The attachment prints a row number, C1_V20 and a T source on 61 pages, with no glyph column. C1_V20 is a working number, not a published scalar. The cover states the attachment has 62 pages while its attachment pages run 1–61. Two rows repeat one working number and source, and TC-5229 and TD-4F5C each appear twice.
 - **Japan**, [IRGN1198,2006-05-22](https://www.unicode.org/irg/docs/n1198-ExtensionC1Withdraw.pdf). Proposes dropping JMK65904 (C1 no. 08772) from the CJK C1 v6 candidate because it has no lone usage. The codes sit in prose and no glyph is printed for the dropped character; the two page-2 images show the idiom 僥倖. The cover prints “N 1198”; IRGN1198 is the filename form.
 - **NGWU YOH**, personal communications dated 2026-11-06 and 2026-11-07 requesting character-set search and an Extension E withdrawn set; privately supplied screenshots of 字統網 and CNS11643. These establish the interface reference and requested category, with no independent character-membership evidence.
 

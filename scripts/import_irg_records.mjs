@@ -13,10 +13,10 @@ import { parsePages, rowsFor } from './sources/irg.mjs'
 /** @typedef {{id:string, document:string, title:string, source:string, date:string, url:string, status?:string}} CuratedDocument */
 /** @typedef {{serial?:string|null, source?:string|null, document:string, status?:string, mappedUnicode?:string|null, mappedCharacter?:string, mappingKind?:string, evidenceUrls?:string[], mappingEvidence?:string}} CuratedRecord */
 /** @typedef {import('./sources/irg.mjs').Matcher} Matcher */
-/** @typedef {{document:string, pages:number[], matcher:Matcher, serialPattern:string, sourcePattern:string, draftPattern?:string, leftGap?:number, status?:string, count:number}} ExtractStep */
+/** @typedef {{document:string, pages:number[], matcher:Matcher, serialPattern:string, sourcePattern:string, sequencePattern?:string, draftPattern?:string, leftGap?:number, duplicateSources?:boolean, status?:string, count:number}} ExtractStep */
 /** @typedef {{id:string, file:string, group:string, label:string, glyphs:string, names:{en:string,zh?:string,hans?:string,ja?:string,ko?:string}, title:string, complete:boolean, scope:string, source:{name:string,url:string}, documents:CuratedDocument[], extract:ExtractStep[], additionalRecords:CuratedRecord[]}} CuratedSet */
 /** @typedef {{sets:CuratedSet[]}} Curated */
-/** @typedef {{serial:string|null, source:string, target?:string, document:string, page:number, glyph:string, from:string, status?:string}} Row */
+/** @typedef {{serial:string|null, source:string, target?:string, sequence?:string, document:string, page:number, glyph:string, from:string, status?:string}} Row */
 
 const ROOT = join(import.meta.dirname, '..')
 const OUT = join(ROOT, 'app/public/charsets')
@@ -71,7 +71,9 @@ try {
     rows.sort((a, b) => (a.serial ?? a.source).localeCompare(b.serial ?? b.source))
     const serials = rows.filter(row => row.from).map(row => row.serial).filter(Boolean)
     if (new Set(serials).size !== serials.length) throw new Error(`${set.id}: repeated serial`)
-    if (new Set(rows.map(row => row.source)).size !== rows.length) throw new Error(`${set.id}: repeated source`)
+    // IRGN1306 lists two sources twice; the flag keeps that evidence instead of deduplicating it.
+    const duplicatesAllowed = set.extract.some(step => step.duplicateSources)
+    if (!duplicatesAllowed && new Set(rows.map(row => row.source)).size !== rows.length) throw new Error(`${set.id}: repeated source`)
 
     const glyphDir = join(OUT, set.glyphs)
     rmSync(glyphDir, { recursive: true, force: true })
@@ -90,7 +92,7 @@ try {
       source: set.source,
       documents: set.documents,
       records: [
-        ...rows.map(({ serial, source, target, document, page, glyph, status }) => ({ ...(serial ? { serial } : {}), source, document, page, ...(glyph ? { glyph } : {}), ...(target ? { unifiedWith: target } : {}), ...(status ? { status } : {}) })),
+        ...rows.map(({ serial, source, target, sequence, document, page, glyph, status }) => ({ ...(serial ? { serial } : {}), ...(sequence ? { sequence } : {}), source, document, page, ...(glyph ? { glyph } : {}), ...(target ? { unifiedWith: target } : {}), ...(status ? { status } : {}) })),
         ...set.additionalRecords,
       ],
     }

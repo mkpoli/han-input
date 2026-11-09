@@ -2847,6 +2847,31 @@
     }
   },
   {
+    "id": "ext_d_withdrawals_1306",
+    "group": "Proposals",
+    "label": "Ext.D withdrawn · T",
+    "names": {
+      "en": "T-source characters withdrawn from CJK D",
+      "zh": "擴展D撤銷T源字",
+      "hans": "扩展D撤销T源字",
+      "ja": "拡張D撤回T源字",
+      "ko": "확장 D T 출처 철회자"
+    },
+    "chars": 0,
+    "total": 6545,
+    "encoded": 0,
+    "unencoded": 6545,
+    "records": {
+      "file": "/charsets/ext_d_withdrawals_1306_records.json",
+      "count": 6545,
+      "glyphs": 0
+    },
+    "source": {
+      "name": "IRG",
+      "url": "https://www.unicode.org/irg/docs/n1306-ExtensionDWithdraw.pdf"
+    }
+  },
+  {
     "id": "ext_c1_jmk_withdrawals",
     "group": "Proposals",
     "label": "Ext.C1 withdrawn · J",

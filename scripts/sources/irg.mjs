@@ -4,8 +4,8 @@
 /** @typedef {{top:number, left:number, width:number, height:number, value:string}} TextBox */
 /** @typedef {{top:number, left:number, width:number, height:number, src:string}} ImageBox */
 /** @typedef {{number:number, text:TextBox[], images:ImageBox[]}} PageBoxes */
-/** @typedef {{serial:string|null, source:string, target?:string, page:number, file:string}} Row */
-/** @typedef {{serialPattern:string, sourcePattern:string, draftPattern?:string, leftGap?:number, skipUnmatched?:boolean}} Patterns */
+/** @typedef {{serial:string|null, source:string, target?:string, sequence?:string, page:number, file:string}} Row */
+/** @typedef {{serialPattern:string, sourcePattern:string, sequencePattern?:string, draftPattern?:string, leftGap?:number, skipUnmatched?:boolean}} Patterns */
 
 /** @param {string} xml @returns {PageBoxes[]} */
 export function parsePages(xml) {
@@ -88,7 +88,40 @@ export function dualCodeCellRows(page, patterns) {
   return rows
 }
 
-/** @typedef {'codes-left' | 'code-text' | 'code-only' | 'text-pairs' | 'dual-code-cells' | 'glyph-pairs'} Matcher */
+/**
+ * A table without glyphs whose rows print a sequence number and a working number in one cell, with
+ * the source in the next column or, when poppler merges tight cells, in the same box. IRGN1306
+ * prints "1  00410" then "TC-2122", and sometimes "973  12029  TD-4F3E" on one line.
+ * @param {PageBoxes} page @param {Patterns} patterns @returns {Row[]}
+ */
+export function numberedCodeRows(page, patterns) {
+  const bare = (/** @type {string} */ pattern) => pattern.replace(/^\^/, '').replace(/\$$/, '')
+  const cell = new RegExp(`^(${bare(patterns.sequencePattern ?? '\\d{1,4}')})\\s+(${bare(patterns.serialPattern)})(?:\\s+(${bare(patterns.sourcePattern)}))?$`)
+  const source = new RegExp(`^${patterns.sourcePattern}$`)
+  const rows = []
+  const consumed = new Set()
+  for (const text of page.text) {
+    const match = cell.exec(text.value)
+    if (!match) continue
+    const [, sequence, serial, inline] = match
+    let sourceValue = inline
+    if (sourceValue) consumed.add(text)
+    else {
+      const beside = page.text.filter(candidate => !consumed.has(candidate) && source.test(candidate.value)
+        && Math.abs(candidate.top - text.top) <= 8
+        && candidate.left - text.left > 0 && candidate.left - text.left <= (patterns.leftGap ?? 150))
+      if (beside.length !== 1) throw new Error(`Page ${page.number}: row ${sequence} has ${beside.length} source candidates`)
+      sourceValue = beside[0].value
+      consumed.add(beside[0])
+    }
+    rows.push({ serial, sequence, source: sourceValue, page: page.number, file: '' })
+  }
+  const loose = page.text.filter(text => source.test(text.value) && !consumed.has(text))
+  if (loose.length) throw new Error(`Page ${page.number}: ${loose.length} source codes without a row`)
+  return rows
+}
+
+/** @typedef {'codes-left' | 'code-text' | 'code-only' | 'text-pairs' | 'dual-code-cells' | 'numbered-code-rows' | 'glyph-pairs'} Matcher */
 
 /**
  * A list without glyphs: every row prints a sequence number and a source id on one line.
@@ -166,6 +199,7 @@ export function rowsFor(page, matcher, patterns) {
   if (matcher === 'code-only') return codeOnlyRows(page, patterns)
   if (matcher === 'text-pairs') return textPairRows(page, patterns)
   if (matcher === 'dual-code-cells') return dualCodeCellRows(page, patterns)
+  if (matcher === 'numbered-code-rows') return numberedCodeRows(page, patterns)
   if (matcher === 'glyph-pairs') return glyphPairRows(page)
   throw new Error(`Unknown matcher: ${matcher}`)
 }
