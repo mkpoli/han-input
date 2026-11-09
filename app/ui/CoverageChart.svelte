@@ -11,13 +11,17 @@
    * @property {number} otherTotal Characters listed by the other set.
    */
 
-  /** @type {{ encoded: number, unencoded: number, compared?: Compared | null }} */
-  let { encoded, unencoded, compared = null } = $props()
+  /** @type {{ encoded: number, unencoded: number, compared?: Compared | null, blocks?: import('../lib/blocks.js').BlockRow[] }} */
+  let { encoded, unencoded, compared = null, blocks = [] } = $props()
   const total = $derived(encoded + unencoded)
   const share = $derived(total ? unencoded / total : 0)
   const format = (/** @type {number} */ share) =>
     new Intl.NumberFormat(i18n.locale, { maximumFractionDigits: 1 }).format(share * 100)
   const percent = $derived(format(share))
+  const formatShare = (/** @type {number} */ share) => new Intl.NumberFormat(i18n.locale, {
+    minimumFractionDigits: 1,
+    maximumFractionDigits: share > 0 && share < 0.001 ? 2 : 1,
+  }).format(share * 100)
   const radius = 27
   const circumference = 2 * Math.PI * radius
   const arc = $derived(circumference * share)
@@ -94,6 +98,20 @@
       </figcaption>
     </figure>
   {/if}
+  {#if blocks.length}
+    <div class="blocks">
+      <p class="caption">{t('charset.blocks')}</p>
+      <ol>
+        {#each blocks as row (row.id)}
+          <li>
+            <span class="name">{row.id === 'other' ? t('charset.blockOther') : row.label}</span>
+            <span class="count">{row.count.toLocaleString(i18n.locale)}</span>
+            <b>{formatShare(row.share)}%</b>
+          </li>
+        {/each}
+      </ol>
+    </div>
+  {/if}
 </div>
 
 <style>
@@ -116,4 +134,11 @@
   .swatch.encoded{background:var(--ui-color-accent)}
   .swatch.unencoded{background:var(--ui-color-border-strong)}
   figcaption .ui-hint{margin-block-start:var(--ui-space-2xs)}
+  .blocks{flex:1 0 100%;padding-block-start:var(--ui-space-sm);border-block-start:1px solid var(--ui-color-border)}
+  .blocks .caption{margin:0 0 var(--ui-space-2xs)}
+  .blocks ol{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,168px),1fr));gap:2px var(--ui-space-md);margin:0;padding:0;list-style:none}
+  .blocks li{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:baseline;gap:var(--ui-space-xs);font-size:var(--ui-text-xs);line-height:var(--ui-leading-tight)}
+  .blocks .name{color:var(--ui-color-ink-soft);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .blocks .count{color:var(--ui-color-ink-muted);font-variant-numeric:tabular-nums}
+  .blocks b{font-weight:var(--ui-weight-medium);color:var(--ui-color-ink);font-variant-numeric:tabular-nums}
 </style>

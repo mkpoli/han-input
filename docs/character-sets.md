@@ -27,6 +27,8 @@ A selected set also shows its source coverage: `encoded` counts source character
 
 **Compare with** intersects the two sets' listed characters. The overlap pie shows the characters in both and the characters only in the selected set; the percentages are of the selected set's listed characters and of the other set's. A 字統 row without an assigned scalar is absent from the set's listed characters, so it cannot be compared, while a CNS private-use slot matches only the same slot.
 
+The panel also groups the selected set's listed characters by Unicode block: URO, Ext.A through Ext.J, the two compatibility blocks, and Other for anything else. Shares are of the listed characters, and the ranges come from Blocks.txt 18.0.0.
+
 The four hidden 字統 entries currently return empty objects. Their catalogue entries retain zero mapped characters and a source-unavailable note. Sets with unencoded rows link to their records; 50 字統網 sets carry IDS descriptions this way. Proposal sets with unencoded forms link to their source rows.
 
 ## CNS source categories
