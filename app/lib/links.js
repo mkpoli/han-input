@@ -7,7 +7,7 @@ const e = encodeURIComponent
 export const LINKS = [
   { key: 'zitools', name: '字統網 zi.tools', kind: 'all', deep: true, url: c => `https://zi.tools/zi/${e(c)}` },
   { key: 'zdic', name: '漢典 zdic', kind: 'dict', deep: true, url: c => `https://www.zdic.net/hans/${e(c)}` },
-  { key: 'yedict', name: '葉典 yedict', kind: 'dict', deep: true, url: c => `https://www.yedict.com/zscontent.asp?uni=${cp(c).toUpperCase()}` },
+  { key: 'yedict', name: '新葉典 yedict', kind: 'dict', deep: true, url: c => `http://www.yedict.com/z/U${cp(c).toUpperCase().padStart(5, '0')}` },
   { key: 'wikt-en', every: true, name: 'Wiktionary (en)', kind: 'dict', deep: true, url: c => `https://en.wiktionary.org/wiki/${e(c)}` },
   { key: 'wikt-zh', every: true, name: '維基詞典 (zh)', kind: 'dict', deep: true, url: c => `https://zh.wiktionary.org/wiki/${e(c)}` },
   { key: 'wikt-ja', every: true, name: 'ウィクショナリー (ja)', kind: 'dict', deep: true, url: c => `https://ja.wiktionary.org/wiki/${e(c)}` },
