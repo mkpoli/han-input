@@ -1,15 +1,20 @@
 <script>
   // The printed records behind a character set. Many were never encoded, so the only form a reader
   // can see is the glyph printed in the proposal; the record keeps its source or serial code.
+  import { tick } from 'svelte'
   import { ui, showRecord } from '../lib/ui.svelte.js'
   import { nameOf, t } from '../lib/i18n.svelte.js'
   import { gSourceOf } from '../lib/sources.js'
   import { compareCodes } from '../lib/charsets.js'
+  import Pager from './Pager.svelte'
 
   /** @type {{ records: import('../lib/charsets.js').ProposalRecords, label: string }} */
   let { records, label } = $props()
   const documents = $derived(new Map(records.documents.map(doc => /** @type {[string, import('../lib/charsets.js').ProposalDocument]} */ ([doc.id, doc]))))
-  const LIMIT = 240
+  const PER_PAGE = 240
+  let page = $state(0)
+  /** @type {HTMLElement | null} */
+  let top = $state(null)
   const idsMode = $derived(records.records.some(record => record.kind === 'ids'))
   const textOnly = $derived(records.records.some(record => !record.glyph && record.kind !== 'ids'))
   /** @type {'all' | 'encoded' | 'unencoded'} */
@@ -28,10 +33,22 @@
     if (byCode) list = [...list].sort((a, b) => compareCodes(code(a), code(b)))
     return list
   })
-  const shown = $derived(arranged.slice(0, LIMIT))
+  const pages = $derived(Math.max(1, Math.ceil(arranged.length / PER_PAGE)))
+  const shown = $derived(arranged.slice(page * PER_PAGE, (page + 1) * PER_PAGE))
+
+  $effect(() => { arranged; page = 0 })
+
+  /** @param {number} next */
+  async function turnTo(next) {
+    next = Math.max(0, Math.min(pages - 1, next))
+    if (next === page) return
+    page = next
+    await tick()
+    top?.scrollIntoView({ block: 'start' })
+  }
 </script>
 
-<section class="ui-section">
+<section class="ui-section" bind:this={top}>
   <h2 class="ui-label">{t('charset.records')} <span class="ui-count">{arranged.length.toLocaleString()}</span></h2>
   {#if !idsMode}
     <div class="records-tools">
@@ -43,6 +60,7 @@
       </div>
     </div>
   {/if}
+  <Pager page={page + 1} {pages} onchange={next => turnTo(next - 1)} />
   {#if idsMode}
     <ol class="ids-list" aria-label={`${label} ${t('charset.records')}`}>
       {#each shown as record, i (record.document + ':' + code(record) + ':' + i)}
@@ -64,8 +82,8 @@
     </div>
     {#if !arranged.length}<p class="ui-hint">{t('find.none')}</p>{/if}
   {/if}
+  <Pager page={page + 1} {pages} onchange={next => turnTo(next - 1)} />
 </section>
-{#if arranged.length > LIMIT}<p class="ui-hint">{t('common.cut', { shown: LIMIT, total: arranged.length })}</p>{/if}
 
 <style>
   .records{grid-template-columns:repeat(auto-fill,minmax(72px,1fr))}

@@ -266,7 +266,7 @@ try {
         const firstGlyph = data.records.find(/** @param {{glyph?:string}} record */ record => record.glyph)
         assert.equal(await page.locator('main .records .ui-tile-note').first().innerText(), firstGlyph.source ?? firstGlyph.serial)
       }
-      if (proposal.records.count > 240) assert.match(await page.locator('main .ui-hint').last().innerText(), new RegExp(`240 of ${proposal.records.count}`))
+      if (proposal.records.count > 240) assert.match(await page.locator('main .pager').first().innerText(), new RegExp(`Page 1 of ${Math.ceil(proposal.records.count / 240)}`))
       await page.waitForFunction(() => [...document.querySelectorAll('main .records img')].every(image => /** @type {HTMLImageElement} */ (image).complete && /** @type {HTMLImageElement} */ (image).naturalWidth > 0))
       assert.equal(await page.getByRole('link', { name: 'Records', exact: true }).getAttribute('href'), proposal.records.file)
       const first = data.records[0]
@@ -314,9 +314,31 @@ try {
       assert.equal(await page.locator('main .records .ui-tile').count(), visible)
       assert.equal(await page.locator('main .records img').count(), 0)
       assert.ok((await page.locator('main .records').innerText()).includes(data.records[0].source))
-      if (listed.count > 240) assert.match(await page.locator('main .ui-hint').last().innerText(), new RegExp(`240 of ${listed.count}`))
+      if (listed.count > 240) assert.match(await page.locator('main .pager').first().innerText(), new RegExp(`Page 1 of ${Math.ceil(listed.count / 240)}`))
       await page.locator('main .records .ui-tile').first().click()
       assert.match(await page.locator('aside.card').innerText(), new RegExp(data.records[0].source ?? data.records[0].serial))
+    })
+  }
+  const paged = catalogue.find(set => set.id === 'ext_d_withdrawals_1306' && set.records) ?? catalogue.filter(set => set.records && !set.records.file.endsWith('.ids.json') && set.records.count > 240).sort((a, b) => (b.records?.count ?? 0) - (a.records?.count ?? 0))[0]
+  if (paged?.records) {
+    const listing = paged.records
+    await check(`a large printed set pages its records: ${paged.id}`, async () => {
+      const count = listing.count
+      const pages = Math.ceil(count / 240)
+      await find(page, '', paged.id)
+      const pager = page.locator('main .pager').first()
+      assert.match(await pager.innerText(), new RegExp(`Page 1 of ${pages}`))
+      assert.equal(await page.locator('main .records .ui-tile').count(), 240)
+      assert.equal(await page.locator('main .cut').count(), 0)
+      const first = await page.locator('main .records .ui-tile').first().getAttribute('title')
+      await pager.locator('[data-page="next"]').click()
+      await page.waitForFunction(was => document.querySelector('main .records .ui-tile')?.getAttribute('title') !== was, first)
+      assert.equal(await page.locator('main .records .ui-tile').count(), Math.min(240, count - 240))
+      await pager.locator('input').fill(String(pages))
+      await pager.getByRole('button', { name: 'Go' }).click()
+      await page.waitForFunction(wanted => document.querySelector('.pager')?.textContent?.includes(`Page ${wanted} of`), pages)
+      assert.equal(await page.locator('main .records .ui-tile').count(), count - (pages - 1) * 240)
+      assert.equal(await pager.locator('[data-page="next"]').isDisabled(), true)
     })
   }
   const recorded = catalogue.find(set => set.source.records)
