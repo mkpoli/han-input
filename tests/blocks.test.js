@@ -1,5 +1,6 @@
 import { describe, expect, test } from 'bun:test'
-import { blockRows } from '../app/lib/blocks.js'
+import { versionRows } from '../app/lib/ages.js'
+import { blockOccupancy, blockRows, planeRows } from '../app/lib/blocks.js'
 
 const char = (/** @type {number} */ point) => String.fromCodePoint(point)
 
@@ -18,5 +19,68 @@ describe('block shares', () => {
   })
   test('returns nothing for an empty set', () => {
     expect(blockRows(new Set())).toEqual([])
+  })
+})
+
+describe('version shares', () => {
+  const ranges = /** @type {[number, number, string][]} */ ([
+    [0x41, 0x5A, '1.1'],
+    [0x61, 0x7A, '2.0'],
+    [0x20000, 0x2A6D6, '3.1'],
+    [0x2A6D7, 0x2A6DD, '13.0'],
+    [0x2A6DE, 0x2A6DF, '14.0'],
+  ])
+  const point = (/** @type {number} */ value) => String.fromCodePoint(value)
+
+  test('groups characters by the version that first assigned them', () => {
+    const rows = versionRows(new Set([point(0x41), point(0x42), point(0x61)]), ranges)
+    expect(rows.map(row => [row.version, row.count])).toEqual([['1.1', 2], ['2.0', 1]])
+    expect(rows[0].share).toBeCloseTo(2 / 3)
+    expect(rows[1].share).toBeCloseTo(1 / 3)
+  })
+
+  test('orders versions numerically and merges consecutive points', () => {
+    const rows = versionRows(new Set([point(0x2A6D7), point(0x20000), point(0x2A6D8)]), ranges)
+    expect(rows.map(row => row.version)).toEqual(['3.1', '13.0'])
+    expect(rows[1].ranges).toEqual([{ start: 0x2A6D7, end: 0x2A6D8, count: 2 }])
+  })
+
+  test('keeps a gap as two ranges', () => {
+    const rows = versionRows(new Set([point(0x41), point(0x43)]), ranges)
+    expect(rows[0].ranges).toEqual([{ start: 0x41, end: 0x41, count: 1 }, { start: 0x43, end: 0x43, count: 1 }])
+  })
+
+  test('returns nothing for an empty set', () => {
+    expect(versionRows(new Set(), ranges)).toEqual([])
+  })
+})
+
+describe('block occupancy', () => {
+  const blocks = [
+    { id: 'a', label: 'A', start: 0x100, end: 0x103 },
+    { id: 'b', label: 'B', start: 0x108, end: 0x109 },
+  ]
+  test('counts assigned code points and the empty remainder in code point order', () => {
+    const rows = blockOccupancy([[0x100, 0x101, '1.1'], [0x103, 0x103, '2.0']], blocks)
+    expect(rows.map(row => [row.id, row.total, row.assigned, row.empty])).toEqual([['a', 4, 3, 1], ['b', 2, 0, 2]])
+    expect(rows[0].share).toBeCloseTo(0.25)
+    expect(rows[1].share).toBe(1)
+  })
+  test('clips age ranges to the block', () => {
+    const rows = blockOccupancy([[0xF0, 0x110, '1.1']], blocks)
+    expect(rows.map(row => [row.id, row.assigned])).toEqual([['a', 4], ['b', 2]])
+  })
+})
+
+describe('plane shares', () => {
+  const point = (/** @type {number} */ value) => String.fromCodePoint(value)
+  test('counts planes 0 to 3 and keeps higher planes apart', () => {
+    const rows = planeRows(new Set([point(0x5B57), point(0x1B170), point(0x20000), point(0x30000), point(0xF0000)]))
+    expect(rows.map(row => [row.plane, row.count])).toEqual([[0, 1], [1, 1], [2, 1], [3, 1], [null, 1]])
+    expect(rows.every(row => row.share === 1 / 5)).toBe(true)
+  })
+  test('keeps all four planes for a set in one plane', () => {
+    const rows = planeRows(new Set([point(0x5B57)]))
+    expect(rows.map(row => [row.plane, row.count, row.share])).toEqual([[0, 1, 1], [1, 0, 0], [2, 0, 0], [3, 0, 0]])
   })
 })

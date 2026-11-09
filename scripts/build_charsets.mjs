@@ -108,6 +108,17 @@ for (const line of ucdBytes.toString('utf8').split('\n')) {
 const blocksUrl = 'https://www.unicode.org/Public/18.0.0/ucd/Blocks.txt'
 const blocksBytes = readFileSync(await fetchOnce(blocksUrl))
 record(blocksUrl, blocksBytes)
+// The version that first assigned each code point, for the block version breakdown.
+const ageUrl = 'https://www.unicode.org/Public/18.0.0/ucd/DerivedAge.txt'
+const ageBytes = readFileSync(await fetchOnce(ageUrl))
+record(ageUrl, ageBytes)
+/** @type {[number, number, string][]} */
+const ageRanges = []
+for (const line of ageBytes.toString('utf8').split('\n')) {
+  const match = line.split('#')[0].trim().match(/^([0-9A-F]+)(?:\.\.([0-9A-F]+))?\s*;\s*([0-9.]+)$/)
+  if (match) ageRanges.push([parseInt(match[1], 16), parseInt(match[2] ?? match[1], 16), match[3]])
+}
+writeFileSync(join(OUT, 'unicode-age.json'), JSON.stringify({ version: '18.0.0', source: ageUrl, ranges: ageRanges.sort((a, b) => a[0] - b[0]) }) + '\n')
 for (const line of blocksBytes.toString('utf8').split('\n')) {
   const match = line.match(/^([0-9A-F]+)\.\.([0-9A-F]+); (.+)$/)
   if (!match || !/^(?:CJK Radicals Supplement|Kangxi Radicals|CJK Strokes|CJK Compatibility Ideographs(?: Supplement)?|Hiragana|Katakana(?: Phonetic Extensions)?|Kana (?:Extended-[AB]|Supplement)|Small Kana Extension|Nushu)$/.test(match[3])) continue
