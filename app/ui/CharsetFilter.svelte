@@ -1,7 +1,7 @@
 <script>
   import { tick } from 'svelte'
   import { blockRows } from '../lib/blocks.js'
-  import { loadCharset, sharedCharacters } from '../lib/charsets.js'
+  import { loadCharset, loadRecords, sharedCharacters } from '../lib/charsets.js'
   import { i18n, nameOf, t } from '../lib/i18n.svelte.js'
   import CoverageChart from './CoverageChart.svelte'
   import CoverageDot from './CoverageDot.svelte'
@@ -22,7 +22,7 @@
   let compareRetry = $state(0)
   let compareBusy = $state(false)
   let compareFailed = $state(false)
-  let comparison = $state(/** @type {{id: string, shared: number, total: number, otherTotal: number} | null} */ (null))
+  let comparison = $state(/** @type {{id: string, shared: number, total: number, mapped: number, otherTotal: number, glyphs: number, mappedGlyphs: number} | null} */ (null))
   /** @type {import('../lib/blocks.js').BlockRow[]} */
   let blocks = $state([])
   const chosen = $derived(charsets.find(set => set.id === selected))
@@ -41,8 +41,8 @@
   })).filter(group => group.sets.length))
   const compared = $derived.by(() => {
     if (!comparison || compareBusy) return null
-    const { id, shared, total, otherTotal } = comparison
-    return { name: charsets.find(set => set.id === id)?.label ?? id, shared, total, otherTotal }
+    const { id, shared, total, mapped, otherTotal, glyphs, mappedGlyphs } = comparison
+    return { name: charsets.find(set => set.id === id)?.label ?? id, shared, total, mapped, otherTotal, glyphs, mappedGlyphs }
   })
 
   $effect(() => {
@@ -79,9 +79,19 @@
     comparison = null
     ;(async () => {
       try {
-        const [first, second] = await Promise.all([loadCharset(mine), loadCharset(other)])
+        const set = charsets.find(entry => entry.id === mine)
+        const printed = set?.records?.glyphs ? loadRecords(mine) : null
+        const [first, second, records] = await Promise.all([loadCharset(mine), loadCharset(other), printed])
         if (!active) return
-        comparison = { id: other, shared: sharedCharacters(first, second), total: first.size, otherTotal: second.size }
+        comparison = {
+          id: other,
+          shared: sharedCharacters(first, second),
+          total: records ? records.records.length : first.size,
+          mapped: first.size,
+          otherTotal: second.size,
+          glyphs: records ? set?.records?.glyphs ?? 0 : 0,
+          mappedGlyphs: records ? records.records.filter(record => record.glyph && record.mappedUnicode).length : 0,
+        }
       } catch {
         if (active) compareFailed = true
       } finally {

@@ -1,13 +1,17 @@
 <script>
   // How much of a character set carries a Unicode character, and how many of its characters another
-  // set lists too.
+  // set lists too. A set with printed records counts every record, so a record without a scalar
+  // stays visible instead of leaving the dial.
   import { i18n, t } from '../lib/i18n.svelte.js'
 
   /**
    * @typedef {object} Compared
    * @property {string} name The other set's short label.
    * @property {number} shared Characters listed by both sets.
-   * @property {number} total Characters listed by this set.
+   * @property {number} total Characters, or records when the set has printed records.
+   * @property {number} [mapped] Characters in this set that carry a scalar.
+   * @property {number} [glyphs] Printed records in this set.
+   * @property {number} [mappedGlyphs] Printed records that carry a scalar.
    * @property {number} otherTotal Characters listed by the other set.
    */
 
@@ -34,14 +38,24 @@
   const sharedPercent = $derived(format(sharedShare))
   const sharedArc = $derived(circumference * sharedShare)
   const otherShare = $derived(compared?.otherTotal ? compared.shared / compared.otherTotal : 0)
-  const only = $derived(compared ? compared.total - compared.shared : 0)
-  const sharedLabel = $derived(compared ? t('charset.sharedLabel', {
+  const mapped = $derived(compared ? compared.mapped ?? compared.total : 0)
+  const unmapped = $derived(compared ? compared.total - mapped : 0)
+  const only = $derived(compared ? mapped - compared.shared : 0)
+  const onlyShare = $derived(compared?.total ? only / compared.total : 0)
+  const onlyArc = $derived(circumference * onlyShare)
+  const sharedLabel = $derived(compared ? t(unmapped ? 'charset.sharedRecordsLabel' : 'charset.sharedLabel', {
     percent: sharedPercent,
     shared: compared.shared.toLocaleString(i18n.locale),
     total: compared.total.toLocaleString(i18n.locale),
+    mapped: mapped.toLocaleString(i18n.locale),
     name: compared.name,
     otherPercent: format(otherShare),
     otherTotal: compared.otherTotal.toLocaleString(i18n.locale),
+  }) : '')
+  const printed = $derived(compared?.glyphs ? t('charset.printedRecords', {
+    glyphs: compared.glyphs.toLocaleString(i18n.locale),
+    mapped: (compared.mappedGlyphs ?? 0).toLocaleString(i18n.locale),
+    unmatched: (compared.glyphs - (compared.mappedGlyphs ?? 0)).toLocaleString(i18n.locale),
   }) : '')
 </script>
 
@@ -76,7 +90,10 @@
           {#if compared.shared === compared.total}
             <circle class="encoded" cx="36" cy="36" r={radius} />
           {:else}
-            <circle class="unencoded" cx="36" cy="36" r={radius} />
+            {#if only}
+              <circle class="unencoded" cx="36" cy="36" r={radius}
+                stroke-dasharray="{onlyArc} {circumference - onlyArc}" stroke-dashoffset={-sharedArc} transform="rotate(-90 36 36)" />
+            {/if}
             {#if compared.shared}
               <circle class="encoded" cx="36" cy="36" r={radius}
                 stroke-dasharray="{sharedArc} {circumference - sharedArc}" transform="rotate(-90 36 36)" />
@@ -89,12 +106,16 @@
         <p class="caption">{t('charset.sharedCaption', { name: compared.name })}</p>
         <p class="legend"><span class="swatch encoded" aria-hidden="true"></span>{t('charset.shared')}<b>{compared.shared.toLocaleString(i18n.locale)}</b></p>
         <p class="legend"><span class="swatch unencoded" aria-hidden="true"></span>{t('charset.onlyHere')}<b>{only.toLocaleString(i18n.locale)}</b></p>
+        {#if unmapped}
+          <p class="legend"><span class="swatch noscalar" aria-hidden="true"></span>{t('charset.noScalar')}<b>{unmapped.toLocaleString(i18n.locale)}</b></p>
+        {/if}
         <p class="ui-hint">{t('charset.otherShare', {
           percent: format(otherShare),
           name: compared.name,
           shared: compared.shared.toLocaleString(i18n.locale),
           total: compared.otherTotal.toLocaleString(i18n.locale),
         })}</p>
+        {#if printed}<p class="ui-hint">{printed}</p>{/if}
       </figcaption>
     </figure>
   {/if}
@@ -133,6 +154,7 @@
   .swatch{inline-size:8px;block-size:8px;border-radius:2px;flex:none}
   .swatch.encoded{background:var(--ui-color-accent)}
   .swatch.unencoded{background:var(--ui-color-border-strong)}
+  .swatch.noscalar{background:var(--ui-color-surface-sunken);border:1px solid var(--ui-color-border)}
   figcaption .ui-hint{margin-block-start:var(--ui-space-2xs)}
   .blocks{flex:1 0 100%;padding-block-start:var(--ui-space-sm);border-block-start:1px solid var(--ui-color-border)}
   .blocks .caption{margin:0 0 var(--ui-space-2xs)}
