@@ -1,0 +1,674 @@
+{
+  "id": "ext_d_v_withdrawals",
+  "group": "Proposals",
+  "label": "Ext.D withdrawn · V",
+  "names": {
+    "en": "V-source characters withdrawn from CJK D",
+    "zh": "擴展D撤銷V源字",
+    "hans": "扩展D撤销V源字",
+    "ja": "拡張D撤回V源字",
+    "ko": "확장 D V 출처 철회자"
+  },
+  "title": "V-source characters withdrawn from the CJK D candidate",
+  "complete": false,
+  "scope": "The 107 V-source characters that IRGN1567 asks to withdraw from the CJK D candidate, one record per row. Each record keeps the d_v20 working number as its serial and the V-source id printed beside it. The second number in the same cell is a draft code point (ucs_tmp); neither printed number is claimed to be a published Unicode scalar. The request leaves later resubmission open.",
+  "source": {
+    "name": "IRG",
+    "url": "https://www.unicode.org/irg/docs/n1567-ExtensionDWithdraw.pdf"
+  },
+  "documents": [
+    {
+      "id": "n1567",
+      "document": "IRGN1567",
+      "title": "Request of withdrawing 107 glyphs in V-source Ext.D",
+      "source": "Vietnam",
+      "date": "2009-01-13",
+      "url": "https://www.unicode.org/irg/docs/n1567-ExtensionDWithdraw.pdf",
+      "status": "Asks IRG#32 to withdraw 107 V-source characters from CJK D. Rows print d_v20, a draft code point (ucs_tmp) and a V source; pages 2–15 also carry scanned evidence. No published scalar is claimed for any row."
+    }
+  ],
+  "records": [
+    {
+      "serial": "00186",
+      "source": "V04-4066",
+      "document": "n1567",
+      "page": 2
+    },
+    {
+      "serial": "00220",
+      "source": "V04-406E",
+      "document": "n1567",
+      "page": 2
+    },
+    {
+      "serial": "00290",
+      "source": "V04-407E",
+      "document": "n1567",
+      "page": 2
+    },
+    {
+      "serial": "00373",
+      "source": "V04-4141",
+      "document": "n1567",
+      "page": 2
+    },
+    {
+      "serial": "00457",
+      "source": "V04-4160",
+      "document": "n1567",
+      "page": 2
+    },
+    {
+      "serial": "00586",
+      "source": "V04-417A",
+      "document": "n1567",
+      "page": 2
+    },
+    {
+      "serial": "00631",
+      "source": "V04-4231",
+      "document": "n1567",
+      "page": 2
+    },
+    {
+      "serial": "00650",
+      "source": "V04-4233",
+      "document": "n1567",
+      "page": 3
+    },
+    {
+      "serial": "00669",
+      "source": "V04-423A",
+      "document": "n1567",
+      "page": 3
+    },
+    {
+      "serial": "00688",
+      "source": "V04-4240",
+      "document": "n1567",
+      "page": 3
+    },
+    {
+      "serial": "00701",
+      "source": "V04-4243",
+      "document": "n1567",
+      "page": 3
+    },
+    {
+      "serial": "00709",
+      "source": "V04-4247",
+      "document": "n1567",
+      "page": 3
+    },
+    {
+      "serial": "00728",
+      "source": "V04-424E",
+      "document": "n1567",
+      "page": 3
+    },
+    {
+      "serial": "00791",
+      "source": "V04-425F",
+      "document": "n1567",
+      "page": 3
+    },
+    {
+      "serial": "00904",
+      "source": "V04-4275",
+      "document": "n1567",
+      "page": 3
+    },
+    {
+      "serial": "00945",
+      "source": "V04-5240",
+      "document": "n1567",
+      "page": 12
+    },
+    {
+      "serial": "01011",
+      "source": "V04-4323",
+      "document": "n1567",
+      "page": 4
+    },
+    {
+      "serial": "01114",
+      "source": "V04-434B",
+      "document": "n1567",
+      "page": 4
+    },
+    {
+      "serial": "01193",
+      "source": "V04-4370",
+      "document": "n1567",
+      "page": 4
+    },
+    {
+      "serial": "01234",
+      "source": "V04-4425",
+      "document": "n1567",
+      "page": 4
+    },
+    {
+      "serial": "01263",
+      "source": "V04-442E",
+      "document": "n1567",
+      "page": 4
+    },
+    {
+      "serial": "01275",
+      "source": "V04-4436",
+      "document": "n1567",
+      "page": 4
+    },
+    {
+      "serial": "01283",
+      "source": "V04-443D",
+      "document": "n1567",
+      "page": 4
+    },
+    {
+      "serial": "01318",
+      "source": "V04-444B",
+      "document": "n1567",
+      "page": 4
+    },
+    {
+      "serial": "01330",
+      "source": "V04-444C",
+      "document": "n1567",
+      "page": 5
+    },
+    {
+      "serial": "01530",
+      "source": "V04-446B",
+      "document": "n1567",
+      "page": 5
+    },
+    {
+      "serial": "01748",
+      "source": "V04-447B",
+      "document": "n1567",
+      "page": 5
+    },
+    {
+      "serial": "01761",
+      "source": "V04-4478",
+      "document": "n1567",
+      "page": 5
+    },
+    {
+      "serial": "01793",
+      "source": "V04-4528",
+      "document": "n1567",
+      "page": 5
+    },
+    {
+      "serial": "01830",
+      "source": "V04-453D",
+      "document": "n1567",
+      "page": 5
+    },
+    {
+      "serial": "02587",
+      "source": "V04-467C",
+      "document": "n1567",
+      "page": 5
+    },
+    {
+      "serial": "02634",
+      "source": "V04-4732",
+      "document": "n1567",
+      "page": 6
+    },
+    {
+      "serial": "02668",
+      "source": "V04-4745",
+      "document": "n1567",
+      "page": 6
+    },
+    {
+      "serial": "02864",
+      "source": "V04-477C",
+      "document": "n1567",
+      "page": 6
+    },
+    {
+      "serial": "02951",
+      "source": "V04-4828",
+      "document": "n1567",
+      "page": 6
+    },
+    {
+      "serial": "03019",
+      "source": "V04-4837",
+      "document": "n1567",
+      "page": 6
+    },
+    {
+      "serial": "03276",
+      "source": "V04-4930",
+      "document": "n1567",
+      "page": 6
+    },
+    {
+      "serial": "03344",
+      "source": "V04-4957",
+      "document": "n1567",
+      "page": 6
+    },
+    {
+      "serial": "03350",
+      "source": "V04-4961",
+      "document": "n1567",
+      "page": 7
+    },
+    {
+      "serial": "03352",
+      "source": "V04-495D",
+      "document": "n1567",
+      "page": 7
+    },
+    {
+      "serial": "03383",
+      "source": "V04-4958",
+      "document": "n1567",
+      "page": 6
+    },
+    {
+      "serial": "03394",
+      "source": "V04-4968",
+      "document": "n1567",
+      "page": 7
+    },
+    {
+      "serial": "03409",
+      "source": "V04-496E",
+      "document": "n1567",
+      "page": 7
+    },
+    {
+      "serial": "03585",
+      "source": "V04-4A2C",
+      "document": "n1567",
+      "page": 7
+    },
+    {
+      "serial": "03690",
+      "source": "V04-4A5A",
+      "document": "n1567",
+      "page": 7
+    },
+    {
+      "serial": "04052",
+      "source": "V04-4B4B",
+      "document": "n1567",
+      "page": 7
+    },
+    {
+      "serial": "04064",
+      "source": "V04-4B4D",
+      "document": "n1567",
+      "page": 7
+    },
+    {
+      "serial": "04091",
+      "source": "V04-4B57",
+      "document": "n1567",
+      "page": 8
+    },
+    {
+      "serial": "04240",
+      "source": "V04-4541",
+      "document": "n1567",
+      "page": 5
+    },
+    {
+      "serial": "04300",
+      "source": "V04-4B7D",
+      "document": "n1567",
+      "page": 8
+    },
+    {
+      "serial": "04306",
+      "source": "V04-4C23",
+      "document": "n1567",
+      "page": 8
+    },
+    {
+      "serial": "04593",
+      "source": "V04-4C69",
+      "document": "n1567",
+      "page": 8
+    },
+    {
+      "serial": "04632",
+      "source": "V04-4C75",
+      "document": "n1567",
+      "page": 8
+    },
+    {
+      "serial": "04636",
+      "source": "V04-4C76",
+      "document": "n1567",
+      "page": 8
+    },
+    {
+      "serial": "04663",
+      "source": "V04-4D21",
+      "document": "n1567",
+      "page": 8
+    },
+    {
+      "serial": "04776",
+      "source": "V04-4D43",
+      "document": "n1567",
+      "page": 8
+    },
+    {
+      "serial": "04794",
+      "source": "V04-4D46",
+      "document": "n1567",
+      "page": 9
+    },
+    {
+      "serial": "04818",
+      "source": "V04-4D4D",
+      "document": "n1567",
+      "page": 9
+    },
+    {
+      "serial": "04902",
+      "source": "V04-4D63",
+      "document": "n1567",
+      "page": 9
+    },
+    {
+      "serial": "04939",
+      "source": "V04-4D69",
+      "document": "n1567",
+      "page": 9
+    },
+    {
+      "serial": "04977",
+      "source": "V04-4D6F",
+      "document": "n1567",
+      "page": 9
+    },
+    {
+      "serial": "05057",
+      "source": "V04-4E22",
+      "document": "n1567",
+      "page": 9
+    },
+    {
+      "serial": "05181",
+      "source": "V04-4E27",
+      "document": "n1567",
+      "page": 9
+    },
+    {
+      "serial": "05188",
+      "source": "V04-4E29",
+      "document": "n1567",
+      "page": 9
+    },
+    {
+      "serial": "05245",
+      "source": "V04-4E3B",
+      "document": "n1567",
+      "page": 10
+    },
+    {
+      "serial": "05363",
+      "source": "V04-4E70",
+      "document": "n1567",
+      "page": 10
+    },
+    {
+      "serial": "05372",
+      "source": "V04-4E74",
+      "document": "n1567",
+      "page": 10
+    },
+    {
+      "serial": "05382",
+      "source": "V04-4E76",
+      "document": "n1567",
+      "page": 10
+    },
+    {
+      "serial": "05433",
+      "source": "V04-4E79",
+      "document": "n1567",
+      "page": 10
+    },
+    {
+      "serial": "05711",
+      "source": "V04-4F59",
+      "document": "n1567",
+      "page": 10
+    },
+    {
+      "serial": "05811",
+      "source": "V04-5437",
+      "document": "n1567",
+      "page": 13
+    },
+    {
+      "serial": "05927",
+      "source": "V04-4F78",
+      "document": "n1567",
+      "page": 10
+    },
+    {
+      "serial": "06045",
+      "source": "V04-502D",
+      "document": "n1567",
+      "page": 11
+    },
+    {
+      "serial": "06050",
+      "source": "V04-502C",
+      "document": "n1567",
+      "page": 10
+    },
+    {
+      "serial": "06277",
+      "source": "V04-5066",
+      "document": "n1567",
+      "page": 11
+    },
+    {
+      "serial": "06296",
+      "source": "V04-5074",
+      "document": "n1567",
+      "page": 11
+    },
+    {
+      "serial": "06343",
+      "source": "V04-5138",
+      "document": "n1567",
+      "page": 11
+    },
+    {
+      "serial": "06348",
+      "source": "V04-513C",
+      "document": "n1567",
+      "page": 11
+    },
+    {
+      "serial": "06615",
+      "source": "V04-5157",
+      "document": "n1567",
+      "page": 11
+    },
+    {
+      "serial": "06662",
+      "source": "V04-516B",
+      "document": "n1567",
+      "page": 11
+    },
+    {
+      "serial": "06678",
+      "source": "V04-516F",
+      "document": "n1567",
+      "page": 11
+    },
+    {
+      "serial": "06750",
+      "source": "V04-5250",
+      "document": "n1567",
+      "page": 12
+    },
+    {
+      "serial": "06795",
+      "source": "V04-525E",
+      "document": "n1567",
+      "page": 12
+    },
+    {
+      "serial": "07103",
+      "source": "V04-532B",
+      "document": "n1567",
+      "page": 12
+    },
+    {
+      "serial": "07318",
+      "source": "V04-5359",
+      "document": "n1567",
+      "page": 12
+    },
+    {
+      "serial": "07502",
+      "source": "V04-5425",
+      "document": "n1567",
+      "page": 12
+    },
+    {
+      "serial": "07517",
+      "source": "V04-5429",
+      "document": "n1567",
+      "page": 12
+    },
+    {
+      "serial": "07521",
+      "source": "V04-542B",
+      "document": "n1567",
+      "page": 12
+    },
+    {
+      "serial": "07614",
+      "source": "V04-5443",
+      "document": "n1567",
+      "page": 13
+    },
+    {
+      "serial": "07673",
+      "source": "V04-5449",
+      "document": "n1567",
+      "page": 13
+    },
+    {
+      "serial": "08095",
+      "source": "V04-547D",
+      "document": "n1567",
+      "page": 13
+    },
+    {
+      "serial": "08121",
+      "source": "V04-5529",
+      "document": "n1567",
+      "page": 13
+    },
+    {
+      "serial": "08163",
+      "source": "V04-5535",
+      "document": "n1567",
+      "page": 13
+    },
+    {
+      "serial": "08171",
+      "source": "V04-5536",
+      "document": "n1567",
+      "page": 13
+    },
+    {
+      "serial": "08613",
+      "source": "V04-5636",
+      "document": "n1567",
+      "page": 13
+    },
+    {
+      "serial": "08649",
+      "source": "V04-563A",
+      "document": "n1567",
+      "page": 14
+    },
+    {
+      "serial": "08662",
+      "source": "V04-563D",
+      "document": "n1567",
+      "page": 14
+    },
+    {
+      "serial": "08687",
+      "source": "V04-5642",
+      "document": "n1567",
+      "page": 14
+    },
+    {
+      "serial": "09180",
+      "source": "V04-5664",
+      "document": "n1567",
+      "page": 14
+    },
+    {
+      "serial": "09190",
+      "source": "V04-5669",
+      "document": "n1567",
+      "page": 14
+    },
+    {
+      "serial": "09393",
+      "source": "V04-572D",
+      "document": "n1567",
+      "page": 14
+    },
+    {
+      "serial": "09548",
+      "source": "V04-5749",
+      "document": "n1567",
+      "page": 14
+    },
+    {
+      "serial": "09727",
+      "source": "V04-5762",
+      "document": "n1567",
+      "page": 14
+    },
+    {
+      "serial": "09836",
+      "source": "V04-5773",
+      "document": "n1567",
+      "page": 15
+    },
+    {
+      "serial": "10063",
+      "source": "V04-5777",
+      "document": "n1567",
+      "page": 15
+    },
+    {
+      "serial": "10436",
+      "source": "V04-5832",
+      "document": "n1567",
+      "page": 15
+    },
+    {
+      "serial": "10449",
+      "source": "V04-5836",
+      "document": "n1567",
+      "page": 15
+    }
+  ]
+}

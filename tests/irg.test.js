@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'bun:test'
-import { parsePages, codesLeftRows, codeTextRows, rowsFor } from '../scripts/sources/irg.mjs'
+import { parsePages, codesLeftRows, codeTextRows, dualCodeCellRows, rowsFor } from '../scripts/sources/irg.mjs'
 
 /** @param {{number:number, text:any[], images:any[]}} page */
 const pageOf = page => /** @type {any} */ (page)
@@ -79,5 +79,63 @@ describe('row matching', () => {
     expect(() => codeTextRows(bad, G)).toThrow('unrecognized row')
     expect(() => codeTextRows(pageOf({ number: 3, text: [], images: bad.images }), G)).toThrow('0 code candidates')
     expect(() => rowsFor(bad, 'nope', G)).toThrow('Unknown matcher')
+  })
+})
+
+describe('two-code cells', () => {
+  const V = {
+    serialPattern: '^\\d{5}$',
+    sourcePattern: '^V\\d{2}-[0-9A-F]{4}$',
+    draftPattern: '^[0-9A-F]{4,5}$',
+  }
+  test('splits a serial and draft code point printed in one cell from the source beside it', () => {
+    const page = pageOf({
+      number: 2,
+      text: [
+        { top: 351, left: 85, width: 117, height: 17, value: '00186 06209' },
+        { top: 351, left: 221, width: 82, height: 17, value: 'V04-4066' },
+        { top: 342, left: 307, width: 31, height: 34, value: '戉' },
+      ],
+      images: [],
+    })
+    expect(dualCodeCellRows(page, V)).toEqual([{ serial: '00186', source: 'V04-4066', page: 2, file: '' }])
+  })
+
+  test('reads a source printed in the same cell, and joins one wrapped after the hyphen', () => {
+    const inline = pageOf({
+      number: 2,
+      text: [{ top: 692, left: 85, width: 219, height: 17, value: '00373 062C4  V04-4141' }],
+      images: [],
+    })
+    expect(dualCodeCellRows(inline, V)).toEqual([{ serial: '00373', source: 'V04-4141', page: 2, file: '' }])
+    const wrapped = pageOf({
+      number: 7,
+      text: [
+        { top: 588, left: 85, width: 118, height: 17, value: '03585 06F50' },
+        { top: 580, left: 221, width: 32, height: 17, value: 'V04-' },
+        { top: 597, left: 221, width: 42, height: 17, value: '4A2C' },
+      ],
+      images: [],
+    })
+    expect(dualCodeCellRows(wrapped, V)).toEqual([{ serial: '03585', source: 'V04-4A2C', page: 7, file: '' }])
+  })
+
+  test('refuses a row without exactly one source', () => {
+    const missing = pageOf({
+      number: 2,
+      text: [{ top: 351, left: 85, width: 117, height: 17, value: '00186 06209' }],
+      images: [],
+    })
+    expect(() => dualCodeCellRows(missing, V)).toThrow('0 source candidates')
+    const repeated = pageOf({
+      number: 2,
+      text: [
+        { top: 351, left: 85, width: 117, height: 17, value: '00186 06209' },
+        { top: 351, left: 221, width: 82, height: 17, value: 'V04-4066' },
+        { top: 351, left: 221, width: 82, height: 17, value: 'V04-4067' },
+      ],
+      images: [],
+    })
+    expect(() => dualCodeCellRows(repeated, V)).toThrow('2 source candidates')
   })
 })

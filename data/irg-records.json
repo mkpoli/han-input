@@ -175,6 +175,65 @@
       "additionalRecords": []
     },
     {
+      "id": "ext_d_v_withdrawals",
+      "file": "ext_d_v_records.json",
+      "group": "Proposals",
+      "label": "Ext.D withdrawn · V",
+      "glyphs": "glyphs/ext-d-v",
+      "names": {
+        "en": "V-source characters withdrawn from CJK D",
+        "zh": "擴展D撤銷V源字",
+        "hans": "扩展D撤销V源字",
+        "ja": "拡張D撤回V源字",
+        "ko": "확장 D V 출처 철회자"
+      },
+      "source": {
+        "name": "IRG",
+        "url": "https://www.unicode.org/irg/docs/n1567-ExtensionDWithdraw.pdf"
+      },
+      "title": "V-source characters withdrawn from the CJK D candidate",
+      "complete": false,
+      "scope": "The 107 V-source characters that IRGN1567 asks to withdraw from the CJK D candidate, one record per row. Each record keeps the d_v20 working number as its serial and the V-source id printed beside it. The second number in the same cell is a draft code point (ucs_tmp); neither printed number is claimed to be a published Unicode scalar. The request leaves later resubmission open.",
+      "documents": [
+        {
+          "id": "n1567",
+          "document": "IRGN1567",
+          "title": "Request of withdrawing 107 glyphs in V-source Ext.D",
+          "source": "Vietnam",
+          "date": "2009-01-13",
+          "url": "https://www.unicode.org/irg/docs/n1567-ExtensionDWithdraw.pdf",
+          "status": "Asks IRG#32 to withdraw 107 V-source characters from CJK D. Rows print d_v20, a draft code point (ucs_tmp) and a V source; pages 2–15 also carry scanned evidence. No published scalar is claimed for any row."
+        }
+      ],
+      "extract": [
+        {
+          "document": "n1567",
+          "pages": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "matcher": "dual-code-cells",
+          "serialPattern": "^\\d{5}$",
+          "sourcePattern": "^V\\d{2}-[0-9A-F]{4}$",
+          "draftPattern": "^[0-9A-F]{4,5}$",
+          "count": 107
+        }
+      ],
+      "additionalRecords": []
+    },
+    {
       "id": "ext_f_sat_withdrawals",
       "file": "ext_f_sat_records.json",
       "group": "Proposals",
