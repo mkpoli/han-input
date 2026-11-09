@@ -101,6 +101,26 @@ for (const [name, query, char] of FINDS) {
   await check(`find ${name}: ${query} → ${char}`, async () => assert.ok((await find(query)).includes(char)))
 }
 
+await check('a broad meaning turns its own pages without changing the query', async () => {
+  await page.goto(`${SITE}/?q=water`)
+  await page.waitForLoadState('networkidle')
+  const heading = await page.locator('main .ui-section h2').first().innerText()
+  const total = Number(heading.match(/(\d+)\s*$/)?.[1])
+  assert.ok(total > 96, heading)
+  const lastPage = Math.ceil(total / 96)
+  const pager = page.locator('.pager').first()
+  assert.match(await pager.innerText(), new RegExp(`Page 1 of ${lastPage}`))
+  assert.equal(await pager.locator('a').count(), 0)
+  const first = await page.locator('main .ui-tile-glyph').first().innerText()
+  await pager.locator('[data-page="next"]').click()
+  await page.waitForFunction(was => document.querySelector('main .ui-tile-glyph')?.textContent !== was, first)
+  assert.equal(new URL(page.url()).searchParams.has('p'), false)
+  assert.equal(await page.locator('main .ui-tile-glyph').count(), Math.min(96, total - 96))
+  await pager.locator('input').fill(String(lastPage))
+  await pager.getByRole('button', { name: 'Go' }).click()
+  await page.waitForFunction(wanted => document.querySelector('.pager')?.textContent?.includes(`Page ${wanted} of`), lastPage)
+  assert.equal(await page.locator('main .ui-tile-glyph').count(), total - (lastPage - 1) * 96)
+})
 await check('the seal radical is searched through its Kangxi form', async () => {
   assert.ok((await find('⼙')).includes('節'))
 })
