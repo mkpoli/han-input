@@ -234,6 +234,75 @@
       "additionalRecords": []
     },
     {
+      "id": "ext_d_g_withdrawals",
+      "file": "ext_d_g_records.json",
+      "group": "Proposals",
+      "label": "Ext.D withdrawn · G",
+      "glyphs": "glyphs/ext-d-g",
+      "names": {
+        "en": "G-source characters withdrawn from CJK D",
+        "zh": "擴展D撤銷G源字",
+        "hans": "扩展D撤销G源字",
+        "ja": "拡張D撤回G源字",
+        "ko": "확장 D G 출처 철회자"
+      },
+      "source": {
+        "name": "IRG",
+        "url": "https://www.unicode.org/irg/docs/n1531-ExtensionDWithdraw.pdf"
+      },
+      "title": "G-source characters proposed for withdrawal from the CJK D candidate",
+      "complete": false,
+      "scope": "The 3,215 G-source characters that IRGN1531 asks to withdraw from the CJK D candidate, one record per row: the D V20 working number and the G source printed beside a glyph cut from the document's page. The numbers are proposal identifiers, and no published Unicode scalar is claimed for any row. The request leaves later resubmission open.",
+      "documents": [
+        {
+          "id": "n1531",
+          "document": "IRGN1531",
+          "title": "Request of withdrawing 3,215 G-source CJK_D characters",
+          "source": "China",
+          "date": "2008-11-07",
+          "url": "https://www.unicode.org/irg/docs/n1531-ExtensionDWithdraw.pdf",
+          "status": "Asks IRG#31 to withdraw 3,215 G-source characters from CJK D because the evidence for them could not be collected in time. Pages 2–26 print six columns of glyphs, each beside a D V20 working number and a G source; the document itself prints only the draft number “IRG N xxxx”. A withdrawal request states no scalar for any row and is not a final disposition."
+        }
+      ],
+      "extract": [
+        {
+          "document": "n1531",
+          "pages": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26
+          ],
+          "matcher": "codes-left",
+          "serialPattern": "^\\d{5}$",
+          "sourcePattern": "^G_[A-Z0-9_.]+$",
+          "count": 3215
+        }
+      ],
+      "additionalRecords": []
+    },
+    {
       "id": "ext_f_sat_withdrawals",
       "file": "ext_f_sat_records.json",
       "group": "Proposals",
