@@ -1,5 +1,6 @@
 <script>
   import { tick } from 'svelte'
+  import { loadCharset, sharedCharacters } from '../lib/charsets.js'
   import { i18n, nameOf, t } from '../lib/i18n.svelte.js'
   import CoverageChart from './CoverageChart.svelte'
   import CoverageDot from './CoverageDot.svelte'
@@ -16,6 +17,11 @@
   let groupList = $state(null)
   let search = $state('')
   let expanded = $state(false)
+  let compare = $state('')
+  let compareRetry = $state(0)
+  let compareBusy = $state(false)
+  let compareFailed = $state(false)
+  let comparison = $state(/** @type {{id: string, shared: number, total: number, otherTotal: number} | null} */ (null))
   const chosen = $derived(charsets.find(set => set.id === selected))
   const recordsFile = $derived(chosen ? chosen.records?.file ?? chosen.source.records : '')
   const needle = $derived(search.trim().toLowerCase())
@@ -26,6 +32,48 @@
       || [set.id, set.group, set.group === CNS_GROUP ? t('charset.cnsSources') : '', set.label, ...Object.values(set.names), set.source.name]
         .some(value => value?.toLowerCase().includes(needle)))),
   })).filter(group => group.sets.length))
+  const compareGroups = $derived([...new Set(charsets.map(set => set.group))].map(group => ({
+    name: group,
+    sets: charsets.filter(set => set.group === group && set.id !== selected && set.chars > 0),
+  })).filter(group => group.sets.length))
+  const compared = $derived.by(() => {
+    if (!comparison || compareBusy) return null
+    const { id, shared, total, otherTotal } = comparison
+    return { name: charsets.find(set => set.id === id)?.label ?? id, shared, total, otherTotal }
+  })
+
+  $effect(() => {
+    if (compare && compare === selected) compare = ''
+  })
+
+  // The overlap dial compares listed characters, so both sets load before either count is drawn.
+  $effect(() => {
+    const mine = selected
+    const other = compare
+    compareRetry
+    if (!mine || !other || mine === other) {
+      comparison = null
+      compareBusy = false
+      compareFailed = false
+      return
+    }
+    let active = true
+    compareBusy = true
+    compareFailed = false
+    comparison = null
+    ;(async () => {
+      try {
+        const [first, second] = await Promise.all([loadCharset(mine), loadCharset(other)])
+        if (!active) return
+        comparison = { id: other, shared: sharedCharacters(first, second), total: first.size, otherTotal: second.size }
+      } catch {
+        if (active) compareFailed = true
+      } finally {
+        if (active) compareBusy = false
+      }
+    })()
+    return () => { active = false }
+  })
 
   async function showCns() {
     expanded = true
@@ -106,8 +154,30 @@
       {#if recordsFile}<a href={recordsFile} target="_blank" rel="noopener noreferrer">{t('charset.records')}</a>{/if}
     </div>
     <p class="set-name">{nameOf(chosen.names)}</p>
+    {#if chosen.chars > 0}
+      <div class="compare">
+        <label class="ui-label" for="charset-compare">{t('charset.compare')}</label>
+        <span class="ui-select-wrap">
+          <select id="charset-compare" class="ui-select" bind:value={compare}>
+            <option value="">{t('charset.compareNone')}</option>
+            {#each compareGroups as group (group.name)}
+              <optgroup label={group.name === CNS_GROUP ? t('charset.cnsSources') : group.name}>
+                {#each group.sets as set (set.id)}<option value={set.id}>{set.label}</option>{/each}
+              </optgroup>
+            {/each}
+          </select>
+        </span>
+        {#if compareBusy}<span class="ui-hint" role="status">{t('charset.loading')}</span>{/if}
+      </div>
+      {#if compareFailed}
+        <div class="compare-error" role="alert">
+          <p class="ui-hint">{t('charset.compareError')}</p>
+          <button class="ui-button" data-size="sm" type="button" onclick={() => compareRetry++}>{t('charset.retry')}</button>
+        </div>
+      {/if}
+    {/if}
     {#if chosen.unencoded !== undefined && (chosen.encoded ?? chosen.chars) + chosen.unencoded > 0}
-      <CoverageChart encoded={chosen.encoded ?? chosen.chars} unencoded={chosen.unencoded} />
+      <CoverageChart encoded={chosen.encoded ?? chosen.chars} unencoded={chosen.unencoded} {compared} />
     {/if}
     <p class="ui-hint">{chosen.records ? t('charset.recordsNote') : t('charset.unencoded')}</p>
     {#if chosen.source.note}<p class="ui-hint">{chosen.source.note}</p>{/if}
@@ -129,6 +199,9 @@
   .set span:first-child{overflow-wrap:anywhere}
   .set-end{display:flex;align-items:center;gap:var(--ui-space-xs);flex:none}
   button[aria-pressed='true']{border-color:var(--ui-color-accent-ink);color:var(--ui-color-accent-ink)}
+  .compare{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:var(--ui-space-xs) var(--ui-space-sm);max-inline-size:380px;margin-block-start:var(--ui-space-xs)}
+  .compare .ui-hint{grid-column:2}
+  .compare-error{display:flex;align-items:center;gap:var(--ui-space-sm);max-inline-size:380px;margin-block-start:var(--ui-space-xs)}
   .metadata{display:flex;flex-wrap:wrap;gap:var(--ui-space-2xs) var(--ui-space-md);margin-block-start:var(--ui-space-sm);font-size:var(--ui-text-sm);color:var(--ui-color-ink-soft)}
   .set-name{font-size:var(--ui-text-sm);color:var(--ui-color-ink-soft)}
 </style>

@@ -1,7 +1,7 @@
 import { describe, test, expect, afterEach } from 'bun:test'
 import { readFileSync, readdirSync } from 'node:fs'
 import { mappedMembers, iwdsMembers, scalarExpressions, idsRecords } from '../scripts/charset-members.mjs'
-import { filterAnswer, loadCharsets, loadCharset, loadRecords } from '../app/lib/charsets.js'
+import { filterAnswer, loadCharsets, loadCharset, loadRecords, sharedCharacters } from '../app/lib/charsets.js'
 import { loadChars, findMeaning } from '../app/lib/data.js'
 import { cnsSourceSets, unihanTSources } from '../scripts/sources/charsets-cns.mjs'
 
@@ -47,6 +47,16 @@ test('filters every answer channel without changing cached results', () => {
   expect(filtered.readings).toHaveLength(1)
   expect(filtered.readings[0].chars).toEqual(['字'])
   expect(answer.hits[0].chars).toEqual(['字', '子'])
+})
+
+test('counts the characters two listed sets share', () => {
+  const base = new URL('../app/public/charsets/', import.meta.url)
+  const read = id => new Set([...readFileSync(new URL(`${id}.txt`, base), 'utf8')])
+  const zhuang = read('g_gzw')
+  const plane15 = read('g_fkzz')
+  expect(sharedCharacters(zhuang, plane15)).toBe(3590)
+  expect(sharedCharacters(plane15, zhuang)).toBe(3590)
+  expect(sharedCharacters(zhuang, new Set())).toBe(0)
 })
 
 test('selected literal scalars remain searchable outside the general script parser', () => {

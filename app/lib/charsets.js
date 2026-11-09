@@ -39,6 +39,14 @@ export function loadCharset(id) {
 /** @param {string} id */
 export async function browseCharset(id) { return [...await loadCharset(id)] }
 
+/** Characters listed by both sets, counted once. A private-use slot matches only the same slot.
+ * @param {Set<string>} a @param {Set<string>} b */
+export function sharedCharacters(a, b) {
+  let shared = 0
+  for (const char of a) if (b.has(char)) shared++
+  return shared
+}
+
 /** @param {import('./search.js').Answer} answer @param {Set<string>} membership @returns {import('./search.js').Answer} */
 export function filterAnswer(answer, membership) {
   const keep = (/** @type {string[]} */ chars) => chars.filter(char => membership.has(char))

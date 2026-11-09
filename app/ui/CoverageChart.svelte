@@ -1,11 +1,23 @@
 <script>
-  // How much of a character set carries a Unicode character, and how much has no scalar at all.
+  // How much of a character set carries a Unicode character, and how many of its characters another
+  // set lists too.
   import { i18n, t } from '../lib/i18n.svelte.js'
 
-  let { encoded, unencoded } = $props()
+  /**
+   * @typedef {object} Compared
+   * @property {string} name The other set's short label.
+   * @property {number} shared Characters listed by both sets.
+   * @property {number} total Characters listed by this set.
+   * @property {number} otherTotal Characters listed by the other set.
+   */
+
+  /** @type {{ encoded: number, unencoded: number, compared?: Compared | null }} */
+  let { encoded, unencoded, compared = null } = $props()
   const total = $derived(encoded + unencoded)
   const share = $derived(total ? unencoded / total : 0)
-  const percent = $derived(new Intl.NumberFormat(i18n.locale, { maximumFractionDigits: 1 }).format(share * 100))
+  const format = (/** @type {number} */ share) =>
+    new Intl.NumberFormat(i18n.locale, { maximumFractionDigits: 1 }).format(share * 100)
+  const percent = $derived(format(share))
   const radius = 27
   const circumference = 2 * Math.PI * radius
   const arc = $derived(circumference * share)
@@ -14,33 +26,80 @@
     encoded: encoded.toLocaleString(i18n.locale),
     unencoded: unencoded.toLocaleString(i18n.locale),
   }))
+  const sharedShare = $derived(compared?.total ? compared.shared / compared.total : 0)
+  const sharedPercent = $derived(format(sharedShare))
+  const sharedArc = $derived(circumference * sharedShare)
+  const otherShare = $derived(compared?.otherTotal ? compared.shared / compared.otherTotal : 0)
+  const only = $derived(compared ? compared.total - compared.shared : 0)
+  const sharedLabel = $derived(compared ? t('charset.sharedLabel', {
+    percent: sharedPercent,
+    shared: compared.shared.toLocaleString(i18n.locale),
+    total: compared.total.toLocaleString(i18n.locale),
+    name: compared.name,
+    otherPercent: format(otherShare),
+    otherTotal: compared.otherTotal.toLocaleString(i18n.locale),
+  }) : '')
 </script>
 
-<figure class="coverage">
-  <div class="dial">
-    <svg viewBox="0 0 72 72" role="img" aria-label={label}>
-      <circle class="track" cx="36" cy="36" r={radius} />
-      {#if unencoded === total}
-        <circle class="unencoded" cx="36" cy="36" r={radius} />
-      {:else}
-        <circle class="encoded" cx="36" cy="36" r={radius} />
-        {#if unencoded}
-          <circle class="unencoded" cx="36" cy="36" r={radius}
-            stroke-dasharray="{arc} {circumference - arc}" transform="rotate(-90 36 36)" />
+<div class="coverage" class:two={!!compared}>
+  <figure class="metric">
+    <div class="dial">
+      <svg viewBox="0 0 72 72" role="img" aria-label={label}>
+        <circle class="track" cx="36" cy="36" r={radius} />
+        {#if unencoded === total}
+          <circle class="unencoded" cx="36" cy="36" r={radius} />
+        {:else}
+          <circle class="encoded" cx="36" cy="36" r={radius} />
+          {#if unencoded}
+            <circle class="unencoded" cx="36" cy="36" r={radius}
+              stroke-dasharray="{arc} {circumference - arc}" transform="rotate(-90 36 36)" />
+          {/if}
         {/if}
-      {/if}
-    </svg>
-    <span class="percent" aria-hidden="true">{percent}%<small>{t('charset.unencodedShort')}</small></span>
-  </div>
-  <figcaption>
-    <p class="caption">{t('charset.coverage')}</p>
-    <p class="legend"><span class="swatch encoded" aria-hidden="true"></span>{t('charset.encoded')}<b>{encoded.toLocaleString(i18n.locale)}</b></p>
-    <p class="legend"><span class="swatch unencoded" aria-hidden="true"></span>{t('charset.unencodedShort')}<b>{unencoded.toLocaleString(i18n.locale)}</b></p>
-  </figcaption>
-</figure>
+      </svg>
+      <span class="percent" aria-hidden="true">{percent}%<small>{t('charset.unencodedShort')}</small></span>
+    </div>
+    <figcaption>
+      <p class="caption">{t('charset.coverage')}</p>
+      <p class="legend"><span class="swatch encoded" aria-hidden="true"></span>{t('charset.encoded')}<b>{encoded.toLocaleString(i18n.locale)}</b></p>
+      <p class="legend"><span class="swatch unencoded" aria-hidden="true"></span>{t('charset.unencodedShort')}<b>{unencoded.toLocaleString(i18n.locale)}</b></p>
+    </figcaption>
+  </figure>
+  {#if compared}
+    <figure class="metric">
+      <div class="dial">
+        <svg viewBox="0 0 72 72" role="img" aria-label={sharedLabel}>
+          <circle class="track" cx="36" cy="36" r={radius} />
+          {#if compared.shared === compared.total}
+            <circle class="encoded" cx="36" cy="36" r={radius} />
+          {:else}
+            <circle class="unencoded" cx="36" cy="36" r={radius} />
+            {#if compared.shared}
+              <circle class="encoded" cx="36" cy="36" r={radius}
+                stroke-dasharray="{sharedArc} {circumference - sharedArc}" transform="rotate(-90 36 36)" />
+            {/if}
+          {/if}
+        </svg>
+        <span class="percent" aria-hidden="true">{sharedPercent}%<small>{t('charset.sharedShort')}</small></span>
+      </div>
+      <figcaption>
+        <p class="caption">{t('charset.sharedCaption', { name: compared.name })}</p>
+        <p class="legend"><span class="swatch encoded" aria-hidden="true"></span>{t('charset.shared')}<b>{compared.shared.toLocaleString(i18n.locale)}</b></p>
+        <p class="legend"><span class="swatch unencoded" aria-hidden="true"></span>{t('charset.onlyHere')}<b>{only.toLocaleString(i18n.locale)}</b></p>
+        <p class="ui-hint">{t('charset.otherShare', {
+          percent: format(otherShare),
+          name: compared.name,
+          shared: compared.shared.toLocaleString(i18n.locale),
+          total: compared.otherTotal.toLocaleString(i18n.locale),
+        })}</p>
+      </figcaption>
+    </figure>
+  {/if}
+</div>
 
 <style>
-  .coverage{display:flex;max-inline-size:380px;align-items:center;gap:var(--ui-space-lg);margin-block-start:var(--ui-space-sm);padding:var(--ui-space-sm) var(--ui-space-md);background:var(--ui-color-surface-sunken);border-radius:var(--ui-radius-sm)}
+  .coverage{display:flex;flex-wrap:wrap;align-items:center;gap:var(--ui-space-md) var(--ui-space-lg);max-inline-size:380px;margin-block-start:var(--ui-space-sm);padding:var(--ui-space-sm) var(--ui-space-md);background:var(--ui-color-surface-sunken);border-radius:var(--ui-radius-sm)}
+  .coverage.two{max-inline-size:760px}
+  .metric{display:flex;flex:1 1 260px;min-inline-size:0;align-items:center;gap:var(--ui-space-lg);margin:0}
   .dial{position:relative;inline-size:72px;block-size:72px;flex:none}
   svg{display:block;inline-size:100%;block-size:100%}
   circle{fill:none;stroke-width:9}
@@ -56,4 +115,5 @@
   .swatch{inline-size:8px;block-size:8px;border-radius:2px;flex:none}
   .swatch.encoded{background:var(--ui-color-accent)}
   .swatch.unencoded{background:var(--ui-color-border-strong)}
+  figcaption .ui-hint{margin-block-start:var(--ui-space-2xs)}
 </style>
