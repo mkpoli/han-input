@@ -5,7 +5,7 @@
 /** @typedef {{top:number, left:number, width:number, height:number, src:string}} ImageBox */
 /** @typedef {{number:number, text:TextBox[], images:ImageBox[]}} PageBoxes */
 /** @typedef {{serial:string|null, source:string, target?:string, sequence?:string, page:number, file:string}} Row */
-/** @typedef {{serialPattern:string, sourcePattern:string, sequencePattern?:string, draftPattern?:string, leftGap?:number, skipUnmatched?:boolean}} Patterns */
+/** @typedef {{serialPattern:string, sourcePattern:string, sequencePattern?:string, draftPattern?:string, stopPattern?:string, leftGap?:number, skipUnmatched?:boolean}} Patterns */
 
 /** @param {string} xml @returns {PageBoxes[]} */
 export function parsePages(xml) {
@@ -121,7 +121,7 @@ export function numberedCodeRows(page, patterns) {
   return rows
 }
 
-/** @typedef {'codes-left' | 'code-text' | 'code-only' | 'text-pairs' | 'dual-code-cells' | 'numbered-code-rows' | 'glyph-pairs'} Matcher */
+/** @typedef {'codes-left' | 'code-text' | 'code-only' | 'text-pairs' | 'dual-code-cells' | 'numbered-code-rows' | 'glyph-pairs' | 'source-lines'} Matcher */
 
 /**
  * A list without glyphs: every row prints a sequence number and a source id on one line.
@@ -192,6 +192,24 @@ export function glyphPairRows(page) {
   return rows
 }
 
+/**
+ * A prose list of ids printed as running text: IRGN424 prints "A-2360" under a heading. Tokens are
+ * read in printed order, and an optional stop pattern ends the list at the paragraph after it.
+ * @param {PageBoxes} page @param {Patterns} patterns @returns {Row[]}
+ */
+export function sourceLineRows(page, patterns) {
+  const source = new RegExp(`^${patterns.sourcePattern}$`)
+  const stop = patterns.stopPattern ? new RegExp(patterns.stopPattern) : null
+  const rows = []
+  for (const text of [...page.text].sort((a, b) => a.top - b.top || a.left - b.left)) {
+    if (stop?.test(text.value)) break
+    for (const token of text.value.split(/[\s,;]+/)) {
+      if (source.test(token)) rows.push({ serial: null, source: token, page: page.number, file: '' })
+    }
+  }
+  return rows
+}
+
 /** @param {PageBoxes} page @param {Matcher} matcher @param {Patterns} patterns @returns {Row[]} */
 export function rowsFor(page, matcher, patterns) {
   if (matcher === 'codes-left') return codesLeftRows(page, patterns)
@@ -201,5 +219,6 @@ export function rowsFor(page, matcher, patterns) {
   if (matcher === 'dual-code-cells') return dualCodeCellRows(page, patterns)
   if (matcher === 'numbered-code-rows') return numberedCodeRows(page, patterns)
   if (matcher === 'glyph-pairs') return glyphPairRows(page)
+  if (matcher === 'source-lines') return sourceLineRows(page, patterns)
   throw new Error(`Unknown matcher: ${matcher}`)
 }

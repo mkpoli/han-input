@@ -1,0 +1,37 @@
+{
+  "id": "ext_a_j_removals",
+  "group": "Proposals",
+  "label": "Ext.A removed · J",
+  "names": {
+    "en": "J-source ideograph removed from CJK A",
+    "zh": "擴展A撤銷J源字",
+    "hans": "扩展A撤销J源字",
+    "ja": "拡張A撤回J源字",
+    "ko": "확장 A J 출처 철회자"
+  },
+  "title": "The J-source ideograph removed from the CJK A candidate",
+  "complete": false,
+  "scope": "The single ideograph that IRGN424 removes from Japan's CJK A proposal revision 5 (IRGN346), printed as A-2360. The document also states that the proposal then held 661 ideographs. A-2360 is a proposal code, and no published Unicode scalar is claimed for it.",
+  "source": {
+    "name": "IRG",
+    "url": "https://www.unicode.org/irg/docs/n0424-RemoveJSourceIdeographExtensionA.pdf"
+  },
+  "documents": [
+    {
+      "id": "n0424",
+      "document": "IRGN424",
+      "title": "Modification of Japanese Proposed Repertoire for IRG Vertical Extension-A",
+      "source": "Japan",
+      "date": "1997-01-10",
+      "url": "https://www.unicode.org/irg/docs/n0424-RemoveJSourceIdeographExtensionA.pdf",
+      "status": "Removes one ideograph, A-2360, from the Japanese Extension A proposal revision 5 at the Singapore 1997 meeting, leaving 661 proposed characters. The document prints no glyph and no scalar for it."
+    }
+  ],
+  "records": [
+    {
+      "source": "A-2360",
+      "document": "n0424",
+      "page": 1
+    }
+  ]
+}
