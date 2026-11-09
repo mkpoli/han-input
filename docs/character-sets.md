@@ -1,6 +1,6 @@
 # Character sets
 
-Find accepts one character-set filter at a time. An empty query browses its mapped characters, 240 to a page; a query intersects the set with every result channel. The address stores the selection in `?set=`, alongside `?q=` and `?c=`.
+Find accepts one character-set filter at a time. An empty query browses its mapped characters, 240 to a page; a query intersects the set with every result channel. The address stores the selection in `?set=`, alongside `?q=`, `?c=` and the browsed page in `?p=`.
 
 ## Catalogue
 
