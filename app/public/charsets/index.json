@@ -3051,6 +3051,31 @@
     }
   },
   {
+    "id": "unc_utc_withdrawals",
+    "group": "Proposals",
+    "label": "UNC withdrawn · UTC",
+    "names": {
+      "en": "UTC characters withdrawn from the UNC proposal",
+      "zh": "UNC撤銷UTC源字",
+      "hans": "UNC撤销UTC源字",
+      "ja": "UNC撤回UTC源字",
+      "ko": "UNC UTC 출처 철회자"
+    },
+    "chars": 0,
+    "total": 16,
+    "encoded": 0,
+    "unencoded": 16,
+    "records": {
+      "file": "/charsets/unc_utc_withdrawals_records.json",
+      "count": 16,
+      "glyphs": 16
+    },
+    "source": {
+      "name": "IRG",
+      "url": "https://www.unicode.org/irg/docs/n1525-UNC-UTC-Withdraw.pdf"
+    }
+  },
+  {
     "id": "cns_source_c36ad76b3200",
     "group": "CNS sources",
     "label": "異體國字字表(《CNS 11643》96年公布)",

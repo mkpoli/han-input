@@ -1,0 +1,128 @@
+{
+  "id": "unc_utc_withdrawals",
+  "group": "Proposals",
+  "label": "UNC withdrawn · UTC",
+  "names": {
+    "en": "UTC characters withdrawn from the UNC proposal",
+    "zh": "UNC撤銷UTC源字",
+    "hans": "UNC撤销UTC源字",
+    "ja": "UNC撤回UTC源字",
+    "ko": "UNC UTC 출처 철회자"
+  },
+  "title": "UTC-source characters withdrawn from the UNC proposal",
+  "complete": false,
+  "scope": "The 16 UTC-source characters that IRGN1525 withdraws from the UNC (Urgently Needed Characters) proposal because the UTC could not provide evidence of use. Three further UTC characters are explicitly kept pending a unification determination and are not records here. UTC00291–UTC00315 are proposal source codes; each glyph is the private-use character printed in the document, and no published Unicode scalar is claimed.",
+  "source": {
+    "name": "IRG",
+    "url": "https://www.unicode.org/irg/docs/n1525-UNC-UTC-Withdraw.pdf"
+  },
+  "documents": [
+    {
+      "id": "n1525",
+      "document": "IRGN1525",
+      "title": "Characters to be Withdrawn from UNC",
+      "source": "UTC",
+      "date": "2008-11-10",
+      "url": "https://www.unicode.org/irg/docs/n1525-UNC-UTC-Withdraw.pdf",
+      "status": "Withdraws 16 UTC-source characters from the UNC proposal for lack of evidence of use; UTC00855, UTC00856 and UTC00867 are explicitly kept for a later determination on unification. The UTC codes are proposal source codes, and each glyph is the private-use character printed in the document's font."
+    }
+  ],
+  "records": [
+    {
+      "source": "UTC00291",
+      "document": "n1525",
+      "page": 1,
+      "glyph": "glyphs/unc-utc/UTC00291.png"
+    },
+    {
+      "source": "UTC00294",
+      "document": "n1525",
+      "page": 1,
+      "glyph": "glyphs/unc-utc/UTC00294.png"
+    },
+    {
+      "source": "UTC00296",
+      "document": "n1525",
+      "page": 1,
+      "glyph": "glyphs/unc-utc/UTC00296.png"
+    },
+    {
+      "source": "UTC00297",
+      "document": "n1525",
+      "page": 1,
+      "glyph": "glyphs/unc-utc/UTC00297.png"
+    },
+    {
+      "source": "UTC00300",
+      "document": "n1525",
+      "page": 1,
+      "glyph": "glyphs/unc-utc/UTC00300.png"
+    },
+    {
+      "source": "UTC00301",
+      "document": "n1525",
+      "page": 1,
+      "glyph": "glyphs/unc-utc/UTC00301.png"
+    },
+    {
+      "source": "UTC00302",
+      "document": "n1525",
+      "page": 1,
+      "glyph": "glyphs/unc-utc/UTC00302.png"
+    },
+    {
+      "source": "UTC00303",
+      "document": "n1525",
+      "page": 1,
+      "glyph": "glyphs/unc-utc/UTC00303.png"
+    },
+    {
+      "source": "UTC00304",
+      "document": "n1525",
+      "page": 1,
+      "glyph": "glyphs/unc-utc/UTC00304.png"
+    },
+    {
+      "source": "UTC00305",
+      "document": "n1525",
+      "page": 1,
+      "glyph": "glyphs/unc-utc/UTC00305.png"
+    },
+    {
+      "source": "UTC00306",
+      "document": "n1525",
+      "page": 1,
+      "glyph": "glyphs/unc-utc/UTC00306.png"
+    },
+    {
+      "source": "UTC00308",
+      "document": "n1525",
+      "page": 1,
+      "glyph": "glyphs/unc-utc/UTC00308.png"
+    },
+    {
+      "source": "UTC00311",
+      "document": "n1525",
+      "page": 1,
+      "glyph": "glyphs/unc-utc/UTC00311.png"
+    },
+    {
+      "source": "UTC00312",
+      "document": "n1525",
+      "page": 1,
+      "glyph": "glyphs/unc-utc/UTC00312.png"
+    },
+    {
+      "source": "UTC00314",
+      "document": "n1525",
+      "page": 1,
+      "glyph": "glyphs/unc-utc/UTC00314.png"
+    },
+    {
+      "source": "UTC00315",
+      "document": "n1525",
+      "page": 1,
+      "glyph": "glyphs/unc-utc/UTC00315.png"
+    }
+  ]
+}

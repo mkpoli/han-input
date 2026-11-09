@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'bun:test'
-import { parsePages, codesLeftRows, codeTextRows, dualCodeCellRows, numberedCodeRows, rowsFor } from '../scripts/sources/irg.mjs'
+import { parsePages, codesLeftRows, codeTextRows, dualCodeCellRows, numberedCodeRows, textGlyphRows, rowsFor } from '../scripts/sources/irg.mjs'
 
 /** @param {{number:number, text:any[], images:any[]}} page */
 const pageOf = page => /** @type {any} */ (page)
@@ -79,6 +79,44 @@ describe('row matching', () => {
     expect(() => codeTextRows(bad, G)).toThrow('unrecognized row')
     expect(() => codeTextRows(pageOf({ number: 3, text: [], images: bad.images }), G)).toThrow('0 code candidates')
     expect(() => rowsFor(bad, 'nope', G)).toThrow('Unknown matcher')
+  })
+})
+
+describe('text glyph rows', () => {
+  const UTC = { sourcePattern: '^UTC\\d{5}$', stopPattern: 'not be withdrawing' }
+  test('pairs a private-use glyph with the code printed to its left', () => {
+    const page = pageOf({
+      number: 1,
+      text: [
+        { top: 539, left: 108, width: 100, height: 21, value: 'UTC00291' },
+        { top: 539, left: 209, width: 21, height: 21, value: '\ue922' },
+        { top: 539, left: 230, width: 112, height: 21, value: ', UTC00294' },
+        { top: 539, left: 342, width: 21, height: 21, value: '\ue925' },
+      ],
+    })
+    expect(textGlyphRows(page, UTC)).toEqual([
+      { serial: null, source: 'UTC00291', char: '\ue922', box: { left: 209, top: 539, width: 21, height: 21 }, page: 1, file: '' },
+      { serial: null, source: 'UTC00294', char: '\ue925', box: { left: 342, top: 539, width: 21, height: 21 }, page: 1, file: '' },
+    ])
+  })
+
+  test('stops before a retained list that prints more glyphs', () => {
+    const page = pageOf({
+      number: 1,
+      text: [
+        { top: 539, left: 108, width: 100, height: 21, value: 'UTC00291' },
+        { top: 539, left: 209, width: 21, height: 21, value: '\ue922' },
+        { top: 755, left: 108, width: 675, height: 21, value: 'After consultation with Ken Lunde, we will not be withdrawing the following,' },
+        { top: 863, left: 108, width: 100, height: 21, value: 'UTC00855' },
+        { top: 863, left: 209, width: 21, height: 21, value: '\ueb56' },
+      ],
+    })
+    expect(textGlyphRows(page, UTC).map(row => row.source)).toEqual(['UTC00291'])
+  })
+
+  test('refuses a glyph without a code on its line', () => {
+    const bare = pageOf({ number: 1, text: [{ top: 539, left: 209, width: 21, height: 21, value: '\ue922' }] })
+    expect(() => textGlyphRows(bare, UTC)).toThrow('no code candidates')
   })
 })
 

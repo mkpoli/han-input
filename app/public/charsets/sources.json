@@ -49,6 +49,10 @@
       "sha256": "999fe8c163c46754a2320800e3646e8979e758ae3b9559f9e4c772274f70ce31"
     },
     {
+      "url": "https://www.unicode.org/irg/docs/n1525-UNC-UTC-Withdraw.pdf",
+      "sha256": "a2c2b9147bae16e64ae9f62a454c0f8bb269c12133e465f404815fab6f921ed1"
+    },
+    {
       "url": "https://www.unicode.org/irg/docs/n1531-ExtensionDWithdraw.pdf",
       "sha256": "37047d353a9048a59460034873914f9746459848dc072aebade468f642badf62"
     },
