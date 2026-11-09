@@ -113,6 +113,7 @@
   "charset.otherShare": "{name}의 {percent}%({total}자 가운데 {shared}자)",
   "charset.sharedLabel": "{percent}% 겹침: {total}자 가운데 {shared}자가 {name}에도 있습니다. {name}의 {otherPercent}%({otherTotal}자 가운데 {shared}자).",
   "charset.blocks": "Unicode 블록",
+  "charset.versions": "Unicode 버전",
   "charset.blockOther": "기타",
   "proposal.unifiedWith": "통합 대상",
   "proposal.page": "{page}쪽",

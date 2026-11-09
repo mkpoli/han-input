@@ -113,6 +113,7 @@
   "charset.otherShare": "占{name}的{percent}%（{total}個字中{shared}個）",
   "charset.sharedLabel": "重合{percent}%：{total}個字中有{shared}個也見於{name}。占{name}的{otherPercent}%（{otherTotal}個字中{shared}個）。",
   "charset.blocks": "Unicode區塊",
+  "charset.versions": "Unicode 版本",
   "charset.blockOther": "其他",
   "proposal.unifiedWith": "合併至",
   "proposal.page": "第{page}頁",

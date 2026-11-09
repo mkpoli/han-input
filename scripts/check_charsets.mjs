@@ -431,6 +431,16 @@ try {
     assert.equal(new URL(page.url()).searchParams.get('q'), 'jnd')
     assert.equal(new URL(page.url()).searchParams.has('set'), false)
   })
+  await check('an Extension B set reports its Unicode version shares', async () => {
+    await find(page, '', 'unicode_ext_b')
+    const versions = page.locator('.versions')
+    await versions.waitFor()
+    const text = await versions.innerText()
+    assert.match(text, /13\.0/)
+    assert.match(text, /0\.016%/)
+    assert.match(text, /U\+2A6D7/)
+    assert.match(text, /U\+2A6DD/)
+  })
   for (const theme of /** @type {const} */ (['light', 'dark'])) {
     for (const phone of [false, true]) {
       const view = await browser.newContext({ viewport: phone ? { width: 390, height: 844 } : { width: 1360, height: 900 }, deviceScaleFactor: 2, colorScheme: theme, locale: 'en-US' })
@@ -449,6 +459,10 @@ try {
         await tab.getByRole('button', { name: 'CNS source categories', exact: true }).click()
         await tab.screenshot({ path: join(SHOTS, `${name}-cns.png`) })
         assert.equal(await tab.locator('main details .set').count(), 123)
+        assert.equal(await tab.evaluate(() => document.documentElement.scrollWidth - innerWidth), 0)
+        await find(tab, '', 'unicode_ext_b')
+        await tab.locator('.versions').waitFor()
+        await tab.screenshot({ path: join(SHOTS, `${name}-versions.png`) })
         assert.equal(await tab.evaluate(() => document.documentElement.scrollWidth - innerWidth), 0)
         for (const proposal of catalogue.filter(set => set.records?.glyphs)) {
           await find(tab, '', proposal.id)
