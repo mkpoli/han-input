@@ -95,7 +95,7 @@ try {
       ],
     }
     writeFileSync(join(OUT, set.file), JSON.stringify(data, null, 2) + '\n')
-    console.log(`${set.id}: ${rows.length} glyphs, ${set.additionalRecords.length} further records`)
+    console.log(`${set.id}: ${rows.length} records, ${rows.filter(row => row.glyph).length} glyphs, ${set.additionalRecords.length} further records`)
   }
 } finally {
   rmSync(work, { recursive: true, force: true })
