@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'bun:test'
-import { parsePages, codesLeftRows, codeTextRows, dualCodeCellRows, rowsFor } from '../scripts/sources/irg.mjs'
+import { parsePages, codesLeftRows, codeTextRows, dualCodeCellRows, numberedCodeRows, rowsFor } from '../scripts/sources/irg.mjs'
 
 /** @param {{number:number, text:any[], images:any[]}} page */
 const pageOf = page => /** @type {any} */ (page)
@@ -79,6 +79,57 @@ describe('row matching', () => {
     expect(() => codeTextRows(bad, G)).toThrow('unrecognized row')
     expect(() => codeTextRows(pageOf({ number: 3, text: [], images: bad.images }), G)).toThrow('0 code candidates')
     expect(() => rowsFor(bad, 'nope', G)).toThrow('Unknown matcher')
+  })
+})
+
+describe('numbered code rows', () => {
+  const T = { sequencePattern: '^\\d{1,4}$', serialPattern: '^[0-9A-F]{5}$', sourcePattern: '^T[CDE]-[0-9A-F]{4}$' }
+  test('reads a row number and working number from one cell with the source in the next column', () => {
+    const page = pageOf({
+      number: 3,
+      text: [
+        { top: 120, left: 147, width: 86, height: 17, value: '1  00410' },
+        { top: 120, left: 255, width: 75, height: 17, value: 'TC-2122' },
+        { top: 120, left: 349, width: 86, height: 17, value: '37 00863' },
+        { top: 120, left: 462, width: 75, height: 17, value: 'TC-2269' },
+        { top: 149, left: 147, width: 86, height: 17, value: '973  12029  TD-4F3E' },
+      ],
+      images: [],
+    })
+    expect(numberedCodeRows(page, T)).toEqual([
+      { serial: '00410', sequence: '1', source: 'TC-2122', page: 3, file: '' },
+      { serial: '00863', sequence: '37', source: 'TC-2269', page: 3, file: '' },
+      { serial: '12029', sequence: '973', source: 'TD-4F3E', page: 3, file: '' },
+    ])
+  })
+
+  test('refuses a row without exactly one source and any source outside a row', () => {
+    const missing = pageOf({
+      number: 3,
+      text: [{ top: 120, left: 147, width: 86, height: 17, value: '1  00410' }],
+      images: [],
+    })
+    expect(() => numberedCodeRows(missing, T)).toThrow('0 source candidates')
+    const repeated = pageOf({
+      number: 3,
+      text: [
+        { top: 120, left: 147, width: 86, height: 17, value: '1  00410' },
+        { top: 120, left: 255, width: 75, height: 17, value: 'TC-2122' },
+        { top: 120, left: 290, width: 75, height: 17, value: 'TC-2123' },
+      ],
+      images: [],
+    })
+    expect(() => numberedCodeRows(repeated, T)).toThrow('2 source candidates')
+    const loose = pageOf({
+      number: 3,
+      text: [
+        { top: 120, left: 147, width: 86, height: 17, value: '1  00410' },
+        { top: 120, left: 255, width: 75, height: 17, value: 'TC-2122' },
+        { top: 149, left: 255, width: 75, height: 17, value: 'TC-2269' },
+      ],
+      images: [],
+    })
+    expect(() => numberedCodeRows(loose, T)).toThrow('1 source codes without a row')
   })
 })
 

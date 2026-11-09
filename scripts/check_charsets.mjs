@@ -241,15 +241,17 @@ try {
       assert.ok((await page.locator('main .ids-list li').first().innerText()).length > 0)
     })
   }
-  const textOnly = catalogue.find(set => set.id === 'ext_d_v_withdrawals')
-  const textOnlyRecords = textOnly?.records
-  if (textOnly && textOnlyRecords) {
+  for (const textOnly of catalogue.filter(set => set.records && set.records.glyphs === 0 && !set.records.file.endsWith('.ids.json'))) {
+    const listed = textOnly.records
+    if (!listed) continue
     await check(`text-only proposal records are listed: ${textOnly.id}`, async () => {
-      const data = JSON.parse(readFileSync(join(DIST, 'charsets', textOnlyRecords.file.replace('/charsets/', '')), 'utf8'))
+      const data = JSON.parse(readFileSync(join(DIST, 'charsets', listed.file.replace('/charsets/', '')), 'utf8'))
       await find(page, '', textOnly.id)
-      assert.equal(await page.locator('main .records .ui-tile').count(), textOnlyRecords.count)
+      const visible = Math.min(240, listed.count)
+      assert.equal(await page.locator('main .records .ui-tile').count(), visible)
       assert.equal(await page.locator('main .records img').count(), 0)
       assert.ok((await page.locator('main .records').innerText()).includes(data.records[0].source))
+      if (listed.count > 240) assert.match(await page.locator('main .ui-hint').last().innerText(), new RegExp(`240 of ${listed.count}`))
       await page.locator('main .records .ui-tile').first().click()
       assert.match(await page.locator('aside.card').innerText(), new RegExp(data.records[0].source))
     })
