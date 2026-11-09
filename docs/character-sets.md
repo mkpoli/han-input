@@ -1,6 +1,6 @@
 # Character sets
 
-Find accepts one character-set filter at a time. An empty query browses its mapped characters, 240 to a page; a query intersects the set with every result channel. The address stores the selection in `?set=`, alongside `?q=`, `?c=` and the browsed page in `?p=`.
+Find accepts one character-set filter at a time. An empty query browses its mapped characters, 240 to a page; a query intersects the set with every result channel. On a screen 1200 pixels wide or more, a browsed page also lays its rows one value of the code's last digit wide: sixteen for a hexadecimal index and ten for a decimal one, so the grid turns like the source's own code table. A narrower screen keeps the auto-fill grid. The address stores the selection in `?set=`, alongside `?q=`, `?c=` and the browsed page in `?p=`.
 
 A browsed character carries the code its own set gives it, printed under the glyph. The code is the source's index — a CNS grid position such as `1-4421`, a kuten position, a code point or a serial. It is not a scalar assignment. The grid can follow that code order instead of code-point order, and can show only members with an assigned scalar or only private-use slots and other unencoded forms.
 

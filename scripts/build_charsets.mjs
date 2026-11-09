@@ -4,7 +4,7 @@ import { join } from 'node:path'
 import { createHash } from 'node:crypto'
 import { execFileSync } from 'node:child_process'
 import { fetchOnce } from './lib.mjs'
-import { mappedMembers, iwdsMembers, idsRecords } from './charset-members.mjs'
+import { mappedMembers, iwdsMembers, idsRecords, columnsOf } from './charset-members.mjs'
 import { cnsRowCodes, codeText, evidenceCodes, proposalCodes, rowCodes } from './charset-codes.mjs'
 import * as OpenCC from 'opencc-js'
 import { readCnsSourceSets } from './sources/charsets-cns.mjs'
@@ -77,6 +77,7 @@ await Promise.all(Array.from({ length: 4 }, async () => {
       names: { en: entry.name_en || entry.abbr, zh: hant(entry.name_zh || entry.abbr), hans: hans(entry.name_zh || entry.abbr) },
       chars: [...members].length, total, encoded, unencoded, codes, records,
       source: { name: '字統網', url, note: payload.rows ? undefined : 'The source endpoint supplies no membership rows.' },
+      columns: columnsOf(entry.index),
     }
     console.log(`${entry.id}: ${[...members].length} characters / ${total} rows`)
   }
@@ -88,7 +89,7 @@ const iwds = iwdsMembers(iwdsBytes.toString('utf8'))
 writeFileSync(join(OUT, 'iwds.txt'), iwds.members)
 writeFileSync(join(OUT, 'iwds-evidence.json'), JSON.stringify(iwds.evidence) + '\n')
 writeFileSync(join(OUT, 'iwds.codes.tsv'), codeText(evidenceCodes(iwds.evidence, iwds.members)))
-catalogue.push({ id: 'iwds', group: 'Unicode', label: 'IWDS', names: { en: 'IWDS · encoded examples', zh: 'IWDS·已編碼例字', hans: 'IWDS·已编码例字' }, chars: [...iwds.members].length, total: iwds.total, encoded: iwds.encoded, unencoded: iwds.unencoded, codes: '/charsets/iwds.codes.tsv', source: { name: 'yi-bai/iwds', url: iwdsUrl } })
+catalogue.push({ id: 'iwds', group: 'Unicode', label: 'IWDS', names: { en: 'IWDS · encoded examples', zh: 'IWDS·已編碼例字', hans: 'IWDS·已编码例字' }, chars: [...iwds.members].length, total: iwds.total, encoded: iwds.encoded, unencoded: iwds.unencoded, codes: '/charsets/iwds.codes.tsv', source: { name: 'yi-bai/iwds', url: iwdsUrl }, columns: 10 })
 
 // Literal block membership also covers the site's kana and Nüshu, and keeps compatibility scalars.
 const ucdUrl = 'https://www.unicode.org/Public/18.0.0/ucd/UnicodeData.txt'
@@ -116,7 +117,7 @@ for (const line of blocksBytes.toString('utf8').split('\n')) {
   const id = `block_${name.toLowerCase().replaceAll(' ', '_').replaceAll('-', '_')}`
   writeFileSync(join(OUT, `${id}.txt`), members.join(''))
   writeFileSync(join(OUT, `${id}.codes.tsv`), codeText(members.map(char => ({ char, code: `U+${(char.codePointAt(0) ?? 0).toString(16).toUpperCase()}` }))))
-  catalogue.push({ id, group: 'Unicode blocks', label: name, names: { en: name }, chars: members.length, total: members.length, encoded: members.length, unencoded: 0, codes: `/charsets/${id}.codes.tsv`, source: { name: 'Unicode 18.0.0', url: blocksUrl } })
+  catalogue.push({ id, group: 'Unicode blocks', label: name, names: { en: name }, chars: members.length, total: members.length, encoded: members.length, unencoded: 0, codes: `/charsets/${id}.codes.tsv`, source: { name: 'Unicode 18.0.0', url: blocksUrl }, columns: 16 })
 }
 for (const name of readdirSync(OUT).filter(/** @param {string} name */ name => name.endsWith('_records.json')).sort()) {
   const set = JSON.parse(readFileSync(join(OUT, name), 'utf8'))
@@ -139,6 +140,7 @@ for (const name of readdirSync(OUT).filter(/** @param {string} name */ name => n
     codes,
     records: { file: `/charsets/${name}`, count: set.records.length, glyphs: set.records.filter(/** @param {{glyph?:string}} record */ record => record.glyph).length },
     source: set.source,
+    columns: 10,
   })
 }
 const cns = JSON.parse(readFileSync(join(OUT, 'cns-sources.json'), 'utf8'))
@@ -167,6 +169,7 @@ for (const set of cnsSets) {
   catalogue.push({ id: set.id, group: 'CNS sources', label: set.label, names: { en: set.label, zh: set.label, hans: hans(set.label), ja: set.label, ko: set.label },
     chars: [...set.members].length, total: set.records.length, encoded: set.encoded, unencoded: set.unencoded, codes: `/charsets/${set.id}.codes.tsv`,
     source: { name: 'CNS11643全字庫', url: sourceUrl, records, version: cns.datasetVersion.replace(/^(\d{4})(\d{2})(\d{2})$/, '$1-$2-$3'), licence: cns.licenseUrl, attribution },
+    columns: 16,
   })
 }
 writeFileSync(join(OUT, 'index.json'), JSON.stringify(catalogue, null, 2) + '\n')

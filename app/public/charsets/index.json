@@ -16,7 +16,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/unicode_basic.json"
     },
-    "codes": "/charsets/unicode_basic.codes.tsv"
+    "codes": "/charsets/unicode_basic.codes.tsv",
+    "columns": 16
   },
   {
     "id": "unicode_ext_a",
@@ -35,7 +36,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/unicode_ext_a.json"
     },
-    "codes": "/charsets/unicode_ext_a.codes.tsv"
+    "codes": "/charsets/unicode_ext_a.codes.tsv",
+    "columns": 16
   },
   {
     "id": "unicode_ext_b",
@@ -54,7 +56,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/unicode_ext_b.json"
     },
-    "codes": "/charsets/unicode_ext_b.codes.tsv"
+    "codes": "/charsets/unicode_ext_b.codes.tsv",
+    "columns": 16
   },
   {
     "id": "unicode_ext_c",
@@ -73,7 +76,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/unicode_ext_c.json"
     },
-    "codes": "/charsets/unicode_ext_c.codes.tsv"
+    "codes": "/charsets/unicode_ext_c.codes.tsv",
+    "columns": 16
   },
   {
     "id": "unicode_ext_d",
@@ -92,7 +96,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/unicode_ext_d.json"
     },
-    "codes": "/charsets/unicode_ext_d.codes.tsv"
+    "codes": "/charsets/unicode_ext_d.codes.tsv",
+    "columns": 16
   },
   {
     "id": "unicode_ext_e",
@@ -111,7 +116,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/unicode_ext_e.json"
     },
-    "codes": "/charsets/unicode_ext_e.codes.tsv"
+    "codes": "/charsets/unicode_ext_e.codes.tsv",
+    "columns": 16
   },
   {
     "id": "unicode_ext_f",
@@ -130,7 +136,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/unicode_ext_f.json"
     },
-    "codes": "/charsets/unicode_ext_f.codes.tsv"
+    "codes": "/charsets/unicode_ext_f.codes.tsv",
+    "columns": 16
   },
   {
     "id": "unicode_ext_g",
@@ -149,7 +156,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/unicode_ext_g.json"
     },
-    "codes": "/charsets/unicode_ext_g.codes.tsv"
+    "codes": "/charsets/unicode_ext_g.codes.tsv",
+    "columns": 16
   },
   {
     "id": "unicode_ext_h",
@@ -168,7 +176,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/unicode_ext_h.json"
     },
-    "codes": "/charsets/unicode_ext_h.codes.tsv"
+    "codes": "/charsets/unicode_ext_h.codes.tsv",
+    "columns": 16
   },
   {
     "id": "unicode_ext_i",
@@ -187,7 +196,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/unicode_ext_i.json"
     },
-    "codes": "/charsets/unicode_ext_i.codes.tsv"
+    "codes": "/charsets/unicode_ext_i.codes.tsv",
+    "columns": 16
   },
   {
     "id": "unicode_ext_j",
@@ -206,7 +216,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/unicode_ext_j.json"
     },
-    "codes": "/charsets/unicode_ext_j.codes.tsv"
+    "codes": "/charsets/unicode_ext_j.codes.tsv",
+    "columns": 16
   },
   {
     "id": "unicode_comp_a_tentative",
@@ -229,7 +240,8 @@
       "file": "/charsets/unicode_comp_a_tentative.ids.json",
       "count": 119,
       "glyphs": 0
-    }
+    },
+    "columns": 16
   },
   {
     "id": "unicode_comp_b_tentative",
@@ -253,7 +265,8 @@
       "count": 197,
       "glyphs": 0
     },
-    "codes": "/charsets/unicode_comp_b_tentative.codes.tsv"
+    "codes": "/charsets/unicode_comp_b_tentative.codes.tsv",
+    "columns": 16
   },
   {
     "id": "compatibility",
@@ -277,7 +290,8 @@
       "count": 187,
       "glyphs": 0
     },
-    "codes": "/charsets/compatibility.codes.tsv"
+    "codes": "/charsets/compatibility.codes.tsv",
+    "columns": 16
   },
   {
     "id": "ws2015",
@@ -301,7 +315,8 @@
       "count": 338,
       "glyphs": 0
     },
-    "codes": "/charsets/ws2015.codes.tsv"
+    "codes": "/charsets/ws2015.codes.tsv",
+    "columns": 10
   },
   {
     "id": "ws2017",
@@ -325,7 +340,8 @@
       "count": 539,
       "glyphs": 0
     },
-    "codes": "/charsets/ws2017.codes.tsv"
+    "codes": "/charsets/ws2017.codes.tsv",
+    "columns": 10
   },
   {
     "id": "ws2021",
@@ -349,7 +365,8 @@
       "count": 538,
       "glyphs": 0
     },
-    "codes": "/charsets/ws2021.codes.tsv"
+    "codes": "/charsets/ws2021.codes.tsv",
+    "columns": 10
   },
   {
     "id": "ws2024",
@@ -373,7 +390,8 @@
       "count": 4646,
       "glyphs": 0
     },
-    "codes": "/charsets/ws2024.codes.tsv"
+    "codes": "/charsets/ws2024.codes.tsv",
+    "columns": 10
   },
   {
     "id": "utc",
@@ -397,7 +415,8 @@
       "count": 740,
       "glyphs": 0
     },
-    "codes": "/charsets/utc.codes.tsv"
+    "codes": "/charsets/utc.codes.tsv",
+    "columns": 10
   },
   {
     "id": "swjz",
@@ -416,7 +435,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/swjz.json"
     },
-    "codes": "/charsets/swjz.codes.tsv"
+    "codes": "/charsets/swjz.codes.tsv",
+    "columns": 10
   },
   {
     "id": "unicode_rad_str",
@@ -435,7 +455,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/unicode_rad_str.json"
     },
-    "codes": "/charsets/unicode_rad_str.codes.tsv"
+    "codes": "/charsets/unicode_rad_str.codes.tsv",
+    "columns": 10
   },
   {
     "id": "irgn",
@@ -454,7 +475,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/irgn.json",
       "note": "The source endpoint supplies no membership rows."
-    }
+    },
+    "columns": 10
   },
   {
     "id": "l2",
@@ -473,7 +495,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/l2.json",
       "note": "The source endpoint supplies no membership rows."
-    }
+    },
+    "columns": 10
   },
   {
     "id": "g0",
@@ -492,7 +515,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/g0.json"
     },
-    "codes": "/charsets/g0.codes.tsv"
+    "codes": "/charsets/g0.codes.tsv",
+    "columns": 10
   },
   {
     "id": "g1",
@@ -511,7 +535,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/g1.json"
     },
-    "codes": "/charsets/g1.codes.tsv"
+    "codes": "/charsets/g1.codes.tsv",
+    "columns": 10
   },
   {
     "id": "g2",
@@ -535,7 +560,8 @@
       "count": 496,
       "glyphs": 0
     },
-    "codes": "/charsets/g2.codes.tsv"
+    "codes": "/charsets/g2.codes.tsv",
+    "columns": 10
   },
   {
     "id": "g3",
@@ -554,7 +580,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/g3.json"
     },
-    "codes": "/charsets/g3.codes.tsv"
+    "codes": "/charsets/g3.codes.tsv",
+    "columns": 10
   },
   {
     "id": "g4",
@@ -578,7 +605,8 @@
       "count": 995,
       "glyphs": 0
     },
-    "codes": "/charsets/g4.codes.tsv"
+    "codes": "/charsets/g4.codes.tsv",
+    "columns": 10
   },
   {
     "id": "g5",
@@ -602,7 +630,8 @@
       "count": 24,
       "glyphs": 0
     },
-    "codes": "/charsets/g5.codes.tsv"
+    "codes": "/charsets/g5.codes.tsv",
+    "columns": 10
   },
   {
     "id": "g7",
@@ -626,7 +655,8 @@
       "count": 28,
       "glyphs": 0
     },
-    "codes": "/charsets/g7.codes.tsv"
+    "codes": "/charsets/g7.codes.tsv",
+    "columns": 10
   },
   {
     "id": "g8",
@@ -650,7 +680,8 @@
       "count": 2,
       "glyphs": 0
     },
-    "codes": "/charsets/g8.codes.tsv"
+    "codes": "/charsets/g8.codes.tsv",
+    "columns": 10
   },
   {
     "id": "ge",
@@ -669,7 +700,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/ge.json"
     },
-    "codes": "/charsets/ge.codes.tsv"
+    "codes": "/charsets/ge.codes.tsv",
+    "columns": 10
   },
   {
     "id": "gk",
@@ -693,7 +725,8 @@
       "count": 2,
       "glyphs": 0
     },
-    "codes": "/charsets/gk.codes.tsv"
+    "codes": "/charsets/gk.codes.tsv",
+    "columns": 10
   },
   {
     "id": "gh",
@@ -712,7 +745,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/gh.json"
     },
-    "codes": "/charsets/gh.codes.tsv"
+    "codes": "/charsets/gh.codes.tsv",
+    "columns": 10
   },
   {
     "id": "gb_a",
@@ -736,7 +770,8 @@
       "count": 14,
       "glyphs": 0
     },
-    "codes": "/charsets/gb_a.codes.tsv"
+    "codes": "/charsets/gb_a.codes.tsv",
+    "columns": 16
   },
   {
     "id": "gb_a_v1",
@@ -760,7 +795,8 @@
       "count": 174,
       "glyphs": 0
     },
-    "codes": "/charsets/gb_a_v1.codes.tsv"
+    "codes": "/charsets/gb_a_v1.codes.tsv",
+    "columns": 16
   },
   {
     "id": "gt",
@@ -779,7 +815,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/gt.json"
     },
-    "codes": "/charsets/gt.codes.tsv"
+    "codes": "/charsets/gt.codes.tsv",
+    "columns": 10
   },
   {
     "id": "gkx",
@@ -803,7 +840,8 @@
       "count": 23,
       "glyphs": 0
     },
-    "codes": "/charsets/gkx.codes.tsv"
+    "codes": "/charsets/gkx.codes.tsv",
+    "columns": 10
   },
   {
     "id": "ghzr",
@@ -827,7 +865,8 @@
       "count": 1809,
       "glyphs": 0
     },
-    "codes": "/charsets/ghzr.codes.tsv"
+    "codes": "/charsets/ghzr.codes.tsv",
+    "columns": 10
   },
   {
     "id": "gzfy",
@@ -851,7 +890,8 @@
       "count": 96,
       "glyphs": 0
     },
-    "codes": "/charsets/gzfy.codes.tsv"
+    "codes": "/charsets/gzfy.codes.tsv",
+    "columns": 10
   },
   {
     "id": "gzjw",
@@ -875,7 +915,8 @@
       "count": 180,
       "glyphs": 0
     },
-    "codes": "/charsets/gzjw.codes.tsv"
+    "codes": "/charsets/gzjw.codes.tsv",
+    "columns": 10
   },
   {
     "id": "gce",
@@ -894,7 +935,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/gce.json"
     },
-    "codes": "/charsets/gce.codes.tsv"
+    "codes": "/charsets/gce.codes.tsv",
+    "columns": 10
   },
   {
     "id": "gz",
@@ -918,7 +960,8 @@
       "count": 2680,
       "glyphs": 0
     },
-    "codes": "/charsets/gz.codes.tsv"
+    "codes": "/charsets/gz.codes.tsv",
+    "columns": 10
   },
   {
     "id": "ghf",
@@ -942,7 +985,8 @@
       "count": 329,
       "glyphs": 0
     },
-    "codes": "/charsets/ghf.codes.tsv"
+    "codes": "/charsets/ghf.codes.tsv",
+    "columns": 10
   },
   {
     "id": "g_8f",
@@ -966,7 +1010,8 @@
       "count": 636,
       "glyphs": 0
     },
-    "codes": "/charsets/g_8f.codes.tsv"
+    "codes": "/charsets/g_8f.codes.tsv",
+    "columns": 10
   },
   {
     "id": "g_tg",
@@ -990,7 +1035,8 @@
       "count": 1,
       "glyphs": 0
     },
-    "codes": "/charsets/g_tg.codes.tsv"
+    "codes": "/charsets/g_tg.codes.tsv",
+    "columns": 10
   },
   {
     "id": "g_cy",
@@ -1009,7 +1055,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/g_cy.json"
     },
-    "codes": "/charsets/g_cy.codes.tsv"
+    "codes": "/charsets/g_cy.codes.tsv",
+    "columns": 10
   },
   {
     "id": "g_1j",
@@ -1028,7 +1075,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/g_1j.json"
     },
-    "codes": "/charsets/g_1j.codes.tsv"
+    "codes": "/charsets/g_1j.codes.tsv",
+    "columns": 10
   },
   {
     "id": "g_bujian",
@@ -1052,7 +1100,8 @@
       "count": 27,
       "glyphs": 0
     },
-    "codes": "/charsets/g_bujian.codes.tsv"
+    "codes": "/charsets/g_bujian.codes.tsv",
+    "columns": 10
   },
   {
     "id": "g_2j",
@@ -1076,7 +1125,8 @@
       "count": 410,
       "glyphs": 0
     },
-    "codes": "/charsets/g_2j.codes.tsv"
+    "codes": "/charsets/g_2j.codes.tsv",
+    "columns": 10
   },
   {
     "id": "g_roc1j",
@@ -1100,7 +1150,8 @@
       "count": 42,
       "glyphs": 0
     },
-    "codes": "/charsets/g_roc1j.codes.tsv"
+    "codes": "/charsets/g_roc1j.codes.tsv",
+    "columns": 10
   },
   {
     "id": "bouyei",
@@ -1124,7 +1175,8 @@
       "count": 885,
       "glyphs": 0
     },
-    "codes": "/charsets/bouyei.codes.tsv"
+    "codes": "/charsets/bouyei.codes.tsv",
+    "columns": 10
   },
   {
     "id": "gin",
@@ -1148,7 +1200,8 @@
       "count": 992,
       "glyphs": 0
     },
-    "codes": "/charsets/gin.codes.tsv"
+    "codes": "/charsets/gin.codes.tsv",
+    "columns": 10
   },
   {
     "id": "g_guji",
@@ -1167,7 +1220,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/g_guji.json"
     },
-    "codes": "/charsets/g_guji.codes.tsv"
+    "codes": "/charsets/g_guji.codes.tsv",
+    "columns": 10
   },
   {
     "id": "gzhs",
@@ -1191,7 +1245,8 @@
       "count": 21800,
       "glyphs": 0
     },
-    "codes": "/charsets/gzhs.codes.tsv"
+    "codes": "/charsets/gzhs.codes.tsv",
+    "columns": 16
   },
   {
     "id": "g_fzk",
@@ -1210,7 +1265,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/g_fzk.json",
       "note": "The source endpoint supplies no membership rows."
-    }
+    },
+    "columns": 16
   },
   {
     "id": "g_gzw",
@@ -1234,7 +1290,8 @@
       "count": 5144,
       "glyphs": 0
     },
-    "codes": "/charsets/g_gzw.codes.tsv"
+    "codes": "/charsets/g_gzw.codes.tsv",
+    "columns": 16
   },
   {
     "id": "g_fkzz",
@@ -1258,7 +1315,8 @@
       "count": 6760,
       "glyphs": 0
     },
-    "codes": "/charsets/g_fkzz.codes.tsv"
+    "codes": "/charsets/g_fkzz.codes.tsv",
+    "columns": 16
   },
   {
     "id": "hb1",
@@ -1277,7 +1335,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/hb1.json"
     },
-    "codes": "/charsets/hb1.codes.tsv"
+    "codes": "/charsets/hb1.codes.tsv",
+    "columns": 16
   },
   {
     "id": "hb2",
@@ -1296,7 +1355,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/hb2.json"
     },
-    "codes": "/charsets/hb2.codes.tsv"
+    "codes": "/charsets/hb2.codes.tsv",
+    "columns": 16
   },
   {
     "id": "h",
@@ -1315,7 +1375,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/h.json"
     },
-    "codes": "/charsets/h.codes.tsv"
+    "codes": "/charsets/h.codes.tsv",
+    "columns": 16
   },
   {
     "id": "h_",
@@ -1334,7 +1395,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/h_.json"
     },
-    "codes": "/charsets/h_.codes.tsv"
+    "codes": "/charsets/h_.codes.tsv",
+    "columns": 16
   },
   {
     "id": "h_cy",
@@ -1353,7 +1415,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/h_cy.json"
     },
-    "codes": "/charsets/h_cy.codes.tsv"
+    "codes": "/charsets/h_cy.codes.tsv",
+    "columns": 10
   },
   {
     "id": "mac",
@@ -1377,7 +1440,8 @@
       "count": 2,
       "glyphs": 0
     },
-    "codes": "/charsets/mac.codes.tsv"
+    "codes": "/charsets/mac.codes.tsv",
+    "columns": 16
   },
   {
     "id": "t1",
@@ -1396,7 +1460,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/t1.json"
     },
-    "codes": "/charsets/t1.codes.tsv"
+    "codes": "/charsets/t1.codes.tsv",
+    "columns": 10
   },
   {
     "id": "t2",
@@ -1415,7 +1480,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/t2.json"
     },
-    "codes": "/charsets/t2.codes.tsv"
+    "codes": "/charsets/t2.codes.tsv",
+    "columns": 10
   },
   {
     "id": "t3",
@@ -1439,7 +1505,8 @@
       "count": 1,
       "glyphs": 0
     },
-    "codes": "/charsets/t3.codes.tsv"
+    "codes": "/charsets/t3.codes.tsv",
+    "columns": 10
   },
   {
     "id": "t4",
@@ -1463,7 +1530,8 @@
       "count": 1,
       "glyphs": 0
     },
-    "codes": "/charsets/t4.codes.tsv"
+    "codes": "/charsets/t4.codes.tsv",
+    "columns": 10
   },
   {
     "id": "t5",
@@ -1487,7 +1555,8 @@
       "count": 1,
       "glyphs": 0
     },
-    "codes": "/charsets/t5.codes.tsv"
+    "codes": "/charsets/t5.codes.tsv",
+    "columns": 10
   },
   {
     "id": "t6",
@@ -1511,7 +1580,8 @@
       "count": 1,
       "glyphs": 0
     },
-    "codes": "/charsets/t6.codes.tsv"
+    "codes": "/charsets/t6.codes.tsv",
+    "columns": 10
   },
   {
     "id": "t7",
@@ -1535,7 +1605,8 @@
       "count": 2,
       "glyphs": 0
     },
-    "codes": "/charsets/t7.codes.tsv"
+    "codes": "/charsets/t7.codes.tsv",
+    "columns": 10
   },
   {
     "id": "t9",
@@ -1559,7 +1630,8 @@
       "count": 710,
       "glyphs": 0
     },
-    "codes": "/charsets/t9.codes.tsv"
+    "codes": "/charsets/t9.codes.tsv",
+    "columns": 10
   },
   {
     "id": "ta",
@@ -1578,7 +1650,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/ta.json"
     },
-    "codes": "/charsets/ta.codes.tsv"
+    "codes": "/charsets/ta.codes.tsv",
+    "columns": 10
   },
   {
     "id": "tb",
@@ -1602,7 +1675,8 @@
       "count": 3503,
       "glyphs": 0
     },
-    "codes": "/charsets/tb.codes.tsv"
+    "codes": "/charsets/tb.codes.tsv",
+    "columns": 10
   },
   {
     "id": "tc",
@@ -1626,7 +1700,8 @@
       "count": 4233,
       "glyphs": 0
     },
-    "codes": "/charsets/tc.codes.tsv"
+    "codes": "/charsets/tc.codes.tsv",
+    "columns": 10
   },
   {
     "id": "td",
@@ -1650,7 +1725,8 @@
       "count": 3638,
       "glyphs": 0
     },
-    "codes": "/charsets/td.codes.tsv"
+    "codes": "/charsets/td.codes.tsv",
+    "columns": 10
   },
   {
     "id": "te",
@@ -1674,7 +1750,8 @@
       "count": 2405,
       "glyphs": 0
     },
-    "codes": "/charsets/te.codes.tsv"
+    "codes": "/charsets/te.codes.tsv",
+    "columns": 10
   },
   {
     "id": "tf",
@@ -1698,7 +1775,8 @@
       "count": 22,
       "glyphs": 0
     },
-    "codes": "/charsets/tf.codes.tsv"
+    "codes": "/charsets/tf.codes.tsv",
+    "columns": 10
   },
   {
     "id": "t10",
@@ -1722,7 +1800,8 @@
       "count": 5,
       "glyphs": 0
     },
-    "codes": "/charsets/t10.codes.tsv"
+    "codes": "/charsets/t10.codes.tsv",
+    "columns": 10
   },
   {
     "id": "t11",
@@ -1746,7 +1825,8 @@
       "count": 40,
       "glyphs": 0
     },
-    "codes": "/charsets/t11.codes.tsv"
+    "codes": "/charsets/t11.codes.tsv",
+    "columns": 10
   },
   {
     "id": "t12",
@@ -1765,7 +1845,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/t12.json"
     },
-    "codes": "/charsets/t12.codes.tsv"
+    "codes": "/charsets/t12.codes.tsv",
+    "columns": 10
   },
   {
     "id": "t13",
@@ -1789,7 +1870,8 @@
       "count": 1208,
       "glyphs": 0
     },
-    "codes": "/charsets/t13.codes.tsv"
+    "codes": "/charsets/t13.codes.tsv",
+    "columns": 10
   },
   {
     "id": "t18",
@@ -1813,7 +1895,8 @@
       "count": 1,
       "glyphs": 0
     },
-    "codes": "/charsets/t18.codes.tsv"
+    "codes": "/charsets/t18.codes.tsv",
+    "columns": 10
   },
   {
     "id": "t_a",
@@ -1832,7 +1915,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/t_a.json"
     },
-    "codes": "/charsets/t_a.codes.tsv"
+    "codes": "/charsets/t_a.codes.tsv",
+    "columns": 10
   },
   {
     "id": "t_b",
@@ -1851,7 +1935,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/t_b.json"
     },
-    "codes": "/charsets/t_b.codes.tsv"
+    "codes": "/charsets/t_b.codes.tsv",
+    "columns": 10
   },
   {
     "id": "t_c",
@@ -1870,7 +1955,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/t_c.json"
     },
-    "codes": "/charsets/t_c.codes.tsv"
+    "codes": "/charsets/t_c.codes.tsv",
+    "columns": 10
   },
   {
     "id": "t_bt",
@@ -1889,7 +1975,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/t_bt.json"
     },
-    "codes": "/charsets/t_bt.codes.tsv"
+    "codes": "/charsets/t_bt.codes.tsv",
+    "columns": 10
   },
   {
     "id": "j0",
@@ -1908,7 +1995,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/j0.json"
     },
-    "codes": "/charsets/j0.codes.tsv"
+    "codes": "/charsets/j0.codes.tsv",
+    "columns": 10
   },
   {
     "id": "j1",
@@ -1927,7 +2015,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/j1.json"
     },
-    "codes": "/charsets/j1.codes.tsv"
+    "codes": "/charsets/j1.codes.tsv",
+    "columns": 10
   },
   {
     "id": "j3",
@@ -1946,7 +2035,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/j3.json"
     },
-    "codes": "/charsets/j3.codes.tsv"
+    "codes": "/charsets/j3.codes.tsv",
+    "columns": 10
   },
   {
     "id": "j4",
@@ -1965,7 +2055,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/j4.json"
     },
-    "codes": "/charsets/j4.codes.tsv"
+    "codes": "/charsets/j4.codes.tsv",
+    "columns": 10
   },
   {
     "id": "jk",
@@ -1989,7 +2080,8 @@
       "count": 73,
       "glyphs": 0
     },
-    "codes": "/charsets/jk.codes.tsv"
+    "codes": "/charsets/jk.codes.tsv",
+    "columns": 10
   },
   {
     "id": "jmj",
@@ -2008,7 +2100,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/jmj.json"
     },
-    "codes": "/charsets/jmj.codes.tsv"
+    "codes": "/charsets/jmj.codes.tsv",
+    "columns": 10
   },
   {
     "id": "jmjp",
@@ -2032,7 +2125,8 @@
       "count": 6427,
       "glyphs": 0
     },
-    "codes": "/charsets/jmjp.codes.tsv"
+    "codes": "/charsets/jmjp.codes.tsv",
+    "columns": 10
   },
   {
     "id": "j_jy",
@@ -2051,7 +2145,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/j_jy.json"
     },
-    "codes": "/charsets/j_jy.codes.tsv"
+    "codes": "/charsets/j_jy.codes.tsv",
+    "columns": 10
   },
   {
     "id": "j_hg",
@@ -2070,7 +2165,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/j_hg.json"
     },
-    "codes": "/charsets/j_hg.codes.tsv"
+    "codes": "/charsets/j_hg.codes.tsv",
+    "columns": 10
   },
   {
     "id": "j_jm",
@@ -2089,7 +2185,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/j_jm.json"
     },
-    "codes": "/charsets/j_jm.codes.tsv"
+    "codes": "/charsets/j_jm.codes.tsv",
+    "columns": 10
   },
   {
     "id": "k0",
@@ -2108,7 +2205,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/k0.json"
     },
-    "codes": "/charsets/k0.codes.tsv"
+    "codes": "/charsets/k0.codes.tsv",
+    "columns": 10
   },
   {
     "id": "k1",
@@ -2127,7 +2225,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/k1.json"
     },
-    "codes": "/charsets/k1.codes.tsv"
+    "codes": "/charsets/k1.codes.tsv",
+    "columns": 10
   },
   {
     "id": "k2",
@@ -2146,7 +2245,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/k2.json"
     },
-    "codes": "/charsets/k2.codes.tsv"
+    "codes": "/charsets/k2.codes.tsv",
+    "columns": 10
   },
   {
     "id": "k3",
@@ -2165,7 +2265,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/k3.json"
     },
-    "codes": "/charsets/k3.codes.tsv"
+    "codes": "/charsets/k3.codes.tsv",
+    "columns": 10
   },
   {
     "id": "k4",
@@ -2184,7 +2285,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/k4.json"
     },
-    "codes": "/charsets/k4.codes.tsv"
+    "codes": "/charsets/k4.codes.tsv",
+    "columns": 16
   },
   {
     "id": "k5",
@@ -2203,7 +2305,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/k5.json"
     },
-    "codes": "/charsets/k5.codes.tsv"
+    "codes": "/charsets/k5.codes.tsv",
+    "columns": 16
   },
   {
     "id": "k6",
@@ -2222,7 +2325,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/k6.json"
     },
-    "codes": "/charsets/k6.codes.tsv"
+    "codes": "/charsets/k6.codes.tsv",
+    "columns": 16
   },
   {
     "id": "kc",
@@ -2241,7 +2345,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/kc.json"
     },
-    "codes": "/charsets/kc.codes.tsv"
+    "codes": "/charsets/kc.codes.tsv",
+    "columns": 10
   },
   {
     "id": "k_gy",
@@ -2260,7 +2365,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/k_gy.json"
     },
-    "codes": "/charsets/k_gy.codes.tsv"
+    "codes": "/charsets/k_gy.codes.tsv",
+    "columns": 10
   },
   {
     "id": "k_jm",
@@ -2279,7 +2385,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/k_jm.json"
     },
-    "codes": "/charsets/k_jm.codes.tsv"
+    "codes": "/charsets/k_jm.codes.tsv",
+    "columns": 10
   },
   {
     "id": "kwhj",
@@ -2298,7 +2405,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/kwhj.json"
     },
-    "codes": "/charsets/kwhj.codes.tsv"
+    "codes": "/charsets/kwhj.codes.tsv",
+    "columns": 16
   },
   {
     "id": "kp0",
@@ -2317,7 +2425,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/kp0.json"
     },
-    "codes": "/charsets/kp0.codes.tsv"
+    "codes": "/charsets/kp0.codes.tsv",
+    "columns": 10
   },
   {
     "id": "kp1",
@@ -2336,7 +2445,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/kp1.json"
     },
-    "codes": "/charsets/kp1.codes.tsv"
+    "codes": "/charsets/kp1.codes.tsv",
+    "columns": 16
   },
   {
     "id": "v0",
@@ -2355,7 +2465,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/v0.json"
     },
-    "codes": "/charsets/v0.codes.tsv"
+    "codes": "/charsets/v0.codes.tsv",
+    "columns": 10
   },
   {
     "id": "v1",
@@ -2374,7 +2485,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/v1.json"
     },
-    "codes": "/charsets/v1.codes.tsv"
+    "codes": "/charsets/v1.codes.tsv",
+    "columns": 10
   },
   {
     "id": "v2",
@@ -2393,7 +2505,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/v2.json"
     },
-    "codes": "/charsets/v2.codes.tsv"
+    "codes": "/charsets/v2.codes.tsv",
+    "columns": 10
   },
   {
     "id": "v3",
@@ -2412,7 +2525,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/v3.json"
     },
-    "codes": "/charsets/v3.codes.tsv"
+    "codes": "/charsets/v3.codes.tsv",
+    "columns": 10
   },
   {
     "id": "v4",
@@ -2431,7 +2545,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/v4.json"
     },
-    "codes": "/charsets/v4.codes.tsv"
+    "codes": "/charsets/v4.codes.tsv",
+    "columns": 10
   },
   {
     "id": "vn",
@@ -2450,7 +2565,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/vn.json"
     },
-    "codes": "/charsets/vn.codes.tsv"
+    "codes": "/charsets/vn.codes.tsv",
+    "columns": 16
   },
   {
     "id": "uk",
@@ -2469,7 +2585,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/uk.json"
     },
-    "codes": "/charsets/uk.codes.tsv"
+    "codes": "/charsets/uk.codes.tsv",
+    "columns": 10
   },
   {
     "id": "sat",
@@ -2488,7 +2605,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/sat.json"
     },
-    "codes": "/charsets/sat.codes.tsv"
+    "codes": "/charsets/sat.codes.tsv",
+    "columns": 10
   },
   {
     "id": "1k8myqp9o8zxkvdpbqdhrfs6yfx5bk2t",
@@ -2507,7 +2625,8 @@
       "name": "字統網",
       "url": "https://zi.tools/api/ma/ma/1k8myqp9o8zxkvdpbqdhrfs6yfx5bk2t.json",
       "note": "The source endpoint supplies no membership rows."
-    }
+    },
+    "columns": 10
   },
   {
     "id": "iwds",
@@ -2526,7 +2645,8 @@
       "name": "yi-bai/iwds",
       "url": "https://raw.githubusercontent.com/yi-bai/iwds/master/iwds.xml"
     },
-    "codes": "/charsets/iwds.codes.tsv"
+    "codes": "/charsets/iwds.codes.tsv",
+    "columns": 10
   },
   {
     "id": "block_cjk_radicals_supplement",
@@ -2543,7 +2663,8 @@
       "name": "Unicode 18.0.0",
       "url": "https://www.unicode.org/Public/18.0.0/ucd/Blocks.txt"
     },
-    "codes": "/charsets/block_cjk_radicals_supplement.codes.tsv"
+    "codes": "/charsets/block_cjk_radicals_supplement.codes.tsv",
+    "columns": 16
   },
   {
     "id": "block_kangxi_radicals",
@@ -2560,7 +2681,8 @@
       "name": "Unicode 18.0.0",
       "url": "https://www.unicode.org/Public/18.0.0/ucd/Blocks.txt"
     },
-    "codes": "/charsets/block_kangxi_radicals.codes.tsv"
+    "codes": "/charsets/block_kangxi_radicals.codes.tsv",
+    "columns": 16
   },
   {
     "id": "block_hiragana",
@@ -2577,7 +2699,8 @@
       "name": "Unicode 18.0.0",
       "url": "https://www.unicode.org/Public/18.0.0/ucd/Blocks.txt"
     },
-    "codes": "/charsets/block_hiragana.codes.tsv"
+    "codes": "/charsets/block_hiragana.codes.tsv",
+    "columns": 16
   },
   {
     "id": "block_katakana",
@@ -2594,7 +2717,8 @@
       "name": "Unicode 18.0.0",
       "url": "https://www.unicode.org/Public/18.0.0/ucd/Blocks.txt"
     },
-    "codes": "/charsets/block_katakana.codes.tsv"
+    "codes": "/charsets/block_katakana.codes.tsv",
+    "columns": 16
   },
   {
     "id": "block_cjk_strokes",
@@ -2611,7 +2735,8 @@
       "name": "Unicode 18.0.0",
       "url": "https://www.unicode.org/Public/18.0.0/ucd/Blocks.txt"
     },
-    "codes": "/charsets/block_cjk_strokes.codes.tsv"
+    "codes": "/charsets/block_cjk_strokes.codes.tsv",
+    "columns": 16
   },
   {
     "id": "block_katakana_phonetic_extensions",
@@ -2628,7 +2753,8 @@
       "name": "Unicode 18.0.0",
       "url": "https://www.unicode.org/Public/18.0.0/ucd/Blocks.txt"
     },
-    "codes": "/charsets/block_katakana_phonetic_extensions.codes.tsv"
+    "codes": "/charsets/block_katakana_phonetic_extensions.codes.tsv",
+    "columns": 16
   },
   {
     "id": "block_cjk_compatibility_ideographs",
@@ -2645,7 +2771,8 @@
       "name": "Unicode 18.0.0",
       "url": "https://www.unicode.org/Public/18.0.0/ucd/Blocks.txt"
     },
-    "codes": "/charsets/block_cjk_compatibility_ideographs.codes.tsv"
+    "codes": "/charsets/block_cjk_compatibility_ideographs.codes.tsv",
+    "columns": 16
   },
   {
     "id": "block_kana_extended_b",
@@ -2662,7 +2789,8 @@
       "name": "Unicode 18.0.0",
       "url": "https://www.unicode.org/Public/18.0.0/ucd/Blocks.txt"
     },
-    "codes": "/charsets/block_kana_extended_b.codes.tsv"
+    "codes": "/charsets/block_kana_extended_b.codes.tsv",
+    "columns": 16
   },
   {
     "id": "block_kana_supplement",
@@ -2679,7 +2807,8 @@
       "name": "Unicode 18.0.0",
       "url": "https://www.unicode.org/Public/18.0.0/ucd/Blocks.txt"
     },
-    "codes": "/charsets/block_kana_supplement.codes.tsv"
+    "codes": "/charsets/block_kana_supplement.codes.tsv",
+    "columns": 16
   },
   {
     "id": "block_kana_extended_a",
@@ -2696,7 +2825,8 @@
       "name": "Unicode 18.0.0",
       "url": "https://www.unicode.org/Public/18.0.0/ucd/Blocks.txt"
     },
-    "codes": "/charsets/block_kana_extended_a.codes.tsv"
+    "codes": "/charsets/block_kana_extended_a.codes.tsv",
+    "columns": 16
   },
   {
     "id": "block_small_kana_extension",
@@ -2713,7 +2843,8 @@
       "name": "Unicode 18.0.0",
       "url": "https://www.unicode.org/Public/18.0.0/ucd/Blocks.txt"
     },
-    "codes": "/charsets/block_small_kana_extension.codes.tsv"
+    "codes": "/charsets/block_small_kana_extension.codes.tsv",
+    "columns": 16
   },
   {
     "id": "block_nushu",
@@ -2730,7 +2861,8 @@
       "name": "Unicode 18.0.0",
       "url": "https://www.unicode.org/Public/18.0.0/ucd/Blocks.txt"
     },
-    "codes": "/charsets/block_nushu.codes.tsv"
+    "codes": "/charsets/block_nushu.codes.tsv",
+    "columns": 16
   },
   {
     "id": "block_cjk_compatibility_ideographs_supplement",
@@ -2747,7 +2879,8 @@
       "name": "Unicode 18.0.0",
       "url": "https://www.unicode.org/Public/18.0.0/ucd/Blocks.txt"
     },
-    "codes": "/charsets/block_cjk_compatibility_ideographs_supplement.codes.tsv"
+    "codes": "/charsets/block_cjk_compatibility_ideographs_supplement.codes.tsv",
+    "columns": 16
   },
   {
     "id": "ext_d_removals",
@@ -2772,7 +2905,8 @@
       "url": "https://www.unicode.org/irg/docs/n1250-ExtensionDWithdraw.pdf"
     },
     "encoded": 0,
-    "unencoded": 78
+    "unencoded": 78,
+    "columns": 10
   },
   {
     "id": "ext_f_sat_withdrawals",
@@ -2797,7 +2931,8 @@
       "file": "/charsets/ext_f_sat_records.json",
       "count": 64,
       "glyphs": 64
-    }
+    },
+    "columns": 10
   },
   {
     "id": "ext_f_jmj_withdrawals",
@@ -2822,7 +2957,8 @@
       "file": "/charsets/ext_f_jmj_records.json",
       "count": 26,
       "glyphs": 26
-    }
+    },
+    "columns": 10
   },
   {
     "id": "ext_f1_sat_drops",
@@ -2847,7 +2983,8 @@
       "file": "/charsets/ext_f1_sat_records.json",
       "count": 50,
       "glyphs": 0
-    }
+    },
+    "columns": 10
   },
   {
     "id": "ext_e_macao_missing",
@@ -2872,7 +3009,8 @@
       "file": "/charsets/ext_e_macao_records.json",
       "count": 20,
       "glyphs": 20
-    }
+    },
+    "columns": 10
   },
   {
     "id": "ext_c_pdam5_removals",
@@ -2897,7 +3035,8 @@
       "file": "/charsets/ext_c_pdam5_records.json",
       "count": 67,
       "glyphs": 67
-    }
+    },
+    "columns": 10
   },
   {
     "id": "ext_d_v_withdrawals",
@@ -2922,7 +3061,8 @@
     "source": {
       "name": "IRG",
       "url": "https://www.unicode.org/irg/docs/n1567-ExtensionDWithdraw.pdf"
-    }
+    },
+    "columns": 10
   },
   {
     "id": "ext_e_withdrawal_records",
@@ -2948,7 +3088,8 @@
       "count": 138,
       "glyphs": 134
     },
-    "codes": "/charsets/ext_e_withdrawal_records.codes.tsv"
+    "codes": "/charsets/ext_e_withdrawal_records.codes.tsv",
+    "columns": 10
   },
   {
     "id": "ext_d_g_withdrawals",
@@ -2973,7 +3114,8 @@
     "source": {
       "name": "IRG",
       "url": "https://www.unicode.org/irg/docs/n1531-ExtensionDWithdraw.pdf"
-    }
+    },
+    "columns": 10
   },
   {
     "id": "ext_d_withdrawals_1306",
@@ -2998,7 +3140,8 @@
     "source": {
       "name": "IRG",
       "url": "https://www.unicode.org/irg/docs/n1306-ExtensionDWithdraw.pdf"
-    }
+    },
+    "columns": 10
   },
   {
     "id": "ext_c1_jmk_withdrawals",
@@ -3023,7 +3166,8 @@
     "source": {
       "name": "IRG",
       "url": "https://www.unicode.org/irg/docs/n1198-ExtensionC1Withdraw.pdf"
-    }
+    },
+    "columns": 10
   },
   {
     "id": "ext_a_j_removals",
@@ -3048,7 +3192,8 @@
     "source": {
       "name": "IRG",
       "url": "https://www.unicode.org/irg/docs/n0424-RemoveJSourceIdeographExtensionA.pdf"
-    }
+    },
+    "columns": 10
   },
   {
     "id": "unc_utc_withdrawals",
@@ -3073,7 +3218,8 @@
     "source": {
       "name": "IRG",
       "url": "https://www.unicode.org/irg/docs/n1525-UNC-UTC-Withdraw.pdf"
-    }
+    },
+    "columns": 10
   },
   {
     "id": "cns_source_c36ad76b3200",
@@ -3098,7 +3244,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_c36ad76b3200.codes.tsv"
+    "codes": "/charsets/cns_source_c36ad76b3200.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_25a5e103e53f",
@@ -3123,7 +3270,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_25a5e103e53f.codes.tsv"
+    "codes": "/charsets/cns_source_25a5e103e53f.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_dd16ba5ac21b",
@@ -3148,7 +3296,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_dd16ba5ac21b.codes.tsv"
+    "codes": "/charsets/cns_source_dd16ba5ac21b.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_054c71b685d3",
@@ -3173,7 +3322,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_054c71b685d3.codes.tsv"
+    "codes": "/charsets/cns_source_054c71b685d3.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_278ae8d71fe8",
@@ -3198,7 +3348,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_278ae8d71fe8.codes.tsv"
+    "codes": "/charsets/cns_source_278ae8d71fe8.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_62dd1234f802",
@@ -3223,7 +3374,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_62dd1234f802.codes.tsv"
+    "codes": "/charsets/cns_source_62dd1234f802.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_f8744b5cf664",
@@ -3248,7 +3400,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_f8744b5cf664.codes.tsv"
+    "codes": "/charsets/cns_source_f8744b5cf664.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_9050f9dacd7a",
@@ -3273,7 +3426,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_9050f9dacd7a.codes.tsv"
+    "codes": "/charsets/cns_source_9050f9dacd7a.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_cbdb277d3097",
@@ -3298,7 +3452,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_cbdb277d3097.codes.tsv"
+    "codes": "/charsets/cns_source_cbdb277d3097.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_8b5ed77ff338",
@@ -3323,7 +3478,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_8b5ed77ff338.codes.tsv"
+    "codes": "/charsets/cns_source_8b5ed77ff338.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_6cb0cf83eda1",
@@ -3348,7 +3504,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_6cb0cf83eda1.codes.tsv"
+    "codes": "/charsets/cns_source_6cb0cf83eda1.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_7d2f85d5af0b",
@@ -3373,7 +3530,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_7d2f85d5af0b.codes.tsv"
+    "codes": "/charsets/cns_source_7d2f85d5af0b.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_be88823eade7",
@@ -3398,7 +3556,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_be88823eade7.codes.tsv"
+    "codes": "/charsets/cns_source_be88823eade7.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_d22d507840f6",
@@ -3423,7 +3582,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_d22d507840f6.codes.tsv"
+    "codes": "/charsets/cns_source_d22d507840f6.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_40707d428e25",
@@ -3448,7 +3608,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_40707d428e25.codes.tsv"
+    "codes": "/charsets/cns_source_40707d428e25.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_dc29a0f76dd1",
@@ -3473,7 +3634,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_dc29a0f76dd1.codes.tsv"
+    "codes": "/charsets/cns_source_dc29a0f76dd1.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_5b8d51b01392",
@@ -3498,7 +3660,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_5b8d51b01392.codes.tsv"
+    "codes": "/charsets/cns_source_5b8d51b01392.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_c3d8a768cf9b",
@@ -3523,7 +3686,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_c3d8a768cf9b.codes.tsv"
+    "codes": "/charsets/cns_source_c3d8a768cf9b.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_91c19d23d20f",
@@ -3548,7 +3712,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_91c19d23d20f.codes.tsv"
+    "codes": "/charsets/cns_source_91c19d23d20f.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_fc6f8601f158",
@@ -3573,7 +3738,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_fc6f8601f158.codes.tsv"
+    "codes": "/charsets/cns_source_fc6f8601f158.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_7279453d01e8",
@@ -3598,7 +3764,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_7279453d01e8.codes.tsv"
+    "codes": "/charsets/cns_source_7279453d01e8.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_82f49620efad",
@@ -3623,7 +3790,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_82f49620efad.codes.tsv"
+    "codes": "/charsets/cns_source_82f49620efad.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_feaa2fb6fa4f",
@@ -3648,7 +3816,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_feaa2fb6fa4f.codes.tsv"
+    "codes": "/charsets/cns_source_feaa2fb6fa4f.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_249e629bc51a",
@@ -3673,7 +3842,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_249e629bc51a.codes.tsv"
+    "codes": "/charsets/cns_source_249e629bc51a.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_0537ff1ed3f8",
@@ -3698,7 +3868,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_0537ff1ed3f8.codes.tsv"
+    "codes": "/charsets/cns_source_0537ff1ed3f8.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_177cece364de",
@@ -3723,7 +3894,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_177cece364de.codes.tsv"
+    "codes": "/charsets/cns_source_177cece364de.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_b1118bdf0fb4",
@@ -3748,7 +3920,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_b1118bdf0fb4.codes.tsv"
+    "codes": "/charsets/cns_source_b1118bdf0fb4.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_655feed3e0b8",
@@ -3773,7 +3946,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_655feed3e0b8.codes.tsv"
+    "codes": "/charsets/cns_source_655feed3e0b8.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_38378f43affd",
@@ -3798,7 +3972,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_38378f43affd.codes.tsv"
+    "codes": "/charsets/cns_source_38378f43affd.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_8bde542fb100",
@@ -3823,7 +3998,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_8bde542fb100.codes.tsv"
+    "codes": "/charsets/cns_source_8bde542fb100.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_52e34b04097a",
@@ -3848,7 +4024,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_52e34b04097a.codes.tsv"
+    "codes": "/charsets/cns_source_52e34b04097a.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_4b004c82d3a7",
@@ -3873,7 +4050,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_4b004c82d3a7.codes.tsv"
+    "codes": "/charsets/cns_source_4b004c82d3a7.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_1be6b6e08223",
@@ -3898,7 +4076,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_1be6b6e08223.codes.tsv"
+    "codes": "/charsets/cns_source_1be6b6e08223.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_0258d4d7ea7c",
@@ -3923,7 +4102,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_0258d4d7ea7c.codes.tsv"
+    "codes": "/charsets/cns_source_0258d4d7ea7c.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_449de5307da0",
@@ -3948,7 +4128,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_449de5307da0.codes.tsv"
+    "codes": "/charsets/cns_source_449de5307da0.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_5620915cb734",
@@ -3973,7 +4154,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_5620915cb734.codes.tsv"
+    "codes": "/charsets/cns_source_5620915cb734.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_797df52ff4f7",
@@ -3998,7 +4180,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_797df52ff4f7.codes.tsv"
+    "codes": "/charsets/cns_source_797df52ff4f7.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_c5a0c4bc42e4",
@@ -4023,7 +4206,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_c5a0c4bc42e4.codes.tsv"
+    "codes": "/charsets/cns_source_c5a0c4bc42e4.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_c9dfb3a7217a",
@@ -4048,7 +4232,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_c9dfb3a7217a.codes.tsv"
+    "codes": "/charsets/cns_source_c9dfb3a7217a.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_fecdff717fa8",
@@ -4073,7 +4258,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_fecdff717fa8.codes.tsv"
+    "codes": "/charsets/cns_source_fecdff717fa8.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_7d0b3ae7f50c",
@@ -4098,7 +4284,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_7d0b3ae7f50c.codes.tsv"
+    "codes": "/charsets/cns_source_7d0b3ae7f50c.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_ced0b4cc8a14",
@@ -4123,7 +4310,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_ced0b4cc8a14.codes.tsv"
+    "codes": "/charsets/cns_source_ced0b4cc8a14.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_7000cf11e2fd",
@@ -4148,7 +4336,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_7000cf11e2fd.codes.tsv"
+    "codes": "/charsets/cns_source_7000cf11e2fd.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_eda25c5b293f",
@@ -4173,7 +4362,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_eda25c5b293f.codes.tsv"
+    "codes": "/charsets/cns_source_eda25c5b293f.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_213ccf3d5ef3",
@@ -4198,7 +4388,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_213ccf3d5ef3.codes.tsv"
+    "codes": "/charsets/cns_source_213ccf3d5ef3.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_880ead07a4f5",
@@ -4223,7 +4414,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_880ead07a4f5.codes.tsv"
+    "codes": "/charsets/cns_source_880ead07a4f5.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_3a2780d062f5",
@@ -4248,7 +4440,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_3a2780d062f5.codes.tsv"
+    "codes": "/charsets/cns_source_3a2780d062f5.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_cbb4ee78526e",
@@ -4273,7 +4466,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_cbb4ee78526e.codes.tsv"
+    "codes": "/charsets/cns_source_cbb4ee78526e.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_7cd38fefb908",
@@ -4298,7 +4492,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_7cd38fefb908.codes.tsv"
+    "codes": "/charsets/cns_source_7cd38fefb908.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_07c84fb5e06d",
@@ -4323,7 +4518,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_07c84fb5e06d.codes.tsv"
+    "codes": "/charsets/cns_source_07c84fb5e06d.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_ca919c529a9c",
@@ -4348,7 +4544,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_ca919c529a9c.codes.tsv"
+    "codes": "/charsets/cns_source_ca919c529a9c.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_d246b62e66e8",
@@ -4373,7 +4570,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_d246b62e66e8.codes.tsv"
+    "codes": "/charsets/cns_source_d246b62e66e8.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_4c6ccf173b80",
@@ -4398,7 +4596,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_4c6ccf173b80.codes.tsv"
+    "codes": "/charsets/cns_source_4c6ccf173b80.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_f65e09aa19fe",
@@ -4423,7 +4622,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_f65e09aa19fe.codes.tsv"
+    "codes": "/charsets/cns_source_f65e09aa19fe.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_efb37f9abf8d",
@@ -4448,7 +4648,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_efb37f9abf8d.codes.tsv"
+    "codes": "/charsets/cns_source_efb37f9abf8d.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_6907f4dcc559",
@@ -4473,7 +4674,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_6907f4dcc559.codes.tsv"
+    "codes": "/charsets/cns_source_6907f4dcc559.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_6cfefdb0027b",
@@ -4498,7 +4700,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_6cfefdb0027b.codes.tsv"
+    "codes": "/charsets/cns_source_6cfefdb0027b.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_40ed70d1a4da",
@@ -4523,7 +4726,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_40ed70d1a4da.codes.tsv"
+    "codes": "/charsets/cns_source_40ed70d1a4da.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_fb848cc9ca84",
@@ -4548,7 +4752,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_fb848cc9ca84.codes.tsv"
+    "codes": "/charsets/cns_source_fb848cc9ca84.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_475361f2c57a",
@@ -4573,7 +4778,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_475361f2c57a.codes.tsv"
+    "codes": "/charsets/cns_source_475361f2c57a.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_244287a7fcab",
@@ -4598,7 +4804,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_244287a7fcab.codes.tsv"
+    "codes": "/charsets/cns_source_244287a7fcab.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_f0d3f7e2cae1",
@@ -4623,7 +4830,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_f0d3f7e2cae1.codes.tsv"
+    "codes": "/charsets/cns_source_f0d3f7e2cae1.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_2f943509eb76",
@@ -4648,7 +4856,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_2f943509eb76.codes.tsv"
+    "codes": "/charsets/cns_source_2f943509eb76.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_701dad9f9352",
@@ -4673,7 +4882,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_701dad9f9352.codes.tsv"
+    "codes": "/charsets/cns_source_701dad9f9352.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_ae8a4ccf06f0",
@@ -4698,7 +4908,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_ae8a4ccf06f0.codes.tsv"
+    "codes": "/charsets/cns_source_ae8a4ccf06f0.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_611db04bbd35",
@@ -4723,7 +4934,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_611db04bbd35.codes.tsv"
+    "codes": "/charsets/cns_source_611db04bbd35.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_f7a108996d44",
@@ -4748,7 +4960,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_f7a108996d44.codes.tsv"
+    "codes": "/charsets/cns_source_f7a108996d44.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_84b1dcc58ad7",
@@ -4773,7 +4986,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_84b1dcc58ad7.codes.tsv"
+    "codes": "/charsets/cns_source_84b1dcc58ad7.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_37f181f261f6",
@@ -4798,7 +5012,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_37f181f261f6.codes.tsv"
+    "codes": "/charsets/cns_source_37f181f261f6.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_8fa48bbd5fd1",
@@ -4823,7 +5038,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_8fa48bbd5fd1.codes.tsv"
+    "codes": "/charsets/cns_source_8fa48bbd5fd1.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_b88be589cac8",
@@ -4848,7 +5064,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_b88be589cac8.codes.tsv"
+    "codes": "/charsets/cns_source_b88be589cac8.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_e40804733bfc",
@@ -4873,7 +5090,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_e40804733bfc.codes.tsv"
+    "codes": "/charsets/cns_source_e40804733bfc.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_ea21f11bc86b",
@@ -4898,7 +5116,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_ea21f11bc86b.codes.tsv"
+    "codes": "/charsets/cns_source_ea21f11bc86b.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_a5799c3262f7",
@@ -4923,7 +5142,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_a5799c3262f7.codes.tsv"
+    "codes": "/charsets/cns_source_a5799c3262f7.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_60f4b29d3d54",
@@ -4948,7 +5168,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_60f4b29d3d54.codes.tsv"
+    "codes": "/charsets/cns_source_60f4b29d3d54.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_802c97e8a5b3",
@@ -4973,7 +5194,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_802c97e8a5b3.codes.tsv"
+    "codes": "/charsets/cns_source_802c97e8a5b3.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_6a486c64d99f",
@@ -4998,7 +5220,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_6a486c64d99f.codes.tsv"
+    "codes": "/charsets/cns_source_6a486c64d99f.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_29b0266abbdc",
@@ -5023,7 +5246,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_29b0266abbdc.codes.tsv"
+    "codes": "/charsets/cns_source_29b0266abbdc.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_67ebcb192310",
@@ -5048,7 +5272,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_67ebcb192310.codes.tsv"
+    "codes": "/charsets/cns_source_67ebcb192310.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_fd7a7caf3388",
@@ -5073,7 +5298,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_fd7a7caf3388.codes.tsv"
+    "codes": "/charsets/cns_source_fd7a7caf3388.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_b6ceca6c0735",
@@ -5098,7 +5324,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_b6ceca6c0735.codes.tsv"
+    "codes": "/charsets/cns_source_b6ceca6c0735.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_1863fd6afb81",
@@ -5123,7 +5350,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_1863fd6afb81.codes.tsv"
+    "codes": "/charsets/cns_source_1863fd6afb81.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_43e833fc781c",
@@ -5148,7 +5376,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_43e833fc781c.codes.tsv"
+    "codes": "/charsets/cns_source_43e833fc781c.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_1a3acef637d5",
@@ -5173,7 +5402,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_1a3acef637d5.codes.tsv"
+    "codes": "/charsets/cns_source_1a3acef637d5.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_941a8e35ec7d",
@@ -5198,7 +5428,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_941a8e35ec7d.codes.tsv"
+    "codes": "/charsets/cns_source_941a8e35ec7d.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_44a202bd3e1b",
@@ -5223,7 +5454,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_44a202bd3e1b.codes.tsv"
+    "codes": "/charsets/cns_source_44a202bd3e1b.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_9d093cbbe12a",
@@ -5248,7 +5480,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_9d093cbbe12a.codes.tsv"
+    "codes": "/charsets/cns_source_9d093cbbe12a.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_acb7b55b4806",
@@ -5273,7 +5506,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_acb7b55b4806.codes.tsv"
+    "codes": "/charsets/cns_source_acb7b55b4806.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_aed86848e891",
@@ -5298,7 +5532,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_aed86848e891.codes.tsv"
+    "codes": "/charsets/cns_source_aed86848e891.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_be9335bac67c",
@@ -5323,7 +5558,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_be9335bac67c.codes.tsv"
+    "codes": "/charsets/cns_source_be9335bac67c.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_bd0741719814",
@@ -5348,7 +5584,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_bd0741719814.codes.tsv"
+    "codes": "/charsets/cns_source_bd0741719814.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_cc68216677f4",
@@ -5373,7 +5610,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_cc68216677f4.codes.tsv"
+    "codes": "/charsets/cns_source_cc68216677f4.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_38a239c10b04",
@@ -5398,7 +5636,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_38a239c10b04.codes.tsv"
+    "codes": "/charsets/cns_source_38a239c10b04.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_c78127f1c605",
@@ -5423,7 +5662,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_c78127f1c605.codes.tsv"
+    "codes": "/charsets/cns_source_c78127f1c605.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_cefc492ee33e",
@@ -5448,7 +5688,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_cefc492ee33e.codes.tsv"
+    "codes": "/charsets/cns_source_cefc492ee33e.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_9ccf2c2482ce",
@@ -5473,7 +5714,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_9ccf2c2482ce.codes.tsv"
+    "codes": "/charsets/cns_source_9ccf2c2482ce.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_f6181fa6c110",
@@ -5498,7 +5740,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_f6181fa6c110.codes.tsv"
+    "codes": "/charsets/cns_source_f6181fa6c110.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_0fea6f81fd6f",
@@ -5523,7 +5766,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_0fea6f81fd6f.codes.tsv"
+    "codes": "/charsets/cns_source_0fea6f81fd6f.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_2758d40e8a45",
@@ -5548,7 +5792,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_2758d40e8a45.codes.tsv"
+    "codes": "/charsets/cns_source_2758d40e8a45.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_d12c01937f95",
@@ -5573,7 +5818,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_d12c01937f95.codes.tsv"
+    "codes": "/charsets/cns_source_d12c01937f95.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_26c9e3641278",
@@ -5598,7 +5844,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_26c9e3641278.codes.tsv"
+    "codes": "/charsets/cns_source_26c9e3641278.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_ce8bd21c3987",
@@ -5623,7 +5870,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_ce8bd21c3987.codes.tsv"
+    "codes": "/charsets/cns_source_ce8bd21c3987.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_4b228bb75113",
@@ -5648,7 +5896,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_4b228bb75113.codes.tsv"
+    "codes": "/charsets/cns_source_4b228bb75113.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_4a276bfd96b1",
@@ -5673,7 +5922,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_4a276bfd96b1.codes.tsv"
+    "codes": "/charsets/cns_source_4a276bfd96b1.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_1706933ab176",
@@ -5698,7 +5948,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_1706933ab176.codes.tsv"
+    "codes": "/charsets/cns_source_1706933ab176.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_70ff00424cc8",
@@ -5723,7 +5974,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_70ff00424cc8.codes.tsv"
+    "codes": "/charsets/cns_source_70ff00424cc8.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_2bfde7b85317",
@@ -5748,7 +6000,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_2bfde7b85317.codes.tsv"
+    "codes": "/charsets/cns_source_2bfde7b85317.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_38c252c93e07",
@@ -5773,7 +6026,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_38c252c93e07.codes.tsv"
+    "codes": "/charsets/cns_source_38c252c93e07.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_39a8aef4136f",
@@ -5798,7 +6052,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_39a8aef4136f.codes.tsv"
+    "codes": "/charsets/cns_source_39a8aef4136f.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_0797c3fa7908",
@@ -5823,7 +6078,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_0797c3fa7908.codes.tsv"
+    "codes": "/charsets/cns_source_0797c3fa7908.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_e3e11677763c",
@@ -5848,7 +6104,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_e3e11677763c.codes.tsv"
+    "codes": "/charsets/cns_source_e3e11677763c.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_2b51e758c88a",
@@ -5873,7 +6130,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_2b51e758c88a.codes.tsv"
+    "codes": "/charsets/cns_source_2b51e758c88a.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_5f6b664b4511",
@@ -5898,7 +6156,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_5f6b664b4511.codes.tsv"
+    "codes": "/charsets/cns_source_5f6b664b4511.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_750f2c563d3c",
@@ -5923,7 +6182,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_750f2c563d3c.codes.tsv"
+    "codes": "/charsets/cns_source_750f2c563d3c.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_f0ebc864bec5",
@@ -5948,7 +6208,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_f0ebc864bec5.codes.tsv"
+    "codes": "/charsets/cns_source_f0ebc864bec5.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_ccf1c04f5d28",
@@ -5973,7 +6234,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_ccf1c04f5d28.codes.tsv"
+    "codes": "/charsets/cns_source_ccf1c04f5d28.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_bc5ee31b4d0b",
@@ -5998,7 +6260,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_bc5ee31b4d0b.codes.tsv"
+    "codes": "/charsets/cns_source_bc5ee31b4d0b.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_e39f4a6b4c80",
@@ -6023,7 +6286,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_e39f4a6b4c80.codes.tsv"
+    "codes": "/charsets/cns_source_e39f4a6b4c80.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_18fd2afb8573",
@@ -6048,7 +6312,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_18fd2afb8573.codes.tsv"
+    "codes": "/charsets/cns_source_18fd2afb8573.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_5f0054431866",
@@ -6073,7 +6338,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_5f0054431866.codes.tsv"
+    "codes": "/charsets/cns_source_5f0054431866.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_560b97813b71",
@@ -6098,7 +6364,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_560b97813b71.codes.tsv"
+    "codes": "/charsets/cns_source_560b97813b71.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_8b60800729d3",
@@ -6123,7 +6390,8 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_8b60800729d3.codes.tsv"
+    "codes": "/charsets/cns_source_8b60800729d3.codes.tsv",
+    "columns": 16
   },
   {
     "id": "cns_source_71635ac15c40",
@@ -6148,6 +6416,7 @@
       "licence": "https://www.cns11643.gov.tw/pageView.jsp?ID=59",
       "attribution": "數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw"
     },
-    "codes": "/charsets/cns_source_71635ac15c40.codes.tsv"
+    "codes": "/charsets/cns_source_71635ac15c40.codes.tsv",
+    "columns": 16
   }
 ]

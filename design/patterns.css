@@ -153,6 +153,24 @@
   gap: var(--ui-space-2xs);
 }
 
+/* A set browsed as a code table lays one value of its code's last digit in a row: sixteen for a
+   hexadecimal index, ten for a decimal one. The glyph then follows the width of its tile. */
+@media (min-width: 1200px) {
+  .ui-tiles[data-columns] {
+    grid-template-columns: repeat(var(--ui-tile-columns), minmax(0, 1fr));
+    container-type: inline-size;
+  }
+
+  .ui-tiles[data-columns] .ui-tile-glyph {
+    font-size: calc((100cqw - (var(--ui-tile-columns) - 1) * var(--ui-space-2xs)) / var(--ui-tile-columns) * 0.52);
+  }
+
+  /* A code under the glyph shrinks with the tile, so the print stays whole in a narrow row. */
+  .ui-tiles[data-columns] .ui-tile-note {
+    font-size: min(var(--ui-text-2xs), calc(100cqw / var(--ui-tile-columns) * 0.2));
+  }
+}
+
 .ui-tile {
   display: grid;
   grid-template-rows: 1fr auto;

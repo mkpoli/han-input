@@ -241,7 +241,7 @@
           </div>
         {/if}
         <Pager page={page + 1} {pages} disabled={turning} href={pageHref} onchange={next => turnTo(next - 1)} />
-        <Tiles chars={pageChars} notes={codes} limit={GRID_LIMIT} codeNotes={longCodes} label={chosen ? nameOf(chosen.names) : route.set} />
+        <Tiles chars={pageChars} notes={codes} columns={chosen?.columns ?? 0} limit={GRID_LIMIT} codeNotes={longCodes} label={chosen ? nameOf(chosen.names) : route.set} />
         {#if !arranged.length}<p class="ui-hint">{t('find.none')}</p>{/if}
         <Pager page={page + 1} {pages} disabled={turning} href={pageHref} onchange={next => turnTo(next - 1)} />
       </section>

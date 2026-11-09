@@ -1,5 +1,12 @@
 // 字統's row index is local to its source; only the glyph column can establish membership.
 import { inScope } from '../src/fold.js'
+
+/** A browsed grid lays one value of the code's last digit in a row: sixteen for a hexadecimal
+ * index, ten for a decimal one. Sets ordered by anything else still use the decimal width.
+ * @param {string | undefined} index */
+export function columnsOf(index) {
+  return index === 'hex' || index === 'source' ? 16 : 10
+}
 /** @param {unknown} input */
 export function mappedMembers(input) {
   if (!input || typeof input !== 'object' || !('rows' in input) || !Array.isArray(input.rows)) throw new Error('Invalid character-set rows')
