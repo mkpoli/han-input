@@ -1,6 +1,6 @@
 import { describe, test, expect, afterEach } from 'bun:test'
 import { readFileSync, readdirSync } from 'node:fs'
-import { mappedMembers, iwdsMembers, scalarExpressions, idsRecords } from '../scripts/charset-members.mjs'
+import { mappedMembers, iwdsMembers, scalarExpressions, idsRecords, columnsOf } from '../scripts/charset-members.mjs'
 import { compareCodes, filterAnswer, loadCharsets, loadCharset, loadRecords, sharedCharacters } from '../app/lib/charsets.js'
 import { loadChars, findMeaning } from '../app/lib/data.js'
 import { cnsSourceSets, unihanTSources } from '../scripts/sources/charsets-cns.mjs'
@@ -31,6 +31,14 @@ describe('source glyph membership', () => {
   test('keeps IDS descriptions as records, not as scalar members', () => {
     expect(idsRecords({ rows: [['1', '⿰亻哥'], ['2', '字'], ['3', '⿱一木']] })).toEqual(['⿰亻哥', '⿱一木'])
   })
+})
+
+test('a browsed row follows the code digit', () => {
+  expect(columnsOf('hex')).toBe(16)
+  expect(columnsOf('source')).toBe(16)
+  expect(columnsOf('kuten')).toBe(10)
+  expect(columnsOf('zfill4')).toBe(10)
+  expect(columnsOf(undefined)).toBe(10)
 })
 
 test('filters every answer channel without changing cached results', () => {
