@@ -180,6 +180,19 @@ try {
       assert.ok((await page.locator('main .ids-list li').first().innerText()).length > 0)
     })
   }
+  const textOnly = catalogue.find(set => set.id === 'ext_d_v_withdrawals')
+  const textOnlyRecords = textOnly?.records
+  if (textOnly && textOnlyRecords) {
+    await check(`text-only proposal records are listed: ${textOnly.id}`, async () => {
+      const data = JSON.parse(readFileSync(join(DIST, 'charsets', textOnlyRecords.file.replace('/charsets/', '')), 'utf8'))
+      await find(page, '', textOnly.id)
+      assert.equal(await page.locator('main .records .ui-tile').count(), textOnlyRecords.count)
+      assert.equal(await page.locator('main .records img').count(), 0)
+      assert.ok((await page.locator('main .records').innerText()).includes(data.records[0].source))
+      await page.locator('main .records .ui-tile').first().click()
+      assert.match(await page.locator('aside.card').innerText(), new RegExp(data.records[0].source))
+    })
+  }
   const recorded = catalogue.find(set => set.source.records)
   if (recorded) {
     await check('selected set links its source records', async () => {

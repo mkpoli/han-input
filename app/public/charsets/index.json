@@ -2772,6 +2772,31 @@
     }
   },
   {
+    "id": "ext_d_v_withdrawals",
+    "group": "Proposals",
+    "label": "Ext.D withdrawn · V",
+    "names": {
+      "en": "V-source characters withdrawn from CJK D",
+      "zh": "擴展D撤銷V源字",
+      "hans": "扩展D撤销V源字",
+      "ja": "拡張D撤回V源字",
+      "ko": "확장 D V 출처 철회자"
+    },
+    "chars": 0,
+    "total": 107,
+    "encoded": 0,
+    "unencoded": 107,
+    "records": {
+      "file": "/charsets/ext_d_v_records.json",
+      "count": 107,
+      "glyphs": 0
+    },
+    "source": {
+      "name": "IRG",
+      "url": "https://www.unicode.org/irg/docs/n1567-ExtensionDWithdraw.pdf"
+    }
+  },
+  {
     "id": "ext_e_withdrawal_records",
     "group": "Proposals",
     "label": "Ext.E withdrawn",

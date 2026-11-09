@@ -13,7 +13,7 @@ import { parsePages, rowsFor } from './sources/irg.mjs'
 /** @typedef {{id:string, document:string, title:string, source:string, date:string, url:string, status?:string}} CuratedDocument */
 /** @typedef {{serial?:string|null, source?:string|null, document:string, status?:string, mappedUnicode?:string|null, mappedCharacter?:string, mappingKind?:string, evidenceUrls?:string[], mappingEvidence?:string}} CuratedRecord */
 /** @typedef {import('./sources/irg.mjs').Matcher} Matcher */
-/** @typedef {{document:string, pages:number[], matcher:Matcher, serialPattern:string, sourcePattern:string, leftGap?:number, status?:string, count:number}} ExtractStep */
+/** @typedef {{document:string, pages:number[], matcher:Matcher, serialPattern:string, sourcePattern:string, draftPattern?:string, leftGap?:number, status?:string, count:number}} ExtractStep */
 /** @typedef {{id:string, file:string, group:string, label:string, glyphs:string, names:{en:string,zh?:string,hans?:string,ja?:string,ko?:string}, title:string, complete:boolean, scope:string, source:{name:string,url:string}, documents:CuratedDocument[], extract:ExtractStep[], additionalRecords:CuratedRecord[]}} CuratedSet */
 /** @typedef {{sets:CuratedSet[]}} Curated */
 /** @typedef {{serial:string|null, source:string, target?:string, document:string, page:number, glyph:string, from:string, status?:string}} Row */
