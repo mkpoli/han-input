@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'bun:test'
 import { versionRows } from '../app/lib/ages.js'
-import { blockRows } from '../app/lib/blocks.js'
+import { blockOccupancy, blockRows } from '../app/lib/blocks.js'
 
 const char = (/** @type {number} */ point) => String.fromCodePoint(point)
 
@@ -52,5 +52,22 @@ describe('version shares', () => {
 
   test('returns nothing for an empty set', () => {
     expect(versionRows(new Set(), ranges)).toEqual([])
+  })
+})
+
+describe('block occupancy', () => {
+  const blocks = [
+    { id: 'a', label: 'A', start: 0x100, end: 0x103 },
+    { id: 'b', label: 'B', start: 0x108, end: 0x109 },
+  ]
+  test('counts assigned code points and the empty remainder in code point order', () => {
+    const rows = blockOccupancy([[0x100, 0x101, '1.1'], [0x103, 0x103, '2.0']], blocks)
+    expect(rows.map(row => [row.id, row.total, row.assigned, row.empty])).toEqual([['a', 4, 3, 1], ['b', 2, 0, 2]])
+    expect(rows[0].share).toBeCloseTo(0.25)
+    expect(rows[1].share).toBe(1)
+  })
+  test('clips age ranges to the block', () => {
+    const rows = blockOccupancy([[0xF0, 0x110, '1.1']], blocks)
+    expect(rows.map(row => [row.id, row.assigned])).toEqual([['a', 4], ['b', 2]])
   })
 })

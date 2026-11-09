@@ -441,6 +441,16 @@ try {
     assert.match(text, /U\+2A6D7/)
     assert.match(text, /U\+2A6DD/)
   })
+  await check('an Extension B set reports empty code points by block', async () => {
+    await find(page, '', 'unicode_ext_b')
+    const table = page.locator('.occupancy')
+    await table.waitFor()
+    const text = await table.innerText()
+    assert.match(text, /Ext\.D/)
+    assert.match(text, /224/)
+    assert.match(text, /0\.446%/)
+    assert.match(text, /42,720/)
+  })
   for (const theme of /** @type {const} */ (['light', 'dark'])) {
     for (const phone of [false, true]) {
       const view = await browser.newContext({ viewport: phone ? { width: 390, height: 844 } : { width: 1360, height: 900 }, deviceScaleFactor: 2, colorScheme: theme, locale: 'en-US' })
