@@ -11,6 +11,7 @@
   import { i18n, nameOf, t } from '../lib/i18n.svelte.js'
   import { gSourceOf, noteOf } from '../lib/sources.js'
   import Tiles from '../ui/Tiles.svelte'
+  import Pager from '../ui/Pager.svelte'
   import CharsetFilter from '../ui/CharsetFilter.svelte'
   import ProposalRecords from '../ui/ProposalRecords.svelte'
 
@@ -119,11 +120,11 @@
   const empty = $derived(!busy && answers.length > 0 && !common.length && !groups.length)
 
   /** A page of a browsed set arrives as one grid, so its face is fetched before the page turns.
-   * @param {number} step */
-  async function turn(step) {
+   * @param {number} next */
+  async function turnTo(next) {
     if (turning) return
     const from = browsed
-    const next = Math.max(0, Math.min(pages - 1, page + step))
+    next = Math.max(0, Math.min(pages - 1, next))
     if (next === page) return
     turning = true
     try {
@@ -135,16 +136,6 @@
     } finally { turning = false }
   }
 </script>
-
-{#snippet pager()}
-  {#if pages > 1}
-    <p class="ui-hint pager">
-      <button class="ui-button" data-size="sm" data-page="prev" type="button" aria-label={t('find.previous')} disabled={turning || page === 0} onclick={() => turn(-1)}>−</button>
-      <span>{t('find.page', { page: page + 1, pages, total: browsed.length.toLocaleString(i18n.locale) })}</span>
-      <button class="ui-button" data-size="sm" data-page="next" type="button" aria-label={t('find.next')} disabled={turning || page >= pages - 1} onclick={() => turn(1)}>+</button>
-    </p>
-  {/if}
-{/snippet}
 
 {#snippet methodGroup(/** @type {ReturnType<typeof groupHits>[number]} */ group)}
       {@const method = methods.get(group.method)}
@@ -187,10 +178,10 @@
     {#if browsed.length || !records}
       <section class="ui-section" bind:this={browseTop}>
         <h2 class="ui-label">{t('find.characters')} <span class="ui-count">{browsed.length.toLocaleString()}</span></h2>
-        {@render pager()}
+        <Pager page={page + 1} {pages} disabled={turning} onchange={next => turnTo(next - 1)} />
         <Tiles chars={pageChars} limit={GRID_LIMIT} label={chosen ? nameOf(chosen.names) : route.set} />
         {#if !browsed.length}<p class="ui-hint">{t('find.none')}</p>{/if}
-        {@render pager()}
+        <Pager page={page + 1} {pages} disabled={turning} onchange={next => turnTo(next - 1)} />
       </section>
     {/if}
     {#if records}<ProposalRecords {records} label={chosen ? nameOf(chosen.names) : route.set} />{/if}
@@ -275,7 +266,6 @@
 
 <style>
   .box{font-size:22px;block-size:52px}
-  .pager{display:flex;align-items:center;gap:var(--ui-space-sm)}
   .examples{display:flex;flex-wrap:wrap;gap:var(--ui-space-2xs)}
   .clues{display:flex;flex-wrap:wrap;gap:var(--ui-space-xs)}
   .clue{padding:2px var(--ui-space-sm);border:1px solid var(--ui-color-border);border-radius:var(--ui-radius-sm)}
