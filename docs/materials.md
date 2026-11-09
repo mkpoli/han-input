@@ -107,8 +107,8 @@ semantic similarity, so a synonym the gloss does not use will not be found.
 
 ## Linked, not copied
 
-字統網 zi.tools, 漢典 zdic, 葉典 yedict, 韻典網 ytenx, 古音小鏡 kaom, Web韻圖 (鈴木慎吾), Glyph Atlas, IDS
-Workshop, GlyphWiki. Ytenx's `DATA_LICENSE.md` grants nothing for its data, and no bulk data was
+字統網 zi.tools, 漢典 zdic, 新葉典 yedict, 韻典網 ytenx, 古音小鏡 kaom, Web韻圖 (鈴木慎吾), Glyph Atlas,
+IDS Workshop, GlyphWiki. Ytenx's `DATA_LICENSE.md` grants nothing for its data, and no bulk data was
 found for kaom, so both stay links. Web韻圖 and kaom have no address for a single character, and those
 links open the site's search page.
 
