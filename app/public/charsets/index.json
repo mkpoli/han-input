@@ -2822,6 +2822,31 @@
     }
   },
   {
+    "id": "ext_d_g_withdrawals",
+    "group": "Proposals",
+    "label": "Ext.D withdrawn · G",
+    "names": {
+      "en": "G-source characters withdrawn from CJK D",
+      "zh": "擴展D撤銷G源字",
+      "hans": "扩展D撤销G源字",
+      "ja": "拡張D撤回G源字",
+      "ko": "확장 D G 출처 철회자"
+    },
+    "chars": 0,
+    "total": 3215,
+    "encoded": 0,
+    "unencoded": 3215,
+    "records": {
+      "file": "/charsets/ext_d_g_records.json",
+      "count": 3215,
+      "glyphs": 3215
+    },
+    "source": {
+      "name": "IRG",
+      "url": "https://www.unicode.org/irg/docs/n1531-ExtensionDWithdraw.pdf"
+    }
+  },
+  {
     "id": "cns_source_c36ad76b3200",
     "group": "CNS sources",
     "label": "異體國字字表(《CNS 11643》96年公布)",

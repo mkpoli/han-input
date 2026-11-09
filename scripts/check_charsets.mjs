@@ -183,8 +183,10 @@ try {
       await find(page, '', proposal.id)
       assert.equal(await page.locator('main .ui-tile-glyph').count(), proposal.chars)
       const tiles = page.locator('main .records .ui-tile')
-      assert.equal(await tiles.count(), proposal.records.count)
-      assert.equal(await page.locator('main .records img').count(), proposal.records.glyphs)
+      const visible = Math.min(240, proposal.records.count)
+      assert.equal(await tiles.count(), visible)
+      assert.equal(await page.locator('main .records img').count(), Math.min(visible, proposal.records.glyphs))
+      if (proposal.records.count > 240) assert.match(await page.locator('main .ui-hint').last().innerText(), new RegExp(`240 of ${proposal.records.count}`))
       await page.waitForFunction(() => [...document.querySelectorAll('main .records img')].every(image => /** @type {HTMLImageElement} */ (image).complete && /** @type {HTMLImageElement} */ (image).naturalWidth > 0))
       assert.equal(await page.getByRole('link', { name: 'Records', exact: true }).getAttribute('href'), proposal.records.file)
       const first = data.records[0]
