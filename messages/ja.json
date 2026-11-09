@@ -112,6 +112,8 @@
   "charset.sharedShort": "共通",
   "charset.otherShare": "{name}の{percent}%（{total}字中{shared}字）",
   "charset.sharedLabel": "{percent}%が共通：{total}字のうち{shared}字が{name}にもあります。{name}の{otherPercent}%（{otherTotal}字中{shared}字）。",
+  "charset.blocks": "Unicodeブロック",
+  "charset.blockOther": "その他",
   "proposal.unifiedWith": "統合先",
   "proposal.page": "{page}ページ",
   "methods.title": "すべての入力法",

@@ -1,5 +1,6 @@
 <script>
   import { tick } from 'svelte'
+  import { blockRows } from '../lib/blocks.js'
   import { loadCharset, sharedCharacters } from '../lib/charsets.js'
   import { i18n, nameOf, t } from '../lib/i18n.svelte.js'
   import CoverageChart from './CoverageChart.svelte'
@@ -22,6 +23,8 @@
   let compareBusy = $state(false)
   let compareFailed = $state(false)
   let comparison = $state(/** @type {{id: string, shared: number, total: number, otherTotal: number} | null} */ (null))
+  /** @type {import('../lib/blocks.js').BlockRow[]} */
+  let blocks = $state([])
   const chosen = $derived(charsets.find(set => set.id === selected))
   const recordsFile = $derived(chosen ? chosen.records?.file ?? chosen.source.records : '')
   const needle = $derived(search.trim().toLowerCase())
@@ -44,6 +47,19 @@
 
   $effect(() => {
     if (compare && compare === selected) compare = ''
+  })
+
+  // The block shares describe the selected set itself, so they need its members, not its counts.
+  $effect(() => {
+    const id = selected
+    if (!id) { blocks = []; return }
+    let active = true
+    loadCharset(id).then(members => {
+      if (!active) return
+      const rows = blockRows(members)
+      blocks = rows.some(row => row.id !== 'other') ? rows : []
+    }).catch(() => { if (active) blocks = [] })
+    return () => { active = false }
   })
 
   // The overlap dial compares listed characters, so both sets load before either count is drawn.
@@ -177,7 +193,7 @@
       {/if}
     {/if}
     {#if chosen.unencoded !== undefined && (chosen.encoded ?? chosen.chars) + chosen.unencoded > 0}
-      <CoverageChart encoded={chosen.encoded ?? chosen.chars} unencoded={chosen.unencoded} {compared} />
+      <CoverageChart encoded={chosen.encoded ?? chosen.chars} unencoded={chosen.unencoded} {compared} {blocks} />
     {/if}
     <p class="ui-hint">{chosen.records ? t('charset.recordsNote') : t('charset.unencoded')}</p>
     {#if chosen.source.note}<p class="ui-hint">{chosen.source.note}</p>{/if}

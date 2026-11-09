@@ -112,6 +112,8 @@
   "charset.sharedShort": "shared",
   "charset.otherShare": "{percent}% of {name}: {shared} of {total}",
   "charset.sharedLabel": "{percent}% shared: {shared} of {total} characters also appear in {name}. {otherPercent}% of {name} ({shared} of {otherTotal}).",
+  "charset.blocks": "Unicode blocks",
+  "charset.blockOther": "Other",
   "proposal.unifiedWith": "Unified with",
   "proposal.page": "page {page}",
   "methods.title": "Every way in",
