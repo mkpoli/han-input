@@ -10,14 +10,14 @@ const CATALOGUES = { en, ja, 'zh-Hans': zhHans, 'zh-Hant': zhHant, ko }
 
 describe('page metadata', () => {
   test('gives every top-level route its own title and description', () => {
-    expect(pageMetadata('')).toEqual({ title: 'find.title', description: 'find.intro' })
-    expect(pageMetadata('methods')).toEqual({ title: 'methods.title', description: 'methods.intro' })
-    expect(pageMetadata('readings')).toEqual({ title: 'readings.title', description: 'readings.intro' })
-    expect(pageMetadata('rhymes')).toEqual({ title: 'rhymes.title', description: 'rhymes.intro' })
-    expect(pageMetadata('radicals')).toEqual({ title: 'radicals.title', description: 'radicals.intro' })
-    expect(pageMetadata('convert')).toEqual({ title: 'convert.title', description: 'convert.intro' })
-    expect(pageMetadata('composition')).toEqual({ title: 'composition.title', description: 'composition.intro' })
-    expect(pageMetadata('about')).toEqual({ title: 'about.title', description: 'about.intro' })
+    expect(pageMetadata('')).toEqual({ title: 'find.seoTitle', description: 'find.seo' })
+    expect(pageMetadata('methods')).toEqual({ title: 'methods.title', description: 'methods.seo' })
+    expect(pageMetadata('readings')).toEqual({ title: 'readings.title', description: 'readings.seo' })
+    expect(pageMetadata('rhymes')).toEqual({ title: 'rhymes.title', description: 'rhymes.seo' })
+    expect(pageMetadata('radicals')).toEqual({ title: 'radicals.title', description: 'radicals.seo' })
+    expect(pageMetadata('convert')).toEqual({ title: 'convert.title', description: 'convert.seo' })
+    expect(pageMetadata('composition')).toEqual({ title: 'composition.title', description: 'composition.seo' })
+    expect(pageMetadata('about')).toEqual({ title: 'about.title', description: 'about.seo' })
     expect(pageMetadata('notfound')).toEqual({ title: 'notfound.title', description: 'notfound.intro' })
   })
   test('borrows the page a detail route belongs to', () => {

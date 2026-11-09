@@ -15,10 +15,20 @@ export const NAV = /** @type {const} */ ([
 /** @type {Set<string>} */
 const PAGES = new Set(NAV.map(entry => entry.path).filter(Boolean))
 
+/**
+ * The page a path names: a rail page, the page a detail route belongs to, or `notfound`.
+ * @param {string} path a pathname
+ * @returns {string}
+ */
+export function pageOf(path) {
+  const clean = path.replace(/^\/+|\/+$/g, '')
+  if (!clean) return ''
+  if (PAGES.has(clean)) return clean
+  const detail = /^([mv])\/[\w-]+$/.exec(clean)
+  return detail ? detail[1] : 'notfound'
+}
+
 /** @param {string} path a pathname @returns {boolean} */
 export function isAppPath(path) {
-  const clean = path.replace(/^\/+|\/+$/g, '')
-  if (!clean) return true
-  if (PAGES.has(clean)) return true
-  return /^[mv]\/[\w-]+$/.test(clean)
+  return pageOf(path) !== 'notfound'
 }
