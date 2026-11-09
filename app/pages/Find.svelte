@@ -1,6 +1,7 @@
 <script>
   // Find: one box for whatever the reader has. A clue is tried as a code in every method at once and
   // as a word of meaning. Several clues, split by spaces, leave the characters that fit them all.
+  import { tick } from 'svelte'
   import { route, setQuery, setCharset, link, go } from '../lib/route.svelte.js'
   import { loadCharsets, loadCharset, loadRecords, filterAnswer, browseCharset } from '../lib/charsets.js'
   import { answer, groupHits, intersect, readQuery, tallyReadings } from '../lib/search.js'
@@ -14,6 +15,7 @@
   import ProposalRecords from '../ui/ProposalRecords.svelte'
 
   const EXAMPLES = ['ユタヘヘミ', 'jnd', 'luong', '端一東平', '30407', 'tsɿ', '氵 12畫', '口匕', 'river ジ', 'chữ', 'a-1', 'a672', 'U+5B57', '氵+青']
+  // A browsed set turns one page of 240 characters at a time; the search grids keep their own caps.
   const GRID_LIMIT = 240
 
   const query = $derived(route.q)
@@ -34,6 +36,12 @@
   let retry = $state(0)
   /** @type {Map<string, import('../lib/data.js').Method>} */
   let methods = $state(new Map())
+  let page = $state(0)
+  let turning = $state(false)
+  /** @type {HTMLElement | null} */
+  let browseTop = $state(null)
+  const pages = $derived(Math.max(1, Math.ceil(browsed.length / GRID_LIMIT)))
+  const pageChars = $derived(browsed.slice(page * GRID_LIMIT, (page + 1) * GRID_LIMIT))
 
   loadMethods().then(list => { methods = new Map(list.map(method => [method.id, method])) }).catch(() => {})
 
@@ -54,6 +62,7 @@
     common = []
     browsed = []
     records = null
+    page = 0
     failed = false
     busy = true
     ;(async () => {
@@ -108,7 +117,34 @@
   const tallyNotes = $derived(new Map(tally.map(([char, count]) => [char, String(count)])))
   const varieties = $derived(single ? new Set(single.readings.map(hit => hit.n)).size : 0)
   const empty = $derived(!busy && answers.length > 0 && !common.length && !groups.length)
+
+  /** A page of a browsed set arrives as one grid, so its face is fetched before the page turns.
+   * @param {number} step */
+  async function turn(step) {
+    if (turning) return
+    const from = browsed
+    const next = Math.max(0, Math.min(pages - 1, page + step))
+    if (next === page) return
+    turning = true
+    try {
+      await loadGlyphs(from.slice(next * GRID_LIMIT, (next + 1) * GRID_LIMIT))
+      if (browsed !== from) return
+      page = next
+      await tick()
+      browseTop?.scrollIntoView({ block: 'start' })
+    } finally { turning = false }
+  }
 </script>
+
+{#snippet pager()}
+  {#if pages > 1}
+    <p class="ui-hint pager">
+      <button class="ui-button" data-size="sm" data-page="prev" type="button" aria-label={t('find.previous')} disabled={turning || page === 0} onclick={() => turn(-1)}>−</button>
+      <span>{t('find.page', { page: page + 1, pages, total: browsed.length.toLocaleString(i18n.locale) })}</span>
+      <button class="ui-button" data-size="sm" data-page="next" type="button" aria-label={t('find.next')} disabled={turning || page >= pages - 1} onclick={() => turn(1)}>+</button>
+    </p>
+  {/if}
+{/snippet}
 
 {#snippet methodGroup(/** @type {ReturnType<typeof groupHits>[number]} */ group)}
       {@const method = methods.get(group.method)}
@@ -149,10 +185,12 @@
     <p class="ui-hint" role="status">{t('charset.loading')}</p>
   {:else if !query.trim() && route.set}
     {#if browsed.length || !records}
-      <section class="ui-section">
+      <section class="ui-section" bind:this={browseTop}>
         <h2 class="ui-label">{t('find.characters')} <span class="ui-count">{browsed.length.toLocaleString()}</span></h2>
-        <Tiles chars={browsed} limit={GRID_LIMIT} label={chosen ? nameOf(chosen.names) : route.set} />
+        {@render pager()}
+        <Tiles chars={pageChars} limit={GRID_LIMIT} label={chosen ? nameOf(chosen.names) : route.set} />
         {#if !browsed.length}<p class="ui-hint">{t('find.none')}</p>{/if}
+        {@render pager()}
       </section>
     {/if}
     {#if records}<ProposalRecords {records} label={chosen ? nameOf(chosen.names) : route.set} />{/if}
@@ -237,6 +275,7 @@
 
 <style>
   .box{font-size:22px;block-size:52px}
+  .pager{display:flex;align-items:center;gap:var(--ui-space-sm)}
   .examples{display:flex;flex-wrap:wrap;gap:var(--ui-space-2xs)}
   .clues{display:flex;flex-wrap:wrap;gap:var(--ui-space-xs)}
   .clue{padding:2px var(--ui-space-sm);border:1px solid var(--ui-color-border);border-radius:var(--ui-radius-sm)}
