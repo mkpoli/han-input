@@ -528,6 +528,29 @@ try {
     assert.equal(new URL(page.url()).searchParams.get('q'), 'jnd')
     assert.equal(new URL(page.url()).searchParams.has('set'), false)
   })
+  await check('a set without printed records keeps the character overlap', async () => {
+    await find(page, '', 't1')
+    await page.locator('#charset-compare').selectOption('g0')
+    const metric = page.locator('.coverage .metric').nth(1)
+    await metric.waitFor()
+    const text = await metric.innerText()
+    assert.doesNotMatch(text, /No scalar/)
+    const shared = [...t1].filter(char => g0.has(char)).length
+    assert.match(text, new RegExp(`In both\\s*${shared.toLocaleString('en-US')}(?!\\d)`))
+  })
+  await check('Extension E overlap counts every record, including printed glyphs without a scalar', async () => {
+    await page.goto(`${SITE}/?set=ext_e_withdrawal_records`)
+    await ready(page)
+    await page.locator('#charset-compare').selectOption('g_8f')
+    const metric = page.locator('.coverage .metric').nth(1)
+    await metric.waitFor()
+    const text = await metric.innerText()
+    assert.match(text, /0\.7%/)
+    assert.match(text, /No scalar/)
+    assert.match(text, /134 printed records: 0 with a Unicode scalar/)
+    assert.match(await metric.locator('svg').getAttribute('aria-label') ?? '', /1 of 138 records/)
+    await page.screenshot({ path: join(SHOTS, 'overlap-ext-e-8f-light.png') })
+  })
   for (const theme of /** @type {const} */ (['light', 'dark'])) {
     for (const phone of [false, true]) {
       const view = await browser.newContext({ viewport: phone ? { width: 390, height: 844 } : { width: 1360, height: 900 }, deviceScaleFactor: 2, colorScheme: theme, locale: 'en-US' })
@@ -546,6 +569,11 @@ try {
         await tab.getByRole('button', { name: 'CNS source categories', exact: true }).click()
         await tab.screenshot({ path: join(SHOTS, `${name}-cns.png`) })
         assert.equal(await tab.locator('main details .set').count(), 123)
+        assert.equal(await tab.evaluate(() => document.documentElement.scrollWidth - innerWidth), 0)
+        await find(tab, '', 'ext_e_withdrawal_records')
+        await tab.locator('#charset-compare').selectOption('g_8f')
+        await tab.locator('.coverage .metric').nth(1).waitFor()
+        await tab.screenshot({ path: join(SHOTS, `${name}-overlap.png`) })
         assert.equal(await tab.evaluate(() => document.documentElement.scrollWidth - innerWidth), 0)
         for (const proposal of catalogue.filter(set => set.records?.glyphs)) {
           await find(tab, '', proposal.id)
