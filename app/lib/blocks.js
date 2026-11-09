@@ -65,3 +65,21 @@ export function blockOccupancy(ages, blocks = BLOCKS) {
     return { id: block.id, label: block.label, start: block.start, end: block.end, total, assigned, empty: total - assigned, share: total ? (total - assigned) / total : 0 }
   }).sort((a, b) => rank(a.id) - rank(b.id) || a.start - b.start)
 }
+
+/** @typedef {{plane: number | null, count: number, share: number}} PlaneRow */
+
+/** The share of a set's characters in planes 0–3, with anything above plane 3 kept as Other.
+ * @param {Set<string>} members @returns {PlaneRow[]} */
+export function planeRows(members) {
+  const counts = new Map()
+  for (const char of members) {
+    const plane = (char.codePointAt(0) ?? 0) >> 16
+    counts.set(plane, (counts.get(plane) ?? 0) + 1)
+  }
+  const total = members.size
+  /** @type {PlaneRow[]} */
+  const rows = [0, 1, 2, 3].map(plane => ({ plane, count: counts.get(plane) ?? 0, share: total ? (counts.get(plane) ?? 0) / total : 0 }))
+  const other = [...counts].filter(([plane]) => plane > 3).reduce((sum, [, count]) => sum + count, 0)
+  if (other) rows.push({ plane: null, count: other, share: total ? other / total : 0 })
+  return rows
+}

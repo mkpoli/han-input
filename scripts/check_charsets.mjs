@@ -451,6 +451,15 @@ try {
     assert.match(text, /0\.446%/)
     assert.match(text, /42,720/)
   })
+  await check('a set reports its share in the four planes', async () => {
+    await find(page, '', 'g_8f')
+    const planes = page.locator('.planes')
+    await planes.waitFor()
+    const text = await planes.innerText()
+    assert.match(text, /P0\s*20\.5%/)
+    assert.match(text, /P2\s*51\.5%/)
+    assert.match(text, /P3\s*28\.0%/)
+  })
   for (const theme of /** @type {const} */ (['light', 'dark'])) {
     for (const phone of [false, true]) {
       const view = await browser.newContext({ viewport: phone ? { width: 390, height: 844 } : { width: 1360, height: 900 }, deviceScaleFactor: 2, colorScheme: theme, locale: 'en-US' })

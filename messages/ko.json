@@ -115,6 +115,7 @@
   "charset.blocks": "Unicode 블록",
   "charset.versions": "Unicode 버전",
   "charset.occupancy": "빈 부호 위치",
+  "charset.planes": "평면",
   "charset.block": "블록",
   "charset.total": "부호 위치",
   "charset.empty": "빈",

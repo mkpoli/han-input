@@ -1,7 +1,7 @@
 <script>
   import { tick } from 'svelte'
   import { loadAges, versionRows } from '../lib/ages.js'
-  import { blockOccupancy, blockRows } from '../lib/blocks.js'
+  import { blockOccupancy, blockRows, planeRows } from '../lib/blocks.js'
   import { loadCharset, sharedCharacters } from '../lib/charsets.js'
   import { i18n, nameOf, t } from '../lib/i18n.svelte.js'
   import CoverageChart from './CoverageChart.svelte'
@@ -30,6 +30,8 @@
   let versions = $state([])
   /** @type {import('../lib/blocks.js').BlockOccupancy[]} */
   let occupancy = $state([])
+  /** @type {import('../lib/blocks.js').PlaneRow[]} */
+  let planes = $state([])
   const chosen = $derived(charsets.find(set => set.id === selected))
   const recordsFile = $derived(chosen ? chosen.records?.file ?? chosen.source.records : '')
   const needle = $derived(search.trim().toLowerCase())
@@ -57,20 +59,21 @@
   // The block shares describe the selected set itself, so they need its members, not its counts.
   $effect(() => {
     const id = selected
-    if (!id) { blocks = []; versions = []; occupancy = []; return }
+    if (!id) { blocks = []; versions = []; occupancy = []; planes = []; return }
     const blockSet = /^(?:unicode_basic|unicode_ext_[a-j]|unicode_comp_[ab]_tentative|compatibility)$/.test(id)
     let active = true
     loadCharset(id).then(async members => {
       if (!active) return
       const rows = blockRows(members)
       blocks = rows.some(row => row.id !== 'other') ? rows : []
+      planes = planeRows(members)
       try {
         const ages = await loadAges()
         if (!active) return
         versions = versionRows(members, ages)
         occupancy = blockSet ? blockOccupancy(ages) : []
       } catch { if (active) { versions = []; occupancy = [] } }
-    }).catch(() => { if (active) { blocks = []; versions = []; occupancy = [] } })
+    }).catch(() => { if (active) { blocks = []; versions = []; occupancy = []; planes = [] } })
     return () => { active = false }
   })
 
@@ -205,7 +208,7 @@
       {/if}
     {/if}
     {#if chosen.unencoded !== undefined && (chosen.encoded ?? chosen.chars) + chosen.unencoded > 0}
-      <CoverageChart encoded={chosen.encoded ?? chosen.chars} unencoded={chosen.unencoded} {compared} {blocks} {versions} {occupancy} />
+      <CoverageChart encoded={chosen.encoded ?? chosen.chars} unencoded={chosen.unencoded} {compared} {blocks} {versions} {occupancy} {planes} />
     {/if}
     <p class="ui-hint">{chosen.records ? t('charset.recordsNote') : t('charset.unencoded')}</p>
     {#if chosen.source.note}<p class="ui-hint">{chosen.source.note}</p>{/if}

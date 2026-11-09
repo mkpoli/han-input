@@ -115,6 +115,7 @@
   "charset.blocks": "Unicode區塊",
   "charset.versions": "Unicode 版本",
   "charset.occupancy": "空碼位",
+  "charset.planes": "平面",
   "charset.block": "區塊",
   "charset.total": "碼位",
   "charset.empty": "空",
