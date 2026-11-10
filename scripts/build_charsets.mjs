@@ -96,6 +96,8 @@ await Promise.all(Array.from({ length: 4 }, async () => {
       ? {
           id: entry.id, group: entry.source, label: entry.abbr, names,
           chars: table.members.length, total: gbRows.length, encoded: table.members.length, unencoded: unencodedCodes.size,
+          // The standard's table is 94 rows of 94 cells; every printed row fills one cell.
+          positions: { total: 94 * 94, filled: gbRows.length, mapped: gbRows.length - unencodedCodes.size },
           codes, records,
           source: { name: 'GB/T 12052-1989', url: 'https://archive.org/details/GB-T12052-1989', noteKey },
           columns: columnsOf(entry.index),
@@ -137,6 +139,12 @@ for (const line of ucdBytes.toString('utf8').split('\n')) {
 const blocksUrl = 'https://www.unicode.org/Public/18.0.0/ucd/Blocks.txt'
 const blocksBytes = readFileSync(await fetchOnce(blocksUrl))
 record(blocksUrl, blocksBytes)
+/** The designed size of every block, by its Unicode name. @type {Map<string, number>} */
+const blockSizes = new Map()
+for (const line of blocksBytes.toString('utf8').split('\n')) {
+  const match = line.match(/^([0-9A-F]+)\.\.([0-9A-F]+); (.+)$/)
+  if (match) blockSizes.set(match[3], parseInt(match[2], 16) - parseInt(match[1], 16) + 1)
+}
 // The version that first assigned each code point, for the block version breakdown.
 const ageUrl = 'https://www.unicode.org/Public/18.0.0/ucd/DerivedAge.txt'
 const ageBytes = readFileSync(await fetchOnce(ageUrl))
@@ -152,12 +160,13 @@ for (const line of blocksBytes.toString('utf8').split('\n')) {
   const match = line.match(/^([0-9A-F]+)\.\.([0-9A-F]+); (.+)$/)
   if (!match || !/^(?:CJK Radicals Supplement|Kangxi Radicals|CJK Strokes|CJK Compatibility Ideographs(?: Supplement)?|Hiragana|Katakana(?: Phonetic Extensions)?|Kana (?:Extended-[AB]|Supplement)|Small Kana Extension|Nushu)$/.test(match[3])) continue
   const [, start, end, name] = match
+  const total = parseInt(end, 16) - parseInt(start, 16) + 1
   const members = []
   for (let cp = parseInt(start, 16); cp <= parseInt(end, 16); cp++) if (assigned.has(cp)) members.push(String.fromCodePoint(cp))
   const id = `block_${name.toLowerCase().replaceAll(' ', '_').replaceAll('-', '_')}`
   writeFileSync(join(OUT, `${id}.txt`), membersText(members))
   writeFileSync(join(OUT, `${id}.codes.tsv`), codeText(members.map(char => ({ char, code: `U+${(char.codePointAt(0) ?? 0).toString(16).toUpperCase()}` }))))
-  catalogue.push({ id, group: 'Unicode blocks', label: name, names: { en: name }, chars: members.length, total: members.length, encoded: members.length, unencoded: 0, codes: `/charsets/${id}.codes.tsv`, source: { name: 'Unicode 18.0.0', url: blocksUrl }, columns: 16 })
+  catalogue.push({ id, group: 'Unicode blocks', label: name, names: { en: name }, chars: members.length, total: members.length, encoded: members.length, unencoded: 0, positions: { total, filled: members.length, mapped: members.length }, codes: `/charsets/${id}.codes.tsv`, source: { name: 'Unicode 18.0.0', url: blocksUrl }, columns: 16 })
 }
 for (const name of readdirSync(OUT).filter(/** @param {string} name */ name => name.endsWith('_records.json')).sort()) {
   const set = JSON.parse(readFileSync(join(OUT, name), 'utf8'))
@@ -211,6 +220,13 @@ for (const set of cnsSets) {
     source: { name: 'CNS11643全字庫', url: sourceUrl, records, version: cns.datasetVersion.replace(/^(\d{4})(\d{2})(\d{2})$/, '$1-$2-$3'), licence: cns.licenseUrl, attribution },
     columns: 16,
   })
+}
+// A 字統 set named for a Unicode block is that block's assigned characters; the block's range gives
+// the designed positions the coverage dial divides by.
+for (const row of catalogue) {
+  if (row.group !== 'Unicode' || row.positions || !row.names?.en) continue
+  const total = blockSizes.get(row.names.en)
+  if (total && row.chars <= total) row.positions = { total, filled: row.chars, mapped: row.chars }
 }
 writeFileSync(join(OUT, 'index.json'), JSON.stringify(catalogue, null, 2) + '\n')
 writeFileSync(join(OUT, 'sources.json'), JSON.stringify({

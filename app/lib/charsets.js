@@ -1,5 +1,6 @@
 // Character-set membership is a scalar glyph mapping, independent of the search corpus.
-/** @typedef {{id:string, group:string, label:string, names:{en:string,zh?:string,hans?:string,ja?:string,ko?:string}, chars:number, total:number, encoded?:number, unencoded?:number, codes?:string, records?:{file:string, count:number, glyphs:number}, columns?:number, source:{name:string,url:string,note?:string,noteKey?:string,records?:string,version?:string,licence?:string,attribution?:string}}} Charset */
+/** @typedef {{total:number, filled:number, mapped:number}} Positions */
+/** @typedef {{id:string, group:string, label:string, names:{en:string,zh?:string,hans?:string,ja?:string,ko?:string}, chars:number, total:number, encoded?:number, unencoded?:number, positions?:Positions, codes?:string, records?:{file:string, count:number, glyphs:number}, columns?:number, source:{name:string,url:string,note?:string,noteKey?:string,records?:string,version?:string,licence?:string,attribution?:string}}} Charset */
 /** @typedef {{id:string, document:string, title:string, source:string, date:string, url:string, status?:string}} ProposalDocument */
 /** @typedef {{serial?:string|null, sequence?:string, source?:string|null, document:string, page?:number, glyph?:string, status?:string, mappedUnicode?:string, mappedCharacter?:string, unifiedWith?:string, mappingKind?:string, mappingEvidence?:string, evidenceUrls?:string[], kind?:'ids', ids?:string}} ProposalRecord */
 /** @typedef {{title:string, complete:boolean, scope:string, documents:ProposalDocument[], records:ProposalRecord[]}} ProposalRecords */
@@ -49,6 +50,18 @@ export function compareCodes(a, b) {
     if (Number.isFinite(left) && Number.isFinite(right) && left !== right) return left - right
   }
   return collator.compare(a, b)
+}
+
+/** The counts a coverage dial divides: a designed code table counts positions, a source list counts
+ * characters. `filled - mapped` positions hold a character still outside Unicode, and the rest of
+ * the design is unassigned.
+ * @param {Positions | null | undefined} positions @param {number} encoded @param {number} unencoded
+ * @returns {{positioned: boolean, total: number, inUnicode: number, unencoded: number, unassigned: number}} */
+export function coverageParts(positions, encoded, unencoded) {
+  if (!positions?.total) return { positioned: false, total: encoded + unencoded, inUnicode: encoded, unencoded, unassigned: 0 }
+  const inUnicode = positions.mapped
+  const unencodedPositions = positions.filled - positions.mapped
+  return { positioned: true, total: positions.total, inUnicode, unencoded: unencodedPositions, unassigned: positions.total - positions.filled }
 }
 
 /** A private-use slot stands for a glyph without an assigned scalar. @param {string} char */

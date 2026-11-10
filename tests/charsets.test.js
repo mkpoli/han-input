@@ -2,7 +2,7 @@ import { describe, test, expect, afterEach } from 'bun:test'
 import { readFileSync, readdirSync } from 'node:fs'
 import { mappedMembers, membersText, iwdsMembers, scalarExpressions, idsRecords, columnsOf } from '../scripts/charset-members.mjs'
 import { GB12052_UNENCODED, gb12052Members } from '../scripts/sources/charsets-gb12052.mjs'
-import { compareCodes, filterAnswer, loadCharsets, loadCharset, loadRecords, sharedCharacters } from '../app/lib/charsets.js'
+import { compareCodes, coverageParts, filterAnswer, loadCharsets, loadCharset, loadRecords, sharedCharacters } from '../app/lib/charsets.js'
 import { loadChars, findMeaning } from '../app/lib/data.js'
 import { cnsSourceSets, unihanTSources } from '../scripts/sources/charsets-cns.mjs'
 import { cnsRowCodes, codeText, evidenceCodes, rowCodes } from '../scripts/charset-codes.mjs'
@@ -56,6 +56,7 @@ test('the GK set is the standard table, not the 字統 subset', () => {
   expect(gk.chars).toBe(5954)
   expect(gk.total).toBe(5979)
   expect([gk.encoded, gk.unencoded]).toEqual([5954, 2])
+  expect(gk.positions).toEqual({ total: 8836, filled: 5979, mapped: 5977 })
   expect(gk.source.url).toBe('https://archive.org/details/GB-T12052-1989')
   const members = membersOf(readFileSync(new URL('gk.txt', base), 'utf8'))
   expect(members).toHaveLength(gk.chars)
@@ -66,6 +67,23 @@ test('the GK set is the standard table, not the 字統 subset', () => {
   expect(codes).toHaveLength(gk.chars)
   for (const position of GB12052_UNENCODED) expect(codes.some(line => line.endsWith(`\t${position}`))).toBe(false)
   expect(codes.find(line => line.startsWith('乫\t'))).toBe('乫\t7189')
+})
+
+test('a Unicode block set counts its whole block as designed positions', () => {
+  const catalogue = JSON.parse(readFileSync(new URL('../app/public/charsets/index.json', import.meta.url), 'utf8'))
+  const extD = catalogue.find((/** @type {{id: string}} */ row) => row.id === 'unicode_ext_d')
+  expect(extD.positions).toEqual({ total: 224, filled: 223, mapped: 223 })
+  const hiragana = catalogue.find((/** @type {{id: string}} */ row) => row.id === 'block_hiragana')
+  expect(hiragana.positions).toEqual({ total: 96, filled: 93, mapped: 93 })
+  const list = catalogue.find((/** @type {{id: string}} */ row) => row.id === 'ws2017')
+  expect(list.positions).toBeUndefined()
+})
+
+test('coverage parts divide a table by its positions and a list by its characters', () => {
+  expect(coverageParts({ total: 8836, filled: 5979, mapped: 5977 }, 5954, 2))
+    .toEqual({ positioned: true, total: 8836, inUnicode: 5977, unencoded: 2, unassigned: 2857 })
+  expect(coverageParts(null, 4385, 539))
+    .toEqual({ positioned: false, total: 4924, inUnicode: 4385, unencoded: 539, unassigned: 0 })
 })
 
 test('a member file keeps a code-point sequence whole', () => {

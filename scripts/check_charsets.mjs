@@ -613,6 +613,17 @@ try {
     await blocks.waitFor()
     assert.match(await blocks.innerText(), /Hiragana/)
   })
+  await check('a printed table divides its coverage by the designed positions', async () => {
+    await find(page, '', 'gk')
+    const metric = page.locator('.coverage .metric').first()
+    await metric.waitFor()
+    const text = await metric.innerText()
+    assert.match(text, /Designed positions/)
+    assert.match(text, /5,977/)
+    assert.match(text, /2,857/)
+    assert.match(text, /8,836/)
+    assert.match(await metric.locator('svg').getAttribute('aria-label') ?? '', /8,836 designed positions/)
+  })
   for (const theme of /** @type {const} */ (['light', 'dark'])) {
     for (const phone of [false, true]) {
       const view = await browser.newContext({ viewport: phone ? { width: 390, height: 844 } : { width: 1360, height: 900 }, deviceScaleFactor: 2, colorScheme: theme, locale: 'en-US' })

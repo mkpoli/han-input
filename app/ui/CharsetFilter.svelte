@@ -221,7 +221,7 @@
       {/if}
     {/if}
     {#if chosen.unencoded !== undefined && (chosen.encoded ?? chosen.chars) + chosen.unencoded > 0}
-      <CoverageChart encoded={chosen.encoded ?? chosen.chars} unencoded={chosen.unencoded} {compared} {blocks} {versions} {occupancy} {planes} />
+      <CoverageChart encoded={chosen.encoded ?? chosen.chars} unencoded={chosen.unencoded} positions={chosen.positions ?? null} {compared} {blocks} {versions} {occupancy} {planes} />
     {/if}
     {#if !chosen.source.noteKey}<p class="ui-hint">{chosen.records ? t('charset.recordsNote') : t('charset.unencoded')}</p>{/if}
     {#if chosen.source.noteKey}<p class="ui-hint">{t(chosen.source.noteKey)}</p>
