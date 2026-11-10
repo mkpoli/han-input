@@ -6544,5 +6544,278 @@
     },
     "codes": "/charsets/cns_source_71635ac15c40.codes.tsv",
     "columns": 16
+  },
+  {
+    "id": "g_src_gdm",
+    "group": "G",
+    "label": "GDM",
+    "names": {
+      "en": "Place-name characters, Ministry of Public Security",
+      "zh": "中華人民共和國公安部治安管理局地名漢字",
+      "hans": "中华人民共和国公安部治安管理局地名汉字"
+    },
+    "chars": 773,
+    "total": 773,
+    "encoded": 773,
+    "unencoded": 0,
+    "codes": "/charsets/g_src_gdm.codes.tsv",
+    "source": {
+      "name": "Unihan 18.0.0",
+      "url": "https://www.unicode.org/reports/tr38/#kIRG_GSource",
+      "note": "Place-name characters from the Public Order Administration, Ministry of Public Security; GDM- plus a five-digit serial."
+    },
+    "columns": 10
+  },
+  {
+    "id": "g_src_ghc",
+    "group": "G",
+    "label": "GHC",
+    "names": {
+      "en": "Hanyu Dacidian",
+      "zh": "漢語大詞典",
+      "hans": "汉语大词典"
+    },
+    "chars": 543,
+    "total": 543,
+    "encoded": 543,
+    "unencoded": 0,
+    "codes": "/charsets/g_src_ghc.codes.tsv",
+    "source": {
+      "name": "Unihan 18.0.0",
+      "url": "https://www.unicode.org/reports/tr38/#kIRG_GSource",
+      "note": "Hanyu Dacidian, Shanghai Lexicographical Publishing House, 1986; GHC- plus a seven-digit serial."
+    },
+    "columns": 10
+  },
+  {
+    "id": "g_src_gkj",
+    "group": "G",
+    "label": "GKJ",
+    "names": {
+      "en": "Terms in sciences and technologies",
+      "zh": "全國科學技術名詞審定委員會術語定名用字",
+      "hans": "全国科学技术名词审定委员会术语定名用字"
+    },
+    "chars": 669,
+    "total": 669,
+    "encoded": 669,
+    "unencoded": 0,
+    "codes": "/charsets/g_src_gkj.codes.tsv",
+    "source": {
+      "name": "Unihan 18.0.0",
+      "url": "https://www.unicode.org/reports/tr38/#kIRG_GSource",
+      "note": "Terms approved by the China National Committee for Terms in Sciences and Technologies; GKJ- plus a five-digit serial."
+    },
+    "columns": 10
+  },
+  {
+    "id": "g_src_glgyj",
+    "group": "G",
+    "label": "GLGYJ",
+    "names": {
+      "en": "Zhuang Liao Songs Research",
+      "zh": "壯族嘹歌研究",
+      "hans": "壮族嘹歌研究"
+    },
+    "chars": 12,
+    "total": 12,
+    "encoded": 12,
+    "unencoded": 0,
+    "codes": "/charsets/g_src_glgyj.codes.tsv",
+    "source": {
+      "name": "Unihan 18.0.0",
+      "url": "https://www.unicode.org/reports/tr38/#kIRG_GSource",
+      "note": "Zhuang Liao Songs Research, Guangxi Nationalities Publishing House, 2008; GLGYJ- plus a four-digit serial."
+    },
+    "columns": 10
+  },
+  {
+    "id": "g_src_gpglg",
+    "group": "G",
+    "label": "GPGLG",
+    "names": {
+      "en": "Pingguo County Liao Songs",
+      "zh": "壯族民歌文化叢書•平果嘹歌",
+      "hans": "壮族民歌文化丛书•平果嘹歌"
+    },
+    "chars": 96,
+    "total": 96,
+    "encoded": 96,
+    "unencoded": 0,
+    "codes": "/charsets/g_src_gpglg.codes.tsv",
+    "source": {
+      "name": "Unihan 18.0.0",
+      "url": "https://www.unicode.org/reports/tr38/#kIRG_GSource",
+      "note": "Zhuang Folk Song Culture Series: Pingguo County Liao Songs, 2004–2006; GPGLG- plus a four-digit serial."
+    },
+    "columns": 10
+  },
+  {
+    "id": "g_src_gxm",
+    "group": "G",
+    "label": "GXM",
+    "names": {
+      "en": "Personal-name characters",
+      "zh": "中華人民共和國人名用字",
+      "hans": "中华人民共和国人名用字"
+    },
+    "chars": 282,
+    "total": 282,
+    "encoded": 282,
+    "unencoded": 0,
+    "codes": "/charsets/g_src_gxm.codes.tsv",
+    "source": {
+      "name": "Unihan 18.0.0",
+      "url": "https://www.unicode.org/reports/tr38/#kIRG_GSource",
+      "note": "Personal-name characters from the Public Order Administration, Ministry of Public Security; GXM- plus a five-digit serial."
+    },
+    "columns": 10
+  },
+  {
+    "id": "g_src_gz",
+    "group": "G",
+    "label": "GZ·U",
+    "names": {
+      "en": "Ancient Zhuang Character Dictionary (encoded source)",
+      "zh": "古壯字字典（Unihan G 源）",
+      "hans": "古壮字字典（Unihan G 源）"
+    },
+    "chars": 3591,
+    "total": 3591,
+    "encoded": 3591,
+    "unencoded": 0,
+    "codes": "/charsets/g_src_gz.codes.tsv",
+    "source": {
+      "name": "Unihan 18.0.0",
+      "url": "https://www.unicode.org/reports/tr38/#kIRG_GSource",
+      "note": "Ancient Zhuang Character Dictionary, 1989; GZ- plus a seven-digit serial. The gz set is the broader 字統 snapshot of the same dictionary, including unencoded rows."
+    },
+    "columns": 10
+  },
+  {
+    "id": "g_src_gza_1",
+    "group": "G",
+    "label": "GZA-1",
+    "names": {
+      "en": "Filial Piety and Zhuang Funeral Songs",
+      "zh": "生生不息的傳承•孝與壯族行孝歌之研究",
+      "hans": "生生不息的传承•孝与壮族行孝歌之研究"
+    },
+    "chars": 6,
+    "total": 6,
+    "encoded": 6,
+    "unencoded": 0,
+    "codes": "/charsets/g_src_gza_1.codes.tsv",
+    "source": {
+      "name": "Unihan 18.0.0",
+      "url": "https://www.unicode.org/reports/tr38/#kIRG_GSource",
+      "note": "GZA- values whose six-digit serial begins 1; the book is A Vibrant and Unbroken Transmission—Filial Piety and Zhuang Funeral Songs (2010)."
+    },
+    "columns": 10
+  },
+  {
+    "id": "g_src_gza_2",
+    "group": "G",
+    "label": "GZA-2",
+    "names": {
+      "en": "Annotated Long Zhuang Morality Songs",
+      "zh": "壯族倫理道德長詩傳揚歌譯注",
+      "hans": "壮族伦理道德长诗传扬歌译注"
+    },
+    "chars": 38,
+    "total": 38,
+    "encoded": 38,
+    "unencoded": 0,
+    "codes": "/charsets/g_src_gza_2.codes.tsv",
+    "source": {
+      "name": "Unihan 18.0.0",
+      "url": "https://www.unicode.org/reports/tr38/#kIRG_GSource",
+      "note": "GZA- values whose six-digit serial begins 2; the book is Annotated Long Zhuang Morality Songs (2005)."
+    },
+    "columns": 10
+  },
+  {
+    "id": "g_src_gza_3",
+    "group": "G",
+    "label": "GZA-3",
+    "names": {
+      "en": "Old Zhuang Folksong Texts: Wooing Songs I",
+      "zh": "壯族民歌古籍集成•情歌（一）嘹歌",
+      "hans": "壮族民歌古籍集成•情歌（一）嘹歌"
+    },
+    "chars": 2,
+    "total": 2,
+    "encoded": 2,
+    "unencoded": 0,
+    "codes": "/charsets/g_src_gza_3.codes.tsv",
+    "source": {
+      "name": "Unihan 18.0.0",
+      "url": "https://www.unicode.org/reports/tr38/#kIRG_GSource",
+      "note": "GZA- values whose six-digit serial begins 3; the book is Compendium of Old Zhuang Folksong Texts—Wooing Songs vol. 1—Liao Songs (1993)."
+    },
+    "columns": 10
+  },
+  {
+    "id": "g_src_gza_4",
+    "group": "G",
+    "label": "GZA-4",
+    "names": {
+      "en": "Old Zhuang Folksong Texts: Wooing Songs II",
+      "zh": "壯族民歌古籍集成•情歌（二）歡𭪤",
+      "hans": "壮族民歌古籍集成•情歌（二）欢𭪤"
+    },
+    "chars": 11,
+    "total": 11,
+    "encoded": 11,
+    "unencoded": 0,
+    "codes": "/charsets/g_src_gza_4.codes.tsv",
+    "source": {
+      "name": "Unihan 18.0.0",
+      "url": "https://www.unicode.org/reports/tr38/#kIRG_GSource",
+      "note": "GZA- values whose six-digit serial begins 4; the book is Compendium of Old Zhuang Folksong Texts—Wooing Songs vol. 2—Fwen Nganx (1997)."
+    },
+    "columns": 10
+  },
+  {
+    "id": "g_src_gza_6",
+    "group": "G",
+    "label": "GZA-6",
+    "names": {
+      "en": "Zhuang Proverbs from China",
+      "zh": "中國壯族諺語",
+      "hans": "中国壮族谚语"
+    },
+    "chars": 59,
+    "total": 59,
+    "encoded": 59,
+    "unencoded": 0,
+    "codes": "/charsets/g_src_gza_6.codes.tsv",
+    "source": {
+      "name": "Unihan 18.0.0",
+      "url": "https://www.unicode.org/reports/tr38/#kIRG_GSource",
+      "note": "GZA- values whose six-digit serial begins 6; the book is Zhuang Proverbs from China (2015)."
+    },
+    "columns": 10
+  },
+  {
+    "id": "g_src_gza_7",
+    "group": "G",
+    "label": "GZA-7",
+    "names": {
+      "en": "Zhuang Creation Myth Songs",
+      "zh": "遠古的追憶•壯族創世神話古歌研究",
+      "hans": "远古的追忆•壮族创世神话古歌研究"
+    },
+    "chars": 1,
+    "total": 1,
+    "encoded": 1,
+    "unencoded": 0,
+    "codes": "/charsets/g_src_gza_7.codes.tsv",
+    "source": {
+      "name": "Unihan 18.0.0",
+      "url": "https://www.unicode.org/reports/tr38/#kIRG_GSource",
+      "note": "GZA- values whose six-digit serial begins 7; the book is Ancient Remembrance—Zhuang Creation Myth Songs (2012)."
+    },
+    "columns": 10
   }
 ]

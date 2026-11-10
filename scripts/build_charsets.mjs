@@ -8,6 +8,7 @@ import { mappedMembers, membersText, iwdsMembers, idsRecords, columnsOf } from '
 import { cnsRowCodes, codeText, evidenceCodes, proposalCodes, rowCodes } from './charset-codes.mjs'
 import * as OpenCC from 'opencc-js'
 import { readCnsSourceSets } from './sources/charsets-cns.mjs'
+import { writeGSourceSets } from './sources/charsets-g-sources.mjs'
 import { GB12052, GB12052_UNENCODED, gb12052Members, gb12052Rows } from './sources/charsets-gb12052.mjs'
 
 const BASE = 'https://zi.tools/api/ma/ma/'
@@ -221,6 +222,7 @@ for (const set of cnsSets) {
     columns: 16,
   })
 }
+writeGSourceSets(catalogue, unihanText, OUT, hans)
 // A 字統 set named for a Unicode block is that block's assigned characters; the block's range gives
 // the designed positions the coverage dial divides by.
 for (const row of catalogue) {
@@ -232,6 +234,6 @@ writeFileSync(join(OUT, 'index.json'), JSON.stringify(catalogue, null, 2) + '\n'
 writeFileSync(join(OUT, 'sources.json'), JSON.stringify({
   catalogue: `${BASE}metadata.json`, retrieved: new Date().toISOString().slice(0, 10),
   attribution: '字統網, character-set catalogue and glyph mappings. Editorial mappings; original standards and proposal documents remain authoritative. Reuse terms are unspecified at these endpoints. GB/T 12052-1989 follows Jaemin Chung’s transcription (ecma35lib); its printed totals differ from the table by three, and the set counts printed rows.',
-  policy: 'Source-row sets index every row through its assigned Unicode scalars, or its private-use glyph slots where no scalar is assigned; rows described only by an IDS are kept as records, not scalar members; a glyph printed at more than one position is listed once, at its first position; a member may be a jamo sequence when a standard prints one glyph for a Hangul syllable Unicode cannot compose. Unihan kIRG_TSource fills assignments newer than the bulk release. Literal Unicode block sets contain assigned scalars. Local row numbers, IDS components and variation sequences do not establish scalar membership. OTHER follows the source’s unified substitutions, rather than literal Unicode block membership.',
+  policy: 'Source-row sets index every row through its assigned Unicode scalars, or its private-use glyph slots where no scalar is assigned; rows described only by an IDS are kept as records, not scalar members; a glyph printed at more than one position is listed once, at its first position; a member may be a jamo sequence when a standard prints one glyph for a Hangul syllable Unicode cannot compose. Unihan kIRG_TSource fills assignments newer than the bulk release. Literal Unicode block sets contain assigned scalars. Unihan kIRG_GSource gives the G source collections. Local row numbers, IDS components and variation sequences do not establish scalar membership. OTHER follows the source’s unified substitutions, rather than literal Unicode block membership.',
   inputs: inputs.sort((a, b) => a.url.localeCompare(b.url)),
 }, null, 2) + '\n')
