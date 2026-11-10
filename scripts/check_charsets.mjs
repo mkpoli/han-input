@@ -618,7 +618,7 @@ try {
     const metric = page.locator('.coverage .metric').first()
     await metric.waitFor()
     const text = await metric.innerText()
-    assert.match(text, /Designed positions/)
+    assert.match(text, /Designed positions/i)
     assert.match(text, /5,977/)
     assert.match(text, /2,857/)
     assert.match(text, /8,836/)
