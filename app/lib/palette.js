@@ -1,9 +1,10 @@
-// Share charts keep one hue: a slice carries the accent in proportion to its share, so the
-// largest slice is the deepest and the many slivers fade into the track.
-/** @param {number} share */
-export function shareTint(share) {
-  const accent = Math.max(40, Math.min(100, Math.round(Math.sqrt(share) * 100)))
-  return `color-mix(in oklab, var(--ui-color-accent) ${accent}%, var(--ui-color-surface-sunken))`
+// Share charts give each slice its own hue. A ramp that followed the share made the small slices
+// nearly identical pale blues; the list still prints every count and percentage.
+const CHART = Array.from({ length: 12 }, (_, index) => `var(--ui-color-chart-${index + 1})`)
+
+/** @param {number} index */
+export function shareColor(index) {
+  return CHART[index % CHART.length]
 }
 
 /** The colour the panel already gives a record without a scalar. */
