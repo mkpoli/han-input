@@ -85,6 +85,21 @@
   --ui-color-accent-soft: var(--p-accent-soft);
   --ui-color-accent-ink: var(--p-accent-ink);
   --ui-color-on-accent: var(--p-on-accent);
+
+  /* Chart categories. Twelve hues at one lightness, so small slices stay apart instead of
+     fading into the pale end of a ramp. */
+  --ui-color-chart-1: light-dark(oklch(47% 0.095 255), oklch(74% 0.105 255));
+  --ui-color-chart-2: light-dark(oklch(47% 0.095 225), oklch(74% 0.105 225));
+  --ui-color-chart-3: light-dark(oklch(47% 0.095 195), oklch(74% 0.105 195));
+  --ui-color-chart-4: light-dark(oklch(47% 0.095 165), oklch(74% 0.105 165));
+  --ui-color-chart-5: light-dark(oklch(47% 0.095 135), oklch(74% 0.105 135));
+  --ui-color-chart-6: light-dark(oklch(47% 0.095 105), oklch(74% 0.105 105));
+  --ui-color-chart-7: light-dark(oklch(47% 0.095 75), oklch(74% 0.105 75));
+  --ui-color-chart-8: light-dark(oklch(47% 0.095 45), oklch(74% 0.105 45));
+  --ui-color-chart-9: light-dark(oklch(47% 0.095 20), oklch(74% 0.105 20));
+  --ui-color-chart-10: light-dark(oklch(47% 0.095 350), oklch(74% 0.105 350));
+  --ui-color-chart-11: light-dark(oklch(47% 0.095 320), oklch(74% 0.105 320));
+  --ui-color-chart-12: light-dark(oklch(47% 0.095 290), oklch(74% 0.105 290));
   /* Focus is ink: a coloured ring around every field reads as an error, and ink keeps its
      contrast on every surface in both schemes. */
   --ui-color-focus: var(--p-ink);

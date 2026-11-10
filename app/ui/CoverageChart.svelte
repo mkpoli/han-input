@@ -5,7 +5,7 @@
   // a scalar stays visible instead of leaving the dial.
   import { coverageParts } from '../lib/charsets.js'
   import { i18n, t } from '../lib/i18n.svelte.js'
-  import { shareTint, unencodedTint } from '../lib/palette.js'
+  import { shareColor, unencodedTint } from '../lib/palette.js'
   import SharePie from './SharePie.svelte'
 
   /**
@@ -80,17 +80,17 @@
     otherTotal: compared.otherTotal.toLocaleString(i18n.locale),
   }) : '')
   const planeSlices = $derived([
-    ...planes.map(row => ({ id: `p${row.plane ?? 'other'}`, count: row.count, share: row.share, color: shareTint(row.share) })),
+    ...planes.map((row, index) => ({ id: `p${row.plane ?? 'other'}`, count: row.count, share: row.share, color: shareColor(index) })),
     ...(unencoded ? [{ id: 'unencoded', count: unencoded, share: listShare, color: unencodedTint }] : []),
   ])
   const planeTotal = $derived(planes.reduce((sum, row) => sum + row.count, 0) + unencoded)
   const blockSlices = $derived(blocks.map((row, index) => ({
     id: row.id, count: row.count, share: row.share,
-    color: row.id === 'unencoded' ? unencodedTint : shareTint(row.share),
+    color: row.id === 'unencoded' ? unencodedTint : shareColor(index),
   })))
   const blockTotal = $derived(blocks.reduce((sum, row) => sum + row.count, 0))
   const versionSlices = $derived([
-    ...(versions ?? []).map(row => ({ id: row.version, count: row.count, share: row.share, color: shareTint(row.share) })),
+    ...(versions ?? []).map((row, index) => ({ id: row.version, count: row.count, share: row.share, color: shareColor(index) })),
     ...(unencoded ? [{ id: 'unencoded', count: unencoded, share: listShare, color: unencodedTint }] : []),
   ])
   const versionTotal = $derived((versions ?? []).reduce((sum, row) => sum + row.count, 0) + unencoded)
