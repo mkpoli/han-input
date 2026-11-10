@@ -463,6 +463,16 @@ try {
     assert.equal(await page.locator('[data-primary]').inputValue(), 'lung4')
     subset(await page.locator('main .ui-tile-glyph').allTextContents(), g0)
   })
+  await check('a sequence member keeps every code point', async () => {
+    await page.goto(`${SITE}/?set=gk&p=25`)
+    await ready(page)
+    await page.locator('main .ui-tile[title$="7058"]').click()
+    assert.equal(new URL(page.url()).searchParams.get('c'), '110B-1162-11EB')
+    assert.equal(await page.locator('aside.card .cp').innerText(), 'U+110B U+1162 U+11EB')
+    await page.goBack()
+    await ready(page)
+    assert.equal(new URL(page.url()).searchParams.has('c'), false)
+  })
   await check('clear selection restores unrestricted search and omits set from URL', async () => {
     await find(page, 'U+20000')
     await page.locator('main details summary').click()
