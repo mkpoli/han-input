@@ -581,6 +581,12 @@ try {
     assert.match(text, /P3\s*20\.9%/)
     assert.match(text, /Unencoded\s*25\.5%/)
   })
+  await check('a kana set names its block', async () => {
+    await find(page, '', 'block_hiragana')
+    const blocks = page.locator('.blocks')
+    await blocks.waitFor()
+    assert.match(await blocks.innerText(), /Hiragana/)
+  })
   for (const theme of /** @type {const} */ (['light', 'dark'])) {
     for (const phone of [false, true]) {
       const view = await browser.newContext({ viewport: phone ? { width: 390, height: 844 } : { width: 1360, height: 900 }, deviceScaleFactor: 2, colorScheme: theme, locale: 'en-US' })
