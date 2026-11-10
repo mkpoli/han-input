@@ -7,8 +7,9 @@ own source and terms are also in the site, on its Sources page and on each metho
 
 The site finds characters of sinographic writing systems: Han, the extended sinographies that reuse and
 extend it such as Chữ Nôm and Sawndip, and the kana and Nüshu derived from it. Siniform scripts (Tangut,
-Khitan, Jurchen) stay out. A standard's table can be browsed in full where it lists characters outside
-this scope, as GB/T 12052 does for Hangul and symbols; a search still covers only the scripts above.
+Khitan, Jurchen) stay out of the finder; their encoded ranges are listed on the [code charts](code-charts.md)
+page. A standard's table can be browsed in full where it lists characters outside this scope, as GB/T 12052
+does for Hangul and symbols; a search still covers only the scripts above.
 The terms follow Zev Handel's "sinographic" and "siniform", Marc Miyake's
 "extended sinography" (2017, *Encyclopedia of Chinese Language and Linguistics*) and 吉池孝一 (2006,
 「中国周辺の漢字系文字」), who counts kana and Nüshu as 漢字系文字. They are taken from a summary in a private
@@ -79,6 +80,9 @@ character differs from BabelStone's only in one operand, and that operand is a C
 number, the two are taken for one component: the entity is drawn as that number's glyph and the
 hover text names both. BabelStone's `？` for an unnamed part, and an entity with no such alignment,
 have no character to draw, so they stay as written and carry the same mark.
+
+The siniform code charts, their counts and the three missing-glyph ranges are described in
+[`code-charts.md`](code-charts.md).
 
 The research behind these choices, with every candidate and what was checked, is in
 [`research-input-methods.md`](research-input-methods.md) and

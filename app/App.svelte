@@ -18,6 +18,7 @@
   import Readings from './pages/Readings.svelte'
   import Rhymes from './pages/Rhymes.svelte'
   import Radicals from './pages/Radicals.svelte'
+  import Siniform from './pages/Siniform.svelte'
   import About from './pages/About.svelte'
   import Convert from './pages/Convert.svelte'
   import NotFound from './pages/NotFound.svelte'
@@ -57,7 +58,7 @@
 
 <svelte:window onkeydown={keys} />
 
-<div class="shell">
+<div class="shell" class:without-card={route.page === 'scripts'}>
   <nav class="rail" aria-label={t('nav.label')}>
     <div class="site">
       <SiteSelect home={event => nav(event, '')}><span class="seal ui-script" aria-hidden="true">字</span></SiteSelect>
@@ -82,6 +83,7 @@
     {:else if route.page === 'readings'}<Readings />
     {:else if route.page === 'rhymes'}<Rhymes />
     {:else if route.page === 'radicals'}<Radicals />
+    {:else if route.page === 'scripts'}<Siniform />
     {:else if route.page === 'convert'}<Convert />
     {:else if route.page === 'notfound'}<NotFound />
     {:else if route.page === 'composition'}<Composition />
@@ -110,11 +112,14 @@
   .pop{position:absolute;inset-inline-start:calc(100% + var(--ui-space-sm));inset-block-end:0;z-index:var(--ui-z-menu);inline-size:320px;padding:var(--ui-space-2xs) var(--ui-space-lg);color:var(--ui-color-ink)}
   .finder{grid-column:2;grid-row:1;min-inline-size:0;overflow:auto;padding:var(--ui-space-3xl) clamp(var(--ui-space-xl),4vw,72px) var(--ui-space-3xl)}
   .card{grid-column:3;grid-row:1;overflow:auto;background:var(--ui-color-surface);border-inline-start:1px solid var(--ui-color-border);overscroll-behavior:contain}
+  .shell.without-card{grid-template-columns:var(--rail-w) minmax(0,1fr)}
+  .shell.without-card .card{display:none}
+  .shell.without-card .dock{grid-column:2}
   .dock{grid-column:2 / span 2;grid-row:2;min-inline-size:0}
   .toast{position:fixed;left:50%;bottom:calc(var(--dock-h) + var(--ui-space-lg));transform:translateX(-50%);z-index:var(--ui-z-toast);pointer-events:none}
   @media (max-width:1200px){.shell{--card-w:360px;--rail-w:88px}}
   @media (max-width:900px){
-    .shell{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) var(--dock-h) auto}
+    .shell,.shell.without-card{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) var(--dock-h) auto}
     .rail{grid-column:1;grid-row:3;flex-direction:row;align-items:center;padding:var(--ui-space-2xs) var(--ui-space-xs) calc(var(--ui-space-2xs) + env(safe-area-inset-bottom));min-inline-size:0}
     .site{display:none}
     .pages{flex-direction:row;flex:1;margin:0;overflow-x:auto;scrollbar-width:none}
@@ -124,6 +129,7 @@
     .pop{inset-inline-start:auto;inset-inline-end:0;inset-block-end:calc(100% + var(--ui-space-sm));inline-size:min(320px,calc(100vw - 32px))}
     .finder{grid-column:1;padding:var(--ui-space-xl) var(--ui-space-lg)}
     .dock{grid-column:1;grid-row:2}
+    .shell.without-card .dock{grid-column:1}
     .card{position:fixed;inset:0;grid-column:auto;z-index:var(--ui-z-modal);border:0;transform:translateY(100%);transition:transform var(--ui-duration) var(--ui-ease);visibility:hidden}
     .card.open{transform:none;visibility:visible}
   }

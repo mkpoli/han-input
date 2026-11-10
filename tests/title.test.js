@@ -15,6 +15,7 @@ describe('page metadata', () => {
     expect(pageMetadata('readings')).toEqual({ title: 'readings.title', description: 'readings.seo' })
     expect(pageMetadata('rhymes')).toEqual({ title: 'rhymes.title', description: 'rhymes.seo' })
     expect(pageMetadata('radicals')).toEqual({ title: 'radicals.title', description: 'radicals.seo' })
+    expect(pageMetadata('scripts')).toEqual({ title: 'siniform.title', description: 'siniform.seo' })
     expect(pageMetadata('convert')).toEqual({ title: 'convert.title', description: 'convert.seo' })
     expect(pageMetadata('composition')).toEqual({ title: 'composition.title', description: 'composition.seo' })
     expect(pageMetadata('about')).toEqual({ title: 'about.title', description: 'about.seo' })
@@ -31,7 +32,7 @@ describe('page metadata', () => {
 
 describe('catalogues', () => {
   test('holds every title and description key in every language', () => {
-    for (const page of ['', 'methods', 'readings', 'rhymes', 'radicals', 'convert', 'composition', 'about', 'notfound', 'm', 'v']) {
+    for (const page of ['', 'methods', 'readings', 'rhymes', 'radicals', 'scripts', 'convert', 'composition', 'about', 'notfound', 'm', 'v']) {
       const { title, description } = pageMetadata(page)
       for (const [locale, catalogue] of Object.entries(CATALOGUES)) {
         expect(title in catalogue, `${locale} ${title}`).toBe(true)

@@ -20,6 +20,7 @@ import { allMethods } from './sources/index.mjs'
 import { meaningWords } from './sources/meaning.mjs'
 import { rhymeTable } from './sources/qieyun.mjs'
 import { CACHE } from './lib.mjs'
+import { buildSiniform } from './build_siniform.mjs'
 import * as OpenCC from 'opencc-js'
 
 const OUT = join(import.meta.dirname, '..', 'app', 'public', 'data')
@@ -179,3 +180,6 @@ for (const entry of manifest) {
 writeFileSync(join(OUT, 'methods.json'), JSON.stringify(manifest))
 rmSync(SPOOL, { recursive: true, force: true })
 console.log(`${manifest.length} methods`)
+
+console.log('siniform')
+await buildSiniform()

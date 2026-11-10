@@ -43,3 +43,9 @@
 @font-face { font-family: 'CNS PUA'; src: url('/fonts/cns-pua-fd.woff2') format('woff2'); font-display: swap; unicode-range: U+FD000-FDFFF; }
 @font-face { font-family: 'CNS PUA'; src: url('/fonts/cns-pua-fe.woff2') format('woff2'); font-display: swap; unicode-range: U+FE000-FEFFF; }
 @font-face { font-family: 'CNS PUA'; src: url('/fonts/cns-pua-ff.woff2') format('woff2'); font-display: swap; unicode-range: U+FF000-FFFFF; }
+/* The siniform code charts: each face claims its own block, so one family can draw all three
+   scripts. Tangut components added in Unicode 17.0 and the newest ideographs have no glyph here;
+   their cells show a placeholder rather than a shape from another source. */
+@font-face { font-family: 'Siniform'; src: url('/fonts/noto-serif-tangut.woff2') format('woff2'); font-display: swap; unicode-range: U+17000-18AFF, U+18D00-18D7F; }
+@font-face { font-family: 'Siniform'; src: url('/fonts/noto-serif-khitan.woff2') format('woff2'); font-display: swap; unicode-range: U+18B00-18CFF; }
+@font-face { font-family: 'Siniform'; src: url('/fonts/alari-jurchen.woff2') format('woff2'); font-display: swap; unicode-range: U+18E00-191DF; }

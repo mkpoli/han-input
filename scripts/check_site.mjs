@@ -220,6 +220,24 @@ for (const [name, hex] of [['Extension B', '20000'], ['Extension G', '30000'], [
     assert.ok(fonts.some(font => font.isCustomFont), fonts.map(font => font.familyName).join())
   })
 }
+await check('the code charts page lists, switches and pages each script', async () => {
+  await page.goto(`${SITE}/scripts`)
+  await page.waitForLoadState('networkidle')
+  await page.waitForFunction(() => document.fonts.status === 'loaded')
+  assert.equal(await page.locator('[data-script-tab]').count(), 3)
+  const first = page.locator('.code-chart').first()
+  assert.match(await first.locator('.range').innerText(), /U\+18800/)
+  await page.locator('[data-script-tab="jurchen"]').click()
+  await page.waitForTimeout(200)
+  assert.match(await page.locator('#script-panel').innerText(), /914/)
+  await page.locator('[data-script-tab="tangut"]').click()
+  await page.waitForTimeout(200)
+  const chars = page.locator('.code-chart').last()
+  await chars.locator('.pager').first().locator('[data-page="last"]').click()
+  await page.waitForTimeout(200)
+  assert.match(await chars.locator('.range').innerText(), /U\+18D00/)
+})
+
 await check('an IRG G source names itself', async () => {
   await page.goto(`${SITE}/?c=206C5`)
   await page.waitForLoadState('networkidle')
@@ -240,7 +258,7 @@ await check('an Extension E record names its G source', async () => {
 })
 await check('no script errors', async () => assert.equal(errors.join(' | '), ''))
 
-const SHOTS = [['find', '/?q=lung4&c=9F8D'], ['clues', '/?q=%E6%B0%B5+12%E7%95%AB&c=6E56'], ['methods', '/methods'], ['ashide', '/m/ashide?q=%E3%83%A6%E3%82%BF'], ['readings', '/readings'], ['rhymes', '/rhymes?q=%E6%9D%B1&c=6771'], ['radicals', '/radicals?q=85'], ['rare', '/?c=33473'], ['nushu', '/?q=%E4%B8%80&c=1B170'], ['hentaigana', '/?q=%E5%AE%89&c=1B002'], ['about', '/about']]
+const SHOTS = [['find', '/?q=lung4&c=9F8D'], ['clues', '/?q=%E6%B0%B5+12%E7%95%AB&c=6E56'], ['methods', '/methods'], ['ashide', '/m/ashide?q=%E3%83%A6%E3%82%BF'], ['readings', '/readings'], ['rhymes', '/rhymes?q=%E6%9D%B1&c=6771'], ['radicals', '/radicals?q=85'], ['scripts', '/scripts'], ['rare', '/?c=33473'], ['nushu', '/?q=%E4%B8%80&c=1B170'], ['hentaigana', '/?q=%E5%AE%89&c=1B002'], ['about', '/about']]
 for (const [theme, phone] of [['light', false], ['dark', false], ['light', true], ['dark', true]]) {
   const view = await browser.newContext({ viewport: phone ? { width: 390, height: 844 } : { width: 1360, height: 900 }, deviceScaleFactor: 2, colorScheme: /** @type {'light' | 'dark'} */ (theme), locale: 'en-US' })
   if (dist) await serveDist(view, dist)

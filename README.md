@@ -21,6 +21,9 @@ It covers Han, extended sinographies such as Chữ Nôm and Sawndip, and kana an
 - **Readings**: every variety in 漢字音典, each typed the same way.
 - **Rhyme tables**: the Guangyun by rhyme, initial, grade and tone.
 - **Radicals**: the 214 Kangxi radicals by residual strokes.
+- **Code charts**: the Unicode blocks of Tangut, Jurchen and the Khitan small script, with components or
+  radicals and characters apart, each code charted and counted. Scope and limits are in
+  [`docs/code-charts.md`](docs/code-charts.md).
 - **PUA conversion**: convert text from the Ministry of Education's Taiwanese/Hakka fonts to Unicode and browse the mappings. Each character's card lists its own PUA codes and those of its Unihan variants.
 - **Composition**: convert Taiwan's pre-IDS 構字式 (Big5 8DF1–8DFD) and arithmetic composition to IDS. The thirteen symbols and the arithmetic signs are palettes; the Korean History Database and CBETA assign those signs differently.
 
@@ -29,6 +32,7 @@ It covers Han, extended sinographies such as Chữ Nôm and Sawndip, and kana an
 ```sh
 bun install
 bun run build:data      # the tables, from sources pinned in scripts/ and cached in cache/
+bun scripts/build_siniform.mjs  # the three siniform code charts
 bun run dev
 bun run verify          # unit tests, type check, messages
 ```

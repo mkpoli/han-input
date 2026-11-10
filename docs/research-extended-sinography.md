@@ -1,6 +1,6 @@
 # Extended sinography lookup sources
 
-Checked 2026-11-05. "Live" means the URL answered HTTP 200 from curl or `gh api` on that date. Row counts are line counts of the fetched file unless noted. Anything not fetched is marked uncertain. Tangut, Jurchen and Khitan are out of scope.
+Checked 2026-11-05. "Live" means the URL answered HTTP 200 from curl or `gh api` on that date. Row counts are line counts of the fetched file unless noted. Anything not fetched is marked uncertain. Tangut, Jurchen and Khitan are out of the finder's scope; their encoded ranges are listed on the [code charts](code-charts.md) page.
 
 ## Sources found
 
