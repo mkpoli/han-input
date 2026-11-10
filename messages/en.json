@@ -128,6 +128,7 @@
   "charset.versions": "Unicode versions",
   "charset.occupancy": "Empty code points",
   "charset.planes": "Planes",
+  "charset.denominator": "Denominator",
   "charset.block": "Block",
   "charset.total": "Code points",
   "charset.empty": "Empty",

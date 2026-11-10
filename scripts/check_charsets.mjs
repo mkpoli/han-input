@@ -590,6 +590,13 @@ try {
     assert.match(text, /0\.446%/)
     assert.match(text, /42,720/)
   })
+  await check('each share group prints its denominator under a pie', async () => {
+    await find(page, '', 'ws2017')
+    assert.equal(await page.locator('.share-section').count(), 3)
+    const caption = await page.locator('.share-section figcaption').first().innerText()
+    assert.match(caption, /Denominator/)
+    assert.match(caption, /4,924/)
+  })
   await check('a set reports its share in the four planes and its unencoded records apart', async () => {
     await find(page, '', 'g_8f')
     const planes = page.locator('.planes')
