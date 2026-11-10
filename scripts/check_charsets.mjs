@@ -186,6 +186,15 @@ try {
     await page.waitForFunction(expected => document.querySelectorAll('main .ui-tile-glyph').length === expected, Math.min(240, all.length))
     assert.deepEqual(await page.locator('main .ui-tile-glyph').allTextContents(), all.slice(0, 240))
   })
+  await check('a browse narrows to Han characters or shows every script', async () => {
+    await find(page, '', 'block_hiragana')
+    const tools = page.locator('main .browse-tools')
+    await tools.getByRole('button', { name: 'Han only', exact: true }).click()
+    await page.waitForFunction(() => document.querySelectorAll('main .ui-tile-glyph').length === 0)
+    assert.match(await page.locator('main').innerText(), /Nothing matches/)
+    await tools.getByRole('button', { name: 'All characters', exact: true }).click()
+    await page.waitForFunction(() => document.querySelectorAll('main .ui-tile-glyph').length === 93)
+  })
   await check('a browsed set pages by number, end and jump, with a short last page', async () => {
     const all = [...t1]
     const pageCount = Math.ceil(all.length / 240)
