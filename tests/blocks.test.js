@@ -6,11 +6,11 @@ const char = (/** @type {number} */ point) => String.fromCodePoint(point)
 
 describe('block shares', () => {
   test('groups a set by block, largest first, and keeps the rest apart', () => {
-    const rows = blockRows(new Set([char(0x5B57), char(0x20000), char(0x30000), char(0x1B170)]))
+    const rows = blockRows(new Set([char(0x5B57), char(0x20000), char(0x30000), char(0x1D100)]))
     expect(rows.map(row => [row.id, row.count])).toEqual([['uro', 1], ['ext_b', 1], ['ext_g', 1], ['other', 1]])
   })
   test('counts characters that share a block and takes shares of the whole set', () => {
-    const rows = blockRows(new Set([char(0x3400), char(0x3401), char(0x20000), char(0x1B170)]))
+    const rows = blockRows(new Set([char(0x3400), char(0x3401), char(0x20000), char(0x1D100)]))
     expect(rows.map(row => [row.id, row.count, row.share])).toEqual([['ext_a', 2, 0.5], ['ext_b', 1, 0.25], ['other', 1, 0.25]])
   })
   test('places the last code point of each block inside it', () => {
@@ -82,5 +82,17 @@ describe('plane shares', () => {
   test('keeps all four planes for a set in one plane', () => {
     const rows = planeRows(new Set([point(0x5B57)]))
     expect(rows.map(row => [row.plane, row.count, row.share])).toEqual([[0, 1, 1], [1, 0, 0], [2, 0, 0], [3, 0, 0]])
+  })
+})
+
+describe('script blocks', () => {
+  test('names the Latin, kana, stroke and radical blocks', () => {
+    const rows = blockRows(new Set([0x41, 0x3042, 0x30A2, 0x2F00, 0x2E80, 0x31C0, 0x1B001, 0x1B170].map(point => String.fromCodePoint(point))))
+    expect(rows.map(row => row.id)).toEqual(['latin', 'rad_supp', 'kangxi', 'hiragana', 'katakana', 'strokes', 'kana_supp', 'nushu'])
+  })
+  test('keeps the occupancy table on the unified ideograph blocks', () => {
+    const rows = blockOccupancy([[0x41, 0x41, '1.1']])
+    expect(rows.some(row => row.id === 'latin')).toBe(false)
+    expect(rows).toHaveLength(13)
   })
 })
