@@ -229,7 +229,7 @@ test('snapshot covers every source catalogue and counts match unique scalars', (
   expect(referenceIds).toHaveLength(119)
   for (const id of referenceIds) expect(catalogue.some(row => row.id === id)).toBe(true)
   for (const input of sources.inputs) expect(input.sha256).toMatch(/^[a-f0-9]{64}$/)
-  expect(catalogue.length).toBe(269)
+  expect(catalogue.length).toBe(282)
   const cns = catalogue.filter(row => row.group === 'CNS sources')
   const cnsSource = JSON.parse(readFileSync(new URL('cns-sources.json', base), 'utf8'))
   expect(cns).toHaveLength(123)
