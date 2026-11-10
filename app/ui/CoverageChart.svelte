@@ -15,8 +15,8 @@
    * @property {number} otherTotal Characters listed by the other set.
    */
 
-  /** @type {{ encoded: number, unencoded: number, compared?: Compared | null, blocks?: import('../lib/blocks.js').BlockRow[], versions?: import('../lib/ages.js').VersionRow[], occupancy?: import('../lib/blocks.js').BlockOccupancy[], planes?: import('../lib/blocks.js').PlaneRow[] }} */
-  let { encoded, unencoded, compared = null, blocks = [], versions = [], occupancy = [], planes = [] } = $props()
+  /** @type {{ encoded: number, unencoded: number, compared?: Compared | null, blocks?: import('../lib/blocks.js').BlockRow[], versions?: import('../lib/ages.js').VersionRow[] | null, occupancy?: import('../lib/blocks.js').BlockOccupancy[], planes?: import('../lib/blocks.js').PlaneRow[] }} */
+  let { encoded, unencoded, compared = null, blocks = [], versions = null, occupancy = [], planes = [] } = $props()
   const total = $derived(encoded + unencoded)
   const share = $derived(total ? unencoded / total : 0)
   const format = (/** @type {number} */ share) =>
@@ -157,7 +157,7 @@
       </ol>
     </div>
   {/if}
-  {#if versions.length || unencoded}
+  {#if versions !== null}
     <div class="versions">
       <p class="caption">{t('charset.versions')}</p>
       <ol>
