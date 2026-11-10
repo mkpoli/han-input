@@ -59,8 +59,8 @@ export function gb12052Rows(text) {
 }
 
 /** The table's distinct characters, each with the first position it occupies. Repeated characters
- * keep the earlier position, as the standard prints the later one in another typeface. Positions
- * whose printed glyph has no assigned scalar stay out of the list and live as records.
+ * keep the earlier position; the transcription notes that the later ones use another typeface.
+ * Positions whose printed glyph has no assigned scalar stay out of the list and live as records.
  * @param {Gb12052Row[]} rows @param {Set<string>} unencoded @returns {{ members: string[], codes: { char: string, code: string }[] }} */
 export function gb12052Members(rows, unencoded) {
   const printed = new Set(rows.map(row => row.code))
