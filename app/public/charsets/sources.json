@@ -105,10 +105,6 @@
       "sha256": "8712fff06b159de6b6af7aaa658193bd12ee6af490d2bfcf66515e24270a2210"
     },
     {
-      "url": "https://zi.tools/api/ma/ma/1k8myqp9o8zxkvdpbqdhrfs6yfx5bk2t.json",
-      "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
-    },
-    {
       "url": "https://zi.tools/api/ma/ma/bouyei.json",
       "sha256": "0d1165f66375014f6ba9d59df1251b11176412f405b7815e3239e66307b3af05"
     },
@@ -171,10 +167,6 @@
     {
       "url": "https://zi.tools/api/ma/ma/g_fkzz.json",
       "sha256": "9ed4f78af8587bc185b429f0423ecfd9910d33100e6554c0a7d17d0f37439b09"
-    },
-    {
-      "url": "https://zi.tools/api/ma/ma/g_fzk.json",
-      "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
     },
     {
       "url": "https://zi.tools/api/ma/ma/g_guji.json",
@@ -273,10 +265,6 @@
       "sha256": "7dad2d0c33ad6761230963496f71fc208de4e404a8b58c9c24ae199e1b5e07eb"
     },
     {
-      "url": "https://zi.tools/api/ma/ma/irgn.json",
-      "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
-    },
-    {
       "url": "https://zi.tools/api/ma/ma/j0.json",
       "sha256": "72fb3c816bddd4b3df1aafaa7ff23065d56b921ee29b845e5ee2144f3fab319b"
     },
@@ -367,10 +355,6 @@
     {
       "url": "https://zi.tools/api/ma/ma/kwhj.json",
       "sha256": "17bacfcd95e6d1eab2fda4c88a1b74c3e5b4a30e4e9af52c6555d5dbfe48a73c"
-    },
-    {
-      "url": "https://zi.tools/api/ma/ma/l2.json",
-      "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
     },
     {
       "url": "https://zi.tools/api/ma/ma/mac.json",

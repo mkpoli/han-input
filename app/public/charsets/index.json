@@ -514,46 +514,6 @@
     "columns": 10
   },
   {
-    "id": "irgn",
-    "group": "Unicode",
-    "label": "IRGN",
-    "names": {
-      "en": "IRG Document",
-      "zh": "表意文字研究小組文件",
-      "hans": "表意文字研究小组文件"
-    },
-    "chars": 0,
-    "total": 0,
-    "encoded": 0,
-    "unencoded": 0,
-    "source": {
-      "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/irgn.json",
-      "note": "The source endpoint supplies no membership rows."
-    },
-    "columns": 10
-  },
-  {
-    "id": "l2",
-    "group": "Unicode",
-    "label": "L2",
-    "names": {
-      "en": "UTC Document Registry",
-      "zh": "統一碼技術委員會文件存檔",
-      "hans": "统一码技术委员会文件存档"
-    },
-    "chars": 0,
-    "total": 0,
-    "encoded": 0,
-    "unencoded": 0,
-    "source": {
-      "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/l2.json",
-      "note": "The source endpoint supplies no membership rows."
-    },
-    "columns": 10
-  },
-  {
     "id": "g0",
     "group": "G",
     "label": "G0",
@@ -1307,26 +1267,6 @@
       "glyphs": 0
     },
     "codes": "/charsets/gzhs.codes.tsv",
-    "columns": 16
-  },
-  {
-    "id": "g_fzk",
-    "group": "G",
-    "label": "G方正楷体",
-    "names": {
-      "en": "Fangzheng Kaiti S",
-      "zh": "方正楷體超大字符集第16平面",
-      "hans": "方正楷体超大字符集第16平面"
-    },
-    "chars": 0,
-    "total": 0,
-    "encoded": 0,
-    "unencoded": 0,
-    "source": {
-      "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/g_fzk.json",
-      "note": "The source endpoint supplies no membership rows."
-    },
     "columns": 16
   },
   {
@@ -2667,26 +2607,6 @@
       "url": "https://zi.tools/api/ma/ma/sat.json"
     },
     "codes": "/charsets/sat.codes.tsv",
-    "columns": 10
-  },
-  {
-    "id": "1k8myqp9o8zxkvdpbqdhrfs6yfx5bk2t",
-    "group": "J",
-    "label": "Glyphwiki_ebag",
-    "names": {
-      "en": "Glyphwiki_ebag",
-      "zh": "Glyphwiki_ebag",
-      "hans": "Glyphwiki_ebag"
-    },
-    "chars": 0,
-    "total": 0,
-    "encoded": 0,
-    "unencoded": 0,
-    "source": {
-      "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/1k8myqp9o8zxkvdpbqdhrfs6yfx5bk2t.json",
-      "note": "The source endpoint supplies no membership rows."
-    },
     "columns": 10
   },
   {
