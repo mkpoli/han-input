@@ -195,6 +195,7 @@
       <span>{t('charset.rows', { count: chosen.total.toLocaleString() })}</span>
       {#if chosen.source.version}<span class="ui-count">{chosen.source.version}</span>{/if}
       <a href={chosen.source.url} target="_blank" rel="noopener noreferrer">{t('method.source')}: {chosen.source.name}</a>
+      {#if chosen.source.dataUrl}<a href={chosen.source.dataUrl} target="_blank" rel="noopener noreferrer">{t('convert.data')}</a>{/if}
       {#if recordsFile}<a href={recordsFile} target="_blank" rel="noopener noreferrer">{t('charset.records')}</a>{/if}
     </div>
     <p class="set-name">{nameOf(chosen.names)}</p>
