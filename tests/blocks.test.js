@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs'
 import { describe, expect, test } from 'bun:test'
 import { versionRows } from '../app/lib/ages.js'
 import { blockOccupancy, blockRows, planeRows } from '../app/lib/blocks.js'
@@ -86,13 +87,27 @@ describe('plane shares', () => {
 })
 
 describe('script blocks', () => {
-  test('names the Latin, kana, stroke and radical blocks', () => {
+  test('names the Latin, kana, radical, stroke and Nushu blocks', () => {
     const rows = blockRows(new Set([0x41, 0x3042, 0x30A2, 0x2F00, 0x2E80, 0x31C0, 0x1B001, 0x1B170].map(point => String.fromCodePoint(point))))
     expect(rows.map(row => row.id)).toEqual(['latin', 'rad_supp', 'kangxi', 'hiragana', 'katakana', 'strokes', 'kana_supp', 'nushu'])
   })
-  test('keeps the occupancy table on the unified ideograph blocks', () => {
+  test('keeps the occupancy table on the CJK ideograph blocks', () => {
     const rows = blockOccupancy([[0x41, 0x41, '1.1']])
     expect(rows.some(row => row.id === 'latin')).toBe(false)
     expect(rows).toHaveLength(13)
+  })
+})
+
+describe('catalogue blocks', () => {
+  test('gives every Unicode block set a named block', () => {
+    const catalogue = JSON.parse(readFileSync(new URL('../app/public/charsets/index.json', import.meta.url), 'utf8'))
+    for (const set of catalogue.filter(/** @param {{group: string}} entry */ entry => entry.group === 'Unicode blocks')) {
+      const members = new Set(readFileSync(new URL(`../app/public/charsets/${set.id}.txt`, import.meta.url), 'utf8'))
+      expect({ id: set.id, other: blockRows(members).filter(row => row.id === 'other').length }).toEqual({ id: set.id, other: 0 })
+    }
+  })
+  test('places the last code point of each added block inside it', () => {
+    const rows = blockRows(new Set([0x007F, 0x2EFF, 0x2FDF, 0x309F, 0x30FF, 0x31EF, 0x31FF, 0x1AFFF, 0x1B0FF, 0x1B12F, 0x1B16F, 0x1B2FF].map(point => String.fromCodePoint(point))))
+    expect(rows.map(row => row.id)).toEqual(['latin', 'rad_supp', 'kangxi', 'hiragana', 'katakana', 'strokes', 'katakana_ext', 'kana_ext_b', 'kana_supp', 'kana_ext_a', 'small_kana', 'nushu'])
   })
 })
