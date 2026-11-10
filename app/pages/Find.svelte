@@ -7,6 +7,7 @@
   import { answer, groupHits, intersect, readQuery, tallyReadings } from '../lib/search.js'
   import { loadMethods } from '../lib/data.js'
   import { loadGlyphs } from '../lib/fonts.js'
+  import { isHan } from '../../src/fold.js'
   import { autofocus } from '../lib/ui.svelte.js'
   import { i18n, nameOf, t } from '../lib/i18n.svelte.js'
   import { gSourceOf, noteOf } from '../lib/sources.js'
@@ -31,6 +32,7 @@
   let codes = $state(new Map())
   /** @type {'all' | 'encoded' | 'unencoded'} */
   let show = $state('all')
+  let hanOnly = $state(false)
   let byCode = $state(false)
   /** @type {import('../lib/charsets.js').ProposalRecords | null} */
   let records = $state(null)
@@ -46,9 +48,11 @@
   let turning = $state(false)
   /** @type {HTMLElement | null} */
   let browseTop = $state(null)
-  /** @param {string[]} list @param {Map<string, string>} codeOf @param {'all' | 'encoded' | 'unencoded'} mode @param {boolean} sorted */
-  function arrange(list, codeOf, mode, sorted) {
+  /** @param {string[]} list @param {Map<string, string>} codeOf @param {'all' | 'encoded' | 'unencoded'} mode @param {boolean} sorted @param {boolean} hanOnly */
+  function arrange(list, codeOf, mode, sorted, hanOnly) {
     let out = mode === 'all' ? list : list.filter(char => mode === 'unencoded' ? isPrivateUse(char) : !isPrivateUse(char))
+    // A private-use slot is a Han record without a scalar, so it stays in the Han view.
+    if (hanOnly) out = out.filter(char => isHan(char) || isPrivateUse(char))
     if (sorted) {
       out = [...out].sort((a, b) => {
         const left = codeOf.get(a)
@@ -61,7 +65,7 @@
     }
     return out
   }
-  const arranged = $derived(arrange(browsed, codes, show, byCode && codes.size > 0))
+  const arranged = $derived(arrange(browsed, codes, show, byCode && codes.size > 0, hanOnly))
   const longCodes = $derived([...codes.values()].some(code => code.length > 7))
   const pages = $derived(Math.max(1, Math.ceil(arranged.length / GRID_LIMIT)))
   const page = $derived(Math.min(pages - 1, Math.max(0, route.p - 1)))
@@ -107,7 +111,7 @@
           if (!active) return
           const setCodes = selected && entry?.codes ? await loadCharsetCodes(selected) : new Map()
           if (!active) return
-          const visible = arrange(chars, setCodes, untrack(() => show), untrack(() => byCode))
+          const visible = arrange(chars, setCodes, untrack(() => show), untrack(() => byCode), untrack(() => hanOnly))
           const requested = untrack(() => route.p)
           const wanted = Math.min(Math.max(1, Math.ceil(visible.length / GRID_LIMIT)), Math.max(1, requested))
           const start = (wanted - 1) * GRID_LIMIT
@@ -178,6 +182,15 @@
   }
 
   /** @param {boolean} next */
+  async function setHan(next) {
+    if (hanOnly === next) return
+    hanOnly = next
+    setPage(1, { replace: true })
+    await tick()
+    await loadGlyphs(arranged.slice(0, GRID_LIMIT))
+  }
+
+  /** @param {boolean} next */
   async function setOrder(next) {
     if (byCode === next) return
     byCode = next
@@ -237,6 +250,10 @@
               <button class="ui-button" data-size="sm" type="button" aria-pressed={show === 'all'} onclick={() => setShow('all')}>{t('find.showAll')}</button>
               <button class="ui-button" data-size="sm" type="button" aria-pressed={show === 'encoded'} onclick={() => setShow('encoded')}>{t('find.showEncoded')}</button>
               <button class="ui-button" data-size="sm" type="button" aria-pressed={show === 'unencoded'} onclick={() => setShow('unencoded')}>{t('find.showUnencoded')}</button>
+            </div>
+            <div class="seg" role="group" aria-label={t('find.scriptLabel')}>
+              <button class="ui-button" data-size="sm" type="button" aria-pressed={!hanOnly} onclick={() => setHan(false)}>{t('find.showAllChars')}</button>
+              <button class="ui-button" data-size="sm" type="button" aria-pressed={hanOnly} onclick={() => setHan(true)}>{t('find.showHan')}</button>
             </div>
           </div>
         {/if}

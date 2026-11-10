@@ -4,6 +4,7 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { CACHE } from './lib.mjs'
 import { cnsRowCodes, codeText, evidenceCodes, proposalCodes, rowCodes } from './charset-codes.mjs'
+import { GB12052_UNENCODED, gb12052Members, readGb12052 } from './sources/charsets-gb12052.mjs'
 
 const OUT = join(import.meta.dirname, '../app/public/charsets')
 /** @type {import('../app/lib/charsets.js').Charset[]} */
@@ -13,10 +14,12 @@ const metadata = JSON.parse(readFileSync(join(CACHE, 'zi.tools_api_ma_ma_metadat
 const metaById = new Map(metadata.map(/** @param {{id: string}} entry */ entry => [entry.id, entry]))
 
 for (const entry of catalogue) {
-  const members = readFileSync(join(OUT, `${entry.id}.txt`), 'utf8')
+  const members = new Set(readFileSync(join(OUT, `${entry.id}.txt`), 'utf8').split('\n').filter(Boolean))
   /** @type {{char: string, code: string}[]} */
   let codes = []
-  if (entry.group === 'CNS sources') {
+  if (entry.id === 'gk') {
+    codes = gb12052Members(await readGb12052(), new Set(GB12052_UNENCODED)).codes
+  } else if (entry.group === 'CNS sources') {
     const text = readFileSync(join(OUT, `${entry.id}.tsv`), 'utf8')
     const records = text.split('\n').filter(line => line && !line.startsWith('#') && !line.startsWith('CNS\t')).map(line => {
       const [cns, unicode = ''] = line.split('\t')
@@ -45,7 +48,7 @@ for (const entry of catalogue) {
   } else {
     delete entry.codes
   }
-  const missing = [...members].length - codes.length
+  const missing = members.size - codes.length
   if (codes.length && missing) console.warn(`${entry.id}: ${missing} members without a code`)
 }
 writeFileSync(join(OUT, 'index.json'), JSON.stringify(catalogue, null, 2) + '\n')

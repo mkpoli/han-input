@@ -3,7 +3,7 @@
 
 /** @typedef {{ char: string, code: string }} Code */
 
-/** @param {unknown[] | undefined} rows @param {{ index?: string, source?: string }} meta @param {string} members @returns {Code[]} */
+/** @param {unknown[] | undefined} rows @param {{ index?: string, source?: string }} meta @param {Iterable<string>} members @returns {Code[]} */
 export function rowCodes(rows, meta, members) {
   const set = new Set(members)
   const seen = new Set()
@@ -19,7 +19,7 @@ export function rowCodes(rows, meta, members) {
   return codes
 }
 
-/** @param {{ cns: string, unicode: string[], crosswalk?: string }[]} records @param {string} members @returns {Code[]} */
+/** @param {{ cns: string, unicode: string[], crosswalk?: string }[]} records @param {Iterable<string>} members @returns {Code[]} */
 export function cnsRowCodes(records, members) {
   const set = new Set(members)
   const seen = new Set()
@@ -36,7 +36,7 @@ export function cnsRowCodes(records, members) {
   return codes
 }
 
-/** @param {{ mappedUnicode?: string, source?: string | null, serial?: string }[]} records @param {string} members @returns {Code[]} */
+/** @param {{ mappedUnicode?: string, source?: string | null, serial?: string }[]} records @param {Iterable<string>} members @returns {Code[]} */
 export function proposalCodes(records, members) {
   const set = new Set(members)
   const seen = new Set()
@@ -53,7 +53,7 @@ export function proposalCodes(records, members) {
   return codes
 }
 
-/** @param {{ char: string, entry: string }[]} evidence @param {string} members @returns {Code[]} */
+/** @param {{ char: string, entry: string }[]} evidence @param {Iterable<string>} members @returns {Code[]} */
 export function evidenceCodes(evidence, members) {
   const set = new Set(members)
   const seen = new Set()

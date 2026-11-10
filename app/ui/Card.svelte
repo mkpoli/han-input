@@ -11,12 +11,13 @@
   import { FAMILIES } from '../lib/families.js'
   import SourceCode from './SourceCode.svelte'
   import { isHan } from '../../src/fold.js'
-  import { puaOf } from '../../src/pua.js'
+  import { codePoints, puaOf } from '../../src/pua.js'
   import { characterVariants } from '../../src/variants.js'
   import { pieces } from '../lib/notation.js'
 
   const char = $derived(route.c)
-  const cp = $derived(char ? `U+${(char.codePointAt(0) ?? 0).toString(16).toUpperCase()}` : '')
+  // A member may be a jamo sequence: GB 12052 spells archaic Hangul with two or three code points.
+  const cp = $derived(char ? codePoints(char) : '')
   const puaRows = $derived(char ? puaOf(char) : [])
   /** @param {string} code */
   const puaText = code => String.fromCodePoint(parseInt(code.slice(2), 16))
