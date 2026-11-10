@@ -3,7 +3,7 @@
 /** @typedef {{id: string, label: string, start: number, end: number}} Block */
 /** @typedef {{id: string, label: string, count: number, share: number}} BlockRow */
 
-/** The unified ideograph blocks, the ones the block occupancy table describes. @type {Block[]} */
+/** The CJK ideograph blocks, the ones the block occupancy table describes. @type {Block[]} */
 export const CJK_BLOCKS = [
   { id: 'ext_a', label: 'Ext.A', start: 0x3400, end: 0x4DBF },
   { id: 'uro', label: 'URO', start: 0x4E00, end: 0x9FFF },
@@ -20,9 +20,9 @@ export const CJK_BLOCKS = [
   { id: 'ext_j', label: 'Ext.J', start: 0x323B0, end: 0x3347F },
 ]
 
-/** The other scripts a set can list, kept out of the occupancy table. */
-const SCRIPT_BLOCKS = [
-  { id: 'latin', label: 'Latin', start: 0x0000, end: 0x007F },
+/** Blocks outside the ideograph ranges, kept out of the occupancy table. */
+const NON_IDEOGRAPH_BLOCKS = [
+  { id: 'latin', label: 'Basic Latin', start: 0x0000, end: 0x007F },
   { id: 'rad_supp', label: 'Rad. Suppl.', start: 0x2E80, end: 0x2EFF },
   { id: 'kangxi', label: 'Kangxi', start: 0x2F00, end: 0x2FDF },
   { id: 'hiragana', label: 'Hiragana', start: 0x3040, end: 0x309F },
@@ -36,8 +36,8 @@ const SCRIPT_BLOCKS = [
   { id: 'nushu', label: 'Nushu', start: 0x1B170, end: 0x1B2FF },
 ]
 
-/** Every block a share list names, non-CJK scripts first. @type {Block[]} */
-export const BLOCKS = [...SCRIPT_BLOCKS, ...CJK_BLOCKS]
+/** Every block a share list names, the other blocks first. @type {Block[]} */
+export const BLOCKS = [...NON_IDEOGRAPH_BLOCKS, ...CJK_BLOCKS]
 
 /** The shares of a set's characters in each block, largest first; anything outside the blocks is Other.
  * @param {Set<string>} members @returns {BlockRow[]} */
