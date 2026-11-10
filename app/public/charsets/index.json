@@ -718,7 +718,8 @@
     "unencoded": 2,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/gk.json"
+      "url": "https://zi.tools/api/ma/ma/gk.json",
+      "noteKey": "charset.scope.gk"
     },
     "records": {
       "file": "/charsets/gk.ids.json",

@@ -221,7 +221,8 @@
       <CoverageChart encoded={chosen.encoded ?? chosen.chars} unencoded={chosen.unencoded} {compared} {blocks} {versions} {occupancy} {planes} />
     {/if}
     <p class="ui-hint">{chosen.records ? t('charset.recordsNote') : t('charset.unencoded')}</p>
-    {#if chosen.source.note}<p class="ui-hint">{chosen.source.note}</p>{/if}
+    {#if chosen.source.noteKey}<p class="ui-hint">{t(chosen.source.noteKey)}</p>
+    {:else if chosen.source.note}<p class="ui-hint">{chosen.source.note}</p>{/if}
   {/if}
 </div>
 
