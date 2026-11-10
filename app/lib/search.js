@@ -151,7 +151,15 @@ export async function intersect(answers) {
   return kept.sort((a, b) => (rows.get(a)?.rank ?? 1e6) - (rows.get(b)?.rank ?? 1e6))
 }
 
-/** Hits put in reading order: whole codes first, then those a query only begins. @param {import('./data.js').CodeHit[]} hits */
+/** How much of a method group a page shows: its first codes, each with its first characters. */
+export const GROUP_HITS = 8
+export const GROUP_CHARS = 24
+
+/**
+ * @typedef {{ method: string, hits: import('./data.js').CodeHit[], literal: boolean, exact: boolean, total: number }} MethodGroup
+ */
+
+/** Hits put in reading order: whole codes first, then those a query only begins. @param {import('./data.js').CodeHit[]} hits @returns {MethodGroup[]} */
 export function groupHits(hits) {
   /** @type {Map<string, import('./data.js').CodeHit[]>} */
   const byMethod = new Map()
@@ -164,6 +172,33 @@ export function groupHits(hits) {
     list.sort((a, b) => Number(b.literal) - Number(a.literal) || Number(b.exact) - Number(a.exact) || a.code.length - b.code.length)
     return { method, hits: list, literal: list.some(hit => hit.literal), exact: list.some(hit => hit.exact), total: list.reduce((sum, hit) => sum + hit.chars.length, 0) }
   }).sort((a, b) => Number(b.literal) - Number(a.literal) || Number(b.exact) - Number(a.exact) || a.total - b.total)
+}
+
+/** The tiles a group draws, counting only the codes and characters its section shows. @param {MethodGroup} group */
+function groupTiles(group) {
+  return group.hits.slice(0, GROUP_HITS).reduce((sum, hit) => sum + Math.min(GROUP_CHARS, hit.chars.length), 0)
+}
+
+/** A clue read as a code reaches every method that shares it; a common reading brings a hundred.
+ * Pages hold whole groups up to a tile budget, so no page lays out the whole result grid at once.
+ * @param {MethodGroup[]} groups @param {number} [budget] @returns {MethodGroup[][]} */
+export function groupPages(groups, budget = 240) {
+  /** @type {MethodGroup[][]} */
+  const pages = []
+  let page = []
+  let tiles = 0
+  for (const group of groups) {
+    const size = groupTiles(group)
+    if (page.length && tiles + size > budget) {
+      pages.push(page)
+      page = []
+      tiles = 0
+    }
+    page.push(group)
+    tiles += size
+  }
+  if (page.length) pages.push(page)
+  return pages
 }
 
 /** The other spellings of a part, then the parts that only resemble it. @param {string} part @param {string[]} exact @param {import('../../src/variants.js').Variants} variants */

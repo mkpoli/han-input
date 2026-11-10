@@ -2,18 +2,18 @@
   // Find: one box for whatever the reader has. A clue is tried as a code in every method at once and
   // as a word of meaning. Several clues, split by spaces, leave the characters that fit them all.
   import { tick, untrack } from 'svelte'
-  import { route, setQuery, setCharset, setPage, pageHref, link, go } from '../lib/route.svelte.js'
+  import { route, setQuery, setCharset, setPage, pageHref } from '../lib/route.svelte.js'
   import { loadCharsets, loadCharset, loadCharsetCodes, loadRecords, filterAnswer, browseCharset, compareCodes, isPrivateUse } from '../lib/charsets.js'
   import { answer, groupHits, intersect, readQuery, tallyReadings } from '../lib/search.js'
   import { loadMethods } from '../lib/data.js'
   import { loadGlyphs } from '../lib/fonts.js'
   import { isHan } from '../../src/fold.js'
   import { autofocus } from '../lib/ui.svelte.js'
-  import { i18n, nameOf, t } from '../lib/i18n.svelte.js'
-  import { gSourceOf, noteOf } from '../lib/sources.js'
+  import { nameOf, t } from '../lib/i18n.svelte.js'
   import Tiles from '../ui/Tiles.svelte'
   import Pager from '../ui/Pager.svelte'
   import PaginatedTiles from '../ui/PaginatedTiles.svelte'
+  import MethodGroups from '../ui/MethodGroups.svelte'
   import CharsetFilter from '../ui/CharsetFilter.svelte'
   import ProposalRecords from '../ui/ProposalRecords.svelte'
 
@@ -148,6 +148,9 @@
   const many = $derived(answers.length > 1)
   const single = $derived(answers.length === 1 ? answers[0] : null)
   const groups = $derived(single ? groupHits(single.hits) : [])
+  // Each method list keeps its page when other parts of the result change.
+  const exactGroups = $derived(groups.filter(group => group.literal))
+  const prefixGroups = $derived(groups.filter(group => !group.literal))
   const tally = $derived(single ? tallyReadings(single.readings) : [])
   const tallyChars = $derived(tally.map(([char]) => char))
   const variantChars = $derived(single ? single.variants.map(row => row.char) : [])
@@ -199,26 +202,6 @@
     await loadGlyphs(arranged.slice(0, GRID_LIMIT))
   }
 </script>
-
-{#snippet methodGroup(/** @type {ReturnType<typeof groupHits>[number]} */ group)}
-      {@const method = methods.get(group.method)}
-      <section class="ui-section">
-        <h2 class="ui-label method">
-          <a href={link('m', { method: group.method, q: query })} onclick={event => { event.preventDefault(); const q = query; go('m', group.method); setQuery(q) }}>{method ? nameOf(method.names) : group.method}</a>
-          <span class="ui-count">{group.total}</span>
-        </h2>
-        <div class="hits">
-          {#each group.hits.slice(0, 8) as hit (hit.code)}
-            {@const gsource = group.method === 'irg-g' ? gSourceOf(hit.code) : null}
-            <div class="hit">
-              <span class="code ui-mono" class:exact={hit.exact} title={gsource ? `${nameOf(gsource.names)} — ${noteOf(gsource, i18n.locale)}` : undefined}>{hit.code}</span>
-              <Tiles chars={hit.chars} size={44} limit={24} label={hit.code} />
-            </div>
-          {/each}
-          {#if group.hits.length > 8}<p class="ui-hint">{t('find.moreCodes', { count: group.hits.length - 8 })}</p>{/if}
-        </div>
-      </section>
-    {/snippet}
 
 <div class="ui-page">
   <header class="ui-page-head">
@@ -307,7 +290,7 @@
         <PaginatedTiles chars={variantChars} label={t('find.sameCharacter')} />
       </section>
     {/if}
-    {#each groups.filter(group => group.literal) as group (group.method)}{@render methodGroup(group)}{/each}
+    <MethodGroups groups={exactGroups} {methods} {query} heading={t('find.sameCode')} />
     {#if single.meaning.length}
       <section class="ui-section">
         <h2 class="ui-label">{t('find.meaning', { word: single.clue.text })} <span class="ui-count">{single.meaning.length}</span></h2>
@@ -339,7 +322,7 @@
         <PaginatedTiles chars={tallyChars} notes={tallyNotes} label={t('find.readings', { count: varieties, chars: tally.length })} />
       </section>
     {/if}
-    {#each groups.filter(group => !group.literal) as group (group.method)}{@render methodGroup(group)}{/each}
+    <MethodGroups groups={prefixGroups} {methods} {query} heading={t('find.codePrefix')} />
   {/if}
 </div>
 
@@ -348,12 +331,7 @@
   .examples{display:flex;flex-wrap:wrap;gap:var(--ui-space-2xs)}
   .clues{display:flex;flex-wrap:wrap;gap:var(--ui-space-xs)}
   .clue{padding:2px var(--ui-space-sm);border:1px solid var(--ui-color-border);border-radius:var(--ui-radius-sm)}
-  .method a{color:inherit}
   .browse-tools{display:flex;flex-wrap:wrap;align-items:center;gap:var(--ui-space-2xs)}
   .seg{display:flex;flex-wrap:wrap;gap:var(--ui-space-2xs)}
   .browse-tools button[aria-pressed='true']{border-color:var(--ui-color-accent);background:var(--ui-color-accent-soft);color:var(--ui-color-accent-ink)}
-  .hits{display:grid;gap:var(--ui-space-xs)}
-  .hit{display:grid;grid-template-columns:minmax(72px,auto) minmax(0,1fr);gap:var(--ui-space-md);align-items:center}
-  .code{font-size:var(--ui-text-sm);color:var(--ui-color-ink-soft);font-family:'Han Ext',var(--ui-font-mono),var(--ui-font-sans),'Jigmo'}
-  .code.exact{color:var(--ui-color-accent-ink);font-weight:var(--ui-weight-semibold)}
 </style>
