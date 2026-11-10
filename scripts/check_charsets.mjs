@@ -581,14 +581,21 @@ try {
     assert.match(text, /0\.446%/)
     assert.match(text, /42,720/)
   })
-  await check('a set reports its share in the four planes', async () => {
+  await check('a set reports its share in the four planes and its unencoded records apart', async () => {
     await find(page, '', 'g_8f')
     const planes = page.locator('.planes')
     await planes.waitFor()
     const text = await planes.innerText()
-    assert.match(text, /P0\s*20\.5%/)
-    assert.match(text, /P2\s*51\.5%/)
-    assert.match(text, /P3\s*28\.0%/)
+    assert.match(text, /P0\s*15\.3%/)
+    assert.match(text, /P2\s*38\.4%/)
+    assert.match(text, /P3\s*20\.9%/)
+    assert.match(text, /Unencoded\s*25\.5%/)
+  })
+  await check('a kana set names its block', async () => {
+    await find(page, '', 'block_hiragana')
+    const blocks = page.locator('.blocks')
+    await blocks.waitFor()
+    assert.match(await blocks.innerText(), /Hiragana/)
   })
   for (const theme of /** @type {const} */ (['light', 'dark'])) {
     for (const phone of [false, true]) {
