@@ -13,7 +13,7 @@ const SHOTS = resolve('shots')
 mkdirSync(SHOTS, { recursive: true })
 /** @type {import('../app/lib/charsets.js').Charset[]} */
 const catalogue = JSON.parse(readFileSync(join(DIST, 'charsets/index.json'), 'utf8'))
-const members = (/** @type {string} */ id) => new Set([...readFileSync(join(DIST, 'charsets', `${id}.txt`), 'utf8')])
+const members = (/** @type {string} */ id) => new Set(readFileSync(join(DIST, 'charsets', `${id}.txt`), 'utf8').split('\n').filter(Boolean))
 const t1 = members('t1')
 const g0 = members('g0')
 /** @param {string} char */

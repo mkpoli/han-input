@@ -4,6 +4,8 @@ Find accepts one character-set filter at a time. An empty query browses its mapp
 
 A browsed character carries the code its own set gives it, printed under the glyph. The code is the source's index — a CNS grid position such as `1-4421`, a kuten position, a code point or a serial. It is not a scalar assignment. The grid can follow that code order instead of code-point order, and can show only members with an assigned scalar or only private-use slots and other unencoded forms.
 
+A member is a string of one or more code points. GB 12052 writes 1,718 archaic Hangul syllables as two or three jamo, which the grid draws as one syllable block; the rest of the catalogue's members are single scalars. Browsing a standard's table can therefore show characters the finder does not search, such as its symbols and Hangul.
+
 ## Catalogue
 
 | Collection | Coverage |
@@ -25,10 +27,11 @@ A browsed character carries the code its own set gives it, printed under the gly
 | Ext.A removed · J | One J-source ideograph, A-2360, removed from Japan's CJK A proposal revision 5 in IRGN424; the document prints no glyph |
 | UNC withdrawn · UTC | 16 UTC-source rows from IRGN1525, withdrawn from the UNC proposal; the document prints each glyph as private-use text |
 | CNS11643全字庫 | All 123 exact registration-source labels from the 2026-08-05 bulk release, across Han, other scripts and symbols |
+| GB/T 12052-1989 | The standard's printed 94×94 table: 682 symbols, 3,424 first-level Hangul and 1,873 second-level rows, 94 of them 吏讀字. The set lists 5,954 distinct characters; 23 positions repeat a glyph, 1,718 archaic syllables are jamo sequences, and two 吏讀字 positions have no scalar |
 
 Each set has a unique character count and a source-row count. A source row joins through its assigned scalars, or through its private-use glyph slot where no scalar is assigned. A row whose only glyph is an Ideographic Description Sequence stays out of the scalar count and is kept as a record on the set. Repeated mappings, variation sequences and IDS descriptions can make the counts differ. Draft row numbers never establish Unicode assignments.
 
-A selected set also shows its source coverage: `encoded` counts source characters that resolve to an assigned, non-private-use Unicode scalar, including characters outside the search scope. It counts distinct glyphs for 字統 and Ext.E, and rows for CNS. `unencoded` counts rows without such a scalar, including IDS descriptions and private-use slots. Repeated 字統 scalars and variation sequences are not counted, so the two totals need not add up to the source-row count. `chars` remains the browsable count, which includes CNS private-use slots, and IWDS `total` counts entries rather than its example characters. Catalogue pies mark sets with unencoded rows, and their title gives the exact numbers.
+A selected set also shows its source coverage: `encoded` counts source characters that resolve to assigned Unicode code points, whether one scalar or the jamo sequence a member is made of, including characters outside the search scope. It counts distinct glyphs for 字統 and Ext.E, and rows for CNS. `unencoded` counts rows without such an assignment, including IDS descriptions and private-use slots. Repeated 字統 scalars and variation sequences are not counted, so the two totals need not add up to the source-row count. `chars` remains the browsable count, which includes CNS private-use slots, and IWDS `total` counts entries rather than its example characters. Catalogue pies mark sets with unencoded rows, and their title gives the exact numbers.
 
 **Compare with** intersects the two sets' listed characters. The overlap pie shows the characters in both and the characters only in the selected set; the percentages are of the selected set's listed characters and of the other set's. A 字統 row without an assigned scalar is absent from the set's listed characters, so it cannot be compared, while a CNS private-use slot matches only the same slot. A set with printed records counts its records instead: shared records, mapped records only in the selected set, and records without a scalar each take a segment, and the hint gives the printed records that cannot enter the comparison.
 
@@ -75,7 +78,7 @@ Character cards show the G source beside its code, and a printed record card doe
 
 ## Data and checks
 
-The checked-in [catalogue](../app/public/charsets/index.json), per-set text files, `.codes.tsv` files and [source digests](../app/public/charsets/sources.json) work without requests to external services. Each code file has one `character<TAB>code` line for each member the source gives a code, in the set's source order; the catalogue's `codes` field points to it. A member without a source code keeps no line. `bun scripts/build_charset_codes.mjs` refreshes those files from the pinned payloads in `cache/` without refetching the catalogue. The generator checks downloaded bytes against recorded SHA-256 values. Source files are cached under `cache/`; changed inputs require a reviewed digest update.
+The checked-in [catalogue](../app/public/charsets/index.json), per-set text files, `.codes.tsv` files and [source digests](../app/public/charsets/sources.json) work without requests to external services. Each member file has one member per line, so a jamo sequence stays one member. Each code file has one `character<TAB>code` line for each member the source gives a code, in the set's source order; the catalogue's `codes` field points to it. A member without a source code keeps no line. `bun scripts/build_charset_codes.mjs` refreshes those files from the pinned payloads in `cache/` without refetching the catalogue. The generator checks downloaded bytes against recorded SHA-256 values. Source files are cached under `cache/`; changed inputs require a reviewed digest update.
 
 ```sh
 bun scripts/build_charsets.mjs

@@ -1,6 +1,14 @@
 // 字統's row index is local to its source; only the glyph column can establish membership.
 import { inScope } from '../src/fold.js'
 
+/** One member per line. A member is one scalar for almost every set; a standard whose glyph is a
+ * sequence of code points, as GB 12052 spells some archaic Hangul, keeps the whole sequence.
+ * @param {Iterable<string> | string} members */
+export function membersText(members) {
+  const list = [...members]
+  return list.length ? `${list.join('\n')}\n` : ''
+}
+
 /** A browsed grid lays one value of the code's last digit in a row: sixteen for a hexadecimal
  * index, ten for a decimal one. Sets ordered by anything else still use the decimal width.
  * @param {string | undefined} index */

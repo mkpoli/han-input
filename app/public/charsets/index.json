@@ -712,13 +712,13 @@
       "zh": "信息交換用朝鮮文字編碼字符集",
       "hans": "信息交换用朝鲜文字编码字符集"
     },
-    "chars": 92,
-    "total": 94,
-    "encoded": 92,
+    "chars": 5954,
+    "total": 5979,
+    "encoded": 5954,
     "unencoded": 2,
     "source": {
-      "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/gk.json",
+      "name": "GB/T 12052-1989",
+      "url": "https://archive.org/details/GB-T12052-1989",
       "noteKey": "charset.scope.gk"
     },
     "records": {

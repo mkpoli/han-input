@@ -1,4 +1,5 @@
-// Where the reader is: the page in the path, the open character in `?c=` (its code point in hex),
+// Where the reader is: the page in the path, the open character in `?c=` (its code points in hex,
+// hyphen-joined when a set member is a jamo sequence),
 // the page's query in `?q=`, Find's character set in `?set=`, and the page of a browsed set in `?p=`.
 
 import { NAV } from './paths.js'
@@ -6,7 +7,7 @@ export { NAV }
 
 /** @typedef {{ page: string, method: string, q: string, c: string, set: string, p: number }} Route */
 
-const hex = (/** @type {string} */ char) => (char.codePointAt(0) ?? 0).toString(16).toUpperCase()
+const hex = (/** @type {string} */ char) => [...char].map(part => (part.codePointAt(0) ?? 0).toString(16).toUpperCase()).join('-')
 
 /** @returns {Route} */
 function read() {
@@ -16,7 +17,7 @@ function read() {
   const c = params.get('c') ?? ''
   const q = params.get('q') ?? ''
   const p = Number.parseInt(params.get('p') ?? '', 10)
-  const char = /^[0-9a-f]{4,5}$/i.test(c) ? String.fromCodePoint(parseInt(c, 16)) : ''
+  const char = /^[0-9a-f]{4,5}(?:-[0-9a-f]{4,5})*$/i.test(c) ? c.split('-').map(part => String.fromCodePoint(parseInt(part, 16))).join('') : ''
   const inner = pagePath.match(/^([mv])\/([\w-]+)$/)
   const known = NAV.some(entry => entry.path === pagePath)
   const page = inner ? inner[1] : known ? pagePath : pagePath ? 'notfound' : ''
