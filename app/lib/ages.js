@@ -1,5 +1,7 @@
 // Unicode DerivedAge 18.0.0: the version that first assigned each code point.
 // https://www.unicode.org/Public/18.0.0/ucd/DerivedAge.txt
+import { isPrivateUse } from './charsets.js'
+
 /** @typedef {[number, number, string]} AgeRange */
 /** @typedef {{start: number, end: number, count: number}} VersionRange */
 /** @typedef {{version: string, count: number, share: number, ranges: VersionRange[]}} VersionRow */
@@ -43,12 +45,16 @@ function compareVersions(a, b) {
 }
 
 /** The versions that first assigned a set's characters, with the code point runs of each.
- * @param {Set<string>} members @param {AgeRange[]} ranges @returns {VersionRow[]} */
-export function versionRows(members, ranges) {
+ * The unencoded count widens the denominator, as in the block shares.
+ * @param {Set<string>} members @param {AgeRange[]} ranges @param {number} [unencoded] @returns {VersionRow[]} */
+export function versionRows(members, ranges, unencoded = 0) {
   const ordered = [...ranges].sort((a, b) => a[0] - b[0])
   /** @type {Map<string, number[]>} */
   const points = new Map()
+  let coded = 0
   for (const char of members) {
+    if (isPrivateUse(char)) continue
+    coded++
     const point = char.codePointAt(0) ?? 0
     const version = versionAt(point, ordered)
     if (!version) continue
@@ -56,7 +62,7 @@ export function versionRows(members, ranges) {
     if (list) list.push(point)
     else points.set(version, [point])
   }
-  const total = members.size
+  const total = coded + unencoded
   return [...points].map(([version, list]) => {
     list.sort((a, b) => a - b)
     /** @type {VersionRange[]} */

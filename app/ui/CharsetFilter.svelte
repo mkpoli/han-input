@@ -26,8 +26,8 @@
   let comparison = $state(/** @type {{id: string, shared: number, total: number, mapped: number, otherTotal: number, glyphs: number, mappedGlyphs: number} | null} */ (null))
   /** @type {import('../lib/blocks.js').BlockRow[]} */
   let blocks = $state([])
-  /** @type {import('../lib/ages.js').VersionRow[]} */
-  let versions = $state([])
+  /** @type {import('../lib/ages.js').VersionRow[] | null} */
+  let versions = $state(null)
   /** @type {import('../lib/blocks.js').BlockOccupancy[]} */
   let occupancy = $state([])
   /** @type {import('../lib/blocks.js').PlaneRow[]} */
@@ -57,23 +57,26 @@
   })
 
   // The block shares describe the selected set itself, so they need its members, not its counts.
+  // Its unencoded records have no block, so they only enlarge the denominator.
   $effect(() => {
     const id = selected
-    if (!id) { blocks = []; versions = []; occupancy = []; planes = []; return }
+    if (!id) { blocks = []; versions = null; occupancy = []; planes = []; return }
     const blockSet = /^(?:unicode_basic|unicode_ext_[a-j]|unicode_comp_[ab]_tentative|compatibility)$/.test(id)
+    const unencoded = charsets.find(set => set.id === id)?.unencoded ?? 0
+    versions = null
     let active = true
     loadCharset(id).then(async members => {
       if (!active) return
-      const rows = blockRows(members)
+      const rows = blockRows(members, unencoded)
       blocks = rows.some(row => row.id !== 'other') ? rows : []
-      planes = planeRows(members)
+      planes = planeRows(members, unencoded)
       try {
         const ages = await loadAges()
         if (!active) return
-        versions = versionRows(members, ages)
+        versions = versionRows(members, ages, unencoded)
         occupancy = blockSet ? blockOccupancy(ages) : []
-      } catch { if (active) { versions = []; occupancy = [] } }
-    }).catch(() => { if (active) { blocks = []; versions = []; occupancy = []; planes = [] } })
+      } catch { if (active) { versions = null; occupancy = [] } }
+    }).catch(() => { if (active) { blocks = []; versions = null; occupancy = []; planes = [] } })
     return () => { active = false }
   })
 
