@@ -108,6 +108,7 @@
   "charset.unencodedShort": "未編碼",
   "charset.coverageLabel": "{percent}% 未編碼：{encoded} 個已編碼，{unencoded} 個未編碼。",
   "charset.recordsNote": "記錄為提案條目，保留文件所印的編碼。",
+  "charset.scope.gk": "本字元集收錄GB/T 12052-1989（71-89–72-88）的94個`吏讀字`；該標準另編配的5,300個朝鮮文字與682個符號未收錄於本字元集。",
   "charset.compare": "對比字集",
   "charset.compareNone": "不對比",
   "charset.compareError": "無法載入對比的字集。",

@@ -108,6 +108,7 @@
   "charset.unencodedShort": "未収録",
   "charset.coverageLabel": "{percent}% 未収録：収録済み {encoded} 字、未収録 {unencoded} 字。",
   "charset.recordsNote": "記録は提案項目で、文書に印刷された符号を保ちます。",
+  "charset.scope.gk": "この文字集合はGB/T 12052-1989（71-89–72-88）の`吏読字`94字を収録しています。同規格が定める5,300字の朝鮮文字と682個の記号は、この文字集合には含まれません。",
   "charset.compare": "比べる文字集合",
   "charset.compareNone": "比較しない",
   "charset.compareError": "比較する文字集合を読み込めませんでした。",

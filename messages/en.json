@@ -108,6 +108,7 @@
   "charset.unencodedShort": "Unencoded",
   "charset.coverageLabel": "{percent}% unencoded: {encoded} in Unicode, {unencoded} unencoded.",
   "charset.recordsNote": "Records are proposal entries; each row keeps the codes the document printed.",
+  "charset.scope.gk": "This set holds the 94 `吏讀字` of GB/T 12052-1989 (71-89–72-88); the standard also assigns 5,300 Korean syllables and 682 symbols, which are not in this set.",
   "charset.compare": "Compare with",
   "charset.compareNone": "No comparison",
   "charset.compareError": "The comparison set could not be loaded.",

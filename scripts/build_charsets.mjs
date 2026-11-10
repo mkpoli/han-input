@@ -33,10 +33,11 @@ async function get(url) {
 }
 // A 字統 metadata row names a standard; where the standard holds more than the mapped rows,
 // the set's note says what this set covers. GK's 94 rows are the 吏讀字 of GB/T 12052-1989
-// (71区89位–72区88位); the standard's own counts are in docs/materials.md.
+// (71区89位–72区88位); the standard's own counts are in docs/materials.md. The note text lives
+// in messages/*.json under charset.scope.gk so readers in each locale see it in their language.
 /** @type {Record<string, string>} */
-const SET_NOTES = {
-  gk: 'This set holds the 94 吏讀字 of GB/T 12052-1989 (71-89–72-88); the standard also assigns 5,300 Korean syllables and 682 symbols, which are not in this set.',
+const SET_NOTE_KEYS = {
+  gk: 'charset.scope.gk',
 }
 
 const metadata = await get(`${BASE}metadata.json`)
@@ -80,11 +81,14 @@ await Promise.all(Array.from({ length: 4 }, async () => {
       }) + '\n')
       records = { file: `/charsets/${entry.id}.ids.json`, count: ids.length, glyphs: 0 }
     }
+    const noteKey = SET_NOTE_KEYS[entry.id]
     catalogue[i] = {
       id: entry.id, group: entry.source, label: entry.abbr,
       names: { en: entry.name_en || entry.abbr, zh: hant(entry.name_zh || entry.abbr), hans: hans(entry.name_zh || entry.abbr) },
       chars: [...members].length, total, encoded, unencoded, codes, records,
-      source: { name: '字統網', url, note: SET_NOTES[entry.id] ?? (payload.rows ? undefined : 'The source endpoint supplies no membership rows.') },
+      source: noteKey
+        ? { name: '字統網', url, noteKey }
+        : { name: '字統網', url, note: payload.rows ? undefined : 'The source endpoint supplies no membership rows.' },
       columns: columnsOf(entry.index),
     }
     console.log(`${entry.id}: ${[...members].length} characters / ${total} rows`)

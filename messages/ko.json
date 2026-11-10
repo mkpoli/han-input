@@ -108,6 +108,7 @@
   "charset.unencodedShort": "미수록",
   "charset.coverageLabel": "{percent}% 미수록: 수록 {encoded}자, 미수록 {unencoded}자.",
   "charset.recordsNote": "기록은 제안 항목이며 문서에 인쇄된 부호를 유지합니다.",
+  "charset.scope.gk": "이 문자 집합은 GB/T 12052-1989(71-89–72-88)의 `이두자` 94자를 수록합니다. 해당 표준이 배정한 조선 문자 5,300자와 기호 682개는 이 문자 집합에 포함되지 않습니다.",
   "charset.compare": "비교할 문자 집합",
   "charset.compareNone": "비교 안 함",
   "charset.compareError": "비교할 문자 집합을 읽지 못했습니다.",
