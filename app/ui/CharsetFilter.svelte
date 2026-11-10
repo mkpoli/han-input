@@ -57,20 +57,22 @@
   })
 
   // The block shares describe the selected set itself, so they need its members, not its counts.
+  // Its unencoded records have no block, so they only enlarge the denominator.
   $effect(() => {
     const id = selected
     if (!id) { blocks = []; versions = []; occupancy = []; planes = []; return }
     const blockSet = /^(?:unicode_basic|unicode_ext_[a-j]|unicode_comp_[ab]_tentative|compatibility)$/.test(id)
+    const unencoded = charsets.find(set => set.id === id)?.unencoded ?? 0
     let active = true
     loadCharset(id).then(async members => {
       if (!active) return
-      const rows = blockRows(members)
+      const rows = blockRows(members, unencoded)
       blocks = rows.some(row => row.id !== 'other') ? rows : []
-      planes = planeRows(members)
+      planes = planeRows(members, unencoded)
       try {
         const ages = await loadAges()
         if (!active) return
-        versions = versionRows(members, ages)
+        versions = versionRows(members, ages, unencoded)
         occupancy = blockSet ? blockOccupancy(ages) : []
       } catch { if (active) { versions = []; occupancy = [] } }
     }).catch(() => { if (active) { blocks = []; versions = []; occupancy = []; planes = [] } })

@@ -75,12 +75,32 @@ describe('block occupancy', () => {
 describe('plane shares', () => {
   const point = (/** @type {number} */ value) => String.fromCodePoint(value)
   test('counts planes 0 to 3 and keeps higher planes apart', () => {
-    const rows = planeRows(new Set([point(0x5B57), point(0x1B170), point(0x20000), point(0x30000), point(0xF0000)]))
+    const rows = planeRows(new Set([point(0x5B57), point(0x1B170), point(0x20000), point(0x30000), point(0xE0100)]))
     expect(rows.map(row => [row.plane, row.count])).toEqual([[0, 1], [1, 1], [2, 1], [3, 1], [null, 1]])
     expect(rows.every(row => row.share === 1 / 5)).toBe(true)
   })
   test('keeps all four planes for a set in one plane', () => {
     const rows = planeRows(new Set([point(0x5B57)]))
     expect(rows.map(row => [row.plane, row.count, row.share])).toEqual([[0, 1, 1], [1, 0, 0], [2, 0, 0], [3, 0, 0]])
+  })
+})
+
+describe('unencoded shares', () => {
+  const point = (/** @type {number} */ value) => String.fromCodePoint(value)
+  test('widens the block shares to the unencoded records', () => {
+    const rows = blockRows(new Set([point(0x4E00)]), 3)
+    expect(rows.map(row => [row.id, row.count, row.share])).toEqual([['unencoded', 3, 0.75], ['uro', 1, 0.25]])
+  })
+  test('counts a private-use slot with the unencoded records instead of Other', () => {
+    const rows = blockRows(new Set([point(0x4E00), point(0xE001)]), 1)
+    expect(rows.map(row => [row.id, row.count])).toEqual([['uro', 1], ['unencoded', 1]])
+  })
+  test('widens the plane shares and skips private-use slots', () => {
+    const rows = planeRows(new Set([point(0x5B57), point(0xE001)]), 1)
+    expect(rows[0]).toEqual({ plane: 0, count: 1, share: 0.5 })
+  })
+  test('widens the version shares and skips private-use slots', () => {
+    const rows = versionRows(new Set([point(0x41), point(0xE001)]), [[0x41, 0x5A, '1.1']], 1)
+    expect(rows.map(row => [row.version, row.count, row.share])).toEqual([['1.1', 1, 0.5]])
   })
 })

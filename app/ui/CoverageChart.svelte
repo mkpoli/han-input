@@ -137,6 +137,9 @@
         {#each planes as row (row.plane ?? 'other')}
           <span class="plane-chip"><b>{row.plane === null ? t('charset.blockOther') : `P${row.plane}`}</b>{formatVersionShare(row.share)}%</span>
         {/each}
+        {#if unencoded}
+          <span class="plane-chip"><b>{t('charset.unencodedShort')}</b>{formatVersionShare(share)}%</span>
+        {/if}
       </p>
     </div>
   {/if}
@@ -146,7 +149,7 @@
       <ol>
         {#each blocks as row (row.id)}
           <li>
-            <span class="name">{row.id === 'other' ? t('charset.blockOther') : row.label}</span>
+            <span class="name">{row.id === 'other' ? t('charset.blockOther') : row.id === 'unencoded' ? t('charset.unencodedShort') : row.label}</span>
             <span class="count">{row.count.toLocaleString(i18n.locale)}</span>
             <b>{formatShare(row.share)}%</b>
           </li>
@@ -154,7 +157,7 @@
       </ol>
     </div>
   {/if}
-  {#if versions.length}
+  {#if versions.length || unencoded}
     <div class="versions">
       <p class="caption">{t('charset.versions')}</p>
       <ol>
@@ -170,6 +173,14 @@
             <b>{formatVersionShare(row.share)}%</b>
           </li>
         {/each}
+        {#if unencoded}
+          <li>
+            <span class="name">{t('charset.unencodedShort')}</span>
+            <span class="range"></span>
+            <span class="count">{unencoded.toLocaleString(i18n.locale)}</span>
+            <b>{formatVersionShare(share)}%</b>
+          </li>
+        {/if}
       </ol>
     </div>
   {/if}
