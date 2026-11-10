@@ -718,7 +718,8 @@
     "unencoded": 2,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/gk.json"
+      "url": "https://zi.tools/api/ma/ma/gk.json",
+      "note": "This set holds the 94 `吏讀字` of GB/T 12052-1989 (71-89–72-88); the standard also assigns 5,300 Korean syllables and 682 symbols, which are not in this set."
     },
     "records": {
       "file": "/charsets/gk.ids.json",
