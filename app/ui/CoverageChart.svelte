@@ -1,7 +1,9 @@
 <script>
-  // How much of a character set carries a Unicode character, and how many of its characters another
-  // set lists too. A set with printed records counts every record, so a record without a scalar
-  // stays visible instead of leaving the dial.
+  // How much of a character set reaches Unicode, and how many of its characters another set lists
+  // too. A printed table or a Unicode block divides by its designed code positions; a source list
+  // divides by its characters. A set with printed records counts every record, so a record without
+  // a scalar stays visible instead of leaving the dial.
+  import { coverageParts } from '../lib/charsets.js'
   import { i18n, t } from '../lib/i18n.svelte.js'
   import { shareTint, unencodedTint } from '../lib/palette.js'
   import SharePie from './SharePie.svelte'
@@ -17,13 +19,16 @@
    * @property {number} otherTotal Characters listed by the other set.
    */
 
-  /** @type {{ encoded: number, unencoded: number, compared?: Compared | null, blocks?: import('../lib/blocks.js').BlockRow[], versions?: import('../lib/ages.js').VersionRow[] | null, occupancy?: import('../lib/blocks.js').BlockOccupancy[], planes?: import('../lib/blocks.js').PlaneRow[] }} */
-  let { encoded, unencoded, compared = null, blocks = [], versions = null, occupancy = [], planes = [] } = $props()
-  const total = $derived(encoded + unencoded)
-  const share = $derived(total ? unencoded / total : 0)
+  /** @type {{ encoded: number, unencoded: number, positions?: import('../lib/charsets.js').Positions | null, compared?: Compared | null, blocks?: import('../lib/blocks.js').BlockRow[], versions?: import('../lib/ages.js').VersionRow[] | null, occupancy?: import('../lib/blocks.js').BlockOccupancy[], planes?: import('../lib/blocks.js').PlaneRow[] }} */
+  let { encoded, unencoded, positions = null, compared = null, blocks = [], versions = null, occupancy = [], planes = [] } = $props()
+  // A printed table divides by its designed code positions; a source list divides by its characters.
+  const parts = $derived(coverageParts(positions, encoded, unencoded))
+  const listTotal = $derived(encoded + unencoded)
+  const listShare = $derived(listTotal ? unencoded / listTotal : 0)
+  const coverageShare = $derived(parts.total ? (parts.positioned ? parts.inUnicode : parts.unencoded) / parts.total : 0)
   const format = (/** @type {number} */ share) =>
     new Intl.NumberFormat(i18n.locale, { maximumFractionDigits: 1 }).format(share * 100)
-  const percent = $derived(format(share))
+  const percent = $derived(format(coverageShare))
   const formatShare = (/** @type {number} */ share) => new Intl.NumberFormat(i18n.locale, {
     minimumFractionDigits: 1,
     maximumFractionDigits: share > 0 && share < 0.001 ? 2 : 1,
@@ -41,12 +46,21 @@
     ranges.map(range => range.start === range.end ? hex(range.start) : `${hex(range.start)}–${hex(range.end)}`).join(', ')
   const radius = 27
   const circumference = 2 * Math.PI * radius
-  const arc = $derived(circumference * share)
-  const label = $derived(t('charset.coverageLabel', {
-    percent,
-    encoded: encoded.toLocaleString(i18n.locale),
-    unencoded: unencoded.toLocaleString(i18n.locale),
-  }))
+  const inArc = $derived(circumference * (parts.total ? parts.inUnicode / parts.total : 0))
+  const unencodedArc = $derived(circumference * (parts.total ? parts.unencoded / parts.total : 0))
+  const label = $derived(parts.positioned
+    ? t('charset.coveragePositionsLabel', {
+        percent,
+        total: parts.total.toLocaleString(i18n.locale),
+        encoded: parts.inUnicode.toLocaleString(i18n.locale),
+        unencoded: parts.unencoded.toLocaleString(i18n.locale),
+        unassigned: parts.unassigned.toLocaleString(i18n.locale),
+      })
+    : t('charset.coverageLabel', {
+        percent,
+        encoded: encoded.toLocaleString(i18n.locale),
+        unencoded: unencoded.toLocaleString(i18n.locale),
+      }))
   const sharedShare = $derived(compared?.total ? compared.shared / compared.total : 0)
   const sharedPercent = $derived(format(sharedShare))
   const sharedArc = $derived(circumference * sharedShare)
@@ -67,7 +81,7 @@
   }) : '')
   const planeSlices = $derived([
     ...planes.map(row => ({ id: `p${row.plane ?? 'other'}`, count: row.count, share: row.share, color: shareTint(row.share) })),
-    ...(unencoded ? [{ id: 'unencoded', count: unencoded, share, color: unencodedTint }] : []),
+    ...(unencoded ? [{ id: 'unencoded', count: unencoded, share: listShare, color: unencodedTint }] : []),
   ])
   const planeTotal = $derived(planes.reduce((sum, row) => sum + row.count, 0) + unencoded)
   const blockSlices = $derived(blocks.map((row, index) => ({
@@ -77,7 +91,7 @@
   const blockTotal = $derived(blocks.reduce((sum, row) => sum + row.count, 0))
   const versionSlices = $derived([
     ...(versions ?? []).map(row => ({ id: row.version, count: row.count, share: row.share, color: shareTint(row.share) })),
-    ...(unencoded ? [{ id: 'unencoded', count: unencoded, share, color: unencodedTint }] : []),
+    ...(unencoded ? [{ id: 'unencoded', count: unencoded, share: listShare, color: unencodedTint }] : []),
   ])
   const versionTotal = $derived((versions ?? []).reduce((sum, row) => sum + row.count, 0) + unencoded)
 
@@ -93,22 +107,25 @@
     <div class="dial">
       <svg viewBox="0 0 72 72" role="img" aria-label={label}>
         <circle class="track" cx="36" cy="36" r={radius} />
-        {#if unencoded === total}
-          <circle class="unencoded" cx="36" cy="36" r={radius} />
-        {:else}
-          <circle class="encoded" cx="36" cy="36" r={radius} />
-          {#if unencoded}
-            <circle class="unencoded" cx="36" cy="36" r={radius}
-              stroke-dasharray="{arc} {circumference - arc}" transform="rotate(-90 36 36)" />
-          {/if}
+        {#if parts.inUnicode}
+          <circle class="encoded" cx="36" cy="36" r={radius}
+            stroke-dasharray="{inArc} {circumference - inArc}" transform="rotate(-90 36 36)" />
+        {/if}
+        {#if parts.unencoded}
+          <circle class="unencoded" cx="36" cy="36" r={radius}
+            stroke-dasharray="{unencodedArc} {circumference - unencodedArc}" stroke-dashoffset={-inArc} transform="rotate(-90 36 36)" />
         {/if}
       </svg>
-      <span class="percent" aria-hidden="true">{percent}%<small>{t('charset.unencodedShort')}</small></span>
+      <span class="percent" aria-hidden="true">{percent}%<small>{parts.positioned ? t('charset.encoded') : t('charset.unencodedShort')}</small></span>
     </div>
     <figcaption>
-      <p class="caption">{t('charset.coverage')}</p>
-      <p class="legend"><span class="swatch encoded" aria-hidden="true"></span>{t('charset.encoded')}<b>{encoded.toLocaleString(i18n.locale)}</b></p>
-      <p class="legend"><span class="swatch unencoded" aria-hidden="true"></span>{t('charset.unencodedShort')}<b>{unencoded.toLocaleString(i18n.locale)}</b></p>
+      <p class="caption">{parts.positioned ? t('charset.coveragePositions') : t('charset.coverage')}</p>
+      <p class="legend"><span class="swatch encoded" aria-hidden="true"></span>{t('charset.encoded')}<b>{parts.inUnicode.toLocaleString(i18n.locale)}</b></p>
+      <p class="legend"><span class="swatch unencoded" aria-hidden="true"></span>{t('charset.unencodedShort')}<b>{parts.unencoded.toLocaleString(i18n.locale)}</b></p>
+      {#if parts.positioned && parts.unassigned}
+        <p class="legend"><span class="swatch unassigned" aria-hidden="true"></span>{t('charset.unassigned')}<b>{parts.unassigned.toLocaleString(i18n.locale)}</b></p>
+      {/if}
+      <p class="basis"><span>{t('charset.denominator')}</span><b>{parts.total.toLocaleString(i18n.locale)}</b></p>
     </figcaption>
   </figure>
   {#if compared}
@@ -158,7 +175,7 @@
             <span class="plane-chip"><i class="swatch" style:background={planeSlices[index].color}></i><b>{row.plane === null ? t('charset.blockOther') : `P${row.plane}`}</b>{formatVersionShare(row.share)}%</span>
           {/each}
           {#if unencoded}
-            <span class="plane-chip"><i class="swatch" style:background={unencodedTint}></i><b>{t('charset.unencodedShort')}</b>{formatVersionShare(share)}%</span>
+            <span class="plane-chip"><i class="swatch" style:background={unencodedTint}></i><b>{t('charset.unencodedShort')}</b>{formatVersionShare(listShare)}%</span>
           {/if}
         </p>
       </div>
@@ -207,7 +224,7 @@
               <span class="name">{t('charset.unencodedShort')}</span>
               <span class="range"></span>
               <span class="count">{unencoded.toLocaleString(i18n.locale)}</span>
-              <b>{formatVersionShare(share)}%</b>
+              <b>{formatVersionShare(listShare)}%</b>
             </li>
           {/if}
         </ol>
@@ -245,14 +262,14 @@
   .coverage{display:flex;flex-wrap:wrap;align-items:center;gap:var(--ui-space-md) var(--ui-space-lg);max-inline-size:380px;margin-block-start:var(--ui-space-sm);padding:var(--ui-space-sm) var(--ui-space-md);background:var(--ui-color-surface-sunken);border-radius:var(--ui-radius-sm)}
   .coverage.two{max-inline-size:760px}
   .metric{display:flex;flex:1 1 260px;min-inline-size:0;align-items:center;gap:var(--ui-space-lg);margin:0}
-  .dial{position:relative;inline-size:72px;block-size:72px;flex:none}
+  .dial{position:relative;inline-size:84px;block-size:84px;flex:none}
   svg{display:block;inline-size:100%;block-size:100%}
   circle{fill:none;stroke-width:9}
   .track{stroke:var(--ui-color-border)}
   .encoded{stroke:var(--ui-color-accent)}
   .unencoded{stroke:var(--ui-color-border-strong)}
   .percent{position:absolute;inset:0;display:grid;place-content:center;text-align:center;font-size:var(--ui-text-md);font-weight:var(--ui-weight-semibold);line-height:1.15;font-variant-numeric:tabular-nums}
-  .percent small{display:block;font-size:9px;font-weight:var(--ui-weight-normal);color:var(--ui-color-ink-soft);letter-spacing:.02em}
+  .percent small{display:block;font-size:8px;font-weight:var(--ui-weight-normal);color:var(--ui-color-ink-soft);letter-spacing:.02em}
   figcaption{display:grid;gap:2px;flex:1;min-inline-size:0;max-inline-size:260px}
   .caption{margin:0;font-size:var(--ui-text-2xs);color:var(--ui-color-ink-muted);letter-spacing:var(--ui-tracking-caps);text-transform:uppercase}
   .legend{display:grid;grid-template-columns:8px minmax(0,1fr) auto;align-items:center;gap:var(--ui-space-xs);font-size:var(--ui-text-sm);color:var(--ui-color-ink-soft);line-height:var(--ui-leading-tight)}
@@ -261,6 +278,9 @@
   .swatch.encoded{background:var(--ui-color-accent)}
   .swatch.unencoded{background:var(--ui-color-border-strong)}
   .swatch.noscalar{background:var(--ui-color-surface-sunken);border:1px solid var(--ui-color-border)}
+  .swatch.unassigned{background:var(--ui-color-border)}
+  .basis{display:flex;justify-content:space-between;gap:var(--ui-space-sm);margin:var(--ui-space-2xs) 0 0;padding-block-start:2px;border-block-start:1px solid var(--ui-color-border);font-size:var(--ui-text-2xs);color:var(--ui-color-ink-muted)}
+  .basis b{font-weight:var(--ui-weight-medium);color:var(--ui-color-ink);font-variant-numeric:tabular-nums}
   figcaption .ui-hint{margin-block-start:var(--ui-space-2xs)}
   .share-section{flex:1 0 100%;display:grid;grid-template-columns:64px minmax(0,1fr);align-items:start;gap:var(--ui-space-md);padding-block-start:var(--ui-space-sm);border-block-start:1px solid var(--ui-color-border)}
   .share-body{display:grid;gap:var(--ui-space-2xs);min-inline-size:0}
