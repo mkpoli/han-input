@@ -1,9 +1,13 @@
 {
   "catalogue": "https://zi.tools/api/ma/ma/metadata.json",
   "retrieved": "2026-11-09",
-  "attribution": "字統網, character-set catalogue and glyph mappings. Editorial mappings; original standards and proposal documents remain authoritative. Reuse terms are unspecified at these endpoints.",
-  "policy": "Source-row sets index every row through its assigned Unicode scalars, or its private-use glyph slots where no scalar is assigned; rows described only by an IDS are kept as records, not scalar members; Unihan kIRG_TSource fills assignments newer than the bulk release. Literal Unicode block sets contain assigned scalars. Local row numbers, IDS components and variation sequences do not establish scalar membership. OTHER follows the source’s unified substitutions, rather than literal Unicode block membership.",
+  "attribution": "字統網, character-set catalogue and glyph mappings. Editorial mappings; original standards and proposal documents remain authoritative. Reuse terms are unspecified at these endpoints. GB/T 12052-1989 follows Jaemin Chung’s transcription (ecma35lib); its printed totals differ from the table by three, and the set counts printed rows.",
+  "policy": "Source-row sets index every row through its assigned Unicode scalars, or its private-use glyph slots where no scalar is assigned; rows described only by an IDS are kept as records, not scalar members; a glyph printed at more than one position is listed once, at its first position; a member may be a jamo sequence when a standard prints one glyph for a Hangul syllable Unicode cannot compose. Unihan kIRG_TSource fills assignments newer than the bulk release. Literal Unicode block sets contain assigned scalars. Local row numbers, IDS components and variation sequences do not establish scalar membership. OTHER follows the source’s unified substitutions, rather than literal Unicode block membership.",
   "inputs": [
+    {
+      "url": "https://raw.githubusercontent.com/harjitmoe/ecma35lib/3ac8f4561c388b3744e0a2b221773eb602c09702/ecma35/data/multibyte/mbmaps/Other/gb12052-uni.txt",
+      "sha256": "d5823a5b1198c7464797f85badae9b3b902b16337014fb2f3619d6fcec292cc1"
+    },
     {
       "url": "https://raw.githubusercontent.com/yi-bai/iwds/master/iwds.xml",
       "sha256": "886b426ea3d1d329749e02b32cccd5082d31d6cf1b996ea37bdae5ac593ca491"

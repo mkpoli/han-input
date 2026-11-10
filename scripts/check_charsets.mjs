@@ -13,7 +13,7 @@ const SHOTS = resolve('shots')
 mkdirSync(SHOTS, { recursive: true })
 /** @type {import('../app/lib/charsets.js').Charset[]} */
 const catalogue = JSON.parse(readFileSync(join(DIST, 'charsets/index.json'), 'utf8'))
-const members = (/** @type {string} */ id) => new Set([...readFileSync(join(DIST, 'charsets', `${id}.txt`), 'utf8')])
+const members = (/** @type {string} */ id) => new Set(readFileSync(join(DIST, 'charsets', `${id}.txt`), 'utf8').split('\n').filter(Boolean))
 const t1 = members('t1')
 const g0 = members('g0')
 /** @param {string} char */
@@ -462,6 +462,16 @@ try {
     assert.equal(new URL(page.url()).searchParams.get('set'), 'g0')
     assert.equal(await page.locator('[data-primary]').inputValue(), 'lung4')
     subset(await page.locator('main .ui-tile-glyph').allTextContents(), g0)
+  })
+  await check('a sequence member keeps every code point', async () => {
+    await page.goto(`${SITE}/?set=gk&p=25`)
+    await ready(page)
+    await page.locator('main .ui-tile[title$="7058"]').click()
+    assert.equal(new URL(page.url()).searchParams.get('c'), '110B-1162-11EB')
+    assert.equal(await page.locator('aside.card .cp').innerText(), 'U+110B U+1162 U+11EB')
+    await page.goBack()
+    await ready(page)
+    assert.equal(new URL(page.url()).searchParams.has('c'), false)
   })
   await check('clear selection restores unrestricted search and omits set from URL', async () => {
     await find(page, 'U+20000')

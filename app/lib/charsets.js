@@ -27,7 +27,8 @@ export function loadCharset(id) {
       if (!entry) throw new Error('Unknown character set')
       const response = await fetch(`/charsets/${encodeURIComponent(id)}.txt`)
       if (!response.ok || (response.headers.get('content-type') ?? '').includes('text/html')) throw new Error('Character set unavailable')
-      const members = new Set([...(await response.text())])
+      // One member per line: a member is a scalar or, for archaic Hangul, a jamo sequence.
+      const members = new Set((await response.text()).split('\n').filter(Boolean))
       if (members.size !== entry.chars) throw new Error('Incomplete character set')
       return members
     })().catch(error => { held.delete(id); throw error })

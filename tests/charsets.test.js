@@ -1,6 +1,7 @@
 import { describe, test, expect, afterEach } from 'bun:test'
 import { readFileSync, readdirSync } from 'node:fs'
-import { mappedMembers, iwdsMembers, scalarExpressions, idsRecords, columnsOf } from '../scripts/charset-members.mjs'
+import { mappedMembers, membersText, iwdsMembers, scalarExpressions, idsRecords, columnsOf } from '../scripts/charset-members.mjs'
+import { GB12052_UNENCODED, gb12052Members } from '../scripts/sources/charsets-gb12052.mjs'
 import { compareCodes, filterAnswer, loadCharsets, loadCharset, loadRecords, sharedCharacters } from '../app/lib/charsets.js'
 import { loadChars, findMeaning } from '../app/lib/data.js'
 import { cnsSourceSets, unihanTSources } from '../scripts/sources/charsets-cns.mjs'
@@ -33,6 +34,45 @@ describe('source glyph membership', () => {
   })
 })
 
+// Member files hold one member per line, so a jamo sequence stays one member.
+const membersOf = (/** @type {string} */ text) => text.split('\n').filter(Boolean)
+
+test('GB 12052 keeps each printed position and drops repeated glyphs', () => {
+  const rows = [
+    { code: '0101', row: 1, cell: 1, glyph: '\u3000' },
+    { code: '0102', row: 1, cell: 2, glyph: '、' },
+    { code: '0103', row: 1, cell: 3, glyph: '、' },
+    { code: '7233', row: 72, cell: 33, glyph: '壭' },
+    { code: '7267', row: 72, cell: 67, glyph: '噕' },
+  ]
+  const { members, codes } = gb12052Members(rows, new Set(GB12052_UNENCODED))
+  expect(members).toEqual(['\u3000', '、'])
+  expect(codes).toEqual([{ char: '\u3000', code: '0101' }, { char: '、', code: '0102' }])
+})
+
+test('the GK set is the standard table, not the 字統 subset', () => {
+  const base = new URL('../app/public/charsets/', import.meta.url)
+  const gk = JSON.parse(readFileSync(new URL('index.json', base), 'utf8')).find((/** @type {{id: string}} */ row) => row.id === 'gk')
+  expect(gk.chars).toBe(5954)
+  expect(gk.total).toBe(5979)
+  expect([gk.encoded, gk.unencoded]).toEqual([5954, 2])
+  expect(gk.source.url).toBe('https://archive.org/details/GB-T12052-1989')
+  const members = membersOf(readFileSync(new URL('gk.txt', base), 'utf8'))
+  expect(members).toHaveLength(gk.chars)
+  expect(members[0]).toBe('\u3000')
+  expect(members).toContain('乫')
+  expect(members.filter(member => [...member].length > 1)).toHaveLength(1718)
+  const codes = membersOf(readFileSync(new URL('gk.codes.tsv', base), 'utf8'))
+  expect(codes).toHaveLength(gk.chars)
+  for (const position of GB12052_UNENCODED) expect(codes.some(line => line.endsWith(`\t${position}`))).toBe(false)
+  expect(codes.find(line => line.startsWith('乫\t'))).toBe('乫\t7189')
+})
+
+test('a member file keeps a code-point sequence whole', () => {
+  expect(membersOf(membersText(['가', '가ᇇ', '각']))).toEqual(['가', '가ᇇ', '각'])
+  expect(membersText([])).toBe('')
+})
+
 test('a browsed row follows the code digit', () => {
   expect(columnsOf('hex')).toBe(16)
   expect(columnsOf('source')).toBe(16)
@@ -60,7 +100,7 @@ test('filters every answer channel without changing cached results', () => {
 
 test('counts the characters two listed sets share', () => {
   const base = new URL('../app/public/charsets/', import.meta.url)
-  const read = id => new Set([...readFileSync(new URL(`${id}.txt`, base), 'utf8')])
+  const read = id => new Set(membersOf(readFileSync(new URL(`${id}.txt`, base), 'utf8')))
   const zhuang = read('g_gzw')
   const plane15 = read('g_fkzz')
   expect(sharedCharacters(zhuang, plane15)).toBe(3590)
@@ -101,7 +141,7 @@ test('the snapshot keeps one code per member where the set defines one', () => {
   const coded = catalogue.filter(row => row.codes)
   expect(coded.length).toBeGreaterThan(240)
   for (const row of coded) {
-    const members = new Set([...readFileSync(new URL(`${row.id}.txt`, base), 'utf8')])
+    const members = new Set(membersOf(readFileSync(new URL(`${row.id}.txt`, base), 'utf8')))
     const lines = readFileSync(new URL(row.codes.replace('/charsets/', ''), base), 'utf8').split('\n').filter(Boolean)
     expect(lines.length).toBeGreaterThan(0)
     const seen = new Set()
@@ -189,7 +229,7 @@ test('snapshot covers every source catalogue and counts match unique scalars', (
   const taiwan = cns.find(row => row.label === '臺灣台語用字')
   expect(taiwan.chars).toBe(3)
   expect([taiwan.encoded, taiwan.unencoded]).toEqual([1, 2])
-  expect([...readFileSync(new URL(`${taiwan.id}.txt`, base), 'utf8')].map(char => char.codePointAt(0))).toEqual([0x324D6, 0xFFB0E, 0xFFB0F])
+  expect(membersOf(readFileSync(new URL(`${taiwan.id}.txt`, base), 'utf8')).map(char => char.codePointAt(0))).toEqual([0x324D6, 0xFFB0E, 0xFFB0F])
   const isPrivateUse = point => point >= 0xE000 && point <= 0xF8FF || point >= 0xF0000 && point <= 0xFFFFD || point >= 0x100000 && point <= 0x10FFFD
   const idsSets = catalogue.filter(row => row.records)
   expect(idsSets.length).toBeGreaterThan(40)
@@ -199,7 +239,7 @@ test('snapshot covers every source catalogue and counts match unique scalars', (
   expect(idsFile.records).toHaveLength(gzhs.records.count)
   expect(idsFile.records[0].kind).toBe('ids')
   for (const row of catalogue) {
-    const members = [...readFileSync(new URL(`${row.id}.txt`, base), 'utf8')]
+    const members = membersOf(readFileSync(new URL(`${row.id}.txt`, base), 'utf8'))
     expect(new Set(members).size).toBe(row.chars)
     expect(members.length).toBe(row.chars)
     expect(row.source.url).toMatch(/^https:\/\//)
@@ -244,7 +284,7 @@ test('snapshot covers every source catalogue and counts match unique scalars', (
       expect(png.readUInt32BE(16)).toBeGreaterThanOrEqual(32)
       expect(png.readUInt32BE(20)).toBeGreaterThanOrEqual(32)
     }
-    const members = [...readFileSync(new URL(`${set.id}.txt`, base), 'utf8')]
+    const members = membersOf(readFileSync(new URL(`${set.id}.txt`, base), 'utf8'))
     expect(members.length).toBe(set.chars)
     expect(new Set(members).size).toBe(set.chars)
     expect(new Set(members)).toEqual(new Set(records.records.filter(record => record.mappedUnicode).map(record => String.fromCodePoint(parseInt(record.mappedUnicode.slice(2), 16)))))
@@ -356,7 +396,7 @@ test('snapshot covers every source catalogue and counts match unique scalars', (
   expect(entry.total).toBe(138)
   expect([entry.encoded, entry.unencoded]).toEqual([3, 135])
   expect(entry.records).toEqual({ file: '/charsets/ext_e_records.json', count: 138, glyphs: 134 })
-  const mapped = new Set([...readFileSync(new URL('ext_e_withdrawal_records.txt', base), 'utf8')])
+  const mapped = new Set(membersOf(readFileSync(new URL('ext_e_withdrawal_records.txt', base), 'utf8')))
   expect(mapped).toEqual(new Set(['𦱳', String.fromCodePoint(0x2AC66), String.fromCodePoint(0x2AC69)]))
   expect(mapped.has('薓')).toBe(false) // A corrected proposal glyph is not an attested crosswalk.
   expect(readFileSync(new URL('block_nushu.txt', base), 'utf8')).toContain('𛅰')

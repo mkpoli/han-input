@@ -4,10 +4,11 @@ import { join } from 'node:path'
 import { createHash } from 'node:crypto'
 import { execFileSync } from 'node:child_process'
 import { fetchOnce } from './lib.mjs'
-import { mappedMembers, iwdsMembers, idsRecords, columnsOf } from './charset-members.mjs'
+import { mappedMembers, membersText, iwdsMembers, idsRecords, columnsOf } from './charset-members.mjs'
 import { cnsRowCodes, codeText, evidenceCodes, proposalCodes, rowCodes } from './charset-codes.mjs'
 import * as OpenCC from 'opencc-js'
 import { readCnsSourceSets } from './sources/charsets-cns.mjs'
+import { GB12052, GB12052_UNENCODED, gb12052Members, gb12052Rows } from './sources/charsets-gb12052.mjs'
 
 const BASE = 'https://zi.tools/api/ma/ma/'
 const OUT = join(import.meta.dirname, '../app/public/charsets')
@@ -31,10 +32,15 @@ async function get(url) {
   record(url, bytes)
   return JSON.parse(bytes.toString('utf8'))
 }
+// GB/T 12052-1989 is a standard's own 94×94 table, not a 字統 catalogue of Han rows: the set
+// lists every printed character, so it comes from the pinned transcription rather than zi.tools.
+// The 字統 payload still supplies the two 吏讀字 rows whose printed glyph has no scalar.
+const gbBytes = readFileSync(await fetchOnce(GB12052.url, GB12052.as))
+record(GB12052.url, gbBytes)
+const gbRows = gb12052Rows(gbBytes.toString('utf8'))
 // A 字統 metadata row names a standard; where the standard holds more than the mapped rows,
-// the set's note says what this set covers. GK's 94 rows are the 吏讀字 of GB/T 12052-1989
-// (71区89位–72区88位); the standard's own counts are in docs/materials.md. The note text lives
-// in messages/*.json under charset.scope.gk so readers in each locale see it in their language.
+// the set's note says what this set covers. The note text lives in messages/*.json under
+// charset.scope.gk so readers in each locale see it in their language.
 /** @type {Record<string, string>} */
 const SET_NOTE_KEYS = {
   gk: 'charset.scope.gk',
@@ -62,9 +68,12 @@ await Promise.all(Array.from({ length: 4 }, async () => {
       ? mappedMembers(payload)
       : { members: '', total: 0, encoded: 0, unencoded: 0 }
     const ids = payload.rows ? idsRecords(payload) : []
-    writeFileSync(join(OUT, `${entry.id}.txt`), members)
+    // GB 12052's two 吏讀字 rows whose printed glyph is an IDS carry no scalar, so they stay records.
+    const unencodedCodes = new Set(GB12052_UNENCODED)
+    const table = entry.id === 'gk' ? gb12052Members(gbRows, unencodedCodes) : null
+    writeFileSync(join(OUT, `${entry.id}.txt`), membersText(table ? table.members : members))
     // A row whose glyph is not a member (an IDS or a variation sequence) carries no member code.
-    const coded = rowCodes(payload.rows, entry, members)
+    const coded = table ? table.codes : rowCodes(payload.rows, entry, members)
     let codes
     if (coded.length) {
       writeFileSync(join(OUT, `${entry.id}.codes.tsv`), codeText(coded))
@@ -82,23 +91,31 @@ await Promise.all(Array.from({ length: 4 }, async () => {
       records = { file: `/charsets/${entry.id}.ids.json`, count: ids.length, glyphs: 0 }
     }
     const noteKey = SET_NOTE_KEYS[entry.id]
-    catalogue[i] = {
-      id: entry.id, group: entry.source, label: entry.abbr,
-      names: { en: entry.name_en || entry.abbr, zh: hant(entry.name_zh || entry.abbr), hans: hans(entry.name_zh || entry.abbr) },
-      chars: [...members].length, total, encoded, unencoded, codes, records,
-      source: noteKey
-        ? { name: '字統網', url, noteKey }
-        : { name: '字統網', url, note: payload.rows ? undefined : 'The source endpoint supplies no membership rows.' },
-      columns: columnsOf(entry.index),
-    }
-    console.log(`${entry.id}: ${[...members].length} characters / ${total} rows`)
+    const names = { en: entry.name_en || entry.abbr, zh: hant(entry.name_zh || entry.abbr), hans: hans(entry.name_zh || entry.abbr) }
+    catalogue[i] = table
+      ? {
+          id: entry.id, group: entry.source, label: entry.abbr, names,
+          chars: table.members.length, total: gbRows.length, encoded: table.members.length, unencoded: unencodedCodes.size,
+          codes, records,
+          source: { name: 'GB/T 12052-1989', url: 'https://archive.org/details/GB-T12052-1989', noteKey },
+          columns: columnsOf(entry.index),
+        }
+      : {
+          id: entry.id, group: entry.source, label: entry.abbr, names,
+          chars: [...members].length, total, encoded, unencoded, codes, records,
+          source: noteKey
+            ? { name: '字統網', url, noteKey }
+            : { name: '字統網', url, note: payload.rows ? undefined : 'The source endpoint supplies no membership rows.' },
+          columns: columnsOf(entry.index),
+        }
+    console.log(`${entry.id}: ${table ? table.members.length : [...members].length} characters / ${table ? gbRows.length : total} rows`)
   }
 }))
 const iwdsUrl = 'https://raw.githubusercontent.com/yi-bai/iwds/master/iwds.xml'
 const iwdsBytes = readFileSync(await fetchOnce(iwdsUrl))
 record(iwdsUrl, iwdsBytes)
 const iwds = iwdsMembers(iwdsBytes.toString('utf8'))
-writeFileSync(join(OUT, 'iwds.txt'), iwds.members)
+writeFileSync(join(OUT, 'iwds.txt'), membersText(iwds.members))
 writeFileSync(join(OUT, 'iwds-evidence.json'), JSON.stringify(iwds.evidence) + '\n')
 writeFileSync(join(OUT, 'iwds.codes.tsv'), codeText(evidenceCodes(iwds.evidence, iwds.members)))
 catalogue.push({ id: 'iwds', group: 'Unicode', label: 'IWDS', names: { en: 'IWDS · encoded examples', zh: 'IWDS·已編碼例字', hans: 'IWDS·已编码例字' }, chars: [...iwds.members].length, total: iwds.total, encoded: iwds.encoded, unencoded: iwds.unencoded, codes: '/charsets/iwds.codes.tsv', source: { name: 'yi-bai/iwds', url: iwdsUrl }, columns: 10 })
@@ -138,7 +155,7 @@ for (const line of blocksBytes.toString('utf8').split('\n')) {
   const members = []
   for (let cp = parseInt(start, 16); cp <= parseInt(end, 16); cp++) if (assigned.has(cp)) members.push(String.fromCodePoint(cp))
   const id = `block_${name.toLowerCase().replaceAll(' ', '_').replaceAll('-', '_')}`
-  writeFileSync(join(OUT, `${id}.txt`), members.join(''))
+  writeFileSync(join(OUT, `${id}.txt`), membersText(members))
   writeFileSync(join(OUT, `${id}.codes.tsv`), codeText(members.map(char => ({ char, code: `U+${(char.codePointAt(0) ?? 0).toString(16).toUpperCase()}` }))))
   catalogue.push({ id, group: 'Unicode blocks', label: name, names: { en: name }, chars: members.length, total: members.length, encoded: members.length, unencoded: 0, codes: `/charsets/${id}.codes.tsv`, source: { name: 'Unicode 18.0.0', url: blocksUrl }, columns: 16 })
 }
@@ -148,7 +165,7 @@ for (const name of readdirSync(OUT).filter(/** @param {string} name */ name => n
     if (!inputs.some(input => input.url === url)) record(url, readFileSync(await fetchOnce(url)))
   }
   const members = [...new Set(set.records.filter(/** @param {{mappedUnicode?:string}} record */ record => record.mappedUnicode).map(/** @param {{mappedUnicode:string}} record */ record => String.fromCodePoint(parseInt(record.mappedUnicode.slice(2), 16))))].join('')
-  writeFileSync(join(OUT, `${set.id}.txt`), members)
+  writeFileSync(join(OUT, `${set.id}.txt`), membersText(members))
   const coded = proposalCodes(set.records, members)
   let codes
   if (coded.length) {
@@ -178,7 +195,7 @@ const unihanText = execFileSync('unzip', ['-p', unihanPath, 'Unihan_IRGSources.t
 const cnsSets = readCnsSourceSets(propertiesPath, mappingPath, unihanText, assigned)
 if (cnsSets.length !== cns.categoryCount || cnsSets.reduce((sum, set) => sum + set.records.length, 0) !== cns.rowCount) throw new Error('CNS catalogue count changed')
 for (const set of cnsSets) {
-  writeFileSync(join(OUT, `${set.id}.txt`), set.members)
+  writeFileSync(join(OUT, `${set.id}.txt`), membersText(set.members))
   const records = `/charsets/${set.id}.tsv`
   const categoryId = cns.verifiedOfficialCategoryIds[set.label]
   const sourceUrl = categoryId ? `https://www.cns11643.gov.tw/searchSY.jsp?ID=${categoryId}` : cns.sourceUrl
@@ -198,7 +215,7 @@ for (const set of cnsSets) {
 writeFileSync(join(OUT, 'index.json'), JSON.stringify(catalogue, null, 2) + '\n')
 writeFileSync(join(OUT, 'sources.json'), JSON.stringify({
   catalogue: `${BASE}metadata.json`, retrieved: new Date().toISOString().slice(0, 10),
-  attribution: '字統網, character-set catalogue and glyph mappings. Editorial mappings; original standards and proposal documents remain authoritative. Reuse terms are unspecified at these endpoints.',
-  policy: 'Source-row sets index every row through its assigned Unicode scalars, or its private-use glyph slots where no scalar is assigned; Unihan kIRG_TSource fills assignments newer than the bulk release. Literal Unicode block sets contain assigned scalars. Local row numbers, IDS components and variation sequences do not establish scalar membership. OTHER follows the source’s unified substitutions, rather than literal Unicode block membership.',
+  attribution: '字統網, character-set catalogue and glyph mappings. Editorial mappings; original standards and proposal documents remain authoritative. Reuse terms are unspecified at these endpoints. GB/T 12052-1989 follows Jaemin Chung’s transcription (ecma35lib); its printed totals differ from the table by three, and the set counts printed rows.',
+  policy: 'Source-row sets index every row through its assigned Unicode scalars, or its private-use glyph slots where no scalar is assigned; rows described only by an IDS are kept as records, not scalar members; a glyph printed at more than one position is listed once, at its first position; a member may be a jamo sequence when a standard prints one glyph for a Hangul syllable Unicode cannot compose. Unihan kIRG_TSource fills assignments newer than the bulk release. Literal Unicode block sets contain assigned scalars. Local row numbers, IDS components and variation sequences do not establish scalar membership. OTHER follows the source’s unified substitutions, rather than literal Unicode block membership.',
   inputs: inputs.sort((a, b) => a.url.localeCompare(b.url)),
 }, null, 2) + '\n')
