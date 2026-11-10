@@ -49,9 +49,14 @@ export function versionRows(members, ranges) {
   /** @type {Map<string, number[]>} */
   const points = new Map()
   for (const char of members) {
-    const point = char.codePointAt(0) ?? 0
-    const version = versionAt(point, ordered)
+    const parts = [...char].map(part => part.codePointAt(0) ?? 0)
+    // A member made of several code points is assigned only once its last code point is.
+    const version = parts.reduce((latest, point) => {
+      const found = versionAt(point, ordered)
+      return found && (!latest || compareVersions(found, latest) > 0) ? found : latest
+    }, /** @type {string | null} */ (null))
     if (!version) continue
+    const point = parts[0]
     const list = points.get(version)
     if (list) list.push(point)
     else points.set(version, [point])

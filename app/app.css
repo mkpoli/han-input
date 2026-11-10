@@ -5,7 +5,7 @@
 @font-face{font-family:'IDS Numbered';src:url('/fonts/IDSNumbered.woff2') format('woff2');font-display:swap;unicode-range:U+E000-F8FF}
 
 :root {
-  --ui-font-script: 'CDP Composition', 'CNS Composed', 'Han Ext', 'CNS PUA', 'Noto Serif CJK JP', 'Noto Serif CJK SC', 'Source Han Serif', 'Songti SC', 'Hiragino Mincho ProN', 'Yu Mincho', serif, 'Jigmo';
+  --ui-font-script: 'CDP Composition', 'CNS Composed', 'Han Ext', 'CNS PUA', 'Noto Serif CJK JP', 'Noto Serif CJK SC', 'Source Han Serif', 'Songti SC', 'Hiragino Mincho ProN', 'Yu Mincho', 'Noto Serif CJK KR', 'Noto Sans CJK KR', serif, 'Jigmo';
 }
 
 .ui-input,

@@ -17,7 +17,9 @@ function read() {
   const c = params.get('c') ?? ''
   const q = params.get('q') ?? ''
   const p = Number.parseInt(params.get('p') ?? '', 10)
-  const char = /^[0-9a-f]{4,5}(?:-[0-9a-f]{4,5})*$/i.test(c) ? c.split('-').map(part => String.fromCodePoint(parseInt(part, 16))).join('') : ''
+  const parts = c.split('-')
+  const char = parts.every(part => /^[0-9a-f]{4,6}$/i.test(part) && parseInt(part, 16) <= 0x10FFFF)
+    ? parts.map(part => String.fromCodePoint(parseInt(part, 16))).join('') : ''
   const inner = pagePath.match(/^([mv])\/([\w-]+)$/)
   const known = NAV.some(entry => entry.path === pagePath)
   const page = inner ? inner[1] : known ? pagePath : pagePath ? 'notfound' : ''

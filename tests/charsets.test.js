@@ -43,6 +43,7 @@ test('GB 12052 keeps each printed position and drops repeated glyphs', () => {
     { code: '0102', row: 1, cell: 2, glyph: '、' },
     { code: '0103', row: 1, cell: 3, glyph: '、' },
     { code: '7233', row: 72, cell: 33, glyph: '壭' },
+    { code: '7267', row: 72, cell: 67, glyph: '噕' },
   ]
   const { members, codes } = gb12052Members(rows, new Set(GB12052_UNENCODED))
   expect(members).toEqual(['\u3000', '、'])

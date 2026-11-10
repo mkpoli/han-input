@@ -1,7 +1,8 @@
 // GB/T 12052-1989's 94×94 table. The 1989 standard assigns 5,979 graphic characters: 682 symbols,
 // 3,424 first-level Hangul, and 1,873 second-level rows, 94 of them 吏讀字 at 71-89–72-88. The table
 // is read from Jaemin Chung's transcription (ecma35lib, 2014), which gives each row's kuten position
-// and its Unicode scalar or, for the 1,719 archaic syllables, a sequence of two or three jamo.
+// and its Unicode scalar or, for the 1,719 archaic-syllable rows (1,718 distinct), a sequence of
+// two or three jamo.
 import { readFileSync } from 'node:fs'
 import { fetchOnce } from '../lib.mjs'
 
@@ -29,6 +30,7 @@ export function gb12052Rows(text) {
   /** @type {Gb12052Row[]} */
   const rows = []
   const seen = new Set()
+  let previous = { row: 0, cell: 0 }
   for (const line of text.split('\n')) {
     if (!line || line.startsWith('#')) continue
     const match = line.match(/^(\d{2})-(\d{2})\t0x([0-9A-F]{4})\t0x([0-9A-F]{4})\t(U\+[0-9A-F]{4,6}(?: U\+[0-9A-F]{4,6})*)\t# (.*)$/)
@@ -43,6 +45,8 @@ export function gb12052Rows(text) {
     const code = `${rowText}${cellText}`
     if (seen.has(code)) throw new Error(`GB 12052 repeats the position ${code}`)
     seen.add(code)
+    if (row < previous.row || (row === previous.row && cell <= previous.cell)) throw new Error(`GB 12052 rows are out of kuten order at ${code}`)
+    previous = { row, cell }
     const glyph = scalars.split(' ').map(scalar => String.fromCodePoint(parseInt(scalar.slice(2), 16))).join('')
     if (!glyph) throw new Error(`GB 12052 row without a glyph: ${code}`)
     rows.push({ code, row, cell, glyph })
@@ -59,6 +63,8 @@ export function gb12052Rows(text) {
  * whose printed glyph has no assigned scalar stay out of the list and live as records.
  * @param {Gb12052Row[]} rows @param {Set<string>} unencoded @returns {{ members: string[], codes: { char: string, code: string }[] }} */
 export function gb12052Members(rows, unencoded) {
+  const printed = new Set(rows.map(row => row.code))
+  for (const code of unencoded) if (!printed.has(code)) throw new Error(`GB 12052 has no position ${code}`)
   const seen = new Set()
   /** @type {string[]} */
   const members = []
