@@ -15,8 +15,8 @@
    * @property {number} otherTotal Characters listed by the other set.
    */
 
-  /** @type {{ encoded: number, unencoded: number, compared?: Compared | null, blocks?: import('../lib/blocks.js').BlockRow[], versions?: import('../lib/ages.js').VersionRow[], occupancy?: import('../lib/blocks.js').BlockOccupancy[], planes?: import('../lib/blocks.js').PlaneRow[] }} */
-  let { encoded, unencoded, compared = null, blocks = [], versions = [], occupancy = [], planes = [] } = $props()
+  /** @type {{ encoded: number, unencoded: number, compared?: Compared | null, blocks?: import('../lib/blocks.js').BlockRow[], versions?: import('../lib/ages.js').VersionRow[] | null, occupancy?: import('../lib/blocks.js').BlockOccupancy[], planes?: import('../lib/blocks.js').PlaneRow[] }} */
+  let { encoded, unencoded, compared = null, blocks = [], versions = null, occupancy = [], planes = [] } = $props()
   const total = $derived(encoded + unencoded)
   const share = $derived(total ? unencoded / total : 0)
   const format = (/** @type {number} */ share) =>
@@ -137,6 +137,9 @@
         {#each planes as row (row.plane ?? 'other')}
           <span class="plane-chip"><b>{row.plane === null ? t('charset.blockOther') : `P${row.plane}`}</b>{formatVersionShare(row.share)}%</span>
         {/each}
+        {#if unencoded}
+          <span class="plane-chip"><b>{t('charset.unencodedShort')}</b>{formatVersionShare(share)}%</span>
+        {/if}
       </p>
     </div>
   {/if}
@@ -146,7 +149,7 @@
       <ol>
         {#each blocks as row (row.id)}
           <li>
-            <span class="name">{row.id === 'other' ? t('charset.blockOther') : row.label}</span>
+            <span class="name">{row.id === 'other' ? t('charset.blockOther') : row.id === 'unencoded' ? t('charset.unencodedShort') : row.label}</span>
             <span class="count">{row.count.toLocaleString(i18n.locale)}</span>
             <b>{formatShare(row.share)}%</b>
           </li>
@@ -154,7 +157,7 @@
       </ol>
     </div>
   {/if}
-  {#if versions.length}
+  {#if versions !== null}
     <div class="versions">
       <p class="caption">{t('charset.versions')}</p>
       <ol>
@@ -170,6 +173,14 @@
             <b>{formatVersionShare(row.share)}%</b>
           </li>
         {/each}
+        {#if unencoded}
+          <li>
+            <span class="name">{t('charset.unencodedShort')}</span>
+            <span class="range"></span>
+            <span class="count">{unencoded.toLocaleString(i18n.locale)}</span>
+            <b>{formatVersionShare(share)}%</b>
+          </li>
+        {/if}
       </ol>
     </div>
   {/if}
