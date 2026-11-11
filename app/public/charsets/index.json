@@ -6914,5 +6914,33 @@
       "licence": "Free use, copy and distribution"
     },
     "columns": 10
+  },
+  {
+    "id": "fz_pua",
+    "group": "PUA",
+    "label": "FZ PUA",
+    "names": {
+      "en": "FZ oversized PUA",
+      "zh": "方正超大字符集私用區",
+      "hans": "方正超大字符集私用区",
+      "ja": "方正超大字符集私用領域",
+      "ko": "FZ 초대형 문자 집합 PUA"
+    },
+    "chars": 0,
+    "total": 633,
+    "encoded": 0,
+    "unencoded": 633,
+    "records": {
+      "file": "/charsets/fz_pua_records.json",
+      "count": 633,
+      "glyphs": 0
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "方正超大字符集",
+      "url": "https://github.com/xiangrongjingujiu/FangZhengChaoDaZiFuJi",
+      "licence": "Commercial; cmap facts only"
+    },
+    "columns": 10
   }
 ]

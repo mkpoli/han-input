@@ -236,6 +236,18 @@ catalogue.push({
   source: { name: 'GlyphWiki', url: 'https://glyphwiki.org/', licence: 'Free use, copy and distribution' },
   columns: 10,
 })
+// The 方正超大字符集 fonts define 633 BMP private-use slots. Only the cmap facts are kept; the font
+// files and glyph outlines stay out of the repository.
+const fzPua = JSON.parse(readFileSync(join(OUT, 'fz_pua_records.json'), 'utf8'))
+catalogue.push({
+  id: 'fz_pua', group: 'PUA', label: 'FZ PUA',
+  names: { en: 'FZ oversized PUA', zh: '方正超大字符集私用區', hans: '方正超大字符集私用区', ja: '方正超大字符集私用領域', ko: 'FZ 초대형 문자 집합 PUA' },
+  chars: 0, total: fzPua.records.length, encoded: 0, unencoded: fzPua.records.length,
+  records: { file: '/charsets/fz_pua_records.json', count: fzPua.records.length, glyphs: 0 },
+  recordsNote: false,
+  source: { name: '方正超大字符集', url: 'https://github.com/xiangrongjingujiu/FangZhengChaoDaZiFuJi', licence: 'Commercial; cmap facts only' },
+  columns: 10,
+})
 // A 字統 set named for a Unicode block is that block's assigned characters; the block's range gives
 // the designed positions the coverage dial divides by.
 for (const row of catalogue) {

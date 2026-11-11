@@ -30,6 +30,7 @@ A member is a string of one or more code points. GB 12052 writes 1,718 archaic H
 | GB/T 12052-1989 | The standard's printed 94×94 table: 682 symbols, 3,424 first-level Hangul and 1,873 second-level rows, 94 of them 吏讀字. The set lists 5,954 distinct characters; 23 positions repeat a glyph, 1,718 archaic syllables are jamo sequences, and two 吏讀字 positions have no scalar |
 | Unihan G sources | 13 publication-level G source codes from Unicode 18.0.0 `kIRG_GSource`, each a set of assigned characters; `GZ·U` is the encoded GZ source while `gz` is 字統's broader snapshot |
 | GlyphWiki ebag | 24,359 GlyphWiki glyphs named `ebag_*`, the 缺字編號 posted for 引得市's missing-character index; 24,356 carry a sprite and three keep the name only |
+| FZ oversized PUA | 633 BMP private-use slots defined by the 方正超大字符集 fonts' cmaps; the font files and glyph outlines are not kept |
 
 Each set has a unique character count and a source-row count. A source row joins through its assigned scalars, or through its private-use glyph slot where no scalar is assigned. A row whose only glyph is an Ideographic Description Sequence stays out of the scalar count and is kept as a record on the set. Repeated mappings, variation sequences and IDS descriptions can make the counts differ. Draft row numbers never establish Unicode assignments.
 
@@ -65,6 +66,12 @@ GlyphWiki's `ebag_*` names are the 缺字編號 that 引得市 uses for its miss
 
 `bun scripts/import_glyphwiki_ebag.mjs` reads the pinned dump and writes the records; the dump's SHA-256 is in `glyphwiki_ebag_source.json`. `python scripts/build_ebag_sprites.py` renders the sheets; it needs the KAGE engine (GPL-3.0) installed separately. The glyphs are not scalar members: the set counts zero characters and 24,359 unencoded records, and GlyphWiki's related character is not treated as an assignment.
 
+## FZ private-use table
+
+Four 方正超大字符集 fonts define 633 distinct BMP private-use slots: 522 in FZKTJW, 122 in FZSongS, 108 in FZJiaoCai GuiFanKai and 106 in FZKTK, with 106 slots shared by at least two faces. The set lists each slot and the faces that define it; no slot is treated as a coded character, and the font files and glyph outlines are not kept.
+
+The public copies are unofficial. `python scripts/build_fz_pua.py --mirror <url> FZKTK.TTF FZKTJW.TTF FZJCGFKTK.TTF FZSongS.TTF` reads their cmaps and writes the records. None of the six files has a plane-16 mapping, so 字統's `G方正楷体` plane-16 table is not reconstructed.
+
 ## G source collections
 
 Thirteen sets index the G source codes that name publications and lists in Unihan `kIRG_GSource`: GDM, GHC, GKJ, GLGYJ, GPGLG, GXM, GZ·U and GZA-1, -2, -3, -4, -6 and -7. A member is an assigned character whose value carries the code; no unencoded row enters these sets. The code under a member is that member's G source serial, such as GDM-00013. The GZA sets split on the serial's first digit, the `[123467]` of UAX #38's `GZA-[123467]\d{5}` pattern, so GZA-5 has no members. GZ·U holds the encoded GZ source; the existing gz set is 字統's broader snapshot of the 古壯字字典, with 7,964 rows including unencoded forms, and keeps its label.
@@ -93,6 +100,7 @@ Character cards show the G source beside its code, and a printed record card doe
 - **Japan**, [IRGN424,1997-01-10](https://www.unicode.org/irg/docs/n0424-RemoveJSourceIdeographExtensionA.pdf). Removes one ideograph, A-2360, from Japan's CJK A proposal revision 5 at the Singapore 1997 meeting and leaves 661 proposed characters. A-2360 is a proposal code; the document prints neither a glyph nor a scalar for it.
 - **UTC**, [IRGN1525,2008-11-10](https://www.unicode.org/irg/docs/n1525-UNC-UTC-Withdraw.pdf). Withdraws 16 UTC-source characters, UTC00291 through UTC00315, from the UNC (Urgently Needed Characters) proposal for lack of evidence of use; UTC00855, UTC00856 and UTC00867 are explicitly kept pending an IRG determination on unification. The UTC codes are proposal source codes, and each glyph is the private-use character printed in the document, cropped from a rendering of the page. No published scalar is claimed, and the document states no reuse terms for its glyphs.
 - **GlyphWiki**, [newest-version dump](https://glyphwiki.org/dump.tar.gz), retrieved 2026-11-10, whose `LICENSE.txt` permits use, copy and distribution, commercial or not, without warranty. The `ebag_*` names are the 缺字編號 posted for 引得市's missing-character index; its numbering and Seal font are described in 阿良人, [20260116「Seal缺字」最新版本發布暨新版「古文字缺字資料庫」公開](https://ebag2007.blogspot.com/2026/01/20260106seal.html), 2026-01-16. That post is a personal announcement, and the numbering is not independently verified here. Sprite rendering uses [kage-engine](https://github.com/HowardZorn/kage-engine) (GPL-3.0) offline.
+- **方正超大字符集**, unofficial copies in [FangZhengChaoDaZiFuJi](https://github.com/xiangrongjingujiu/FangZhengChaoDaZiFuJi), retrieved 2026-11-12; FZKai-Z03 5.30, FZKai-Z03S 5.30, FZJiaoCai GuiFanKai 1.02, FZSongS-Extended 2.00, FZKaiS-Extended 1.00 and FZSongS-Extended(SIP) 2.00, © Founder Corporation. The copies carry no licence; only their cmap facts are used, and no font file or glyph outline is stored. All six lack plane-16 mappings.
 - **NGWU YOH**, personal communications dated 2026-11-06 and 2026-11-07 requesting character-set search and an Extension E withdrawn set; privately supplied screenshots of 字統網 and CNS11643. These establish the interface reference and requested category, with no independent character-membership evidence.
 
 ## Data and checks
