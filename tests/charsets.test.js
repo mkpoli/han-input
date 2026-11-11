@@ -227,10 +227,11 @@ test('snapshot covers every source catalogue and counts match unique scalars', (
     const match = input.url.match(/^https:\/\/zi.tools\/api\/ma\/ma\/([^/]+)\.json$/)
     return match && match[1] !== 'metadata' ? [match[1]] : []
   })
-  expect(referenceIds).toHaveLength(119)
+  expect(referenceIds).toHaveLength(115)
   for (const id of referenceIds) expect(catalogue.some(row => row.id === id)).toBe(true)
   for (const input of sources.inputs) expect(input.sha256).toMatch(/^[a-f0-9]{64}$/)
-  expect(catalogue.length).toBe(282)
+  expect(catalogue.length).toBe(278)
+  for (const id of ['irgn', 'l2', 'g_fzk', '1k8myqp9o8zxkvdpbqdhrfs6yfx5bk2t']) expect(catalogue.some(row => row.id === id)).toBe(false)
   const cns = catalogue.filter(row => row.group === 'CNS sources')
   const cnsSource = JSON.parse(readFileSync(new URL('cns-sources.json', base), 'utf8'))
   expect(cns).toHaveLength(123)
@@ -258,16 +259,15 @@ test('snapshot covers every source catalogue and counts match unique scalars', (
   expect(idsFile.records).toHaveLength(gzhs.records.count)
   expect(idsFile.records[0].kind).toBe('ids')
   const ziSets = catalogue.filter(row => row.source.name === '字統網')
-  expect(ziSets).toHaveLength(118)
+  expect(ziSets).toHaveLength(114)
   const ziPages = {
     g0: 'https://zi.tools/?secondary=character_set&set=G0',
     swjz: 'https://zi.tools/?secondary=character_set&set=zhuan',
-    irgn: 'https://zi.tools/',
   }
   for (const row of ziSets) {
-    // The source link opens the set on zi.tools, whose hidden document registries have no set page
-    // and whose Shuowen view opens as 篆/zhuan; the endpoint that supplied the rows stays beside it.
-    expect(row.source.url).toBe(ziSourcePage({ id: row.id, abbr: row.label, hidden: row.total === 0 }))
+    // The source link opens the set on zi.tools; its Shuowen view opens as 篆/zhuan, and the
+    // endpoint that supplied the rows stays beside it.
+    expect(row.source.url).toBe(ziSourcePage({ id: row.id, abbr: row.label }))
     expect(row.source.dataUrl).toBe(`https://zi.tools/api/ma/ma/${row.id}.json`)
     expect(sources.inputs.some(input => input.url === row.source.dataUrl)).toBe(true)
   }
