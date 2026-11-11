@@ -209,6 +209,176 @@ try {
     releaseFoo()
     await queryPage.close()
 
+    // A scroll key on a focused button cancels even when the pane is already at its edge.
+    let releaseQux = () => {}
+    let startedQux = () => {}
+    /** @type {Promise<void>} */
+    const quxGate = new Promise(resolve => { releaseQux = resolve })
+    /** @type {Promise<void>} */
+    const quxStarted = new Promise(resolve => { startedQux = resolve })
+    const keyboardPage = await context.newPage()
+    await keyboardPage.route(`**/data/c/${codeBucket('qux')}.gz`, async route => {
+      startedQux()
+      await quxGate
+      await route.fulfill({ body: rows('qux'), contentType: 'text/plain' })
+    })
+    await keyboardPage.goto('http://local.test/?q=qux', { waitUntil: 'domcontentloaded' })
+    await quxStarted
+    await keyboardPage.locator('main .ui-page').evaluate(element => {
+      const filler = document.createElement('div')
+      filler.style.height = '2000px'
+      element.append(filler)
+      const main = element.closest('main')
+      if (main) main.scrollTop = 500
+    })
+    assert.equal(await keyboardPage.locator('main').evaluate(element => element.scrollTop), 500)
+    await keyboardPage.locator('nav.rail a[href="/methods"]').click()
+    await keyboardPage.goBack()
+    await keyboardPage.locator('.charset-filter .overview').focus()
+    assert.equal(await keyboardPage.locator('main').evaluate(element => element.scrollTop), 0)
+    await keyboardPage.keyboard.press('Home')
+    assert.equal(await keyboardPage.locator('main').evaluate(element => element.scrollTop), 0)
+    releaseQux()
+    await keyboardPage.locator('main .method').first().waitFor()
+    assert.equal(await keyboardPage.locator('main').evaluate(element => element.scrollTop), 0, 'Home on a button cancels restoration at the scroll edge')
+
+    // At an uncontained nested edge, the wheel is allowed to chain to the finder.
+    await keyboardPage.locator('main').evaluate(element => { element.scrollTop = 500 })
+    assert.equal(await keyboardPage.locator('main').evaluate(element => element.scrollTop), 500)
+    await keyboardPage.locator('nav.rail a[href="/methods"]').click()
+    const clip = await keyboardPage.addStyleTag({ content: 'main .ui-page { height: 200px !important; overflow: hidden !important }' })
+    await keyboardPage.goBack()
+    await keyboardPage.locator('main [data-primary]').waitFor()
+    assert.equal(await keyboardPage.locator('main').evaluate(element => element.scrollTop), 0)
+    await keyboardPage.locator('main .ui-page').evaluate(element => {
+      const scroller = document.createElement('div')
+      scroller.id = 'scroll-test-chain'
+      scroller.style.cssText = 'height: 50px; flex: none; overflow: auto'
+      const content = document.createElement('div')
+      content.style.height = '200px'
+      scroller.append(content)
+      element.prepend(scroller)
+      scroller.scrollTop = scroller.scrollHeight
+    })
+    const chain = keyboardPage.locator('#scroll-test-chain')
+    await chain.hover()
+    const chainWheel = keyboardPage.evaluate(() => new Promise(resolve => document.querySelector('#scroll-test-chain')?.addEventListener('wheel', resolve, { once: true })))
+    await keyboardPage.mouse.wheel(0, 150)
+    await chainWheel
+    await chain.evaluate(element => element.remove())
+    await clip.evaluate(element => element.parentNode?.removeChild(element))
+    await keyboardPage.evaluate(() => new Promise(requestAnimationFrame))
+    await keyboardPage.evaluate(() => new Promise(requestAnimationFrame))
+    assert.equal(await keyboardPage.locator('main').evaluate(element => element.scrollTop), 0, 'wheel chaining cancels finder restoration')
+    await keyboardPage.close()
+
+    // Scrolling the contained catalogue must not cancel the finder's restoration.
+    let releaseBaz = () => {}
+    let startedBaz = () => {}
+    /** @type {Promise<void>} */
+    const bazGate = new Promise(resolve => { releaseBaz = resolve })
+    /** @type {Promise<void>} */
+    const bazStarted = new Promise(resolve => { startedBaz = resolve })
+    const nestedPage = await context.newPage()
+    await nestedPage.route(`**/data/c/${codeBucket('baz')}.gz`, async route => {
+      startedBaz()
+      await bazGate
+      await route.fulfill({ body: rows('baz'), contentType: 'text/plain' })
+    })
+    await nestedPage.goto('http://local.test/?q=baz', { waitUntil: 'domcontentloaded' })
+    await bazStarted
+    await nestedPage.locator('main .ui-page').evaluate(element => {
+      const filler = document.createElement('div')
+      filler.style.height = '2000px'
+      element.append(filler)
+      const main = element.closest('main')
+      if (main) main.scrollTop = 500
+    })
+    assert.equal(await nestedPage.locator('main').evaluate(element => element.scrollTop), 500)
+    await nestedPage.locator('nav.rail a[href="/methods"]').click()
+    await nestedPage.goBack()
+    await nestedPage.locator('main .ui-page').evaluate(element => {
+      const button = document.createElement('button')
+      button.id = 'scroll-test-button'
+      button.textContent = 'Test'
+      button.addEventListener('click', () => { button.dataset.activated = 'yes' })
+      element.append(button)
+    })
+    const testButton = nestedPage.locator('#scroll-test-button')
+    await testButton.focus()
+    await nestedPage.keyboard.press('Space')
+    assert.equal(await testButton.getAttribute('data-activated'), 'yes', 'Space activates a button')
+    await testButton.evaluate(element => element.remove())
+    const summary = nestedPage.locator('.charset-filter summary')
+    await summary.focus()
+    await nestedPage.keyboard.press('Space')
+    const groups = nestedPage.locator('.charset-filter .groups')
+    await groups.locator('button').first().waitFor()
+    await groups.hover()
+    await nestedPage.mouse.wheel(0, 150)
+    await nestedPage.waitForFunction(() => (document.querySelector('.charset-filter .groups')?.scrollTop ?? 0) > 0)
+    await groups.locator('button').first().focus()
+    const nestedTop = await groups.evaluate(element => element.scrollTop)
+    await nestedPage.keyboard.press('PageDown')
+    await nestedPage.waitForFunction(y => (document.querySelector('.charset-filter .groups')?.scrollTop ?? 0) > y, nestedTop)
+    await groups.evaluate(element => {
+      const start = new Touch({ identifier: 1, target: element, clientY: 300 })
+      const move = new Touch({ identifier: 1, target: element, clientY: 200 })
+      element.dispatchEvent(new TouchEvent('touchstart', { bubbles: true, touches: [start], changedTouches: [start] }))
+      element.dispatchEvent(new TouchEvent('touchmove', { bubbles: true, touches: [move], changedTouches: [move] }))
+      element.dispatchEvent(new TouchEvent('touchend', { bubbles: true, touches: [], changedTouches: [move] }))
+    })
+    await groups.evaluate(element => { element.scrollTop = element.scrollHeight })
+    await groups.hover()
+    const boundaryWheel = nestedPage.evaluate(() => new Promise(resolve => document.querySelector('.charset-filter .groups')?.addEventListener('wheel', resolve, { once: true })))
+    await nestedPage.mouse.wheel(0, 150)
+    await boundaryWheel
+    if (process.env.SHOT_PREFIX) await nestedPage.screenshot({ path: `${process.env.SHOT_PREFIX}-nested-${colorScheme}.png` })
+    await summary.focus()
+    await nestedPage.keyboard.press('Space')
+    releaseBaz()
+    await nestedPage.locator('main .method').first().waitFor()
+    await nestedPage.waitForFunction(() => document.querySelector('main')?.scrollTop === 500, null, { timeout: 5000 })
+    await nestedPage.close()
+
+    // A touch gesture on the finder still cancels restoration at a scroll edge.
+    let releaseTux = () => {}
+    let startedTux = () => {}
+    /** @type {Promise<void>} */
+    const tuxGate = new Promise(resolve => { releaseTux = resolve })
+    /** @type {Promise<void>} */
+    const tuxStarted = new Promise(resolve => { startedTux = resolve })
+    const touchPage = await context.newPage()
+    await touchPage.route(`**/data/c/${codeBucket('tux')}.gz`, async route => {
+      startedTux()
+      await tuxGate
+      await route.fulfill({ body: rows('tux'), contentType: 'text/plain' })
+    })
+    await touchPage.goto('http://local.test/?q=tux', { waitUntil: 'domcontentloaded' })
+    await tuxStarted
+    await touchPage.locator('main .ui-page').evaluate(element => {
+      const filler = document.createElement('div')
+      filler.style.height = '2000px'
+      element.append(filler)
+      const main = element.closest('main')
+      if (main) main.scrollTop = 500
+    })
+    assert.equal(await touchPage.locator('main').evaluate(element => element.scrollTop), 500)
+    await touchPage.locator('nav.rail a[href="/methods"]').click()
+    await touchPage.goBack()
+    await touchPage.locator('main [data-primary]').waitFor()
+    await touchPage.locator('main').evaluate(element => {
+      const start = new Touch({ identifier: 1, target: element, clientY: 300 })
+      const move = new Touch({ identifier: 1, target: element, clientY: 200 })
+      element.dispatchEvent(new TouchEvent('touchstart', { bubbles: true, touches: [start], changedTouches: [start] }))
+      element.dispatchEvent(new TouchEvent('touchmove', { bubbles: true, touches: [move], changedTouches: [move] }))
+      element.dispatchEvent(new TouchEvent('touchend', { bubbles: true, touches: [], changedTouches: [move] }))
+    })
+    releaseTux()
+    await touchPage.locator('main .method').first().waitFor()
+    assert.equal(await touchPage.locator('main').evaluate(element => element.scrollTop), 0, 'touch on the finder cancels restoration')
+    await touchPage.close()
+
     // A failed load leaves a short page; restoration must eventually stop observing it.
     const shortPage = await context.newPage()
     await shortPage.clock.install()

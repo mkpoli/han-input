@@ -47,11 +47,41 @@ export function installScroll(element) {
     save()
   }
   const userScroll = () => { if (pending) cancelScroll() }
+  /** A nested scrollport can consume the gesture or prevent it from chaining to the finder.
+   * @param {EventTarget | null} target @param {number} delta */
+  const nestedScroll = (target, delta) => {
+    for (let node = target instanceof Element ? target : null; node && node !== element; node = node.parentElement) {
+      const style = getComputedStyle(node)
+      if (!['auto', 'scroll'].includes(style.overflowY)) continue
+      const available = delta < 0 ? node.scrollTop > 0 : node.scrollTop + node.clientHeight < node.scrollHeight
+      if (available || ['contain', 'none'].includes(style.overscrollBehaviorY)) return true
+    }
+    return false
+  }
+  /** @param {WheelEvent} event */
+  const wheel = event => {
+    if (pending && !event.defaultPrevented && !event.ctrlKey && event.deltaY && !nestedScroll(event.target, event.deltaY)) userScroll()
+  }
+  /** @type {number | undefined} */
+  let touchY
+  /** @param {TouchEvent} event */
+  const touchstart = event => { touchY = event.touches.length === 1 ? event.touches[0].clientY : undefined }
+  /** @param {TouchEvent} event */
+  const touchmove = event => {
+    if (touchY === undefined || event.touches.length !== 1) { touchY = undefined; return }
+    const delta = touchY - event.touches[0].clientY
+    touchY = event.touches[0].clientY
+    if (pending && delta && !event.defaultPrevented && !nestedScroll(event.target, delta)) userScroll()
+  }
+  const touchend = () => { touchY = undefined }
   /** @param {KeyboardEvent} event */
   const keydown = event => {
     const target = /** @type {Element | null} */ (event.target)
-    if (target && element.contains(target) && !target.closest('input, textarea, select, button, [contenteditable]') &&
-        ['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '].includes(event.key)) userScroll()
+    if (!pending || !target || event.defaultPrevented || !element.contains(target) || target.closest('input, textarea, select, [contenteditable]')) return
+    if (event.key === ' ' && target.closest('button, summary, [role="button"]')) return
+    const direction = ['ArrowUp', 'PageUp', 'Home'].includes(event.key) || (event.key === ' ' && event.shiftKey) ? -1
+      : ['ArrowDown', 'PageDown', 'End', ' '].includes(event.key) ? 1 : 0
+    if (direction && !nestedScroll(target, direction)) userScroll()
   }
   /** @param {PointerEvent} event */
   const pointerdown = event => {
@@ -59,15 +89,21 @@ export function installScroll(element) {
     if (event.target === element && event.clientX >= bounds.left + element.clientLeft + element.clientWidth) userScroll()
   }
   element.addEventListener('scroll', scroll, { passive: true })
-  element.addEventListener('wheel', userScroll, { passive: true })
-  element.addEventListener('touchmove', userScroll, { passive: true })
+  element.addEventListener('wheel', wheel, { passive: true })
+  element.addEventListener('touchstart', touchstart, { passive: true })
+  element.addEventListener('touchmove', touchmove, { passive: true })
+  element.addEventListener('touchend', touchend, { passive: true })
+  element.addEventListener('touchcancel', touchend, { passive: true })
   element.addEventListener('pointerdown', pointerdown, { passive: true })
   window.addEventListener('keydown', keydown)
   return () => {
     cancel()
     element.removeEventListener('scroll', scroll)
-    element.removeEventListener('wheel', userScroll)
-    element.removeEventListener('touchmove', userScroll)
+    element.removeEventListener('wheel', wheel)
+    element.removeEventListener('touchstart', touchstart)
+    element.removeEventListener('touchmove', touchmove)
+    element.removeEventListener('touchend', touchend)
+    element.removeEventListener('touchcancel', touchend)
     element.removeEventListener('pointerdown', pointerdown)
     window.removeEventListener('keydown', keydown)
     pane = undefined
