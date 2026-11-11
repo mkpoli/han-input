@@ -284,10 +284,10 @@ try {
       const tiles = page.locator('main .records .ui-tile')
       const visible = Math.min(240, proposal.records.count)
       assert.equal(await tiles.count(), visible)
-      assert.equal(await page.locator('main .records img').count(), Math.min(visible, proposal.records.glyphs))
+      assert.equal(await page.locator('main .records img, main .records svg.sprite').count(), Math.min(visible, proposal.records.glyphs))
       assert.equal(await page.locator('main .records .ui-tile-note').count(), Math.min(visible, proposal.records.glyphs))
       if (proposal.records.glyphs) {
-        const firstGlyph = data.records.find(/** @param {{glyph?:string}} record */ record => record.glyph)
+        const firstGlyph = data.records.find(/** @param {{glyph?:string, sprite?:unknown}} record */ record => record.glyph || record.sprite)
         assert.equal(await page.locator('main .records .ui-tile-note').first().innerText(), firstGlyph.source ?? firstGlyph.serial)
       }
       if (proposal.records.count > 240) assert.match(await page.locator('main .pager').first().innerText(), new RegExp(`Page 1 of ${Math.ceil(proposal.records.count / 240)}`))

@@ -224,6 +224,18 @@ for (const set of cnsSets) {
   })
 }
 writeGSourceSets(catalogue, unihanText, OUT, hans)
+// The ebag missing-character glyphs come from GlyphWiki's KAGE data. The records are a snapshot
+// made by scripts/import_glyphwiki_ebag.mjs; their sprite sheets are rendered offline.
+const ebag = JSON.parse(readFileSync(join(OUT, 'glyphwiki_ebag_records.json'), 'utf8'))
+catalogue.push({
+  id: 'glyphwiki_ebag', group: 'GlyphWiki', label: 'ebag 缺字',
+  names: { en: 'ebag missing glyphs', zh: 'ebag 缺字', hans: 'ebag 缺字', ja: 'ebag 缺字', ko: 'ebag 缺字' },
+  chars: 0, total: ebag.records.length, encoded: 0, unencoded: ebag.records.length,
+  records: { file: '/charsets/glyphwiki_ebag_records.json', count: ebag.records.length, glyphs: ebag.records.filter(/** @param {{sprite?:unknown}} record */ record => record.sprite).length },
+  recordsNote: false,
+  source: { name: 'GlyphWiki', url: 'https://glyphwiki.org/', licence: 'Free use, copy and distribution' },
+  columns: 10,
+})
 // A 字統 set named for a Unicode block is that block's assigned characters; the block's range gives
 // the designed positions the coverage dial divides by.
 for (const row of catalogue) {

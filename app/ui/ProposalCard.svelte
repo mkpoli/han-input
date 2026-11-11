@@ -22,7 +22,9 @@
   <article class="record">
     <header class="head">
       <div class="glyph">
-        {#if record.glyph}<img src={`/charsets/${record.glyph}`} alt="" width="128" height="128" />{:else}<span class="ui-mono">{code}</span>{/if}
+        {#if record.sprite}
+          <svg viewBox="0 0 200 200" aria-hidden="true"><use href={`/charsets/ebag-sprites/${record.sprite.sheet}.svg#${record.sprite.symbol}`}></use></svg>
+        {:else if record.glyph}<img src={`/charsets/${record.glyph}`} alt="" width="128" height="128" />{:else}<span class="ui-mono">{code}</span>{/if}
       </div>
       <div class="facts">
         <p class="name"><SourceCode code={code} /></p>
@@ -55,7 +57,7 @@
   .record{display:grid;gap:var(--ui-space-lg);padding:var(--ui-space-xl)}
   .head{display:flex;gap:var(--ui-space-lg);align-items:flex-start}
   .glyph{flex:none;display:grid;place-items:center;inline-size:112px;block-size:112px;padding:4px;border:1px solid var(--ui-color-border);border-radius:var(--ui-radius-md);background:var(--ui-color-canvas)}
-  .glyph img{inline-size:100%;block-size:100%}
+  .glyph img,.glyph svg{inline-size:100%;block-size:100%}
   .facts{display:grid;gap:var(--ui-space-2xs);min-inline-size:0}
   .name{margin:0;font-size:var(--ui-text-sm);overflow-wrap:anywhere}
   .facts a{color:var(--ui-color-accent-ink);font-size:var(--ui-text-sm);overflow-wrap:anywhere}
@@ -64,6 +66,6 @@
   .mapped a{font-size:56px;line-height:1;color:var(--ui-color-ink);text-decoration:none}
   .links{display:flex;flex-wrap:wrap;gap:var(--ui-space-2xs)}
   .links a{padding:2px var(--ui-space-sm);border:1px solid var(--ui-color-border);border-radius:var(--ui-radius-sm);font-size:var(--ui-text-xs);color:var(--ui-color-ink);text-decoration:none;overflow-wrap:anywhere}
-  @media (prefers-color-scheme:dark){:global(:root:not([data-theme='light'])) .glyph img{filter:invert(1)}}
-  :global(:root[data-theme='dark']) .glyph img{filter:invert(1)}
+  @media (prefers-color-scheme:dark){:global(:root:not([data-theme='light'])) .glyph img,:global(:root:not([data-theme='light'])) .glyph svg{filter:invert(1)}}
+  :global(:root[data-theme='dark']) .glyph img,:global(:root[data-theme='dark']) .glyph svg{filter:invert(1)}
 </style>

@@ -1,8 +1,8 @@
 // Character-set membership is a scalar glyph mapping, independent of the search corpus.
 /** @typedef {{total:number, filled:number, mapped:number}} Positions */
-/** @typedef {{id:string, group:string, label:string, names:{en:string,zh?:string,hans?:string,ja?:string,ko?:string}, chars:number, total:number, encoded?:number, unencoded?:number, positions?:Positions, codes?:string, records?:{file:string, count:number, glyphs:number}, columns?:number, source:{name:string,url:string,dataUrl?:string,note?:string,noteKey?:string,records?:string,version?:string,licence?:string,attribution?:string}}} Charset */
+/** @typedef {{id:string, group:string, label:string, names:{en:string,zh?:string,hans?:string,ja?:string,ko?:string}, chars:number, total:number, encoded?:number, unencoded?:number, positions?:Positions, codes?:string, records?:{file:string, count:number, glyphs:number}, recordsNote?:boolean, columns?:number, source:{name:string,url:string,dataUrl?:string,note?:string,noteKey?:string,records?:string,version?:string,licence?:string,attribution?:string}}} Charset */
 /** @typedef {{id:string, document:string, title:string, source:string, date:string, url:string, status?:string}} ProposalDocument */
-/** @typedef {{serial?:string|null, sequence?:string, source?:string|null, document:string, page?:number, glyph?:string, status?:string, mappedUnicode?:string, mappedCharacter?:string, unifiedWith?:string, mappingKind?:string, mappingEvidence?:string, evidenceUrls?:string[], kind?:'ids', ids?:string}} ProposalRecord */
+/** @typedef {{serial?:string|null, sequence?:string, source?:string|null, document:string, page?:number, glyph?:string, sprite?:{sheet:string, symbol:string}, status?:string, mappedUnicode?:string, mappedCharacter?:string, unifiedWith?:string, mappingKind?:string, mappingEvidence?:string, evidenceUrls?:string[], kind?:'ids', ids?:string}} ProposalRecord */
 /** @typedef {{title:string, complete:boolean, scope:string, documents:ProposalDocument[], records:ProposalRecord[]}} ProposalRecords */
 
 /** @type {Promise<Charset[]> | null} */
