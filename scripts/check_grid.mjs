@@ -61,6 +61,32 @@ try {
     else assert.ok(new URL(page.url()).searchParams.has('c'))
     console.log(`ok ${url}: roles, roving focus, arrows, Home/End, Tab, resize, activation`)
   }
+  for (const [url, selector] of [['/?q=water', 'main .ui-tiles'], ['/?set=ext_e_withdrawal_records', '.records']]) {
+    await page.setViewportSize({ width: 1280, height: 900 })
+    await page.goto(site + url)
+    const grid = page.locator(selector).first()
+    const buttons = grid.locator('button')
+    await buttons.first().waitFor()
+    await page.waitForFunction(element => {
+      const columns = getComputedStyle(element).gridTemplateColumns.split(' ').filter(Boolean).length
+      return columns > 1 && element.querySelector('[role="row"]')?.querySelectorAll('button').length === columns
+    }, await grid.elementHandle())
+    const target = buttons.nth(13)
+    const label = await target.innerText()
+    await target.focus()
+    await page.keyboard.press('Tab')
+    const outside = await page.evaluateHandle(() => document.activeElement)
+    assert.equal(await grid.evaluate(element => element.contains(document.activeElement)), false)
+    const previousRows = await grid.locator('[role="row"]').count()
+    await page.setViewportSize({ width: 1024, height: 900 })
+    await page.waitForFunction(({ element, previous }) => element.querySelectorAll('[role="row"]').length !== previous, { element: await grid.elementHandle(), previous: previousRows })
+    assert.equal(await outside.evaluate(element => element === document.activeElement), true, `${url} stole focus after resize`)
+    assert.equal(await grid.locator('button[tabindex="0"]').innerText(), label, `${url} lost the remembered item`)
+    await page.keyboard.press('Shift+Tab')
+    assert.equal(await target.evaluate(element => element === document.activeElement), true, `${url} returned to a different item`)
+    await outside.dispose()
+    console.log(`ok ${url}: resize while outside preserves the roving item and outside focus`)
+  }
   await page.setViewportSize({ width: 1280, height: 900 })
   for (const [url, selector] of [['/?q=water', 'main .ui-tiles'], ['/?set=ext_e_withdrawal_records', '.records']]) {
     await page.goto(site + url)
@@ -110,10 +136,17 @@ try {
       const columns = getComputedStyle(element).gridTemplateColumns.split(' ').filter(Boolean).length
       return columns > 1 && element.querySelector('[role="row"]')?.querySelectorAll('button').length === columns
     }, await grid.elementHandle())
+    const label = (await button.innerText()).trim()
+    if (url.includes('set=')) {
+      assert.equal(await button.getAttribute('aria-current'), null)
+      assert.ok(!(await page.locator('.card').first().innerText()).includes(label))
+    }
     await button.focus()
     await page.keyboard.press('Space')
-    if (url.includes('set=')) await page.locator('.card').first().waitFor()
-    else await page.waitForFunction(() => new URL(location.href).searchParams.has('c'))
+    if (url.includes('set=')) {
+      await page.waitForFunction(element => element.getAttribute('aria-current') === 'true', await button.elementHandle())
+      await page.waitForFunction(code => document.querySelector('.card')?.textContent?.includes(code), label)
+    } else await page.waitForFunction(() => new URL(location.href).searchParams.has('c'))
     console.log(`ok ${url}: Space activates the native button`)
   }
   await page.goto(site + '/?q=water')

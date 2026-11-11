@@ -14,11 +14,19 @@
       const next = tracks === 'none' ? 1 : tracks.split(' ').filter(Boolean).length
       if (next === columns) return
       const buttons = [...element.querySelectorAll('button')]
-      const index = buttons.indexOf(/** @type {HTMLButtonElement} */ (document.activeElement))
+      const focused = document.activeElement
+      const focusedIndex = buttons.indexOf(/** @type {HTMLButtonElement} */ (focused))
+      const rememberedIndex = focusedIndex >= 0 ? focusedIndex : buttons.findIndex(button => button.tabIndex === 0)
+      const remembered = items[rememberedIndex]
       columns = next
       await tick()
-      if (index >= 0 && (document.activeElement === document.body || element.contains(document.activeElement))) {
-        element.querySelectorAll('button')[index]?.focus()
+      const index = items.indexOf(remembered)
+      if (rememberedIndex < 0 || index < 0) return
+      const updated = [...element.querySelectorAll('button')]
+      if (focusedIndex >= 0) {
+        if (document.activeElement === focused || document.activeElement === document.body) updated[index]?.focus()
+      } else if (!element.contains(document.activeElement)) {
+        updated.forEach((button, i) => { button.tabIndex = i === index ? 0 : -1 })
       }
     })
     observer.observe(element)
