@@ -172,6 +172,9 @@ try {
 
     const quota = await context.newPage()
     await quota.addInitScript(() => {
+      window.addEventListener('pagehide', event => {
+        if (window.name === 'quota-recover') { event.stopImmediatePropagation(); window.name = '' }
+      }, true)
       const setItem = Storage.prototype.setItem
       /** @param {string} key @param {string} value */
       Storage.prototype.setItem = function (key, value) {
@@ -189,6 +192,10 @@ try {
     await quota.waitForFunction(() => document.querySelector('main')?.scrollTop === 200)
     await quota.locator('main').evaluate(element => { element.scrollTop = 600 })
     await quota.waitForFunction(() => history.state?.__finderScroll?.top === 600)
+    await quota.reload()
+    await quota.waitForFunction(() => document.querySelector('main')?.scrollTop === 600, null, { timeout: 5000 })
+    // Recover storage without refreshing the old snapshot, as after a failed pagehide write.
+    await quota.evaluate(() => { window.name = 'quota-recover' })
     await quota.reload()
     await quota.waitForFunction(() => document.querySelector('main')?.scrollTop === 600, null, { timeout: 5000 })
 

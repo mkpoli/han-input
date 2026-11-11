@@ -4,6 +4,8 @@ import { tick } from 'svelte'
 const key = '__finderScroll'
 /** @type {Map<string, number>} */
 const positions = new Map()
+/** @type {Map<string, number>} */
+const revisions = new Map()
 /** @type {HTMLElement | undefined} */
 let pane
 let entry = ''
@@ -18,12 +20,24 @@ function newEntry() { return Array.from(crypto.getRandomValues(new Uint32Array(4
 
 /** @param {string} id @param {number} top */
 function state(id, top) {
-  return { ...history.state, [key]: { id, top } }
+  return { ...history.state, [key]: { id, top, revision: revisions.get(id) ?? 0 } }
 }
 
 function save() {
   if (!pane || !entry || pending) return
-  positions.set(entry, pane.scrollTop)
+  if (positions.get(entry) !== pane.scrollTop) {
+    positions.set(entry, pane.scrollTop)
+    revisions.set(entry, (revisions.get(entry) ?? 0) + 1)
+  }
+}
+
+/** Merge an entry only when it is newer than the in-memory copy.
+ * @param {string} id @param {number} top @param {number} revision */
+function merge(id, top, revision) {
+  if (!positions.has(id) || revision > (revisions.get(id) ?? 0)) {
+    positions.set(id, top)
+    revisions.set(id, revision)
+  }
 }
 
 function cancel() {
@@ -39,19 +53,18 @@ export function installScroll(element) {
     sessionStorage.setItem(`${key}:probe`, '1')
     sessionStorage.removeItem(`${key}:probe`)
   } catch { storageAvailable = false }
-  if (storageAvailable) {
-    try {
-      const stored = JSON.parse(sessionStorage.getItem(key) ?? '[]')
-      if (Array.isArray(stored)) {
-        for (const [id, top] of stored) {
-          if (typeof id === 'string' && typeof top === 'number') positions.set(id, top)
-        }
+  try {
+    const stored = JSON.parse(sessionStorage.getItem(key) ?? '[]')
+    if (Array.isArray(stored)) {
+      for (const [id, top, revision] of stored) {
+        if (typeof id === 'string' && typeof top === 'number') merge(id, top, Number.isSafeInteger(revision) ? revision : 0)
       }
-    } catch { /* History still works within this document when storage is unavailable. */ }
-  }
+    }
+  } catch { /* History still works within this document when storage is unavailable. */ }
   const saved = history.state?.[key]
   entry = typeof saved?.id === 'string' ? saved.id : newEntry()
-  const top = positions.get(entry) ?? (typeof saved?.top === 'number' ? saved.top : element.scrollTop)
+  if (typeof saved?.top === 'number') merge(entry, saved.top, Number.isSafeInteger(saved.revision) ? saved.revision : 0)
+  const top = positions.get(entry) ?? element.scrollTop
   positions.set(entry, top)
   history.replaceState(state(entry, top), '')
   if (top > 0) {
@@ -99,7 +112,7 @@ export function installScroll(element) {
   }
   const pagehide = () => {
     save()
-    try { sessionStorage.setItem(key, JSON.stringify([...positions])) }
+    try { sessionStorage.setItem(key, JSON.stringify([...positions].map(([id, top]) => [id, top, revisions.get(id) ?? 0]))) }
     catch {
       // If storage is unavailable, retain the current entry when history permits it.
       try { history.replaceState(state(entry, positions.get(entry) ?? 0), '') } catch { /* The in-memory map still works. */ }
@@ -154,7 +167,8 @@ export function leaveScroll() {
 export async function restoreScroll() {
   const saved = history.state?.[key]
   entry = typeof saved?.id === 'string' ? saved.id : newEntry()
-  const target = positions.get(entry) ?? (typeof saved?.top === 'number' ? saved.top : 0)
+  if (typeof saved?.top === 'number') merge(entry, saved.top, Number.isSafeInteger(saved.revision) ? saved.revision : 0)
+  const target = positions.get(entry) ?? 0
   positions.set(entry, target)
   if (!saved?.id) history.replaceState(state(entry, target), '')
   const id = entry
