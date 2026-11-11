@@ -25,7 +25,7 @@
     if (!element) return
     const start = element.selectionStart
     const end = element.selectionEnd
-    input = input.slice(0, start) + char + input.slice(end)
+    input = element.value.slice(0, start) + char + element.value.slice(end)
     await tick()
     element.focus()
     element.setSelectionRange(start + char.length, start + char.length)
@@ -37,7 +37,7 @@
     if (!element) return
     const start = element.selectionStart
     const end = element.selectionEnd
-    arithmeticInput = arithmeticInput.slice(0, start) + char + arithmeticInput.slice(end)
+    arithmeticInput = element.value.slice(0, start) + char + element.value.slice(end)
     await tick()
     element.focus()
     element.setSelectionRange(start + char.length, start + char.length)

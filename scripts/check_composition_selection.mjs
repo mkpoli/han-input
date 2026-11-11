@@ -33,6 +33,18 @@ try {
     await button.click()
     assert.equal(await input.inputValue(), `ab${sign}d`)
   }
+  /** @type {[string, number, string][]} */
+  const initialQueries = [['a\r\nb', 2, 'a\nb'], ['𠮷\r\nb', 3, '𠮷\nb']]
+  for (const [query, start, expected] of initialQueries) {
+    await page.goto(`http://localhost/composition?q=${encodeURIComponent(query)}`)
+    const input = page.locator('#composition-input')
+    const button = page.locator('.palette button').first()
+    const sign = await button.locator('span').first().innerText()
+    await input.evaluate((element, index) => /** @type {HTMLTextAreaElement} */ (element).setSelectionRange(index, index), start)
+    await button.click()
+    assert.equal(await input.inputValue(), `${expected.slice(0, start)}${sign}${expected.slice(start)}`)
+    assert.equal(await input.evaluate(element => /** @type {HTMLTextAreaElement} */ (element).selectionStart), start + sign.length)
+  }
   if (process.env.SHOT) await page.screenshot({ path: process.env.SHOT })
   console.log('Composition palettes insert at retained selection: passed')
 } finally {
