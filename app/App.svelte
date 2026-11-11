@@ -56,12 +56,19 @@
         savedScroll = scroll
         sheet.append(card)
       } else {
+        const active = document.activeElement
+        const focused = sheet.open && active instanceof HTMLElement && active !== card && card.contains(active) && !active.closest('.back') ? active : null
         if (sheet.open) sheet.close()
         shell.insertBefore(card, sheet)
+        const restored = document.activeElement
         savedScroll = scroll
         ui.sheet = false
         void tick().then(() => {
-          if (!media.matches) { card.scrollTop = scroll; savedScroll = null }
+          if (!media.matches) {
+            card.scrollTop = scroll
+            savedScroll = null
+            if (focused?.isConnected && card.contains(focused) && document.activeElement === restored) focused.focus({ preventScroll: true })
+          }
         })
       }
       mobile = next
