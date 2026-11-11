@@ -32,97 +32,193 @@
       "source": "UTC00291",
       "document": "n1525",
       "page": 1,
-      "glyph": "glyphs/unc-utc/UTC00291.png"
+      "glyph": "glyphs/unc-utc/UTC00291.png",
+      "guess": {
+        "ids": "⿸厂⿱⿰幺己⿰⺝⿺乚三",
+        "confidence": 0.478,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "source": "UTC00294",
       "document": "n1525",
       "page": 1,
-      "glyph": "glyphs/unc-utc/UTC00294.png"
+      "glyph": "glyphs/unc-utc/UTC00294.png",
+      "guess": {
+        "ids": "⿰缶⿳彑一氺",
+        "confidence": 0.737,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "source": "UTC00296",
       "document": "n1525",
       "page": 1,
-      "glyph": "glyphs/unc-utc/UTC00296.png"
+      "glyph": "glyphs/unc-utc/UTC00296.png",
+      "guess": {
+        "ids": "⿰冫罩",
+        "confidence": 0.439,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.15"
+      }
     },
     {
       "source": "UTC00297",
       "document": "n1525",
       "page": 1,
-      "glyph": "glyphs/unc-utc/UTC00297.png"
+      "glyph": "glyphs/unc-utc/UTC00297.png",
+      "guess": {
+        "ids": "⿰女雨",
+        "confidence": 0.796,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "source": "UTC00300",
       "document": "n1525",
       "page": 1,
-      "glyph": "glyphs/unc-utc/UTC00300.png"
+      "glyph": "glyphs/unc-utc/UTC00300.png",
+      "guess": {
+        "ids": "⿱艹⿰香⿱口匂",
+        "confidence": 0.639,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.15"
+      }
     },
     {
       "source": "UTC00301",
       "document": "n1525",
       "page": 1,
-      "glyph": "glyphs/unc-utc/UTC00301.png"
+      "glyph": "glyphs/unc-utc/UTC00301.png",
+      "guess": {
+        "ids": "⿱⿰方方⿰士士",
+        "confidence": 0.626,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "source": "UTC00302",
       "document": "n1525",
       "page": 1,
-      "glyph": "glyphs/unc-utc/UTC00302.png"
+      "glyph": "glyphs/unc-utc/UTC00302.png",
+      "guess": {
+        "ids": "⿰土建",
+        "confidence": 0.806,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.03"
+      }
     },
     {
       "source": "UTC00303",
       "document": "n1525",
       "page": 1,
-      "glyph": "glyphs/unc-utc/UTC00303.png"
+      "glyph": "glyphs/unc-utc/UTC00303.png",
+      "guess": {
+        "ids": "⿰⿱𫇦禾昷",
+        "confidence": 0.289,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "source": "UTC00304",
       "document": "n1525",
       "page": 1,
-      "glyph": "glyphs/unc-utc/UTC00304.png"
+      "glyph": "glyphs/unc-utc/UTC00304.png",
+      "guess": {
+        "ids": "⿰冫央",
+        "confidence": 0.842,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "source": "UTC00305",
       "document": "n1525",
       "page": 1,
-      "glyph": "glyphs/unc-utc/UTC00305.png"
+      "glyph": "glyphs/unc-utc/UTC00305.png",
+      "guess": {
+        "ids": "⿰天昆",
+        "confidence": 0.833,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "source": "UTC00306",
       "document": "n1525",
       "page": 1,
-      "glyph": "glyphs/unc-utc/UTC00306.png"
+      "glyph": "glyphs/unc-utc/UTC00306.png",
+      "guess": {
+        "ids": "⿰土式",
+        "confidence": 0.903,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "source": "UTC00308",
       "document": "n1525",
       "page": 1,
-      "glyph": "glyphs/unc-utc/UTC00308.png"
+      "glyph": "glyphs/unc-utc/UTC00308.png",
+      "guess": {
+        "ids": "⿰支翟",
+        "confidence": 0.71,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "source": "UTC00311",
       "document": "n1525",
       "page": 1,
-      "glyph": "glyphs/unc-utc/UTC00311.png"
+      "glyph": "glyphs/unc-utc/UTC00311.png",
+      "guess": {
+        "ids": "⿰文⿳一且貝",
+        "confidence": 0.394,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.08"
+      }
     },
     {
       "source": "UTC00312",
       "document": "n1525",
       "page": 1,
-      "glyph": "glyphs/unc-utc/UTC00312.png"
+      "glyph": "glyphs/unc-utc/UTC00312.png",
+      "guess": {
+        "ids": "⿰阝春",
+        "confidence": 0.844,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "source": "UTC00314",
       "document": "n1525",
       "page": 1,
-      "glyph": "glyphs/unc-utc/UTC00314.png"
+      "glyph": "glyphs/unc-utc/UTC00314.png",
+      "guess": {
+        "ids": "⿰月庚",
+        "confidence": 0.801,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "source": "UTC00315",
       "document": "n1525",
       "page": 1,
-      "glyph": "glyphs/unc-utc/UTC00315.png"
+      "glyph": "glyphs/unc-utc/UTC00315.png",
+      "guess": {
+        "ids": "⿰赤兒",
+        "confidence": 0.836,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     }
   ]
 }

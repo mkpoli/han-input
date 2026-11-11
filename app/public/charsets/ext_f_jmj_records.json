@@ -34,7 +34,13 @@
       "document": "n1924",
       "page": 2,
       "glyph": "glyphs/ext-f-jmj/00009.png",
-      "unifiedWith": "U+0642D"
+      "unifiedWith": "U+0642D",
+      "guess": {
+        "ids": "⿺⿻一亅丶",
+        "confidence": 0.801,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "00030",
@@ -42,7 +48,13 @@
       "document": "n1924",
       "page": 2,
       "glyph": "glyphs/ext-f-jmj/00030.png",
-      "unifiedWith": "U+2B741"
+      "unifiedWith": "U+2B741",
+      "guess": {
+        "ids": "⿻⿱一⿻口丿丶",
+        "confidence": 0.419,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.15"
+      }
     },
     {
       "serial": "00092",
@@ -50,7 +62,13 @@
       "document": "n1924",
       "page": 5,
       "glyph": "glyphs/ext-f-jmj/00092.png",
-      "unifiedWith": "JMJ-056893"
+      "unifiedWith": "JMJ-056893",
+      "guess": {
+        "ids": "⿱丶来",
+        "confidence": 0.222,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.08"
+      }
     },
     {
       "serial": "00499",
@@ -58,7 +76,13 @@
       "document": "n1924",
       "page": 2,
       "glyph": "glyphs/ext-f-jmj/00499.png",
-      "unifiedWith": "U+05178"
+      "unifiedWith": "U+05178",
+      "guess": {
+        "ids": "⿱曲八",
+        "confidence": 0.372,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.03"
+      }
     },
     {
       "serial": "00793",
@@ -66,7 +90,13 @@
       "document": "n1924",
       "page": 2,
       "glyph": "glyphs/ext-f-jmj/00793.png",
-      "unifiedWith": "U+0530B"
+      "unifiedWith": "U+0530B",
+      "guess": {
+        "ids": "⿹勹𦈢",
+        "confidence": 0.848,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "00831",
@@ -74,7 +104,13 @@
       "document": "n1924",
       "page": 4,
       "glyph": "glyphs/ext-f-jmj/00831.png",
-      "unifiedWith": "U+2B9E6"
+      "unifiedWith": "U+2B9E6",
+      "guess": {
+        "ids": "⿰十專",
+        "confidence": 0.822,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.03"
+      }
     },
     {
       "serial": "00894",
@@ -82,7 +118,13 @@
       "document": "n1924",
       "page": 2,
       "glyph": "glyphs/ext-f-jmj/00894.png",
-      "unifiedWith": "U+20AE4"
+      "unifiedWith": "U+20AE4",
+      "guess": {
+        "ids": "⿱又厷",
+        "confidence": 0.611,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "00953",
@@ -90,7 +132,13 @@
       "document": "n1924",
       "page": 2,
       "glyph": "glyphs/ext-f-jmj/00953.png",
-      "unifiedWith": "U+20BCC"
+      "unifiedWith": "U+20BCC",
+      "guess": {
+        "ids": "⿱又右",
+        "confidence": 0.764,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "01640",
@@ -98,7 +146,13 @@
       "document": "n1924",
       "page": 5,
       "glyph": "glyphs/ext-f-jmj/01640.png",
-      "unifiedWith": "JMJ-057254"
+      "unifiedWith": "JMJ-057254",
+      "guess": {
+        "ids": "⿱隹夊",
+        "confidence": 0.768,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "01651",
@@ -106,7 +160,13 @@
       "document": "n1924",
       "page": 2,
       "glyph": "glyphs/ext-f-jmj/01651.png",
-      "unifiedWith": "U+2B762"
+      "unifiedWith": "U+2B762",
+      "guess": {
+        "ids": "⿻⿰夕丶丶",
+        "confidence": 0.469,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.15"
+      }
     },
     {
       "serial": "01707",
@@ -114,7 +174,13 @@
       "document": "n1924",
       "page": 5,
       "glyph": "glyphs/ext-f-jmj/01707.png",
-      "unifiedWith": "JMJ-059482"
+      "unifiedWith": "JMJ-059482",
+      "guess": {
+        "ids": "⿳⺊𭁨大",
+        "confidence": 0.899,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "01857",
@@ -122,7 +188,13 @@
       "document": "n1924",
       "page": 2,
       "glyph": "glyphs/ext-f-jmj/01857.png",
-      "unifiedWith": "U+219F1"
+      "unifiedWith": "U+219F1",
+      "guess": {
+        "ids": "⿱宀吾",
+        "confidence": 0.487,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "01879",
@@ -130,7 +202,13 @@
       "document": "n1924",
       "page": 5,
       "glyph": "glyphs/ext-f-jmj/01879.png",
-      "unifiedWith": "JMJ-057337"
+      "unifiedWith": "JMJ-057337",
+      "guess": {
+        "ids": "⿱宀𰥍",
+        "confidence": 0.368,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "03586",
@@ -138,7 +216,13 @@
       "document": "n1924",
       "page": 4,
       "glyph": "glyphs/ext-f-jmj/03586.png",
-      "unifiedWith": "U+2BBFC"
+      "unifiedWith": "U+2BBFC",
+      "guess": {
+        "ids": "⿱⿲木歹木大",
+        "confidence": 0.806,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.08"
+      }
     },
     {
       "serial": "03792",
@@ -146,7 +230,13 @@
       "document": "n1924",
       "page": 4,
       "glyph": "glyphs/ext-f-jmj/03792.png",
-      "unifiedWith": "U+2C199"
+      "unifiedWith": "U+2C199",
+      "guess": {
+        "ids": "⿱⿻巳巳廾",
+        "confidence": 0.635,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.15"
+      }
     },
     {
       "serial": "03820",
@@ -154,7 +244,13 @@
       "document": "n1924",
       "page": 4,
       "glyph": "glyphs/ext-f-jmj/03820.png",
-      "unifiedWith": "U+2BA3D"
+      "unifiedWith": "U+2BA3D",
+      "guess": {
+        "ids": "⿰皀殳",
+        "confidence": 0.704,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "03848",
@@ -162,7 +258,13 @@
       "document": "n1924",
       "page": 4,
       "glyph": "glyphs/ext-f-jmj/03848.png",
-      "unifiedWith": "U+2C1B6"
+      "unifiedWith": "U+2C1B6",
+      "guess": {
+        "ids": "⿰豙殳",
+        "confidence": 0.366,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.03"
+      }
     },
     {
       "serial": "04064",
@@ -170,7 +272,13 @@
       "document": "n1924",
       "page": 4,
       "glyph": "glyphs/ext-f-jmj/04064.png",
-      "unifiedWith": "U+2C231"
+      "unifiedWith": "U+2C231",
+      "guess": {
+        "ids": "⿰氵㥯",
+        "confidence": 0.65,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "04672",
@@ -178,7 +286,13 @@
       "document": "n1924",
       "page": 4,
       "glyph": "glyphs/ext-f-jmj/04672.png",
-      "unifiedWith": "U+2C3AD"
+      "unifiedWith": "U+2C3AD",
+      "guess": {
+        "ids": "⿰朶瓦",
+        "confidence": 0.728,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.03"
+      }
     },
     {
       "serial": "04795",
@@ -186,7 +300,13 @@
       "document": "n1924",
       "page": 2,
       "glyph": "glyphs/ext-f-jmj/04795.png",
-      "unifiedWith": "U+2B7AC"
+      "unifiedWith": "U+2B7AC",
+      "guess": {
+        "ids": "⿸疒圣",
+        "confidence": 0.887,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "04863",
@@ -194,7 +314,13 @@
       "document": "n1924",
       "page": 5,
       "glyph": "glyphs/ext-f-jmj/04863.png",
-      "unifiedWith": "JMJ-058133"
+      "unifiedWith": "JMJ-058133",
+      "guess": {
+        "ids": "〾⿱𭼽豆",
+        "confidence": 0.668,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "06170",
@@ -202,7 +328,13 @@
       "document": "n1924",
       "page": 5,
       "glyph": "glyphs/ext-f-jmj/06170.png",
-      "unifiedWith": "JMJ-058472"
+      "unifiedWith": "JMJ-058472",
+      "guess": {
+        "ids": "⿱艹麦",
+        "confidence": 0.499,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "06450",
@@ -210,7 +342,13 @@
       "document": "n1924",
       "page": 3,
       "glyph": "glyphs/ext-f-jmj/06450.png",
-      "unifiedWith": "U+04572"
+      "unifiedWith": "U+04572",
+      "guess": {
+        "ids": "⿱艹廩",
+        "confidence": 0.797,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "06880",
@@ -218,7 +356,13 @@
       "document": "n1924",
       "page": 3,
       "glyph": "glyphs/ext-f-jmj/06880.png",
-      "unifiedWith": "U+08B53"
+      "unifiedWith": "U+08B53",
+      "guess": {
+        "ids": "⿰訁恵",
+        "confidence": 0.723,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "07267",
@@ -226,7 +370,13 @@
       "document": "n1924",
       "page": 3,
       "glyph": "glyphs/ext-f-jmj/07267.png",
-      "unifiedWith": "U+08FF3"
+      "unifiedWith": "U+08FF3",
+      "guess": {
+        "ids": "⿱又⿺辶圣",
+        "confidence": 0.417,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.03"
+      }
     },
     {
       "serial": "08476",
@@ -234,7 +384,13 @@
       "document": "n1924",
       "page": 4,
       "glyph": "glyphs/ext-f-jmj/08476.png",
-      "unifiedWith": "U+2CE7B"
+      "unifiedWith": "U+2CE7B",
+      "guess": {
+        "ids": "⿰齒朶",
+        "confidence": 0.845,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     }
   ]
 }

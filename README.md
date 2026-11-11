@@ -28,7 +28,7 @@ It covers Han, extended sinographies such as Chữ Nôm and Sawndip, and kana an
 
 ```sh
 bun install
-bun run build:data      # the tables, from sources pinned in scripts/ and cached in cache/
+bun run build:data      # the tables and the /statistics counts, from sources pinned in scripts/
 bun run dev
 bun run verify          # unit tests, type check, messages
 ```
@@ -40,6 +40,11 @@ before `build:data` reads it. The generated `app/public/data/` is about 300 MB a
 The proposal sets carry the glyphs printed in their IRG documents. `bun scripts/import_irg_records.mjs`
 cuts them from the pinned PDFs (poppler and ImageMagick), matches each to the codes printed beside it,
 and writes `app/public/charsets/glyphs/` plus one records file per set.
+
+A record whose only shape is a printed image also carries a `guess`, read from that image by han2ids
+v0.4. `scripts/guess_ids.py` writes the sequence, confidence and model beside the image; a guess never
+enters the attested `kind: "ids"` field. The checkpoint is a release asset, and the script runs from
+the han2ids checkout; its header gives both commands.
 
 The part spellings and character variants come from the committed [variant snapshot](data/variants.json),
 built by `bun scripts/import_variants.mjs` from IWDS, the curated [Idu groups](data/variant-groups.json)

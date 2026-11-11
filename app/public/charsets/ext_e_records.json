@@ -65,938 +65,1742 @@
       "source": "G_ZFY00028",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/00171.png"
+      "glyph": "glyphs/ext-e/00171.png",
+      "guess": {
+        "ids": "⿱二门",
+        "confidence": 0.465,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "00276",
       "source": "G_ZFY00252",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/00276.png"
+      "glyph": "glyphs/ext-e/00276.png",
+      "guess": {
+        "ids": "⿰亻亟",
+        "confidence": 0.607,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "00314",
       "source": "G_ZFY00302",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/00314.png"
+      "glyph": "glyphs/ext-e/00314.png",
+      "guess": {
+        "ids": "⿰亻𦏾",
+        "confidence": 0.594,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "00321",
       "source": "G_ZFY00179",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/00321.png"
+      "glyph": "glyphs/ext-e/00321.png",
+      "guess": {
+        "ids": "⿰亻紂",
+        "confidence": 0.805,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "00358",
       "source": "G_GJZ00004",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/00358.png"
+      "glyph": "glyphs/ext-e/00358.png",
+      "guess": {
+        "ids": "⿰会卑",
+        "confidence": 0.878,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "00516",
       "source": "G_ZFY00427",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/00516.png"
+      "glyph": "glyphs/ext-e/00516.png",
+      "guess": {
+        "ids": "⿱冖贛",
+        "confidence": 0.682,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.03"
+      }
     },
     {
       "serial": "00550",
       "source": "G_ZFY00356",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/00550.png"
+      "glyph": "glyphs/ext-e/00550.png",
+      "guess": {
+        "ids": "⿰冫参",
+        "confidence": 0.857,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "00636",
       "source": "G_ZFY00045",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/00636.png"
+      "glyph": "glyphs/ext-e/00636.png",
+      "guess": {
+        "ids": "⿰廷刂",
+        "confidence": 0.533,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "00643",
       "source": "G_GJZ00005",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/00643.png"
+      "glyph": "glyphs/ext-e/00643.png",
+      "guess": {
+        "ids": "⿰参刂",
+        "confidence": 0.008,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "00738",
       "source": "G_GH100129",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/00738.png"
+      "glyph": "glyphs/ext-e/00738.png",
+      "guess": {
+        "ids": "⿰匕𡿺",
+        "confidence": 0.828,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "00807",
       "source": "G_ZFY00228",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/00807.png"
+      "glyph": "glyphs/ext-e/00807.png",
+      "guess": {
+        "ids": "⿱⿰⺊日⿰卤最",
+        "confidence": 0.32,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.15"
+      }
     },
     {
       "serial": "00872",
       "source": "G_GJZ00009",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/00872.png"
+      "glyph": "glyphs/ext-e/00872.png",
+      "guess": {
+        "ids": "⿸厂⿳𠔿𠔿⿲人人人",
+        "confidence": 0.456,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.15"
+      }
     },
     {
       "serial": "00997",
       "source": "G_GJZ00015",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/00997.png"
+      "glyph": "glyphs/ext-e/00997.png",
+      "guess": {
+        "ids": "⿰口𢀖",
+        "confidence": 0.873,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "01044",
       "source": "G_GJZ00017",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/01044.png"
+      "glyph": "glyphs/ext-e/01044.png",
+      "guess": {
+        "ids": "⿰口⿳山𠆢𠤎",
+        "confidence": 0.867,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "01159",
       "source": "G_GJZ00018",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/01159.png"
+      "glyph": "glyphs/ext-e/01159.png",
+      "guess": {
+        "ids": "⿰口恋",
+        "confidence": 0.687,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "01206",
       "source": "G_GJZ00020",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/01206.png"
+      "glyph": "glyphs/ext-e/01206.png",
+      "guess": {
+        "ids": "⿰口⿰孛鸟",
+        "confidence": 0.419,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "01220",
       "source": "G_GJZ00021",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/01220.png"
+      "glyph": "glyphs/ext-e/01220.png",
+      "guess": {
+        "ids": "⿰口⿱𰁜肉",
+        "confidence": 0.702,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "01299",
       "source": "G_GJZ00024",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/01299.png"
+      "glyph": "glyphs/ext-e/01299.png",
+      "guess": {
+        "ids": "⿰口額",
+        "confidence": 0.451,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "01480",
       "source": "G_GJZ00026",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/01480.png"
+      "glyph": "glyphs/ext-e/01480.png",
+      "guess": {
+        "ids": "⿱⿱土冖车",
+        "confidence": 0.848,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "01792",
       "source": "G_ZFY00256",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/01792.png"
+      "glyph": "glyphs/ext-e/01792.png",
+      "guess": {
+        "ids": "⿱夕⿰⿱一丂⿱㇒巾",
+        "confidence": 0.759,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.08"
+      }
     },
     {
       "serial": "01824",
       "source": "G_ZFY00206",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/01824.png"
+      "glyph": "glyphs/ext-e/01824.png",
+      "guess": {
+        "ids": "⿱⿺𠃊龶大",
+        "confidence": 0.056,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "01919",
       "source": "G_GJZ00027",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/01919.png"
+      "glyph": "glyphs/ext-e/01919.png",
+      "guess": {
+        "ids": "⿰女毕",
+        "confidence": 0.861,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "01944",
       "source": "G_GJZ00028",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/01944.png"
+      "glyph": "glyphs/ext-e/01944.png",
+      "guess": {
+        "ids": "⿰女条",
+        "confidence": 0.848,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "01959",
       "source": "G_GJZ00029",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/01959.png"
+      "glyph": "glyphs/ext-e/01959.png",
+      "guess": {
+        "ids": "⿰女责",
+        "confidence": 0.15,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "01962",
       "source": "G_GJZ00030",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/01962.png"
+      "glyph": "glyphs/ext-e/01962.png",
+      "guess": {
+        "ids": "⿱斩女",
+        "confidence": 0.874,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "01972",
       "source": "G_GJZ00031",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/01972.png"
+      "glyph": "glyphs/ext-e/01972.png",
+      "guess": {
+        "ids": "⿰女枭",
+        "confidence": 0.823,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "02099",
       "source": "G_GJZ00033",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/02099.png"
+      "glyph": "glyphs/ext-e/02099.png",
+      "guess": {
+        "ids": "⿰子贝",
+        "confidence": 0.87,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "02105",
       "source": "G_GJZ00034",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/02105.png"
+      "glyph": "glyphs/ext-e/02105.png",
+      "guess": {
+        "ids": "⿰子呙",
+        "confidence": 0.873,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "02349",
       "source": "G_ZFY00882",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/02349.png"
+      "glyph": "glyphs/ext-e/02349.png",
+      "guess": {
+        "ids": "⿸尸坔",
+        "confidence": 0.792,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "02698",
       "source": "G_ZFY00041",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/02698.png"
+      "glyph": "glyphs/ext-e/02698.png",
+      "guess": {
+        "ids": "⿱幵朿",
+        "confidence": 0.227,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "02944",
       "source": "G_ZFY00212",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/02944.png"
+      "glyph": "glyphs/ext-e/02944.png",
+      "guess": {
+        "ids": "⿱牛心",
+        "confidence": 0.524,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "03190",
       "source": "G_ZFY00584",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/03190.png"
+      "glyph": "glyphs/ext-e/03190.png",
+      "guess": {
+        "ids": "⿰扌庄",
+        "confidence": 0.549,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "03318",
       "source": "G_GJZ00046",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/03318.png"
+      "glyph": "glyphs/ext-e/03318.png",
+      "guess": {
+        "ids": "⿰扌烦",
+        "confidence": 0.655,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "03320",
       "source": "G_ZFY00618",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/03320.png"
+      "glyph": "glyphs/ext-e/03320.png",
+      "guess": {
+        "ids": "⿰扌料",
+        "confidence": 0.896,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "03321",
       "source": "G_ZFY00648",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/03321.png"
+      "glyph": "glyphs/ext-e/03321.png",
+      "guess": {
+        "ids": "⿰扌冤",
+        "confidence": 0.903,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "03361",
       "source": "G_GJZ00047",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/03361.png"
+      "glyph": "glyphs/ext-e/03361.png",
+      "guess": {
+        "ids": "⿰扌缘",
+        "confidence": 0.702,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "03490",
       "source": "G_ZFY00453",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/03490.png"
+      "glyph": "glyphs/ext-e/03490.png",
+      "guess": {
+        "ids": "⿻户敉",
+        "confidence": 0.312,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.15"
+      }
     },
     {
       "serial": "03744",
       "source": "G_GJZ00117",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/03744.png"
+      "glyph": "glyphs/ext-e/03744.png",
+      "guess": {
+        "ids": "⿰月刍",
+        "confidence": 0.898,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "03778",
       "source": "G_GJZ00118",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/03778.png"
+      "glyph": "glyphs/ext-e/03778.png",
+      "guess": {
+        "ids": "⿰月聂",
+        "confidence": 0.332,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "04061",
       "source": "G_GJZ00051",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/04061.png"
+      "glyph": "glyphs/ext-e/04061.png",
+      "guess": {
+        "ids": "⿰木遗",
+        "confidence": 0.687,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "04253",
       "source": "G_ZFY00888",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/04253.png"
+      "glyph": "glyphs/ext-e/04253.png",
+      "guess": {
+        "ids": "⿱𠘧⿰⿸尸衣又",
+        "confidence": 0.333,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.15"
+      }
     },
     {
       "serial": "04429",
       "source": "G_GJZ00053",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/04429.png"
+      "glyph": "glyphs/ext-e/04429.png",
+      "guess": {
+        "ids": "⿰氵觅",
+        "confidence": 0.804,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "04430",
       "source": "G_GJZ00054",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/04430.png"
+      "glyph": "glyphs/ext-e/04430.png",
+      "guess": {
+        "ids": "⿰氵貪",
+        "confidence": 0.484,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "04477",
       "source": "G_GH100807",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/04477.png"
+      "glyph": "glyphs/ext-e/04477.png",
+      "guess": {
+        "ids": "⿰氵养",
+        "confidence": 0.9,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "04479",
       "source": "G_GJZ00056",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/04479.png"
+      "glyph": "glyphs/ext-e/04479.png",
+      "guess": {
+        "ids": "⿰氵阁",
+        "confidence": 0.806,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "04487",
       "source": "G_GJZ00057",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/04487.png"
+      "glyph": "glyphs/ext-e/04487.png",
+      "guess": {
+        "ids": "⿱⿰冫荐⿶凵存",
+        "confidence": 0.288,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.03"
+      }
     },
     {
       "serial": "04641",
       "source": "G_GJZ00059",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/04641.png"
+      "glyph": "glyphs/ext-e/04641.png",
+      "guess": {
+        "ids": "⿰氵𡭽",
+        "confidence": 0.384,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "04674",
       "source": "G_ZFY01044",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/04674.png"
+      "glyph": "glyphs/ext-e/04674.png",
+      "guess": {
+        "ids": "⿰火专",
+        "confidence": 0.904,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "04677",
       "source": "G_GJZ00060",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/04677.png"
+      "glyph": "glyphs/ext-e/04677.png",
+      "guess": {
+        "ids": "⿰火长",
+        "confidence": 0.912,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "04682",
       "source": "G_GJZ00061",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/04682.png"
+      "glyph": "glyphs/ext-e/04682.png",
+      "guess": {
+        "ids": "⿰火为",
+        "confidence": 0.863,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "04692",
       "source": "G_GJZ00062",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/04692.png"
+      "glyph": "glyphs/ext-e/04692.png",
+      "guess": {
+        "ids": "⿱执火",
+        "confidence": 0.892,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "04943",
       "source": "G_GH100880",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/04943.png"
+      "glyph": "glyphs/ext-e/04943.png",
+      "guess": {
+        "ids": "⿰牜⿳𣅽八氺",
+        "confidence": 0.566,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "04990",
       "source": "G_GJZ00067",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/04990.png"
+      "glyph": "glyphs/ext-e/04990.png",
+      "guess": {
+        "ids": "⿰犭党",
+        "confidence": 0.904,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "05003",
       "source": "G_GJZ00068",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/05003.png"
+      "glyph": "glyphs/ext-e/05003.png",
+      "guess": {
+        "ids": "⿰犭鲁",
+        "confidence": 0.908,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "05032",
       "source": "G_GJZ00069",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/05032.png"
+      "glyph": "glyphs/ext-e/05032.png",
+      "guess": {
+        "ids": "⿰𤣩卢",
+        "confidence": 0.897,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "05044",
       "source": "G_GJZ00070",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/05044.png"
+      "glyph": "glyphs/ext-e/05044.png",
+      "guess": {
+        "ids": "⿰𤣩亚",
+        "confidence": 0.893,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "05045",
       "source": "G_GJZ00071",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/05045.png"
+      "glyph": "glyphs/ext-e/05045.png",
+      "guess": {
+        "ids": "⿰𤣩尧",
+        "confidence": 0.887,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "05083",
       "source": "G_GJZ00072",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/05083.png"
+      "glyph": "glyphs/ext-e/05083.png",
+      "guess": {
+        "ids": "⿰𤣩贲",
+        "confidence": 0.877,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "05224",
       "source": "G_GJZ00076",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/05224.png"
+      "glyph": "glyphs/ext-e/05224.png",
+      "guess": {
+        "ids": "⿰田⿱𠂉𠃓",
+        "confidence": 0.924,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "05325",
       "source": "G_GJZ00078",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/05325.png"
+      "glyph": "glyphs/ext-e/05325.png",
+      "guess": {
+        "ids": "⿸疒欽",
+        "confidence": 0.361,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "05351",
       "source": "G_ZFY00273",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/05351.png"
+      "glyph": "glyphs/ext-e/05351.png",
+      "guess": {
+        "ids": "⿰白豕",
+        "confidence": 0.9,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "05376",
       "source": "G_GJZ00080",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/05376.png"
+      "glyph": "glyphs/ext-e/05376.png",
+      "guess": {
+        "ids": "⿰卖皮",
+        "confidence": 0.86,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "05381",
       "source": "G_ZFY00539",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/05381.png"
+      "glyph": "glyphs/ext-e/05381.png",
+      "guess": {
+        "ids": "⿰皮骨",
+        "confidence": 0.896,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "05476",
       "source": "G_GJZ00081",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/05476.png"
+      "glyph": "glyphs/ext-e/05476.png",
+      "guess": {
+        "ids": "⿰目业",
+        "confidence": 0.886,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "05752",
       "source": "G_GJZ00084",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/05752.png"
+      "glyph": "glyphs/ext-e/05752.png",
+      "guess": {
+        "ids": "⿰礻农",
+        "confidence": 0.899,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "05795",
       "source": "G_GJZ00086",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/05795.png"
+      "glyph": "glyphs/ext-e/05795.png",
+      "guess": {
+        "ids": "⿰礻啬",
+        "confidence": 0.88,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "05810",
       "source": "G_GJZ00087",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/05810.png"
+      "glyph": "glyphs/ext-e/05810.png",
+      "guess": {
+        "ids": "⿰礻赖",
+        "confidence": 0.812,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "05836",
       "source": "G_GJZ00089",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/05836.png"
+      "glyph": "glyphs/ext-e/05836.png",
+      "guess": {
+        "ids": "⿰禾龙",
+        "confidence": 0.909,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "05837",
       "source": "G_GJZ00088",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/05837.png"
+      "glyph": "glyphs/ext-e/05837.png",
+      "guess": {
+        "ids": "⿰禾闪",
+        "confidence": 0.566,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "05839",
       "source": "G_GJZ00090",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/05839.png"
+      "glyph": "glyphs/ext-e/05839.png",
+      "guess": {
+        "ids": "⿰禾厌",
+        "confidence": 0.782,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "05895",
       "source": "G_ZFY00322",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/05895.png"
+      "glyph": "glyphs/ext-e/05895.png",
+      "guess": {
+        "ids": "⿱穴申",
+        "confidence": 0.581,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "05964",
       "source": "G_ZFY01004",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/05964.png"
+      "glyph": "glyphs/ext-e/05964.png",
+      "guess": {
+        "ids": "⿱𥫗大",
+        "confidence": 0.334,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "06178",
       "source": "G_ZFY01023",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/06178.png"
+      "glyph": "glyphs/ext-e/06178.png",
+      "guess": {
+        "ids": "⿰米页",
+        "confidence": 0.869,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "06179",
       "source": "G_GJZ00094",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/06179.png"
+      "glyph": "glyphs/ext-e/06179.png",
+      "guess": {
+        "ids": "⿰米岂",
+        "confidence": 0.914,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "06193",
       "source": "G_GJZ00095",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/06193.png"
+      "glyph": "glyphs/ext-e/06193.png",
+      "guess": {
+        "ids": "⿰米间",
+        "confidence": 0.921,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "06225",
       "source": "G_ZFY01013",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/06225.png"
+      "glyph": "glyphs/ext-e/06225.png",
+      "guess": {
+        "ids": "⿰米産",
+        "confidence": 0.916,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "06379",
       "source": "G_GJZ00102",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/06379.png"
+      "glyph": "glyphs/ext-e/06379.png",
+      "guess": {
+        "ids": "⿰纟乍",
+        "confidence": 0.891,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "06403",
       "source": "G_GJZ00103",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/06403.png"
+      "glyph": "glyphs/ext-e/06403.png",
+      "guess": {
+        "ids": "⿰纟先",
+        "confidence": 0.891,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "06422",
       "source": "G_GJZ00109",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/06422.png"
+      "glyph": "glyphs/ext-e/06422.png",
+      "guess": {
+        "ids": "⿰纟𫔮",
+        "confidence": 0.888,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "06465",
       "source": "G_GH101241",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/06465.png"
+      "glyph": "glyphs/ext-e/06465.png",
+      "guess": {
+        "ids": "⿰纟致",
+        "confidence": 0.896,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "06470",
       "source": "G_GJZ00106",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/06470.png"
+      "glyph": "glyphs/ext-e/06470.png",
+      "guess": {
+        "ids": "⿰纟冥",
+        "confidence": 0.9,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "06478",
       "source": "G_GJZ00108",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/06478.png"
+      "glyph": "glyphs/ext-e/06478.png",
+      "guess": {
+        "ids": "⿰纟⿱目兆",
+        "confidence": 0.834,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "06500",
       "source": "G_GJZ00110",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/06500.png"
+      "glyph": "glyphs/ext-e/06500.png",
+      "guess": {
+        "ids": "⿰纟廉",
+        "confidence": 0.9,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "06502",
       "source": "G_GJZ00099",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/06502.png"
+      "glyph": "glyphs/ext-e/06502.png",
+      "guess": {
+        "ids": "⿰纟蔡",
+        "confidence": 0.876,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "06507",
       "source": "G_GJZ00111",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/06507.png"
+      "glyph": "glyphs/ext-e/06507.png",
+      "guess": {
+        "ids": "⿰纟選",
+        "confidence": 0.897,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "06564",
       "source": "G_GJZ00112",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/06564.png"
+      "glyph": "glyphs/ext-e/06564.png",
+      "guess": {
+        "ids": "⿱罒𩸥",
+        "confidence": 0.482,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "06831",
       "source": "G_GJZ00120",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/06831.png"
+      "glyph": "glyphs/ext-e/06831.png",
+      "guess": {
+        "ids": "⿰舟华",
+        "confidence": 0.879,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "06836",
       "source": "G_ZFY00188",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/06836.png"
+      "glyph": "glyphs/ext-e/06836.png",
+      "guess": {
+        "ids": "⿰舟带",
+        "confidence": 0.783,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "06932",
       "source": "G_GJZ00124",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/06932.png"
+      "glyph": "glyphs/ext-e/06932.png",
+      "guess": {
+        "ids": "⿱艹闷",
+        "confidence": 0.9,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "06950",
       "source": "G_GJZ00122",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/06950.png"
+      "glyph": "glyphs/ext-e/06950.png",
+      "guess": {
+        "ids": "⿱艹沙",
+        "confidence": 0.527,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "06951",
       "source": "G_GJZ00123",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/06951.png"
+      "glyph": "glyphs/ext-e/06951.png",
+      "guess": {
+        "ids": "⿱艹维",
+        "confidence": 0.177,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "07011",
       "source": "G_ZFY00509",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/07011.png"
+      "glyph": "glyphs/ext-e/07011.png",
+      "guess": {
+        "ids": "⿱艹𧈹",
+        "confidence": 0.584,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.03"
+      }
     },
     {
       "serial": "07074",
       "source": "G_GJZ00126",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/07074.png"
+      "glyph": "glyphs/ext-e/07074.png",
+      "guess": {
+        "ids": "⿱艹闵",
+        "confidence": 0.373,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "07139",
       "source": "G_GJZ00128",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/07139.png"
+      "glyph": "glyphs/ext-e/07139.png",
+      "guess": {
+        "ids": "⿱艹儲",
+        "confidence": 0.551,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "07153",
       "source": "G_GJZ00127",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/07153.png"
+      "glyph": "glyphs/ext-e/07153.png",
+      "guess": {
+        "ids": "⿱艹⿰纟蚤",
+        "confidence": 0.474,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "07169",
       "source": "G_GJZ00129",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/07169.png"
+      "glyph": "glyphs/ext-e/07169.png",
+      "guess": {
+        "ids": "⿱艹颓",
+        "confidence": 0.395,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.15"
+      }
     },
     {
       "serial": "07170",
       "source": "G_GJZ00130",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/07170.png"
+      "glyph": "glyphs/ext-e/07170.png",
+      "guess": {
+        "ids": "⿱艹⿰⿱⺈田包",
+        "confidence": 0.344,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.08"
+      }
     },
     {
       "serial": "07181",
       "source": "G_CY101438",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/07181.png"
+      "glyph": "glyphs/ext-e/07181.png",
+      "guess": {
+        "ids": "⿱窡巾",
+        "confidence": 0.264,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.15"
+      }
     },
     {
       "serial": "07208",
       "source": "G_GJZ00131",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/07208.png"
+      "glyph": "glyphs/ext-e/07208.png",
+      "guess": {
+        "ids": "⿱艹⿰⿻丷⿻丷十瓜",
+        "confidence": 0.381,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.15"
+      }
     },
     {
       "serial": "07236",
       "source": "G_GJZ00132",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/07236.png"
+      "glyph": "glyphs/ext-e/07236.png",
+      "guess": {
+        "ids": "⿵茂韭",
+        "confidence": 0.56,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "07290",
       "source": "G_ZFY00258",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/07290.png"
+      "glyph": "glyphs/ext-e/07290.png",
+      "guess": {
+        "ids": "⿰虎鸟",
+        "confidence": 0.782,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.03"
+      }
     },
     {
       "serial": "07341",
       "source": "G_GH101478",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/07341.png"
+      "glyph": "glyphs/ext-e/07341.png",
+      "guess": {
+        "ids": "⿰虫岂",
+        "confidence": 0.88,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "07492",
       "source": "G_GH101517",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/07492.png"
+      "glyph": "glyphs/ext-e/07492.png",
+      "guess": {
+        "ids": "⿰衤厌",
+        "confidence": 0.693,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.08"
+      }
     },
     {
       "serial": "07585",
       "source": "G_GJZ00135",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/07585.png"
+      "glyph": "glyphs/ext-e/07585.png",
+      "guess": {
+        "ids": "⿰吉见",
+        "confidence": 0.875,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "07596",
       "source": "G_ZFY00876",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/07596.png"
+      "glyph": "glyphs/ext-e/07596.png",
+      "guess": {
+        "ids": "⿰𠁁见",
+        "confidence": 0.733,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "07768",
       "source": "G_ZFY00345",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/07768.png"
+      "glyph": "glyphs/ext-e/07768.png",
+      "guess": {
+        "ids": "⿰讠别",
+        "confidence": 0.838,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "07811",
       "source": "G_ZFY00373",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/07811.png"
+      "glyph": "glyphs/ext-e/07811.png",
+      "guess": {
+        "ids": "⿰讠荂",
+        "confidence": 0.752,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "07869",
       "source": "G_ZFY00457",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/07869.png"
+      "glyph": "glyphs/ext-e/07869.png",
+      "guess": {
+        "ids": "⿰讠龠",
+        "confidence": 0.871,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "08062",
       "source": "G_ZFY00702",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/08062.png"
+      "glyph": "glyphs/ext-e/08062.png",
+      "guess": {
+        "ids": "⿰𧾷产",
+        "confidence": 0.827,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "08068",
       "source": "G_ZFY00745",
       "document": "n1841",
       "page": 2,
-      "glyph": "glyphs/ext-e/08068.png"
+      "glyph": "glyphs/ext-e/08068.png",
+      "guess": {
+        "ids": "⿰𧾷𢌳",
+        "confidence": 0.522,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "08143",
       "source": "G_ZFY00127",
       "document": "n1841",
       "page": 3,
-      "glyph": "glyphs/ext-e/08143.png"
+      "glyph": "glyphs/ext-e/08143.png",
+      "guess": {
+        "ids": "⿰身反",
+        "confidence": 0.879,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "08287",
       "source": "G_ZFY00019",
       "document": "n1841",
       "page": 3,
-      "glyph": "glyphs/ext-e/08287.png"
+      "glyph": "glyphs/ext-e/08287.png",
+      "guess": {
+        "ids": "⿰辛画",
+        "confidence": 0.684,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "08785",
       "source": "G_ZFY00963",
       "document": "n1841",
       "page": 3,
-      "glyph": "glyphs/ext-e/08785.png"
+      "glyph": "glyphs/ext-e/08785.png",
+      "guess": {
+        "ids": "⿰钅囟",
+        "confidence": 0.917,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "08798",
       "source": "G_ZFY00923",
       "document": "n1841",
       "page": 3,
-      "glyph": "glyphs/ext-e/08798.png"
+      "glyph": "glyphs/ext-e/08798.png",
+      "guess": {
+        "ids": "⿰钅吞",
+        "confidence": 0.856,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "08876",
       "source": "G_ZFY00965",
       "document": "n1841",
       "page": 3,
-      "glyph": "glyphs/ext-e/08876.png"
+      "glyph": "glyphs/ext-e/08876.png",
+      "guess": {
+        "ids": "⿰钅𦐇",
+        "confidence": 0.915,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "08917",
       "source": "G_ZFY00935",
       "document": "n1841",
       "page": 3,
-      "glyph": "glyphs/ext-e/08917.png"
+      "glyph": "glyphs/ext-e/08917.png",
+      "guess": {
+        "ids": "⿰钅𢧜",
+        "confidence": 0.891,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "08950",
       "source": "G_ZFY00893",
       "document": "n1841",
       "page": 3,
-      "glyph": "glyphs/ext-e/08950.png"
+      "glyph": "glyphs/ext-e/08950.png",
+      "guess": {
+        "ids": "⿵門犬",
+        "confidence": 0.789,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.03"
+      }
     },
     {
       "serial": "09003",
       "source": "G_ZFY00428",
       "document": "n1841",
       "page": 3,
-      "glyph": "glyphs/ext-e/09003.png"
+      "glyph": "glyphs/ext-e/09003.png",
+      "guess": {
+        "ids": "⿵门覀",
+        "confidence": 0.832,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "09319",
       "source": "G_ZFY00925",
       "document": "n1841",
       "page": 3,
-      "glyph": "glyphs/ext-e/09319.png"
+      "glyph": "glyphs/ext-e/09319.png",
+      "guess": {
+        "ids": "⿱⺈⿺⿱乛乙贝",
+        "confidence": 0.265,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.15"
+      }
     },
     {
       "serial": "09321",
       "source": "G_ZFY00841",
       "document": "n1841",
       "page": 3,
-      "glyph": "glyphs/ext-e/09321.png"
+      "glyph": "glyphs/ext-e/09321.png",
+      "guess": {
+        "ids": "⿰⿰耳页贝",
+        "confidence": 0.438,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.15"
+      }
     },
     {
       "serial": "09371",
       "source": "G_ZFY00098",
       "document": "n1841",
       "page": 3,
-      "glyph": "glyphs/ext-e/09371.png"
+      "glyph": "glyphs/ext-e/09371.png",
+      "guess": {
+        "ids": "⿱⿰鬼页贝",
+        "confidence": 0.333,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.15"
+      }
     },
     {
       "serial": "09410",
       "source": "G_ZFY00827",
       "document": "n1841",
       "page": 3,
-      "glyph": "glyphs/ext-e/09410.png"
+      "glyph": "glyphs/ext-e/09410.png",
+      "guess": {
+        "ids": "⿺风豖",
+        "confidence": 0.853,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "09424",
       "source": "G_ZFY00920",
       "document": "n1841",
       "page": 3,
-      "glyph": "glyphs/ext-e/09424.png"
+      "glyph": "glyphs/ext-e/09424.png",
+      "guess": {
+        "ids": "⿰飠亏",
+        "confidence": 0.799,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "09425",
       "source": "G_ZFY00921",
       "document": "n1841",
       "page": 3,
-      "glyph": "glyphs/ext-e/09425.png"
+      "glyph": "glyphs/ext-e/09425.png",
+      "guess": {
+        "ids": "⿰飠于",
+        "confidence": 0.89,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "09431",
       "source": "G_ZFY00936",
       "document": "n1841",
       "page": 3,
-      "glyph": "glyphs/ext-e/09431.png"
+      "glyph": "glyphs/ext-e/09431.png",
+      "guess": {
+        "ids": "⿰飠它",
+        "confidence": 0.786,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "09440",
       "source": "G_ZFY00954",
       "document": "n1841",
       "page": 3,
-      "glyph": "glyphs/ext-e/09440.png"
+      "glyph": "glyphs/ext-e/09440.png",
+      "guess": {
+        "ids": "⿰飠其",
+        "confidence": 0.817,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "09446",
       "source": "G_ZFY00939",
       "document": "n1841",
       "page": 3,
-      "glyph": "glyphs/ext-e/09446.png"
+      "glyph": "glyphs/ext-e/09446.png",
+      "guess": {
+        "ids": "⿰飠叜",
+        "confidence": 0.839,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "09470",
       "source": "G_ZFY00113",
       "document": "n1841",
       "page": 3,
-      "glyph": "glyphs/ext-e/09470.png"
+      "glyph": "glyphs/ext-e/09470.png",
+      "guess": {
+        "ids": "⿰饣不",
+        "confidence": 0.87,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "09508",
       "source": "G_GH102407",
       "document": "n1841",
       "page": 3,
-      "glyph": "glyphs/ext-e/09508.png"
+      "glyph": "glyphs/ext-e/09508.png",
+      "guess": {
+        "ids": "⿰饣枼",
+        "confidence": 0.83,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "09692",
       "source": "G_ZFY00865",
       "document": "n1841",
       "page": 3,
-      "glyph": "glyphs/ext-e/09692.png"
+      "glyph": "glyphs/ext-e/09692.png",
+      "guess": {
+        "ids": "⿰骨奄",
+        "confidence": 0.871,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "10051",
       "source": "G_ZFY00128",
       "document": "n1841",
       "page": 3,
-      "glyph": "glyphs/ext-e/10051.png"
+      "glyph": "glyphs/ext-e/10051.png",
+      "guess": {
+        "ids": "⿰鱼彎",
+        "confidence": 0.834,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "10361",
       "source": "G_ZFY00640",
       "document": "n1841",
       "page": 3,
-      "glyph": "glyphs/ext-e/10361.png"
+      "glyph": "glyphs/ext-e/10361.png",
+      "guess": {
+        "ids": "⿰⿱聿夕未",
+        "confidence": 0.446,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.08"
+      }
     },
     {
       "serial": "10363",
       "source": "G_ZFY00616",
       "document": "n1841",
       "page": 3,
-      "glyph": "glyphs/ext-e/10363.png"
+      "glyph": "glyphs/ext-e/10363.png",
+      "guess": {
+        "ids": "⿰⿱龶夕穴",
+        "confidence": 0.227,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "10384",
       "source": "G_ZFY00569",
       "document": "n1841",
       "page": 3,
-      "glyph": "glyphs/ext-e/10384.png"
+      "glyph": "glyphs/ext-e/10384.png",
+      "guess": {
+        "ids": "⿰黄单",
+        "confidence": 0.724,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.03"
+      }
     },
     {
       "serial": "03098",

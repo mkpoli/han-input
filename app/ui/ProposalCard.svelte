@@ -12,6 +12,7 @@
   const code = $derived(record ? record.source ?? record.serial ?? '' : '')
   const mapped = $derived(record?.mappedUnicode ? String.fromCodePoint(parseInt(record.mappedUnicode.slice(2), 16)) : '')
   const unified = $derived(record?.unifiedWith ?? '')
+  const guessed = $derived(record?.guess ?? null)
   const unifiedChar = $derived(unified.startsWith('U+') ? String.fromCodePoint(parseInt(unified.slice(2), 16)) : '')
 </script>
 
@@ -32,6 +33,9 @@
         <a href={`${document.url}#page=${record.page ?? 1}`} target="_blank" rel="noopener noreferrer">{document.document}{record.page ? ` · ${t('proposal.page', { page: record.page })}` : ''}</a>
       </div>
     </header>
+    {#if guessed}
+      <p class="guess"><span class="ui-hint">{t('proposal.guess')}</span> <span class="seq" lang="und-Hani">{guessed.ids}</span> <span class="ui-count">{guessed.confidence >= 0.01 ? guessed.confidence.toFixed(2) : '<0.01'}</span></p>
+    {/if}
     {#if record.status}<p class="ui-hint">{record.status}</p>{/if}
     {#if unified}
       <p class="unified"><span class="ui-hint">{t('proposal.unifiedWith')}</span>
@@ -61,7 +65,9 @@
   .facts{display:grid;gap:var(--ui-space-2xs);min-inline-size:0}
   .name{margin:0;font-size:var(--ui-text-sm);overflow-wrap:anywhere}
   .facts a{color:var(--ui-color-accent-ink);font-size:var(--ui-text-sm);overflow-wrap:anywhere}
-  .mapped,.unified{margin:0}
+  .mapped,.unified,.guess{margin:0}
+  .guess{display:flex;align-items:baseline;flex-wrap:wrap;gap:var(--ui-space-xs)}
+  .guess .seq{font-family:'Han Ext',var(--ui-font-script);font-size:18px;line-height:1.35;overflow-wrap:anywhere}
   .unified a{font-size:24px;line-height:1;color:var(--ui-color-ink);text-decoration:none}
   .mapped a{font-size:56px;line-height:1;color:var(--ui-color-ink);text-decoration:none}
   .links{display:flex;flex-wrap:wrap;gap:var(--ui-space-2xs)}
