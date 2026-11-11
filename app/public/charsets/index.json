@@ -2447,6 +2447,11 @@
       "url": "https://zi.tools/?secondary=character_set&set=KC",
       "dataUrl": "https://zi.tools/api/ma/ma/kc.json"
     },
+    "records": {
+      "file": "/charsets/kc.ids.json",
+      "count": 6107,
+      "glyphs": 0
+    },
     "codes": "/charsets/kc.codes.tsv",
     "columns": 10
   },
@@ -2510,6 +2515,11 @@
       "url": "https://zi.tools/?secondary=character_set&set=K%E6%B3%95%E9%99%A2",
       "dataUrl": "https://zi.tools/api/ma/ma/kwhj.json"
     },
+    "records": {
+      "file": "/charsets/kwhj.ids.json",
+      "count": 11024,
+      "glyphs": 0
+    },
     "codes": "/charsets/kwhj.codes.tsv",
     "columns": 16
   },
@@ -2551,6 +2561,11 @@
       "name": "字統網",
       "url": "https://zi.tools/?secondary=character_set&set=KP1",
       "dataUrl": "https://zi.tools/api/ma/ma/kp1.json"
+    },
+    "records": {
+      "file": "/charsets/kp1.ids.json",
+      "count": 53,
+      "glyphs": 0
     },
     "codes": "/charsets/kp1.codes.tsv",
     "columns": 16
@@ -2657,6 +2672,11 @@
       "url": "https://zi.tools/?secondary=character_set&set=V4",
       "dataUrl": "https://zi.tools/api/ma/ma/v4.json"
     },
+    "records": {
+      "file": "/charsets/v4.ids.json",
+      "count": 137,
+      "glyphs": 0
+    },
     "codes": "/charsets/v4.codes.tsv",
     "columns": 10
   },
@@ -2677,6 +2697,11 @@
       "name": "字統網",
       "url": "https://zi.tools/?secondary=character_set&set=VN",
       "dataUrl": "https://zi.tools/api/ma/ma/vn.json"
+    },
+    "records": {
+      "file": "/charsets/vn.ids.json",
+      "count": 3993,
+      "glyphs": 0
     },
     "codes": "/charsets/vn.codes.tsv",
     "columns": 16
@@ -2699,6 +2724,11 @@
       "url": "https://zi.tools/?secondary=character_set&set=UK",
       "dataUrl": "https://zi.tools/api/ma/ma/uk.json"
     },
+    "records": {
+      "file": "/charsets/uk.ids.json",
+      "count": 142,
+      "glyphs": 0
+    },
     "codes": "/charsets/uk.codes.tsv",
     "columns": 10
   },
@@ -2719,6 +2749,11 @@
       "name": "字統網",
       "url": "https://zi.tools/?secondary=character_set&set=SAT",
       "dataUrl": "https://zi.tools/api/ma/ma/sat.json"
+    },
+    "records": {
+      "file": "/charsets/sat.ids.json",
+      "count": 2219,
+      "glyphs": 0
     },
     "codes": "/charsets/sat.codes.tsv",
     "columns": 10

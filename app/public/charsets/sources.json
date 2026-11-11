@@ -1,6 +1,6 @@
 {
   "catalogue": "https://zi.tools/api/ma/ma/metadata.json",
-  "retrieved": "2026-11-09",
+  "retrieved": "2026-11-11",
   "attribution": "字統網, character-set catalogue and glyph mappings. Editorial mappings; original standards and proposal documents remain authoritative. Reuse terms are unspecified at these endpoints. GB/T 12052-1989 follows Jaemin Chung’s transcription (ecma35lib); its printed totals differ from the table by three, and the set counts printed rows.",
   "policy": "Source-row sets index every row through its assigned Unicode scalars, or its private-use glyph slots where no scalar is assigned; rows described only by an IDS are kept as records, not scalar members; a glyph printed at more than one position is listed once, at its first position; a member may be a jamo sequence when a standard prints one glyph for a Hangul syllable Unicode cannot compose. Unihan kIRG_TSource fills assignments newer than the bulk release. Literal Unicode block sets contain assigned scalars. Unihan kIRG_GSource gives the G source collections. Local row numbers, IDS components and variation sequences do not establish scalar membership. OTHER follows the source’s unified substitutions, rather than literal Unicode block membership.",
   "inputs": [
@@ -298,7 +298,7 @@
     },
     {
       "url": "https://zi.tools/api/ma/ma/jmj.json",
-      "sha256": "0f4b5d2c3bc20a02661ca1f77e7290c318d04addfc07c9c861a61d99b08039f6"
+      "sha256": "4419d286bda6518923df6fc035f3a8ba1833c9d097657b2e83141c22a0b8f081"
     },
     {
       "url": "https://zi.tools/api/ma/ma/jmjp.json",
@@ -450,7 +450,7 @@
     },
     {
       "url": "https://zi.tools/api/ma/ma/tc.json",
-      "sha256": "099de61e7887cfd19199b33633823f047edb73520399d4bedf0c313878b48ae8"
+      "sha256": "1dbf9ad58c52d7569f0f49d885f987c84608db3a8f4f925e82760996d09a4c99"
     },
     {
       "url": "https://zi.tools/api/ma/ma/td.json",
