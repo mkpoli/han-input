@@ -70,7 +70,7 @@ GlyphWiki's `ebag_*` names are the 缺字編號 that 引得市 uses for its miss
 
 Four 方正超大字符集 fonts define 633 distinct BMP private-use slots: 522 in FZKTJW, 122 in FZSongS, 108 in FZJiaoCai GuiFanKai and 106 in FZKTK, with 106 slots shared by at least two faces. The set lists each slot and the faces that define it; no slot is treated as a coded character, and the font files and glyph outlines are not kept.
 
-The public copies are unofficial. `python scripts/build_fz_pua.py --mirror <url> FZKTK.TTF FZKTJW.TTF FZJCGFKTK.TTF FZSongS.TTF` reads their cmaps and writes the records. None of the six files has a plane-16 mapping, so 字統's `G方正楷体` plane-16 table is not reconstructed.
+The public copies are unofficial. `uv run --with fonttools python scripts/build_fz_pua.py --mirror <url> FZKTK.TTF FZKTJW.TTF FZJCGFKTK.TTF FZSongS.TTF` reads their cmaps and writes the records. None of the six files has a plane-16 mapping, so 字統's `G方正楷体` plane-16 table is not reconstructed.
 
 ## G source collections
 

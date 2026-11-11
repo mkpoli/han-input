@@ -1,6 +1,6 @@
 # Reads the cmap of the 方正超大字符集 font copies and writes the BMP private-use table. The fonts
 # stay outside the repository; this script only keeps the slot numbers and face coverage.
-#   python scripts/build_fz_pua.py --mirror <url> FZKTK.TTF FZKTJW.TTF FZJCGFKTK.TTF FZSongS.TTF
+#   uv run --with fonttools python scripts/build_fz_pua.py --mirror <url> FZKTK.TTF FZKTJW.TTF FZJCGFKTK.TTF FZSongS.TTF
 import argparse, hashlib, json, os
 from datetime import date
 from collections import defaultdict
