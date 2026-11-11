@@ -1,7 +1,7 @@
 <script>
   // The frame: a dark rail of pages down the side, the finder in the middle, the card of the open
   // character on the right (a sheet on a phone), and the text being written docked along the bottom.
-  import { NAV, go, route } from './lib/route.svelte.js'
+  import { NAV, go, navigation, route } from './lib/route.svelte.js'
   import { pageMetadata } from './lib/title.js'
   import { applySeo } from './lib/seo.js'
   import { ui, applyTheme } from './lib/ui.svelte.js'
@@ -36,6 +36,15 @@
   })
   const OWNER = /** @type {Record<string, string>} */ ({ m: 'methods', v: 'readings' })
   const current = $derived(OWNER[route.page] ?? route.page)
+  /** @type {HTMLElement} */
+  let finder
+  let lastNavigation = navigation.sequence
+  $effect(() => {
+    const next = navigation.sequence
+    if (next === lastNavigation) return
+    lastNavigation = next
+    finder.scrollTop = 0
+  })
 
   /** @param {MouseEvent} event @param {string} page */
   function nav(event, page) {
@@ -75,7 +84,7 @@
     </div>
   </nav>
 
-  <main class="finder">
+  <main class="finder" bind:this={finder}>
     {#if route.page === ''}<Find />
     {:else if route.page === 'methods'}<Methods />
     {:else if route.page === 'm' || route.page === 'v'}{#key route.page + route.method}<Method />{/key}

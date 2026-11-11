@@ -27,6 +27,7 @@ function read() {
 }
 
 export const route = $state(read())
+export const navigation = $state({ sequence: 0 })
 
 /** @param {Route} next */
 function href(next) {
@@ -48,7 +49,7 @@ export function go(page, method = '') {
   route.set = ''
   route.p = 1
   history.pushState(null, '', href(route))
-  scrollTo(0, 0)
+  navigation.sequence++
 }
 
 /** Close the open character, leaving a record card free to take its place. */
