@@ -45,6 +45,28 @@ try {
 
     await page.goto('http://local.test/about')
     await page.locator('main table').last().locator('tbody tr').last().waitFor()
+    assert.equal(await page.evaluate(() => history.scrollRestoration), 'auto', 'native restoration remains enabled for the rest of the document')
+    await page.locator('aside.card').evaluate(element => {
+      const filler = document.createElement('div')
+      filler.style.height = '3000px'
+      filler.id = 'scroll-test-filler'
+      element.append(filler)
+      element.scrollTop = 200
+    })
+    const writes = await main.evaluate(async element => {
+      let count = 0
+      const original = history.replaceState
+      history.replaceState = function (...args) { count++; return original.apply(this, args) }
+      try {
+        for (let i = 0; i < 20; i++) {
+          element.scrollTop = i * 20
+          await new Promise(requestAnimationFrame)
+        }
+        await new Promise(requestAnimationFrame)
+        return count
+      } finally { history.replaceState = original }
+    })
+    assert.equal(writes, 0, 'scroll events do not write history state')
     const aboutTop = await main.evaluate(element => element.scrollHeight - element.clientHeight - 100)
     await scroll(aboutTop)
     await nav('methods')
@@ -56,9 +78,24 @@ try {
     await page.waitForURL('**/about')
     await page.locator('main h1').waitFor()
     assert.ok(await top() < aboutTop, 'restoration waits for asynchronous content')
+    const staticCell = await page.locator('main td:not(:has(a))').evaluateAll(cells => {
+      const cell = cells.find(element => {
+        const rect = element.getBoundingClientRect()
+        return rect.top >= 0 && rect.bottom < innerHeight - 80 && rect.width > 20
+      })
+      if (!cell) throw new Error('No visible static cell')
+      const rect = cell.getBoundingClientRect()
+      return { x: rect.left + 10, y: rect.top + rect.height / 2 }
+    })
+    await page.mouse.click(staticCell.x, staticCell.y)
+    await page.locator('#writing').click()
+    await page.keyboard.type(' ')
     unhold()
     await expectTop(aboutTop)
-    assert.equal(await page.evaluate(() => document.activeElement?.getAttribute('href')), '/methods', 'history restoration does not steal focus')
+    assert.equal(await page.evaluate(() => document.activeElement?.id), 'writing', 'history restoration does not steal focus')
+    assert.equal(await page.locator('aside.card').evaluate(element => element.scrollTop), 200, 'finder restoration leaves the card alone')
+    assert.equal(await page.evaluate(() => window.scrollY), 0, 'the shell does not scroll the window')
+    await page.locator('#scroll-test-filler').evaluate(element => element.remove())
     if (process.env.SHOT_PREFIX) await page.screenshot({ path: `${process.env.SHOT_PREFIX}-${colorScheme}.png` })
     await page.goForward()
     await expectTop(600)
@@ -118,6 +155,48 @@ try {
     await page.reload()
     await expectTop(700)
     assert.notEqual(await page.evaluate(() => document.activeElement?.hasAttribute('data-primary')), true, 'reload restoration does not focus the finder')
+
+    // Opening a method should leave the user ready to type without an extra click.
+    await nav('methods')
+    await page.locator('main .list a').first().click()
+    const input = page.locator('main [data-primary]')
+    await input.waitFor()
+    assert.equal(await input.evaluate(element => document.activeElement === element), true, 'opening a method focuses its input')
+    await page.keyboard.type('abc')
+    assert.equal(await input.inputValue(), 'abc')
+    await page.goBack()
+    await page.locator('main .list a').first().waitFor()
+    await page.goForward()
+    await input.waitFor()
+    assert.equal(await input.evaluate(element => document.activeElement === element), false, 'history traversal does not focus the method input')
+
+    const fallback = await context.newPage()
+    await fallback.addInitScript(() => {
+      const setItem = Storage.prototype.setItem
+      /** @param {string} key @param {string} value */
+      Storage.prototype.setItem = function (key, value) {
+        if (this === sessionStorage) throw new DOMException('Storage unavailable', 'QuotaExceededError')
+        return setItem.call(this, key, value)
+      }
+    })
+    await fallback.goto('http://local.test/about')
+    await fallback.locator('main table').last().locator('tbody tr').last().waitFor()
+    const fallbackWrites = await fallback.locator('main').evaluate(async element => {
+      let count = 0
+      const original = history.replaceState
+      history.replaceState = function (...args) { count++; return original.apply(this, args) }
+      try {
+        for (let i = 1; i <= 20; i++) {
+          element.scrollTop = i * 35
+          await new Promise(requestAnimationFrame)
+        }
+        return count
+      } finally { history.replaceState = original }
+    })
+    assert.ok(fallbackWrites <= 2, 'history fallback is rate-limited')
+    await fallback.waitForFunction(() => history.state?.__finderScroll?.top === 700)
+    await fallback.reload()
+    await fallback.waitForFunction(() => document.querySelector('main')?.scrollTop === 700)
     await context.close()
   }
   console.log('Navigation scroll history passed in light and dark themes')

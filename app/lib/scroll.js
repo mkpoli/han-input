@@ -9,9 +9,9 @@ let pane
 let entry = ''
 /** @type {{ target: number, applied: number, stop: () => void } | undefined} */
 let pending
-let navigated = false
+let restoringHistory = false
 
-export const hasNavigated = () => navigated
+export const isRestoringHistory = () => restoringHistory
 
 function newEntry() { return Array.from(crypto.getRandomValues(new Uint32Array(4)), n => n.toString(36)).join('-') }
 
@@ -25,13 +25,6 @@ function save() {
   positions.set(entry, pane.scrollTop)
 }
 
-function persist() {
-  save()
-  if (!pending && pane && history.state?.[key]?.id === entry) {
-    history.replaceState(state(entry, pane.scrollTop), '')
-  }
-}
-
 function cancel() {
   pending?.stop()
   pending = undefined
@@ -40,45 +33,92 @@ function cancel() {
 /** Install the shared pane once it has mounted. @param {HTMLElement} element */
 export function installScroll(element) {
   pane = element
+  try {
+    const stored = JSON.parse(sessionStorage.getItem(key) ?? '[]')
+    if (Array.isArray(stored)) {
+      for (const [id, top] of stored) {
+        if (typeof id === 'string' && typeof top === 'number') positions.set(id, top)
+      }
+    }
+  } catch { /* History still works within this document when storage is unavailable. */ }
   const saved = history.state?.[key]
   entry = typeof saved?.id === 'string' ? saved.id : newEntry()
-  positions.set(entry, typeof saved?.top === 'number' ? saved.top : element.scrollTop)
-  history.replaceState(state(entry, positions.get(entry) ?? 0), '')
-  history.scrollRestoration = 'manual'
-  if (typeof saved?.top === 'number' && saved.top > 0) {
-    navigated = true
+  const top = positions.get(entry) ?? (typeof saved?.top === 'number' ? saved.top : element.scrollTop)
+  positions.set(entry, top)
+  history.replaceState(state(entry, top), '')
+  if (top > 0) {
+    restoringHistory = true
     void restoreScroll()
   }
 
+  let storageAvailable = true
+  try {
+    sessionStorage.setItem(`${key}:probe`, '1')
+    sessionStorage.removeItem(`${key}:probe`)
+  } catch { storageAvailable = false }
+  let lastFallback = -Infinity
+  /** @type {ReturnType<typeof setTimeout> | undefined} */
+  let fallbackTimer
+  const saveFallback = () => {
+    if (storageAvailable || fallbackTimer) return
+    const write = () => {
+      fallbackTimer = undefined
+      if (pending || history.state?.[key]?.id !== entry) return
+      lastFallback = performance.now()
+      try { history.replaceState(state(entry, positions.get(entry) ?? 0), '') } catch { /* The in-memory map still works. */ }
+    }
+    const delay = 1000 - (performance.now() - lastFallback)
+    if (delay <= 0) write()
+    else fallbackTimer = setTimeout(write, delay)
+  }
   const scroll = () => {
     if (pending && Math.abs(element.scrollTop - pending.applied) > 1) cancel()
-    persist()
+    save()
+    saveFallback()
   }
-  const userScroll = () => { if (pending) { cancel(); persist() } }
+  const userScroll = () => { if (pending) { cancel(); save() } }
   /** @param {KeyboardEvent} event */
   const keydown = event => {
-    if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '].includes(event.key)) userScroll()
+    const target = /** @type {Element | null} */ (event.target)
+    if (target && element.contains(target) && !target.closest('input, textarea, select, button, [contenteditable]') &&
+        ['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '].includes(event.key)) userScroll()
+  }
+  /** @param {PointerEvent} event */
+  const pointerdown = event => {
+    const bounds = element.getBoundingClientRect()
+    if (event.target === element && event.clientX >= bounds.left + element.clientLeft + element.clientWidth) userScroll()
+  }
+  const pagehide = () => {
+    save()
+    try { sessionStorage.setItem(key, JSON.stringify([...positions])) }
+    catch {
+      // If storage is unavailable, retain the current entry when history permits it.
+      try { history.replaceState(state(entry, positions.get(entry) ?? 0), '') } catch { /* The in-memory map still works. */ }
+    }
   }
   element.addEventListener('scroll', scroll, { passive: true })
   element.addEventListener('wheel', userScroll, { passive: true })
-  element.addEventListener('touchstart', userScroll, { passive: true })
-  element.addEventListener('pointerdown', userScroll, { passive: true })
+  element.addEventListener('touchmove', userScroll, { passive: true })
+  element.addEventListener('pointerdown', pointerdown, { passive: true })
   window.addEventListener('keydown', keydown)
+  window.addEventListener('pagehide', pagehide)
   return () => {
     cancel()
+    clearTimeout(fallbackTimer)
     element.removeEventListener('scroll', scroll)
     element.removeEventListener('wheel', userScroll)
-    element.removeEventListener('touchstart', userScroll)
-    element.removeEventListener('pointerdown', userScroll)
+    element.removeEventListener('touchmove', userScroll)
+    element.removeEventListener('pointerdown', pointerdown)
     window.removeEventListener('keydown', keydown)
+    window.removeEventListener('pagehide', pagehide)
     pane = undefined
   }
 }
 
 /** Push a distinct history entry. @param {string} url @param {boolean} reset */
 export function pushScroll(url, reset) {
-  navigated = true
-  persist()
+  restoringHistory = false
+  save()
   cancel()
   entry = newEntry()
   const top = reset ? 0 : pane?.scrollTop ?? 0
@@ -94,7 +134,7 @@ export function replaceScroll(url) {
 
 /** Capture the outgoing entry before the route is updated on popstate. */
 export function leaveScroll() {
-  navigated = true
+  restoringHistory = true
   save()
   cancel()
 }
@@ -127,7 +167,7 @@ export async function restoreScroll() {
     pending.applied = element.scrollTop
     if (Math.abs(element.scrollTop - target) <= 1) {
       cancel()
-      persist()
+      save()
     }
   }
 }
