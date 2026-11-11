@@ -206,8 +206,47 @@ try {
     await queryInput.fill('bar')
     await queryPage.locator('main .method').first().waitFor()
     assert.equal(await queryPage.locator('main').evaluate(element => element.scrollTop), 0, 'new query does not restore the old query offset')
+    await queryInput.focus()
+    await queryPage.keyboard.press('PageDown')
+    await queryPage.waitForFunction(() => (document.querySelector('main')?.scrollTop ?? 0) > 0)
     releaseFoo()
     await queryPage.close()
+
+    // Page keys on the Find input cancel even when the pane is already at its edge.
+    for (const [query, key] of [['fin', 'PageDown'], ['din', 'PageUp']]) {
+      let releaseInput = () => {}
+      let startedInput = () => {}
+      /** @type {Promise<void>} */
+      const inputGate = new Promise(resolve => { releaseInput = resolve })
+      /** @type {Promise<void>} */
+      const inputStarted = new Promise(resolve => { startedInput = resolve })
+      const inputPage = await context.newPage()
+      await inputPage.route(`**/data/c/${codeBucket(query)}.gz`, async route => {
+        startedInput()
+        await inputGate
+        await route.fulfill({ body: rows(query), contentType: 'text/plain' })
+      })
+      await inputPage.goto(`http://local.test/?q=${query}`, { waitUntil: 'domcontentloaded' })
+      await inputStarted
+      await inputPage.locator('main .ui-page').evaluate(element => {
+        const filler = document.createElement('div')
+        filler.style.height = '2000px'
+        element.append(filler)
+        const main = element.closest('main')
+        if (main) main.scrollTop = 500
+      })
+      assert.equal(await inputPage.locator('main').evaluate(element => element.scrollTop), 500)
+      await inputPage.locator('nav.rail a[href="/methods"]').click()
+      await inputPage.goBack()
+      await inputPage.locator('main [data-primary]').focus()
+      assert.equal(await inputPage.locator('main').evaluate(element => element.scrollTop), 0)
+      await inputPage.keyboard.press(key)
+      assert.equal(await inputPage.locator('main').evaluate(element => element.scrollTop), 0)
+      releaseInput()
+      await inputPage.locator('main .method').first().waitFor()
+      assert.equal(await inputPage.locator('main').evaluate(element => element.scrollTop), 0, `${key} on a search input cancels restoration at the scroll edge`)
+      await inputPage.close()
+    }
 
     // A scroll key on a focused button cancels even when the pane is already at its edge.
     let releaseQux = () => {}
@@ -297,6 +336,16 @@ try {
     assert.equal(await nestedPage.locator('main').evaluate(element => element.scrollTop), 500)
     await nestedPage.locator('nav.rail a[href="/methods"]').click()
     await nestedPage.goBack()
+    const caretInput = nestedPage.locator('main [data-primary]')
+    await caretInput.focus()
+    await caretInput.evaluate(element => /** @type {HTMLInputElement} */ (element).setSelectionRange(2, 2))
+    await nestedPage.keyboard.press('Home')
+    assert.equal(await caretInput.evaluate(element => /** @type {HTMLInputElement} */ (element).selectionStart), 0)
+    await nestedPage.keyboard.press('End')
+    assert.equal(await caretInput.evaluate(element => /** @type {HTMLInputElement} */ (element).selectionStart), 3)
+    await nestedPage.keyboard.press('ArrowLeft')
+    assert.equal(await caretInput.evaluate(element => /** @type {HTMLInputElement} */ (element).selectionStart), 2)
+    await nestedPage.keyboard.press('Shift+PageDown')
     await nestedPage.locator('main .ui-page').evaluate(element => {
       const button = document.createElement('button')
       button.id = 'scroll-test-button'
@@ -317,6 +366,16 @@ try {
     await groups.hover()
     await nestedPage.mouse.wheel(0, 150)
     await nestedPage.waitForFunction(() => (document.querySelector('.charset-filter .groups')?.scrollTop ?? 0) > 0)
+    await groups.evaluate(element => {
+      const input = document.createElement('input')
+      input.type = 'search'
+      input.id = 'scroll-test-nested-input'
+      element.prepend(input)
+    })
+    const nestedInput = groups.locator('#scroll-test-nested-input')
+    await nestedInput.focus()
+    await nestedPage.keyboard.press('PageDown')
+    await nestedInput.evaluate(element => element.remove())
     await groups.locator('button').first().focus()
     const nestedTop = await groups.evaluate(element => element.scrollTop)
     await nestedPage.keyboard.press('PageDown')

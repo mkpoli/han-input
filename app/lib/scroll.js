@@ -77,7 +77,10 @@ export function installScroll(element) {
   /** @param {KeyboardEvent} event */
   const keydown = event => {
     const target = /** @type {Element | null} */ (event.target)
-    if (!pending || !target || event.defaultPrevented || !element.contains(target) || target.closest('input, textarea, select, [contenteditable]')) return
+    if (!pending || !target || event.defaultPrevented || !element.contains(target) || target.closest('textarea, select, [contenteditable]')) return
+    const input = target.closest('input')
+    if (input && (!['text', 'search', 'email', 'url', 'tel', 'password'].includes(input.type) ||
+        !['PageUp', 'PageDown'].includes(event.key) || event.shiftKey || event.ctrlKey || event.altKey || event.metaKey)) return
     if (event.key === ' ' && target.closest('button, summary, [role="button"]')) return
     const direction = ['ArrowUp', 'PageUp', 'Home'].includes(event.key) || (event.key === ' ' && event.shiftKey) ? -1
       : ['ArrowDown', 'PageDown', 'End', ' '].includes(event.key) ? 1 : 0
