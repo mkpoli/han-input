@@ -227,10 +227,11 @@ test('snapshot covers every source catalogue and counts match unique scalars', (
     const match = input.url.match(/^https:\/\/zi.tools\/api\/ma\/ma\/([^/]+)\.json$/)
     return match && match[1] !== 'metadata' ? [match[1]] : []
   })
-  expect(referenceIds).toHaveLength(119)
+  expect(referenceIds).toHaveLength(115)
   for (const id of referenceIds) expect(catalogue.some(row => row.id === id)).toBe(true)
   for (const input of sources.inputs) expect(input.sha256).toMatch(/^[a-f0-9]{64}$/)
-  expect(catalogue.length).toBe(282)
+  expect(catalogue.length).toBe(279)
+  for (const id of ['irgn', 'l2', 'g_fzk', '1k8myqp9o8zxkvdpbqdhrfs6yfx5bk2t']) expect(catalogue.some(row => row.id === id)).toBe(false)
   const cns = catalogue.filter(row => row.group === 'CNS sources')
   const cnsSource = JSON.parse(readFileSync(new URL('cns-sources.json', base), 'utf8'))
   expect(cns).toHaveLength(123)
@@ -258,16 +259,15 @@ test('snapshot covers every source catalogue and counts match unique scalars', (
   expect(idsFile.records).toHaveLength(gzhs.records.count)
   expect(idsFile.records[0].kind).toBe('ids')
   const ziSets = catalogue.filter(row => row.source.name === '字統網')
-  expect(ziSets).toHaveLength(118)
+  expect(ziSets).toHaveLength(114)
   const ziPages = {
     g0: 'https://zi.tools/?secondary=character_set&set=G0',
     swjz: 'https://zi.tools/?secondary=character_set&set=zhuan',
-    irgn: 'https://zi.tools/',
   }
   for (const row of ziSets) {
-    // The source link opens the set on zi.tools, whose hidden document registries have no set page
-    // and whose Shuowen view opens as 篆/zhuan; the endpoint that supplied the rows stays beside it.
-    expect(row.source.url).toBe(ziSourcePage({ id: row.id, abbr: row.label, hidden: row.total === 0 }))
+    // The source link opens the set on zi.tools; its Shuowen view opens as 篆/zhuan, and the
+    // endpoint that supplied the rows stays beside it.
+    expect(row.source.url).toBe(ziSourcePage({ id: row.id, abbr: row.label }))
     expect(row.source.dataUrl).toBe(`https://zi.tools/api/ma/ma/${row.id}.json`)
     expect(sources.inputs.some(input => input.url === row.source.dataUrl)).toBe(true)
   }
@@ -305,12 +305,12 @@ test('snapshot covers every source catalogue and counts match unique scalars', (
     expect(set.id).toBe(records.id)
     expect(set.total).toBe(records.records.length)
     expect(set.records.count).toBe(records.records.length)
-    const glyphs = records.records.filter(record => record.glyph)
+    const glyphs = records.records.filter(record => record.glyph || record.sprite)
     expect(set.records.glyphs).toBe(glyphs.length)
     const glyphSerials = glyphs.map(record => record.serial).filter(Boolean)
     expect(new Set(glyphSerials).size).toBe(glyphSerials.length)
     expect(new Set(glyphs.map(record => record.source)).size).toBe(glyphs.length)
-    for (const record of glyphs) {
+    for (const record of records.records.filter(record => record.glyph)) {
       const png = readFileSync(new URL(record.glyph, base))
       expect(png.subarray(0, 8)).toEqual(Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]))
       // The Macao Extension E document prints some glyphs in 36–45px boxes; the snapshot keeps
@@ -318,11 +318,29 @@ test('snapshot covers every source catalogue and counts match unique scalars', (
       expect(png.readUInt32BE(16)).toBeGreaterThanOrEqual(32)
       expect(png.readUInt32BE(20)).toBeGreaterThanOrEqual(32)
     }
+    for (const record of records.records.filter(record => record.sprite).slice(0, 8)) {
+      const sprite = readFileSync(new URL(`ebag-sprites/${record.sprite.sheet}.svg`, base), 'utf8')
+      expect(sprite).toContain(`id="${record.sprite.symbol}"`)
+    }
     const members = membersOf(readFileSync(new URL(`${set.id}.txt`, base), 'utf8'))
     expect(members.length).toBe(set.chars)
     expect(new Set(members).size).toBe(set.chars)
     expect(new Set(members)).toEqual(new Set(records.records.filter(record => record.mappedUnicode).map(record => String.fromCodePoint(parseInt(record.mappedUnicode.slice(2), 16)))))
   }
+  const ebag = catalogue.find(row => row.id === 'glyphwiki_ebag')
+  expect(ebag.group).toBe('GlyphWiki')
+  expect(ebag.chars).toBe(0)
+  expect(ebag.total).toBe(24359)
+  expect(ebag.records).toEqual({ file: '/charsets/glyphwiki_ebag_records.json', count: 24359, glyphs: 24356 })
+  const ebagRecords = JSON.parse(readFileSync(new URL('glyphwiki_ebag_records.json', base), 'utf8'))
+  expect(new Set(ebagRecords.records.map(record => record.source)).size).toBe(24359)
+  expect(ebagRecords.records.filter(record => record.sprite)).toHaveLength(24356)
+  expect(ebagRecords.records.filter(record => !record.sprite).map(record => record.source)).toEqual(['ebag_s030-528', 'ebag_s042-022', 'ebag_s085-350'])
+  expect(ebagRecords.records.every(record => record.source.startsWith('ebag_'))).toBe(true)
+  expect(ebagRecords.records.every(record => record.evidenceUrls?.[0] === `https://glyphwiki.org/wiki/${record.source}`)).toBe(true)
+  const ebagSource = JSON.parse(readFileSync(new URL('glyphwiki_ebag_source.json', base), 'utf8'))
+  expect(ebagSource.dump.sha256).toMatch(/^[a-f0-9]{64}$/)
+  expect(ebagSource.dump.url).toBe('https://glyphwiki.org/dump.tar.gz')
   const sat = catalogue.find(row => row.id === 'ext_f_sat_withdrawals')
   expect(sat.group).toBe('Proposals')
   expect(sat.chars).toBe(0)

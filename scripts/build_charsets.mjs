@@ -55,21 +55,21 @@ for (const entry of metadata.meta) {
   if (!/^[a-z0-9_]+$/.test(entry.id) || ids.has(entry.id)) throw new Error(`Invalid set id: ${entry.id}`)
   ids.add(entry.id)
 }
+// 字統 marks its document registries hidden and serves no rows for them; a character-set
+// catalogue lists sets, so those entries are left out.
+const entries = metadata.meta.filter((/** @type {any} */ entry) => !entry.hidden)
 /** @type {any[]} */
-const catalogue = new Array(metadata.meta.length)
+const catalogue = new Array(entries.length)
 let next = 0
 await Promise.all(Array.from({ length: 4 }, async () => {
-  while (next < metadata.meta.length) {
+  while (next < entries.length) {
     const i = next++
-    const entry = metadata.meta[i]
+    const entry = entries[i]
     const url = `${BASE}${entry.id}.json`
     const payload = await get(url)
-    if (!Array.isArray(payload.rows) && !entry.hidden) throw new Error(`Missing rows: ${entry.id}`)
-    // Hidden document registries have empty endpoints; retain their catalogue identity.
-    const { members, total, encoded, unencoded } = payload.rows
-      ? mappedMembers(payload)
-      : { members: '', total: 0, encoded: 0, unencoded: 0 }
-    const ids = payload.rows ? idsRecords(payload) : []
+    if (!Array.isArray(payload.rows)) throw new Error(`Missing rows: ${entry.id}`)
+    const { members, total, encoded, unencoded } = mappedMembers(payload)
+    const ids = idsRecords(payload)
     // GB 12052's two 吏讀字 rows whose printed glyph is an IDS carry no scalar, so they stay records.
     const unencodedCodes = new Set(GB12052_UNENCODED)
     const table = entry.id === 'gk' ? gb12052Members(gbRows, unencodedCodes) : null
@@ -109,7 +109,7 @@ await Promise.all(Array.from({ length: 4 }, async () => {
           chars: [...members].length, total, encoded, unencoded, codes, records,
           source: noteKey
             ? { name: '字統網', url: ziSourcePage(entry), dataUrl: url, noteKey }
-            : { name: '字統網', url: ziSourcePage(entry), dataUrl: url, note: payload.rows ? undefined : 'The source endpoint supplies no membership rows.' },
+            : { name: '字統網', url: ziSourcePage(entry), dataUrl: url },
           columns: columnsOf(entry.index),
         }
     console.log(`${entry.id}: ${table ? table.members.length : [...members].length} characters / ${table ? gbRows.length : total} rows`)
@@ -224,6 +224,18 @@ for (const set of cnsSets) {
   })
 }
 writeGSourceSets(catalogue, unihanText, OUT, hans)
+// The ebag missing-character glyphs come from GlyphWiki's KAGE data. The records are a snapshot
+// made by scripts/import_glyphwiki_ebag.mjs; their sprite sheets are rendered offline.
+const ebag = JSON.parse(readFileSync(join(OUT, 'glyphwiki_ebag_records.json'), 'utf8'))
+catalogue.push({
+  id: 'glyphwiki_ebag', group: 'GlyphWiki', label: 'ebag 缺字',
+  names: { en: 'ebag missing glyphs', zh: 'ebag 缺字', hans: 'ebag 缺字', ja: 'ebag 缺字', ko: 'ebag 缺字' },
+  chars: 0, total: ebag.records.length, encoded: 0, unencoded: ebag.records.length,
+  records: { file: '/charsets/glyphwiki_ebag_records.json', count: ebag.records.length, glyphs: ebag.records.filter(/** @param {{sprite?:unknown}} record */ record => record.sprite).length },
+  recordsNote: false,
+  source: { name: 'GlyphWiki', url: 'https://glyphwiki.org/', licence: 'Free use, copy and distribution' },
+  columns: 10,
+})
 // A 字統 set named for a Unicode block is that block's assigned characters; the block's range gives
 // the designed positions the coverage dial divides by.
 for (const row of catalogue) {
