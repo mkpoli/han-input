@@ -63,7 +63,7 @@ These are proposal numbers, not scalar assignments. IRGN1841 lists characters fo
 
 GlyphWiki's `ebag_*` names are the 缺字編號 that 引得市 uses for its missing-character index. The set keeps 24,359 records, each the glyph name and a link to its GlyphWiki page; 24,356 render from the dump's KAGE data as sprite sheets, and three keep the name only because two recurse through their components and one has degenerate stroke data.
 
-`bun scripts/import_glyphwiki_ebag.mjs` reads the pinned dump and writes the records. `python scripts/build_ebag_sprites.py` renders the sheets; it needs the KAGE engine (GPL-3.0) installed separately. The glyphs are not scalar members: the set counts zero characters and 24,359 unencoded records, and GlyphWiki's related character is not treated as an assignment.
+`bun scripts/import_glyphwiki_ebag.mjs` reads the pinned dump and writes the records; the dump's SHA-256 is in `glyphwiki_ebag_source.json`. `python scripts/build_ebag_sprites.py` renders the sheets; it needs the KAGE engine (GPL-3.0) installed separately. The glyphs are not scalar members: the set counts zero characters and 24,359 unencoded records, and GlyphWiki's related character is not treated as an assignment.
 
 ## G source collections
 
