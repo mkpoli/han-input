@@ -5,6 +5,7 @@ import { GB12052_UNENCODED, gb12052Members } from '../scripts/sources/charsets-g
 import { compareCodes, coverageParts, filterAnswer, loadCharsets, loadCharset, loadRecords, sharedCharacters } from '../app/lib/charsets.js'
 import { loadChars, findMeaning } from '../app/lib/data.js'
 import { cnsSourceSets, unihanTSources } from '../scripts/sources/charsets-cns.mjs'
+import { ziSourcePage } from '../scripts/sources/zi-page.mjs'
 import { cnsRowCodes, codeText, evidenceCodes, rowCodes } from '../scripts/charset-codes.mjs'
 
 describe('source glyph membership', () => {
@@ -256,6 +257,21 @@ test('snapshot covers every source catalogue and counts match unique scalars', (
   const idsFile = JSON.parse(readFileSync(new URL(gzhs.records.file.replace('/charsets/', ''), base), 'utf8'))
   expect(idsFile.records).toHaveLength(gzhs.records.count)
   expect(idsFile.records[0].kind).toBe('ids')
+  const ziSets = catalogue.filter(row => row.source.name === '字統網')
+  expect(ziSets).toHaveLength(118)
+  const ziPages = {
+    g0: 'https://zi.tools/?secondary=character_set&set=G0',
+    swjz: 'https://zi.tools/?secondary=character_set&set=zhuan',
+    irgn: 'https://zi.tools/',
+  }
+  for (const row of ziSets) {
+    // The source link opens the set on zi.tools, whose hidden document registries have no set page
+    // and whose Shuowen view opens as 篆/zhuan; the endpoint that supplied the rows stays beside it.
+    expect(row.source.url).toBe(ziSourcePage({ id: row.id, abbr: row.label, hidden: row.total === 0 }))
+    expect(row.source.dataUrl).toBe(`https://zi.tools/api/ma/ma/${row.id}.json`)
+    expect(sources.inputs.some(input => input.url === row.source.dataUrl)).toBe(true)
+  }
+  for (const [id, url] of Object.entries(ziPages)) expect(ziSets.find(row => row.id === id).source.url).toBe(url)
   for (const row of catalogue) {
     const members = membersOf(readFileSync(new URL(`${row.id}.txt`, base), 'utf8'))
     expect(new Set(members).size).toBe(row.chars)

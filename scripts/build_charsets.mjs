@@ -10,6 +10,7 @@ import * as OpenCC from 'opencc-js'
 import { readCnsSourceSets } from './sources/charsets-cns.mjs'
 import { writeGSourceSets } from './sources/charsets-g-sources.mjs'
 import { GB12052, GB12052_UNENCODED, gb12052Members, gb12052Rows } from './sources/charsets-gb12052.mjs'
+import { ziSourcePage } from './sources/zi-page.mjs'
 
 const BASE = 'https://zi.tools/api/ma/ma/'
 const OUT = join(import.meta.dirname, '../app/public/charsets')
@@ -107,8 +108,8 @@ await Promise.all(Array.from({ length: 4 }, async () => {
           id: entry.id, group: entry.source, label: entry.abbr, names,
           chars: [...members].length, total, encoded, unencoded, codes, records,
           source: noteKey
-            ? { name: '字統網', url, noteKey }
-            : { name: '字統網', url, note: payload.rows ? undefined : 'The source endpoint supplies no membership rows.' },
+            ? { name: '字統網', url: ziSourcePage(entry), dataUrl: url, noteKey }
+            : { name: '字統網', url: ziSourcePage(entry), dataUrl: url, note: payload.rows ? undefined : 'The source endpoint supplies no membership rows.' },
           columns: columnsOf(entry.index),
         }
     console.log(`${entry.id}: ${table ? table.members.length : [...members].length} characters / ${table ? gbRows.length : total} rows`)
