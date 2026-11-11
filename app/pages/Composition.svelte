@@ -23,26 +23,24 @@
   async function insert(char) {
     const element = field
     if (!element) return
-    const focused = document.activeElement === element
-    const start = focused ? element.selectionStart ?? input.length : input.length
-    const end = focused ? element.selectionEnd ?? start : start
+    const start = element.selectionStart
+    const end = element.selectionEnd
     input = input.slice(0, start) + char + input.slice(end)
     await tick()
     element.focus()
-    element.setSelectionRange(start + 1, start + 1)
+    element.setSelectionRange(start + char.length, start + char.length)
   }
 
   /** @param {string} char */
   async function insertArithmetic(char) {
     const element = arithmeticField
     if (!element) return
-    const focused = document.activeElement === element
-    const start = focused ? element.selectionStart ?? arithmeticInput.length : arithmeticInput.length
-    const end = focused ? element.selectionEnd ?? start : start
+    const start = element.selectionStart
+    const end = element.selectionEnd
     arithmeticInput = arithmeticInput.slice(0, start) + char + arithmeticInput.slice(end)
     await tick()
     element.focus()
-    element.setSelectionRange(start + 1, start + 1)
+    element.setSelectionRange(start + char.length, start + char.length)
   }
 
   /** @param {string} char */
