@@ -1,7 +1,6 @@
 <script>
   // The frame: a dark rail of pages down the side, the finder in the middle, the card of the open
   // character on the right (a sheet on a phone), and the text being written docked along the bottom.
-  import { onMount } from 'svelte'
   import { NAV, go, route } from './lib/route.svelte.js'
   import { installScroll } from './lib/scroll.js'
   import { pageMetadata } from './lib/title.js'
@@ -38,9 +37,6 @@
   })
   const OWNER = /** @type {Record<string, string>} */ ({ m: 'methods', v: 'readings' })
   const current = $derived(OWNER[route.page] ?? route.page)
-  /** @type {HTMLElement} */
-  let finder
-  onMount(() => installScroll(finder))
 
   /** @param {MouseEvent} event @param {string} page */
   function nav(event, page) {
@@ -80,7 +76,7 @@
     </div>
   </nav>
 
-  <main class="finder" bind:this={finder}>
+  <main class="finder" {@attach installScroll}>
     {#if route.page === ''}<Find />
     {:else if route.page === 'methods'}<Methods />
     {:else if route.page === 'm' || route.page === 'v'}{#key route.page + route.method}<Method />{/key}
