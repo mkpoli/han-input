@@ -33,546 +33,1014 @@
       "source": "JMK65005",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/00225.png"
+      "glyph": "glyphs/ext-d/00225.png",
+      "guess": {
+        "ids": "⿰丨云",
+        "confidence": 0.789,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "00294",
       "source": "JMK65006",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/00294.png"
+      "glyph": "glyphs/ext-d/00294.png",
+      "guess": {
+        "ids": "⿰𠄌⺄",
+        "confidence": 0.573,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "00325",
       "source": "JMK65008",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/00325.png"
+      "glyph": "glyphs/ext-d/00325.png",
+      "guess": {
+        "ids": "⿵乃木",
+        "confidence": 0.776,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "00672",
       "source": "JMK65015",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/00672.png"
+      "glyph": "glyphs/ext-d/00672.png",
+      "guess": {
+        "ids": "⿳亠父加",
+        "confidence": 0.678,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "01917",
       "source": "JMK65038",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/01917.png"
+      "glyph": "glyphs/ext-d/01917.png",
+      "guess": {
+        "ids": "⿰左児",
+        "confidence": 0.697,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.03"
+      }
     },
     {
       "serial": "02047",
       "source": "JMK65039",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/02047.png"
+      "glyph": "glyphs/ext-d/02047.png",
+      "guess": {
+        "ids": "⿱⿰工几共",
+        "confidence": 0.085,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "02621",
       "source": "JMK65042",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/02621.png"
+      "glyph": "glyphs/ext-d/02621.png",
+      "guess": {
+        "ids": "⿰𫜹刂",
+        "confidence": 0.197,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.03"
+      }
     },
     {
       "serial": "02652",
       "source": "JMK65045",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/02652.png"
+      "glyph": "glyphs/ext-d/02652.png",
+      "guess": {
+        "ids": "⿱刀目",
+        "confidence": 0.114,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "03123",
       "source": "JMK66115",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/03123.png"
+      "glyph": "glyphs/ext-d/03123.png",
+      "guess": {
+        "ids": "⿺北西",
+        "confidence": 0.765,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "04239",
       "source": "JMK65062",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/04239.png"
+      "glyph": "glyphs/ext-d/04239.png",
+      "guess": {
+        "ids": "⿰口皀",
+        "confidence": 0.86,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "06346",
       "source": "JMK66119",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/06346.png"
+      "glyph": "glyphs/ext-d/06346.png",
+      "guess": {
+        "ids": "⿱林⿰土北",
+        "confidence": 0.457,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "06807",
       "source": "JMK66121",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/06807.png"
+      "glyph": "glyphs/ext-d/06807.png",
+      "guess": {
+        "ids": "⿰女助",
+        "confidence": 0.683,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "07085",
       "source": "JMK65124",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/07085.png"
+      "glyph": "glyphs/ext-d/07085.png",
+      "guess": {
+        "ids": "⿰女實",
+        "confidence": 0.659,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "07147",
       "source": "JMK66122",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/07147.png"
+      "glyph": "glyphs/ext-d/07147.png",
+      "guess": {
+        "ids": "⿰子双",
+        "confidence": 0.807,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "08018",
       "source": "JMK65147",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/08018.png"
+      "glyph": "glyphs/ext-d/08018.png",
+      "guess": {
+        "ids": "⿰山唐",
+        "confidence": 0.382,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.15"
+      }
     },
     {
       "serial": "08127",
       "source": "JMK65152",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/08127.png"
+      "glyph": "glyphs/ext-d/08127.png",
+      "guess": {
+        "ids": "⿰左官",
+        "confidence": 0.782,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "08276",
       "source": "JMK65159",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/08276.png"
+      "glyph": "glyphs/ext-d/08276.png",
+      "guess": {
+        "ids": "⿰平民",
+        "confidence": 0.656,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "08604",
       "source": "JMK65162",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/08604.png"
+      "glyph": "glyphs/ext-d/08604.png",
+      "guess": {
+        "ids": "⿰弓武",
+        "confidence": 0.828,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "08822",
       "source": "JMK65168",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/08822.png"
+      "glyph": "glyphs/ext-d/08822.png",
+      "guess": {
+        "ids": "⿱心心",
+        "confidence": 0.452,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.15"
+      }
     },
     {
       "serial": "09575",
       "source": "JMK65186",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/09575.png"
+      "glyph": "glyphs/ext-d/09575.png",
+      "guess": {
+        "ids": "⿺兒手",
+        "confidence": 0.803,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "10550",
       "source": "JMK65213",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/10550.png"
+      "glyph": "glyphs/ext-d/10550.png",
+      "guess": {
+        "ids": "⿰日⿸户隹",
+        "confidence": 0.736,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "11012",
       "source": "JMK65258",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/11012.png"
+      "glyph": "glyphs/ext-d/11012.png",
+      "guess": {
+        "ids": "⿰木舍",
+        "confidence": 0.746,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "11069",
       "source": "JMK65277",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/11069.png"
+      "glyph": "glyphs/ext-d/11069.png",
+      "guess": {
+        "ids": "⿱丙木",
+        "confidence": 0.099,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "11175",
       "source": "JMK65295",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/11175.png"
+      "glyph": "glyphs/ext-d/11175.png",
+      "guess": {
+        "ids": "⿰木⿹𢦏⿻⿰丿亅⺗",
+        "confidence": 0.394,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.03"
+      }
     },
     {
       "serial": "11310",
       "source": "JMK65285",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/11310.png"
+      "glyph": "glyphs/ext-d/11310.png",
+      "guess": {
+        "ids": "⿰木⿱自母",
+        "confidence": 0.582,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.08"
+      }
     },
     {
       "serial": "11376",
       "source": "JMK65312",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/11376.png"
+      "glyph": "glyphs/ext-d/11376.png",
+      "guess": {
+        "ids": "⿰木嵗",
+        "confidence": 0.591,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "11501",
       "source": "JMK65337",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/11501.png"
+      "glyph": "glyphs/ext-d/11501.png",
+      "guess": {
+        "ids": "〾⿱⿲木米殳殳",
+        "confidence": 0.284,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.15"
+      }
     },
     {
       "serial": "11672",
       "source": "JMK65349",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/11672.png"
+      "glyph": "glyphs/ext-d/11672.png",
+      "guess": {
+        "ids": "⿱止及",
+        "confidence": 0.828,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "12178",
       "source": "JMK65355",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/12178.png"
+      "glyph": "glyphs/ext-d/12178.png",
+      "guess": {
+        "ids": "⿰氵⿱艹⿱一㐄",
+        "confidence": 0.763,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "12765",
       "source": "JMK65363",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/12765.png"
+      "glyph": "glyphs/ext-d/12765.png",
+      "guess": {
+        "ids": "⿰氵耤",
+        "confidence": 0.235,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "13141",
       "source": "JMK65369",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/13141.png"
+      "glyph": "glyphs/ext-d/13141.png",
+      "guess": {
+        "ids": "⿰火𥙊",
+        "confidence": 0.613,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "13326",
       "source": "JMK65374",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/13326.png"
+      "glyph": "glyphs/ext-d/13326.png",
+      "guess": {
+        "ids": "⿰火⿸广⿱䀠安",
+        "confidence": 0.678,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.03"
+      }
     },
     {
       "serial": "14180",
       "source": "JMK65409",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/14180.png"
+      "glyph": "glyphs/ext-d/14180.png",
+      "guess": {
+        "ids": "⿰生若",
+        "confidence": 0.737,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "14720",
       "source": "JMK65439",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/14720.png"
+      "glyph": "glyphs/ext-d/14720.png",
+      "guess": {
+        "ids": "⿱明目",
+        "confidence": 0.227,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "14803",
       "source": "JMK65447",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/14803.png"
+      "glyph": "glyphs/ext-d/14803.png",
+      "guess": {
+        "ids": "⿰目緣",
+        "confidence": 0.694,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "15648",
       "source": "JMK65477",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/15648.png"
+      "glyph": "glyphs/ext-d/15648.png",
+      "guess": {
+        "ids": "⿱穴⿱宀儿",
+        "confidence": 0.334,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "16173",
       "source": "JMK65504",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/16173.png"
+      "glyph": "glyphs/ext-d/16173.png",
+      "guess": {
+        "ids": "⿱𥫗⿲糹⿱土隹戈",
+        "confidence": 0.544,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "17288",
       "source": "JMK65530",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/17288.png"
+      "glyph": "glyphs/ext-d/17288.png",
+      "guess": {
+        "ids": "⿱叔聿",
+        "confidence": 0.487,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "17316",
       "source": "JMK65531",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/17316.png"
+      "glyph": "glyphs/ext-d/17316.png",
+      "guess": {
+        "ids": "⿰月布",
+        "confidence": 0.76,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "17470",
       "source": "JMK65544",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/17470.png"
+      "glyph": "glyphs/ext-d/17470.png",
+      "guess": {
+        "ids": "⿰肉⿱⿲幺幺力⿱刀力",
+        "confidence": 0.39,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "17636",
       "source": "JMK66137",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/17636.png"
+      "glyph": "glyphs/ext-d/17636.png",
+      "guess": {
+        "ids": "⿲舟示申",
+        "confidence": 0.401,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "17655",
       "source": "JMK65556",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/17655.png"
+      "glyph": "glyphs/ext-d/17655.png",
+      "guess": {
+        "ids": "⿰舟羅",
+        "confidence": 0.732,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "18265",
       "source": "JMK65585",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/18265.png"
+      "glyph": "glyphs/ext-d/18265.png",
+      "guess": {
+        "ids": "⿱艹𥑴",
+        "confidence": 0.225,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "18269",
       "source": "JMK66138",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/18269.png"
+      "glyph": "glyphs/ext-d/18269.png",
+      "guess": {
+        "ids": "⿱茨皿",
+        "confidence": 0.565,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "18327",
       "source": "JMK65614",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/18327.png"
+      "glyph": "glyphs/ext-d/18327.png",
+      "guess": {
+        "ids": "⿱艹補",
+        "confidence": 0.742,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.03"
+      }
     },
     {
       "serial": "18470",
       "source": "JMK65637",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/18470.png"
+      "glyph": "glyphs/ext-d/18470.png",
+      "guess": {
+        "ids": "⿱艹覔",
+        "confidence": 0.276,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "18629",
       "source": "JMK65608",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/18629.png"
+      "glyph": "glyphs/ext-d/18629.png",
+      "guess": {
+        "ids": "⿱艹𭮧",
+        "confidence": 0.494,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "18636",
       "source": "JMK66140",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/18636.png"
+      "glyph": "glyphs/ext-d/18636.png",
+      "guess": {
+        "ids": "⿱艹⿰⿱艹示⿱賏𢛧",
+        "confidence": 0.409,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.03"
+      }
     },
     {
       "serial": "18822",
       "source": "JMK65689",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/18822.png"
+      "glyph": "glyphs/ext-d/18822.png",
+      "guess": {
+        "ids": "⿰虫⿱𠂉⿱中儿",
+        "confidence": 0.718,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "18955",
       "source": "JMK65713",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/18955.png"
+      "glyph": "glyphs/ext-d/18955.png",
+      "guess": {
+        "ids": "⿰虫⿱止𫀄",
+        "confidence": 0.708,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "18979",
       "source": "JMK65706",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/18979.png"
+      "glyph": "glyphs/ext-d/18979.png",
+      "guess": {
+        "ids": "⿰虫⿱䜌叉",
+        "confidence": 0.489,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "19145",
       "source": "JMK66142",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/19145.png"
+      "glyph": "glyphs/ext-d/19145.png",
+      "guess": {
+        "ids": "⿰衤⿲月月力",
+        "confidence": 0.458,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "19249",
       "source": "JMK65732",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/19249.png"
+      "glyph": "glyphs/ext-d/19249.png",
+      "guess": {
+        "ids": "⿺見直",
+        "confidence": 0.799,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "19760",
       "source": "JMK65753",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/19760.png"
+      "glyph": "glyphs/ext-d/19760.png",
+      "guess": {
+        "ids": "⿰豆燕",
+        "confidence": 0.785,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "20991",
       "source": "JMK65800",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/20991.png"
+      "glyph": "glyphs/ext-d/20991.png",
+      "guess": {
+        "ids": "⿳𠆢悲⿱一由",
+        "confidence": 0.618,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "21069",
       "source": "JMK65812",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/21069.png"
+      "glyph": "glyphs/ext-d/21069.png",
+      "guess": {
+        "ids": "⿰⿴囗金卜",
+        "confidence": 0.528,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "21313",
       "source": "JMK66144",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/21313.png"
+      "glyph": "glyphs/ext-d/21313.png",
+      "guess": {
+        "ids": "⿲厷隹金",
+        "confidence": 0.418,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "21336",
       "source": "JMK65854",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/21336.png"
+      "glyph": "glyphs/ext-d/21336.png",
+      "guess": {
+        "ids": "⿱湯金",
+        "confidence": 0.806,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "21738",
       "source": "JMK66146",
       "document": "n1250",
       "page": 4,
-      "glyph": "glyphs/ext-d/21738.png"
+      "glyph": "glyphs/ext-d/21738.png",
+      "guess": {
+        "ids": "⿵門出",
+        "confidence": 0.72,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "22235",
       "source": "JMK66147",
       "document": "n1250",
       "page": 4,
-      "glyph": "glyphs/ext-d/22235.png"
+      "glyph": "glyphs/ext-d/22235.png",
+      "guess": {
+        "ids": "⿱譶龖",
+        "confidence": 0.474,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "22300",
       "source": "JMK65894",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/22300.png"
+      "glyph": "glyphs/ext-d/22300.png",
+      "guess": {
+        "ids": "⿰⿱卝干青",
+        "confidence": 0.597,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "22387",
       "source": "JMK65970",
       "document": "n1250",
       "page": 4,
-      "glyph": "glyphs/ext-d/22387.png"
+      "glyph": "glyphs/ext-d/22387.png",
+      "guess": {
+        "ids": "⿰魚眷",
+        "confidence": 0.788,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "22423",
       "source": "JMK65901",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/22423.png"
+      "glyph": "glyphs/ext-d/22423.png",
+      "guess": {
+        "ids": "⿰⿱亠厶頁",
+        "confidence": 0.709,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "22822",
       "source": "JMK65917",
       "document": "n1250",
       "page": 4,
-      "glyph": "glyphs/ext-d/22822.png"
+      "glyph": "glyphs/ext-d/22822.png",
+      "guess": {
+        "ids": "⿱馬⺀",
+        "confidence": 0.205,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "23129",
       "source": "JMK66148",
       "document": "n1250",
       "page": 4,
-      "glyph": "glyphs/ext-d/23129.png"
+      "glyph": "glyphs/ext-d/23129.png",
+      "guess": {
+        "ids": "⿱髟⿱主⿻二龰",
+        "confidence": 0.235,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.15"
+      }
     },
     {
       "serial": "23328",
       "source": "JMK66004",
       "document": "n1250",
       "page": 4,
-      "glyph": "glyphs/ext-d/23328.png"
+      "glyph": "glyphs/ext-d/23328.png",
+      "guess": {
+        "ids": "⿱冖⿰⿱八魚⿱⺈⿵冂魚",
+        "confidence": 0.501,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.08"
+      }
     },
     {
       "serial": "23335",
       "source": "JMK66012",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/23335.png"
+      "glyph": "glyphs/ext-d/23335.png",
+      "guess": {
+        "ids": "⿰魚苖",
+        "confidence": 0.674,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "23376",
       "source": "JMK66031",
       "document": "n1250",
       "page": 4,
-      "glyph": "glyphs/ext-d/23376.png"
+      "glyph": "glyphs/ext-d/23376.png",
+      "guess": {
+        "ids": "⿰魚麥",
+        "confidence": 0.717,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "23410",
       "source": "JMK50671",
       "document": "n1250",
       "page": 4,
-      "glyph": "glyphs/ext-d/23410.png"
+      "glyph": "glyphs/ext-d/23410.png",
+      "guess": {
+        "ids": "⿰魚卿",
+        "confidence": 0.639,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.03"
+      }
     },
     {
       "serial": "23426",
       "source": "JMK66016",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/23426.png"
+      "glyph": "glyphs/ext-d/23426.png",
+      "guess": {
+        "ids": "⿰魚集",
+        "confidence": 0.844,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "23765",
       "source": "JMK66073",
       "document": "n1250",
       "page": 4,
-      "glyph": "glyphs/ext-d/23765.png"
+      "glyph": "glyphs/ext-d/23765.png",
+      "guess": {
+        "ids": "⿰⿱艹⿰亻匕鳥",
+        "confidence": 0.576,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "23771",
       "source": "JMK66074",
       "document": "n1250",
       "page": 4,
-      "glyph": "glyphs/ext-d/23771.png"
+      "glyph": "glyphs/ext-d/23771.png",
+      "guess": {
+        "ids": "⿰岩鳥",
+        "confidence": 0.684,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "23833",
       "source": "JMK66078",
       "document": "n1250",
       "page": 4,
-      "glyph": "glyphs/ext-d/23833.png"
+      "glyph": "glyphs/ext-d/23833.png",
+      "guess": {
+        "ids": "⿰𡻕鳥",
+        "confidence": 0.556,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "23855",
       "source": "JMK66101",
       "document": "n1250",
       "page": 4,
-      "glyph": "glyphs/ext-d/23855.png"
+      "glyph": "glyphs/ext-d/23855.png",
+      "guess": {
+        "ids": "⿱啄鳥",
+        "confidence": 0.397,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.08"
+      }
     },
     {
       "serial": "23858",
       "source": "JMK66102",
       "document": "n1250",
       "page": 4,
-      "glyph": "glyphs/ext-d/23858.png"
+      "glyph": "glyphs/ext-d/23858.png",
+      "guess": {
+        "ids": "⿱⿲禾禾弓⿰⿱丶鬯鳥",
+        "confidence": 0.271,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.15"
+      }
     },
     {
       "serial": "24112",
       "source": "JMK66106",
       "document": "n1250",
       "page": 4,
-      "glyph": "glyphs/ext-d/24112.png"
+      "glyph": "glyphs/ext-d/24112.png",
+      "guess": {
+        "ids": "⿰鹿子",
+        "confidence": 0.771,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "24143",
       "source": "JMK66108",
       "document": "n1250",
       "page": 3,
-      "glyph": "glyphs/ext-d/24143.png"
+      "glyph": "glyphs/ext-d/24143.png",
+      "guess": {
+        "ids": "⿺麦曹",
+        "confidence": 0.85,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "24260",
       "source": "JMK66110",
       "document": "n1250",
       "page": 4,
-      "glyph": "glyphs/ext-d/24260.png"
+      "glyph": "glyphs/ext-d/24260.png",
+      "guess": {
+        "ids": "⿰鼠斬",
+        "confidence": 0.87,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     }
   ]
 }

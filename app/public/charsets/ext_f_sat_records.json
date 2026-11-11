@@ -33,448 +33,832 @@
       "source": "Z_SAT04919",
       "document": "n1925",
       "page": 2,
-      "glyph": "glyphs/ext-f-sat/1709.png"
+      "glyph": "glyphs/ext-f-sat/1709.png",
+      "guess": {
+        "ids": "⿱與电",
+        "confidence": 0.577,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "181",
       "source": "Z_SAT60006",
       "document": "n1925",
       "page": 2,
-      "glyph": "glyphs/ext-f-sat/181.png"
+      "glyph": "glyphs/ext-f-sat/181.png",
+      "guess": {
+        "ids": "⿱丶兀",
+        "confidence": 0.774,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.08"
+      }
     },
     {
       "serial": "1868",
       "source": "Z_SAT02459",
       "document": "n1925",
       "page": 2,
-      "glyph": "glyphs/ext-f-sat/1868.png"
+      "glyph": "glyphs/ext-f-sat/1868.png",
+      "guess": {
+        "ids": "⿳宀一⿱一⺝",
+        "confidence": 0.38,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "1904",
       "source": "Z_SAT01982",
       "document": "n1925",
       "page": 2,
-      "glyph": "glyphs/ext-f-sat/1904.png"
+      "glyph": "glyphs/ext-f-sat/1904.png",
+      "guess": {
+        "ids": "⿱宀⿳㇒且力",
+        "confidence": 0.63,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "2192",
       "source": "Z_SAT02560",
       "document": "n1925",
       "page": 2,
-      "glyph": "glyphs/ext-f-sat/2192.png"
+      "glyph": "glyphs/ext-f-sat/2192.png",
+      "guess": {
+        "ids": "⿱工爪",
+        "confidence": 0.693,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.15"
+      }
     },
     {
       "serial": "2240",
       "source": "Z_SAT02522",
       "document": "n1925",
       "page": 3,
-      "glyph": "glyphs/ext-f-sat/2240.png"
+      "glyph": "glyphs/ext-f-sat/2240.png",
+      "guess": {
+        "ids": "⿰号帝",
+        "confidence": 0.853,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "253",
       "source": "Z_SAT05108",
       "document": "n1925",
       "page": 2,
-      "glyph": "glyphs/ext-f-sat/253.png"
+      "glyph": "glyphs/ext-f-sat/253.png",
+      "guess": {
+        "ids": "⿱㇒疋",
+        "confidence": 0.464,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.08"
+      }
     },
     {
       "serial": "2603",
       "source": "Z_SAT60111",
       "document": "n1925",
       "page": 3,
-      "glyph": "glyphs/ext-f-sat/2603.png"
+      "glyph": "glyphs/ext-f-sat/2603.png",
+      "guess": {
+        "ids": "⿰忄𡿺",
+        "confidence": 0.692,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.08"
+      }
     },
     {
       "serial": "2704",
       "source": "Z_SAT02451",
       "document": "n1925",
       "page": 3,
-      "glyph": "glyphs/ext-f-sat/2704.png"
+      "glyph": "glyphs/ext-f-sat/2704.png",
+      "guess": {
+        "ids": "⿰忄薨",
+        "confidence": 0.694,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "3025",
       "source": "Z_SAT60134",
       "document": "n1925",
       "page": 3,
-      "glyph": "glyphs/ext-f-sat/3025.png"
+      "glyph": "glyphs/ext-f-sat/3025.png",
+      "guess": {
+        "ids": "⿰⿱𠂉𫜹攵",
+        "confidence": 0.588,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "3513",
       "source": "Z_SAT03409",
       "document": "n1925",
       "page": 3,
-      "glyph": "glyphs/ext-f-sat/3513.png"
+      "glyph": "glyphs/ext-f-sat/3513.png",
+      "guess": {
+        "ids": "⿱來木",
+        "confidence": 0.732,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.15"
+      }
     },
     {
       "serial": "3638",
       "source": "Z_SAT01552",
       "document": "n1925",
       "page": 3,
-      "glyph": "glyphs/ext-f-sat/3638.png"
+      "glyph": "glyphs/ext-f-sat/3638.png",
+      "guess": {
+        "ids": "⿰木⿸广畢",
+        "confidence": 0.489,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "3693",
       "source": "Z_SAT05723",
       "document": "n1925",
       "page": 3,
-      "glyph": "glyphs/ext-f-sat/3693.png"
+      "glyph": "glyphs/ext-f-sat/3693.png",
+      "guess": {
+        "ids": "⿲木眞貝",
+        "confidence": 0.658,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.03"
+      }
     },
     {
       "serial": "3699",
       "source": "Z_SAT02681",
       "document": "n1925",
       "page": 3,
-      "glyph": "glyphs/ext-f-sat/3699.png"
+      "glyph": "glyphs/ext-f-sat/3699.png",
+      "guess": {
+        "ids": "⿰木⿱𦥯焱",
+        "confidence": 0.643,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "3849",
       "source": "Z_SAT03567",
       "document": "n1925",
       "page": 3,
-      "glyph": "glyphs/ext-f-sat/3849.png"
+      "glyph": "glyphs/ext-f-sat/3849.png",
+      "guess": {
+        "ids": "⿱孰⿰忄殳",
+        "confidence": 0.278,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.15"
+      }
     },
     {
       "serial": "3898",
       "source": "Z_SAT01984",
       "document": "n1925",
       "page": 4,
-      "glyph": "glyphs/ext-f-sat/3898.png"
+      "glyph": "glyphs/ext-f-sat/3898.png",
+      "guess": {
+        "ids": "⿰皀民",
+        "confidence": 0.709,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "3910",
       "source": "Z_SAT60182",
       "document": "n1925",
       "page": 4,
-      "glyph": "glyphs/ext-f-sat/3910.png"
+      "glyph": "glyphs/ext-f-sat/3910.png",
+      "guess": {
+        "ids": "⿱夫氺",
+        "confidence": 0.627,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.08"
+      }
     },
     {
       "serial": "4056",
       "source": "Z_SAT00058",
       "document": "n1925",
       "page": 4,
-      "glyph": "glyphs/ext-f-sat/4056.png"
+      "glyph": "glyphs/ext-f-sat/4056.png",
+      "guess": {
+        "ids": "⿱田㳟",
+        "confidence": 0.672,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "4108",
       "source": "Z_SAT08610",
       "document": "n1925",
       "page": 4,
-      "glyph": "glyphs/ext-f-sat/4108.png"
+      "glyph": "glyphs/ext-f-sat/4108.png",
+      "guess": {
+        "ids": "⿰氵⿰臣合",
+        "confidence": 0.314,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "427",
       "source": "Z_SAT02826",
       "document": "n1925",
       "page": 2,
-      "glyph": "glyphs/ext-f-sat/427.png"
+      "glyph": "glyphs/ext-f-sat/427.png",
+      "guess": {
+        "ids": "⿰亻⿳丶⿲幺丨丨⿱丶丨",
+        "confidence": 0.62,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.15"
+      }
     },
     {
       "serial": "4396",
       "source": "Z_SAT02198",
       "document": "n1925",
       "page": 4,
-      "glyph": "glyphs/ext-f-sat/4396.png"
+      "glyph": "glyphs/ext-f-sat/4396.png",
+      "guess": {
+        "ids": "⿰⿱爫万⿸𠂋巾",
+        "confidence": 0.683,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "4508",
       "source": "Z_SAT01729",
       "document": "n1925",
       "page": 4,
-      "glyph": "glyphs/ext-f-sat/4508.png"
+      "glyph": "glyphs/ext-f-sat/4508.png",
+      "guess": {
+        "ids": "⿰犭𦍒",
+        "confidence": 0.758,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "4604",
       "source": "Z_SAT04306",
       "document": "n1925",
       "page": 4,
-      "glyph": "glyphs/ext-f-sat/4604.png"
+      "glyph": "glyphs/ext-f-sat/4604.png",
+      "guess": {
+        "ids": "⿱⿻廿⿰丨丨⿰𠂇丨",
+        "confidence": 0.436,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.15"
+      }
     },
     {
       "serial": "4682",
       "source": "Z_SAT03566",
       "document": "n1925",
       "page": 4,
-      "glyph": "glyphs/ext-f-sat/4682.png"
+      "glyph": "glyphs/ext-f-sat/4682.png",
+      "guess": {
+        "ids": "⿱凃瓦",
+        "confidence": 0.712,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "4790",
       "source": "Z_SAT05220",
       "document": "n1925",
       "page": 4,
-      "glyph": "glyphs/ext-f-sat/4790.png"
+      "glyph": "glyphs/ext-f-sat/4790.png",
+      "guess": {
+        "ids": "⿱軗疋",
+        "confidence": 0.41,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "4846",
       "source": "Z_SAT60221",
       "document": "n1925",
       "page": 5,
-      "glyph": "glyphs/ext-f-sat/4846.png"
+      "glyph": "glyphs/ext-f-sat/4846.png",
+      "guess": {
+        "ids": "⿸疒隱",
+        "confidence": 0.665,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "4982",
       "source": "Z_SAT01002",
       "document": "n1925",
       "page": 5,
-      "glyph": "glyphs/ext-f-sat/4982.png"
+      "glyph": "glyphs/ext-f-sat/4982.png",
+      "guess": {
+        "ids": "⿰目左",
+        "confidence": 0.854,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "4998",
       "source": "Z_SAT02653",
       "document": "n1925",
       "page": 5,
-      "glyph": "glyphs/ext-f-sat/4998.png"
+      "glyph": "glyphs/ext-f-sat/4998.png",
+      "guess": {
+        "ids": "⿰目足",
+        "confidence": 0.867,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "5031",
       "source": "Z_SAT60230",
       "document": "n1925",
       "page": 5,
-      "glyph": "glyphs/ext-f-sat/5031.png"
+      "glyph": "glyphs/ext-f-sat/5031.png",
+      "guess": {
+        "ids": "⿰目巻",
+        "confidence": 0.758,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "5177",
       "source": "Z_SAT01197",
       "document": "n1925",
       "page": 5,
-      "glyph": "glyphs/ext-f-sat/5177.png"
+      "glyph": "glyphs/ext-f-sat/5177.png",
+      "guess": {
+        "ids": "⿰石蒪",
+        "confidence": 0.882,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "5245",
       "source": "Z_SAT60237",
       "document": "n1925",
       "page": 5,
-      "glyph": "glyphs/ext-f-sat/5245.png"
+      "glyph": "glyphs/ext-f-sat/5245.png",
+      "guess": {
+        "ids": "⿵⿰礻幸執",
+        "confidence": 0.326,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "5294",
       "source": "Z_SAT60238",
       "document": "n1925",
       "page": 5,
-      "glyph": "glyphs/ext-f-sat/5294.png"
+      "glyph": "glyphs/ext-f-sat/5294.png",
+      "guess": {
+        "ids": "⿰禾⿱㇒⿻友一",
+        "confidence": 0.643,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "5353",
       "source": "Z_SAT07102",
       "document": "n1925",
       "page": 5,
-      "glyph": "glyphs/ext-f-sat/5353.png"
+      "glyph": "glyphs/ext-f-sat/5353.png",
+      "guess": {
+        "ids": "⿱⿰秀龶貝",
+        "confidence": 0.317,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.08"
+      }
     },
     {
       "serial": "5377",
       "source": "Z_SAT05027",
       "document": "n1925",
       "page": 5,
-      "glyph": "glyphs/ext-f-sat/5377.png"
+      "glyph": "glyphs/ext-f-sat/5377.png",
+      "guess": {
+        "ids": "⿱⿱宀儿⿰木殳",
+        "confidence": 0.73,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.03"
+      }
     },
     {
       "serial": "5697",
       "source": "Z_SAT60266",
       "document": "n1925",
       "page": 6,
-      "glyph": "glyphs/ext-f-sat/5697.png"
+      "glyph": "glyphs/ext-f-sat/5697.png",
+      "guess": {
+        "ids": "⿰糹每",
+        "confidence": 0.795,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "5727",
       "source": "Z_SAT60273",
       "document": "n1925",
       "page": 6,
-      "glyph": "glyphs/ext-f-sat/5727.png"
+      "glyph": "glyphs/ext-f-sat/5727.png",
+      "guess": {
+        "ids": "⿰糹巻",
+        "confidence": 0.587,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.15"
+      }
     },
     {
       "serial": "5936",
       "source": "Z_SAT03654",
       "document": "n1925",
       "page": 6,
-      "glyph": "glyphs/ext-f-sat/5936.png"
+      "glyph": "glyphs/ext-f-sat/5936.png",
+      "guess": {
+        "ids": "⿰耳穴",
+        "confidence": 0.846,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "5953",
       "source": "Z_SAT60286",
       "document": "n1925",
       "page": 6,
-      "glyph": "glyphs/ext-f-sat/5953.png"
+      "glyph": "glyphs/ext-f-sat/5953.png",
+      "guess": {
+        "ids": "⿰耳絲",
+        "confidence": 0.662,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "6080",
       "source": "Z_SAT05160",
       "document": "n1925",
       "page": 6,
-      "glyph": "glyphs/ext-f-sat/6080.png"
+      "glyph": "glyphs/ext-f-sat/6080.png",
+      "guess": {
+        "ids": "⿱與禺",
+        "confidence": 0.851,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "6084",
       "source": "Z_SAT01299",
       "document": "n1925",
       "page": 6,
-      "glyph": "glyphs/ext-f-sat/6084.png"
+      "glyph": "glyphs/ext-f-sat/6084.png",
+      "guess": {
+        "ids": "⿱⿰萑目⿰臼八",
+        "confidence": 0.506,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "6161",
       "source": "Z_SAT60305",
       "document": "n1925",
       "page": 6,
-      "glyph": "glyphs/ext-f-sat/6161.png"
+      "glyph": "glyphs/ext-f-sat/6161.png",
+      "guess": {
+        "ids": "⿳艹亾𫶧",
+        "confidence": 0.717,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "6201",
       "source": "Z_SAT00037",
       "document": "n1925",
       "page": 6,
-      "glyph": "glyphs/ext-f-sat/6201.png"
+      "glyph": "glyphs/ext-f-sat/6201.png",
+      "guess": {
+        "ids": "⿱屾⿰肉力",
+        "confidence": 0.546,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "6424",
       "source": "Z_SAT60322",
       "document": "n1925",
       "page": 6,
-      "glyph": "glyphs/ext-f-sat/6424.png"
+      "glyph": "glyphs/ext-f-sat/6424.png",
+      "guess": {
+        "ids": "⿱艹𠅀",
+        "confidence": 0.646,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.08"
+      }
     },
     {
       "serial": "6437",
       "source": "Z_SAT60321",
       "document": "n1925",
       "page": 7,
-      "glyph": "glyphs/ext-f-sat/6437.png"
+      "glyph": "glyphs/ext-f-sat/6437.png",
+      "guess": {
+        "ids": "⿱艹𦀓",
+        "confidence": 0.435,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "6456",
       "source": "Z_SAT04821",
       "document": "n1925",
       "page": 7,
-      "glyph": "glyphs/ext-f-sat/6456.png"
+      "glyph": "glyphs/ext-f-sat/6456.png",
+      "guess": {
+        "ids": "⿱艹孹",
+        "confidence": 0.712,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "6464",
       "source": "Z_SAT60361",
       "document": "n1925",
       "page": 7,
-      "glyph": "glyphs/ext-f-sat/6464.png"
+      "glyph": "glyphs/ext-f-sat/6464.png",
+      "guess": {
+        "ids": "⿺辶⿱艹⿸虍永",
+        "confidence": 0.358,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "6609",
       "source": "Z_SAT60333",
       "document": "n1925",
       "page": 7,
-      "glyph": "glyphs/ext-f-sat/6609.png"
+      "glyph": "glyphs/ext-f-sat/6609.png",
+      "guess": {
+        "ids": "⿰虫⿽𧴮一",
+        "confidence": 0.139,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "6633",
       "source": "Z_SAT60334",
       "document": "n1925",
       "page": 7,
-      "glyph": "glyphs/ext-f-sat/6633.png"
+      "glyph": "glyphs/ext-f-sat/6633.png",
+      "guess": {
+        "ids": "⿰虫⿳巛𠔿⿰丨丨",
+        "confidence": 0.521,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "7236",
       "source": "Z_SAT60358",
       "document": "n1925",
       "page": 7,
-      "glyph": "glyphs/ext-f-sat/7236.png"
+      "glyph": "glyphs/ext-f-sat/7236.png",
+      "guess": {
+        "ids": "⿲辛夕𨐌",
+        "confidence": 0.764,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "7301",
       "source": "Z_SAT01418",
       "document": "n1925",
       "page": 7,
-      "glyph": "glyphs/ext-f-sat/7301.png"
+      "glyph": "glyphs/ext-f-sat/7301.png",
+      "guess": {
+        "ids": "⿱艹苟",
+        "confidence": 0.315,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "7349",
       "source": "Z_SAT02663",
       "document": "n1925",
       "page": 7,
-      "glyph": "glyphs/ext-f-sat/7349.png"
+      "glyph": "glyphs/ext-f-sat/7349.png",
+      "guess": {
+        "ids": "⿺辶⿱艹⿸厂⿱龷⿻一从",
+        "confidence": 0.486,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "7382",
       "source": "Z_SAT60362",
       "document": "n1925",
       "page": 7,
-      "glyph": "glyphs/ext-f-sat/7382.png"
+      "glyph": "glyphs/ext-f-sat/7382.png",
+      "guess": {
+        "ids": "⿻⿰丨丨阝",
+        "confidence": 0.6,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.15"
+      }
     },
     {
       "serial": "7699",
       "source": "Z_SAT04946",
       "document": "n1925",
       "page": 8,
-      "glyph": "glyphs/ext-f-sat/7699.png"
+      "glyph": "glyphs/ext-f-sat/7699.png",
+      "guess": {
+        "ids": "⿵門⿱口⿰丨丨",
+        "confidence": 0.466,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "7781",
       "source": "Z_SAT60374",
       "document": "n1925",
       "page": 8,
-      "glyph": "glyphs/ext-f-sat/7781.png"
+      "glyph": "glyphs/ext-f-sat/7781.png",
+      "guess": {
+        "ids": "⿰阝⿱少杲",
+        "confidence": 0.609,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "8051",
       "source": "Z_SAT01589",
       "document": "n1925",
       "page": 8,
-      "glyph": "glyphs/ext-f-sat/8051.png"
+      "glyph": "glyphs/ext-f-sat/8051.png",
+      "guess": {
+        "ids": "⿰飠烝",
+        "confidence": 0.858,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "8138",
       "source": "Z_SAT06917",
       "document": "n1925",
       "page": 8,
-      "glyph": "glyphs/ext-f-sat/8138.png"
+      "glyph": "glyphs/ext-f-sat/8138.png",
+      "guess": {
+        "ids": "⿰馬⿱⿻𠮛⿱冖冖水",
+        "confidence": 0.677,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.03"
+      }
     },
     {
       "serial": "8261",
       "source": "Z_SAT02112",
       "document": "n1925",
       "page": 8,
-      "glyph": "glyphs/ext-f-sat/8261.png"
+      "glyph": "glyphs/ext-f-sat/8261.png",
+      "guess": {
+        "ids": "⿰魚⿱罒⿱一𧘇",
+        "confidence": 0.827,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "8309",
       "source": "Z_SAT01900",
       "document": "n1925",
       "page": 8,
-      "glyph": "glyphs/ext-f-sat/8309.png"
+      "glyph": "glyphs/ext-f-sat/8309.png",
+      "guess": {
+        "ids": "⿰丸鳥",
+        "confidence": 0.649,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "8321",
       "source": "Z_SAT02191",
       "document": "n1925",
       "page": 8,
-      "glyph": "glyphs/ext-f-sat/8321.png"
+      "glyph": "glyphs/ext-f-sat/8321.png",
+      "guess": {
+        "ids": "⿰⿱上矢鳥",
+        "confidence": 0.809,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.08"
+      }
     },
     {
       "serial": "8356",
       "source": "Z_SAT60390",
       "document": "n1925",
       "page": 8,
-      "glyph": "glyphs/ext-f-sat/8356.png"
+      "glyph": "glyphs/ext-f-sat/8356.png",
+      "guess": {
+        "ids": "⿰慈鳥",
+        "confidence": 0.827,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "8392",
       "source": "Z_SAT60395",
       "document": "n1925",
       "page": 8,
-      "glyph": "glyphs/ext-f-sat/8392.png"
+      "glyph": "glyphs/ext-f-sat/8392.png",
+      "guess": {
+        "ids": "⿱一⿱昍鹿",
+        "confidence": 0.288,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.15"
+      }
     },
     {
       "serial": "8397",
       "source": "Z_SAT60397",
       "document": "n1925",
       "page": 9,
-      "glyph": "glyphs/ext-f-sat/8397.png"
+      "glyph": "glyphs/ext-f-sat/8397.png",
+      "guess": {
+        "ids": "⿰麦去",
+        "confidence": 0.799,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "846",
       "source": "Z_SAT60041",
       "document": "n1925",
       "page": 2,
-      "glyph": "glyphs/ext-f-sat/846.png"
+      "glyph": "glyphs/ext-f-sat/846.png",
+      "guess": {
+        "ids": "⿳⺊𠔿冋",
+        "confidence": 0.846,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "8485",
       "source": "Z_SAT01939",
       "document": "n1925",
       "page": 9,
-      "glyph": "glyphs/ext-f-sat/8485.png"
+      "glyph": "glyphs/ext-f-sat/8485.png",
+      "guess": {
+        "ids": "⿰齒専",
+        "confidence": 0.628,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     }
   ]
 }

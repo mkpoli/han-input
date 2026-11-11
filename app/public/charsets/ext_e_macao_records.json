@@ -32,121 +32,241 @@
       "source": "MAC00013",
       "document": "n1854",
       "page": 2,
-      "glyph": "glyphs/ext-e-macao/MAC00013.png"
+      "glyph": "glyphs/ext-e-macao/MAC00013.png",
+      "guess": {
+        "ids": "⿱艹范",
+        "confidence": 0.505,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.15"
+      }
     },
     {
       "source": "MAC00024",
       "document": "n1854",
       "page": 1,
-      "glyph": "glyphs/ext-e-macao/MAC00024.png"
+      "glyph": "glyphs/ext-e-macao/MAC00024.png",
+      "guess": {
+        "ids": "⿰釒奕",
+        "confidence": 0.774,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.03"
+      }
     },
     {
       "source": "MAC00030",
       "document": "n1854",
       "page": 1,
-      "glyph": "glyphs/ext-e-macao/MAC00030.png"
+      "glyph": "glyphs/ext-e-macao/MAC00030.png",
+      "guess": {
+        "ids": "⿰口飲",
+        "confidence": 0.466,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.08"
+      }
     },
     {
       "source": "MAC00062",
       "document": "n1854",
       "page": 2,
-      "glyph": "glyphs/ext-e-macao/MAC00062.png"
+      "glyph": "glyphs/ext-e-macao/MAC00062.png",
+      "guess": {
+        "ids": "⿳业⿸⿻𦍌日日日",
+        "confidence": 0.12,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "source": "MAC00075",
       "document": "n1854",
       "page": 1,
-      "glyph": "glyphs/ext-e-macao/MAC00075.png"
+      "glyph": "glyphs/ext-e-macao/MAC00075.png",
+      "guess": {
+        "ids": "⿰女立",
+        "confidence": 0.72,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.08"
+      }
     },
     {
       "source": "MAC00077",
       "document": "n1854",
       "page": 2,
-      "glyph": "glyphs/ext-e-macao/MAC00077.png"
+      "glyph": "glyphs/ext-e-macao/MAC00077.png",
+      "guess": {
+        "ids": "⿰土叫",
+        "confidence": 0.522,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.08"
+      }
     },
     {
       "source": "MAC00079",
       "document": "n1854",
       "page": 1,
-      "glyph": "glyphs/ext-e-macao/MAC00079.png"
+      "glyph": "glyphs/ext-e-macao/MAC00079.png",
+      "guess": {
+        "ids": "⿱口⿱十回",
+        "confidence": 0.656,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "source": "MAC00081",
       "document": "n1854",
       "page": 2,
-      "glyph": "glyphs/ext-e-macao/MAC00081.png"
+      "glyph": "glyphs/ext-e-macao/MAC00081.png",
+      "guess": {
+        "ids": "⿰女庒",
+        "confidence": 0.688,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "source": "MAC00082",
       "document": "n1854",
       "page": 2,
-      "glyph": "glyphs/ext-e-macao/MAC00082.png"
+      "glyph": "glyphs/ext-e-macao/MAC00082.png",
+      "guess": {
+        "ids": "⿱𦍌口",
+        "confidence": 0.114,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.08"
+      }
     },
     {
       "source": "MAC00083",
       "document": "n1854",
       "page": 1,
-      "glyph": "glyphs/ext-e-macao/MAC00083.png"
+      "glyph": "glyphs/ext-e-macao/MAC00083.png",
+      "guess": {
+        "ids": "⿱宀䍃",
+        "confidence": 0.463,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "source": "MAC00087",
       "document": "n1854",
       "page": 1,
-      "glyph": "glyphs/ext-e-macao/MAC00087.png"
+      "glyph": "glyphs/ext-e-macao/MAC00087.png",
+      "guess": {
+        "ids": "⿱⿱㇒罒𧰨",
+        "confidence": 0.777,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "source": "MAC00089",
       "document": "n1854",
       "page": 2,
-      "glyph": "glyphs/ext-e-macao/MAC00089.png"
+      "glyph": "glyphs/ext-e-macao/MAC00089.png",
+      "guess": {
+        "ids": "⿺廴由",
+        "confidence": 0.815,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "source": "MAC00117",
       "document": "n1854",
       "page": 1,
-      "glyph": "glyphs/ext-e-macao/MAC00117.png"
+      "glyph": "glyphs/ext-e-macao/MAC00117.png",
+      "guess": {
+        "ids": "⿸广⿱宀⿳宀𠆢夕",
+        "confidence": 0.736,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "source": "MAC00120",
       "document": "n1854",
       "page": 2,
-      "glyph": "glyphs/ext-e-macao/MAC00120.png"
+      "glyph": "glyphs/ext-e-macao/MAC00120.png",
+      "guess": {
+        "ids": "⿰木已",
+        "confidence": 0.86,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "source": "MAC00121",
       "document": "n1854",
       "page": 1,
-      "glyph": "glyphs/ext-e-macao/MAC00121.png"
+      "glyph": "glyphs/ext-e-macao/MAC00121.png",
+      "guess": {
+        "ids": "⿳⺌一⿱八良",
+        "confidence": 0.608,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.03"
+      }
     },
     {
       "source": "MAC00123",
       "document": "n1854",
       "page": 1,
-      "glyph": "glyphs/ext-e-macao/MAC00123.png"
+      "glyph": "glyphs/ext-e-macao/MAC00123.png",
+      "guess": {
+        "ids": "⿰女窩",
+        "confidence": 0.823,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "source": "MAC00125",
       "document": "n1854",
       "page": 2,
-      "glyph": "glyphs/ext-e-macao/MAC00125.png"
+      "glyph": "glyphs/ext-e-macao/MAC00125.png",
+      "guess": {
+        "ids": "⿱卝己",
+        "confidence": 0.528,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "source": "MAC00130",
       "document": "n1854",
       "page": 1,
-      "glyph": "glyphs/ext-e-macao/MAC00130.png"
+      "glyph": "glyphs/ext-e-macao/MAC00130.png",
+      "guess": {
+        "ids": "⿱天水",
+        "confidence": 0.776,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "source": "MAC00131",
       "document": "n1854",
       "page": 1,
-      "glyph": "glyphs/ext-e-macao/MAC00131.png"
+      "glyph": "glyphs/ext-e-macao/MAC00131.png",
+      "guess": {
+        "ids": "⿰火玉",
+        "confidence": 0.838,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "source": "MAC00132",
       "document": "n1854",
       "page": 1,
-      "glyph": "glyphs/ext-e-macao/MAC00132.png"
+      "glyph": "glyphs/ext-e-macao/MAC00132.png",
+      "guess": {
+        "ids": "⿰良刂",
+        "confidence": 0.87,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     }
   ]
 }

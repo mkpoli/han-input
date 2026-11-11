@@ -306,5 +306,6 @@
   "variant.relation.variant": "IWDS異体",
   "variant.relation.compatibility": "互換",
   "variant.source.iwds": "IWDS",
-  "variant.source.unicode": "Unicode"
+  "variant.source.unicode": "Unicode",
+  "proposal.guess": "推定IDS"
 }

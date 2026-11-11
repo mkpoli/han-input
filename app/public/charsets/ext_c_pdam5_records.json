@@ -33,469 +33,871 @@
       "source": "TC-214E",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2A702.png"
+      "glyph": "glyphs/ext-c-pdam5/2A702.png",
+      "guess": {
+        "ids": "⿻己凡",
+        "confidence": 0.46,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.15"
+      }
     },
     {
       "serial": "2A7F5",
       "source": "TC-2D27",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2A7F5.png"
+      "glyph": "glyphs/ext-c-pdam5/2A7F5.png",
+      "guess": {
+        "ids": "⿰⿱十且一",
+        "confidence": 0.631,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "2A84A",
       "source": "G_ZFY00754",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2A84A.png"
+      "glyph": "glyphs/ext-c-pdam5/2A84A.png",
+      "guess": {
+        "ids": "⿰口⿱艹干",
+        "confidence": 0.722,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "2A8BA",
       "source": "TC-297B",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2A8BA.png"
+      "glyph": "glyphs/ext-c-pdam5/2A8BA.png",
+      "guess": {
+        "ids": "⿱夂土",
+        "confidence": 0.389,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.15"
+      }
     },
     {
       "serial": "2A8C3",
       "source": "CYY00225",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2A8C3.png"
+      "glyph": "glyphs/ext-c-pdam5/2A8C3.png",
+      "guess": {
+        "ids": "⿱文土",
+        "confidence": 0.276,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.15"
+      }
     },
     {
       "serial": "2A8DB",
       "source": "TC-4574",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2A8DB.png"
+      "glyph": "glyphs/ext-c-pdam5/2A8DB.png",
+      "guess": {
+        "ids": "⿻⿱廿⿻口土一",
+        "confidence": 0.491,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.08"
+      }
     },
     {
       "serial": "2A938",
       "source": "TC-257C",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2A938.png"
+      "glyph": "glyphs/ext-c-pdam5/2A938.png",
+      "guess": {
+        "ids": "⿶凵⿱士兀",
+        "confidence": 0.237,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.08"
+      }
     },
     {
       "serial": "2A939",
       "source": "TC-4631",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2A939.png"
+      "glyph": "glyphs/ext-c-pdam5/2A939.png",
+      "guess": {
+        "ids": "⿶凵⿰⿱土几⿱土几",
+        "confidence": 0.608,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.08"
+      }
     },
     {
       "serial": "2A93F",
       "source": "TC-2623",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2A93F.png"
+      "glyph": "glyphs/ext-c-pdam5/2A93F.png",
+      "guess": {
+        "ids": "⿱上夕",
+        "confidence": 0.614,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "2A97F",
       "source": "TC-466C",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2A97F.png"
+      "glyph": "glyphs/ext-c-pdam5/2A97F.png",
+      "guess": {
+        "ids": "⿱⿻乃⿱一⿰女亐一",
+        "confidence": 0.375,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.15"
+      }
     },
     {
       "serial": "2A9D0",
       "source": "JK-75314",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2A9D0.png"
+      "glyph": "glyphs/ext-c-pdam5/2A9D0.png",
+      "guess": {
+        "ids": "⿱丶⿱宀土",
+        "confidence": 0.465,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.15"
+      }
     },
     {
       "serial": "2AA06",
       "source": "TC-556C",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2AA06.png"
+      "glyph": "glyphs/ext-c-pdam5/2AA06.png",
+      "guess": {
+        "ids": "⿹𢏚寸",
+        "confidence": 0.338,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "2AA14",
       "source": "TC-2137",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2AA14.png"
+      "glyph": "glyphs/ext-c-pdam5/2AA14.png",
+      "guess": {
+        "ids": "⿶凵尢",
+        "confidence": 0.537,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "2AA17",
       "source": "TD-3944",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2AA17.png"
+      "glyph": "glyphs/ext-c-pdam5/2AA17.png",
+      "guess": {
+        "ids": "⿶尢首",
+        "confidence": 0.496,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "2AA35",
       "source": "TC-2A7A",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2AA35.png"
+      "glyph": "glyphs/ext-c-pdam5/2AA35.png",
+      "guess": {
+        "ids": "⿰⿱山支丨",
+        "confidence": 0.454,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "2AA39",
       "source": "TC-2A68",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2AA39.png"
+      "glyph": "glyphs/ext-c-pdam5/2AA39.png",
+      "guess": {
+        "ids": "⿶凵旵",
+        "confidence": 0.324,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "2AA6F",
       "source": "TE-2B6A",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2AA6F.png"
+      "glyph": "glyphs/ext-c-pdam5/2AA6F.png",
+      "guess": {
+        "ids": "⿱山頟",
+        "confidence": 0.336,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "2AA76",
       "source": "TC-3142",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2AA76.png"
+      "glyph": "glyphs/ext-c-pdam5/2AA76.png",
+      "guess": {
+        "ids": "⿶凵⿱工句",
+        "confidence": 0.531,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.08"
+      }
     },
     {
       "serial": "2AA77",
       "source": "TC-5647",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2AA77.png"
+      "glyph": "glyphs/ext-c-pdam5/2AA77.png",
+      "guess": {
+        "ids": "⿰工具",
+        "confidence": 0.689,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "2AA83",
       "source": "TD-2623",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2AA83.png"
+      "glyph": "glyphs/ext-c-pdam5/2AA83.png",
+      "guess": {
+        "ids": "⿱⿰⿱己千己千",
+        "confidence": 0.389,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "2AACF",
       "source": "TC-223F",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2AACF.png"
+      "glyph": "glyphs/ext-c-pdam5/2AACF.png",
+      "guess": {
+        "ids": "⿳⿰丿弋一一",
+        "confidence": 0.331,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.03"
+      }
     },
     {
       "serial": "2AAD0",
       "source": "TC-2378",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2AAD0.png"
+      "glyph": "glyphs/ext-c-pdam5/2AAD0.png",
+      "guess": {
+        "ids": "⿱⿻弓人一",
+        "confidence": 0.423,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.15"
+      }
     },
     {
       "serial": "2ABBB",
       "source": "TD-5C4B",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2ABBB.png"
+      "glyph": "glyphs/ext-c-pdam5/2ABBB.png",
+      "guess": {
+        "ids": "〾⿳⿲丨丨冖手手",
+        "confidence": 0.239,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.08"
+      }
     },
     {
       "serial": "2ABE6",
       "source": "G_ZJW00399",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2ABE6.png"
+      "glyph": "glyphs/ext-c-pdam5/2ABE6.png",
+      "guess": {
+        "ids": "⿰皀攴",
+        "confidence": 0.866,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "2AC0B",
       "source": "JK-65202",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2AC0B.png"
+      "glyph": "glyphs/ext-c-pdam5/2AC0B.png",
+      "guess": {
+        "ids": "⿰充方",
+        "confidence": 0.413,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "2AC49",
       "source": "TD-286B",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2AC49.png"
+      "glyph": "glyphs/ext-c-pdam5/2AC49.png",
+      "guess": {
+        "ids": "⿱⿴𠀃日八",
+        "confidence": 0.386,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "2AC55",
       "source": "TD-4C59",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2AC55.png"
+      "glyph": "glyphs/ext-c-pdam5/2AC55.png",
+      "guess": {
+        "ids": "⿰日⿶凵⿱日𠦂",
+        "confidence": 0.398,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "2AC78",
       "source": "TC-3C7A",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2AC78.png"
+      "glyph": "glyphs/ext-c-pdam5/2AC78.png",
+      "guess": {
+        "ids": "⿱⿰𢆉月一",
+        "confidence": 0.534,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.03"
+      }
     },
     {
       "serial": "2AC83",
       "source": "TD-4421",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2AC83.png"
+      "glyph": "glyphs/ext-c-pdam5/2AC83.png",
+      "guess": {
+        "ids": "⿰月皇",
+        "confidence": 0.868,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "2AC85",
       "source": "TD-3C3C",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2AC85.png"
+      "glyph": "glyphs/ext-c-pdam5/2AC85.png",
+      "guess": {
+        "ids": "⿰月泰",
+        "confidence": 0.803,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "2AC87",
       "source": "TD-4D2B",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2AC87.png"
+      "glyph": "glyphs/ext-c-pdam5/2AC87.png",
+      "guess": {
+        "ids": "⿰月离",
+        "confidence": 0.86,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "2AC98",
       "source": "TC-3336",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2AC98.png"
+      "glyph": "glyphs/ext-c-pdam5/2AC98.png",
+      "guess": {
+        "ids": "⿰木⿳冈一一",
+        "confidence": 0.403,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "2ACAD",
       "source": "KP1-4B50",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2ACAD.png"
+      "glyph": "glyphs/ext-c-pdam5/2ACAD.png",
+      "guess": {
+        "ids": "⿱㲽木",
+        "confidence": 0.432,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.15"
+      }
     },
     {
       "serial": "2AD0B",
       "source": "TD-5D5B",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2AD0B.png"
+      "glyph": "glyphs/ext-c-pdam5/2AD0B.png",
+      "guess": {
+        "ids": "⿱⿰木⿳丶⿻尸十从一",
+        "confidence": 0.356,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.15"
+      }
     },
     {
       "serial": "2AD73",
       "source": "TD-6B6D",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2AD73.png"
+      "glyph": "glyphs/ext-c-pdam5/2AD73.png",
+      "guess": {
+        "ids": "⿳高⿰豕殳一",
+        "confidence": 0.444,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.08"
+      }
     },
     {
       "serial": "2AD94",
       "source": "TC-3376",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2AD94.png"
+      "glyph": "glyphs/ext-c-pdam5/2AD94.png",
+      "guess": {
+        "ids": "⿰冫⿱匕工",
+        "confidence": 0.561,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "2AE47",
       "source": "G_CH200843",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2AE47.png"
+      "glyph": "glyphs/ext-c-pdam5/2AE47.png",
+      "guess": {
+        "ids": "⿰火𠬤",
+        "confidence": 0.863,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "2AE5D",
       "source": "TD-2C3B",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2AE5D.png"
+      "glyph": "glyphs/ext-c-pdam5/2AE5D.png",
+      "guess": {
+        "ids": "⿰火畏",
+        "confidence": 0.682,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "2AE68",
       "source": "TD-2C54",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2AE68.png"
+      "glyph": "glyphs/ext-c-pdam5/2AE68.png",
+      "guess": {
+        "ids": "⿱⿰⿱巛夕刂火",
+        "confidence": 0.543,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "2AE77",
       "source": "TD-3F3B",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2AE77.png"
+      "glyph": "glyphs/ext-c-pdam5/2AE77.png",
+      "guess": {
+        "ids": "⿳炏冖𰀁",
+        "confidence": 0.747,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.03"
+      }
     },
     {
       "serial": "2AEDF",
       "source": "G_HC100308",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2AEDF.png"
+      "glyph": "glyphs/ext-c-pdam5/2AEDF.png",
+      "guess": {
+        "ids": "⿻丷⿻丶乀",
+        "confidence": 0.213,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.15"
+      }
     },
     {
       "serial": "2AEE3",
       "source": "TC-4658",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2AEE3.png"
+      "glyph": "glyphs/ext-c-pdam5/2AEE3.png",
+      "guess": {
+        "ids": "⿱⿰⿻三丨力大",
+        "confidence": 0.332,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.15"
+      }
     },
     {
       "serial": "2AF0F",
       "source": "TC-5C2E",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2AF0F.png"
+      "glyph": "glyphs/ext-c-pdam5/2AF0F.png",
+      "guess": {
+        "ids": "⿶凵兑",
+        "confidence": 0.569,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.08"
+      }
     },
     {
       "serial": "2AF11",
       "source": "TC-5B6E",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2AF11.png"
+      "glyph": "glyphs/ext-c-pdam5/2AF11.png",
+      "guess": {
+        "ids": "⿰𤣩⿳刀口儿",
+        "confidence": 0.585,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.03"
+      }
     },
     {
       "serial": "2AF2F",
       "source": "TD-4045",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2AF2F.png"
+      "glyph": "glyphs/ext-c-pdam5/2AF2F.png",
+      "guess": {
+        "ids": "⿱⿲𤣩凡一一",
+        "confidence": 0.313,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "2AFAB",
       "source": "TC-5C4F",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2AFAB.png"
+      "glyph": "glyphs/ext-c-pdam5/2AFAB.png",
+      "guess": {
+        "ids": "⿱白⿻从十",
+        "confidence": 0.572,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "2B02C",
       "source": "TE-364E",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2B02C.png"
+      "glyph": "glyphs/ext-c-pdam5/2B02C.png",
+      "guess": {
+        "ids": "⿱𦥯石",
+        "confidence": 0.606,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "2B0B6",
       "source": "TD-5274",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2B0B6.png"
+      "glyph": "glyphs/ext-c-pdam5/2B0B6.png",
+      "guess": {
+        "ids": "⿶凵⿳𥫗𠔿長",
+        "confidence": 0.483,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.03"
+      }
     },
     {
       "serial": "2B129",
       "source": "TD-6239",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2B129.png"
+      "glyph": "glyphs/ext-c-pdam5/2B129.png",
+      "guess": {
+        "ids": "⿰糹𬎾",
+        "confidence": 0.616,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "2B1B9",
       "source": "TD-4374",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2B1B9.png"
+      "glyph": "glyphs/ext-c-pdam5/2B1B9.png",
+      "guess": {
+        "ids": "⿰耳⿱甶㇉",
+        "confidence": 0.657,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "2B1BD",
       "source": "TD-626C",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2B1BD.png"
+      "glyph": "glyphs/ext-c-pdam5/2B1BD.png",
+      "guess": {
+        "ids": "⿰耳翁",
+        "confidence": 0.78,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "2B224",
       "source": "TC-4172",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2B224.png"
+      "glyph": "glyphs/ext-c-pdam5/2B224.png",
+      "guess": {
+        "ids": "〾⿱𡗜⿱大丂",
+        "confidence": 0.287,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.15"
+      }
     },
     {
       "serial": "2B236",
       "source": "TC-5F53",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2B236.png"
+      "glyph": "glyphs/ext-c-pdam5/2B236.png",
+      "guess": {
+        "ids": "⿱艹羗",
+        "confidence": 0.627,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.03"
+      }
     },
     {
       "serial": "2B247",
       "source": "TD-3128",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2B247.png"
+      "glyph": "glyphs/ext-c-pdam5/2B247.png",
+      "guess": {
+        "ids": "〾⿱艹⿰臣卜",
+        "confidence": 0.345,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.08"
+      }
     },
     {
       "serial": "2B25C",
       "source": "TD-452A",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2B25C.png"
+      "glyph": "glyphs/ext-c-pdam5/2B25C.png",
+      "guess": {
+        "ids": "⿱艹展",
+        "confidence": 0.397,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "2B265",
       "source": "K5H00029",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2B265.png"
+      "glyph": "glyphs/ext-c-pdam5/2B265.png",
+      "guess": {
+        "ids": "⿱艹⿰方尔",
+        "confidence": 0.238,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "2B29E",
       "source": "HC101428",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2B29E.png"
+      "glyph": "glyphs/ext-c-pdam5/2B29E.png",
+      "guess": {
+        "ids": "⿱艹𡩋",
+        "confidence": 0.456,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "2B460",
       "source": "TC-425E",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2B460.png"
+      "glyph": "glyphs/ext-c-pdam5/2B460.png",
+      "guess": {
+        "ids": "⿺辶圣",
+        "confidence": 0.641,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "2B488",
       "source": "BK101916",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2B488.png"
+      "glyph": "glyphs/ext-c-pdam5/2B488.png",
+      "guess": {
+        "ids": "⿺辶⿳白冖方",
+        "confidence": 0.763,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "2B497",
       "source": "TC-2D59 G_XC201924",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2B497.png"
+      "glyph": "glyphs/ext-c-pdam5/2B497.png",
+      "guess": {
+        "ids": "⿱⿰⿱㇒⿻二丿阝一",
+        "confidence": 0.74,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.08"
+      }
     },
     {
       "serial": "2B561",
       "source": "TD-716B",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2B561.png"
+      "glyph": "glyphs/ext-c-pdam5/2B561.png",
+      "guess": {
+        "ids": "⿵門免",
+        "confidence": 0.616,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "2B58F",
       "source": "TD-4740",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2B58F.png"
+      "glyph": "glyphs/ext-c-pdam5/2B58F.png",
+      "guess": {
+        "ids": "〾⿰阝⿳丶且⺝",
+        "confidence": 0.733,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.08"
+      }
     },
     {
       "serial": "2B597",
       "source": "TD-7176",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2B597.png"
+      "glyph": "glyphs/ext-c-pdam5/2B597.png",
+      "guess": {
+        "ids": "⿰阝⿳亠口⿵冂𢆉",
+        "confidence": 0.65,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.03"
+      }
     },
     {
       "serial": "2B5CA",
       "source": "UTC00249",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2B5CA.png"
+      "glyph": "glyphs/ext-c-pdam5/2B5CA.png",
+      "guess": {
+        "ids": "⿰革𧈪",
+        "confidence": 0.786,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "2B5D9",
       "source": "G_KX139614",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2B5D9.png"
+      "glyph": "glyphs/ext-c-pdam5/2B5D9.png",
+      "guess": {
+        "ids": "⿰市⿱次韭",
+        "confidence": 0.661,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     },
     {
       "serial": "2B611",
       "source": "TD-3840",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2B611.png"
+      "glyph": "glyphs/ext-c-pdam5/2B611.png",
+      "guess": {
+        "ids": "⿻来食",
+        "confidence": 0.311,
+        "model": "han2ids-v0.4",
+        "variant": "fit 0.15"
+      }
     },
     {
       "serial": "2B68F",
       "source": "TD-666B",
       "document": "n1330",
       "page": 2,
-      "glyph": "glyphs/ext-c-pdam5/2B68F.png"
+      "glyph": "glyphs/ext-c-pdam5/2B68F.png",
+      "guess": {
+        "ids": "⿺⿱甶儿隹",
+        "confidence": 0.807,
+        "model": "han2ids-v0.4",
+        "variant": "em"
+      }
     }
   ]
 }

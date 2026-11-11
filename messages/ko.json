@@ -306,5 +306,6 @@
   "variant.relation.variant": "IWDS 이체",
   "variant.relation.compatibility": "호환",
   "variant.source.iwds": "IWDS",
-  "variant.source.unicode": "유니코드"
+  "variant.source.unicode": "유니코드",
+  "proposal.guess": "추정 IDS"
 }
