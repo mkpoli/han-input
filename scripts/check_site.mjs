@@ -166,7 +166,7 @@ await check('clues combine a source character with a code', async () => {
 })
 await check('a code typed exactly comes before the readings it folds onto', async () => {
   await find('a-1')
-  assert.match(await page.locator('main .ui-section h2').first().innerText(), /kana/i)
+  assert.match(await page.locator('main .ui-section h3').first().innerText(), /kana/i)
 })
 await check('siniform scripts stay out of the tables', async () => {
   const methods = await page.evaluate(async () => (await fetch('/data/methods.json')).json())
