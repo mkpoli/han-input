@@ -7,7 +7,7 @@
   import { LINKS } from '../lib/links.js'
   import { link, route, go, open } from '../lib/route.svelte.js'
   import { put, ui } from '../lib/ui.svelte.js'
-  import { copy } from '../lib/clip.svelte.js'
+  import { copy, toast } from '../lib/clip.svelte.js'
   import { nameOf, t } from '../lib/i18n.svelte.js'
   import { FAMILIES } from '../lib/families.js'
   import SourceCode from './SourceCode.svelte'
@@ -127,6 +127,7 @@
           <button class="ui-button" data-variant="primary" data-size="sm" type="button" onclick={() => put(char)}>{t('card.add')}</button>
           <button class="ui-button" data-size="sm" type="button" onclick={() => copy(char)}>{t('common.copy')}</button>
         </div>
+        {#if ui.sheet}<div class="feedback ui-hint" role="status" aria-live="polite">{#key toast.id}{toast.message}{/key}</div>{/if}
       </div>
     </header>
 

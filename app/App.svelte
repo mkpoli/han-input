@@ -129,7 +129,7 @@
 
   <div class="dock"><Writing /></div>
 
-  <div class="toast" role="status" aria-live="polite">{#if toast.message}<span class="ui-toast">{toast.message}</span>{/if}</div>
+  <div class="toast" role="status" aria-live="polite">{#if toast.message && !ui.sheet}{#key toast.id}<span class="ui-toast">{toast.message}</span>{/key}{/if}</div>
 </div>
 
 <style>
