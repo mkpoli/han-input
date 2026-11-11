@@ -6,7 +6,7 @@
   import { readingTree } from '../lib/classification.js'
   import { LINKS } from '../lib/links.js'
   import { link, route, go, open } from '../lib/route.svelte.js'
-  import { put, ui } from '../lib/ui.svelte.js'
+  import { put, hideSheet } from '../lib/ui.svelte.js'
   import { copy } from '../lib/clip.svelte.js'
   import { nameOf, t } from '../lib/i18n.svelte.js'
   import { FAMILIES } from '../lib/families.js'
@@ -35,7 +35,7 @@
     if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return
     event.preventDefault()
     const dialog = /** @type {HTMLElement} */ (event.currentTarget).closest('dialog')
-    if (dialog) ui.sheet = false
+    if (dialog) hideSheet()
     go(page, method)
     if (dialog) {
       await tick()

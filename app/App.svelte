@@ -5,7 +5,7 @@
   import { NAV, go, route } from './lib/route.svelte.js'
   import { pageMetadata } from './lib/title.js'
   import { applySeo } from './lib/seo.js'
-  import { ui, applyTheme, closeRecord } from './lib/ui.svelte.js'
+  import { ui, applyTheme, closeRecord, hideSheet } from './lib/ui.svelte.js'
   import { toast } from './lib/clip.svelte.js'
   import { t } from './lib/i18n.svelte.js'
   import Writing from './ui/Writing.svelte'
@@ -62,7 +62,7 @@
         shell.insertBefore(card, sheet)
         const restored = document.activeElement
         savedScroll = scroll
-        ui.sheet = false
+        hideSheet()
         void tick().then(() => {
           if (!media.matches) {
             card.scrollTop = scroll
@@ -79,7 +79,7 @@
       media.removeEventListener('change', resize)
       if (sheet.open) sheet.close()
       if (card.parentElement !== shell && sheet.parentElement === shell) shell.insertBefore(card, sheet)
-      ui.sheet = false
+      hideSheet()
     }
   })
 
@@ -94,6 +94,10 @@
       savedScroll = card.scrollTop
       sheet.close()
     }
+  })
+
+  $effect(() => {
+    if (ui.sheet && toast.message) ui.sheetNoticeId = toast.id
   })
 
   function keepFocusVisible() {
@@ -114,7 +118,7 @@
 
   function dismissSheet() {
     if (ui.record && !route.c) closeRecord()
-    else ui.sheet = false
+    else hideSheet()
   }
 
   $effect(() => {

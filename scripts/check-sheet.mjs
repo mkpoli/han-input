@@ -128,6 +128,7 @@ try {
       await statusInProposal.getByText(succeeds ? 'Copied 𦱳' : 'The clipboard is blocked', { exact: true }).waitFor()
       if (!succeeds) await page.screenshot({ path: `/tmp/han-delayed-after-${theme}.png` })
       await dialog.getByRole('button', { name: 'Back' }).click()
+      assert.equal(await page.locator('.toast').textContent(), '', 'proposal dismissal does not repeat its status')
     }
     await proposal.focus()
     await page.keyboard.press('Enter')
