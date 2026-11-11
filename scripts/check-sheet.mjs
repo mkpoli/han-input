@@ -79,6 +79,7 @@ try {
     assert.equal(await page.locator('aside.card').getByText('U+5B57', { exact: true }).count(), 1)
     await page.locator('aside.card').getByRole('button', { name: 'Add to text' }).click()
     await page.locator('.toast').getByText('Added 字', { exact: true }).waitFor()
+    await tile.focus()
     await page.setViewportSize({ width: 390, height: 844 })
     assert.equal(await page.locator('dialog:modal').count(), 0, 'resizing back does not reopen the sheet')
 
@@ -169,16 +170,21 @@ try {
       if (largeHeader) {
         await dialog.locator('[role="status"]').evaluate(el => {
           el.textContent = 'The clipboard is blocked. The clipboard is blocked.'
+          el.classList.add('show')
           ;(/** @type {HTMLElement} */ (el)).style.fontSize = '24px'
         })
       }
       await page.waitForFunction(({ initialHeaderHeight, largeHeader }) => {
-        const sheet = document.querySelector('dialog:modal')
+        const sheet = document.querySelector('dialog:modal .card')
         const head = sheet?.querySelector('.back')
-        if (!sheet || !head) return false
+        const status = sheet?.querySelector('.sheet-status')
+        if (!sheet || !head || !status) return false
         const height = head.getBoundingClientRect().height
-        const padding = parseFloat(getComputedStyle(sheet).scrollPaddingTop)
-        return (!largeHeader || height > initialHeaderHeight * 1.5) && padding >= height && padding <= height + 5
+        const statusHeight = status.getBoundingClientRect().height
+        const style = getComputedStyle(sheet)
+        const topPadding = parseFloat(style.scrollPaddingTop)
+        const bottomPadding = parseFloat(style.scrollPaddingBottom)
+        return (!largeHeader || statusHeight > initialHeaderHeight * 1.5) && topPadding >= height && topPadding <= height + 5 && bottomPadding >= statusHeight && bottomPadding <= statusHeight + 5
       }, { initialHeaderHeight, largeHeader })
       const last = dialog.locator('a[href^="/m/"]').last()
       await last.waitFor()
@@ -186,17 +192,20 @@ try {
       let checked = 0
       for (let i = 0; i < 100; i++) {
         await page.keyboard.press(i < 50 ? 'Shift+Tab' : 'Tab')
+        await page.evaluate(() => new Promise(requestAnimationFrame))
         const focused = await page.evaluate(() => {
           const element = document.activeElement
           const sheet = document.querySelector('dialog:modal')
           const head = sheet?.querySelector('.back')
           if (!element || !head || !sheet?.contains(element) || head.contains(element)) return null
           const bounds = element.getBoundingClientRect()
-          return { label: element.textContent?.trim(), top: bounds.top, headerBottom: head.getBoundingClientRect().bottom }
+          const status = head.querySelector('.sheet-status')
+          return { label: element.textContent?.trim(), top: bounds.top, bottom: bounds.bottom, headerBottom: head.getBoundingClientRect().bottom, statusTop: innerHeight - (status?.getBoundingClientRect().height ?? 0) }
         })
         if (focused) {
           checked++
           assert.ok(focused.top >= focused.headerBottom - 1, `focused ${focused.label} is behind the sticky header`)
+          assert.ok(focused.bottom <= focused.statusTop + 1, `focused ${focused.label} is behind the status: ${JSON.stringify(focused)}`)
           if (i === 9) await page.screenshot({ path: `/tmp/han-focus-fixed-${theme}-${largeHeader ? 'large' : 'normal'}.png` })
         }
       }

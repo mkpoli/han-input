@@ -35,7 +35,7 @@
     if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return
     event.preventDefault()
     const dialog = /** @type {HTMLElement} */ (event.currentTarget).closest('dialog')
-    if (dialog) { dialog.close(); ui.sheet = false }
+    if (dialog) ui.sheet = false
     go(page, method)
     if (dialog) {
       await tick()
