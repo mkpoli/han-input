@@ -33,6 +33,10 @@ bun run dev
 bun run verify          # unit tests, type check, messages
 ```
 
+The coverage page divides its counts by the characters in the search corpus and by the rows in the
+character-set records. `data/font-coverage.json` is the snapshot of the bundled faces' code points;
+rewrite it after `scripts/build_fonts.py` with `uv run scripts/build_font_coverage.py`.
+
 `bun scripts/build_readings.mjs` builds the readings from the database in 漢字音典's release APK, unpacked to
 `cache/mcpdict/x`. `bun scripts/build_wiktionary.mjs <dir>` builds the meaning index from Wiktionary dumps
 before `build:data` reads it. The generated `app/public/data/` is about 300 MB and is not committed.
