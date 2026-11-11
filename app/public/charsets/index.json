@@ -14,7 +14,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/unicode_basic.json"
+      "url": "https://zi.tools/?secondary=character_set&set=Unicode",
+      "dataUrl": "https://zi.tools/api/ma/ma/unicode_basic.json"
     },
     "codes": "/charsets/unicode_basic.codes.tsv",
     "columns": 16,
@@ -39,7 +40,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/unicode_ext_a.json"
+      "url": "https://zi.tools/?secondary=character_set&set=Ext.A",
+      "dataUrl": "https://zi.tools/api/ma/ma/unicode_ext_a.json"
     },
     "codes": "/charsets/unicode_ext_a.codes.tsv",
     "columns": 16,
@@ -64,7 +66,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/unicode_ext_b.json"
+      "url": "https://zi.tools/?secondary=character_set&set=Ext.B",
+      "dataUrl": "https://zi.tools/api/ma/ma/unicode_ext_b.json"
     },
     "codes": "/charsets/unicode_ext_b.codes.tsv",
     "columns": 16,
@@ -89,7 +92,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/unicode_ext_c.json"
+      "url": "https://zi.tools/?secondary=character_set&set=Ext.C",
+      "dataUrl": "https://zi.tools/api/ma/ma/unicode_ext_c.json"
     },
     "codes": "/charsets/unicode_ext_c.codes.tsv",
     "columns": 16,
@@ -114,7 +118,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/unicode_ext_d.json"
+      "url": "https://zi.tools/?secondary=character_set&set=Ext.D",
+      "dataUrl": "https://zi.tools/api/ma/ma/unicode_ext_d.json"
     },
     "codes": "/charsets/unicode_ext_d.codes.tsv",
     "columns": 16,
@@ -139,7 +144,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/unicode_ext_e.json"
+      "url": "https://zi.tools/?secondary=character_set&set=Ext.E",
+      "dataUrl": "https://zi.tools/api/ma/ma/unicode_ext_e.json"
     },
     "codes": "/charsets/unicode_ext_e.codes.tsv",
     "columns": 16,
@@ -164,7 +170,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/unicode_ext_f.json"
+      "url": "https://zi.tools/?secondary=character_set&set=Ext.F",
+      "dataUrl": "https://zi.tools/api/ma/ma/unicode_ext_f.json"
     },
     "codes": "/charsets/unicode_ext_f.codes.tsv",
     "columns": 16,
@@ -189,7 +196,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/unicode_ext_g.json"
+      "url": "https://zi.tools/?secondary=character_set&set=Ext.G",
+      "dataUrl": "https://zi.tools/api/ma/ma/unicode_ext_g.json"
     },
     "codes": "/charsets/unicode_ext_g.codes.tsv",
     "columns": 16,
@@ -214,7 +222,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/unicode_ext_h.json"
+      "url": "https://zi.tools/?secondary=character_set&set=Ext.H",
+      "dataUrl": "https://zi.tools/api/ma/ma/unicode_ext_h.json"
     },
     "codes": "/charsets/unicode_ext_h.codes.tsv",
     "columns": 16,
@@ -239,7 +248,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/unicode_ext_i.json"
+      "url": "https://zi.tools/?secondary=character_set&set=Ext.I",
+      "dataUrl": "https://zi.tools/api/ma/ma/unicode_ext_i.json"
     },
     "codes": "/charsets/unicode_ext_i.codes.tsv",
     "columns": 16,
@@ -264,7 +274,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/unicode_ext_j.json"
+      "url": "https://zi.tools/?secondary=character_set&set=Ext.J",
+      "dataUrl": "https://zi.tools/api/ma/ma/unicode_ext_j.json"
     },
     "codes": "/charsets/unicode_ext_j.codes.tsv",
     "columns": 16,
@@ -289,7 +300,8 @@
     "unencoded": 119,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/unicode_comp_a_tentative.json"
+      "url": "https://zi.tools/?secondary=character_set&set=Comp.A.Tentative",
+      "dataUrl": "https://zi.tools/api/ma/ma/unicode_comp_a_tentative.json"
     },
     "records": {
       "file": "/charsets/unicode_comp_a_tentative.ids.json",
@@ -313,7 +325,8 @@
     "unencoded": 200,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/unicode_comp_b_tentative.json"
+      "url": "https://zi.tools/?secondary=character_set&set=Comp.B.Tentative",
+      "dataUrl": "https://zi.tools/api/ma/ma/unicode_comp_b_tentative.json"
     },
     "records": {
       "file": "/charsets/unicode_comp_b_tentative.ids.json",
@@ -338,7 +351,8 @@
     "unencoded": 187,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/compatibility.json"
+      "url": "https://zi.tools/?secondary=character_set&set=OTHER",
+      "dataUrl": "https://zi.tools/api/ma/ma/compatibility.json"
     },
     "records": {
       "file": "/charsets/compatibility.ids.json",
@@ -363,7 +377,8 @@
     "unencoded": 338,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/ws2015.json"
+      "url": "https://zi.tools/?secondary=character_set&set=WS2015",
+      "dataUrl": "https://zi.tools/api/ma/ma/ws2015.json"
     },
     "records": {
       "file": "/charsets/ws2015.ids.json",
@@ -388,7 +403,8 @@
     "unencoded": 539,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/ws2017.json"
+      "url": "https://zi.tools/?secondary=character_set&set=WS2017",
+      "dataUrl": "https://zi.tools/api/ma/ma/ws2017.json"
     },
     "records": {
       "file": "/charsets/ws2017.ids.json",
@@ -413,7 +429,8 @@
     "unencoded": 539,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/ws2021.json"
+      "url": "https://zi.tools/?secondary=character_set&set=WS2021",
+      "dataUrl": "https://zi.tools/api/ma/ma/ws2021.json"
     },
     "records": {
       "file": "/charsets/ws2021.ids.json",
@@ -438,7 +455,8 @@
     "unencoded": 4646,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/ws2024.json"
+      "url": "https://zi.tools/?secondary=character_set&set=WS2024",
+      "dataUrl": "https://zi.tools/api/ma/ma/ws2024.json"
     },
     "records": {
       "file": "/charsets/ws2024.ids.json",
@@ -463,7 +481,8 @@
     "unencoded": 742,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/utc.json"
+      "url": "https://zi.tools/?secondary=character_set&set=UTC",
+      "dataUrl": "https://zi.tools/api/ma/ma/utc.json"
     },
     "records": {
       "file": "/charsets/utc.ids.json",
@@ -488,7 +507,8 @@
     "unencoded": 1,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/swjz.json"
+      "url": "https://zi.tools/?secondary=character_set&set=zhuan",
+      "dataUrl": "https://zi.tools/api/ma/ma/swjz.json"
     },
     "codes": "/charsets/swjz.codes.tsv",
     "columns": 10
@@ -508,7 +528,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/unicode_rad_str.json"
+      "url": "https://zi.tools/?secondary=character_set&set=RadStr",
+      "dataUrl": "https://zi.tools/api/ma/ma/unicode_rad_str.json"
     },
     "codes": "/charsets/unicode_rad_str.codes.tsv",
     "columns": 10
@@ -528,7 +549,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/g0.json"
+      "url": "https://zi.tools/?secondary=character_set&set=G0",
+      "dataUrl": "https://zi.tools/api/ma/ma/g0.json"
     },
     "codes": "/charsets/g0.codes.tsv",
     "columns": 10
@@ -548,7 +570,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/g1.json"
+      "url": "https://zi.tools/?secondary=character_set&set=G1",
+      "dataUrl": "https://zi.tools/api/ma/ma/g1.json"
     },
     "codes": "/charsets/g1.codes.tsv",
     "columns": 10
@@ -568,7 +591,8 @@
     "unencoded": 496,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/g2.json"
+      "url": "https://zi.tools/?secondary=character_set&set=G2",
+      "dataUrl": "https://zi.tools/api/ma/ma/g2.json"
     },
     "records": {
       "file": "/charsets/g2.ids.json",
@@ -593,7 +617,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/g3.json"
+      "url": "https://zi.tools/?secondary=character_set&set=G3",
+      "dataUrl": "https://zi.tools/api/ma/ma/g3.json"
     },
     "codes": "/charsets/g3.codes.tsv",
     "columns": 10
@@ -613,7 +638,8 @@
     "unencoded": 995,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/g4.json"
+      "url": "https://zi.tools/?secondary=character_set&set=G4",
+      "dataUrl": "https://zi.tools/api/ma/ma/g4.json"
     },
     "records": {
       "file": "/charsets/g4.ids.json",
@@ -638,7 +664,8 @@
     "unencoded": 24,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/g5.json"
+      "url": "https://zi.tools/?secondary=character_set&set=G5",
+      "dataUrl": "https://zi.tools/api/ma/ma/g5.json"
     },
     "records": {
       "file": "/charsets/g5.ids.json",
@@ -663,7 +690,8 @@
     "unencoded": 28,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/g7.json"
+      "url": "https://zi.tools/?secondary=character_set&set=G7",
+      "dataUrl": "https://zi.tools/api/ma/ma/g7.json"
     },
     "records": {
       "file": "/charsets/g7.ids.json",
@@ -688,7 +716,8 @@
     "unencoded": 2,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/g8.json"
+      "url": "https://zi.tools/?secondary=character_set&set=G8",
+      "dataUrl": "https://zi.tools/api/ma/ma/g8.json"
     },
     "records": {
       "file": "/charsets/g8.ids.json",
@@ -713,7 +742,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/ge.json"
+      "url": "https://zi.tools/?secondary=character_set&set=GE",
+      "dataUrl": "https://zi.tools/api/ma/ma/ge.json"
     },
     "codes": "/charsets/ge.codes.tsv",
     "columns": 10
@@ -764,7 +794,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/gh.json"
+      "url": "https://zi.tools/?secondary=character_set&set=GH",
+      "dataUrl": "https://zi.tools/api/ma/ma/gh.json"
     },
     "codes": "/charsets/gh.codes.tsv",
     "columns": 10
@@ -784,7 +815,8 @@
     "unencoded": 14,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/gb_a.json"
+      "url": "https://zi.tools/?secondary=character_set&set=GB18030",
+      "dataUrl": "https://zi.tools/api/ma/ma/gb_a.json"
     },
     "records": {
       "file": "/charsets/gb_a.ids.json",
@@ -809,7 +841,8 @@
     "unencoded": 174,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/gb_a_v1.json"
+      "url": "https://zi.tools/?secondary=character_set&set=GB18030v1",
+      "dataUrl": "https://zi.tools/api/ma/ma/gb_a_v1.json"
     },
     "records": {
       "file": "/charsets/gb_a_v1.ids.json",
@@ -834,7 +867,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/gt.json"
+      "url": "https://zi.tools/?secondary=character_set&set=GT",
+      "dataUrl": "https://zi.tools/api/ma/ma/gt.json"
     },
     "codes": "/charsets/gt.codes.tsv",
     "columns": 10
@@ -854,7 +888,8 @@
     "unencoded": 23,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/gkx.json"
+      "url": "https://zi.tools/?secondary=character_set&set=GKX",
+      "dataUrl": "https://zi.tools/api/ma/ma/gkx.json"
     },
     "records": {
       "file": "/charsets/gkx.ids.json",
@@ -879,7 +914,8 @@
     "unencoded": 1809,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/ghzr.json"
+      "url": "https://zi.tools/?secondary=character_set&set=GHZR",
+      "dataUrl": "https://zi.tools/api/ma/ma/ghzr.json"
     },
     "records": {
       "file": "/charsets/ghzr.ids.json",
@@ -904,7 +940,8 @@
     "unencoded": 96,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/gzfy.json"
+      "url": "https://zi.tools/?secondary=character_set&set=GZFY",
+      "dataUrl": "https://zi.tools/api/ma/ma/gzfy.json"
     },
     "records": {
       "file": "/charsets/gzfy.ids.json",
@@ -929,7 +966,8 @@
     "unencoded": 180,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/gzjw.json"
+      "url": "https://zi.tools/?secondary=character_set&set=GZJW",
+      "dataUrl": "https://zi.tools/api/ma/ma/gzjw.json"
     },
     "records": {
       "file": "/charsets/gzjw.ids.json",
@@ -954,7 +992,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/gce.json"
+      "url": "https://zi.tools/?secondary=character_set&set=GCE",
+      "dataUrl": "https://zi.tools/api/ma/ma/gce.json"
     },
     "codes": "/charsets/gce.codes.tsv",
     "columns": 10
@@ -974,7 +1013,8 @@
     "unencoded": 2680,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/gz.json"
+      "url": "https://zi.tools/?secondary=character_set&set=GZ",
+      "dataUrl": "https://zi.tools/api/ma/ma/gz.json"
     },
     "records": {
       "file": "/charsets/gz.ids.json",
@@ -999,7 +1039,8 @@
     "unencoded": 329,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/ghf.json"
+      "url": "https://zi.tools/?secondary=character_set&set=GHF",
+      "dataUrl": "https://zi.tools/api/ma/ma/ghf.json"
     },
     "records": {
       "file": "/charsets/ghf.ids.json",
@@ -1024,7 +1065,8 @@
     "unencoded": 636,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/g_8f.json"
+      "url": "https://zi.tools/?secondary=character_set&set=G%E5%85%AB%E8%BE%85",
+      "dataUrl": "https://zi.tools/api/ma/ma/g_8f.json"
     },
     "records": {
       "file": "/charsets/g_8f.ids.json",
@@ -1049,7 +1091,8 @@
     "unencoded": 1,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/g_tg.json"
+      "url": "https://zi.tools/?secondary=character_set&set=G%E9%80%9A%E8%A7%84",
+      "dataUrl": "https://zi.tools/api/ma/ma/g_tg.json"
     },
     "records": {
       "file": "/charsets/g_tg.ids.json",
@@ -1074,7 +1117,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/g_cy.json"
+      "url": "https://zi.tools/?secondary=character_set&set=G%E5%B8%B8%E7%94%A8",
+      "dataUrl": "https://zi.tools/api/ma/ma/g_cy.json"
     },
     "codes": "/charsets/g_cy.codes.tsv",
     "columns": 10
@@ -1094,7 +1138,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/g_1j.json"
+      "url": "https://zi.tools/?secondary=character_set&set=G%E4%B8%80%E7%AE%80",
+      "dataUrl": "https://zi.tools/api/ma/ma/g_1j.json"
     },
     "codes": "/charsets/g_1j.codes.tsv",
     "columns": 10
@@ -1114,7 +1159,8 @@
     "unencoded": 27,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/g_bujian.json"
+      "url": "https://zi.tools/?secondary=character_set&set=G%E9%83%A8%E4%BB%B6",
+      "dataUrl": "https://zi.tools/api/ma/ma/g_bujian.json"
     },
     "records": {
       "file": "/charsets/g_bujian.ids.json",
@@ -1139,7 +1185,8 @@
     "unencoded": 410,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/g_2j.json"
+      "url": "https://zi.tools/?secondary=character_set&set=G%E4%BA%8C%E7%AE%80",
+      "dataUrl": "https://zi.tools/api/ma/ma/g_2j.json"
     },
     "records": {
       "file": "/charsets/g_2j.ids.json",
@@ -1164,7 +1211,8 @@
     "unencoded": 42,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/g_roc1j.json"
+      "url": "https://zi.tools/?secondary=character_set&set=G%E6%B0%91%E5%9C%8B%E4%B8%80%E7%B0%A1",
+      "dataUrl": "https://zi.tools/api/ma/ma/g_roc1j.json"
     },
     "records": {
       "file": "/charsets/g_roc1j.ids.json",
@@ -1189,7 +1237,8 @@
     "unencoded": 886,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/bouyei.json"
+      "url": "https://zi.tools/?secondary=character_set&set=G%E5%B8%83%E4%BE%9D",
+      "dataUrl": "https://zi.tools/api/ma/ma/bouyei.json"
     },
     "records": {
       "file": "/charsets/bouyei.ids.json",
@@ -1214,7 +1263,8 @@
     "unencoded": 992,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/gin.json"
+      "url": "https://zi.tools/?secondary=character_set&set=G%E4%BA%AC%E6%97%8F",
+      "dataUrl": "https://zi.tools/api/ma/ma/gin.json"
     },
     "records": {
       "file": "/charsets/gin.ids.json",
@@ -1239,7 +1289,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/g_guji.json"
+      "url": "https://zi.tools/?secondary=character_set&set=G%E5%8F%A4%E7%B1%8D",
+      "dataUrl": "https://zi.tools/api/ma/ma/g_guji.json"
     },
     "codes": "/charsets/g_guji.codes.tsv",
     "columns": 10
@@ -1259,7 +1310,8 @@
     "unencoded": 21808,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/gzhs.json"
+      "url": "https://zi.tools/?secondary=character_set&set=G%E4%B8%AD%E5%8D%8E%E4%B9%A6%E5%B1%80%E5%AE%8B",
+      "dataUrl": "https://zi.tools/api/ma/ma/gzhs.json"
     },
     "records": {
       "file": "/charsets/gzhs.ids.json",
@@ -1284,7 +1336,8 @@
     "unencoded": 5146,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/g_gzw.json"
+      "url": "https://zi.tools/?secondary=character_set&set=G%E5%8F%A4%E5%A3%AE%E6%96%87",
+      "dataUrl": "https://zi.tools/api/ma/ma/g_gzw.json"
     },
     "records": {
       "file": "/charsets/g_gzw.ids.json",
@@ -1309,7 +1362,8 @@
     "unencoded": 6761,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/g_fkzz.json"
+      "url": "https://zi.tools/?secondary=character_set&set=G%E6%96%B9%E5%9D%97%E5%A3%AE%E5%AD%97",
+      "dataUrl": "https://zi.tools/api/ma/ma/g_fkzz.json"
     },
     "records": {
       "file": "/charsets/g_fkzz.ids.json",
@@ -1334,7 +1388,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/hb1.json"
+      "url": "https://zi.tools/?secondary=character_set&set=HB1",
+      "dataUrl": "https://zi.tools/api/ma/ma/hb1.json"
     },
     "codes": "/charsets/hb1.codes.tsv",
     "columns": 16
@@ -1354,7 +1409,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/hb2.json"
+      "url": "https://zi.tools/?secondary=character_set&set=HB2",
+      "dataUrl": "https://zi.tools/api/ma/ma/hb2.json"
     },
     "codes": "/charsets/hb2.codes.tsv",
     "columns": 16
@@ -1374,7 +1430,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/h.json"
+      "url": "https://zi.tools/?secondary=character_set&set=H",
+      "dataUrl": "https://zi.tools/api/ma/ma/h.json"
     },
     "codes": "/charsets/h.codes.tsv",
     "columns": 16
@@ -1394,7 +1451,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/h_.json"
+      "url": "https://zi.tools/?secondary=character_set&set=H%2B",
+      "dataUrl": "https://zi.tools/api/ma/ma/h_.json"
     },
     "codes": "/charsets/h_.codes.tsv",
     "columns": 16
@@ -1414,7 +1472,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/h_cy.json"
+      "url": "https://zi.tools/?secondary=character_set&set=H%E5%B8%B8%E7%94%A8",
+      "dataUrl": "https://zi.tools/api/ma/ma/h_cy.json"
     },
     "codes": "/charsets/h_cy.codes.tsv",
     "columns": 10
@@ -1434,7 +1493,8 @@
     "unencoded": 2,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/mac.json"
+      "url": "https://zi.tools/?secondary=character_set&set=MAC",
+      "dataUrl": "https://zi.tools/api/ma/ma/mac.json"
     },
     "records": {
       "file": "/charsets/mac.ids.json",
@@ -1459,7 +1519,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/t1.json"
+      "url": "https://zi.tools/?secondary=character_set&set=T1",
+      "dataUrl": "https://zi.tools/api/ma/ma/t1.json"
     },
     "codes": "/charsets/t1.codes.tsv",
     "columns": 10
@@ -1479,7 +1540,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/t2.json"
+      "url": "https://zi.tools/?secondary=character_set&set=T2",
+      "dataUrl": "https://zi.tools/api/ma/ma/t2.json"
     },
     "codes": "/charsets/t2.codes.tsv",
     "columns": 10
@@ -1499,7 +1561,8 @@
     "unencoded": 1,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/t3.json"
+      "url": "https://zi.tools/?secondary=character_set&set=T3",
+      "dataUrl": "https://zi.tools/api/ma/ma/t3.json"
     },
     "records": {
       "file": "/charsets/t3.ids.json",
@@ -1524,7 +1587,8 @@
     "unencoded": 1,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/t4.json"
+      "url": "https://zi.tools/?secondary=character_set&set=T4",
+      "dataUrl": "https://zi.tools/api/ma/ma/t4.json"
     },
     "records": {
       "file": "/charsets/t4.ids.json",
@@ -1549,7 +1613,8 @@
     "unencoded": 1,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/t5.json"
+      "url": "https://zi.tools/?secondary=character_set&set=T5",
+      "dataUrl": "https://zi.tools/api/ma/ma/t5.json"
     },
     "records": {
       "file": "/charsets/t5.ids.json",
@@ -1574,7 +1639,8 @@
     "unencoded": 1,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/t6.json"
+      "url": "https://zi.tools/?secondary=character_set&set=T6",
+      "dataUrl": "https://zi.tools/api/ma/ma/t6.json"
     },
     "records": {
       "file": "/charsets/t6.ids.json",
@@ -1599,7 +1665,8 @@
     "unencoded": 2,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/t7.json"
+      "url": "https://zi.tools/?secondary=character_set&set=T7",
+      "dataUrl": "https://zi.tools/api/ma/ma/t7.json"
     },
     "records": {
       "file": "/charsets/t7.ids.json",
@@ -1624,7 +1691,8 @@
     "unencoded": 710,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/t9.json"
+      "url": "https://zi.tools/?secondary=character_set&set=T9",
+      "dataUrl": "https://zi.tools/api/ma/ma/t9.json"
     },
     "records": {
       "file": "/charsets/t9.ids.json",
@@ -1649,7 +1717,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/ta.json"
+      "url": "https://zi.tools/?secondary=character_set&set=TA",
+      "dataUrl": "https://zi.tools/api/ma/ma/ta.json"
     },
     "codes": "/charsets/ta.codes.tsv",
     "columns": 10
@@ -1669,7 +1738,8 @@
     "unencoded": 3504,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/tb.json"
+      "url": "https://zi.tools/?secondary=character_set&set=TB",
+      "dataUrl": "https://zi.tools/api/ma/ma/tb.json"
     },
     "records": {
       "file": "/charsets/tb.ids.json",
@@ -1694,7 +1764,8 @@
     "unencoded": 4233,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/tc.json"
+      "url": "https://zi.tools/?secondary=character_set&set=TC",
+      "dataUrl": "https://zi.tools/api/ma/ma/tc.json"
     },
     "records": {
       "file": "/charsets/tc.ids.json",
@@ -1719,7 +1790,8 @@
     "unencoded": 3638,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/td.json"
+      "url": "https://zi.tools/?secondary=character_set&set=TD",
+      "dataUrl": "https://zi.tools/api/ma/ma/td.json"
     },
     "records": {
       "file": "/charsets/td.ids.json",
@@ -1744,7 +1816,8 @@
     "unencoded": 2405,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/te.json"
+      "url": "https://zi.tools/?secondary=character_set&set=TE",
+      "dataUrl": "https://zi.tools/api/ma/ma/te.json"
     },
     "records": {
       "file": "/charsets/te.ids.json",
@@ -1769,7 +1842,8 @@
     "unencoded": 22,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/tf.json"
+      "url": "https://zi.tools/?secondary=character_set&set=TF",
+      "dataUrl": "https://zi.tools/api/ma/ma/tf.json"
     },
     "records": {
       "file": "/charsets/tf.ids.json",
@@ -1794,7 +1868,8 @@
     "unencoded": 5,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/t10.json"
+      "url": "https://zi.tools/?secondary=character_set&set=T10",
+      "dataUrl": "https://zi.tools/api/ma/ma/t10.json"
     },
     "records": {
       "file": "/charsets/t10.ids.json",
@@ -1819,7 +1894,8 @@
     "unencoded": 40,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/t11.json"
+      "url": "https://zi.tools/?secondary=character_set&set=T11",
+      "dataUrl": "https://zi.tools/api/ma/ma/t11.json"
     },
     "records": {
       "file": "/charsets/t11.ids.json",
@@ -1844,7 +1920,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/t12.json"
+      "url": "https://zi.tools/?secondary=character_set&set=T12",
+      "dataUrl": "https://zi.tools/api/ma/ma/t12.json"
     },
     "codes": "/charsets/t12.codes.tsv",
     "columns": 10
@@ -1864,7 +1941,8 @@
     "unencoded": 1210,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/t13.json"
+      "url": "https://zi.tools/?secondary=character_set&set=T13",
+      "dataUrl": "https://zi.tools/api/ma/ma/t13.json"
     },
     "records": {
       "file": "/charsets/t13.ids.json",
@@ -1889,7 +1967,8 @@
     "unencoded": 1,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/t18.json"
+      "url": "https://zi.tools/?secondary=character_set&set=T18",
+      "dataUrl": "https://zi.tools/api/ma/ma/t18.json"
     },
     "records": {
       "file": "/charsets/t18.ids.json",
@@ -1914,7 +1993,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/t_a.json"
+      "url": "https://zi.tools/?secondary=character_set&set=T%E7%94%B2%E8%A1%A8",
+      "dataUrl": "https://zi.tools/api/ma/ma/t_a.json"
     },
     "codes": "/charsets/t_a.codes.tsv",
     "columns": 10
@@ -1934,7 +2014,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/t_b.json"
+      "url": "https://zi.tools/?secondary=character_set&set=T%E4%B9%99%E8%A1%A8",
+      "dataUrl": "https://zi.tools/api/ma/ma/t_b.json"
     },
     "codes": "/charsets/t_b.codes.tsv",
     "columns": 10
@@ -1954,7 +2035,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/t_c.json"
+      "url": "https://zi.tools/?secondary=character_set&set=T%E4%B8%99%E8%A1%A8",
+      "dataUrl": "https://zi.tools/api/ma/ma/t_c.json"
     },
     "codes": "/charsets/t_c.codes.tsv",
     "columns": 10
@@ -1974,7 +2056,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/t_bt.json"
+      "url": "https://zi.tools/?secondary=character_set&set=T%E6%9C%AC%E5%9C%9F",
+      "dataUrl": "https://zi.tools/api/ma/ma/t_bt.json"
     },
     "codes": "/charsets/t_bt.codes.tsv",
     "columns": 10
@@ -1994,7 +2077,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/j0.json"
+      "url": "https://zi.tools/?secondary=character_set&set=J0",
+      "dataUrl": "https://zi.tools/api/ma/ma/j0.json"
     },
     "codes": "/charsets/j0.codes.tsv",
     "columns": 10
@@ -2014,7 +2098,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/j1.json"
+      "url": "https://zi.tools/?secondary=character_set&set=J1",
+      "dataUrl": "https://zi.tools/api/ma/ma/j1.json"
     },
     "codes": "/charsets/j1.codes.tsv",
     "columns": 10
@@ -2034,7 +2119,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/j3.json"
+      "url": "https://zi.tools/?secondary=character_set&set=J3",
+      "dataUrl": "https://zi.tools/api/ma/ma/j3.json"
     },
     "codes": "/charsets/j3.codes.tsv",
     "columns": 10
@@ -2054,7 +2140,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/j4.json"
+      "url": "https://zi.tools/?secondary=character_set&set=J4",
+      "dataUrl": "https://zi.tools/api/ma/ma/j4.json"
     },
     "codes": "/charsets/j4.codes.tsv",
     "columns": 10
@@ -2074,7 +2161,8 @@
     "unencoded": 73,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/jk.json"
+      "url": "https://zi.tools/?secondary=character_set&set=JK",
+      "dataUrl": "https://zi.tools/api/ma/ma/jk.json"
     },
     "records": {
       "file": "/charsets/jk.ids.json",
@@ -2099,7 +2187,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/jmj.json"
+      "url": "https://zi.tools/?secondary=character_set&set=JMJ",
+      "dataUrl": "https://zi.tools/api/ma/ma/jmj.json"
     },
     "codes": "/charsets/jmj.codes.tsv",
     "columns": 10
@@ -2119,7 +2208,8 @@
     "unencoded": 6427,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/jmjp.json"
+      "url": "https://zi.tools/?secondary=character_set&set=JMJ%2B",
+      "dataUrl": "https://zi.tools/api/ma/ma/jmjp.json"
     },
     "records": {
       "file": "/charsets/jmjp.ids.json",
@@ -2144,7 +2234,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/j_jy.json"
+      "url": "https://zi.tools/?secondary=character_set&set=J%E5%B8%B8%E7%94%A8",
+      "dataUrl": "https://zi.tools/api/ma/ma/j_jy.json"
     },
     "codes": "/charsets/j_jy.codes.tsv",
     "columns": 10
@@ -2164,7 +2255,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/j_hg.json"
+      "url": "https://zi.tools/?secondary=character_set&set=J%E8%A1%A8%E5%A4%96",
+      "dataUrl": "https://zi.tools/api/ma/ma/j_hg.json"
     },
     "codes": "/charsets/j_hg.codes.tsv",
     "columns": 10
@@ -2184,7 +2276,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/j_jm.json"
+      "url": "https://zi.tools/?secondary=character_set&set=J%E4%BA%BA%E5%90%8D",
+      "dataUrl": "https://zi.tools/api/ma/ma/j_jm.json"
     },
     "codes": "/charsets/j_jm.codes.tsv",
     "columns": 10
@@ -2204,7 +2297,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/k0.json"
+      "url": "https://zi.tools/?secondary=character_set&set=K0",
+      "dataUrl": "https://zi.tools/api/ma/ma/k0.json"
     },
     "codes": "/charsets/k0.codes.tsv",
     "columns": 10
@@ -2224,7 +2318,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/k1.json"
+      "url": "https://zi.tools/?secondary=character_set&set=K1",
+      "dataUrl": "https://zi.tools/api/ma/ma/k1.json"
     },
     "codes": "/charsets/k1.codes.tsv",
     "columns": 10
@@ -2244,7 +2339,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/k2.json"
+      "url": "https://zi.tools/?secondary=character_set&set=K2",
+      "dataUrl": "https://zi.tools/api/ma/ma/k2.json"
     },
     "codes": "/charsets/k2.codes.tsv",
     "columns": 10
@@ -2264,7 +2360,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/k3.json"
+      "url": "https://zi.tools/?secondary=character_set&set=K3",
+      "dataUrl": "https://zi.tools/api/ma/ma/k3.json"
     },
     "codes": "/charsets/k3.codes.tsv",
     "columns": 10
@@ -2284,7 +2381,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/k4.json"
+      "url": "https://zi.tools/?secondary=character_set&set=K4",
+      "dataUrl": "https://zi.tools/api/ma/ma/k4.json"
     },
     "codes": "/charsets/k4.codes.tsv",
     "columns": 16
@@ -2304,7 +2402,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/k5.json"
+      "url": "https://zi.tools/?secondary=character_set&set=K5",
+      "dataUrl": "https://zi.tools/api/ma/ma/k5.json"
     },
     "codes": "/charsets/k5.codes.tsv",
     "columns": 16
@@ -2324,7 +2423,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/k6.json"
+      "url": "https://zi.tools/?secondary=character_set&set=K6",
+      "dataUrl": "https://zi.tools/api/ma/ma/k6.json"
     },
     "codes": "/charsets/k6.codes.tsv",
     "columns": 16
@@ -2344,7 +2444,8 @@
     "unencoded": 6107,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/kc.json"
+      "url": "https://zi.tools/?secondary=character_set&set=KC",
+      "dataUrl": "https://zi.tools/api/ma/ma/kc.json"
     },
     "codes": "/charsets/kc.codes.tsv",
     "columns": 10
@@ -2364,7 +2465,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/k_gy.json"
+      "url": "https://zi.tools/?secondary=character_set&set=K%E6%95%8E%E8%82%B2",
+      "dataUrl": "https://zi.tools/api/ma/ma/k_gy.json"
     },
     "codes": "/charsets/k_gy.codes.tsv",
     "columns": 10
@@ -2384,7 +2486,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/k_jm.json"
+      "url": "https://zi.tools/?secondary=character_set&set=K%E4%BA%BA%E5%90%8D",
+      "dataUrl": "https://zi.tools/api/ma/ma/k_jm.json"
     },
     "codes": "/charsets/k_jm.codes.tsv",
     "columns": 10
@@ -2404,7 +2507,8 @@
     "unencoded": 11024,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/kwhj.json"
+      "url": "https://zi.tools/?secondary=character_set&set=K%E6%B3%95%E9%99%A2",
+      "dataUrl": "https://zi.tools/api/ma/ma/kwhj.json"
     },
     "codes": "/charsets/kwhj.codes.tsv",
     "columns": 16
@@ -2424,7 +2528,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/kp0.json"
+      "url": "https://zi.tools/?secondary=character_set&set=KP0",
+      "dataUrl": "https://zi.tools/api/ma/ma/kp0.json"
     },
     "codes": "/charsets/kp0.codes.tsv",
     "columns": 10
@@ -2444,7 +2549,8 @@
     "unencoded": 53,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/kp1.json"
+      "url": "https://zi.tools/?secondary=character_set&set=KP1",
+      "dataUrl": "https://zi.tools/api/ma/ma/kp1.json"
     },
     "codes": "/charsets/kp1.codes.tsv",
     "columns": 16
@@ -2464,7 +2570,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/v0.json"
+      "url": "https://zi.tools/?secondary=character_set&set=V0",
+      "dataUrl": "https://zi.tools/api/ma/ma/v0.json"
     },
     "codes": "/charsets/v0.codes.tsv",
     "columns": 10
@@ -2484,7 +2591,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/v1.json"
+      "url": "https://zi.tools/?secondary=character_set&set=V1",
+      "dataUrl": "https://zi.tools/api/ma/ma/v1.json"
     },
     "codes": "/charsets/v1.codes.tsv",
     "columns": 10
@@ -2504,7 +2612,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/v2.json"
+      "url": "https://zi.tools/?secondary=character_set&set=V2",
+      "dataUrl": "https://zi.tools/api/ma/ma/v2.json"
     },
     "codes": "/charsets/v2.codes.tsv",
     "columns": 10
@@ -2524,7 +2633,8 @@
     "unencoded": 0,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/v3.json"
+      "url": "https://zi.tools/?secondary=character_set&set=V3",
+      "dataUrl": "https://zi.tools/api/ma/ma/v3.json"
     },
     "codes": "/charsets/v3.codes.tsv",
     "columns": 10
@@ -2544,7 +2654,8 @@
     "unencoded": 137,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/v4.json"
+      "url": "https://zi.tools/?secondary=character_set&set=V4",
+      "dataUrl": "https://zi.tools/api/ma/ma/v4.json"
     },
     "codes": "/charsets/v4.codes.tsv",
     "columns": 10
@@ -2564,7 +2675,8 @@
     "unencoded": 3994,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/vn.json"
+      "url": "https://zi.tools/?secondary=character_set&set=VN",
+      "dataUrl": "https://zi.tools/api/ma/ma/vn.json"
     },
     "codes": "/charsets/vn.codes.tsv",
     "columns": 16
@@ -2584,7 +2696,8 @@
     "unencoded": 142,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/uk.json"
+      "url": "https://zi.tools/?secondary=character_set&set=UK",
+      "dataUrl": "https://zi.tools/api/ma/ma/uk.json"
     },
     "codes": "/charsets/uk.codes.tsv",
     "columns": 10
@@ -2604,7 +2717,8 @@
     "unencoded": 2221,
     "source": {
       "name": "字統網",
-      "url": "https://zi.tools/api/ma/ma/sat.json"
+      "url": "https://zi.tools/?secondary=character_set&set=SAT",
+      "dataUrl": "https://zi.tools/api/ma/ma/sat.json"
     },
     "codes": "/charsets/sat.codes.tsv",
     "columns": 10

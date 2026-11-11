@@ -84,6 +84,8 @@
   "find.meaning": "뜻 “{word}”",
   "find.parts": "{part}이 든 글자",
   "find.moreCodes": "부호 {count}개 더",
+  "find.sameCode": "같은 부호",
+  "find.codePrefix": "이 문자열로 시작하는 부호",
   "find.codeOrder": "부호 순",
   "find.showLabel": "표시",
   "find.showAll": "전체",

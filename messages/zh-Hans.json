@@ -84,6 +84,8 @@
   "find.meaning": "意义“{word}”",
   "find.parts": "含{part}的字",
   "find.moreCodes": "还有{count}个编码",
+  "find.sameCode": "相同编码",
+  "find.codePrefix": "开头相同的编码",
   "find.codeOrder": "按编码",
   "find.showLabel": "显示",
   "find.showAll": "全部",

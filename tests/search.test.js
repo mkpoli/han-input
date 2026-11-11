@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'bun:test'
-import { answerChars, readClue } from '../app/lib/search.js'
+import { GROUP_CHARS, GROUP_HITS, answerChars, groupPages, readClue } from '../app/lib/search.js'
 
 describe('readClue', () => {
   test('resolves a private-use code point to its character', () => {
@@ -55,5 +55,40 @@ describe('answerChars', () => {
       readings: [], meaning: [], parts: [],
     }
     expect(answerChars(/** @type {any} */ (answer))).toEqual(['羴'])
+  })
+})
+
+describe('groupPages', () => {
+  /** @param {string} method @param {number[]} sizes */
+  const group = (method, sizes) => ({
+    method,
+    hits: sizes.map((count, at) => ({ method, code: `${method}${at}`, chars: '字'.repeat(count), exact: true, literal: true })),
+    literal: true,
+    exact: true,
+    total: sizes.reduce((sum, count) => sum + count, 0),
+  })
+
+  test('keeps groups whole and turns the page on the tile budget', () => {
+    const pages = groupPages([group('a', [10, 10]), group('b', [10]), group('c', [10, 10])], 40)
+    expect(pages.map(page => page.map(entry => entry.method))).toEqual([['a', 'b'], ['c']])
+  })
+
+  test('gives a group larger than the budget its own page', () => {
+    const pages = groupPages([group('a', [100]), group('b', [1])], 20)
+    expect(pages.map(page => page.map(entry => entry.method))).toEqual([['a'], ['b']])
+  })
+
+  test('counts only the codes and characters its section draws', () => {
+    const wide = group('wide', Array.from({ length: GROUP_HITS + 4 }, () => GROUP_CHARS + 10))
+    expect(groupPages([wide, group('b', [1])], 2).map(page => page.length)).toEqual([1, 1])
+  })
+
+  test('fills a page with as many small groups as the budget takes', () => {
+    const groups = Array.from({ length: 11 }, (_, at) => group(`m${at}`, [1]))
+    expect(groupPages(groups, 4).map(page => page.length)).toEqual([4, 4, 3])
+  })
+
+  test('has no page when there are no groups', () => {
+    expect(groupPages([])).toEqual([])
   })
 })

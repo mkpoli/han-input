@@ -84,6 +84,8 @@
   "find.meaning": "意味「{word}」",
   "find.parts": "{part}を含む字",
   "find.moreCodes": "ほか{count}件の符号",
+  "find.sameCode": "同じ符号",
+  "find.codePrefix": "この文字列で始まる符号",
   "find.codeOrder": "コード順",
   "find.showLabel": "表示",
   "find.showAll": "すべて",

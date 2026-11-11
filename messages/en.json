@@ -84,6 +84,8 @@
   "find.meaning": "Meaning “{word}”",
   "find.parts": "Written with {part}",
   "find.moreCodes": "{count} more codes",
+  "find.sameCode": "Exact code",
+  "find.codePrefix": "Codes that start with it",
   "find.codeOrder": "Code order",
   "find.showLabel": "Show",
   "find.showAll": "All",
