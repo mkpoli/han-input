@@ -20,7 +20,7 @@
   /** @type {HTMLElement | null} */
   let top = $state(null)
   const idsMode = $derived(records.records.some(record => record.kind === 'ids'))
-  const textOnly = $derived(records.records.some(record => !record.glyph && record.kind !== 'ids'))
+  const textOnly = $derived(records.records.some(record => !record.glyph && !record.sprite && record.kind !== 'ids'))
   /** @type {'all' | 'encoded' | 'unencoded'} */
   let show = $state('all')
   let byCode = $state(false)
@@ -78,7 +78,10 @@
           <button class="ui-tile" type="button" tabindex={index === 0 ? 0 : -1} aria-current={ui.record?.record === record ? 'true' : undefined}
             title={[code(record), sourceName(record), documents.get(record.document)?.document].filter(Boolean).join(' · ')}
             onclick={() => { const doc = documents.get(record.document); if (doc) showRecord(record, doc) }}>
-            {#if record.glyph}
+            {#if record.sprite}
+              <svg class="sprite" viewBox="0 0 200 200" aria-hidden="true"><use href={`/charsets/ebag-sprites/${record.sprite.sheet}.svg#${record.sprite.symbol}`}></use></svg>
+              <span class="ui-tile-note ui-mono">{code(record)}</span>
+            {:else if record.glyph}
               <img src={`/charsets/${record.glyph}`} alt="" width="128" height="128" decoding="async" />
               <span class="ui-tile-note ui-mono">{code(record)}</span>
             {:else}<span class="code ui-mono">{code(record)}</span>{/if}
@@ -94,7 +97,7 @@
 <style>
   .records{grid-template-columns:repeat(auto-fill,minmax(72px,1fr))}
   .records .ui-tile{grid-template-rows:1fr auto;padding:3px}
-  .records img{inline-size:100%;block-size:100%;min-inline-size:0;object-fit:contain}
+  .records img,.records .sprite{inline-size:100%;block-size:100%;min-inline-size:0;object-fit:contain}
   .records .ui-tile-note{font-size:9px;line-height:1.2;white-space:normal;overflow-wrap:anywhere;text-align:center}
   .records-tools{display:flex;flex-wrap:wrap;align-items:center;gap:var(--ui-space-2xs)}
   .seg{display:flex;flex-wrap:wrap;gap:var(--ui-space-2xs)}
@@ -104,6 +107,6 @@
   .text-only .code{white-space:nowrap}
 .ids-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:4px;margin:0;padding:0;list-style:none}
 .ids-list li{font-family:'Han Ext','Noto Sans CJK JP','Source Han Sans JP',var(--ui-font-serif),serif;font-size:18px;line-height:1.35;padding:4px 6px;border:1px solid var(--ui-color-border);border-radius:var(--ui-radius-sm);overflow-wrap:anywhere}
-  @media (prefers-color-scheme:dark){:global(:root:not([data-theme='light'])) .records img{filter:invert(1)}}
-  :global(:root[data-theme='dark']) .records img{filter:invert(1)}
+  @media (prefers-color-scheme:dark){:global(:root:not([data-theme='light'])) .records img,:global(:root:not([data-theme='light'])) .records .sprite{filter:invert(1)}}
+  :global(:root[data-theme='dark']) .records img,:global(:root[data-theme='dark']) .records .sprite{filter:invert(1)}
 </style>

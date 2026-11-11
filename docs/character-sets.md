@@ -10,7 +10,7 @@ A member is a string of one or more code points. GB 12052 writes 1,718 archaic H
 
 | Collection | Coverage |
 | --- | --- |
-| 字統網 | All 119 metadata entries, including 115 visible catalogues and four hidden entries |
+| 字統網 | The 115 visible catalogues; four hidden document registries serve no rows and are not listed |
 | IWDS | Explicit encoded component forms and examples, with entry IDs and field roles |
 | Unicode 18.0.0 | Literal compatibility, radical, stroke, kana and Nüshu blocks |
 | Extension E withdrawn | 134 glyphs printed in IRGN1841 and four further documented records; three verified Unicode correspondences |
@@ -29,6 +29,7 @@ A member is a string of one or more code points. GB 12052 writes 1,718 archaic H
 | CNS11643全字庫 | All 123 exact registration-source labels from the 2026-08-05 bulk release, across Han, other scripts and symbols |
 | GB/T 12052-1989 | The standard's printed 94×94 table: 682 symbols, 3,424 first-level Hangul and 1,873 second-level rows, 94 of them 吏讀字. The set lists 5,954 distinct characters; 23 positions repeat a glyph, 1,718 archaic syllables are jamo sequences, and two 吏讀字 positions have no scalar |
 | Unihan G sources | 13 publication-level G source codes from Unicode 18.0.0 `kIRG_GSource`, each a set of assigned characters; `GZ·U` is the encoded GZ source while `gz` is 字統's broader snapshot |
+| GlyphWiki ebag | 24,359 GlyphWiki glyphs named `ebag_*`, the 缺字編號 posted for 引得市's missing-character index; 24,356 carry a sprite and three keep the name only |
 
 Each set has a unique character count and a source-row count. A source row joins through its assigned scalars, or through its private-use glyph slot where no scalar is assigned. A row whose only glyph is an Ideographic Description Sequence stays out of the scalar count and is kept as a record on the set. Repeated mappings, variation sequences and IDS descriptions can make the counts differ. Draft row numbers never establish Unicode assignments.
 
@@ -40,7 +41,7 @@ Where the catalogue records a designed code space, the coverage dial divides by 
 
 The panel groups every source character of the selected set by Unicode block: URO, Ext.A through Ext.J, the two compatibility blocks, Basic Latin, the kana blocks, the radical and stroke blocks, Nushu, Other for anything else, and 未編碼 for records without a scalar. Each share divides by the set's distinct listed members with a scalar plus the catalogue's unencoded record count, so a private-use slot appears once, in the 未編碼 row. The ranges come from Blocks.txt 18.0.0. A version list below the blocks gives the Unicode version that first assigned each character, with its count and share; a version spread over one or two code point runs also shows those ranges. DerivedAge 18.0.0 supplies the version, so the list describes Unicode assignment rather than the set's source document; a member made of several code points counts under the last of them to be assigned. Ranges follow the selected set's members, so an editorial substitution can split a version's range. Unencoded records close the version list as one row and take one chip in the planes line. The same ranges give each CJK block's assigned code points; the block occupancy table shows the empty count and its share of the block's code points, so a nearly full block reads as Ext.D with 1 empty of 224. A planes line gives the selected set's share in planes 0–3 (BMP, SMP, SIP, TIP); characters above plane 3 are grouped as Other. Each of the three groups draws its shares as a pie whose slices follow the list. The coverage dial and each group print the denominator they divide by.
 
-The four hidden 字統 entries currently return empty objects. Their catalogue entries retain zero mapped characters and a source-unavailable note. Sets with unencoded rows link to their records; 50 字統網 sets carry IDS descriptions this way. Proposal sets with unencoded forms link to their source rows.
+Sets with unencoded rows link to their records; 50 字統網 sets carry IDS descriptions this way. Proposal sets with unencoded forms link to their source rows.
 
 ## CNS source categories
 
@@ -58,6 +59,12 @@ A proposed character that was never encoded has no scalar, so its set cannot be 
 
 These are proposal numbers, not scalar assignments. IRGN1841 lists characters for withdrawal while leaving later resubmission possible; IRGN1250 removes J sources from the CJK D candidate for lack of evidence, and some of its characters were proposed again.
 
+## ebag glyphs
+
+GlyphWiki's `ebag_*` names are the 缺字編號 that 引得市 uses for its missing-character index. The set keeps 24,359 records, each the glyph name and a link to its GlyphWiki page; 24,356 render from the dump's KAGE data as sprite sheets, and three keep the name only because two recurse through their components and one has degenerate stroke data.
+
+`bun scripts/import_glyphwiki_ebag.mjs` reads the pinned dump and writes the records; the dump's SHA-256 is in `glyphwiki_ebag_source.json`. `python scripts/build_ebag_sprites.py` renders the sheets; it needs the KAGE engine (GPL-3.0) installed separately. The glyphs are not scalar members: the set counts zero characters and 24,359 unencoded records, and GlyphWiki's related character is not treated as an assignment.
+
 ## G source collections
 
 Thirteen sets index the G source codes that name publications and lists in Unihan `kIRG_GSource`: GDM, GHC, GKJ, GLGYJ, GPGLG, GXM, GZ·U and GZA-1, -2, -3, -4, -6 and -7. A member is an assigned character whose value carries the code; no unencoded row enters these sets. The code under a member is that member's G source serial, such as GDM-00013. The GZA sets split on the serial's first digit, the `[123467]` of UAX #38's `GZA-[123467]\d{5}` pattern, so GZA-5 has no members. GZ·U holds the encoded GZ source; the existing gz set is 字統's broader snapshot of the 古壯字字典, with 7,964 rows including unencoded forms, and keeps its label.
@@ -70,7 +77,7 @@ Character cards show the G source beside its code, and a printed record card doe
 
 ## Sources
 
-- **字統網**, [catalogue metadata](https://zi.tools/api/ma/ma/metadata.json) and each cited `/api/ma/ma/{id}.json` endpoint, retrieved 2026-11-07. These are editorial glyph mappings: some compatibility characters appear as unified forms, dictionary sets can include variants, and G5/KP1 include reconstructions. They do not establish literal membership in every original standard. No blanket redistribution licence was located; the snapshot contains names and factual membership mappings, with no source images or descriptive prose.
+- **字統網**, [catalogue metadata](https://zi.tools/api/ma/ma/metadata.json) and each cited `/api/ma/ma/{id}.json` endpoint, retrieved 2026-11-07, with `jmj` and `tc` re-pinned 2026-11-11. These are editorial glyph mappings: some compatibility characters appear as unified forms, dictionary sets can include variants, and G5/KP1 include reconstructions. They do not establish literal membership in every original standard. No blanket redistribution licence was located; the snapshot contains names and factual membership mappings, with no source images or descriptive prose.
 - **yi-bai/iwds**, [IWDS XML](https://raw.githubusercontent.com/yi-bai/iwds/master/iwds.xml), retrieved 2026-11-07. This is a maintained transcription of component-variation rules and examples. Example lists contain ellipses and cover both unifiable and non-unifiable cases. The filter indexes explicitly listed scalar forms; their entry IDs and roles are in [the evidence file](../app/public/charsets/iwds-evidence.json). No repository-wide licence was located.
 - **數位發展部**, [CNS11643中文標準交換碼全字庫網站](https://www.cns11643.gov.tw), [Properties.zip](https://www.cns11643.gov.tw/opendata/Properties.zip), [MapingTables.zip](https://www.cns11643.gov.tw/opendata/MapingTables.zip), [bulk release dates](https://www.cns11643.gov.tw/opendata/release.txt), version 20260805. The included README defines `CNS_source.txt` column 2 as「該CNS字碼收錄編碼時之來源」. [政府資料開放授權條款第1版](https://www.cns11643.gov.tw/pageView.jsp?ID=59) permits reuse with attribution:「數位發展部，CNS11643中文標準交換碼全字庫網站，https://www.cns11643.gov.tw」。 Live category counts can differ from this release. Private-use mappings are shown as glyph slots and do not establish an assigned scalar. Unihan 18 `kIRG_TSource` fills a scalar assigned after this release; a row keeps its private-use mapping as record evidence. The mapping README's count says three Unicode tables while the archive supplies four; all four named files are read. [Category provenance](../app/public/charsets/cns-sources.json) records exact labels, source counts, member digest and verified official category links.
 - **Unicode, Inc.**, [Unihan 18.0.0](https://www.unicode.org/Public/18.0.0/ucd/Unihan.zip) `kIRG_TSource`, for a scalar that the CNS bulk release still maps to private use; [UnicodeData 18.0.0](https://www.unicode.org/Public/18.0.0/ucd/UnicodeData.txt), [Blocks 18.0.0](https://www.unicode.org/Public/18.0.0/ucd/Blocks.txt) and [DerivedAge 18.0.0](https://www.unicode.org/Public/18.0.0/ucd/DerivedAge.txt), [Unicode Licence v3](https://www.unicode.org/license.txt). Literal block sets include assigned scalars only.
@@ -85,6 +92,7 @@ Character cards show the G source beside its code, and a printed record card doe
 - **Japan**, [IRGN1198,2006-05-22](https://www.unicode.org/irg/docs/n1198-ExtensionC1Withdraw.pdf). Proposes dropping JMK65904 (C1 no. 08772) from the CJK C1 v6 candidate because it has no lone usage. The codes sit in prose and no glyph is printed for the dropped character; the two page-2 images show the idiom 僥倖. The cover prints “N 1198”; IRGN1198 is the filename form.
 - **Japan**, [IRGN424,1997-01-10](https://www.unicode.org/irg/docs/n0424-RemoveJSourceIdeographExtensionA.pdf). Removes one ideograph, A-2360, from Japan's CJK A proposal revision 5 at the Singapore 1997 meeting and leaves 661 proposed characters. A-2360 is a proposal code; the document prints neither a glyph nor a scalar for it.
 - **UTC**, [IRGN1525,2008-11-10](https://www.unicode.org/irg/docs/n1525-UNC-UTC-Withdraw.pdf). Withdraws 16 UTC-source characters, UTC00291 through UTC00315, from the UNC (Urgently Needed Characters) proposal for lack of evidence of use; UTC00855, UTC00856 and UTC00867 are explicitly kept pending an IRG determination on unification. The UTC codes are proposal source codes, and each glyph is the private-use character printed in the document, cropped from a rendering of the page. No published scalar is claimed, and the document states no reuse terms for its glyphs.
+- **GlyphWiki**, [newest-version dump](https://glyphwiki.org/dump.tar.gz), retrieved 2026-11-10, whose `LICENSE.txt` permits use, copy and distribution, commercial or not, without warranty. The `ebag_*` names are the 缺字編號 posted for 引得市's missing-character index; its numbering and Seal font are described in 阿良人, [20260116「Seal缺字」最新版本發布暨新版「古文字缺字資料庫」公開](https://ebag2007.blogspot.com/2026/01/20260106seal.html), 2026-01-16. That post is a personal announcement, and the numbering is not independently verified here. Sprite rendering uses [kage-engine](https://github.com/HowardZorn/kage-engine) (GPL-3.0) offline.
 - **NGWU YOH**, personal communications dated 2026-11-06 and 2026-11-07 requesting character-set search and an Extension E withdrawn set; privately supplied screenshots of 字統網 and CNS11643. These establish the interface reference and requested category, with no independent character-membership evidence.
 
 ## Data and checks
@@ -95,6 +103,7 @@ The checked-in [catalogue](../app/public/charsets/index.json), per-set text file
 bun scripts/build_charsets.mjs
 bun scripts/build_g_sources.mjs
 bun scripts/import_irg_records.mjs
+bun scripts/import_glyphwiki_ebag.mjs
 bun run verify
 bun run build
 bun scripts/check_charsets.mjs

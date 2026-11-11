@@ -535,48 +535,6 @@
     "columns": 10
   },
   {
-    "id": "irgn",
-    "group": "Unicode",
-    "label": "IRGN",
-    "names": {
-      "en": "IRG Document",
-      "zh": "表意文字研究小組文件",
-      "hans": "表意文字研究小组文件"
-    },
-    "chars": 0,
-    "total": 0,
-    "encoded": 0,
-    "unencoded": 0,
-    "source": {
-      "name": "字統網",
-      "url": "https://zi.tools/",
-      "dataUrl": "https://zi.tools/api/ma/ma/irgn.json",
-      "note": "The source endpoint supplies no membership rows."
-    },
-    "columns": 10
-  },
-  {
-    "id": "l2",
-    "group": "Unicode",
-    "label": "L2",
-    "names": {
-      "en": "UTC Document Registry",
-      "zh": "統一碼技術委員會文件存檔",
-      "hans": "统一码技术委员会文件存档"
-    },
-    "chars": 0,
-    "total": 0,
-    "encoded": 0,
-    "unencoded": 0,
-    "source": {
-      "name": "字統網",
-      "url": "https://zi.tools/",
-      "dataUrl": "https://zi.tools/api/ma/ma/l2.json",
-      "note": "The source endpoint supplies no membership rows."
-    },
-    "columns": 10
-  },
-  {
     "id": "g0",
     "group": "G",
     "label": "G0",
@@ -1361,27 +1319,6 @@
       "glyphs": 0
     },
     "codes": "/charsets/gzhs.codes.tsv",
-    "columns": 16
-  },
-  {
-    "id": "g_fzk",
-    "group": "G",
-    "label": "G方正楷体",
-    "names": {
-      "en": "Fangzheng Kaiti S",
-      "zh": "方正楷體超大字符集第16平面",
-      "hans": "方正楷体超大字符集第16平面"
-    },
-    "chars": 0,
-    "total": 0,
-    "encoded": 0,
-    "unencoded": 0,
-    "source": {
-      "name": "字統網",
-      "url": "https://zi.tools/",
-      "dataUrl": "https://zi.tools/api/ma/ma/g_fzk.json",
-      "note": "The source endpoint supplies no membership rows."
-    },
     "columns": 16
   },
   {
@@ -2510,6 +2447,11 @@
       "url": "https://zi.tools/?secondary=character_set&set=KC",
       "dataUrl": "https://zi.tools/api/ma/ma/kc.json"
     },
+    "records": {
+      "file": "/charsets/kc.ids.json",
+      "count": 6107,
+      "glyphs": 0
+    },
     "codes": "/charsets/kc.codes.tsv",
     "columns": 10
   },
@@ -2573,6 +2515,11 @@
       "url": "https://zi.tools/?secondary=character_set&set=K%E6%B3%95%E9%99%A2",
       "dataUrl": "https://zi.tools/api/ma/ma/kwhj.json"
     },
+    "records": {
+      "file": "/charsets/kwhj.ids.json",
+      "count": 11024,
+      "glyphs": 0
+    },
     "codes": "/charsets/kwhj.codes.tsv",
     "columns": 16
   },
@@ -2614,6 +2561,11 @@
       "name": "字統網",
       "url": "https://zi.tools/?secondary=character_set&set=KP1",
       "dataUrl": "https://zi.tools/api/ma/ma/kp1.json"
+    },
+    "records": {
+      "file": "/charsets/kp1.ids.json",
+      "count": 53,
+      "glyphs": 0
     },
     "codes": "/charsets/kp1.codes.tsv",
     "columns": 16
@@ -2720,6 +2672,11 @@
       "url": "https://zi.tools/?secondary=character_set&set=V4",
       "dataUrl": "https://zi.tools/api/ma/ma/v4.json"
     },
+    "records": {
+      "file": "/charsets/v4.ids.json",
+      "count": 137,
+      "glyphs": 0
+    },
     "codes": "/charsets/v4.codes.tsv",
     "columns": 10
   },
@@ -2740,6 +2697,11 @@
       "name": "字統網",
       "url": "https://zi.tools/?secondary=character_set&set=VN",
       "dataUrl": "https://zi.tools/api/ma/ma/vn.json"
+    },
+    "records": {
+      "file": "/charsets/vn.ids.json",
+      "count": 3993,
+      "glyphs": 0
     },
     "codes": "/charsets/vn.codes.tsv",
     "columns": 16
@@ -2762,6 +2724,11 @@
       "url": "https://zi.tools/?secondary=character_set&set=UK",
       "dataUrl": "https://zi.tools/api/ma/ma/uk.json"
     },
+    "records": {
+      "file": "/charsets/uk.ids.json",
+      "count": 142,
+      "glyphs": 0
+    },
     "codes": "/charsets/uk.codes.tsv",
     "columns": 10
   },
@@ -2783,28 +2750,12 @@
       "url": "https://zi.tools/?secondary=character_set&set=SAT",
       "dataUrl": "https://zi.tools/api/ma/ma/sat.json"
     },
+    "records": {
+      "file": "/charsets/sat.ids.json",
+      "count": 2219,
+      "glyphs": 0
+    },
     "codes": "/charsets/sat.codes.tsv",
-    "columns": 10
-  },
-  {
-    "id": "1k8myqp9o8zxkvdpbqdhrfs6yfx5bk2t",
-    "group": "J",
-    "label": "Glyphwiki_ebag",
-    "names": {
-      "en": "Glyphwiki_ebag",
-      "zh": "Glyphwiki_ebag",
-      "hans": "Glyphwiki_ebag"
-    },
-    "chars": 0,
-    "total": 0,
-    "encoded": 0,
-    "unencoded": 0,
-    "source": {
-      "name": "字統網",
-      "url": "https://zi.tools/",
-      "dataUrl": "https://zi.tools/api/ma/ma/1k8myqp9o8zxkvdpbqdhrfs6yfx5bk2t.json",
-      "note": "The source endpoint supplies no membership rows."
-    },
     "columns": 10
   },
   {
@@ -6933,6 +6884,34 @@
       "name": "Unihan 18.0.0",
       "url": "https://www.unicode.org/reports/tr38/#kIRG_GSource",
       "note": "GZA- values whose six-digit serial begins 7; the book is Ancient Remembrance—Zhuang Creation Myth Songs (2012)."
+    },
+    "columns": 10
+  },
+  {
+    "id": "glyphwiki_ebag",
+    "group": "GlyphWiki",
+    "label": "ebag 缺字",
+    "names": {
+      "en": "ebag missing glyphs",
+      "zh": "ebag 缺字",
+      "hans": "ebag 缺字",
+      "ja": "ebag 缺字",
+      "ko": "ebag 缺字"
+    },
+    "chars": 0,
+    "total": 24359,
+    "encoded": 0,
+    "unencoded": 24359,
+    "records": {
+      "file": "/charsets/glyphwiki_ebag_records.json",
+      "count": 24359,
+      "glyphs": 24356
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "GlyphWiki",
+      "url": "https://glyphwiki.org/",
+      "licence": "Free use, copy and distribution"
     },
     "columns": 10
   }

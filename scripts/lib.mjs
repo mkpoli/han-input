@@ -17,7 +17,7 @@ export async function fetchOnce(url, as) {
   const path = join(CACHE, as ?? url.replace(/^https?:\/\//, '').replace(/[^\w.\-]+/g, '_'))
   if (existsSync(path)) return path
   mkdirSync(dirname(path), { recursive: true })
-  const response = await fetch(url, { signal: AbortSignal.timeout(60_000) })
+  const response = await fetch(url, { signal: AbortSignal.timeout(300_000) })
   if (!response.ok) throw new Error(`${url}: ${response.status}`)
   writeFileSync(path, new Uint8Array(await response.arrayBuffer()))
   console.log(`  fetched ${url}`)
