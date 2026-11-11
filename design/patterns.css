@@ -193,7 +193,7 @@
   background: var(--ui-color-surface-hover);
 }
 
-.ui-tile[aria-selected='true'] {
+.ui-tile[aria-current='true'] {
   border-color: var(--ui-color-accent);
   background: var(--ui-color-accent-soft);
 }
