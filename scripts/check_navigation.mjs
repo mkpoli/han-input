@@ -170,6 +170,28 @@ try {
     await input.waitFor()
     assert.equal(await input.evaluate(element => document.activeElement === element), false, 'history traversal does not focus the method input')
 
+    const quota = await context.newPage()
+    await quota.addInitScript(() => {
+      const setItem = Storage.prototype.setItem
+      /** @param {string} key @param {string} value */
+      Storage.prototype.setItem = function (key, value) {
+        if (this === sessionStorage && window.name === 'quota-full') throw new DOMException('Storage full', 'QuotaExceededError')
+        return setItem.call(this, key, value)
+      }
+    })
+    await quota.goto('http://local.test/about')
+    await quota.locator('main table').last().locator('tbody tr').last().waitFor()
+    await quota.locator('main').evaluate(element => { element.scrollTop = 200 })
+    await quota.reload()
+    await quota.waitForFunction(() => document.querySelector('main')?.scrollTop === 200)
+    await quota.evaluate(() => { window.name = 'quota-full' })
+    await quota.reload()
+    await quota.waitForFunction(() => document.querySelector('main')?.scrollTop === 200)
+    await quota.locator('main').evaluate(element => { element.scrollTop = 600 })
+    await quota.waitForFunction(() => history.state?.__finderScroll?.top === 600)
+    await quota.reload()
+    await quota.waitForFunction(() => document.querySelector('main')?.scrollTop === 600, null, { timeout: 5000 })
+
     const fallback = await context.newPage()
     await fallback.addInitScript(() => {
       const setItem = Storage.prototype.setItem
@@ -197,6 +219,23 @@ try {
     await fallback.waitForFunction(() => history.state?.__finderScroll?.top === 700)
     await fallback.reload()
     await fallback.waitForFunction(() => document.querySelector('main')?.scrollTop === 700)
+    await fallback.locator('main').evaluate(element => { element.scrollTop = 100 })
+    await fallback.waitForFunction(() => history.state?.__finderScroll?.top === 100)
+    await fallback.locator('main').evaluate(element => { element.scrollTop = 500 })
+    await fallback.locator('nav.rail a[href="/methods"]').dispatchEvent('click')
+    await fallback.waitForURL('**/methods')
+    await fallback.reload()
+    await fallback.goBack()
+    await fallback.waitForURL('**/about')
+    await fallback.waitForFunction(() => document.querySelector('main')?.scrollTop === 500, null, { timeout: 5000 })
+    // A browser may reject state writes after rapid navigation; the live map must still work.
+    await fallback.evaluate(() => { history.replaceState = () => { throw new DOMException('Rate limited', 'SecurityError') } })
+    await fallback.locator('main').evaluate(element => { element.scrollTop = 650 })
+    await fallback.locator('nav.rail a[href="/methods"]').dispatchEvent('click')
+    await fallback.waitForURL('**/methods')
+    await fallback.goBack()
+    await fallback.waitForURL('**/about')
+    await fallback.waitForFunction(() => document.querySelector('main')?.scrollTop === 650)
     await context.close()
   }
   console.log('Navigation scroll history passed in light and dark themes')

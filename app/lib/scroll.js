@@ -10,6 +10,7 @@ let entry = ''
 /** @type {{ target: number, applied: number, stop: () => void } | undefined} */
 let pending
 let restoringHistory = false
+let flushOutgoing = () => {}
 
 export const isRestoringHistory = () => restoringHistory
 
@@ -33,14 +34,21 @@ function cancel() {
 /** Install the shared pane once it has mounted. @param {HTMLElement} element */
 export function installScroll(element) {
   pane = element
+  let storageAvailable = true
   try {
-    const stored = JSON.parse(sessionStorage.getItem(key) ?? '[]')
-    if (Array.isArray(stored)) {
-      for (const [id, top] of stored) {
-        if (typeof id === 'string' && typeof top === 'number') positions.set(id, top)
+    sessionStorage.setItem(`${key}:probe`, '1')
+    sessionStorage.removeItem(`${key}:probe`)
+  } catch { storageAvailable = false }
+  if (storageAvailable) {
+    try {
+      const stored = JSON.parse(sessionStorage.getItem(key) ?? '[]')
+      if (Array.isArray(stored)) {
+        for (const [id, top] of stored) {
+          if (typeof id === 'string' && typeof top === 'number') positions.set(id, top)
+        }
       }
-    }
-  } catch { /* History still works within this document when storage is unavailable. */ }
+    } catch { /* History still works within this document when storage is unavailable. */ }
+  }
   const saved = history.state?.[key]
   entry = typeof saved?.id === 'string' ? saved.id : newEntry()
   const top = positions.get(entry) ?? (typeof saved?.top === 'number' ? saved.top : element.scrollTop)
@@ -51,26 +59,27 @@ export function installScroll(element) {
     void restoreScroll()
   }
 
-  let storageAvailable = true
-  try {
-    sessionStorage.setItem(`${key}:probe`, '1')
-    sessionStorage.removeItem(`${key}:probe`)
-  } catch { storageAvailable = false }
   let lastFallback = -Infinity
   /** @type {ReturnType<typeof setTimeout> | undefined} */
   let fallbackTimer
-  const saveFallback = () => {
-    if (storageAvailable || fallbackTimer) return
+  /** @param {boolean} [force] */
+  const saveFallback = (force = false) => {
+    if (storageAvailable) return
+    if (force) {
+      clearTimeout(fallbackTimer)
+      fallbackTimer = undefined
+    } else if (fallbackTimer) return
     const write = () => {
       fallbackTimer = undefined
-      if (pending || history.state?.[key]?.id !== entry) return
+      if ((!force && pending) || history.state?.[key]?.id !== entry) return
       lastFallback = performance.now()
       try { history.replaceState(state(entry, positions.get(entry) ?? 0), '') } catch { /* The in-memory map still works. */ }
     }
     const delay = 1000 - (performance.now() - lastFallback)
-    if (delay <= 0) write()
+    if (force || delay <= 0) write()
     else fallbackTimer = setTimeout(write, delay)
   }
+  flushOutgoing = () => saveFallback(true)
   const scroll = () => {
     if (pending && Math.abs(element.scrollTop - pending.applied) > 1) cancel()
     save()
@@ -111,6 +120,7 @@ export function installScroll(element) {
     element.removeEventListener('pointerdown', pointerdown)
     window.removeEventListener('keydown', keydown)
     window.removeEventListener('pagehide', pagehide)
+    flushOutgoing = () => {}
     pane = undefined
   }
 }
@@ -119,6 +129,7 @@ export function installScroll(element) {
 export function pushScroll(url, reset) {
   restoringHistory = false
   save()
+  flushOutgoing()
   cancel()
   entry = newEntry()
   const top = reset ? 0 : pane?.scrollTop ?? 0
