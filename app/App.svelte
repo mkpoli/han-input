@@ -120,7 +120,10 @@
   {#snippet cardContent()}{#if ui.record && !route.c}<ProposalCard />{:else}<Card />{/if}{/snippet}
   {#if mobile}
     <dialog class="card sheet" bind:this={sheet} aria-label={t('card.label')} oncancel={event => { event.preventDefault(); dismissSheet() }}>
-      <div class="back"><button class="ui-button" data-variant="quiet" data-size="sm" type="button" onclick={dismissSheet}>{t('card.back')}</button></div>
+      <div class="back">
+        <button class="ui-button" data-variant="quiet" data-size="sm" type="button" onclick={dismissSheet}>{t('card.back')}</button>
+        <div class="sheet-status ui-hint" role="status" aria-live="polite">{#if ui.sheet}{#key toast.id}{toast.message}{/key}{/if}</div>
+      </div>
       {@render cardContent()}
     </dialog>
   {:else}
@@ -147,7 +150,8 @@
   .pop{position:absolute;inset-inline-start:calc(100% + var(--ui-space-sm));inset-block-end:0;z-index:var(--ui-z-menu);inline-size:320px;padding:var(--ui-space-2xs) var(--ui-space-lg);color:var(--ui-color-ink)}
   .finder{grid-column:2;grid-row:1;min-inline-size:0;overflow:auto;padding:var(--ui-space-3xl) clamp(var(--ui-space-xl),4vw,72px) var(--ui-space-3xl)}
   .card{grid-column:3;grid-row:1;overflow:auto;background:var(--ui-color-surface);border-inline-start:1px solid var(--ui-color-border);overscroll-behavior:contain}
-  .back{padding:var(--ui-space-sm)}
+  .back{position:sticky;top:0;z-index:1;display:flex;align-items:center;gap:var(--ui-space-sm);padding:var(--ui-space-sm);background:var(--ui-color-surface)}
+  .sheet-status{min-inline-size:0}
   .sheet::backdrop{overflow:hidden;overscroll-behavior:contain}
   .dock{grid-column:2 / span 2;grid-row:2;min-inline-size:0}
   .toast{position:fixed;left:50%;bottom:calc(var(--dock-h) + var(--ui-space-lg));transform:translateX(-50%);z-index:var(--ui-z-toast);pointer-events:none}
