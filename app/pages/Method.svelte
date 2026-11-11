@@ -67,7 +67,7 @@
 
   /** @param {KeyboardEvent} event */
   function keys(event) {
-    if (event.isComposing || (event.key === 'Enter' && event.keyCode === 229)) return
+    if (event.isComposing || event.keyCode === 229) return
     const number = /^[1-9]$/.test(event.key) ? Number(event.key) - 1 : -1
     // A digit picks a candidate only where digits are not part of the codes being typed.
     if (number >= 0 && !digitCodes && shown[number]) { event.preventDefault(); take(shown[number].char); return }

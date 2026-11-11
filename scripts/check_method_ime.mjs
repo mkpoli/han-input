@@ -33,7 +33,17 @@ try {
   const backspaceAllowed = await input.evaluate(element => element.dispatchEvent(new KeyboardEvent('keydown', { key: 'Backspace', isComposing: true, bubbles: true, cancelable: true })))
   assert.equal(backspaceAllowed, true)
   assert.equal(await page.evaluate(() => localStorage.getItem('han-input:text')), '一')
+  const lateBackspaceAllowed = await input.evaluate(element => element.dispatchEvent(new KeyboardEvent('keydown', { key: 'Backspace', keyCode: 229, bubbles: true, cancelable: true })))
+  assert.equal(lateBackspaceAllowed, true)
+  assert.equal(await page.evaluate(() => localStorage.getItem('han-input:text')), '一')
   await input.fill('a')
+  for (const key of ['Enter', ' ', '1', 'PageDown', 'PageUp', '=', '-', 'a']) {
+    const allowed = await input.evaluate((element, key) => element.dispatchEvent(new KeyboardEvent('keydown', { key, keyCode: 229, bubbles: true, cancelable: true })), key)
+    assert.equal(allowed, true, `${key} with keyCode 229 must retain its native default`)
+    assert.equal(await input.inputValue(), 'a')
+    assert.equal(await page.locator('.cand').first().innerText(), first)
+    assert.equal(await page.evaluate(() => localStorage.getItem('han-input:text')), '一')
+  }
   await page.locator('.cand').first().waitFor()
   await page.keyboard.press('PageDown')
   assert.notEqual(await page.locator('.cand').first().innerText(), first)
