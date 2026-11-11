@@ -10,7 +10,7 @@ A member is a string of one or more code points. GB 12052 writes 1,718 archaic H
 
 | Collection | Coverage |
 | --- | --- |
-| 字統網 | All 119 metadata entries, including 115 visible catalogues and four hidden entries |
+| 字統網 | The 115 visible catalogues; four hidden document registries serve no rows and are not listed |
 | IWDS | Explicit encoded component forms and examples, with entry IDs and field roles |
 | Unicode 18.0.0 | Literal compatibility, radical, stroke, kana and Nüshu blocks |
 | Extension E withdrawn | 134 glyphs printed in IRGN1841 and four further documented records; three verified Unicode correspondences |
@@ -41,7 +41,7 @@ Where the catalogue records a designed code space, the coverage dial divides by 
 
 The panel groups every source character of the selected set by Unicode block: URO, Ext.A through Ext.J, the two compatibility blocks, Basic Latin, the kana blocks, the radical and stroke blocks, Nushu, Other for anything else, and 未編碼 for records without a scalar. Each share divides by the set's distinct listed members with a scalar plus the catalogue's unencoded record count, so a private-use slot appears once, in the 未編碼 row. The ranges come from Blocks.txt 18.0.0. A version list below the blocks gives the Unicode version that first assigned each character, with its count and share; a version spread over one or two code point runs also shows those ranges. DerivedAge 18.0.0 supplies the version, so the list describes Unicode assignment rather than the set's source document; a member made of several code points counts under the last of them to be assigned. Ranges follow the selected set's members, so an editorial substitution can split a version's range. Unencoded records close the version list as one row and take one chip in the planes line. The same ranges give each CJK block's assigned code points; the block occupancy table shows the empty count and its share of the block's code points, so a nearly full block reads as Ext.D with 1 empty of 224. A planes line gives the selected set's share in planes 0–3 (BMP, SMP, SIP, TIP); characters above plane 3 are grouped as Other. Each of the three groups draws its shares as a pie whose slices follow the list. The coverage dial and each group print the denominator they divide by.
 
-The four hidden 字統 entries currently return empty objects. Their catalogue entries retain zero mapped characters and a source-unavailable note. Sets with unencoded rows link to their records; 50 字統網 sets carry IDS descriptions this way. Proposal sets with unencoded forms link to their source rows.
+Sets with unencoded rows link to their records; 50 字統網 sets carry IDS descriptions this way. Proposal sets with unencoded forms link to their source rows.
 
 ## CNS source categories
 
