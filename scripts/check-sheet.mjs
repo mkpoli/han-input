@@ -152,4 +152,57 @@ try {
     await context.close()
     console.log(`ok ${theme}: character, proposal, keyboard, navigation, and resizing`)
   }
+  for (const theme of /** @type {const} */ (['light', 'dark'])) {
+    for (const largeHeader of [false, true]) {
+      const context = await browser.newContext({ viewport: { width: 390, height: 300 }, locale: 'en-US', colorScheme: theme, deviceScaleFactor: 2 })
+      await serveDist(context, 'dist')
+      const page = await context.newPage()
+      await page.goto('http://site.test/?q=U%2B5B57')
+      const tile = page.locator('main .ui-tile').filter({ hasText: '字' }).first()
+      await tile.waitFor()
+      await tile.focus()
+      await page.keyboard.press('Enter')
+      const dialog = page.locator('dialog:modal')
+      const header = dialog.locator('.back')
+      await header.waitFor()
+      const initialHeaderHeight = await header.evaluate(el => el.getBoundingClientRect().height)
+      if (largeHeader) {
+        await dialog.locator('[role="status"]').evaluate(el => {
+          el.textContent = 'The clipboard is blocked. The clipboard is blocked.'
+          ;(/** @type {HTMLElement} */ (el)).style.fontSize = '24px'
+        })
+      }
+      await page.waitForFunction(({ initialHeaderHeight, largeHeader }) => {
+        const sheet = document.querySelector('dialog:modal')
+        const head = sheet?.querySelector('.back')
+        if (!sheet || !head) return false
+        const height = head.getBoundingClientRect().height
+        const padding = parseFloat(getComputedStyle(sheet).scrollPaddingTop)
+        return (!largeHeader || height > initialHeaderHeight * 1.5) && padding >= height && padding <= height + 5
+      }, { initialHeaderHeight, largeHeader })
+      const last = dialog.locator('a[href^="/m/"]').last()
+      await last.waitFor()
+      await last.focus()
+      let checked = 0
+      for (let i = 0; i < 100; i++) {
+        await page.keyboard.press(i < 50 ? 'Shift+Tab' : 'Tab')
+        const focused = await page.evaluate(() => {
+          const element = document.activeElement
+          const sheet = document.querySelector('dialog:modal')
+          const head = sheet?.querySelector('.back')
+          if (!element || !head || !sheet?.contains(element) || head.contains(element)) return null
+          const bounds = element.getBoundingClientRect()
+          return { label: element.textContent?.trim(), top: bounds.top, headerBottom: head.getBoundingClientRect().bottom }
+        })
+        if (focused) {
+          checked++
+          assert.ok(focused.top >= focused.headerBottom - 1, `focused ${focused.label} is behind the sticky header`)
+          if (i === 9) await page.screenshot({ path: `/tmp/han-focus-fixed-${theme}-${largeHeader ? 'large' : 'normal'}.png` })
+        }
+      }
+      assert.ok(checked >= 90, 'keyboard traversal exercised the sheet contents')
+      await context.close()
+    }
+    console.log(`ok ${theme}: short viewport keeps focused controls visible`)
+  }
 } finally { await browser.close() }

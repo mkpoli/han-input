@@ -29,6 +29,7 @@
   let mobile = $state(matchMedia('(max-width: 900px)').matches)
   /** @type {HTMLDialogElement | undefined} */
   let sheet = $state()
+  let sheetHeaderHeight = $state(0)
 
   onMount(() => {
     const media = matchMedia('(max-width: 900px)')
@@ -119,8 +120,8 @@
 
   {#snippet cardContent()}{#if ui.record && !route.c}<ProposalCard />{:else}<Card />{/if}{/snippet}
   {#if mobile}
-    <dialog class="card sheet" bind:this={sheet} aria-label={t('card.label')} oncancel={event => { event.preventDefault(); dismissSheet() }}>
-      <div class="back">
+    <dialog class="card sheet" bind:this={sheet} style:scroll-padding-block-start="calc({sheetHeaderHeight}px + 4px)" aria-label={t('card.label')} oncancel={event => { event.preventDefault(); dismissSheet() }}>
+      <div class="back" bind:clientHeight={sheetHeaderHeight}>
         <button class="ui-button" data-variant="quiet" data-size="sm" type="button" onclick={dismissSheet}>{t('card.back')}</button>
         <div class="sheet-status ui-hint" role="status" aria-live="polite">{#if ui.sheet}{#key toast.id}{toast.message}{/key}{/if}</div>
       </div>
