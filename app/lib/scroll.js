@@ -1,104 +1,52 @@
-// The finder is shared by every route, so browser document scroll restoration cannot restore it.
+// The finder is shared by every route, so keep its position for each history entry.
 import { tick } from 'svelte'
 
 const key = '__finderScroll'
 /** @type {Map<string, number>} */
 const positions = new Map()
-/** @type {Map<string, number>} */
-const revisions = new Map()
 /** @type {HTMLElement | undefined} */
 let pane
 let entry = ''
-/** @type {{ target: number, applied: number, stop: () => void } | undefined} */
+let generation = 0
+/** @type {{ applied: number, stop: () => void } | undefined} */
 let pending
 let restoringHistory = false
-let flushOutgoing = () => {}
 
 export const isRestoringHistory = () => restoringHistory
 
 function newEntry() { return Array.from(crypto.getRandomValues(new Uint32Array(4)), n => n.toString(36)).join('-') }
-
-/** @param {string} id @param {number} top */
-function state(id, top) {
-  return { ...history.state, [key]: { id, top, revision: revisions.get(id) ?? 0 } }
-}
+/** @param {string} id */
+function state(id) { return { ...history.state, [key]: { id } } }
 
 function save() {
-  if (!pane || !entry || pending) return
-  if (positions.get(entry) !== pane.scrollTop) {
-    positions.set(entry, pane.scrollTop)
-    revisions.set(entry, (revisions.get(entry) ?? 0) + 1)
-  }
-}
-
-/** Merge an entry only when it is newer than the in-memory copy.
- * @param {string} id @param {number} top @param {number} revision */
-function merge(id, top, revision) {
-  if (!positions.has(id) || revision > (revisions.get(id) ?? 0)) {
-    positions.set(id, top)
-    revisions.set(id, revision)
-  }
+  if (pane && entry && !pending) positions.set(entry, pane.scrollTop)
 }
 
 function cancel() {
+  generation++
   pending?.stop()
   pending = undefined
+}
+
+/** Stop restoring an old view when the current query changes. */
+export function cancelScroll() {
+  cancel()
+  save()
 }
 
 /** Install the shared pane once it has mounted. @param {HTMLElement} element */
 export function installScroll(element) {
   pane = element
-  let storageAvailable = true
-  try {
-    sessionStorage.setItem(`${key}:probe`, '1')
-    sessionStorage.removeItem(`${key}:probe`)
-  } catch { storageAvailable = false }
-  try {
-    const stored = JSON.parse(sessionStorage.getItem(key) ?? '[]')
-    if (Array.isArray(stored)) {
-      for (const [id, top, revision] of stored) {
-        if (typeof id === 'string' && typeof top === 'number') merge(id, top, Number.isSafeInteger(revision) ? revision : 0)
-      }
-    }
-  } catch { /* History still works within this document when storage is unavailable. */ }
   const saved = history.state?.[key]
   entry = typeof saved?.id === 'string' ? saved.id : newEntry()
-  if (typeof saved?.top === 'number') merge(entry, saved.top, Number.isSafeInteger(saved.revision) ? saved.revision : 0)
-  const top = positions.get(entry) ?? element.scrollTop
-  positions.set(entry, top)
-  history.replaceState(state(entry, top), '')
-  if (top > 0) {
-    restoringHistory = true
-    void restoreScroll()
-  }
+  positions.set(entry, element.scrollTop)
+  history.replaceState(state(entry), '')
 
-  let lastFallback = -Infinity
-  /** @type {ReturnType<typeof setTimeout> | undefined} */
-  let fallbackTimer
-  /** @param {boolean} [force] */
-  const saveFallback = (force = false) => {
-    if (storageAvailable) return
-    if (force) {
-      clearTimeout(fallbackTimer)
-      fallbackTimer = undefined
-    } else if (fallbackTimer) return
-    const write = () => {
-      fallbackTimer = undefined
-      if ((!force && pending) || history.state?.[key]?.id !== entry) return
-      lastFallback = performance.now()
-      try { history.replaceState(state(entry, positions.get(entry) ?? 0), '') } catch { /* The in-memory map still works. */ }
-    }
-    const delay = 1000 - (performance.now() - lastFallback)
-    if (force || delay <= 0) write()
-    else fallbackTimer = setTimeout(write, delay)
-  }
-  flushOutgoing = () => saveFallback(true)
   const scroll = () => {
     if (pending && Math.abs(element.scrollTop - pending.applied) > 1) cancel()
     save()
-    saveFallback()
   }
-  const userScroll = () => { if (pending) { cancel(); save() } }
+  const userScroll = () => { if (pending) cancelScroll() }
   /** @param {KeyboardEvent} event */
   const keydown = event => {
     const target = /** @type {Element | null} */ (event.target)
@@ -110,30 +58,18 @@ export function installScroll(element) {
     const bounds = element.getBoundingClientRect()
     if (event.target === element && event.clientX >= bounds.left + element.clientLeft + element.clientWidth) userScroll()
   }
-  const pagehide = () => {
-    save()
-    try { sessionStorage.setItem(key, JSON.stringify([...positions].map(([id, top]) => [id, top, revisions.get(id) ?? 0]))) }
-    catch {
-      // If storage is unavailable, retain the current entry when history permits it.
-      try { history.replaceState(state(entry, positions.get(entry) ?? 0), '') } catch { /* The in-memory map still works. */ }
-    }
-  }
   element.addEventListener('scroll', scroll, { passive: true })
   element.addEventListener('wheel', userScroll, { passive: true })
   element.addEventListener('touchmove', userScroll, { passive: true })
   element.addEventListener('pointerdown', pointerdown, { passive: true })
   window.addEventListener('keydown', keydown)
-  window.addEventListener('pagehide', pagehide)
   return () => {
     cancel()
-    clearTimeout(fallbackTimer)
     element.removeEventListener('scroll', scroll)
     element.removeEventListener('wheel', userScroll)
     element.removeEventListener('touchmove', userScroll)
     element.removeEventListener('pointerdown', pointerdown)
     window.removeEventListener('keydown', keydown)
-    window.removeEventListener('pagehide', pagehide)
-    flushOutgoing = () => {}
     pane = undefined
   }
 }
@@ -142,12 +78,11 @@ export function installScroll(element) {
 export function pushScroll(url, reset) {
   restoringHistory = false
   save()
-  flushOutgoing()
   cancel()
   entry = newEntry()
   const top = reset ? 0 : pane?.scrollTop ?? 0
   positions.set(entry, top)
-  history.pushState(state(entry, top), '', url)
+  history.pushState(state(entry), '', url)
   if (reset && pane) pane.scrollTop = 0
 }
 
@@ -167,20 +102,23 @@ export function leaveScroll() {
 export async function restoreScroll() {
   const saved = history.state?.[key]
   entry = typeof saved?.id === 'string' ? saved.id : newEntry()
-  if (typeof saved?.top === 'number') merge(entry, saved.top, Number.isSafeInteger(saved.revision) ? saved.revision : 0)
-  const target = positions.get(entry) ?? 0
-  positions.set(entry, target)
-  if (!saved?.id) history.replaceState(state(entry, target), '')
+  const target = positions.get(entry)
+  if (!saved?.id) history.replaceState(state(entry), '')
+  if (target === undefined) return
+  const destination = target
   const id = entry
+  const attempt = generation
   await tick()
-  if (!pane || entry !== id) return
+  if (!pane || entry !== id || generation !== attempt) return
   const element = pane
   const observer = new ResizeObserver(apply)
   const mutations = new MutationObserver(() => {
     if (element.firstElementChild) observer.observe(element.firstElementChild)
     apply()
   })
-  pending = { target, applied: element.scrollTop, stop: () => { observer.disconnect(); mutations.disconnect() } }
+  // Stop retrying if the content never becomes tall enough, such as after a failed load.
+  const expiry = setTimeout(() => { cancel(); save() }, 30_000)
+  pending = { applied: element.scrollTop, stop: () => { clearTimeout(expiry); observer.disconnect(); mutations.disconnect() } }
   observer.observe(element)
   if (element.firstElementChild) observer.observe(element.firstElementChild)
   mutations.observe(element, { childList: true, subtree: true, characterData: true })
@@ -188,9 +126,9 @@ export async function restoreScroll() {
 
   function apply() {
     if (!pending) return
-    element.scrollTop = target
+    element.scrollTop = destination
     pending.applied = element.scrollTop
-    if (Math.abs(element.scrollTop - target) <= 1) {
+    if (Math.abs(element.scrollTop - destination) <= 1) {
       cancel()
       save()
     }

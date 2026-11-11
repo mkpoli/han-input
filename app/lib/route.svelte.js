@@ -3,7 +3,7 @@
 // the page's query in `?q=`, Find's character set in `?set=`, and the page of a browsed set in `?p=`.
 
 import { NAV } from './paths.js'
-import { pushScroll, replaceScroll, leaveScroll, restoreScroll } from './scroll.js'
+import { pushScroll, replaceScroll, leaveScroll, restoreScroll, cancelScroll } from './scroll.js'
 export { NAV }
 
 /** @typedef {{ page: string, method: string, q: string, c: string, set: string, p: number }} Route */
@@ -67,6 +67,7 @@ export function open(char) {
 
 /** @param {string} q */
 export function setQuery(q) {
+  if (route.q !== q) cancelScroll()
   route.q = q
   route.p = 1
   replaceScroll(href(route))

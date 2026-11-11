@@ -6,6 +6,7 @@ import { existsSync, readdirSync } from 'node:fs'
 import { homedir } from 'node:os'
 import { join, resolve } from 'node:path'
 import { serveDist } from './serve-dist.mjs'
+import { codeBucket } from '../src/fold.js'
 
 const cache = join(homedir(), '.cache/ms-playwright')
 const executablePath = process.env.CHROMIUM_PATH ?? readdirSync(cache).filter(name => name.startsWith('chromium-')).sort().reverse()
@@ -152,9 +153,6 @@ try {
     await page.goForward()
     await page.waitForURL('**/?set=t1&p=2')
     await expectTop(700)
-    await page.reload()
-    await expectTop(700)
-    assert.notEqual(await page.evaluate(() => document.activeElement?.hasAttribute('data-primary')), true, 'reload restoration does not focus the finder')
 
     // Opening a method should leave the user ready to type without an extra click.
     await nav('methods')
@@ -170,79 +168,78 @@ try {
     await input.waitFor()
     assert.equal(await input.evaluate(element => document.activeElement === element), false, 'history traversal does not focus the method input')
 
-    const quota = await context.newPage()
-    await quota.addInitScript(() => {
-      window.addEventListener('pagehide', event => {
-        if (window.name === 'quota-recover') { event.stopImmediatePropagation(); window.name = '' }
-      }, true)
-      const setItem = Storage.prototype.setItem
-      /** @param {string} key @param {string} value */
-      Storage.prototype.setItem = function (key, value) {
-        if (this === sessionStorage && window.name === 'quota-full') throw new DOMException('Storage full', 'QuotaExceededError')
-        return setItem.call(this, key, value)
-      }
+    // Changing the query while an older history entry is loading cancels its restoration.
+    let releaseFoo = () => {}
+    let startedFoo = () => {}
+    /** @type {Promise<void>} */
+    const fooGate = new Promise(resolve => { releaseFoo = resolve })
+    /** @type {Promise<void>} */
+    const fooStarted = new Promise(resolve => { startedFoo = resolve })
+    /** @param {string} query */
+    const rows = query => methods.map(method => `${query}\t${query}\t${method.id}\t字`).join('\n')
+    await context.route('**/data/c/*.gz', async route => {
+      const path = new URL(route.request().url()).pathname
+      if (path.endsWith(`/${codeBucket('foo')}.gz`)) {
+        startedFoo()
+        await fooGate
+        await route.fulfill({ body: rows('foo'), contentType: 'text/plain' })
+      } else if (path.endsWith(`/${codeBucket('bar')}.gz`)) {
+        await route.fulfill({ body: rows('bar'), contentType: 'text/plain' })
+      } else await route.fallback()
     })
-    await quota.goto('http://local.test/about')
-    await quota.locator('main table').last().locator('tbody tr').last().waitFor()
-    await quota.locator('main').evaluate(element => { element.scrollTop = 200 })
-    await quota.reload()
-    await quota.waitForFunction(() => document.querySelector('main')?.scrollTop === 200)
-    await quota.evaluate(() => { window.name = 'quota-full' })
-    await quota.reload()
-    await quota.waitForFunction(() => document.querySelector('main')?.scrollTop === 200)
-    await quota.locator('main').evaluate(element => { element.scrollTop = 600 })
-    await quota.waitForFunction(() => history.state?.__finderScroll?.top === 600)
-    await quota.reload()
-    await quota.waitForFunction(() => document.querySelector('main')?.scrollTop === 600, null, { timeout: 5000 })
-    // Recover storage without refreshing the old snapshot, as after a failed pagehide write.
-    await quota.evaluate(() => { window.name = 'quota-recover' })
-    await quota.reload()
-    await quota.waitForFunction(() => document.querySelector('main')?.scrollTop === 600, null, { timeout: 5000 })
+    const queryPage = await context.newPage()
+    await queryPage.goto('http://local.test/?q=foo', { waitUntil: 'domcontentloaded' })
+    await fooStarted
+    await queryPage.locator('main [data-primary]').waitFor()
+    await queryPage.locator('main .ui-page').evaluate(element => {
+      const filler = document.createElement('div')
+      filler.style.height = '2000px'
+      element.append(filler)
+      const main = element.closest('main')
+      if (main) main.scrollTop = 500
+    })
+    assert.equal(await queryPage.locator('main').evaluate(element => element.scrollTop), 500)
+    await queryPage.locator('nav.rail a[href="/methods"]').click()
+    await queryPage.goBack()
+    const queryInput = queryPage.locator('main [data-primary]')
+    await queryInput.waitFor()
+    await queryInput.fill('bar')
+    await queryPage.locator('main .method').first().waitFor()
+    assert.equal(await queryPage.locator('main').evaluate(element => element.scrollTop), 0, 'new query does not restore the old query offset')
+    releaseFoo()
+    await queryPage.close()
 
-    const fallback = await context.newPage()
-    await fallback.addInitScript(() => {
-      const setItem = Storage.prototype.setItem
-      /** @param {string} key @param {string} value */
-      Storage.prototype.setItem = function (key, value) {
-        if (this === sessionStorage) throw new DOMException('Storage unavailable', 'QuotaExceededError')
-        return setItem.call(this, key, value)
-      }
+    // A failed load leaves a short page; restoration must eventually stop observing it.
+    const shortPage = await context.newPage()
+    await shortPage.clock.install()
+    let failIds = false
+    await shortPage.route('**/data/ids.json', route => failIds
+      ? route.fulfill({ status: 503, body: '' })
+      : route.fulfill({ json: { sources } }))
+    await shortPage.goto('http://local.test/about')
+    await shortPage.locator('main table').last().locator('tbody tr').last().waitFor()
+    await shortPage.locator('main').evaluate(element => { element.scrollTop = 5000 })
+    assert.equal(await shortPage.locator('main').evaluate(element => element.scrollTop), 5000)
+    await shortPage.locator('nav.rail a[href="/methods"]').click()
+    failIds = true
+    const failedLoad = shortPage.waitForResponse(response => response.url().endsWith('/data/ids.json') && response.status() === 503)
+    await shortPage.goBack()
+    await failedLoad
+    await shortPage.waitForFunction(() => {
+      const main = document.querySelector('main')
+      return main && main.scrollTop > 0 && main.scrollTop < 5000
     })
-    await fallback.goto('http://local.test/about')
-    await fallback.locator('main table').last().locator('tbody tr').last().waitFor()
-    const fallbackWrites = await fallback.locator('main').evaluate(async element => {
-      let count = 0
-      const original = history.replaceState
-      history.replaceState = function (...args) { count++; return original.apply(this, args) }
-      try {
-        for (let i = 1; i <= 20; i++) {
-          element.scrollTop = i * 35
-          await new Promise(requestAnimationFrame)
-        }
-        return count
-      } finally { history.replaceState = original }
+    const shortTop = await shortPage.locator('main').evaluate(element => element.scrollTop)
+    await shortPage.clock.fastForward(31_000)
+    await shortPage.locator('main .ui-page').evaluate(element => {
+      const filler = document.createElement('div')
+      filler.style.height = '6000px'
+      element.append(filler)
     })
-    assert.ok(fallbackWrites <= 2, 'history fallback is rate-limited')
-    await fallback.waitForFunction(() => history.state?.__finderScroll?.top === 700)
-    await fallback.reload()
-    await fallback.waitForFunction(() => document.querySelector('main')?.scrollTop === 700)
-    await fallback.locator('main').evaluate(element => { element.scrollTop = 100 })
-    await fallback.waitForFunction(() => history.state?.__finderScroll?.top === 100)
-    await fallback.locator('main').evaluate(element => { element.scrollTop = 500 })
-    await fallback.locator('nav.rail a[href="/methods"]').dispatchEvent('click')
-    await fallback.waitForURL('**/methods')
-    await fallback.reload()
-    await fallback.goBack()
-    await fallback.waitForURL('**/about')
-    await fallback.waitForFunction(() => document.querySelector('main')?.scrollTop === 500, null, { timeout: 5000 })
-    // A browser may reject state writes after rapid navigation; the live map must still work.
-    await fallback.evaluate(() => { history.replaceState = () => { throw new DOMException('Rate limited', 'SecurityError') } })
-    await fallback.locator('main').evaluate(element => { element.scrollTop = 650 })
-    await fallback.locator('nav.rail a[href="/methods"]').dispatchEvent('click')
-    await fallback.waitForURL('**/methods')
-    await fallback.goBack()
-    await fallback.waitForURL('**/about')
-    await fallback.waitForFunction(() => document.querySelector('main')?.scrollTop === 650)
+    await shortPage.clock.runFor(100)
+    assert.equal(await shortPage.locator('main').evaluate(element => element.scrollTop), shortTop, 'expired restoration does not react to later content')
+    await shortPage.close()
+
     await context.close()
   }
   console.log('Navigation scroll history passed in light and dark themes')
