@@ -1,10 +1,11 @@
 <script>
   // The frame: a dark rail of pages down the side, the finder in the middle, the card of the open
   // character on the right (a sheet on a phone), and the text being written docked along the bottom.
+  import { onMount } from 'svelte'
   import { NAV, go, route } from './lib/route.svelte.js'
   import { pageMetadata } from './lib/title.js'
   import { applySeo } from './lib/seo.js'
-  import { ui, applyTheme } from './lib/ui.svelte.js'
+  import { ui, applyTheme, closeRecord } from './lib/ui.svelte.js'
   import { toast } from './lib/clip.svelte.js'
   import { t } from './lib/i18n.svelte.js'
   import Writing from './ui/Writing.svelte'
@@ -25,6 +26,34 @@
 
   applyTheme()
   let settings = $state(false)
+  let mobile = $state(matchMedia('(max-width: 900px)').matches)
+  /** @type {HTMLDialogElement | undefined} */
+  let sheet = $state()
+
+  onMount(() => {
+    const media = matchMedia('(max-width: 900px)')
+    const resize = () => {
+      if (!media.matches) {
+        sheet?.close()
+        ui.sheet = false
+      }
+      mobile = media.matches
+    }
+    media.addEventListener('change', resize)
+    return () => media.removeEventListener('change', resize)
+  })
+
+  $effect(() => {
+    if (!sheet) return
+    if (ui.sheet && !sheet.open) sheet.showModal()
+    else if (!ui.sheet && sheet.open) sheet.close()
+  })
+
+  function dismissSheet() {
+    if (ui.record && !route.c) closeRecord()
+    else ui.sheet = false
+  }
+
   $effect(() => {
     void route.method
     const { title, description } = pageMetadata(route.page)
@@ -47,11 +76,11 @@
   /** @param {KeyboardEvent} event */
   function keys(event) {
     const target = /** @type {HTMLElement} */ (event.target)
-    if (event.key === '/' && !target.closest('input, textarea, [contenteditable]')) {
+    if (event.key === '/' && !ui.sheet && !target.closest('input, textarea, [contenteditable]')) {
       const input = /** @type {HTMLElement | null} */ (document.querySelector('[data-primary]'))
       if (input) { event.preventDefault(); input.focus() }
     }
-    if (event.key === 'Escape') { ui.sheet = false; settings = false }
+    if (event.key === 'Escape') settings = false
   }
 </script>
 
@@ -88,7 +117,15 @@
     {:else}<About />{/if}
   </main>
 
-  <aside class="card" class:open={ui.sheet} aria-label={t('card.label')}>{#if ui.record && !route.c}<ProposalCard />{:else}<Card />{/if}</aside>
+  {#snippet cardContent()}{#if ui.record && !route.c}<ProposalCard />{:else}<Card />{/if}{/snippet}
+  {#if mobile}
+    <dialog class="card sheet" bind:this={sheet} aria-label={t('card.label')} oncancel={event => { event.preventDefault(); dismissSheet() }}>
+      <div class="back"><button class="ui-button" data-variant="quiet" data-size="sm" type="button" onclick={dismissSheet}>{t('card.back')}</button></div>
+      {@render cardContent()}
+    </dialog>
+  {:else}
+    <aside class="card" aria-label={t('card.label')}>{@render cardContent()}</aside>
+  {/if}
 
   <div class="dock"><Writing /></div>
 
@@ -110,6 +147,8 @@
   .pop{position:absolute;inset-inline-start:calc(100% + var(--ui-space-sm));inset-block-end:0;z-index:var(--ui-z-menu);inline-size:320px;padding:var(--ui-space-2xs) var(--ui-space-lg);color:var(--ui-color-ink)}
   .finder{grid-column:2;grid-row:1;min-inline-size:0;overflow:auto;padding:var(--ui-space-3xl) clamp(var(--ui-space-xl),4vw,72px) var(--ui-space-3xl)}
   .card{grid-column:3;grid-row:1;overflow:auto;background:var(--ui-color-surface);border-inline-start:1px solid var(--ui-color-border);overscroll-behavior:contain}
+  .back{padding:var(--ui-space-sm)}
+  .sheet::backdrop{overflow:hidden;overscroll-behavior:contain}
   .dock{grid-column:2 / span 2;grid-row:2;min-inline-size:0}
   .toast{position:fixed;left:50%;bottom:calc(var(--dock-h) + var(--ui-space-lg));transform:translateX(-50%);z-index:var(--ui-z-toast);pointer-events:none}
   @media (max-width:1200px){.shell{--card-w:360px;--rail-w:88px}}
@@ -124,8 +163,6 @@
     .pop{inset-inline-start:auto;inset-inline-end:0;inset-block-end:calc(100% + var(--ui-space-sm));inline-size:min(320px,calc(100vw - 32px))}
     .finder{grid-column:1;padding:var(--ui-space-xl) var(--ui-space-lg)}
     .dock{grid-column:1;grid-row:2}
-    .card{position:fixed;inset:0;grid-column:auto;z-index:var(--ui-z-modal);border:0;transform:translateY(100%);transition:transform var(--ui-duration) var(--ui-ease);visibility:hidden}
-    .card.open{transform:none;visibility:visible}
+    .sheet{position:fixed;inset:0;grid-column:auto;inline-size:100%;block-size:100%;max-inline-size:none;max-block-size:none;margin:0;padding:0;border:0}
   }
-  @media (prefers-reduced-motion:reduce){.card{transition:none}}
 </style>
