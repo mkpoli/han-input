@@ -5,8 +5,8 @@ own source and terms are also in the site, on its Sources page and on each metho
 
 ## Scope
 
-The site finds characters of sinographic writing systems: Han, the extended sinographies that reuse and
-extend it such as Chữ Nôm and Sawndip, and the kana and Nüshu derived from it. Siniform scripts (Tangut,
+The site finds characters of sinographic writing systems: Han and its Small Seal forms, the extended
+sinographies that reuse and extend it such as Chữ Nôm and Sawndip, and the kana and Nüshu derived from it. Siniform scripts (Tangut,
 Khitan, Jurchen) stay out. A standard's table can be browsed in full where it lists characters outside
 this scope, as GB/T 12052 does for Hangul and symbols; a search still covers only the scripts above.
 The terms follow Zev Handel's "sinographic" and "siniform", Marc Miyake's
@@ -26,6 +26,8 @@ Discord discussion of 2026-10-27, and the works themselves were not read.
 | [宇浩輸入法 Yuhao](https://github.com/forfudan/yuhao-ime-release) v3.13.0, 朱宇浩, retrieved 2026-11-08 | the five schemes’ full and short codes: 123,380 characters before scope filtering, 103,964 indexed | CC BY-NC-ND 4.0: non-commercial use, and modified works may not be distributed. Indexed for search, with the licence shown on each method’s page |
 | Rime tables named in `scripts/sources/index.mjs` | codes and spellings | Per repository |
 | [UnicodeData.txt and NushuSources.txt](https://www.unicode.org/Public/18.0.0/ucd/), Unicode 18.0 | kana names, Nüshu readings and Nüshu Duben positions | Unicode License v3 |
+| [SealSources.txt](https://www.unicode.org/Public/18.0.0/ucd/SealSources.txt), Unicode 18.0, SHA-256 `05ba2c22…aa90` | each Small Seal form's modern character, Shuowen radical, and number in four Shuowen editions; simplified forms of the modern characters are converted by OpenCC | Unicode License v3 |
+| Michel Suignard, [Considerations concerning the Small Seal encoding initiative](https://www.unicode.org/wg2/docs/n5294R3-ConsiderationsSmallSeal.pdf), WG2 N5294R3 (L2/25-049R), 2025-01-26 | the editions behind the source tags: Tenghuaxie (THX) and Chen Changzhi (CCZ) of Xu Xuan's text, Qi Junzao's 1839 carving of Xu Kai's (QJZ), and Duan Yucai's 經韻樓本 (DYC). The draft writes extra THX numbers as X- and KD-; the final file writes TH-X and TH-Y, and what those mark was not checked | Unicode document; cited, not reproduced |
 | [hentaigana.el](https://github.com/kawabata/hentaigana) 1.170817, 川幡太一 | the Han character each hiragana and hentaigana form was written from, and hentaigana by modern kana | GPL-3.0-or-later |
 | [rime-hentaigana](https://github.com/yuanhao-chen-nyoeghau/rime-hentaigana) | kana by spelling | Apache-2.0 |
 | `unicode_nushu_data.csv` in [漢字音典 MCPDict](https://github.com/osfans/MCPDict), commit `cc3e293` | the Han characters each Nüshu character corresponds to, with traditional forms converted by OpenCC | MCPDict repository MIT; no separate terms stated for this table |

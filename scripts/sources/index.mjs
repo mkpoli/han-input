@@ -10,6 +10,7 @@ import { cinMethods } from './cin.mjs'
 import { extendedMethods } from './extended.mjs'
 import { extraMethods } from './extra.mjs'
 import { kanaMethods } from './kana.mjs'
+import { sealMethods } from './seal.mjs'
 import { mojikyoMethod } from './mojikyo.mjs'
 import { yuhaoMethods } from './yuhao.mjs'
 
@@ -69,6 +70,7 @@ export async function allMethods() {
       entries: table.map(row => /** @type {[string, string]} */ ([row.code, row.char])) },
     ...await extendedMethods(),
     ...await kanaMethods(),
+    ...await sealMethods(),
     await mojikyoMethod(),
     ...await yuhaoMethods(),
     ...await cinMethods(),
