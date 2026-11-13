@@ -1,5 +1,6 @@
 // The few view states that are not worth an address: the phone's card sheet and the theme.
 import { close, open } from './route.svelte.js'
+import { isRestoringHistory } from './scroll.js'
 import { insert } from './text.svelte.js'
 import { say, toast } from './clip.svelte.js'
 import { t } from './i18n.svelte.js'
@@ -60,5 +61,7 @@ export function applyTheme() {
 
 /** @param {HTMLElement} node */
 export function autofocus(node) {
-  if (!matchMedia('(pointer: coarse)').matches) queueMicrotask(() => node.focus())
+  if (!matchMedia('(pointer: coarse)').matches) queueMicrotask(() => {
+    if (!isRestoringHistory() && node.isConnected) node.focus({ preventScroll: true })
+  })
 }

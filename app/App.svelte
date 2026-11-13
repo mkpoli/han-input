@@ -3,6 +3,7 @@
   // character on the right (a sheet on a phone), and the text being written docked along the bottom.
   import { onMount, tick } from 'svelte'
   import { NAV, go, route } from './lib/route.svelte.js'
+  import { installScroll } from './lib/scroll.js'
   import { pageMetadata } from './lib/title.js'
   import { applySeo } from './lib/seo.js'
   import { ui, applyTheme, closeRecord, hideSheet } from './lib/ui.svelte.js'
@@ -171,7 +172,7 @@
     </div>
   </nav>
 
-  <main class="finder">
+  <main class="finder" {@attach installScroll}>
     {#if route.page === ''}<Find />
     {:else if route.page === 'methods'}<Methods />
     {:else if route.page === 'm' || route.page === 'v'}{#key route.page + route.method}<Method />{/key}
