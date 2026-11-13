@@ -10,7 +10,8 @@
 
 .ui-input,
 .ui-textarea,
-.ui-toast {
+.ui-toast,
+.ui-glyph-text {
   font-family: 'CDP Composition', 'CNS Composed', 'Han Ext', var(--ui-font-sans), 'Jigmo';
 }
 

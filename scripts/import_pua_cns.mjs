@@ -1,12 +1,16 @@
-// bun scripts/import_pua_cns.mjs [CNS2UNICODE.txt] [Unihan_IRGSources.txt]
-// CNS plane 15 characters carry PUA-A code points; Unihan's T source gives the Unicode character.
+// bun scripts/import_pua_cns.mjs
+// Every CNS row the bulk release maps to a private-use code point, with its CNS code; Unihan's T source
+// gives the Unicode character for the rows assigned since.
 import { createHash } from 'node:crypto'
+import { execFileSync } from 'node:child_process'
 import { readFileSync, writeFileSync } from 'node:fs'
-import { dirname, join } from 'node:path'
-import { fileURLToPath } from 'node:url'
+import { join } from 'node:path'
+import { fetchOnce } from './lib.mjs'
+import { isPuaPoint } from '../src/pua.js'
 
-const URL = 'https://raw.githubusercontent.com/qundao/backup-cns11643/HEAD/Tables/MapingTables/Unicode/CNS2UNICODE_Unicode%2015.txt'
-const SHA256 = 'baf46bb1606872b59ad90e580e0d729d250a1bc3ff3c9f9d47ef8b7e89e73893'
+const URL = 'https://www.cns11643.gov.tw/opendata/MapingTables.zip'
+const TABLE = 'Unicode/CNS2UNICODE_Unicode 15.txt'
+const SHA256 = '4502fcf7b433d679dee51127298929543ec7f4aa99be93cd219df1552bc3d2bf'
 const UNIHAN_SHA256 = 'e2c484cd22b54f7e0ce896ebb02f33e092b92325accf0fd55e0e14e3863869eb'
 
 /** @param {string} table @param {string} irg */
@@ -21,36 +25,45 @@ export function parseCns(table, irg) {
   }
   /** @type {Record<string, string>} */
   const mappings = {}
+  /** @type {Record<string, string>} */
+  const codes = {}
   for (const line of table.split('\n')) {
     const [cns, unicode] = line.trim().split(/\s+/)
     if (!cns || !unicode) continue
     const point = parseInt(unicode, 16)
-    const pua = (point >= 0xE000 && point <= 0xF8FF) || (point >= 0xF0000 && point <= 0xFFFFD) || (point >= 0x100000 && point <= 0x10FFFD)
-    if (!pua) continue
+    if (!isPuaPoint(point)) continue
+    const slot = String.fromCodePoint(point)
+    if (slot in codes) throw new Error(`${unicode} is mapped twice`)
+    codes[slot] = cns
     const char = tSources.get(`t${cns.toLowerCase()}`)
-    if (char) mappings[String.fromCodePoint(point)] = char
+    if (char) mappings[slot] = char
   }
-  return mappings
+  return { mappings, codes }
 }
 
+/** @param {Record<string, string>} record */
+const sorted = record => Object.fromEntries(Object.entries(record).sort(([a], [b]) => /** @type {number} */ (a.codePointAt(0)) - /** @type {number} */ (b.codePointAt(0))))
+
 if (import.meta.main) {
-  const [tableArg, irgArg] = process.argv.slice(2)
-  const table = tableArg ? readFileSync(tableArg, 'utf8') : await (await fetch(URL)).text()
-  const irg = readFileSync(irgArg ?? join(dirname(fileURLToPath(import.meta.url)), '..', 'cache', 'unihan', 'Unihan_IRGSources.txt'), 'utf8')
-  if (createHash('sha256').update(table).digest('hex') !== SHA256) throw new Error('the CNS table changed; review it before importing')
+  const zip = await fetchOnce(URL)
+  if (createHash('sha256').update(readFileSync(zip)).digest('hex') !== SHA256) throw new Error('the CNS mapping archive changed; review it before importing')
+  const table = execFileSync('unzip', ['-p', zip, TABLE], { encoding: 'utf8', maxBuffer: 16 * 1024 * 1024 })
+  const irg = readFileSync(join(import.meta.dirname, '..', 'cache', 'unihan', 'Unihan_IRGSources.txt'), 'utf8')
   if (createHash('sha256').update(irg).digest('hex') !== UNIHAN_SHA256) throw new Error('Unihan_IRGSources.txt changed; review it before importing')
+  const { mappings, codes } = parseCns(table, irg)
   const data = {
     source: {
-      name: 'CNS 11643 open data, plane 15 PUA table, crossed with Unihan kIRG_TSource',
-      url: 'https://data.gov.tw/dataset/5961',
+      name: 'CNS 11643 bulk release 20260805, Unicode plane 15 table, crossed with Unihan kIRG_TSource',
+      url: 'https://www.cns11643.gov.tw/',
       dataUrl: URL,
-      retrieved: '2026-11-08',
-      sha256: createHash('sha256').update(table).digest('hex'),
-      unihanSha256: createHash('sha256').update(irg).digest('hex'),
+      retrieved: '2026-11-14',
+      sha256: SHA256,
+      unihanSha256: UNIHAN_SHA256,
       licence: 'Open Government Data License 1.0 for the 全字庫 dataset; Unicode License v3 for Unihan.',
     },
-    mappings: Object.fromEntries(Object.entries(parseCns(table, irg)).sort(([a], [b]) => /** @type {number} */ (a.codePointAt(0)) - /** @type {number} */ (b.codePointAt(0)))),
+    mappings: sorted(mappings),
   }
-  writeFileSync(join(dirname(fileURLToPath(import.meta.url)), '..', 'data', 'cns-pua.json'), JSON.stringify(data, null, 2) + '\n')
-  console.log(`${Object.keys(data.mappings).length} CNS PUA mappings`)
+  writeFileSync(join(import.meta.dirname, '..', 'data', 'cns-pua.json'), JSON.stringify(data, null, 2) + '\n')
+  writeFileSync(join(import.meta.dirname, '..', 'data', 'cns-pua-codes.json'), JSON.stringify({ codes: sorted(codes) }) + '\n')
+  console.log(`${Object.keys(codes).length} CNS private-use rows, ${Object.keys(mappings).length} with a Unicode character`)
 }

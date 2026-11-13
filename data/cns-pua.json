@@ -1,10 +1,10 @@
 {
   "source": {
-    "name": "CNS 11643 open data, plane 15 PUA table, crossed with Unihan kIRG_TSource",
-    "url": "https://data.gov.tw/dataset/5961",
-    "dataUrl": "https://raw.githubusercontent.com/qundao/backup-cns11643/HEAD/Tables/MapingTables/Unicode/CNS2UNICODE_Unicode%2015.txt",
-    "retrieved": "2026-11-08",
-    "sha256": "baf46bb1606872b59ad90e580e0d729d250a1bc3ff3c9f9d47ef8b7e89e73893",
+    "name": "CNS 11643 bulk release 20260805, Unicode plane 15 table, crossed with Unihan kIRG_TSource",
+    "url": "https://www.cns11643.gov.tw/",
+    "dataUrl": "https://www.cns11643.gov.tw/opendata/MapingTables.zip",
+    "retrieved": "2026-11-14",
+    "sha256": "4502fcf7b433d679dee51127298929543ec7f4aa99be93cd219df1552bc3d2bf",
     "unihanSha256": "e2c484cd22b54f7e0ce896ebb02f33e092b92325accf0fd55e0e14e3863869eb",
     "licence": "Open Government Data License 1.0 for the 全字庫 dataset; Unicode License v3 for Unihan."
   },

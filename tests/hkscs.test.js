@@ -1,6 +1,8 @@
 import { describe, expect, test } from 'bun:test'
 import { parseHkscs } from '../scripts/import_pua_hkscs.mjs'
-import { HKSCS_PUA } from '../src/pua.js'
+import { loadPua } from '../src/pua.js'
+
+const pua = await loadPua()
 
 const body = [
   '\uFEFFHKSCS-2008 HKSCS-2008 in ISO/IEC 10646-1:1993',
@@ -14,8 +16,8 @@ describe('HKSCS import', () => {
     expect(parseHkscs(body)).toEqual({ '\uF266': '䏰', '\uF26B': '𧉧' })
   })
   test('keeps the table and its provenance', () => {
-    expect(Object.keys(HKSCS_PUA.mappings)).toHaveLength(2353)
-    expect(HKSCS_PUA.source.sha256).toBe('f52001a4452cc2c790ac5f255b26be3d8d6e24c9a3867f0d271e21f4359bb266')
-    expect(HKSCS_PUA.mappings['\uF266']).toBe('䏰')
+    expect(Object.keys(pua.scheme('hkscs').mappings)).toHaveLength(2353)
+    expect(pua.scheme('hkscs').source.sha256).toBe('f52001a4452cc2c790ac5f255b26be3d8d6e24c9a3867f0d271e21f4359bb266')
+    expect(pua.scheme('hkscs').mappings['\uF266']).toBe('䏰')
   })
 })

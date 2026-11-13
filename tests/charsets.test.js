@@ -105,8 +105,14 @@ test('filters every answer channel without changing cached results', () => {
     clue: { kind: 'code', text: 'zi' }, chars: ['字', '子'], parts: ['子'], meaning: ['字', '子'],
     hits: [{ method: 'a', code: 'zi', exact: true, literal: true, chars: ['字', '子'] }, { method: 'b', code: 'z', chars: ['子'] }],
     readings: [{ n: 1, form: 'zi', chars: ['字', '子'] }, { n: 2, form: 'zi', chars: ['子'] }],
+    pua: [
+      { source: 'moe', slot: '\uE000', code: '', char: '字' },
+      { source: 'cns', slot: '\u{F0001}', code: '19-2122', char: '' },
+      { source: 'cbeta', slot: '\u{F0001}', code: 'CB00001', char: '', records: 'cbeta_gaiji' },
+    ],
   }
-  const filtered = filterAnswer(answer, new Set(['字']))
+  const filtered = filterAnswer(answer, new Set(['字']), 'cbeta_gaiji')
+  expect(filtered.pua.map(reading => reading.source)).toEqual(['moe', 'cbeta'])
   expect(filtered.chars).toEqual(['字'])
   expect(filtered.meaning).toEqual(['字'])
   expect(filtered.parts).toEqual([])
@@ -129,7 +135,7 @@ test('counts the characters two listed sets share', () => {
 
 test('selected literal scalars remain searchable outside the general script parser', () => {
   for (const char of ['㇀', '\u3099', 'ー', '㇀㇁']) {
-    const answer = { clue: { kind: 'code', text: char }, chars: [], parts: [], meaning: [], hits: [], readings: [] }
+    const answer = { clue: { kind: 'code', text: char }, chars: [], parts: [], meaning: [], hits: [], readings: [], pua: [] }
     expect(filterAnswer(answer, new Set([...char])).chars).toEqual([...char])
     expect(filterAnswer(answer, new Set(['字'])).chars).toEqual([])
   }
@@ -230,7 +236,7 @@ test('snapshot covers every source catalogue and counts match unique scalars', (
   expect(referenceIds).toHaveLength(115)
   for (const id of referenceIds) expect(catalogue.some(row => row.id === id)).toBe(true)
   for (const input of sources.inputs) expect(input.sha256).toMatch(/^[a-f0-9]{64}$/)
-  expect(catalogue.length).toBe(279)
+  expect(catalogue.length).toBe(280)
   for (const id of ['irgn', 'l2', 'g_fzk', '1k8myqp9o8zxkvdpbqdhrfs6yfx5bk2t']) expect(catalogue.some(row => row.id === id)).toBe(false)
   const cns = catalogue.filter(row => row.group === 'CNS sources')
   const cnsSource = JSON.parse(readFileSync(new URL('cns-sources.json', base), 'utf8'))
@@ -305,7 +311,7 @@ test('snapshot covers every source catalogue and counts match unique scalars', (
     expect(set.id).toBe(records.id)
     expect(set.total).toBe(records.records.length)
     expect(set.records.count).toBe(records.records.length)
-    const glyphs = records.records.filter(record => record.glyph || record.sprite)
+    const glyphs = records.records.filter(record => record.glyph || record.sprite || record.atlas)
     expect(set.records.glyphs).toBe(glyphs.length)
     const glyphSerials = glyphs.map(record => record.serial).filter(Boolean)
     expect(new Set(glyphSerials).size).toBe(glyphSerials.length)
@@ -341,6 +347,29 @@ test('snapshot covers every source catalogue and counts match unique scalars', (
   const ebagSource = JSON.parse(readFileSync(new URL('glyphwiki_ebag_source.json', base), 'utf8'))
   expect(ebagSource.dump.sha256).toMatch(/^[a-f0-9]{64}$/)
   expect(ebagSource.dump.url).toBe('https://glyphwiki.org/dump.tar.gz')
+  const cbeta = catalogue.find(row => row.id === 'cbeta_gaiji')
+  expect(cbeta.group).toBe('CBETA')
+  expect([cbeta.chars, cbeta.total, cbeta.encoded, cbeta.unencoded]).toEqual([16607, 31935, 16607, 15328])
+  expect(cbeta.records).toEqual({ file: '/charsets/cbeta_gaiji_records.json', count: 31935, glyphs: 28388, search: true })
+  const cbetaRecords = JSON.parse(readFileSync(new URL('cbeta_gaiji_records.json', base), 'utf8'))
+  expect(cbetaRecords.records.every(record => /^CB\d{5}$/.test(record.source) && (record.composition || record.status))).toBe(true)
+  expect(cbetaRecords.records.filter(record => record.status)).toHaveLength(271)
+  expect(cbetaRecords.records.some(record => record.mappedUnicode && record.similarUnicode)).toBe(false)
+  const cells = new Set(cbetaRecords.records.filter(record => record.atlas).map(record => `${record.atlas.sheet}#${record.atlas.cell}`))
+  expect(cells.size).toBe(28388)
+  for (const record of cbetaRecords.records.filter(record => record.atlas)) expect(record.atlas.cell).toBeLessThan(256)
+  for (const sheet of new Set(cbetaRecords.records.filter(record => record.atlas).map(record => record.atlas.sheet))) {
+    expect(readFileSync(new URL(sheet, base)).subarray(1, 4).toString()).toBe('PNG')
+  }
+  const cbetaCodes = readFileSync(new URL('cbeta_gaiji.codes.tsv', base), 'utf8').trim().split('\n')
+  expect(cbetaCodes[0]).toBe('欵\tCB00001')
+  const cbetaSource = JSON.parse(readFileSync(new URL('cbeta_gaiji_source.json', base), 'utf8'))
+  expect(Object.values(cbetaSource).map(input => input.url)).toEqual([
+    'https://raw.githubusercontent.com/cbeta-org/cbeta_gaiji/857156a6d9f37a020d34099447b51a0b72264620/cbeta_gaiji.json',
+    'https://codeload.github.com/cbeta-org/gaiji-CB/tar.gz/e402e97cf0065bd3f13854c0b1c92efe23f859c1',
+    'file:cbeta-workbooks/CBETA難字庫.xlsx',
+    'file:cbeta-workbooks/CBETA難字庫IDS版_1.2.xlsx',
+  ])
   const sat = catalogue.find(row => row.id === 'ext_f_sat_withdrawals')
   expect(sat.group).toBe('Proposals')
   expect(sat.chars).toBe(0)

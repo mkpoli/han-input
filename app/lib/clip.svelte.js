@@ -2,10 +2,12 @@
 import { t } from './i18n.svelte.js'
 
 export const toast = $state({ message: '', id: 0 })
+let lastMessage = ''
 
 /** @param {string} message */
 export function say(message) {
-  toast.message = message
+  toast.message = message === lastMessage ? `${message}\u00a0` : message
+  lastMessage = toast.message
   const id = ++toast.id
   setTimeout(() => { if (toast.id === id) toast.message = '' }, 1800)
 }
