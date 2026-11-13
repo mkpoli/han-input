@@ -8,6 +8,9 @@
   import CoverageDot from './CoverageDot.svelte'
 
   const CNS_GROUP = 'CNS sources'
+  /** @type {Record<string, string>} */
+  const GROUP_KEYS = { [CNS_GROUP]: 'charset.cnsSources', 'Dialect characters': 'charset.dialectChars' }
+  const groupName = (/** @type {string} */ group) => GROUP_KEYS[group] ? t(GROUP_KEYS[group]) : group
 
   /** @type {{ charsets: import('../lib/charsets.js').Charset[], selected: string, onchange: (id: string) => void, failed?: boolean, onretry: () => void }} */
   let { charsets, selected, onchange, failed = false, onretry } = $props()
@@ -39,7 +42,7 @@
   const groups = $derived([...new Set(charsets.map(set => set.group))].map(group => ({
     name: group,
     sets: charsets.filter(set => set.group === group && (!needle
-      || [set.id, set.group, set.group === CNS_GROUP ? t('charset.cnsSources') : '', set.label, ...Object.values(set.names), set.source.name]
+      || [set.id, set.group, groupName(set.group), set.label, ...Object.values(set.names), set.source.name]
         .some(value => value?.toLowerCase().includes(needle)))),
   })).filter(group => group.sets.length))
   const compareGroups = $derived([...new Set(charsets.map(set => set.group))].map(group => ({
@@ -162,7 +165,7 @@
       <div class="groups" bind:this={groupList}>
         {#each groups as group (group.name)}
           <section>
-            <h2 class="ui-label">{group.name === CNS_GROUP ? t('charset.cnsSources') : group.name} <span class="ui-count">{group.sets.length}</span></h2>
+            <h2 class="ui-label">{groupName(group.name)} <span class="ui-count">{group.sets.length}</span></h2>
             {#if group.name === CNS_GROUP}<p class="ui-hint cns-note">{t('charset.cnsIntro')}</p>{/if}
             <div class="sets">
               {#each group.sets as set (set.id)}
@@ -206,7 +209,7 @@
           <select id="charset-compare" class="ui-select" bind:value={compare}>
             <option value="">{t('charset.compareNone')}</option>
             {#each compareGroups as group (group.name)}
-              <optgroup label={group.name === CNS_GROUP ? t('charset.cnsSources') : group.name}>
+              <optgroup label={groupName(group.name)}>
                 {#each group.sets as set (set.id)}<option value={set.id}>{set.label}</option>{/each}
               </optgroup>
             {/each}

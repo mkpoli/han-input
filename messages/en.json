@@ -105,6 +105,7 @@
   "charset.cnsOverview": "CNS source categories",
   "charset.cnsSources": "CNS source categories",
   "charset.cnsIntro": "Categories reflect the source recorded when each CNS code was added.",
+  "charset.dialectChars": "Dialect characters",
   "charset.loading": "Loading…",
   "charset.error": "Search data could not be loaded.",
   "charset.retry": "Retry",

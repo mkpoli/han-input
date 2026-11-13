@@ -1,0 +1,16 @@
+{
+  "fangyanzi": {
+    "url": "https://raw.githubusercontent.com/ambar/fangyanzi/760a0a2de3e02bb902807372556cedaef9d117f0/data/fangyanzi.json",
+    "repository": "https://github.com/ambar/fangyanzi",
+    "committed": "2022-11-01",
+    "retrieved": "2026-11-14",
+    "sha256": "3f2a68f1dcb51495c14f49f091e97866a7a0855d39d9daa5b2b5ab78aa126a4e"
+  },
+  "openIds": {
+    "url": "https://raw.githubusercontent.com/mkpoli/ids-input/a35965b21260748d9eb0bdf21a6c3246b015b163/data/open-data/descriptions.tsv",
+    "repository": "https://github.com/mkpoli/ids-input",
+    "committed": "2026-11-10",
+    "retrieved": "2026-11-14",
+    "sha256": "ac08cbb566bfeb331878a25dff37e63dfdf1040fed5709a09854feba4b3e8202"
+  }
+}

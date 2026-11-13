@@ -105,6 +105,7 @@
   "charset.cnsOverview": "全字库来源分类一览",
   "charset.cnsSources": "全字库来源分类",
   "charset.cnsIntro": "依字码收录时的来源分类。",
+  "charset.dialectChars": "方言字",
   "charset.loading": "加载中…",
   "charset.error": "无法加载搜索数据。",
   "charset.retry": "重试",

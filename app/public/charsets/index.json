@@ -6943,5 +6943,405 @@
       "licence": "Free use, copy and distribution"
     },
     "columns": 10
+  },
+  {
+    "id": "dialect_guan",
+    "group": "Dialect characters",
+    "label": "官話",
+    "names": {
+      "en": "Mandarin",
+      "zh": "官話方言字",
+      "hans": "官话方言字",
+      "ja": "官話の方言字",
+      "ko": "관화 방언자"
+    },
+    "chars": 115,
+    "total": 129,
+    "encoded": 115,
+    "unencoded": 14,
+    "records": {
+      "file": "/charsets/dialect_guan.ids.json",
+      "count": 14,
+      "glyphs": 0
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "全國漢語方言用字總表",
+      "url": "https://github.com/ambar/fangyanzi",
+      "licence": "https://github.com/ambar/fangyanzi/blob/760a0a2de3e02bb902807372556cedaef9d117f0/LICENSE",
+      "note": "The 嚴式方言字 list, as transcribed by ambar/fangyanzi; its publisher and date are unverified."
+    },
+    "columns": 10
+  },
+  {
+    "id": "dialect_jin",
+    "group": "Dialect characters",
+    "label": "晉語",
+    "names": {
+      "en": "Jin",
+      "zh": "晉語方言字",
+      "hans": "晋语方言字",
+      "ja": "晋語の方言字",
+      "ko": "진어 방언자"
+    },
+    "chars": 13,
+    "total": 18,
+    "encoded": 13,
+    "unencoded": 5,
+    "records": {
+      "file": "/charsets/dialect_jin.ids.json",
+      "count": 5,
+      "glyphs": 0
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "全國漢語方言用字總表",
+      "url": "https://github.com/ambar/fangyanzi",
+      "licence": "https://github.com/ambar/fangyanzi/blob/760a0a2de3e02bb902807372556cedaef9d117f0/LICENSE",
+      "note": "The 嚴式方言字 list, as transcribed by ambar/fangyanzi; its publisher and date are unverified."
+    },
+    "columns": 10
+  },
+  {
+    "id": "dialect_wu",
+    "group": "Dialect characters",
+    "label": "吳語",
+    "names": {
+      "en": "Wu",
+      "zh": "吳語方言字",
+      "hans": "吴语方言字",
+      "ja": "呉語の方言字",
+      "ko": "오어 방언자"
+    },
+    "chars": 93,
+    "total": 103,
+    "encoded": 93,
+    "unencoded": 10,
+    "records": {
+      "file": "/charsets/dialect_wu.ids.json",
+      "count": 10,
+      "glyphs": 0
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "全國漢語方言用字總表",
+      "url": "https://github.com/ambar/fangyanzi",
+      "licence": "https://github.com/ambar/fangyanzi/blob/760a0a2de3e02bb902807372556cedaef9d117f0/LICENSE",
+      "note": "The 嚴式方言字 list, as transcribed by ambar/fangyanzi; its publisher and date are unverified."
+    },
+    "columns": 10
+  },
+  {
+    "id": "dialect_hui",
+    "group": "Dialect characters",
+    "label": "徽語",
+    "names": {
+      "en": "Huizhou",
+      "zh": "徽語方言字",
+      "hans": "徽语方言字",
+      "ja": "徽語の方言字",
+      "ko": "휘어 방언자"
+    },
+    "chars": 17,
+    "total": 18,
+    "encoded": 17,
+    "unencoded": 1,
+    "records": {
+      "file": "/charsets/dialect_hui.ids.json",
+      "count": 1,
+      "glyphs": 0
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "全國漢語方言用字總表",
+      "url": "https://github.com/ambar/fangyanzi",
+      "licence": "https://github.com/ambar/fangyanzi/blob/760a0a2de3e02bb902807372556cedaef9d117f0/LICENSE",
+      "note": "The 嚴式方言字 list, as transcribed by ambar/fangyanzi; its publisher and date are unverified."
+    },
+    "columns": 10
+  },
+  {
+    "id": "dialect_gan",
+    "group": "Dialect characters",
+    "label": "贛語",
+    "names": {
+      "en": "Gan",
+      "zh": "贛語方言字",
+      "hans": "赣语方言字",
+      "ja": "贛語の方言字",
+      "ko": "감어 방언자"
+    },
+    "chars": 17,
+    "total": 19,
+    "encoded": 17,
+    "unencoded": 2,
+    "records": {
+      "file": "/charsets/dialect_gan.ids.json",
+      "count": 2,
+      "glyphs": 0
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "全國漢語方言用字總表",
+      "url": "https://github.com/ambar/fangyanzi",
+      "licence": "https://github.com/ambar/fangyanzi/blob/760a0a2de3e02bb902807372556cedaef9d117f0/LICENSE",
+      "note": "The 嚴式方言字 list, as transcribed by ambar/fangyanzi; its publisher and date are unverified."
+    },
+    "columns": 10
+  },
+  {
+    "id": "dialect_xiang",
+    "group": "Dialect characters",
+    "label": "湘語",
+    "names": {
+      "en": "Xiang",
+      "zh": "湘語方言字",
+      "hans": "湘语方言字",
+      "ja": "湘語の方言字",
+      "ko": "상어 방언자"
+    },
+    "chars": 21,
+    "total": 23,
+    "encoded": 21,
+    "unencoded": 2,
+    "records": {
+      "file": "/charsets/dialect_xiang.ids.json",
+      "count": 2,
+      "glyphs": 0
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "全國漢語方言用字總表",
+      "url": "https://github.com/ambar/fangyanzi",
+      "licence": "https://github.com/ambar/fangyanzi/blob/760a0a2de3e02bb902807372556cedaef9d117f0/LICENSE",
+      "note": "The 嚴式方言字 list, as transcribed by ambar/fangyanzi; its publisher and date are unverified."
+    },
+    "columns": 10
+  },
+  {
+    "id": "dialect_hakka",
+    "group": "Dialect characters",
+    "label": "客家話",
+    "names": {
+      "en": "Hakka",
+      "zh": "客家話方言字",
+      "hans": "客家话方言字",
+      "ja": "客家語の方言字",
+      "ko": "객가어 방언자"
+    },
+    "chars": 50,
+    "total": 52,
+    "encoded": 50,
+    "unencoded": 2,
+    "records": {
+      "file": "/charsets/dialect_hakka.ids.json",
+      "count": 2,
+      "glyphs": 0
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "全國漢語方言用字總表",
+      "url": "https://github.com/ambar/fangyanzi",
+      "licence": "https://github.com/ambar/fangyanzi/blob/760a0a2de3e02bb902807372556cedaef9d117f0/LICENSE",
+      "note": "The 嚴式方言字 list, as transcribed by ambar/fangyanzi; its publisher and date are unverified."
+    },
+    "columns": 10
+  },
+  {
+    "id": "dialect_yue",
+    "group": "Dialect characters",
+    "label": "粵語",
+    "names": {
+      "en": "Cantonese",
+      "zh": "粵語方言字",
+      "hans": "粤语方言字",
+      "ja": "粤語の方言字",
+      "ko": "월어 방언자"
+    },
+    "chars": 78,
+    "total": 82,
+    "encoded": 78,
+    "unencoded": 4,
+    "records": {
+      "file": "/charsets/dialect_yue.ids.json",
+      "count": 4,
+      "glyphs": 0
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "全國漢語方言用字總表",
+      "url": "https://github.com/ambar/fangyanzi",
+      "licence": "https://github.com/ambar/fangyanzi/blob/760a0a2de3e02bb902807372556cedaef9d117f0/LICENSE",
+      "note": "The 嚴式方言字 list, as transcribed by ambar/fangyanzi; its publisher and date are unverified."
+    },
+    "columns": 10
+  },
+  {
+    "id": "dialect_min",
+    "group": "Dialect characters",
+    "label": "閩語",
+    "names": {
+      "en": "Min",
+      "zh": "閩語方言字",
+      "hans": "闽语方言字",
+      "ja": "閩語の方言字",
+      "ko": "민어 방언자"
+    },
+    "chars": 110,
+    "total": 124,
+    "encoded": 110,
+    "unencoded": 14,
+    "records": {
+      "file": "/charsets/dialect_min.ids.json",
+      "count": 14,
+      "glyphs": 0
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "全國漢語方言用字總表",
+      "url": "https://github.com/ambar/fangyanzi",
+      "licence": "https://github.com/ambar/fangyanzi/blob/760a0a2de3e02bb902807372556cedaef9d117f0/LICENSE",
+      "note": "The 嚴式方言字 list, as transcribed by ambar/fangyanzi; its publisher and date are unverified."
+    },
+    "columns": 10
+  },
+  {
+    "id": "dialect_min_dong",
+    "group": "Dialect characters",
+    "label": "閩東語",
+    "names": {
+      "en": "Eastern Min",
+      "zh": "閩東語方言字",
+      "hans": "闽东语方言字",
+      "ja": "閩東語の方言字",
+      "ko": "민동어 방언자"
+    },
+    "chars": 37,
+    "total": 42,
+    "encoded": 37,
+    "unencoded": 5,
+    "records": {
+      "file": "/charsets/dialect_min_dong.ids.json",
+      "count": 5,
+      "glyphs": 0
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "全國漢語方言用字總表",
+      "url": "https://github.com/ambar/fangyanzi",
+      "licence": "https://github.com/ambar/fangyanzi/blob/760a0a2de3e02bb902807372556cedaef9d117f0/LICENSE",
+      "note": "The 嚴式方言字 list, as transcribed by ambar/fangyanzi; its publisher and date are unverified. Min rows read at Fuzhou or Gutian."
+    },
+    "columns": 10
+  },
+  {
+    "id": "dialect_min_nan",
+    "group": "Dialect characters",
+    "label": "閩南語",
+    "names": {
+      "en": "Southern Min",
+      "zh": "閩南語方言字",
+      "hans": "闽南语方言字",
+      "ja": "閩南語の方言字",
+      "ko": "민남어 방언자"
+    },
+    "chars": 27,
+    "total": 29,
+    "encoded": 27,
+    "unencoded": 2,
+    "records": {
+      "file": "/charsets/dialect_min_nan.ids.json",
+      "count": 2,
+      "glyphs": 0
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "全國漢語方言用字總表",
+      "url": "https://github.com/ambar/fangyanzi",
+      "licence": "https://github.com/ambar/fangyanzi/blob/760a0a2de3e02bb902807372556cedaef9d117f0/LICENSE",
+      "note": "The 嚴式方言字 list, as transcribed by ambar/fangyanzi; its publisher and date are unverified. Min rows read at Xiamen, Zhangzhou or Zhangping."
+    },
+    "columns": 10
+  },
+  {
+    "id": "dialect_ping",
+    "group": "Dialect characters",
+    "label": "平話",
+    "names": {
+      "en": "Pinghua",
+      "zh": "平話方言字",
+      "hans": "平话方言字",
+      "ja": "平話の方言字",
+      "ko": "평화 방언자"
+    },
+    "chars": 47,
+    "total": 48,
+    "encoded": 47,
+    "unencoded": 1,
+    "records": {
+      "file": "/charsets/dialect_ping.ids.json",
+      "count": 1,
+      "glyphs": 0
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "全國漢語方言用字總表",
+      "url": "https://github.com/ambar/fangyanzi",
+      "licence": "https://github.com/ambar/fangyanzi/blob/760a0a2de3e02bb902807372556cedaef9d117f0/LICENSE",
+      "note": "The 嚴式方言字 list, as transcribed by ambar/fangyanzi; its publisher and date are unverified."
+    },
+    "columns": 10
+  },
+  {
+    "id": "dialect_kokuji",
+    "group": "Dialect characters",
+    "label": "日本國字",
+    "names": {
+      "en": "Japanese kokuji",
+      "zh": "日本國字",
+      "hans": "日本国字",
+      "ja": "国字",
+      "ko": "일본 국자"
+    },
+    "chars": 156,
+    "total": 156,
+    "encoded": 156,
+    "unencoded": 0,
+    "source": {
+      "name": "IDS Workshop open IDS",
+      "url": "https://github.com/mkpoli/ids-input/tree/a35965b21260748d9eb0bdf21a6c3246b015b163/data/open-data",
+      "licence": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "note": "From the sljfaq.org kokuji list and English Wikipedia’s Kokuji."
+    },
+    "columns": 10
+  },
+  {
+    "id": "dialect_gukja",
+    "group": "Dialect characters",
+    "label": "朝鮮國字",
+    "names": {
+      "en": "Korean gukja",
+      "zh": "朝鮮國字",
+      "hans": "朝鲜国字",
+      "ja": "朝鮮の国字",
+      "ko": "국자"
+    },
+    "chars": 95,
+    "total": 116,
+    "encoded": 95,
+    "unencoded": 21,
+    "records": {
+      "file": "/charsets/dialect_gukja.ids.json",
+      "count": 21,
+      "glyphs": 0
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "IDS Workshop open IDS",
+      "url": "https://github.com/mkpoli/ids-input/tree/a35965b21260748d9eb0bdf21a6c3246b015b163/data/open-data",
+      "licence": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "note": "From Korean Wikipedia’s 국자의 음역자와 구결자."
+    },
+    "columns": 10
   }
 ]
