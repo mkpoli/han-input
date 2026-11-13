@@ -181,7 +181,7 @@
           <li>
             <span class="ui-mono">{codePoint(conflict.code)}</span>
             {#each conflict.options as option (option.source)}
-              <span class="option">{option.char} <span class="tag">{t(`pua.source.${option.source}`)}</span></span>
+              <span class="option">{option.char === conflict.code ? option.ids || codePoint(option.char) : option.char} <span class="tag">{t(`pua.source.${option.source}`)}</span></span>
             {/each}
           </li>
         {/each}

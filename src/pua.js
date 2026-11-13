@@ -4,8 +4,8 @@
 // is kept apart, so a slot two schemes share keeps both readings.
 
 /** @typedef {{ name: string, url: string, dataUrl?: string, retrieved?: string, sha256?: string, licence?: string, version?: string }} PuaSource */
-/** @typedef {{ id: string, source: PuaSource, mappings: Record<string, string>, records?: string, font?: boolean }} PuaScheme */
-/** @typedef {{ source: string, slot: string, code: string, char: string, ids?: string, records?: string, font?: boolean }} PuaReading */
+/** @typedef {{ id: string, source: PuaSource, mappings: Record<string, string>, records?: string, set?: string, font?: boolean }} PuaScheme */
+/** @typedef {{ source: string, slot: string, code: string, char: string, ids?: string, records?: string, set?: string, font?: boolean }} PuaReading */
 /** What a scheme names its slots by: its own codes, and IDS for slots it describes only by shape. An
  * empty IDS still claims the slot. @typedef {Map<string, { codes: Record<string, string>, ids: Record<string, string> }>} PuaNames */
 
@@ -18,9 +18,9 @@ const SCHEMES = [
   { id: 'gb18030', load: () => import('../data/gb18030-pua.json') },
   // CBETA reserves U+F0000 plus a CB code's number; a slot without a Unicode character is a record of
   // the CBETA缺字 character set.
-  { id: 'cbeta', load: () => import('../data/cbeta-pua.json'), codes: () => import('../data/cbeta-pua-codes.json'), records: 'cbeta_gaiji' },
+  { id: 'cbeta', load: () => import('../data/cbeta-pua.json'), codes: () => import('../data/cbeta-pua-codes.json'), records: 'cbeta_gaiji', set: 'cbeta_gaiji' },
   // The 中华书局宋 font's plane 15 slots, named by a Unicode character or by an IDS.
-  { id: 'zhonghua', load: () => import('../data/zhonghua-pua.json'), codes: () => import('../data/zhonghua-pua-codes.json') },
+  { id: 'zhonghua', load: () => import('../data/zhonghua-pua.json'), codes: () => import('../data/zhonghua-pua-codes.json'), set: 'gzhs' },
 ]
 
 export const PUA_SCHEME_IDS = SCHEMES.map(scheme => scheme.id)
@@ -100,11 +100,11 @@ export function makePua(schemes, variants) {
       let unmapped = 0
       let ambiguous = 0
       let output = ''
-      /** @type {{ code: string, options: { char: string, source: string }[] }[]} */
+      /** @type {{ code: string, options: { char: string, source: string, ids?: string }[] }[]} */
       const conflicts = []
       for (const char of text) {
         const options = sources.flatMap(scheme => char in scheme.mappings ? [{ char: scheme.mappings[char], source: scheme.id }]
-          : claims(names, scheme.id, char) ? [{ char, source: scheme.id }] : [])
+          : claims(names, scheme.id, char) ? [{ char, source: scheme.id, ...(names.get(scheme.id)?.ids[char] ? { ids: names.get(scheme.id)?.ids[char] } : {}) }] : [])
         const targets = new Set(options.map(option => option.char))
         const [target] = targets
         if (targets.size === 1 && target !== char) { output += target; converted++ }
@@ -143,7 +143,7 @@ export function readingsOf(pua, names, slot) {
     const ids = names.get(scheme.id)?.ids[slot]
     const char = scheme.mappings[slot] ?? ''
     if (!code && !char && ids === undefined) return []
-    return [{ source: scheme.id, slot, code, char, ...(ids ? { ids } : {}), ...(scheme.records ? { records: scheme.records } : {}), ...(scheme.font ? { font: true } : {}) }]
+    return [{ source: scheme.id, slot, code, char, ...(ids ? { ids } : {}), ...(scheme.records ? { records: scheme.records } : {}), ...(scheme.set ? { set: scheme.set } : {}), ...(scheme.font ? { font: true } : {}) }]
   })
 }
 
@@ -175,9 +175,9 @@ let loaded = null
 /** Every scheme's mappings, loaded once. */
 export function loadPua() {
   loaded ??= Promise.all([
-    Promise.all(SCHEMES.map(async ({ id, load, records, font }) => {
+    Promise.all(SCHEMES.map(async ({ id, load, records, set, font }) => {
       const data = json(await load())
-      return /** @type {PuaScheme} */ ({ id, source: data.source, mappings: data.mappings, ...(records ? { records } : {}), ...(font ? { font } : {}) })
+      return /** @type {PuaScheme} */ ({ id, source: data.source, mappings: data.mappings, ...(records ? { records } : {}), ...(set ? { set } : {}), ...(font ? { font } : {}) })
     })),
     import('../data/moe-pua-variants.json').then(json),
   ]).then(([schemes, variants]) => makePua(schemes, variants)).catch(error => { loaded = null; throw error })

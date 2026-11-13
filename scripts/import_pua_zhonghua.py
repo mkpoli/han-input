@@ -3,8 +3,8 @@
 # dependencies = ["openpyxl>=3.1"]
 # ///
 # The 中华书局宋 font's plane 15 private-use slots. 字統網's gzhs payload names 27,939 of them by a
-# Unicode character or an IDS; a privately supplied workbook lists the 14,888 slots 字統 lacks, 225 of
-# them with an IDS. Both inputs are pinned by SHA-256.
+# Unicode character or an IDS; a privately supplied workbook lists the font's other slots, a few hundred
+# of them described. Both inputs are pinned by SHA-256.
 #   uv run scripts/import_pua_zhonghua.py
 import hashlib, json, os
 import openpyxl
@@ -51,14 +51,22 @@ for point, value, _ in json.load(open(ZI['path']))['rows']:
 
 rows = list(openpyxl.load_workbook(workbook_path, read_only=True).worksheets[0].iter_rows(values_only=True))[1:]
 added = 0
-for glyph, point, description, _ in rows:
+for glyph, point, description, note in rows:
     slot = chr(int(point, 16))
     if glyph != slot:
         raise SystemExit(f'{point}: the glyph column does not match the code')
+    # Two rows repeat slots 字統 already describes; 字統's description stands.
     if slot in mappings or slot in ids:
         continue
-    # A single character in the IDS column identifies the slot; an empty cell still claims it.
     text = (description or '').strip()
+    note = (note or '').strip()
+    # The note column records an agreed identification (认同X) or a revised IDS (处理后：…); a
+    # consideration (考虑：…) leaves the IDS as it is.
+    if note.startswith('认同'):
+        text = note[2:]
+    elif note.startswith('处理后：'):
+        text = note[4:]
+    # A single character identifies the slot; an empty cell, or a symbol, still claims it.
     if len(text) == 1 and not is_ids(text) and ord(text) > 0x2E7F:
         mappings[slot] = text
     else:
@@ -74,7 +82,7 @@ source = {
     'name': '中华书局宋 plane 15 private-use slots (字統網 gzhs, with a list of slots it lacks)',
     'url': 'https://zi.tools/?secondary=character_set&set=G%E4%B8%AD%E5%8D%8E%E4%B9%A6%E5%B1%80%E5%AE%8B',
     'dataUrl': ZI['url'],
-    'retrieved': '2026-11-11',
+    'retrieved': '2026-11-07',
     'sha256': pinned[ZI['url']],
     'licence': 'No reuse terms stated at the 字統 endpoint; the slot list is a privately supplied workbook with no licence stated.',
 }

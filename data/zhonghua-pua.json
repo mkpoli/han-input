@@ -3,7 +3,7 @@
     "name": "中华书局宋 plane 15 private-use slots (字統網 gzhs, with a list of slots it lacks)",
     "url": "https://zi.tools/?secondary=character_set&set=G%E4%B8%AD%E5%8D%8E%E4%B9%A6%E5%B1%80%E5%AE%8B",
     "dataUrl": "https://zi.tools/api/ma/ma/gzhs.json",
-    "retrieved": "2026-11-11",
+    "retrieved": "2026-11-07",
     "sha256": "5e4d9a16b12454683fe88135f8c220cd6cb9338023ec384c851a4837c8e458dc",
     "licence": "No reuse terms stated at the 字統 endpoint; the slot list is a privately supplied workbook with no licence stated."
   },
@@ -4313,6 +4313,8 @@
     "󹯚": "𱬬",
     "󹯛": "𰧒",
     "󹯟": "㲲",
+    "󹯢": "鸞",
+    "󹰿": "舁",
     "󼡂": "萈",
     "󼡃": "𫯛",
     "󼡄": "𠵤",

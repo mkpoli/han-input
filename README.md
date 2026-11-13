@@ -51,7 +51,7 @@ U+F6A3–U+F6AF. `uv run scripts/build_composition_font.py` draws them after tab
 `app/public/fonts/cdp-composition.woff2`.
 
 The PUA schemes are committed snapshots, `data/<scheme>-pua.json`, loaded only when a page needs them;
-CNS and CBETA also name each slot in `data/<scheme>-pua-codes.json`. `bun scripts/import_moe_pua.mjs`
+CNS, CBETA and 中华书局宋 also name their slots, by code or IDS, in `data/<scheme>-pua-codes.json`. `bun scripts/import_moe_pua.mjs`
 imports the checksum-pinned MOE source, `bun scripts/import_pua_cns.mjs` the CNS bulk release's plane 15
 table, `uv run scripts/import_cbeta_gaiji.py` the CBETA codes and `uv run scripts/import_pua_zhonghua.py` the 中华书局宋 slots;
 `bun scripts/import_moe_pua_variants.mjs [Unihan_Variants.txt]` rebuilds the Unihan variant index from
