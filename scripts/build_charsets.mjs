@@ -164,7 +164,7 @@ for (const line of ageBytes.toString('utf8').split('\n')) {
 writeFileSync(join(OUT, 'unicode-age.json'), JSON.stringify({ version: '18.0.0', source: ageUrl, ranges: ageRanges.sort((a, b) => a[0] - b[0]) }) + '\n')
 for (const line of blocksBytes.toString('utf8').split('\n')) {
   const match = line.match(/^([0-9A-F]+)\.\.([0-9A-F]+); (.+)$/)
-  if (!match || !/^(?:CJK Radicals Supplement|Kangxi Radicals|CJK Strokes|CJK Compatibility Ideographs(?: Supplement)?|Hiragana|Katakana(?: Phonetic Extensions)?|Kana (?:Extended-[AB]|Supplement)|Small Kana Extension|Nushu)$/.test(match[3])) continue
+  if (!match || !/^(?:CJK Radicals Supplement|Kangxi Radicals|CJK Strokes|CJK Compatibility Ideographs(?: Supplement)?|Hiragana|Katakana(?: Phonetic Extensions)?|Kana (?:Extended-[AB]|Supplement)|Small Kana Extension|Nushu|Seal)$/.test(match[3])) continue
   const [, start, end, name] = match
   const total = parseInt(end, 16) - parseInt(start, 16) + 1
   const members = []
