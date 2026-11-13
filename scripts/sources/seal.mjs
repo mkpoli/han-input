@@ -12,8 +12,8 @@ const N5294 = 'WG2 N5294R3 (https://www.unicode.org/wg2/docs/n5294R3-Considerati
 
 /** @type {[string, string, string, string, string][]} field, id, English, 漢字 name, about */
 const EDITIONS = [
-  ['kSEAL_THXSrc', 'seal-thx', 'Small Seal, Tenghuaxie edition number', '小篆（藤花榭本編號）',
-    'Xu Xuan’s Shuowen in the Tenghuaxie edition, as TH-00001, TH-X001 or TH-Y001.'],
+  ['kSEAL_THXSrc', 'seal-thx', 'Small Seal, unified THX number', '小篆（THX統一編號）',
+    'Unicode’s unified numbering, built on Xu Xuan’s Shuowen in the Tenghuaxie edition, as TH-00001, TH-X001 or TH-Y001.'],
   ['kSEAL_CCZSrc', 'seal-ccz', 'Small Seal, Chen Changzhi edition number', '小篆（陳昌治本編號）',
     'Xu Xuan’s Shuowen as Chen Changzhi recut it, as C-00001.'],
   ['kSEAL_QJZSrc', 'seal-qjz', 'Small Seal, Qi Junzao edition number', '小篆（祁寯藻本編號）',
