@@ -6899,14 +6899,15 @@
       "ko": "CBETA 缺字"
     },
     "chars": 16607,
-    "total": 31664,
+    "total": 31935,
     "encoded": 16607,
-    "unencoded": 15057,
+    "unencoded": 15328,
     "codes": "/charsets/cbeta_gaiji.codes.tsv",
     "records": {
       "file": "/charsets/cbeta_gaiji_records.json",
-      "count": 31664,
-      "glyphs": 28117
+      "count": 31935,
+      "glyphs": 28388,
+      "search": true
     },
     "recordsNote": false,
     "source": {

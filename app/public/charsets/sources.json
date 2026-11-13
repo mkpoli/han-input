@@ -5,6 +5,14 @@
   "policy": "Source-row sets index every row through its assigned Unicode scalars, or its private-use glyph slots where no scalar is assigned; rows described only by an IDS are kept as records, not scalar members; a glyph printed at more than one position is listed once, at its first position; a member may be a jamo sequence when a standard prints one glyph for a Hangul syllable Unicode cannot compose. Unihan kIRG_TSource fills assignments newer than the bulk release. Literal Unicode block sets contain assigned scalars. Unihan kIRG_GSource gives the G source collections. Local row numbers, IDS components and variation sequences do not establish scalar membership. OTHER follows the source’s unified substitutions, rather than literal Unicode block membership.",
   "inputs": [
     {
+      "url": "file:cbeta-workbooks/CBETA難字庫.xlsx",
+      "sha256": "20bd336863f10da880c4883eae10bb06775d73f8752569d7a41af9180ed3dd38"
+    },
+    {
+      "url": "file:cbeta-workbooks/CBETA難字庫IDS版_1.2.xlsx",
+      "sha256": "9fce87c4dfd6a93e8f185bf96640e5db29bc720ea99e1b7667b840341d6bd02a"
+    },
+    {
       "url": "https://codeload.github.com/cbeta-org/gaiji-CB/tar.gz/e402e97cf0065bd3f13854c0b1c92efe23f859c1",
       "sha256": "48d31b5c691a1e51cd2e449f33c8592951f5034587ad6b09e61a6ea2cf94e3e2"
     },

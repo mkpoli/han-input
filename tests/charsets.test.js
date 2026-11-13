@@ -349,13 +349,14 @@ test('snapshot covers every source catalogue and counts match unique scalars', (
   expect(ebagSource.dump.url).toBe('https://glyphwiki.org/dump.tar.gz')
   const cbeta = catalogue.find(row => row.id === 'cbeta_gaiji')
   expect(cbeta.group).toBe('CBETA')
-  expect([cbeta.chars, cbeta.total, cbeta.encoded, cbeta.unencoded]).toEqual([16607, 31664, 16607, 15057])
-  expect(cbeta.records).toEqual({ file: '/charsets/cbeta_gaiji_records.json', count: 31664, glyphs: 28117 })
+  expect([cbeta.chars, cbeta.total, cbeta.encoded, cbeta.unencoded]).toEqual([16607, 31935, 16607, 15328])
+  expect(cbeta.records).toEqual({ file: '/charsets/cbeta_gaiji_records.json', count: 31935, glyphs: 28388, search: true })
   const cbetaRecords = JSON.parse(readFileSync(new URL('cbeta_gaiji_records.json', base), 'utf8'))
-  expect(cbetaRecords.records.every(record => /^CB\d{5}$/.test(record.source) && record.composition)).toBe(true)
+  expect(cbetaRecords.records.every(record => /^CB\d{5}$/.test(record.source) && (record.composition || record.status))).toBe(true)
+  expect(cbetaRecords.records.filter(record => record.status)).toHaveLength(271)
   expect(cbetaRecords.records.some(record => record.mappedUnicode && record.similarUnicode)).toBe(false)
   const cells = new Set(cbetaRecords.records.filter(record => record.atlas).map(record => `${record.atlas.sheet}#${record.atlas.cell}`))
-  expect(cells.size).toBe(28117)
+  expect(cells.size).toBe(28388)
   for (const record of cbetaRecords.records.filter(record => record.atlas)) expect(record.atlas.cell).toBeLessThan(256)
   for (const sheet of new Set(cbetaRecords.records.filter(record => record.atlas).map(record => record.atlas.sheet))) {
     expect(readFileSync(new URL(sheet, base)).subarray(1, 4).toString()).toBe('PNG')
@@ -366,6 +367,8 @@ test('snapshot covers every source catalogue and counts match unique scalars', (
   expect(Object.values(cbetaSource).map(input => input.url)).toEqual([
     'https://raw.githubusercontent.com/cbeta-org/cbeta_gaiji/857156a6d9f37a020d34099447b51a0b72264620/cbeta_gaiji.json',
     'https://codeload.github.com/cbeta-org/gaiji-CB/tar.gz/e402e97cf0065bd3f13854c0b1c92efe23f859c1',
+    'file:cbeta-workbooks/CBETA難字庫.xlsx',
+    'file:cbeta-workbooks/CBETA難字庫IDS版_1.2.xlsx',
   ])
   const sat = catalogue.find(row => row.id === 'ext_f_sat_withdrawals')
   expect(sat.group).toBe('Proposals')

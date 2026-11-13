@@ -1,12 +1,15 @@
 # /// script
 # requires-python = ">=3.12"
-# dependencies = ["pillow>=11"]
+# dependencies = ["pillow>=11", "openpyxl>=3.1"]
 # ///
 # Imports CBETA's missing-character database and its glyph images from pinned commits of
 # cbeta-org/cbeta_gaiji and cbeta-org/gaiji-CB. Each glyph is fitted to a 64-pixel cell and packed
-# 256 to a one-bit sheet, so a browsed page loads one or two images.
+# 256 to a one-bit sheet, so a browsed page loads one or two images. Two privately supplied workbooks,
+# copied to cache/cbeta-workbooks/ and pinned by digest, add the radical, strokes and zhuyin of CBETA's
+# web pages and an IDS for many codes.
 #   uv run scripts/import_cbeta_gaiji.py
 import hashlib, io, json, os, re, tarfile, urllib.request
+import openpyxl
 from PIL import Image
 
 ROOT = os.path.join(os.path.dirname(__file__), '..')
@@ -29,6 +32,12 @@ IMAGES = {
     'committed': '2026-11-01',
 }
 RETRIEVED = '2026-11-14'
+WORKBOOKS = {
+    'notes': {'file': 'CBETA難字庫.xlsx', 'sha256': '20bd336863f10da880c4883eae10bb06775d73f8752569d7a41af9180ed3dd38'},
+    'ids': {'file': 'CBETA難字庫IDS版_1.2.xlsx', 'sha256': '9fce87c4dfd6a93e8f185bf96640e5db29bc720ea99e1b7667b840341d6bd02a'},
+}
+IDC = set('⿰⿱⿲⿳⿴⿵⿶⿷⿸⿹⿺⿻⿼⿽⿾⿿㇯')
+HAN = re.compile('[\u3400-\u4DBF\u4E00-\u9FFF\uF900-\uFAFF\U00020000-\U0003FFFF]')
 
 
 def fetch_once(source):
@@ -55,6 +64,35 @@ for key, source in (('database', DATABASE), ('images', IMAGES)):
     lock[key] = {'url': source['url'], 'repository': source['repository'], 'committed': source['committed'], 'retrieved': RETRIEVED, 'sha256': digest}
 
 database = json.load(open(DATABASE['path'], encoding='utf-8'))
+
+
+def sheet_rows(key):
+    path = os.path.join(CACHE, 'cbeta-workbooks', WORKBOOKS[key]['file'])
+    with open(path, 'rb') as file:
+        if hashlib.sha256(file.read()).hexdigest() != WORKBOOKS[key]['sha256']:
+            raise SystemExit(f'Workbook changed: {path}')
+    lock[f'workbook-{key}'] = {'url': f'file:cbeta-workbooks/{WORKBOOKS[key]["file"]}', 'sha256': WORKBOOKS[key]['sha256'], 'supplied': RETRIEVED}
+    return list(openpyxl.load_workbook(path, read_only=True).worksheets[0].iter_rows(values_only=True))[1:]
+
+
+# The IDS workbook repeats every row of the notes workbook, with one note's punctuation revised, and
+# adds the IDS columns, so its notes are the ones read.
+notes = {row[0]: row for row in sheet_rows('notes') if row[0]}
+workbook = {row[0]: row for row in sheet_rows('ids') if row[0]}
+for code, row in notes.items():
+    if code not in workbook or row[2] != workbook[code][3]:
+        raise SystemExit(f'{code}: the two workbooks disagree')
+    if code not in database or row[2] != database[code]['composition']:
+        raise SystemExit(f'{code}: the workbook formula differs from the database')
+
+
+def note(info, label):
+    match = re.search(r'【' + label + r'[:：]\s*([^】]*)】', info or '')
+    return match[1].strip() if match else ''
+
+
+def is_ids(text):
+    return bool(text) and any(char in IDC for char in text)
 
 
 def scalar(hex_value, char, code):
@@ -94,7 +132,9 @@ def ink(data):
     return cell
 
 
-drawn = [code for code in codes if code in glyphs]
+# Images whose code has no database row still carry CBETA's glyph; they follow the database's codes,
+# so adding them leaves the earlier sheets as they were.
+drawn = [code for code in codes if code in glyphs] + extra
 sheet_dir = os.path.join(OUT, SHEETS)
 os.makedirs(sheet_dir, exist_ok=True)
 for name in os.listdir(sheet_dir):
@@ -125,7 +165,34 @@ for code in codes:
         record['moeVariant'] = entry['moe_variant_id']
     if code in atlas:
         record['atlas'] = atlas[code]
+    row = workbook.get(code)
+    if row:
+        # The workbook's notes and identifications stay apart from CBETA's own fields.
+        info = row[6]
+        added = {}
+        if note(info, '部首'):
+            added['radical'] = note(info, '部首')
+        # A total written as `T=-R+S` counts the radical negatively and cannot be trusted.
+        strokes = re.fullmatch(r'(\d+)=\d+\+\d+', note(info, '筆畫'))
+        if strokes:
+            added['strokes'] = int(strokes[1])
+        if note(info, '注音'):
+            added['zhuyin'] = re.split(r'[\s．]+', note(info, '注音').strip())
+        if is_ids(row[5]):
+            added['ids'] = row[5]
+        if is_ids(row[4]) and row[4] != row[5]:
+            added['idsMachine'] = row[4]
+        # A single character the workbook names for an unencoded code is its identification, not CBETA's.
+        proposed = row[5] or ''
+        similar = chr(int(record['similarUnicode'][2:], 16)) if 'similarUnicode' in record else ''
+        if 'mappedUnicode' not in record and HAN.fullmatch(proposed) and proposed not in (similar, record.get('common')):
+            added['proposed'] = proposed
+        if added:
+            record['workbook'] = added
     records.append(record)
+for code in extra:
+    records.append({'document': 'cbeta', 'source': code, 'status': 'An image in gaiji-CB whose code has no row in the database.', 'atlas': atlas[code]})
+records.sort(key=lambda record: int(record['source'][2:]))
 
 with open(lock_path, 'w', encoding='utf-8') as file:
     json.dump(lock, file, ensure_ascii=False, indent=2)
@@ -138,9 +205,10 @@ with open(os.path.join(OUT, 'cbeta_gaiji_records.json'), 'w', encoding='utf-8') 
         'names': {'en': 'CBETA missing characters', 'zh': 'CBETA缺字', 'hans': 'CBETA缺字', 'ja': 'CBETA缺字', 'ko': 'CBETA 缺字'},
         'source': {'name': 'CBETA', 'url': DATABASE['repository']},
         'recordsNote': False,
+        'search': True,
         'title': 'CBETA缺字資料庫',
         'complete': True,
-        'scope': 'Every CB code in CBETA’s missing-character database, with its composition formula and the glyph image CBETA draws for it.',
+        'scope': 'Every CB code in CBETA’s missing-character database and its image archive, with the formula and glyph CBETA gives; a workbook adds notes, IDS and proposed characters, kept under each record’s workbook field.',
         'documents': [{
             'id': 'cbeta',
             'document': 'cbeta_gaiji',
@@ -148,6 +216,7 @@ with open(os.path.join(OUT, 'cbeta_gaiji_records.json'), 'w', encoding='utf-8') 
             'source': 'CBETA',
             'date': DATABASE['committed'],
             'url': DATABASE['repository'],
+            'workbook': 'CBETA難字庫IDS版 1.2',
         }],
         'records': records,
     }, file, ensure_ascii=False, separators=(',', ':'))
@@ -169,7 +238,7 @@ with open(os.path.join(ROOT, 'data', 'cbeta-pua.json'), 'w', encoding='utf-8') a
     json.dump(pua, file, ensure_ascii=False, indent=2)
     file.write('\n')
 with open(os.path.join(ROOT, 'data', 'cbeta-pua-codes.json'), 'w', encoding='utf-8') as file:
-    json.dump({'formula': {'base': 0xF0000, 'prefix': 'CB', 'digits': 5}, 'numbers': [int(code[2:]) for code in codes]}, file, separators=(',', ':'))
+    json.dump({'formula': {'base': 0xF0000, 'prefix': 'CB', 'digits': 5}, 'numbers': sorted(int(code[2:]) for code in codes + extra)}, file, separators=(',', ':'))
     file.write('\n')
 
 encoded = sum('mappedUnicode' in record for record in records)
