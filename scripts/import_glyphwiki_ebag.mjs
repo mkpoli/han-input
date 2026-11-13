@@ -3,7 +3,7 @@
 //   bun scripts/import_glyphwiki_ebag.mjs
 import { spawn } from 'node:child_process'
 import { createHash } from 'node:crypto'
-import { readFileSync, readdirSync, writeFileSync } from 'node:fs'
+import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { createInterface } from 'node:readline'
 import { fetchOnce } from './lib.mjs'
@@ -12,6 +12,8 @@ const OUT = join(import.meta.dirname, '../app/public/charsets')
 const DUMP_URL = 'https://glyphwiki.org/dump.tar.gz'
 const dump = await fetchOnce(DUMP_URL, 'glyphwiki-dump.tar.gz')
 const sha256 = createHash('sha256').update(readFileSync(dump)).digest('hex')
+const lockPath = join(OUT, 'glyphwiki_ebag_source.json')
+if (existsSync(lockPath) && JSON.parse(readFileSync(lockPath, 'utf8')).dump.sha256 !== sha256) throw new Error(`Source digest changed: ${DUMP_URL}`)
 
 /** @type {string[]} */
 const names = []
@@ -49,6 +51,11 @@ writeFileSync(join(OUT, 'glyphwiki_ebag_source.json'), JSON.stringify({
 writeFileSync(join(OUT, 'glyphwiki_ebag.txt'), '')
 writeFileSync(join(OUT, 'glyphwiki_ebag_records.json'), JSON.stringify({
   id: 'glyphwiki_ebag',
+  group: 'GlyphWiki',
+  label: 'ebag 缺字',
+  names: { en: 'ebag missing glyphs', zh: 'ebag 缺字', hans: 'ebag 缺字', ja: 'ebag 缺字', ko: 'ebag 缺字' },
+  source: { name: 'GlyphWiki', url: 'https://glyphwiki.org/', licence: 'Free use, copy and distribution' },
+  recordsNote: false,
   title: 'GlyphWiki ebag glyphs',
   complete: true,
   scope: 'GlyphWiki glyphs named ebag_*, the 缺字編號 of 引得市’s ebag missing-character index; shapes render from KAGE data in the GlyphWiki dump.',

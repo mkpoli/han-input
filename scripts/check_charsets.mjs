@@ -280,17 +280,19 @@ try {
       assert.ok(proposal.records)
       const data = JSON.parse(readFileSync(join(DIST, 'charsets', proposal.records.file.replace('/charsets/', '')), 'utf8'))
       await find(page, '', proposal.id)
-      assert.equal(await page.locator('main .ui-tile-glyph').count(), proposal.chars)
+      assert.equal(await page.locator('main .ui-tile-glyph').count(), Math.min(240, proposal.chars))
       const tiles = page.locator('main .records .ui-tile')
       const visible = Math.min(240, proposal.records.count)
       assert.equal(await tiles.count(), visible)
-      assert.equal(await page.locator('main .records img, main .records svg.sprite').count(), Math.min(visible, proposal.records.glyphs))
-      assert.equal(await page.locator('main .records .ui-tile-note').count(), Math.min(visible, proposal.records.glyphs))
+      const pageGlyphs = data.records.slice(0, visible).filter(/** @param {{glyph?:string, sprite?:unknown, atlas?:unknown}} record */ record => record.glyph || record.sprite || record.atlas).length
+      assert.equal(await page.locator('main .records .record-glyph').count(), pageGlyphs)
+      const pageNotes = data.records.slice(0, visible).filter(/** @param {{glyph?:string, sprite?:unknown, atlas?:unknown, mappedUnicode?:string}} record */ record => record.glyph || record.sprite || record.atlas || record.mappedUnicode).length
+      assert.equal(await page.locator('main .records .ui-tile-note').count(), pageNotes)
       if (proposal.records.glyphs) {
-        const firstGlyph = data.records.find(/** @param {{glyph?:string, sprite?:unknown}} record */ record => record.glyph || record.sprite)
+        const firstGlyph = data.records.find(/** @param {{glyph?:string, sprite?:unknown, atlas?:unknown, mappedUnicode?:string}} record */ record => record.glyph || record.sprite || record.atlas || record.mappedUnicode)
         assert.equal(await page.locator('main .records .ui-tile-note').first().innerText(), firstGlyph.source ?? firstGlyph.serial)
       }
-      if (proposal.records.count > 240) assert.match(await page.locator('main .pager').first().innerText(), new RegExp(`Page 1 of ${Math.ceil(proposal.records.count / 240)}`))
+      if (proposal.records.count > 240) assert.match(await page.locator('main section', { has: page.locator('.records') }).locator('.pager').first().innerText(), new RegExp(`Page 1 of ${Math.ceil(proposal.records.count / 240)}`))
       await page.waitForFunction(() => [...document.querySelectorAll('main .records img')].every(image => /** @type {HTMLImageElement} */ (image).complete && /** @type {HTMLImageElement} */ (image).naturalWidth > 0))
       assert.equal(await page.getByRole('link', { name: 'Records', exact: true }).getAttribute('href'), proposal.records.file)
       const first = data.records[0]
