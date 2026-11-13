@@ -10,9 +10,10 @@
     "check": "svelte-check --tsconfig ./tsconfig.json --threshold warning",
     "i18n": "x18n check --skip key-conflict",
     "verify": "bun run test && bun run check && bun run i18n",
-    "build:data": "bun scripts/build.mjs",
+    "build:data": "bun scripts/build.mjs && bun scripts/build_coverage.mjs",
     "build:og": "bun scripts/make-og.mjs",
-    "check:site": "bun scripts/check_site.mjs"
+    "check:site": "bun scripts/check_site.mjs",
+    "build:coverage": "bun scripts/build_coverage.mjs"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "6.2.4",

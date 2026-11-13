@@ -19,6 +19,7 @@
   import Rhymes from './pages/Rhymes.svelte'
   import Radicals from './pages/Radicals.svelte'
   import About from './pages/About.svelte'
+  import Statistics from './pages/Statistics.svelte'
   import Convert from './pages/Convert.svelte'
   import NotFound from './pages/NotFound.svelte'
   import Composition from './pages/Composition.svelte'
@@ -36,6 +37,13 @@
   })
   const OWNER = /** @type {Record<string, string>} */ ({ m: 'methods', v: 'readings' })
   const current = $derived(OWNER[route.page] ?? route.page)
+  /** @type {HTMLElement | null} */
+  let pages = $state(null)
+  $effect(() => {
+    const active = current
+    void active
+    pages?.querySelector('a.on')?.scrollIntoView({ block: 'nearest', inline: 'center' })
+  })
 
   /** @param {MouseEvent} event @param {string} page */
   function nav(event, page) {
@@ -62,7 +70,7 @@
     <div class="site">
       <SiteSelect home={event => nav(event, '')}><span class="seal ui-script" aria-hidden="true">字</span></SiteSelect>
     </div>
-    <div class="pages">
+    <div class="pages" bind:this={pages}>
       {#each NAV as entry (entry.path)}
         <a href="/{entry.path}" class:on={current === entry.path} aria-current={current === entry.path ? 'page' : undefined} onclick={event => nav(event, entry.path)}>{t(entry.label)}</a>
       {/each}
@@ -85,6 +93,7 @@
     {:else if route.page === 'convert'}<Convert />
     {:else if route.page === 'notfound'}<NotFound />
     {:else if route.page === 'composition'}<Composition />
+    {:else if route.page === 'statistics'}<Statistics />
     {:else}<About />{/if}
   </main>
 

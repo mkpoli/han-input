@@ -122,7 +122,7 @@ links open the site's search page.
 - No drawing pad yet.
 - Kana written with a combining mark (か゚, カ̣, ㇷ゚) are not indexed, since an entry is one code point. That leaves out the dotted Taiwanese kana and some Ainu kana.
 - Katakana have no source characters: `hentaigana.el` gives them for hiragana and hentaigana only.
-- 26 kana have no bundled glyph, among them the Minnan letters (U+1AFF0–U+1AFFF) and U+1B150, and depend on the reader's system fonts.
+- 30 kana and two further characters (U+1F200 and U+2B81E) have no bundled glyph and depend on the reader's system fonts; the kana include the Minnan letters (U+1AFF0–U+1AFFF) and U+1B150.
 - The readings of a variety lose their notes (文白 and usage) in this index; 音典 keeps them.
 - CHISE describes some characters with parts that have no code point. The description keeps the source's entity name (`&CDP-88CD;`), as BabelStone's `{13}` and `？` stay.
 - Some tables grant only non-commercial use (表形碼, 導碼, E碼, 華象, 嘸蝦米, the 通用 Hakka tables), and

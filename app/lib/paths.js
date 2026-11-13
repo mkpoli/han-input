@@ -9,6 +9,7 @@ export const NAV = /** @type {const} */ ([
   { path: 'radicals', label: 'nav.radicals' },
   { path: 'convert', label: 'nav.convert' },
   { path: 'composition', label: 'nav.composition' },
+  { path: 'statistics', label: 'nav.statistics' },
   { path: 'about', label: 'nav.about' },
 ])
 

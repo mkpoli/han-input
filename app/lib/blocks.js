@@ -43,6 +43,7 @@ const NON_IDEOGRAPH_BLOCKS = [
   { id: 'kana_ext_a', label: 'Kana Ext.-A', start: 0x1B100, end: 0x1B12F },
   { id: 'small_kana', label: 'Small Kana', start: 0x1B130, end: 0x1B16F },
   { id: 'nushu', label: 'Nushu', start: 0x1B170, end: 0x1B2FF },
+  { id: 'enclosed', label: 'Enclosed', start: 0x1F200, end: 0x1F2FF },
 ]
 
 /** Every block a share list names, the other blocks first. @type {Block[]} */
