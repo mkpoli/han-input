@@ -1,6 +1,7 @@
 <script>
   // Every scheme's reading of a private-use slot. A scheme gives a Unicode character, keeps the slot
-  // as a character of its own (a CNS row, drawn by the CNS font), or keeps it as a record with its glyph.
+  // as a character of its own (a CNS row, drawn by the CNS font), keeps it as a record with its glyph,
+  // or describes it by an IDS.
   import { loadRecords } from '../lib/charsets.js'
   import { choose, showRecord, ui } from '../lib/ui.svelte.js'
   import { link } from '../lib/route.svelte.js'
@@ -46,6 +47,8 @@
           aria-label={reading.code} title={reading.code} onclick={() => { if (held) showRecord(held.record, held.document) }}>
           {#if held && (held.record.atlas || held.record.sprite || held.record.glyph)}<RecordGlyph record={held.record} />{:else}<span class="ui-mono code">{reading.code}</span>{/if}
         </button>
+      {:else if !reading.font}
+        <span class="glyph shape" lang="und-Hani" aria-hidden={reading.ids ? undefined : 'true'}>{reading.ids || '—'}</span>
       {:else}
         <a class="ui-tile glyph" href={link('', { c: reading.slot })} lang="und-Hani" onclick={event => { event.preventDefault(); choose(reading.slot) }}>{reading.slot}</a>
       {/if}
@@ -63,6 +66,7 @@
   li{display:flex;align-items:center;gap:var(--ui-space-sm);min-inline-size:0}
   .glyph{flex:none;display:grid;place-items:center;inline-size:72px;block-size:72px;padding:6px;font-family:var(--ui-font-script);font-size:44px;line-height:1;color:var(--ui-color-ink);text-decoration:none}
   .code{font-size:var(--ui-text-2xs)}
+  .shape{border:1px dashed var(--ui-color-border);border-radius:var(--ui-radius-md);font-size:var(--ui-text-sm);line-height:1.2;overflow-wrap:anywhere;text-align:center;color:var(--ui-color-ink-soft)}
   .facts{display:grid;gap:2px;min-inline-size:0;font-size:var(--ui-text-sm);overflow-wrap:anywhere}
   .tag{justify-self:start;padding:0 var(--ui-space-xs);border:1px solid var(--ui-color-border);border-radius:var(--ui-radius-sm);font-size:var(--ui-text-xs)}
 </style>

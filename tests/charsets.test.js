@@ -108,7 +108,7 @@ test('filters every answer channel without changing cached results', () => {
     pua: [
       { source: 'moe', slot: '\uE000', code: '', char: '字' },
       { source: 'cns', slot: '\u{F0001}', code: '19-2122', char: '' },
-      { source: 'cbeta', slot: '\u{F0001}', code: 'CB00001', char: '', records: 'cbeta_gaiji' },
+      { source: 'cbeta', slot: '\u{F0001}', code: 'CB00001', char: '', records: 'cbeta_gaiji', set: 'cbeta_gaiji' },
     ],
   }
   const filtered = filterAnswer(answer, new Set(['字']), 'cbeta_gaiji')

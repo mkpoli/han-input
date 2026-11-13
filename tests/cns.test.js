@@ -17,7 +17,7 @@ describe('CNS import', () => {
   test('keeps the table and its provenance', () => {
     expect(Object.keys(pua.scheme('cns').mappings)).toHaveLength(516)
     expect(pua.scheme('cns').source.sha256).toBe('4502fcf7b433d679dee51127298929543ec7f4aa99be93cd219df1552bc3d2bf')
-    expect(Object.keys(codes.get('cns'))).toHaveLength(20659)
+    expect(Object.keys(codes.get('cns').codes)).toHaveLength(20659)
   })
   test('converts and resolves a CNS PUA code', () => {
     expect(pua.convert('\u{F8FBA}', 'cns')).toEqual({ text: '𳄹', converted: 1, unmapped: 0, ambiguous: 0, conflicts: [] })
@@ -28,8 +28,9 @@ describe('CNS import', () => {
 describe('schemes that share a slot', () => {
   test('keep a CNS row and a CBETA code apart', () => {
     expect(readingsOf(pua, codes, '\u{F0015}')).toEqual([
-      { source: 'cns', slot: '\u{F0015}', code: '19-2132', char: '' },
-      { source: 'cbeta', slot: '\u{F0015}', code: 'CB00021', char: '', records: 'cbeta_gaiji' },
+      { source: 'cns', slot: '\u{F0015}', code: '19-2132', char: '', font: true },
+      { source: 'cbeta', slot: '\u{F0015}', code: 'CB00021', char: '', records: 'cbeta_gaiji', set: 'cbeta_gaiji' },
+      { source: 'zhonghua', slot: '\u{F0015}', code: '', char: '', ids: '⿰山失', set: 'gzhs' },
     ])
     expect(pua.convert('\u{F0003}', 'cbeta').text).toBe('𮗿')
     expect(pua.convert('\u{F0003}', 'cns').text).toBe('\u{F0003}')
@@ -42,7 +43,23 @@ describe('schemes that share a slot', () => {
     expect(slotsOfCode(codes, '15-2D5F')).toEqual([{ source: 'cns', slot: '\u{FFFE1}' }])
   })
   test('cover every CB code', () => {
-    expect(Object.keys(codes.get('cbeta'))).toHaveLength(31935)
+    expect(Object.keys(codes.get('cbeta').codes)).toHaveLength(31935)
     expect(Object.keys(pua.scheme('cbeta').mappings)).toHaveLength(16607)
+  })
+})
+
+describe('the 中华书局宋 scheme', () => {
+  test('names its slots by a character or an IDS, and claims undescribed ones', () => {
+    expect(readingsOf(pua, codes, '\u{F0000}').find(reading => reading.source === 'zhonghua')).toEqual({ source: 'zhonghua', slot: '\u{F0000}', code: '', char: '𬉲', set: 'gzhs' })
+    expect(readingsOf(pua, codes, '\u{F0002}').find(reading => reading.source === 'zhonghua')).toEqual({ source: 'zhonghua', slot: '\u{F0002}', code: '', char: '', ids: '⿰日求', set: 'gzhs' })
+    expect(readingsOf(pua, codes, '\u{F0CEF}').find(reading => reading.source === 'zhonghua')?.ids).toBe('⿱𫲵口')
+    expect(readingsOf(pua, codes, '\u{F0B4F}').find(reading => reading.source === 'zhonghua')).toEqual({ source: 'zhonghua', slot: '\u{F0B4F}', code: '', char: '', set: 'gzhs' })
+    expect(pua.convert('\u{F0000}', 'zhonghua', codes).text).toBe('𬉲')
+    expect(pua.convert('\u{F9BE2}', 'zhonghua', codes).text).toBe('鸞')
+    // In every scheme at once, plane 15 is ambiguous: CBETA's 頴 and the 中华书局宋 slot both claim U+F0002.
+    expect(pua.convert('\u{F0002}', 'all', codes).conflicts[0].options).toEqual([
+      { char: '頴', source: 'cbeta' },
+      { char: '\u{F0002}', source: 'zhonghua', ids: '⿰日求' },
+    ])
   })
 })

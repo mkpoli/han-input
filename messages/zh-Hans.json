@@ -318,6 +318,7 @@
   "pua.source.gb18030": "GB 18030",
   "pua.readings": "各方案所指",
   "pua.source.cbeta": "CBETA",
+  "pua.source.zhonghua": "中华书局宋",
   "pua.relation.simplified": "简体字",
   "pua.relation.traditional": "繁体字",
   "pua.relation.semantic": "语义异体字",
