@@ -2,7 +2,7 @@ import { describe, test, expect, afterEach } from 'bun:test'
 import { readFileSync, readdirSync } from 'node:fs'
 import { mappedMembers, membersText, iwdsMembers, scalarExpressions, idsRecords, columnsOf } from '../scripts/charset-members.mjs'
 import { GB12052_UNENCODED, gb12052Members } from '../scripts/sources/charsets-gb12052.mjs'
-import { compareCodes, coverageParts, filterAnswer, loadCharsets, loadCharset, loadRecords, sharedCharacters } from '../app/lib/charsets.js'
+import { compareCodes, coverageParts, filterAnswer, listedCount, loadCharsets, loadCharset, loadRecords, sharedCharacters } from '../app/lib/charsets.js'
 import { loadChars, findMeaning } from '../app/lib/data.js'
 import { cnsSourceSets, unihanTSources } from '../scripts/sources/charsets-cns.mjs'
 import { ziSourcePage } from '../scripts/sources/zi-page.mjs'
@@ -514,4 +514,11 @@ test('search-data failures release caches for the Find retry button', async () =
   await expect(findMeaning('retry-fixture')).rejects.toThrow('Failed to fetch')
   globalThis.fetch = async () => new Response('retry-fixture\t字')
   expect(await findMeaning('retry-fixture')).toEqual(['字'])
+})
+
+test('a set with IDS records is listed with its members and records together', () => {
+  const source = { name: '', url: '' }
+  expect(listedCount({ id: 'a', group: '', label: '', names: { en: '' }, chars: 2059, total: 3336, source, records: { file: '/charsets/a.ids.json', count: 885, glyphs: 0 } })).toBe(2944)
+  expect(listedCount({ id: 'b', group: '', label: '', names: { en: '' }, chars: 3, total: 138, source, records: { file: '/charsets/b_records.json', count: 138, glyphs: 134 } })).toBe(138)
+  expect(listedCount({ id: 'c', group: '', label: '', names: { en: '' }, chars: 40, total: 40, source })).toBe(40)
 })
