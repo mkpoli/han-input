@@ -153,6 +153,25 @@ with open(os.path.join(OUT, 'cbeta_gaiji_records.json'), 'w', encoding='utf-8') 
     }, file, ensure_ascii=False, separators=(',', ':'))
     file.write('\n')
 
+# CBETA reserves U+F0000 plus the code's number for each code, the private-use form its texts carry.
+pua = {
+    'source': {
+        'name': 'CBETA 缺字資料庫, pua field',
+        'url': DATABASE['repository'],
+        'dataUrl': DATABASE['url'],
+        'retrieved': RETRIEVED,
+        'sha256': lock['database']['sha256'],
+        'licence': 'No licence stated in the repository.',
+    },
+    'mappings': {chr(0xF0000 + int(code[2:])): database[code]['uni_char'] for code in codes if 'unicode' in database[code]},
+}
+with open(os.path.join(ROOT, 'data', 'cbeta-pua.json'), 'w', encoding='utf-8') as file:
+    json.dump(pua, file, ensure_ascii=False, indent=2)
+    file.write('\n')
+with open(os.path.join(ROOT, 'data', 'cbeta-pua-codes.json'), 'w', encoding='utf-8') as file:
+    json.dump({'formula': {'base': 0xF0000, 'prefix': 'CB', 'digits': 5}, 'numbers': [int(code[2:]) for code in codes]}, file, separators=(',', ':'))
+    file.write('\n')
+
 encoded = sum('mappedUnicode' in record for record in records)
 print(f'{len(records)} CB codes, {encoded} encoded, {len(atlas)} glyphs on {-(-len(drawn) // PER_SHEET)} sheets; '
       f'{sum(code not in atlas for code in codes if "unicode" not in database[code])} unencoded without a glyph; '

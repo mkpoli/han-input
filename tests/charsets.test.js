@@ -105,8 +105,14 @@ test('filters every answer channel without changing cached results', () => {
     clue: { kind: 'code', text: 'zi' }, chars: ['字', '子'], parts: ['子'], meaning: ['字', '子'],
     hits: [{ method: 'a', code: 'zi', exact: true, literal: true, chars: ['字', '子'] }, { method: 'b', code: 'z', chars: ['子'] }],
     readings: [{ n: 1, form: 'zi', chars: ['字', '子'] }, { n: 2, form: 'zi', chars: ['子'] }],
+    pua: [
+      { source: 'moe', slot: '\uE000', code: '', char: '字' },
+      { source: 'cns', slot: '\u{F0001}', code: '19-2122', char: '' },
+      { source: 'cbeta', slot: '\u{F0001}', code: 'CB00001', char: '', records: 'cbeta_gaiji' },
+    ],
   }
-  const filtered = filterAnswer(answer, new Set(['字']))
+  const filtered = filterAnswer(answer, new Set(['字']), 'cbeta_gaiji')
+  expect(filtered.pua.map(reading => reading.source)).toEqual(['moe', 'cbeta'])
   expect(filtered.chars).toEqual(['字'])
   expect(filtered.meaning).toEqual(['字'])
   expect(filtered.parts).toEqual([])
@@ -129,7 +135,7 @@ test('counts the characters two listed sets share', () => {
 
 test('selected literal scalars remain searchable outside the general script parser', () => {
   for (const char of ['㇀', '\u3099', 'ー', '㇀㇁']) {
-    const answer = { clue: { kind: 'code', text: char }, chars: [], parts: [], meaning: [], hits: [], readings: [] }
+    const answer = { clue: { kind: 'code', text: char }, chars: [], parts: [], meaning: [], hits: [], readings: [], pua: [] }
     expect(filterAnswer(answer, new Set([...char])).chars).toEqual([...char])
     expect(filterAnswer(answer, new Set(['字'])).chars).toEqual([])
   }
