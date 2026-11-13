@@ -20,10 +20,14 @@ const hant = OpenCC.Converter({ from: 'cn', to: 'tw' })
 /** @type {{url:string,sha256:string}[]} */
 const inputs = []
 const lockPath = join(OUT, 'sources.json')
-const locked = existsSync(lockPath) ? JSON.parse(readFileSync(lockPath, 'utf8')).inputs : []
+const lockFile = existsSync(lockPath) ? JSON.parse(readFileSync(lockPath, 'utf8')) : null
+const locked = lockFile?.inputs ?? []
 /** @param {string} url @param {Buffer} bytes */
 function record(url, bytes) {
-  const sha256 = createHash('sha256').update(bytes).digest('hex')
+  pin(url, createHash('sha256').update(bytes).digest('hex'))
+}
+/** @param {string} url @param {string} sha256 */
+function pin(url, sha256) {
   const previous = locked.find((/** @type {{url:string,sha256:string}} */ item) => item.url === url)
   if (previous && previous.sha256 !== sha256) throw new Error(`Source digest changed: ${url}`)
   inputs.push({ url, sha256 })
@@ -170,10 +174,20 @@ for (const line of blocksBytes.toString('utf8').split('\n')) {
   writeFileSync(join(OUT, `${id}.codes.tsv`), codeText(members.map(char => ({ char, code: `U+${(char.codePointAt(0) ?? 0).toString(16).toUpperCase()}` }))))
   catalogue.push({ id, group: 'Unicode blocks', label: name, names: { en: name }, chars: members.length, total: members.length, encoded: members.length, unencoded: 0, positions: { total, filled: members.length, mapped: members.length }, codes: `/charsets/${id}.codes.tsv`, source: { name: 'Unicode 18.0.0', url: blocksUrl }, columns: 16 })
 }
+// Proposal record sets sit with the standards; other collections follow the G source sets.
+/** @type {any[]} */
+const collections = []
+// A records file describes its own catalogue entry. A set imported from a dump by its own script pins
+// that dump in `<id>_source.json`; its per-record links are pages to visit, so nothing is fetched here.
 for (const name of readdirSync(OUT).filter(/** @param {string} name */ name => name.endsWith('_records.json')).sort()) {
   const set = JSON.parse(readFileSync(join(OUT, name), 'utf8'))
-  for (const url of new Set([...set.documents.map(/** @param {{url:string}} document */ document => document.url), ...set.records.flatMap(/** @param {{evidenceUrls?:string[]}} record */ record => record.evidenceUrls ?? [])])) {
-    if (!inputs.some(input => input.url === url)) record(url, readFileSync(await fetchOnce(url)))
+  const lock = join(OUT, `${set.id}_source.json`)
+  if (existsSync(lock)) {
+    for (const pinned of Object.values(JSON.parse(readFileSync(lock, 'utf8')))) pin(pinned.url, pinned.sha256)
+  } else {
+    for (const url of new Set([...set.documents.map(/** @param {{url:string}} document */ document => document.url), ...set.records.flatMap(/** @param {{evidenceUrls?:string[]}} record */ record => record.evidenceUrls ?? [])])) {
+      if (!inputs.some(input => input.url === url)) record(url, readFileSync(await fetchOnce(url)))
+    }
   }
   const members = [...new Set(set.records.filter(/** @param {{mappedUnicode?:string}} record */ record => record.mappedUnicode).map(/** @param {{mappedUnicode:string}} record */ record => String.fromCodePoint(parseInt(record.mappedUnicode.slice(2), 16))))].join('')
   writeFileSync(join(OUT, `${set.id}.txt`), membersText(members))
@@ -183,13 +197,14 @@ for (const name of readdirSync(OUT).filter(/** @param {string} name */ name => n
     writeFileSync(join(OUT, `${set.id}.codes.tsv`), codeText(coded))
     codes = `/charsets/${set.id}.codes.tsv`
   }
-  catalogue.push({
+  ;(set.group === 'Proposals' ? catalogue : collections).push({
     id: set.id, group: set.group, label: set.label, names: set.names,
     chars: [...members].length, total: set.records.length,
     encoded: [...members].length,
     unencoded: set.records.filter(/** @param {{mappedUnicode?:string}} record */ record => !record.mappedUnicode).length,
     codes,
-    records: { file: `/charsets/${name}`, count: set.records.length, glyphs: set.records.filter(/** @param {{glyph?:string}} record */ record => record.glyph).length },
+    records: { file: `/charsets/${name}`, count: set.records.length, glyphs: set.records.filter(/** @param {{glyph?:string, sprite?:unknown, atlas?:unknown}} record */ record => record.glyph || record.sprite || record.atlas).length, ...(set.search ? { search: true } : {}) },
+    ...(set.recordsNote === false ? { recordsNote: false } : {}),
     source: set.source,
     columns: 10,
   })
@@ -224,18 +239,7 @@ for (const set of cnsSets) {
   })
 }
 writeGSourceSets(catalogue, unihanText, OUT, hans)
-// The ebag missing-character glyphs come from GlyphWiki's KAGE data. The records are a snapshot
-// made by scripts/import_glyphwiki_ebag.mjs; their sprite sheets are rendered offline.
-const ebag = JSON.parse(readFileSync(join(OUT, 'glyphwiki_ebag_records.json'), 'utf8'))
-catalogue.push({
-  id: 'glyphwiki_ebag', group: 'GlyphWiki', label: 'ebag 缺字',
-  names: { en: 'ebag missing glyphs', zh: 'ebag 缺字', hans: 'ebag 缺字', ja: 'ebag 缺字', ko: 'ebag 缺字' },
-  chars: 0, total: ebag.records.length, encoded: 0, unencoded: ebag.records.length,
-  records: { file: '/charsets/glyphwiki_ebag_records.json', count: ebag.records.length, glyphs: ebag.records.filter(/** @param {{sprite?:unknown}} record */ record => record.sprite).length },
-  recordsNote: false,
-  source: { name: 'GlyphWiki', url: 'https://glyphwiki.org/', licence: 'Free use, copy and distribution' },
-  columns: 10,
-})
+catalogue.push(...collections)
 // A 字統 set named for a Unicode block is that block's assigned characters; the block's range gives
 // the designed positions the coverage dial divides by.
 for (const row of catalogue) {
@@ -245,7 +249,9 @@ for (const row of catalogue) {
 }
 writeFileSync(join(OUT, 'index.json'), JSON.stringify(catalogue, null, 2) + '\n')
 writeFileSync(join(OUT, 'sources.json'), JSON.stringify({
-  catalogue: `${BASE}metadata.json`, retrieved: new Date().toISOString().slice(0, 10),
+  catalogue: `${BASE}metadata.json`,
+  // A locked catalogue digest means the same bytes as the recorded retrieval, so its date stands.
+  retrieved: locked.some((/** @type {{url:string}} */ item) => item.url === `${BASE}metadata.json`) ? lockFile.retrieved : new Date().toISOString().slice(0, 10),
   attribution: '字統網, character-set catalogue and glyph mappings. Editorial mappings; original standards and proposal documents remain authoritative. Reuse terms are unspecified at these endpoints. GB/T 12052-1989 follows Jaemin Chung’s transcription (ecma35lib); its printed totals differ from the table by three, and the set counts printed rows.',
   policy: 'Source-row sets index every row through its assigned Unicode scalars, or its private-use glyph slots where no scalar is assigned; rows described only by an IDS are kept as records, not scalar members; a glyph printed at more than one position is listed once, at its first position; a member may be a jamo sequence when a standard prints one glyph for a Hangul syllable Unicode cannot compose. Unihan kIRG_TSource fills assignments newer than the bulk release. Literal Unicode block sets contain assigned scalars. Unihan kIRG_GSource gives the G source collections. Local row numbers, IDS components and variation sequences do not establish scalar membership. OTHER follows the source’s unified substitutions, rather than literal Unicode block membership.',
   inputs: inputs.sort((a, b) => a.url.localeCompare(b.url)),

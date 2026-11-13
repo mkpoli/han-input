@@ -7,6 +7,7 @@
   import { gSourceOf } from '../lib/sources.js'
   import { compareCodes } from '../lib/charsets.js'
   import Pager from './Pager.svelte'
+  import RecordGlyph from './RecordGlyph.svelte'
   import GridRows from './GridRows.svelte'
   import { gridNavigation } from './grid.js'
   /** @type {HTMLDivElement | null} */
@@ -20,7 +21,7 @@
   /** @type {HTMLElement | null} */
   let top = $state(null)
   const idsMode = $derived(records.records.some(record => record.kind === 'ids'))
-  const textOnly = $derived(records.records.some(record => !record.glyph && !record.sprite && record.kind !== 'ids'))
+  const textOnly = $derived(records.records.every(record => !record.glyph && !record.sprite && !record.atlas && !record.mappedUnicode && record.kind !== 'ids'))
   /** @type {'all' | 'encoded' | 'unencoded'} */
   let show = $state('all')
   let byCode = $state(false)
@@ -78,11 +79,11 @@
           <button class="ui-tile" type="button" tabindex={index === 0 ? 0 : -1} aria-current={ui.record?.record === record ? 'true' : undefined}
             title={[code(record), sourceName(record), documents.get(record.document)?.document].filter(Boolean).join(' · ')}
             onclick={() => { const doc = documents.get(record.document); if (doc) showRecord(record, doc) }}>
-            {#if record.sprite}
-              <svg class="sprite" viewBox="0 0 200 200" aria-hidden="true"><use href={`/charsets/ebag-sprites/${record.sprite.sheet}.svg#${record.sprite.symbol}`}></use></svg>
+            {#if record.sprite || record.atlas || record.glyph}
+              <RecordGlyph {record} />
               <span class="ui-tile-note ui-mono">{code(record)}</span>
-            {:else if record.glyph}
-              <img src={`/charsets/${record.glyph}`} alt="" width="128" height="128" decoding="async" />
+            {:else if record.mappedUnicode}
+              <span class="mapped" lang="und-Hani">{String.fromCodePoint(parseInt(record.mappedUnicode.slice(2), 16))}</span>
               <span class="ui-tile-note ui-mono">{code(record)}</span>
             {:else}<span class="code ui-mono">{code(record)}</span>{/if}
           </button>
@@ -97,16 +98,14 @@
 <style>
   .records{grid-template-columns:repeat(auto-fill,minmax(72px,1fr))}
   .records .ui-tile{grid-template-rows:1fr auto;padding:3px}
-  .records img,.records .sprite{inline-size:100%;block-size:100%;min-inline-size:0;object-fit:contain}
   .records .ui-tile-note{font-size:9px;line-height:1.2;white-space:normal;overflow-wrap:anywhere;text-align:center}
   .records-tools{display:flex;flex-wrap:wrap;align-items:center;gap:var(--ui-space-2xs)}
   .seg{display:flex;flex-wrap:wrap;gap:var(--ui-space-2xs)}
   .records-tools button[aria-pressed='true']{border-color:var(--ui-color-accent);background:var(--ui-color-accent-soft);color:var(--ui-color-accent-ink)}
   .code{font-size:var(--ui-text-2xs);overflow-wrap:anywhere}
+  .mapped{display:grid;place-items:center;font-family:var(--ui-font-script);font-size:40px;line-height:1}
   .text-only{grid-template-columns:repeat(auto-fill,minmax(104px,1fr))}
   .text-only .code{white-space:nowrap}
 .ids-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:4px;margin:0;padding:0;list-style:none}
 .ids-list li{font-family:'Han Ext','Noto Sans CJK JP','Source Han Sans JP',var(--ui-font-serif),serif;font-size:18px;line-height:1.35;padding:4px 6px;border:1px solid var(--ui-color-border);border-radius:var(--ui-radius-sm);overflow-wrap:anywhere}
-  @media (prefers-color-scheme:dark){:global(:root:not([data-theme='light'])) .records img,:global(:root:not([data-theme='light'])) .records .sprite{filter:invert(1)}}
-  :global(:root[data-theme='dark']) .records img,:global(:root[data-theme='dark']) .records .sprite{filter:invert(1)}
 </style>

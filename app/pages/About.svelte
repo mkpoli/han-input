@@ -3,7 +3,7 @@
   import { loadMethods, loadVariants } from '../lib/data.js'
   import { i18n, nameOf, t } from '../lib/i18n.svelte.js'
   import { G_SOURCES, noteOf } from '../lib/sources.js'
-  import { PUA_SOURCES } from '../../src/pua.js'
+  import { loadPua } from '../../src/pua.js'
   /** @type {import('../lib/data.js').Method[]} */
   let methods = $state([])
   /** @type {{ id: string, name: string, url: string, licence: string, attribution?: string, version?: string }[]} */
@@ -14,6 +14,9 @@
   /** @type {{ name: string, url: string, licence: string }[]} */
   let variantSources = $state([])
   loadVariants().then(doc => { variantSources = doc.sources }).catch(() => {})
+  /** @type {import('../../src/pua.js').PuaScheme[]} */
+  let puaSchemes = $state([])
+  loadPua().then(pua => { puaSchemes = pua.schemes }).catch(() => {})
 </script>
 
 <div class="ui-page" data-width="wide">
@@ -44,7 +47,7 @@
       <table class="table">
         <thead><tr><th>{t('convert.source')}</th><th>{t('method.licence')}</th></tr></thead>
         <tbody>
-          {#each PUA_SOURCES as item (item.id)}
+          {#each puaSchemes as item (item.id)}
             <tr>
               <td><a href={item.source.url} target="_blank" rel="noopener noreferrer">{item.source.name}</a> · <a href={item.source.dataUrl} target="_blank" rel="noopener noreferrer">{t('convert.data')}</a></td>
               <td class="ui-hint">{item.source.licence}</td>

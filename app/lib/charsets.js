@@ -1,8 +1,8 @@
 // Character-set membership is a scalar glyph mapping, independent of the search corpus.
 /** @typedef {{total:number, filled:number, mapped:number}} Positions */
-/** @typedef {{id:string, group:string, label:string, names:{en:string,zh?:string,hans?:string,ja?:string,ko?:string}, chars:number, total:number, encoded?:number, unencoded?:number, positions?:Positions, codes?:string, records?:{file:string, count:number, glyphs:number}, recordsNote?:boolean, columns?:number, source:{name:string,url:string,dataUrl?:string,note?:string,noteKey?:string,records?:string,version?:string,licence?:string,attribution?:string}}} Charset */
-/** @typedef {{id:string, document:string, title:string, source:string, date:string, url:string, status?:string}} ProposalDocument */
-/** @typedef {{serial?:string|null, sequence?:string, source?:string|null, document:string, page?:number, glyph?:string, sprite?:{sheet:string, symbol:string}, status?:string, mappedUnicode?:string, mappedCharacter?:string, unifiedWith?:string, mappingKind?:string, mappingEvidence?:string, evidenceUrls?:string[], kind?:'ids', ids?:string}} ProposalRecord */
+/** @typedef {{id:string, group:string, label:string, names:{en:string,zh?:string,hans?:string,ja?:string,ko?:string}, chars:number, total:number, encoded?:number, unencoded?:number, positions?:Positions, codes?:string, records?:{file:string, count:number, glyphs:number, search?:boolean}, recordsNote?:boolean, columns?:number, source:{name:string,url:string,dataUrl?:string,note?:string,noteKey?:string,records?:string,version?:string,licence?:string,attribution?:string}}} Charset */
+/** @typedef {{id:string, document:string, title:string, source:string, date:string, url:string, status?:string, workbook?:string}} ProposalDocument */
+/** @typedef {{serial?:string|null, sequence?:string, source?:string|null, document:string, page?:number, glyph?:string, sprite?:{sheet:string, symbol:string}, atlas?:{sheet:string, cell:number}, status?:string, mappedUnicode?:string, similarUnicode?:string, common?:string, composition?:string, moeVariant?:string, workbook?:{radical?:string, strokes?:number, zhuyin?:string[], ids?:string, idsMachine?:string, proposed?:string}, mappedCharacter?:string, unifiedWith?:string, mappingKind?:string, mappingEvidence?:string, evidenceUrls?:string[], kind?:'ids', ids?:string}} ProposalRecord */
 /** @typedef {{title:string, complete:boolean, scope:string, documents:ProposalDocument[], records:ProposalRecord[]}} ProposalRecords */
 
 /** @type {Promise<Charset[]> | null} */
@@ -105,8 +105,8 @@ export function sharedCharacters(a, b) {
   return shared
 }
 
-/** @param {import('./search.js').Answer} answer @param {Set<string>} membership @returns {import('./search.js').Answer} */
-export function filterAnswer(answer, membership) {
+/** @param {import('./search.js').Answer} answer @param {Set<string>} membership @param {string} [setId] @returns {import('./search.js').Answer} */
+export function filterAnswer(answer, membership, setId = '') {
   const keep = (/** @type {string[]} */ chars) => chars.filter(char => membership.has(char))
   const literal = [...answer.clue.text]
   const isLiteral = answer.clue.kind === 'code' && literal.length > 0 && literal.every(char => membership.has(char))
@@ -117,6 +117,7 @@ export function filterAnswer(answer, membership) {
     meaning: keep(answer.meaning), parts: keep(answer.parts),
     hits: answer.hits.map(hit => ({ ...hit, chars: keep(hit.chars) })).filter(hit => hit.chars.length),
     readings: answer.readings.map(hit => ({ ...hit, chars: keep(hit.chars) })).filter(hit => hit.chars.length),
+    pua: answer.pua.filter(reading => membership.has(reading.char || reading.slot) || (!reading.char && reading.records === setId)),
   }
 }
 

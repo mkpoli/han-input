@@ -1,7 +1,7 @@
 // A query is one or more clues, split on spaces. Each clue names a set of characters; several clues
 // leave the characters in all of them.
 import { hanIn, inScope, isHan, isRareKana } from '../../src/fold.js'
-import { puaChars } from '../../src/pua.js'
+import { isPuaChar, loadPua, loadPuaCodes, puaSlot, readingsOf, slotsOfCode } from '../../src/pua.js'
 import { convertArithmetic, isArithmetic } from '../../src/arithmetic.js'
 import { findCodes, findMeaning, findPart, findReadings, findRun, loadChars, loadVariants } from './data.js'
 import { fuzzyComponents, characterVariants, spellings } from '../../src/variants.js'
@@ -10,16 +10,19 @@ import { fuzzyComponents, characterVariants, spellings } from '../../src/variant
  * @typedef {{ kind: 'code' | 'scoped' | 'strokes' | 'point' | 'pua' | 'arithmetic' | 'text' | 'part', text: string, method?: string, code?: string, value?: number, char?: string, chars?: string[] }} Clue
  * @typedef {{ text: string, chars: string[], exact: boolean }} Shape
  * @typedef {{ char: string, relation: string, source: string, group?: string }} VariantRow
- * @typedef {{ clue: Clue, hits: import('./data.js').CodeHit[], readings: import('./data.js').ReadingHit[], meaning: string[], parts: string[], partVariants: Shape[], similarParts: Shape[], shapes: Shape[], variants: VariantRow[], chars: string[] }} Answer
+ * @typedef {{ clue: Clue, hits: import('./data.js').CodeHit[], readings: import('./data.js').ReadingHit[], meaning: string[], parts: string[], partVariants: Shape[], similarParts: Shape[], shapes: Shape[], variants: VariantRow[], pua: import('../../src/pua.js').PuaReading[], chars: string[] }} Answer
  */
 
 /** @param {string} term @param {boolean} alone @returns {Clue} */
 export function readClue(term, alone) {
   const point = term.match(/^[uU]\+?([0-9a-fA-F]{4,6})$/)
   if (point) {
-    const chars = puaChars(point[1]).map(hit => hit.char)
-    return chars.length ? { kind: 'pua', text: term, value: parseInt(point[1], 16), char: chars[0], chars } : { kind: 'point', text: term, value: parseInt(point[1], 16) }
+    const slot = puaSlot(point[1])
+    return slot ? { kind: 'pua', text: term, char: slot } : { kind: 'point', text: term, value: parseInt(point[1], 16) }
   }
+  // A private-use character, or a scheme's name for one, is read in every scheme that has the slot.
+  if (isPuaChar(term)) return { kind: 'pua', text: term, char: term }
+  if (/^CB\d{5}$/i.test(term)) return { kind: 'pua', text: term, code: term.toUpperCase() }
   const strokes = term.match(/^(\d{1,2})[畫画劃划]$/)
   if (strokes) return { kind: 'strokes', text: term, value: Number(strokes[1]) }
   if (isArithmetic(term)) return { kind: 'arithmetic', text: term }
@@ -28,11 +31,6 @@ export function readClue(term, alone) {
   if (isHan(term)) return { kind: alone ? 'text' : 'part', text: term }
   if (isRareKana(term) || (alone && inScope(term))) return { kind: 'text', text: term }
   if (hanIn(term).length === [...term].length) return { kind: 'text', text: term }
-  const hex = term.match(/^[0-9a-fA-F]{4,6}$/)
-  if (hex) {
-    const chars = puaChars(hex[0]).map(hit => hit.char)
-    if (chars.length) return { kind: 'pua', text: term, value: parseInt(hex[0], 16), char: chars[0], chars }
-  }
   return { kind: 'code', text: term }
 }
 
@@ -56,14 +54,15 @@ export async function answer(clue) {
 /** @param {Clue} clue @returns {Promise<Answer>} */
 async function lookUp(clue) {
   /** @type {Answer} */
-  const out = { clue, hits: [], readings: [], meaning: [], parts: [], partVariants: [], similarParts: [], shapes: [], variants: [], chars: [] }
+  const out = { clue, hits: [], readings: [], meaning: [], parts: [], partVariants: [], similarParts: [], shapes: [], variants: [], pua: [], chars: [] }
   if (clue.kind === 'point') {
     if (clue.value !== undefined && clue.value <= 0x10FFFF) out.chars = [String.fromCodePoint(clue.value)]
     return out
   }
   if (clue.kind === 'pua') {
-    out.chars = clue.chars ?? (clue.char ? [clue.char] : [])
-    out.hits = await findCodes(clue.text)
+    out.pua = await puaReadings(clue.char ? [clue.char] : [], clue.code ?? '')
+    // A slot no scheme reads is still a code point, shown as it is.
+    out.chars = out.pua.length ? puaChars(out.pua) : clue.char ? [clue.char] : []
     return out
   }
   if (clue.kind === 'arithmetic') {
@@ -128,17 +127,37 @@ async function lookUp(clue) {
     out.meaning = await findMeaning(clue.text)
     return out
   }
-  const [hits, meaning, readings] = await Promise.all([findCodes(clue.text), findMeaning(clue.text), findReadings(clue.text)])
+  // Hex in a private-use area may be a code point, and a CNS code names a CNS slot; either is also
+  // tried as a code, since methods use letters and digits.
+  const slot = puaSlot(clue.text)
+  const schemeCode = /^\d{1,2}-[0-9A-Fa-f]{4}$/.test(clue.text) ? clue.text : ''
+  const [hits, meaning, readings, pua] = await Promise.all([findCodes(clue.text), findMeaning(clue.text), findReadings(clue.text),
+    slot || schemeCode ? puaReadings(slot ? [slot] : [], schemeCode) : []])
   out.hits = hits
   out.meaning = meaning
   out.readings = readings
-  out.chars = [...new Set([...hits.flatMap(hit => hit.chars), ...meaning, ...readings.flatMap(hit => hit.chars)])]
+  out.pua = pua
+  out.chars = [...new Set([...hits.flatMap(hit => hit.chars), ...meaning, ...readings.flatMap(hit => hit.chars), ...puaChars(pua)])]
   return out
 }
 
+/** Every scheme's reading of the given slots and of the slots a scheme code names. @param {string[]} slots @param {string} code */
+async function puaReadings(slots, code) {
+  const [pua, codes] = await Promise.all([loadPua(), loadPuaCodes()])
+  const all = [...new Set([...slots, ...(code ? slotsOfCode(codes, code).map(hit => hit.slot) : [])])]
+  return all.flatMap(slot => readingsOf(pua, codes, slot))
+}
+
+/**
+ * The characters private-use readings name: a Unicode character, or the slot itself where a scheme
+ * draws it as a character (a CNS row) rather than keeping it as a record.
+ * @param {import('../../src/pua.js').PuaReading[]} readings
+ */
+const puaChars = readings => [...new Set(readings.flatMap(reading => reading.char ? [reading.char] : reading.records ? [] : [reading.slot]))]
+
 /** Characters an answer contributes to an intersection. @param {Answer} item */
 export function answerChars(item) {
-  const chars = [...item.chars, ...(item.clue.kind === 'pua' ? item.hits.flatMap(hit => hit.chars) : [])]
+  const chars = item.chars
   return chars.length ? chars : [...item.hits.flatMap(hit => hit.chars), ...item.parts, ...item.meaning]
 }
 

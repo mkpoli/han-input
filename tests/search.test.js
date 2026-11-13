@@ -2,19 +2,16 @@ import { describe, expect, test } from 'bun:test'
 import { GROUP_CHARS, GROUP_HITS, answerChars, groupPages, readClue } from '../app/lib/search.js'
 
 describe('readClue', () => {
-  test('resolves a private-use code point to its character', () => {
-    expect(readClue('U+E43B', true)).toEqual({ kind: 'pua', text: 'U+E43B', value: 0xE43B, char: '䀯', chars: ['䀯', '𧶏'] })
-    expect(readClue('u+e51f', true)).toEqual({ kind: 'pua', text: 'u+e51f', value: 0xE51F, char: '𠊎', chars: ['𠊎', '𪃡'] })
+  test('reads a private-use code point as its slot, whatever scheme it belongs to', () => {
+    expect(readClue('U+E43B', true)).toEqual({ kind: 'pua', text: 'U+E43B', char: '\uE43B' })
+    expect(readClue('u+f0015', true)).toEqual({ kind: 'pua', text: 'u+f0015', char: '\u{F0015}' })
   })
-  test('resolves a bare private-use hex code', () => {
-    expect(readClue('E43B', true)).toEqual({ kind: 'pua', text: 'E43B', value: 0xE43B, char: '䀯', chars: ['䀯', '𧶏'] })
-    expect(readClue('f8faf', true)).toEqual({ kind: 'pua', text: 'f8faf', value: 0xF8FAF, char: '𰹬', chars: ['𰹬'] })
+  test('reads a private-use character and a CB code', () => {
+    expect(readClue('\u{F0015}', true)).toEqual({ kind: 'pua', text: '\u{F0015}', char: '\u{F0015}' })
+    expect(readClue('cb00021', true)).toEqual({ kind: 'pua', text: 'cb00021', code: 'CB00021' })
   })
-  test('resolves an HKSCS-only code', () => {
-    expect(readClue('U+F266', true)).toEqual({ kind: 'pua', text: 'U+F266', value: 0xF266, char: '䏰', chars: ['䏰'] })
-  })
-  test('keeps both characters where a code has two font assignments', () => {
-    expect(readClue('E35C', true).chars).toEqual(['𫝛', '𦀩'])
+  test('keeps bare hex a code, since methods use letters and digits', () => {
+    expect(readClue('E43B', true)).toEqual({ kind: 'code', text: 'E43B' })
   })
   test('keeps ordinary code points', () => {
     expect(readClue('U+5B57', true)).toEqual({ kind: 'point', text: 'U+5B57', value: 0x5B57 })
@@ -38,14 +35,14 @@ describe('readClue', () => {
 })
 
 describe('answerChars', () => {
-  test('keeps the ordinary code hits that share a PUA code', () => {
+  test('takes a private-use clue’s characters as they are', () => {
     const answer = {
-      clue: { kind: 'pua', text: 'E4DE', char: '羴' },
+      clue: { kind: 'pua', text: 'U+E4DE', char: '\uE4DE' },
       chars: ['羴'],
-      hits: [{ method: 'big5', code: 'e4de', chars: ['鬿'], exact: true, literal: true }],
+      hits: [],
       readings: [], meaning: [], parts: [],
     }
-    expect(answerChars(/** @type {any} */ (answer))).toEqual(['羴', '鬿'])
+    expect(answerChars(/** @type {any} */ (answer))).toEqual(['羴'])
   })
   test('adds no code hits to an ordinary clue', () => {
     const answer = {

@@ -1,5 +1,5 @@
 <script>
-  import { PUA_SOURCES, convertPua, codePoint, codePoints, puaTable } from '../../src/pua.js'
+  import { PUA_SCHEME_IDS, loadPua, loadPuaCodes, codePoint, codePoints } from '../../src/pua.js'
   import { copy } from '../lib/clip.svelte.js'
   import { t } from '../lib/i18n.svelte.js'
   import { link } from '../lib/route.svelte.js'
@@ -7,11 +7,17 @@
 
   const params = new URLSearchParams(location.search)
   let input = $state(params.get('q') ?? '')
-  let sourceId = $state(PUA_SOURCES.some(item => item.id === params.get('s')) ? /** @type {string} */ (params.get('s')) : 'all')
+  let sourceId = $state(PUA_SCHEME_IDS.includes(params.get('s') ?? '') ? /** @type {string} */ (params.get('s')) : 'all')
+  let pua = $state(/** @type {import('../../src/pua.js').Pua | null} */ (null))
+  /** @type {Map<string, Record<string, string>>} */
+  let codes = $state(new Map())
+  // A slot a scheme names without a character still counts, so 全字庫 text is not read as CBETA's.
+  Promise.all([loadPua(), loadPuaCodes()]).then(([loaded, named]) => { codes = named; pua = loaded }).catch(() => {})
+  const schemes = $derived(pua?.schemes ?? [])
   let filter = $state('')
-  const result = $derived(convertPua(input, sourceId))
+  const result = $derived(pua ? pua.convert(input, sourceId, codes) : { text: input, converted: 0, unmapped: 0, ambiguous: 0, conflicts: [] })
   const needle = $derived(filter.trim().toLowerCase())
-  const matches = $derived(puaTable(sourceId).filter(({ legacy, standard, source }) =>
+  const matches = $derived((pua?.table(sourceId) ?? []).filter(({ legacy, standard, source }) =>
     !needle || codePoint(legacy).toLowerCase().includes(needle) || codePoint(standard).toLowerCase().includes(needle) || standard.includes(needle) || source.includes(needle)))
   const rows = $derived(matches.slice(0, 100))
   /** @type {HTMLDivElement | null} */
@@ -152,7 +158,7 @@
         <span class="field-tools">
           <select id="convert-source" class="ui-input" aria-label={t('convert.source')} bind:value={sourceId}>
             <option value="all">{t('pua.source.all')}</option>
-            {#each PUA_SOURCES as item (item.id)}<option value={item.id}>{t(`pua.source.${item.id}`)}</option>{/each}
+            {#each PUA_SCHEME_IDS as id (id)}<option value={id}>{t(`pua.source.${id}`)}</option>{/each}
           </select>
           <button class="ui-button" data-size="sm" type="button" disabled={!result.text} onclick={() => copy(result.text, t('convert.output'))}>{t('common.copy')}</button>
         </span>
@@ -207,7 +213,7 @@
   </details>
 
   <footer class="ui-section attribution">
-    {#each PUA_SOURCES as item (item.id)}
+    {#each schemes as item (item.id)}
       <p><a href={item.source.url} target="_blank" rel="noopener noreferrer">{item.source.name}</a> · <a href={item.source.dataUrl} target="_blank" rel="noopener noreferrer">{t('convert.data')}</a></p>
     {/each}
   </footer>
