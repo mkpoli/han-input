@@ -1,6 +1,8 @@
 import { expect, test } from 'bun:test'
-import { readFileSync } from 'node:fs'
-import { fangyanziRows, openIdsRows } from '../scripts/sources/charsets-dialect.mjs'
+import { mkdtempSync, readFileSync, rmSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import { join } from 'node:path'
+import { fangyanziRows, openIdsRows, writeDialectSets } from '../scripts/sources/charsets-dialect.mjs'
 
 const base = new URL('../app/public/charsets/', import.meta.url)
 const members = (/** @type {string} */ id) => new Set(readFileSync(new URL(`${id}.txt`, base), 'utf8').split('\n').filter(Boolean))
@@ -33,4 +35,21 @@ test('a row with only an IDS becomes a record, never a member', () => {
   const catalogue = JSON.parse(readFileSync(new URL('index.json', base), 'utf8'))
   const gukjaSet = catalogue.find((/** @type {{id: string}} */ row) => row.id === 'dialect_gukja')
   expect(gukjaSet.unencoded).toBe(gukjaSet.records.count)
+})
+
+test('a dialect set counts every source row, repeated characters included', () => {
+  const out = mkdtempSync(join(tmpdir(), 'dialect-'))
+  const rows = [
+    { type: '嚴式', char: '乜', group: ['粵'], pinyin: { 廣州: 'mɐt' } },
+    { type: '嚴式', char: '乜', group: ['粵'], pinyin: { 廣州: 'mɛ' } },
+    { type: '嚴式', char: '', ids: '⿰口乜', group: ['粵'], pinyin: { 廣州: 'x' } },
+    ...['官', '晉', '吳', '徽', '贛', '湘', '客', '平'].map(group => ({ type: '嚴式', char: '甭', group: [group], pinyin: {} })),
+    { type: '嚴式', char: '乇', group: ['閩'], pinyin: { 福州: 'noʔ', 廈門: 'x' } },
+  ]
+  const openIds = 'ids\tchar\tcodepoint\tgroup\n⿰土下\t圷\tU+5737\tkokuji\n⿱加乙\t乫\tU+4E6B\tkorean\n'
+  const catalogue = /** @type {any[]} */ ([])
+  writeDialectSets(catalogue, { fangyanzi: rows, openIds }, out, text => text)
+  const yue = catalogue.find(row => row.id === 'dialect_yue')
+  expect([yue.chars, yue.unencoded, yue.total]).toEqual([1, 1, 3])
+  rmSync(out, { recursive: true })
 })

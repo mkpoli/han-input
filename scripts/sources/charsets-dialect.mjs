@@ -121,7 +121,7 @@ export function writeDialectSets(catalogue, inputs, out, hans) {
     const entry = {
       id: set.id, group: DIALECT_GROUP, label: set.label,
       names: { en: set.en, zh: set.zh, hans: hans(set.zh), ja: set.ja, ko: set.ko },
-      chars: members.length, total: members.length + described.length, encoded: members.length, unencoded: described.length,
+      chars: members.length, total: kept.length, encoded: members.length, unencoded: described.length,
       ...(records ? { records, recordsNote: false } : {}),
       source: { ...source, note: set.note ? `${source.note} ${set.note}` : source.note },
       columns: 10,
