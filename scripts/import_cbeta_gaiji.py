@@ -169,7 +169,7 @@ with open(os.path.join(ROOT, 'data', 'cbeta-pua.json'), 'w', encoding='utf-8') a
     json.dump(pua, file, ensure_ascii=False, indent=2)
     file.write('\n')
 with open(os.path.join(ROOT, 'data', 'cbeta-pua-codes.json'), 'w', encoding='utf-8') as file:
-    json.dump({'codes': {chr(0xF0000 + int(code[2:])): code for code in codes}}, file, ensure_ascii=False, separators=(',', ':'))
+    json.dump({'formula': {'base': 0xF0000, 'prefix': 'CB', 'digits': 5}, 'numbers': [int(code[2:]) for code in codes]}, file, separators=(',', ':'))
     file.write('\n')
 
 encoded = sum('mappedUnicode' in record for record in records)

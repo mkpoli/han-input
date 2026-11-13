@@ -129,7 +129,7 @@
         }
         const found = await Promise.all(clues.map(answer))
         if (!active) return
-        const filtered = membership ? found.map(item => filterAnswer(item, membership)) : found
+        const filtered = membership ? found.map(item => filterAnswer(item, membership, selected)) : found
         const kept = await intersect(filtered)
         if (!active) return
         // `kept` is a grid only when several clues remain; one clue renders its hits instead.
@@ -276,7 +276,7 @@
         <PuaReadings readings={single.pua} label={t('pua.readings')} />
       </section>
     {/if}
-    {#if single.chars.length && !single.shapes.some(shape => shape.exact) && ['text', 'point', 'strokes'].includes(single.clue.kind)}
+    {#if single.chars.length && !single.shapes.some(shape => shape.exact) && (['text', 'point', 'strokes'].includes(single.clue.kind) || (single.clue.kind === 'pua' && !single.pua.length))}
       <section class="ui-section">
         <h2 class="ui-label">{t('find.characters')}</h2>
         <PaginatedTiles chars={single.chars} size={72} label={t('find.characters')} />

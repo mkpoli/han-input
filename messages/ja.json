@@ -309,7 +309,7 @@
   "pua.source.hanyang": "Hanyang",
   "pua.source.cns": "CNS",
   "pua.source.gb18030": "GB 18030",
-  "pua.readings": "私用領域の読み",
+  "pua.readings": "方式ごとの字",
   "pua.source.cbeta": "CBETA",
   "pua.relation.simplified": "簡体字",
   "pua.relation.traditional": "繁体字",

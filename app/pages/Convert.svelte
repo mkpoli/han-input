@@ -1,5 +1,5 @@
 <script>
-  import { PUA_SCHEME_IDS, loadPua, codePoint, codePoints } from '../../src/pua.js'
+  import { PUA_SCHEME_IDS, loadPua, loadPuaCodes, codePoint, codePoints } from '../../src/pua.js'
   import { copy } from '../lib/clip.svelte.js'
   import { t } from '../lib/i18n.svelte.js'
   import { link } from '../lib/route.svelte.js'
@@ -9,10 +9,13 @@
   let input = $state(params.get('q') ?? '')
   let sourceId = $state(PUA_SCHEME_IDS.includes(params.get('s') ?? '') ? /** @type {string} */ (params.get('s')) : 'all')
   let pua = $state(/** @type {import('../../src/pua.js').Pua | null} */ (null))
-  loadPua().then(loaded => { pua = loaded }).catch(() => {})
+  /** @type {Map<string, Record<string, string>>} */
+  let codes = $state(new Map())
+  // A slot a scheme names without a character still counts, so 全字庫 text is not read as CBETA's.
+  Promise.all([loadPua(), loadPuaCodes()]).then(([loaded, named]) => { codes = named; pua = loaded }).catch(() => {})
   const schemes = $derived(pua?.schemes ?? [])
   let filter = $state('')
-  const result = $derived(pua ? pua.convert(input, sourceId) : { text: input, converted: 0, unmapped: 0, ambiguous: 0, conflicts: [] })
+  const result = $derived(pua ? pua.convert(input, sourceId, codes) : { text: input, converted: 0, unmapped: 0, ambiguous: 0, conflicts: [] })
   const needle = $derived(filter.trim().toLowerCase())
   const matches = $derived((pua?.table(sourceId) ?? []).filter(({ legacy, standard, source }) =>
     !needle || codePoint(legacy).toLowerCase().includes(needle) || codePoint(standard).toLowerCase().includes(needle) || standard.includes(needle) || source.includes(needle)))

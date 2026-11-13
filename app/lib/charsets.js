@@ -105,8 +105,8 @@ export function sharedCharacters(a, b) {
   return shared
 }
 
-/** @param {import('./search.js').Answer} answer @param {Set<string>} membership @returns {import('./search.js').Answer} */
-export function filterAnswer(answer, membership) {
+/** @param {import('./search.js').Answer} answer @param {Set<string>} membership @param {string} [setId] @returns {import('./search.js').Answer} */
+export function filterAnswer(answer, membership, setId = '') {
   const keep = (/** @type {string[]} */ chars) => chars.filter(char => membership.has(char))
   const literal = [...answer.clue.text]
   const isLiteral = answer.clue.kind === 'code' && literal.length > 0 && literal.every(char => membership.has(char))
@@ -117,6 +117,7 @@ export function filterAnswer(answer, membership) {
     meaning: keep(answer.meaning), parts: keep(answer.parts),
     hits: answer.hits.map(hit => ({ ...hit, chars: keep(hit.chars) })).filter(hit => hit.chars.length),
     readings: answer.readings.map(hit => ({ ...hit, chars: keep(hit.chars) })).filter(hit => hit.chars.length),
+    pua: answer.pua.filter(reading => membership.has(reading.char || reading.slot) || (!reading.char && reading.records === setId)),
   }
 }
 

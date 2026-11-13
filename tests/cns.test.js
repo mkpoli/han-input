@@ -33,6 +33,9 @@ describe('schemes that share a slot', () => {
     ])
     expect(pua.convert('\u{F0003}', 'cbeta').text).toBe('𮗿')
     expect(pua.convert('\u{F0003}', 'cns').text).toBe('\u{F0003}')
+    expect(pua.convert('\u{F0001}', 'all', codes)).toMatchObject({ text: '\u{F0001}', converted: 0, ambiguous: 1 })
+    expect(pua.convert('\u{F0001}', 'cbeta', codes)).toMatchObject({ text: '欵', converted: 1 })
+    expect(pua.convert('\u{F0001}', 'cns', codes)).toMatchObject({ text: '\u{F0001}', converted: 0, unmapped: 1 })
   })
   test('find a slot by its scheme code', () => {
     expect(slotsOfCode(codes, 'cb00021')).toEqual([{ source: 'cbeta', slot: '\u{F0015}' }])

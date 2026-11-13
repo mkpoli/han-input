@@ -6,14 +6,12 @@ import { execFileSync } from 'node:child_process'
 import { readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { fetchOnce } from './lib.mjs'
+import { isPuaPoint } from '../src/pua.js'
 
 const URL = 'https://www.cns11643.gov.tw/opendata/MapingTables.zip'
 const TABLE = 'Unicode/CNS2UNICODE_Unicode 15.txt'
 const SHA256 = '4502fcf7b433d679dee51127298929543ec7f4aa99be93cd219df1552bc3d2bf'
 const UNIHAN_SHA256 = 'e2c484cd22b54f7e0ce896ebb02f33e092b92325accf0fd55e0e14e3863869eb'
-
-/** @param {number} point */
-export const isPua = point => (point >= 0xE000 && point <= 0xF8FF) || (point >= 0xF0000 && point <= 0xFFFFD) || (point >= 0x100000 && point <= 0x10FFFD)
 
 /** @param {string} table @param {string} irg */
 export function parseCns(table, irg) {
@@ -33,7 +31,7 @@ export function parseCns(table, irg) {
     const [cns, unicode] = line.trim().split(/\s+/)
     if (!cns || !unicode) continue
     const point = parseInt(unicode, 16)
-    if (!isPua(point)) continue
+    if (!isPuaPoint(point)) continue
     const slot = String.fromCodePoint(point)
     if (slot in codes) throw new Error(`${unicode} is mapped twice`)
     codes[slot] = cns

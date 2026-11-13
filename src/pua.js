@@ -84,8 +84,12 @@ export function makePua(schemes, variants) {
       return chosen(id).flatMap(scheme => Object.entries(scheme.mappings).map(([legacy, standard]) => ({ legacy, standard, source: scheme.id })))
         .sort((a, b) => /** @type {number} */ (a.legacy.codePointAt(0)) - /** @type {number} */ (b.legacy.codePointAt(0)) || a.source.localeCompare(b.source))
     },
-    /** Convert one scheme, or every scheme where they agree. @param {string} text @param {string} [id] */
-    convert(text, id = 'moe') {
+    /**
+     * Convert one scheme, or every scheme where they agree. A scheme that names a slot without a Unicode
+     * character for it claims the slot as it is, so it conflicts with a scheme that converts it.
+     * @param {string} text @param {string} [id] @param {Map<string, Record<string, string>>} [codes]
+     */
+    convert(text, id = 'moe', codes = new Map()) {
       const sources = chosen(id)
       let converted = 0
       let unmapped = 0
@@ -94,10 +98,15 @@ export function makePua(schemes, variants) {
       /** @type {{ code: string, options: { char: string, source: string }[] }[]} */
       const conflicts = []
       for (const char of text) {
-        const options = sources.flatMap(scheme => char in scheme.mappings ? [{ char: scheme.mappings[char], source: scheme.id }] : [])
+        const options = sources.flatMap(scheme => char in scheme.mappings ? [{ char: scheme.mappings[char], source: scheme.id }]
+          : codes.get(scheme.id)?.[char] ? [{ char, source: scheme.id }] : [])
         const targets = new Set(options.map(option => option.char))
         const [target] = targets
-        if (targets.size === 1) { output += target; converted++ }
+        if (targets.size === 1 && target !== char) { output += target; converted++ }
+        else if (targets.size === 1) {
+          output += char
+          unmapped++
+        }
         else if (targets.size === 0) {
           output += char
           if (/\p{Co}/u.test(char)) unmapped++
@@ -135,6 +144,17 @@ export function slotsOfCode(codes, code) {
   return [...codes].flatMap(([source, table]) => Object.entries(table).filter(([, value]) => value.toUpperCase() === wanted).map(([slot]) => ({ source, slot })))
 }
 
+/**
+ * A codes file lists each slot's code, or, for a scheme that numbers its slots from a base, the numbers.
+ * @param {{ codes?: Record<string, string>, formula?: { base: number, prefix: string, digits: number }, numbers?: number[] }} data
+ * @returns {Record<string, string>}
+ */
+export function expandCodes(data) {
+  if (data.codes) return data.codes
+  const { base, prefix, digits } = /** @type {{ base: number, prefix: string, digits: number }} */ (data.formula)
+  return Object.fromEntries((data.numbers ?? []).map(number => [String.fromCodePoint(base + number), `${prefix}${String(number).padStart(digits, '0')}`]))
+}
+
 /** @param {any} module */
 const json = module => /** @type {any} */ (module.default ?? module)
 
@@ -148,7 +168,7 @@ export function loadPua() {
       return /** @type {PuaScheme} */ ({ id, source: data.source, mappings: data.mappings, ...(records ? { records } : {}) })
     })),
     import('../data/moe-pua-variants.json').then(json),
-  ]).then(([schemes, variants]) => makePua(schemes, variants))
+  ]).then(([schemes, variants]) => makePua(schemes, variants)).catch(error => { loaded = null; throw error })
   return loaded
 }
 
@@ -156,7 +176,8 @@ export function loadPua() {
 let loadedCodes = null
 /** The scheme codes of every named slot, loaded once. */
 export function loadPuaCodes() {
-  loadedCodes ??= Promise.all(SCHEMES.filter(scheme => scheme.codes).map(async scheme => /** @type {[string, Record<string, string>]} */ ([scheme.id, json(await /** @type {() => Promise<any>} */ (scheme.codes)()).codes])))
+  loadedCodes ??= Promise.all(SCHEMES.filter(scheme => scheme.codes).map(async scheme => /** @type {[string, Record<string, string>]} */ ([scheme.id, expandCodes(json(await /** @type {() => Promise<any>} */ (scheme.codes)()))])))
     .then(entries => new Map(entries))
+    .catch(error => { loadedCodes = null; throw error })
   return loadedCodes
 }

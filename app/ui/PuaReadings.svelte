@@ -5,7 +5,8 @@
   import { choose, showRecord, ui } from '../lib/ui.svelte.js'
   import { link } from '../lib/route.svelte.js'
   import { t } from '../lib/i18n.svelte.js'
-  import { codePoint } from '../../src/pua.js'
+  import { codePoint, codePoints } from '../../src/pua.js'
+  import { isHan } from '../../src/fold.js'
   import RecordGlyph from './RecordGlyph.svelte'
 
   /** @type {{ readings: import('../../src/pua.js').PuaReading[], label: string }} */
@@ -39,11 +40,11 @@
     {@const held = records.get(key(reading))}
     <li>
       {#if reading.char}
-        <a class="ui-tile glyph" href={link('', { c: reading.char })} lang="und-Hani" onclick={event => { event.preventDefault(); choose(reading.char) }}>{reading.char}</a>
+        <a class="ui-tile glyph" href={link('', { c: reading.char })} lang={isHan(reading.char) ? 'und-Hani' : undefined} onclick={event => { event.preventDefault(); choose(reading.char) }}>{reading.char}</a>
       {:else if reading.records}
         <button class="ui-tile glyph" type="button" disabled={!held} aria-pressed={!!held && ui.record?.record === held.record}
-          onclick={() => { if (held) showRecord(held.record, held.document) }}>
-          {#if held}<RecordGlyph record={held.record} />{:else}<span class="ui-mono code">{reading.code}</span>{/if}
+          aria-label={reading.code} title={reading.code} onclick={() => { if (held) showRecord(held.record, held.document) }}>
+          {#if held && (held.record.atlas || held.record.sprite || held.record.glyph)}<RecordGlyph record={held.record} />{:else}<span class="ui-mono code">{reading.code}</span>{/if}
         </button>
       {:else}
         <a class="ui-tile glyph" href={link('', { c: reading.slot })} lang="und-Hani" onclick={event => { event.preventDefault(); choose(reading.slot) }}>{reading.slot}</a>
@@ -51,7 +52,7 @@
       <span class="facts">
         <span class="tag">{t(`pua.source.${reading.source}`)}</span>
         {#if reading.code}<span class="ui-mono">{reading.code}</span>{/if}
-        <span class="ui-mono ui-hint">{codePoint(reading.slot)}{reading.char ? ` → ${codePoint(reading.char)}` : ''}</span>
+        <span class="ui-mono ui-hint">{codePoint(reading.slot)}{reading.char ? ` → ${codePoints(reading.char)}` : ''}</span>
       </span>
     </li>
   {/each}

@@ -61,7 +61,8 @@ async function lookUp(clue) {
   }
   if (clue.kind === 'pua') {
     out.pua = await puaReadings(clue.char ? [clue.char] : [], clue.code ?? '')
-    out.chars = puaChars(out.pua)
+    // A slot no scheme reads is still a code point, shown as it is.
+    out.chars = out.pua.length ? puaChars(out.pua) : clue.char ? [clue.char] : []
     return out
   }
   if (clue.kind === 'arithmetic') {
@@ -144,8 +145,7 @@ async function lookUp(clue) {
 async function puaReadings(slots, code) {
   const [pua, codes] = await Promise.all([loadPua(), loadPuaCodes()])
   const all = [...new Set([...slots, ...(code ? slotsOfCode(codes, code).map(hit => hit.slot) : [])])]
-  const readings = all.flatMap(slot => readingsOf(pua, codes, slot))
-  return code ? readings.filter(reading => slots.includes(reading.slot) || reading.code.toUpperCase() === code.toUpperCase()) : readings
+  return all.flatMap(slot => readingsOf(pua, codes, slot))
 }
 
 /**
