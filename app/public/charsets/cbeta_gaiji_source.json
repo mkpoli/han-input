@@ -12,5 +12,15 @@
     "committed": "2026-11-01",
     "retrieved": "2026-11-14",
     "sha256": "48d31b5c691a1e51cd2e449f33c8592951f5034587ad6b09e61a6ea2cf94e3e2"
+  },
+  "workbook-notes": {
+    "url": "file:cbeta-workbooks/CBETA難字庫.xlsx",
+    "sha256": "20bd336863f10da880c4883eae10bb06775d73f8752569d7a41af9180ed3dd38",
+    "supplied": "2026-11-14"
+  },
+  "workbook-ids": {
+    "url": "file:cbeta-workbooks/CBETA難字庫IDS版_1.2.xlsx",
+    "sha256": "9fce87c4dfd6a93e8f185bf96640e5db29bc720ea99e1b7667b840341d6bd02a",
+    "supplied": "2026-11-14"
   }
 }

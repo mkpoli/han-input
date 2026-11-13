@@ -42,7 +42,7 @@ describe('schemes that share a slot', () => {
     expect(slotsOfCode(codes, '15-2D5F')).toEqual([{ source: 'cns', slot: '\u{FFFE1}' }])
   })
   test('cover every CB code', () => {
-    expect(Object.keys(codes.get('cbeta'))).toHaveLength(31664)
+    expect(Object.keys(codes.get('cbeta'))).toHaveLength(31935)
     expect(Object.keys(pua.scheme('cbeta').mappings)).toHaveLength(16607)
   })
 })
