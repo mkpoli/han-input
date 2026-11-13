@@ -1,7 +1,7 @@
 <script>
   // One printed proposal record: the glyph as the document shows it, the source or serial code it is
   // named by, and where the document states it. Many of these characters were never encoded.
-  import { ui, choose, closeRecord } from '../lib/ui.svelte.js'
+  import { ui, choose } from '../lib/ui.svelte.js'
   import { link } from '../lib/route.svelte.js'
   import { t } from '../lib/i18n.svelte.js'
   import SourceCode from './SourceCode.svelte'
@@ -20,12 +20,16 @@
   const ids = $derived(record?.composition ? convertArithmetic(record.composition, 'general').ids : '')
   const unified = $derived(record?.unifiedWith ?? '')
   const unifiedChar = $derived(unified.startsWith('U+') ? String.fromCodePoint(parseInt(unified.slice(2), 16)) : '')
+
+  /** @param {MouseEvent} event @param {string} char */
+  function follow(event, char) {
+    event.preventDefault()
+    ;(/** @type {HTMLElement} */ (event.currentTarget)).closest('dialog')?.querySelector('button')?.focus()
+    choose(char)
+  }
 </script>
 
 {#if record && document}
-  {#if ui.sheet}
-    <div class="back"><button class="ui-button" data-variant="quiet" data-size="sm" type="button" onclick={closeRecord}>{t('card.back')}</button></div>
-  {/if}
   <article class="record">
     <header class="head">
       <div class="glyph">
@@ -41,13 +45,13 @@
     {#if unified}
       <p class="unified"><span class="ui-hint">{t('proposal.unifiedWith')}</span>
         {#if unifiedChar}
-          <a href={link('', { c: unifiedChar })} lang="und-Hani" onclick={event => { event.preventDefault(); choose(unifiedChar) }}>{unifiedChar}</a>
+          <a href={link('', { c: unifiedChar })} lang="und-Hani" onclick={event => follow(event, unifiedChar)}>{unifiedChar}</a>
         {/if}
         <span class="ui-mono ui-hint">{unified}</span>
       </p>
     {/if}
     {#if mapped}
-      <p class="mapped"><a href={link('', { c: mapped })} lang="und-Hani" onclick={event => { event.preventDefault(); choose(mapped) }}>{mapped}</a> <span class="ui-mono ui-hint">{record.mappedUnicode}</span></p>
+      <p class="mapped"><a href={link('', { c: mapped })} lang="und-Hani" onclick={event => follow(event, mapped)}>{mapped}</a> <span class="ui-mono ui-hint">{record.mappedUnicode}</span></p>
     {/if}
     {#if similar}
       <p class="related"><span class="ui-hint">{t('proposal.similar')}</span>
@@ -98,7 +102,6 @@
 {/if}
 
 <style>
-  .back{padding:var(--ui-space-sm)}
   .record{display:grid;gap:var(--ui-space-lg);padding:var(--ui-space-xl)}
   .head{display:flex;gap:var(--ui-space-lg);align-items:flex-start}
   .glyph{flex:none;display:grid;place-items:center;inline-size:112px;block-size:112px;padding:4px;border:1px solid var(--ui-color-border);border-radius:var(--ui-radius-md);background:var(--ui-color-canvas)}

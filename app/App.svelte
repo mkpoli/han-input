@@ -1,10 +1,11 @@
 <script>
   // The frame: a dark rail of pages down the side, the finder in the middle, the card of the open
   // character on the right (a sheet on a phone), and the text being written docked along the bottom.
+  import { onMount, tick } from 'svelte'
   import { NAV, go, route } from './lib/route.svelte.js'
   import { pageMetadata } from './lib/title.js'
   import { applySeo } from './lib/seo.js'
-  import { ui, applyTheme } from './lib/ui.svelte.js'
+  import { ui, applyTheme, closeRecord, hideSheet } from './lib/ui.svelte.js'
   import { toast } from './lib/clip.svelte.js'
   import { t } from './lib/i18n.svelte.js'
   import Writing from './ui/Writing.svelte'
@@ -25,6 +26,101 @@
 
   applyTheme()
   let settings = $state(false)
+  let mobile = $state(matchMedia('(max-width: 900px)').matches)
+  /** @type {HTMLDialogElement} */
+  let sheet
+  /** @type {HTMLElement} */
+  let card
+  /** @type {HTMLElement} */
+  let shell
+  let sheetHeaderHeight = $state(0)
+  let sheetStatusHeight = $state(0)
+  /** @type {number | null} */
+  let savedScroll = null
+  /** @type {HTMLElement | null} */
+  let resumeFocus = null
+
+  onMount(() => {
+    const media = matchMedia('(max-width: 900px)')
+    const resize = () => {
+      const next = media.matches
+      const scroll = savedScroll ?? card.scrollTop
+      if (next) {
+        const active = document.activeElement
+        if (active instanceof HTMLElement && card.contains(active)) {
+          resumeFocus = active
+          const main = document.querySelector('main')
+          if (main) { main.tabIndex = -1; main.focus() }
+          ui.sheet = true
+        }
+        savedScroll = scroll
+        sheet.append(card)
+      } else {
+        const active = document.activeElement
+        const focused = sheet.open && active instanceof HTMLElement && active !== card && card.contains(active) && !active.closest('.back') ? active : null
+        if (sheet.open) sheet.close()
+        shell.insertBefore(card, sheet)
+        const restored = document.activeElement
+        savedScroll = scroll
+        hideSheet()
+        void tick().then(() => {
+          if (!media.matches) {
+            card.scrollTop = scroll
+            savedScroll = null
+            if (focused?.isConnected && card.contains(focused) && document.activeElement === restored) focused.focus({ preventScroll: true })
+          }
+        })
+      }
+      mobile = next
+    }
+    if (media.matches) resize()
+    media.addEventListener('change', resize)
+    return () => {
+      media.removeEventListener('change', resize)
+      if (sheet.open) sheet.close()
+      if (card.parentElement !== shell && sheet.parentElement === shell) shell.insertBefore(card, sheet)
+      hideSheet()
+    }
+  })
+
+  $effect(() => {
+    if (!mobile) return
+    if (ui.sheet && !sheet.open) {
+      sheet.showModal()
+      if (savedScroll !== null) { card.scrollTop = savedScroll; savedScroll = null }
+      if (resumeFocus?.isConnected) resumeFocus.focus({ preventScroll: true })
+      resumeFocus = null
+    } else if (!ui.sheet && sheet.open) {
+      savedScroll = card.scrollTop
+      sheet.close()
+    }
+  })
+
+  $effect(() => {
+    if (ui.sheet && toast.message) ui.sheetNoticeId = toast.id
+  })
+
+  function keepFocusVisible() {
+    if (!sheet.open || !mobile) return
+    const active = document.activeElement
+    if (!(active instanceof HTMLElement) || !card.contains(active) || active.closest('.back')) return
+    const bounds = active.getBoundingClientRect()
+    const view = card.getBoundingClientRect()
+    if (bounds.top < view.top + sheetHeaderHeight) card.scrollTop -= view.top + sheetHeaderHeight - bounds.top + 4
+    else if (bounds.bottom > view.bottom - sheetStatusHeight) card.scrollTop += bounds.bottom - (view.bottom - sheetStatusHeight) + 4
+  }
+
+  $effect(() => {
+    void sheetHeaderHeight
+    void sheetStatusHeight
+    if (mobile && ui.sheet) void tick().then(keepFocusVisible)
+  })
+
+  function dismissSheet() {
+    if (ui.record && !route.c) closeRecord()
+    else hideSheet()
+  }
+
   $effect(() => {
     void route.method
     const { title, description } = pageMetadata(route.page)
@@ -47,17 +143,17 @@
   /** @param {KeyboardEvent} event */
   function keys(event) {
     const target = /** @type {HTMLElement} */ (event.target)
-    if (event.key === '/' && !target.closest('input, textarea, [contenteditable]')) {
+    if (event.key === '/' && !ui.sheet && !target.closest('input, textarea, [contenteditable]')) {
       const input = /** @type {HTMLElement | null} */ (document.querySelector('[data-primary]'))
       if (input) { event.preventDefault(); input.focus() }
     }
-    if (event.key === 'Escape') { ui.sheet = false; settings = false }
+    if (event.key === 'Escape') settings = false
   }
 </script>
 
 <svelte:window onkeydown={keys} />
 
-<div class="shell">
+<div class="shell" bind:this={shell}>
   <nav class="rail" aria-label={t('nav.label')}>
     <div class="site">
       <SiteSelect home={event => nav(event, '')}><span class="seal ui-script" aria-hidden="true">字</span></SiteSelect>
@@ -88,11 +184,20 @@
     {:else}<About />{/if}
   </main>
 
-  <aside class="card" class:open={ui.sheet} aria-label={t('card.label')}>{#if ui.record && !route.c}<ProposalCard />{:else}<Card />{/if}</aside>
+  <aside class="card" class:in-sheet={mobile} bind:this={card} onfocusin={() => requestAnimationFrame(keepFocusVisible)} style:scroll-padding-block-start={mobile ? `calc(${sheetHeaderHeight}px + 4px)` : undefined} style:scroll-padding-block-end={mobile ? `calc(${sheetStatusHeight}px + 4px)` : undefined} style:padding-block-end={mobile ? `${sheetStatusHeight}px` : undefined} aria-label={t('card.label')}>
+    {#if mobile}
+      <div class="back" bind:clientHeight={sheetHeaderHeight}>
+        <button class="ui-button" data-variant="quiet" data-size="sm" type="button" onclick={dismissSheet}>{t('card.back')}</button>
+        <div class="sheet-status ui-hint ui-glyph-text" class:show={ui.sheet && !!toast.message} bind:clientHeight={sheetStatusHeight} role="status" aria-live="polite">{#if ui.sheet}{#key toast.id}{toast.message}{/key}{/if}</div>
+      </div>
+    {/if}
+    {#if ui.record && !route.c}<ProposalCard />{:else}<Card />{/if}
+  </aside>
+  <dialog class="sheet" bind:this={sheet} aria-label={t('card.label')} oncancel={event => { event.preventDefault(); dismissSheet() }}></dialog>
 
   <div class="dock"><Writing /></div>
 
-  <div class="toast" role="status" aria-live="polite">{#if toast.message}<span class="ui-toast">{toast.message}</span>{/if}</div>
+  <div class="toast" role="status" aria-live="polite">{#if toast.message && !ui.sheet}{#key toast.id}<span class="ui-toast">{toast.message}</span>{/key}{/if}</div>
 </div>
 
 <style>
@@ -110,6 +215,12 @@
   .pop{position:absolute;inset-inline-start:calc(100% + var(--ui-space-sm));inset-block-end:0;z-index:var(--ui-z-menu);inline-size:320px;padding:var(--ui-space-2xs) var(--ui-space-lg);color:var(--ui-color-ink)}
   .finder{grid-column:2;grid-row:1;min-inline-size:0;overflow:auto;padding:var(--ui-space-3xl) clamp(var(--ui-space-xl),4vw,72px) var(--ui-space-3xl)}
   .card{grid-column:3;grid-row:1;overflow:auto;background:var(--ui-color-surface);border-inline-start:1px solid var(--ui-color-border);overscroll-behavior:contain}
+  .back{position:sticky;top:0;z-index:1;padding:var(--ui-space-sm);background:var(--ui-color-surface)}
+  .sheet-status{position:fixed;inset-block-end:0;inset-inline:0;overflow-wrap:anywhere;background:var(--ui-color-surface)}
+  .sheet-status.show{padding:var(--ui-space-sm) var(--ui-space-lg)}
+  .card.in-sheet{grid-column:auto;block-size:100%;border:0}
+  .sheet{position:fixed;inset:0;inline-size:100%;block-size:100%;max-inline-size:none;max-block-size:none;margin:0;padding:0;border:0;overflow:hidden}
+  .sheet::backdrop{overflow:hidden;overscroll-behavior:contain}
   .dock{grid-column:2 / span 2;grid-row:2;min-inline-size:0}
   .toast{position:fixed;left:50%;bottom:calc(var(--dock-h) + var(--ui-space-lg));transform:translateX(-50%);z-index:var(--ui-z-toast);pointer-events:none}
   @media (max-width:1200px){.shell{--card-w:360px;--rail-w:88px}}
@@ -124,8 +235,5 @@
     .pop{inset-inline-start:auto;inset-inline-end:0;inset-block-end:calc(100% + var(--ui-space-sm));inline-size:min(320px,calc(100vw - 32px))}
     .finder{grid-column:1;padding:var(--ui-space-xl) var(--ui-space-lg)}
     .dock{grid-column:1;grid-row:2}
-    .card{position:fixed;inset:0;grid-column:auto;z-index:var(--ui-z-modal);border:0;transform:translateY(100%);transition:transform var(--ui-duration) var(--ui-ease);visibility:hidden}
-    .card.open{transform:none;visibility:visible}
   }
-  @media (prefers-reduced-motion:reduce){.card{transition:none}}
 </style>
