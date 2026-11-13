@@ -7,6 +7,7 @@
   import { i18n, nameOf, t } from '../lib/i18n.svelte.js'
   import { gSourceOf, noteOf } from '../lib/sources.js'
   import { fold } from '../../src/fold.js'
+  import { STROKE_KEYS, STROKE_METHODS, nextKeys } from '../../src/strokes.js'
 
   // A variety's readings type the same way as a method's codes, so one page serves both.
   /** @type {{ title: string, family: string, intro: string, keys?: string, source: { name: string, url: string, licence: string, attribution?: string, note?: string } } | undefined} */
@@ -77,6 +78,16 @@
     if (event.key === 'PageUp' || event.key === '-') { event.preventDefault(); page = Math.max(0, page - 1) }
   }
 
+  // A stroke-order method is typed from keys that show the strokes; a key no code goes on with is off.
+  const strokePad = $derived(route.page !== 'v' && STROKE_METHODS.has(route.method))
+  const strokeNext = $derived(strokePad && rows.length ? nextKeys(rows, query) : null)
+  /** @param {string} next */
+  function setCode(next) { code = next; setQuery(next) }
+  /** A pressed key leaves the focus in the code box, so Space and Enter still take a candidate. @param {PointerEvent} event */
+  const keepFocus = event => event.preventDefault()
+  /** @param {string} digit */
+  function typeStroke(digit) { if (!strokeNext || strokeNext.has(digit)) setCode(code + digit) }
+
   const digitCodes = $derived(rows.length > 0 && /\d/.test(rows[Math.floor(rows.length / 2)]?.code ?? ''))
 </script>
 
@@ -90,6 +101,20 @@
     <input class="ui-input box" data-primary lang="und-Hani" use:autofocus bind:value={code} oninput={() => setQuery(code)} onkeydown={keys}
       placeholder={method.keys ? t('method.keys', { keys: method.keys }) : t('method.type')} aria-label={t('method.type')}
       spellcheck="false" autocomplete="off" autocapitalize="off">
+    {#if strokePad}
+      <div class="strokes" role="group" aria-label={t('method.strokes')}>
+        {#each STROKE_KEYS as key (key.digit)}
+          {@const label = `${t(`method.stroke.${key.digit}`)} (${key.digit})`}
+          <button class="ui-button stroke" type="button" data-stroke={key.digit} title={label} aria-label={label}
+            aria-disabled={Boolean(strokeNext && !strokeNext.has(key.digit)) || undefined} onpointerdown={keepFocus} onclick={() => typeStroke(key.digit)}>
+            <span class="ui-script" lang="und-Hani">{key.stroke}</span><span class="num">{key.digit}</span>
+          </button>
+        {/each}
+        <button class="ui-button" type="button" data-stroke="back" title={t('method.backspace')} aria-label={t('method.backspace')}
+          aria-disabled={!code || undefined} onpointerdown={keepFocus} onclick={() => setCode(code.slice(0, -1))}>←</button>
+        <button class="ui-button" data-variant="quiet" type="button" data-stroke="clear" aria-disabled={!code || undefined} onpointerdown={keepFocus} onclick={() => setCode('')}>{t('writing.clear')}</button>
+      </div>
+    {/if}
     {#if shown.length}
       <ol class="cands">
         {#each shown as item, i (item.char + item.code)}
@@ -120,6 +145,9 @@
 
 <style>
   .box{font-size:22px;block-size:52px}
+  .strokes{display:flex;flex-wrap:wrap;align-items:stretch;gap:var(--ui-space-2xs)}
+  .stroke{display:inline-flex;align-items:center;gap:var(--ui-space-2xs);min-inline-size:56px;justify-content:center;font-size:24px;line-height:1.2}
+  .strokes [aria-disabled="true"]{opacity:.45;cursor:default}
   .cands{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:var(--ui-space-2xs);margin:0;padding:0;list-style:none}
   .cand{display:grid;grid-template-columns:auto auto minmax(0,1fr);align-items:center;gap:var(--ui-space-xs);inline-size:100%;padding:var(--ui-space-2xs) var(--ui-space-sm);border:1px solid var(--ui-color-border);border-radius:var(--ui-radius-sm);background:var(--ui-color-surface);color:var(--ui-color-ink);cursor:pointer;text-align:start}
   .cand:hover{background:var(--ui-color-surface-hover)}
