@@ -2,7 +2,7 @@
   import { tick } from 'svelte'
   import { loadAges, versionRows } from '../lib/ages.js'
   import { blockOccupancy, blockRows, planeRows } from '../lib/blocks.js'
-  import { loadCharset, loadRecords, sharedCharacters } from '../lib/charsets.js'
+  import { listedCount, loadCharset, loadRecords, sharedCharacters } from '../lib/charsets.js'
   import { i18n, nameOf, t } from '../lib/i18n.svelte.js'
   import CoverageChart from './CoverageChart.svelte'
   import CoverageDot from './CoverageDot.svelte'
@@ -171,7 +171,7 @@
                   <span>{set.label}</span>
                   <span class="set-end">
                     {#if coverage}<CoverageDot encoded={set.encoded ?? set.chars} unencoded={set.unencoded ?? 0} />{/if}
-                    <span class="ui-count">{(set.records?.count ?? set.chars).toLocaleString()}</span>
+                    <span class="ui-count">{listedCount(set).toLocaleString()}</span>
                   </span>
                 </button>
               {/each}
