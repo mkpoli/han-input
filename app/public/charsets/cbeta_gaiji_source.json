@@ -1,0 +1,16 @@
+{
+  "database": {
+    "url": "https://raw.githubusercontent.com/cbeta-org/cbeta_gaiji/857156a6d9f37a020d34099447b51a0b72264620/cbeta_gaiji.json",
+    "repository": "https://github.com/cbeta-org/cbeta_gaiji",
+    "committed": "2026-11-09",
+    "retrieved": "2026-11-14",
+    "sha256": "868e92141b26212ed61f6cab76e26f775798fd5929be81d3231b4b064a9348b7"
+  },
+  "images": {
+    "url": "https://codeload.github.com/cbeta-org/gaiji-CB/tar.gz/e402e97cf0065bd3f13854c0b1c92efe23f859c1",
+    "repository": "https://github.com/cbeta-org/gaiji-CB",
+    "committed": "2026-11-01",
+    "retrieved": "2026-11-14",
+    "sha256": "48d31b5c691a1e51cd2e449f33c8592951f5034587ad6b09e61a6ea2cf94e3e2"
+  }
+}

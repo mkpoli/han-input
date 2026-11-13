@@ -3391,34 +3391,6 @@
     "columns": 10
   },
   {
-    "id": "glyphwiki_ebag",
-    "group": "GlyphWiki",
-    "label": "ebag 缺字",
-    "names": {
-      "en": "ebag missing glyphs",
-      "zh": "ebag 缺字",
-      "hans": "ebag 缺字",
-      "ja": "ebag 缺字",
-      "ko": "ebag 缺字"
-    },
-    "chars": 0,
-    "total": 24359,
-    "encoded": 0,
-    "unencoded": 24359,
-    "records": {
-      "file": "/charsets/glyphwiki_ebag_records.json",
-      "count": 24359,
-      "glyphs": 24356
-    },
-    "recordsNote": false,
-    "source": {
-      "name": "GlyphWiki",
-      "url": "https://glyphwiki.org/",
-      "licence": "Free use, copy and distribution"
-    },
-    "columns": 10
-  },
-  {
     "id": "unc_utc_withdrawals",
     "group": "Proposals",
     "label": "UNC withdrawn · UTC",
@@ -6912,6 +6884,62 @@
       "name": "Unihan 18.0.0",
       "url": "https://www.unicode.org/reports/tr38/#kIRG_GSource",
       "note": "GZA- values whose six-digit serial begins 7; the book is Ancient Remembrance—Zhuang Creation Myth Songs (2012)."
+    },
+    "columns": 10
+  },
+  {
+    "id": "cbeta_gaiji",
+    "group": "CBETA",
+    "label": "CBETA缺字",
+    "names": {
+      "en": "CBETA missing characters",
+      "zh": "CBETA缺字",
+      "hans": "CBETA缺字",
+      "ja": "CBETA缺字",
+      "ko": "CBETA 缺字"
+    },
+    "chars": 16607,
+    "total": 31664,
+    "encoded": 16607,
+    "unencoded": 15057,
+    "codes": "/charsets/cbeta_gaiji.codes.tsv",
+    "records": {
+      "file": "/charsets/cbeta_gaiji_records.json",
+      "count": 31664,
+      "glyphs": 28117
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "CBETA",
+      "url": "https://github.com/cbeta-org/cbeta_gaiji"
+    },
+    "columns": 10
+  },
+  {
+    "id": "glyphwiki_ebag",
+    "group": "GlyphWiki",
+    "label": "ebag 缺字",
+    "names": {
+      "en": "ebag missing glyphs",
+      "zh": "ebag 缺字",
+      "hans": "ebag 缺字",
+      "ja": "ebag 缺字",
+      "ko": "ebag 缺字"
+    },
+    "chars": 0,
+    "total": 24359,
+    "encoded": 0,
+    "unencoded": 24359,
+    "records": {
+      "file": "/charsets/glyphwiki_ebag_records.json",
+      "count": 24359,
+      "glyphs": 24356
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "GlyphWiki",
+      "url": "https://glyphwiki.org/",
+      "licence": "Free use, copy and distribution"
     },
     "columns": 10
   }

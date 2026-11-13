@@ -203,7 +203,7 @@ for (const name of readdirSync(OUT).filter(/** @param {string} name */ name => n
     encoded: [...members].length,
     unencoded: set.records.filter(/** @param {{mappedUnicode?:string}} record */ record => !record.mappedUnicode).length,
     codes,
-    records: { file: `/charsets/${name}`, count: set.records.length, glyphs: set.records.filter(/** @param {{glyph?:string, sprite?:unknown}} record */ record => record.glyph || record.sprite).length },
+    records: { file: `/charsets/${name}`, count: set.records.length, glyphs: set.records.filter(/** @param {{glyph?:string, sprite?:unknown, atlas?:unknown}} record */ record => record.glyph || record.sprite || record.atlas).length },
     ...(set.recordsNote === false ? { recordsNote: false } : {}),
     source: set.source,
     columns: 10,

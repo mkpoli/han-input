@@ -108,7 +108,7 @@
           mapped: first.size,
           otherTotal: second.size,
           glyphs: records ? set?.records?.glyphs ?? 0 : 0,
-          mappedGlyphs: records ? records.records.filter(record => record.glyph && record.mappedUnicode).length : 0,
+          mappedGlyphs: records ? records.records.filter(record => (record.glyph || record.sprite || record.atlas) && record.mappedUnicode).length : 0,
         }
       } catch {
         if (active) compareFailed = true
