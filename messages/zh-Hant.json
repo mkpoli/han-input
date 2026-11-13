@@ -57,6 +57,7 @@
   "ids.source.chise": "CHISE",
   "ids.source.project": "本專案",
   "about.writing": "字形來源",
+  "about.order": "結果排序",
   "about.writingIntro": "每個字的寫法，以及每條描述來自哪裡。",
   "about.variants": "異體寫法",
   "family.shape": "字形",

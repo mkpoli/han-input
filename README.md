@@ -36,6 +36,7 @@ bun run verify          # unit tests, type check, messages
 `bun scripts/build_readings.mjs` builds the readings from the database in 漢字音典's release APK, unpacked to
 `cache/mcpdict/x`. `bun scripts/build_wiktionary.mjs <dir>` builds the meaning index from Wiktionary dumps
 before `build:data` reads it. The generated `app/public/data/` is about 300 MB and is not committed.
+Results are ordered with a privately supplied classical frequency table, `cache/frequency/综合频率表(由高到低).csv`; `build:data` stops if it is missing.
 
 The proposal sets carry the glyphs printed in their IRG documents. `bun scripts/import_irg_records.mjs`
 cuts them from the pinned PDFs (poppler and ImageMagick), matches each to the codes printed beside it,

@@ -36,7 +36,7 @@ describe('rankChars', () => {
 
 describe('parseFrequency', () => {
   test('numbers characters from the commonest, equal counts sharing a position', () => {
-    const positions = parseFrequency('﻿Unicode编码,汉字,频率\r\n0x4e4b,之,30\r\n0x4e0d,不,20\r\n0x4e00,一,20\r\n0x4e01,丁,5\r\n')
+    const positions = parseFrequency('\uFEFFUnicode编码,汉字,频率\r\n0x4e4b,之,30\r\n0x4e0d,不,20\r\n0x4e00,一,20\r\n0x4e01,丁,5\r\n')
     expect([...positions]).toEqual([['之', 1], ['不', 2], ['一', 2], ['丁', 4]])
   })
   test('refuses a row whose code is not its character', () => {

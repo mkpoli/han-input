@@ -19,7 +19,7 @@ import { join } from 'node:path'
 import { gzipSync } from 'node:zlib'
 import { charBucket, codeBucket, fold, inScope, isHan, partBucket, pinyinDigits, runBucket, wordBucket } from '../src/fold.js'
 import { readUnihan, unihanMethods, rankChars } from './sources/unihan.mjs'
-import { readFrequency } from './sources/frequency.mjs'
+import { FREQUENCY_SOURCE, readFrequency } from './sources/frequency.mjs'
 import { IDS_SOURCES, components, partsOf, readDescriptions, runsOf } from './sources/ids.mjs'
 import { allMethods } from './sources/index.mjs'
 import { meaningWords } from './sources/meaning.mjs'
@@ -57,6 +57,8 @@ const codes = new Spool('c')
 const chars = new Spool('x')
 
 console.log('reading Unihan')
+// The frequency table is privately supplied, so a missing copy stops the build before the heavy steps.
+const positions = readFrequency()
 const fields = await readUnihan()
 const methods = [...unihanMethods(fields), ...await allMethods()]
 
@@ -134,6 +136,7 @@ for (const [char, rows] of descriptions) {
 }
 for (const [bucket, rows] of writingFiles) writeFileSync(join(OUT, 'i', `${bucket}.gz`), gz(rows.join('\n')))
 writeFileSync(join(OUT, 'ids.json'), JSON.stringify({ sources: IDS_SOURCES }))
+writeFileSync(join(OUT, 'order.json'), JSON.stringify({ sources: [FREQUENCY_SOURCE] }))
 writeFileSync(join(OUT, 'ids-components.json'), JSON.stringify(components()))
 
 console.log('parts')
@@ -170,7 +173,7 @@ writeFileSync(join(OUT, 'variants.json.gz'), gz(readFileSync(join(import.meta.di
 
 // Modern kana come among the commonest characters, and hentaigana and Nüshu after every block of Han.
 const derivedRows = [...derived].map(char => [char, (/[\u3040-\u30FF]/.test(char) ? 5 : 70) * 1e7, 0, ''])
-writeFileSync(join(OUT, 'chars.tsv.gz'), gz([...rankChars(fields, readFrequency()), ...derivedRows].map(row => row.join('\t')).join('\n')))
+writeFileSync(join(OUT, 'chars.tsv.gz'), gz([...rankChars(fields, positions), ...derivedRows].map(row => row.join('\t')).join('\n')))
 writeFileSync(join(OUT, 'rhymes.json.gz'), gz(JSON.stringify(rhymeTable())))
 // Two tables of one method keep the same name, so where they come from tells them apart.
 const uses = new Map()
