@@ -8,13 +8,18 @@
 //   i/<plane>.gz     each character's descriptions as the source writes them, and the sources
 //   ids-components.json  BabelStone's numbered components: PUA character, description, fragment,
 //                        and the CHISE entities each aligns with
-//   chars.tsv.gz     code point, rank, strokes, radical
+//   chars.tsv.gz     character, rank, strokes, radical. The rank is one number, low first:
+//                    tier * 1e7 + corpus position * 100 + strokes. The tier is school grade (1-6), Joyo/IICore
+//                    (10), Jinmeiyo/Korean education (20), UnihanCore2020 (30), then block (40-60); kana take 5
+//                    and hentaigana and Nushu 70. The position is 1 for the commonest character of the
+//                    classical-text frequency table and 99999 for one it lacks.
 //   methods.json     what the above were made from
 import { appendFileSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { gzipSync } from 'node:zlib'
 import { charBucket, codeBucket, fold, inScope, isHan, partBucket, pinyinDigits, runBucket, wordBucket } from '../src/fold.js'
 import { readUnihan, unihanMethods, rankChars } from './sources/unihan.mjs'
+import { readFrequency } from './sources/frequency.mjs'
 import { IDS_SOURCES, components, partsOf, readDescriptions, runsOf } from './sources/ids.mjs'
 import { allMethods } from './sources/index.mjs'
 import { meaningWords } from './sources/meaning.mjs'
@@ -164,8 +169,8 @@ for (const [bucket, rows] of shapeFiles) writeFileSync(join(OUT, 'g', `${bucket}
 writeFileSync(join(OUT, 'variants.json.gz'), gz(readFileSync(join(import.meta.dirname, '..', 'data', 'variants.json'), 'utf8')))
 
 // Modern kana come among the commonest characters, and hentaigana and Nüshu after every block of Han.
-const derivedRows = [...derived].map(char => [char, /[\u3040-\u30FF]/.test(char) ? 500 : 7000, 0, ''])
-writeFileSync(join(OUT, 'chars.tsv.gz'), gz([...rankChars(fields), ...derivedRows].map(row => row.join('\t')).join('\n')))
+const derivedRows = [...derived].map(char => [char, (/[\u3040-\u30FF]/.test(char) ? 5 : 70) * 1e7, 0, ''])
+writeFileSync(join(OUT, 'chars.tsv.gz'), gz([...rankChars(fields, readFrequency()), ...derivedRows].map(row => row.join('\t')).join('\n')))
 writeFileSync(join(OUT, 'rhymes.json.gz'), gz(JSON.stringify(rhymeTable())))
 // Two tables of one method keep the same name, so where they come from tells them apart.
 const uses = new Map()
