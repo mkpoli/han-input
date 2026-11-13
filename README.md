@@ -22,7 +22,7 @@ It covers Han, extended sinographies such as Chữ Nôm and Sawndip, and kana an
 - **Rhyme tables**: the Guangyun by rhyme, initial, grade and tone.
 - **Radicals**: the 214 Kangxi radicals by residual strokes.
 - **PUA conversion**: convert private-use text from one of six schemes (MOE fonts, HKSCS, Hanyang, CNS, GB 18030, CBETA) to Unicode and browse the mappings. Find reads a private-use character, its code point, a CB code or a CNS code in every scheme that has the slot, so a slot two schemes share shows both. Each character's card lists its own PUA codes and those of its Unihan variants.
-- **Composition**: convert Taiwan's pre-IDS 構字式 (Big5 8DF1–8DFD) and arithmetic composition to IDS. The thirteen symbols and the arithmetic signs are palettes; the Korean History Database and CBETA assign those signs differently.
+- **Composition**: convert the 構字式 of Taiwan's 漢字構形資料庫 (Big5 8DF1–8DFD) and arithmetic composition to IDS. The thirteen symbols and the arithmetic signs are palettes; the Korean History Database and CBETA assign those signs differently.
 
 ## Development
 
