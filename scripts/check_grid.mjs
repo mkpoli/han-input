@@ -18,8 +18,10 @@ try {
   const errors = []
   page.on('pageerror', error => errors.push(error.message))
   const site = process.env.SITE_URL ?? 'http://localhost:5302'
+  /** Character tiles, a set's records, and the records a search finds. */
+  const GRIDS = [['/?q=water', 'main .ui-tiles'], ['/?set=ext_e_withdrawal_records', '.records'], ['/?q=%E6%B0%B4', 'main .records']]
 
-  for (const [url, selector] of [['/?q=water', 'main .ui-tiles'], ['/?set=ext_e_withdrawal_records', '.records']]) {
+  for (const [url, selector] of GRIDS) {
     await page.setViewportSize({ width: 1024, height: 768 })
     await page.goto(site + url)
     const grid = page.locator(selector).first()
@@ -57,11 +59,11 @@ try {
     assert.equal(await buttons.last().evaluate(button => button === document.activeElement), true)
     assert.equal(await grid.locator('button[tabindex="0"]').count(), 1)
     await page.keyboard.press('Enter')
-    if (url.includes('set=')) await page.locator('.card').first().waitFor()
+    if (selector.endsWith('.records')) await page.locator('.card').first().waitFor()
     else assert.ok(new URL(page.url()).searchParams.has('c'))
     console.log(`ok ${url}: roles, roving focus, arrows, Home/End, Tab, resize, activation`)
   }
-  for (const [url, selector] of [['/?q=water', 'main .ui-tiles'], ['/?set=ext_e_withdrawal_records', '.records']]) {
+  for (const [url, selector] of GRIDS) {
     await page.setViewportSize({ width: 1280, height: 900 })
     await page.goto(site + url)
     const grid = page.locator(selector).first()
@@ -88,7 +90,7 @@ try {
     console.log(`ok ${url}: resize while outside preserves the roving item and outside focus`)
   }
   await page.setViewportSize({ width: 1280, height: 900 })
-  for (const [url, selector] of [['/?q=water', 'main .ui-tiles'], ['/?set=ext_e_withdrawal_records', '.records']]) {
+  for (const [url, selector] of GRIDS) {
     await page.goto(site + url)
     const grid = page.locator(selector).first()
     await grid.locator('button').first().waitFor()
@@ -127,7 +129,7 @@ try {
     console.log(`ok ${url}: arrow boundaries allow native scrolling; Home/End boundaries retain scroll position`)
   }
   await page.setViewportSize({ width: 1024, height: 768 })
-  for (const [url, selector] of [['/?q=water', 'main .ui-tiles'], ['/?set=ext_e_withdrawal_records', '.records']]) {
+  for (const [url, selector] of GRIDS) {
     await page.goto(site + url)
     const grid = page.locator(selector).first()
     const button = grid.locator('button').first()
@@ -137,13 +139,13 @@ try {
       return columns > 1 && element.querySelector('[role="row"]')?.querySelectorAll('button').length === columns
     }, await grid.elementHandle())
     const label = (await button.innerText()).trim()
-    if (url.includes('set=')) {
+    if (selector.endsWith('.records')) {
       assert.equal(await button.getAttribute('aria-current'), null)
       assert.ok(!(await page.locator('.card').first().innerText()).includes(label))
     }
     await button.focus()
     await page.keyboard.press('Space')
-    if (url.includes('set=')) {
+    if (selector.endsWith('.records')) {
       await page.waitForFunction(element => element.getAttribute('aria-current') === 'true', await button.elementHandle())
       await page.waitForFunction(code => document.querySelector('.card')?.textContent?.includes(code), label)
     } else await page.waitForFunction(() => new URL(location.href).searchParams.has('c'))
