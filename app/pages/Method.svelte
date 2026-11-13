@@ -83,6 +83,8 @@
   const strokeNext = $derived(strokePad && rows.length ? nextKeys(rows, query) : null)
   /** @param {string} next */
   function setCode(next) { code = next; setQuery(next) }
+  /** A pressed key leaves the focus in the code box, so Space and Enter still take a candidate. @param {PointerEvent} event */
+  const keepFocus = event => event.preventDefault()
   /** @param {string} digit */
   function typeStroke(digit) { if (!strokeNext || strokeNext.has(digit)) setCode(code + digit) }
 
@@ -104,13 +106,13 @@
         {#each STROKE_KEYS as key (key.digit)}
           {@const label = `${t(`method.stroke.${key.digit}`)} (${key.digit})`}
           <button class="ui-button stroke" type="button" data-stroke={key.digit} title={label} aria-label={label}
-            aria-disabled={Boolean(strokeNext && !strokeNext.has(key.digit)) || undefined} onclick={() => typeStroke(key.digit)}>
+            aria-disabled={Boolean(strokeNext && !strokeNext.has(key.digit)) || undefined} onpointerdown={keepFocus} onclick={() => typeStroke(key.digit)}>
             <span class="ui-script" lang="und-Hani">{key.stroke}</span><span class="num">{key.digit}</span>
           </button>
         {/each}
         <button class="ui-button" type="button" data-stroke="back" title={t('method.backspace')} aria-label={t('method.backspace')}
-          aria-disabled={!code || undefined} onclick={() => setCode(code.slice(0, -1))}>←</button>
-        <button class="ui-button" data-variant="quiet" type="button" data-stroke="clear" aria-disabled={!code || undefined} onclick={() => setCode('')}>{t('writing.clear')}</button>
+          aria-disabled={!code || undefined} onpointerdown={keepFocus} onclick={() => setCode(code.slice(0, -1))}>←</button>
+        <button class="ui-button" data-variant="quiet" type="button" data-stroke="clear" aria-disabled={!code || undefined} onpointerdown={keepFocus} onclick={() => setCode('')}>{t('writing.clear')}</button>
       </div>
     {/if}
     {#if shown.length}
