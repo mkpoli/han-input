@@ -32,6 +32,7 @@ A member is a string of one or more code points. GB 12052 writes 1,718 archaic H
 | GlyphWiki ebag | 24,359 GlyphWiki glyphs named `ebag_*`, the 缺字編號 posted for 引得市's missing-character index; 24,356 carry a sprite and three keep the name only |
 | CBETA缺字 | 31,935 CB codes: 31,664 from CBETA's missing-character database and 271 found only in its image archive. 16,607 map to a Unicode character and 15,328 do not; 28,388 carry CBETA's glyph image |
 | FZ oversized PUA | 633 BMP private-use slots defined by the 方正超大字符集 fonts' cmaps; the font files and glyph outlines are not kept |
+| 方言字 | Fourteen sets of characters that one doculect coined or gave its own use: twelve Chinese varieties from the 嚴式方言字 list, 日本國字 and 朝鮮國字 |
 
 Each set has a unique character count and a source-row count. A source row joins through its assigned scalars, or through its private-use glyph slot where no scalar is assigned. A row whose only glyph is an Ideographic Description Sequence stays out of the scalar count and is kept as a record on the set. Repeated mappings, variation sequences and IDS descriptions can make the counts differ. Draft row numbers never establish Unicode assignments.
 
@@ -81,6 +82,14 @@ Four 方正超大字符集 fonts define 633 distinct BMP private-use slots: 522 
 
 The public copies are unofficial. `uv run --with fonttools python scripts/build_fz_pua.py` fetches the six files from a pinned commit of the mirror into `cache/fz-fonts/`, reads their cmaps and writes the records; each file's digest is in `fz_pua_source.json`. None of the six files has a plane-16 mapping, so 字統's `G方正楷体` plane-16 table is not reconstructed.
 
+## Dialect characters
+
+Each set holds the characters one doculect coined or gave its own use. Characters shared with the standard written language stay out, so a set takes only a source's dialect-specific tier.
+
+The twelve Chinese sets follow the 嚴式方言字 list of the 全國漢語方言用字總表: 官話, 晉語, 吳語, 徽語, 贛語, 湘語, 客家話, 粵語, 閩語, 閩東語, 閩南語 and 平話. A row joins every group it is labelled with. The list labels Min only as 閩; 閩東語 takes the Min rows it reads at Fuzhou or Gutian, and 閩南語 those it reads at Xiamen, Zhangzhou or Zhangping. Its 寬式方言字 tier, ordinary characters such as 乞 or 比 given a dialect sense, stays out. 日本國字 and 朝鮮國字 take the kokuji and gukja groups of IDS Workshop's open IDS descriptions. A row that the source can only describe with an IDS is a record on its set.
+
+`bun scripts/build_dialect_chars.mjs` rebuilds the sets from the inputs pinned in `dialect_source.json`; the full build calls the same writer.
+
 ## G source collections
 
 Thirteen sets index the G source codes that name publications and lists in Unihan `kIRG_GSource`: GDM, GHC, GKJ, GLGYJ, GPGLG, GXM, GZ·U and GZA-1, -2, -3, -4, -6 and -7. A member is an assigned character whose value carries the code; no unencoded row enters these sets. The code under a member is that member's G source serial, such as GDM-00013. The GZA sets split on the serial's first digit, the `[123467]` of UAX #38's `GZA-[123467]\d{5}` pattern, so GZA-5 has no members. GZ·U holds the encoded GZ source; the existing gz set is 字統's broader snapshot of the 古壯字字典, with 7,964 rows including unencoded forms, and keeps its label.
@@ -112,6 +121,8 @@ Character cards show the G source beside its code, and a printed record card doe
 - **CBETA**, [cbeta_gaiji](https://github.com/cbeta-org/cbeta_gaiji), commit [857156a](https://github.com/cbeta-org/cbeta_gaiji/tree/857156a6d9f37a020d34099447b51a0b72264620) (2026-11-09), `cbeta_gaiji.json`, and [gaiji-CB](https://github.com/cbeta-org/gaiji-CB), commit [e402e97](https://github.com/cbeta-org/gaiji-CB/tree/e402e97cf0065bd3f13854c0b1c92efe23f859c1) (2026-11-01), retrieved 2026-11-14. The README defines the fields; the composition rules are CBETA's [組字式基本規則](https://archive.cbeta.org/data-format/rare-rule.htm). Neither repository states a licence. The images are low-resolution bitmaps, and the sheets resample them.
 - Two workbooks, `CBETA難字庫.xlsx` (18,769 rows, 2026-01-12) and `CBETA難字庫IDS版_1.2.xlsx` (2026-09-11), privately supplied on 2026-11-14 with an image archive, pinned by SHA-256 in `cbeta_gaiji_source.json` and copied to `cache/cbeta-workbooks/` before an import. Their maker is not recorded beyond the file properties. They hold 18,769 of the same CB codes with notes from CBETA's web pages; every formula matches the database. The second revises one note's punctuation and adds a machine-converted IDS column and an IDS or proposed-character column, which its notes sheet says is 97% complete. The radical, strokes, zhuyin, both IDS columns and the proposed characters are read from it; they are a third party's transcription and identifications, not CBETA's database.
 - **方正超大字符集**, unofficial copies in [FangZhengChaoDaZiFuJi](https://github.com/xiangrongjingujiu/FangZhengChaoDaZiFuJi), commit [1ecfaaf](https://github.com/xiangrongjingujiu/FangZhengChaoDaZiFuJi/tree/1ecfaafaa9a8f9661e878fd507094e83a33226b3) (2021-05-30), retrieved 2026-11-12; FZKai-Z03 5.30, FZKai-Z03S 5.30, FZJiaoCai GuiFanKai 1.02, FZSongS-Extended 2.00, FZKaiS-Extended 1.00 and FZSongS-Extended(SIP) 2.00, © Founder Corporation. The copies carry no licence; only their cmap facts are used, and no font file or glyph outline is stored. All six lack plane-16 mappings.
+- **ambar/fangyanzi**, [汉语方言字](https://github.com/ambar/fangyanzi), commit [760a0a2](https://github.com/ambar/fangyanzi/tree/760a0a2de3e02bb902807372556cedaef9d117f0) (2022-11-01), `data/fangyanzi.json`, retrieved 2026-11-14, MIT. A transcription of the 全國漢語方言用字總表 (its headings count 529 嚴式 and 2,582 寬式 characters), which its README calls the 漢語方言用字規範 of the Ministry of Education's language resources protection project, collected mainly from the 現代漢語方言大詞典. The publisher, date and edition of the original were not located, and the transcription replaces its private-use glyphs with Unicode characters or IDS, correcting labels and readings as its README lists.
+- **IDS Workshop**, [open IDS descriptions](https://github.com/mkpoli/ids-input/tree/a35965b21260748d9eb0bdf21a6c3246b015b163/data/open-data), commit a35965b (2026-11-10), `descriptions.tsv`, CC0 1.0. The kokuji group cites [A list of kokuji](http://www.sljfaq.org/afaq/kokuji-list.html) (sljfaq.org, undated) and English Wikipedia's [Kokuji](https://en.wikipedia.org/wiki/Kokuji); the gukja group cites Korean Wikipedia's [국자의 음역자와 구결자](https://ko.wikipedia.org/w/index.php?title=국자의_음역자와_구결자&oldid=42393816) (CC BY-SA 4.0). The IDS come from [BabelStone IDS](https://www.babelstone.co.uk/CJK/IDS.TXT) (Andrew West, 2025-06-27). These are curated examples, not complete inventories.
 - **NGWU YOH**, personal communications dated 2026-11-06 and 2026-11-07 requesting character-set search and an Extension E withdrawn set; privately supplied screenshots of 字統網 and CNS11643. These establish the interface reference and requested category, with no independent character-membership evidence.
 
 ## Data and checks
@@ -124,6 +135,7 @@ bun scripts/import_glyphwiki_ebag.mjs
 uv run scripts/import_cbeta_gaiji.py
 bun scripts/build_charsets.mjs
 bun scripts/build_g_sources.mjs
+bun scripts/build_dialect_chars.mjs
 bun run verify
 bun run build
 bun scripts/check_charsets.mjs

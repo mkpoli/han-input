@@ -105,6 +105,7 @@
   "charset.cnsOverview": "全字庫來源分類一覽",
   "charset.cnsSources": "全字庫來源分類",
   "charset.cnsIntro": "依字碼收錄時的來源分類。",
+  "charset.dialectChars": "方言字",
   "charset.loading": "載入中…",
   "charset.error": "無法載入搜尋資料。",
   "charset.retry": "重試",

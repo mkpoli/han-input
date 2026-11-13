@@ -105,6 +105,7 @@
   "charset.cnsOverview": "CNS 출처 분류 보기",
   "charset.cnsSources": "CNS 출처 분류",
   "charset.cnsIntro": "CNS에 글자를 수록할 때 기록한 출처에 따른 분류입니다.",
+  "charset.dialectChars": "방언자",
   "charset.loading": "불러오는 중…",
   "charset.error": "검색 데이터를 불러올 수 없습니다.",
   "charset.retry": "다시 시도",
