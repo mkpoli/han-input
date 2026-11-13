@@ -18,6 +18,9 @@
   const similar = $derived(charOf(record?.similarUnicode))
   // CBETA writes its formulas in the general arithmetic notation; one that does not parse shows alone.
   const ids = $derived(record?.composition ? convertArithmetic(record.composition, 'general').ids : '')
+  /** A form is a link when it is one character, and plain text when it is a description. @param {string} form */
+  const isChar = form => [...form].length === 1
+  const href = $derived(record && document ? (record.page || document.url.endsWith('.pdf') ? `${document.url}#page=${record.page ?? 1}` : document.url) : '')
   const unified = $derived(record?.unifiedWith ?? '')
   const unifiedChar = $derived(unified.startsWith('U+') ? String.fromCodePoint(parseInt(unified.slice(2), 16)) : '')
 
@@ -33,12 +36,14 @@
   <article class="record">
     <header class="head">
       <div class="glyph">
-        {#if record.sprite || record.atlas || record.glyph}<RecordGlyph {record} />{:else}<span class="ui-mono">{code}</span>{/if}
+        {#if record.sprite || record.atlas || record.glyph}<RecordGlyph {record} />{:else if record.ids}<span class="ids" lang="und-Hani">{record.ids}</span>{:else}<span class="ui-mono">{code}</span>{/if}
       </div>
       <div class="facts">
         <p class="name"><SourceCode code={code} /></p>
-        <p class="ui-hint">{document.title} · {document.source}</p>
-        <a href={record.page || document.url.endsWith('.pdf') ? `${document.url}#page=${record.page ?? 1}` : document.url} target="_blank" rel="noopener noreferrer">{document.document}{record.page ? ` · ${t('proposal.page', { page: record.page })}` : ''}</a>
+        {#if document.source || document.title !== document.document}<p class="ui-hint">{[document.title, document.source].filter(Boolean).join(' · ')}</p>{/if}
+        {#if href}
+          <a {href} target="_blank" rel="noopener noreferrer">{document.document}{record.page ? ` · ${t('proposal.page', { page: record.page })}` : ''}</a>
+        {:else}<p class="doc">{document.document}</p>{/if}
       </div>
     </header>
     {#if record.status}<p class="ui-hint">{record.status}</p>{/if}
@@ -62,6 +67,25 @@
     {#if record.common}
       <p class="related"><span class="ui-hint">{t('proposal.common')}</span>
         <a href={link('', { c: record.common })} lang="und-Hani" onclick={event => { event.preventDefault(); if (record.common) choose(record.common) }}>{record.common}</a>
+      </p>
+    {/if}
+    {#if record.related?.length}
+      <p class="related"><span class="ui-hint">{t('proposal.related')}</span>
+        {#each record.related as form, i (form + i)}
+          {#if isChar(form)}
+            <a href={link('', { c: form })} lang="und-Hani" onclick={event => follow(event, form)}>{form}</a>
+          {:else}<span class="formula" lang="und-Hani">{form}</span>{/if}
+          {#if record.relations?.[i]}<span class="ui-hint">{record.relations[i]}</span>{/if}
+        {/each}
+      </p>
+    {/if}
+    {#if record.alternates?.length}
+      <p class="related"><span class="ui-hint">{t('proposal.alternates')}</span>
+        {#each record.alternates as form, i (form + i)}
+          {#if isChar(form)}
+            <a href={link('', { c: form })} lang="und-Hani" onclick={event => follow(event, form)}>{form}</a>
+          {:else}<span class="formula" lang="und-Hani">{form}</span>{/if}
+        {/each}
       </p>
     {/if}
     {#if record.composition}
@@ -108,7 +132,9 @@
   .facts{display:grid;gap:var(--ui-space-2xs);min-inline-size:0}
   .name{margin:0;font-size:var(--ui-text-sm);overflow-wrap:anywhere}
   .facts a{color:var(--ui-color-accent-ink);font-size:var(--ui-text-sm);overflow-wrap:anywhere}
-  .mapped,.unified,.related{margin:0}
+  .mapped,.unified,.related,.doc{margin:0}
+  .doc{font-size:var(--ui-text-sm);overflow-wrap:anywhere}
+  .ids{font-family:var(--ui-font-script);font-size:var(--ui-text-lg);line-height:1.2;overflow-wrap:anywhere;text-align:center}
   .workbook{display:grid;gap:var(--ui-space-sm);padding-block-start:var(--ui-space-sm);border-block-start:1px solid var(--ui-color-border)}
   .workbook h3{margin:0}
   .notes{display:flex;flex-wrap:wrap;gap:var(--ui-space-xs) var(--ui-space-lg);margin:0}

@@ -13,6 +13,110 @@
       "sha256": "9fce87c4dfd6a93e8f185bf96640e5db29bc720ea99e1b7667b840341d6bd02a"
     },
     {
+      "url": "file:study-tables/《中医古籍用字研究》字頭.xlsx",
+      "sha256": "8fbd8186cbc946fb93fef168fa427edf4169ae5950059f99c66450ce5310b230"
+    },
+    {
+      "url": "file:study-tables/《六朝別字記新編》字頭（不全）v2.xlsx",
+      "sha256": "1fb1768da18bfd09ce6d0674f89c347e5a99c79d39ca2534c059aca3a9324470"
+    },
+    {
+      "url": "file:study-tables/《大字典论稿》難字部分（類推繁体）.xls",
+      "sha256": "8b2f6feb1d74598f959bbfc683d6ffcea3a3838e5a48a961161d44cd400013ee"
+    },
+    {
+      "url": "file:study-tables/《字孳補》字頭v2.xls",
+      "sha256": "8db27ab2a574627edfc6404ea524b46e2ec5420544bf6e60a9b2185d2ee76b02"
+    },
+    {
+      "url": "file:study-tables/《徽州文书俗字研究》字表節選v2.xls",
+      "sha256": "0d672203e4b73b62e1ec422190b2dc324c13ad345fbfb37051b4455531f56d8f"
+    },
+    {
+      "url": "file:study-tables/《徽州文书稀俗字词例释》俗字部分字頭v2.xlsx",
+      "sha256": "ceba38d47b2ef1689f87712428cdb73b045b656326a408d70d8cc8bbd59800aa"
+    },
+    {
+      "url": "file:study-tables/《敦煌佛典语词和俗字研究》俗字部分字頭.xlsx",
+      "sha256": "ba483cf136ff0e8286aab7dadbd2f4fec11e716ca26dc2d88d14195f07172720"
+    },
+    {
+      "url": "file:study-tables/《新集藏经音义随函录研究》字頭v3 釋義・關聯字・字理付.xlsx",
+      "sha256": "bd9c0eeae2ca25a7625c2deb46b7e58be93e887a457381231542b26071ad980f"
+    },
+    {
+      "url": "file:study-tables/《明清大型字書疑難字考釋與研究》下篇字頭.xlsx",
+      "sha256": "54042593b5f886d6ac71f1592f6e8b421e738d7714e16ed6d09494ee8da42a6a"
+    },
+    {
+      "url": "file:study-tables/《明清小说俗字俗语研究》字頭（U外58種）.xlsx",
+      "sha256": "57db67771b0b7dc039e1a030e75fc6130f5a94135131ce5f2e10cba27d6af24d"
+    },
+    {
+      "url": "file:study-tables/《正字通异体字研究》字頭.xlsx",
+      "sha256": "e29d54eed4e949c345744a54acfdd232e3f17da783157087ddeafb7b92ed1ed5"
+    },
+    {
+      "url": "file:study-tables/《汉语大字典难字考》字頭.xlsx",
+      "sha256": "83d4fdd3a297b8044dbe29d07face58e73d6aeba69ab2007180798b5d3feb272"
+    },
+    {
+      "url": "file:study-tables/《玉篇俗字》字表U外去重137种.xlsx",
+      "sha256": "16924b67f2cba2b438a93d41a0822af97f62c5396002bf2b1b2a898de5807303"
+    },
+    {
+      "url": "file:study-tables/《甲骨文字释林》-目录U外字75个.xlsx",
+      "sha256": "8ef01519cc4b131554d55fd9467bfd59fc0871fc2fd8e406fdc1e3c62b33ec8b"
+    },
+    {
+      "url": "file:study-tables/《疑难字三考》字头整理表.xlsx",
+      "sha256": "b44698aff197e295dd2b8e7b2a879c206a214607275366e36e2d12404291085b"
+    },
+    {
+      "url": "file:study-tables/《简化汉字修订方案（草案）》未录入释义及字形汇总表.xlsx",
+      "sha256": "7783fad4b3da797dc7aa8ef01c66ea115d87a80984d046dcbc092ae4ecebb0a5"
+    },
+    {
+      "url": "file:study-tables/《隋唐出土墓志文字研究及整理》第15章俗字考字頭.xlsx",
+      "sha256": "2dd7b2bd91651da19330f12d1997fc43a621c2c1a41b46c6461016e01d157cec"
+    },
+    {
+      "url": "file:study-tables/一切经音义刻本用字研究-字頭節選.xlsx",
+      "sha256": "5327a11826a03c2b085005bba4e41d4a035f263cef718298289abf590070b027"
+    },
+    {
+      "url": "file:study-tables/东汉碑刻异体字研究-字頭節選.xlsx",
+      "sha256": "a7741d8b8021a851431c867fccdfbb320e9d8f4292c06189275d584b70f07448"
+    },
+    {
+      "url": "file:study-tables/可洪音义研究异体字表字头.txt",
+      "sha256": "aa24aa643d4605982914a5ea6b83c97148410a7c4ad5ba1a594976c01f984180"
+    },
+    {
+      "url": "file:study-tables/子弹库帛书-第九部分-文字編字頭.txt",
+      "sha256": "a733d9bf5e5b2cd288cd42e1d7bd8958bac4f9a640d178a00bc84c39a471426e"
+    },
+    {
+      "url": "file:study-tables/康熙外字.txt",
+      "sha256": "9c53898dcaa7fb92d12a2c5da88119cf1eb52eef187853099eff599e77957bf1"
+    },
+    {
+      "url": "file:study-tables/汉语大字典_音义未详字头_粗校.txt",
+      "sha256": "1c1754246e658fdd9b8209861f31563ac8b9d5d78fec1fdcaa9719beef7a513e"
+    },
+    {
+      "url": "file:study-tables/疑难字简明字典 刘叔新 索引.txt",
+      "sha256": "bae96c395ce0aae3045d8ac8b037c50a928e25fe5bd34d0e013e425b13d6565e"
+    },
+    {
+      "url": "file:study-tables/直音篇七卷部首-揚州資政左室v2.xlsx",
+      "sha256": "721423dfb2d950096a14869af1f5fae052ee256c86608c5f265575ee267d88a0"
+    },
+    {
+      "url": "file:study-tables/龙龛手镜研究字头.txt",
+      "sha256": "9f38c97c62c4945f96228ede53f9f61c4abc363b81b6f08c193d86619b407de7"
+    },
+    {
       "url": "https://codeload.github.com/cbeta-org/gaiji-CB/tar.gz/e402e97cf0065bd3f13854c0b1c92efe23f859c1",
       "sha256": "48d31b5c691a1e51cd2e449f33c8592951f5034587ad6b09e61a6ea2cf94e3e2"
     },

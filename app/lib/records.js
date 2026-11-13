@@ -48,16 +48,18 @@ export function keptParts(ids) {
   return parts
 }
 
-/** @param {ProposalRecord} record */
-function partsOf(record) {
-  const ids = [record.workbook?.ids, record.workbook?.idsMachine, record.composition ? convertArithmetic(record.composition, 'general').ids : '']
+/** The parts of a record's own IDS, its alternate descriptions and its formula. @param {ProposalRecord} record */
+export function partsOf(record) {
+  const ids = [record.ids, ...(record.alternates ?? []), record.workbook?.ids, record.workbook?.idsMachine, record.composition ? convertArithmetic(record.composition, 'general').ids : '']
   return new Set(ids.flatMap(text => text ? keptParts(text) : []))
 }
 
-/** @param {ProposalRecord} record */
-function relatedOf(record) {
+/** The characters a record is identified with: those a source relates it to and its one-character alternates.
+ * @param {ProposalRecord} record */
+export function relatedOf(record) {
   const related = new Set(/** @type {string[]} */ ([record.workbook?.proposed, record.common].filter(Boolean)))
   if (record.similarUnicode) related.add(String.fromCodePoint(parseInt(record.similarUnicode.slice(2), 16)))
+  for (const form of [...(record.related ?? []), ...(record.alternates ?? [])]) if (isHan(form)) related.add(form)
   return related
 }
 

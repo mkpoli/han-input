@@ -6973,6 +6973,758 @@
     "columns": 10
   },
   {
+    "id": "study_dazidian_lungao",
+    "group": "Studies",
+    "label": "大字典论稿",
+    "names": {
+      "en": "大字典论稿",
+      "zh": "大字典论稿",
+      "hans": "大字典论稿",
+      "ja": "大字典论稿",
+      "ko": "大字典论稿"
+    },
+    "chars": 460,
+    "total": 580,
+    "encoded": 460,
+    "unencoded": 116,
+    "codes": "/charsets/study_dazidian_lungao.codes.tsv",
+    "records": {
+      "file": "/charsets/study_dazidian_lungao_records.json",
+      "count": 580,
+      "glyphs": 0,
+      "search": true
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "大字典论稿",
+      "url": ""
+    },
+    "columns": 10
+  },
+  {
+    "id": "study_dazidian_nanzikao",
+    "group": "Studies",
+    "label": "汉语大字典难字考",
+    "names": {
+      "en": "汉语大字典难字考",
+      "zh": "汉语大字典难字考",
+      "hans": "汉语大字典难字考",
+      "ja": "汉语大字典难字考",
+      "ko": "汉语大字典难字考"
+    },
+    "chars": 778,
+    "total": 781,
+    "encoded": 778,
+    "unencoded": 1,
+    "codes": "/charsets/study_dazidian_nanzikao.codes.tsv",
+    "records": {
+      "file": "/charsets/study_dazidian_nanzikao_records.json",
+      "count": 781,
+      "glyphs": 0,
+      "search": true
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "汉语大字典难字考",
+      "url": ""
+    },
+    "columns": 10
+  },
+  {
+    "id": "study_dazidian_weixiang",
+    "group": "Studies",
+    "label": "汉语大字典音义未详字头",
+    "names": {
+      "en": "汉语大字典音义未详字头",
+      "zh": "汉语大字典音义未详字头",
+      "hans": "汉语大字典音义未详字头",
+      "ja": "汉语大字典音义未详字头",
+      "ko": "汉语大字典音义未详字头"
+    },
+    "chars": 2167,
+    "total": 2245,
+    "encoded": 2167,
+    "unencoded": 77,
+    "codes": "/charsets/study_dazidian_weixiang.codes.tsv",
+    "records": {
+      "file": "/charsets/study_dazidian_weixiang_records.json",
+      "count": 2245,
+      "glyphs": 0,
+      "search": true
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "汉语大字典音义未详字头",
+      "url": ""
+    },
+    "columns": 10
+  },
+  {
+    "id": "study_donghan_beike",
+    "group": "Studies",
+    "label": "东汉碑刻异体字研究",
+    "names": {
+      "en": "东汉碑刻异体字研究",
+      "zh": "东汉碑刻异体字研究",
+      "hans": "东汉碑刻异体字研究",
+      "ja": "东汉碑刻异体字研究",
+      "ko": "东汉碑刻异体字研究"
+    },
+    "chars": 500,
+    "total": 837,
+    "encoded": 500,
+    "unencoded": 293,
+    "codes": "/charsets/study_donghan_beike.codes.tsv",
+    "records": {
+      "file": "/charsets/study_donghan_beike_records.json",
+      "count": 837,
+      "glyphs": 0,
+      "search": true
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "东汉碑刻异体字研究",
+      "url": ""
+    },
+    "columns": 10
+  },
+  {
+    "id": "study_dunhuang_suzi",
+    "group": "Studies",
+    "label": "敦煌佛典语词和俗字研究",
+    "names": {
+      "en": "敦煌佛典语词和俗字研究",
+      "zh": "敦煌佛典语词和俗字研究",
+      "hans": "敦煌佛典语词和俗字研究",
+      "ja": "敦煌佛典语词和俗字研究",
+      "ko": "敦煌佛典语词和俗字研究"
+    },
+    "chars": 63,
+    "total": 105,
+    "encoded": 63,
+    "unencoded": 40,
+    "codes": "/charsets/study_dunhuang_suzi.codes.tsv",
+    "records": {
+      "file": "/charsets/study_dunhuang_suzi_records.json",
+      "count": 105,
+      "glyphs": 0,
+      "search": true
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "敦煌佛典语词和俗字研究",
+      "url": ""
+    },
+    "columns": 10
+  },
+  {
+    "id": "study_huizhou_suzi",
+    "group": "Studies",
+    "label": "徽州文书俗字研究",
+    "names": {
+      "en": "徽州文书俗字研究",
+      "zh": "徽州文书俗字研究",
+      "hans": "徽州文书俗字研究",
+      "ja": "徽州文书俗字研究",
+      "ko": "徽州文书俗字研究"
+    },
+    "chars": 441,
+    "total": 720,
+    "encoded": 441,
+    "unencoded": 277,
+    "codes": "/charsets/study_huizhou_suzi.codes.tsv",
+    "records": {
+      "file": "/charsets/study_huizhou_suzi_records.json",
+      "count": 720,
+      "glyphs": 0,
+      "search": true
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "徽州文书俗字研究",
+      "url": ""
+    },
+    "columns": 10
+  },
+  {
+    "id": "study_huizhou_xisu",
+    "group": "Studies",
+    "label": "徽州文书稀俗字词例释",
+    "names": {
+      "en": "徽州文书稀俗字词例释",
+      "zh": "徽州文书稀俗字词例释",
+      "hans": "徽州文书稀俗字词例释",
+      "ja": "徽州文书稀俗字词例释",
+      "ko": "徽州文书稀俗字词例释"
+    },
+    "chars": 131,
+    "total": 166,
+    "encoded": 131,
+    "unencoded": 33,
+    "codes": "/charsets/study_huizhou_xisu.codes.tsv",
+    "records": {
+      "file": "/charsets/study_huizhou_xisu_records.json",
+      "count": 166,
+      "glyphs": 0,
+      "search": true
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "徽州文书稀俗字词例释",
+      "url": ""
+    },
+    "columns": 10
+  },
+  {
+    "id": "study_jiaguwen_shilin",
+    "group": "Studies",
+    "label": "甲骨文字释林",
+    "names": {
+      "en": "甲骨文字释林",
+      "zh": "甲骨文字释林",
+      "hans": "甲骨文字释林",
+      "ja": "甲骨文字释林",
+      "ko": "甲骨文字释林"
+    },
+    "chars": 0,
+    "total": 74,
+    "encoded": 0,
+    "unencoded": 74,
+    "records": {
+      "file": "/charsets/study_jiaguwen_shilin_records.json",
+      "count": 74,
+      "glyphs": 0,
+      "search": true
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "甲骨文字释林",
+      "url": ""
+    },
+    "columns": 10
+  },
+  {
+    "id": "study_jianhua_xiuding",
+    "group": "Studies",
+    "label": "简化汉字修订方案（草案）",
+    "names": {
+      "en": "简化汉字修订方案（草案）",
+      "zh": "简化汉字修订方案（草案）",
+      "hans": "简化汉字修订方案（草案）",
+      "ja": "简化汉字修订方案（草案）",
+      "ko": "简化汉字修订方案（草案）"
+    },
+    "chars": 21,
+    "total": 90,
+    "encoded": 21,
+    "unencoded": 69,
+    "codes": "/charsets/study_jianhua_xiuding.codes.tsv",
+    "records": {
+      "file": "/charsets/study_jianhua_xiuding_records.json",
+      "count": 90,
+      "glyphs": 0,
+      "search": true
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "简化汉字修订方案（草案）",
+      "url": ""
+    },
+    "columns": 10
+  },
+  {
+    "id": "study_kangxi_waizi",
+    "group": "Studies",
+    "label": "康熙外字",
+    "names": {
+      "en": "康熙外字",
+      "zh": "康熙外字",
+      "hans": "康熙外字",
+      "ja": "康熙外字",
+      "ko": "康熙外字"
+    },
+    "chars": 181,
+    "total": 365,
+    "encoded": 181,
+    "unencoded": 184,
+    "codes": "/charsets/study_kangxi_waizi.codes.tsv",
+    "records": {
+      "file": "/charsets/study_kangxi_waizi_records.json",
+      "count": 365,
+      "glyphs": 0,
+      "search": true
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "康熙外字",
+      "url": ""
+    },
+    "columns": 10
+  },
+  {
+    "id": "study_kehong",
+    "group": "Studies",
+    "label": "可洪音义研究",
+    "names": {
+      "en": "可洪音义研究",
+      "zh": "可洪音义研究",
+      "hans": "可洪音义研究",
+      "ja": "可洪音义研究",
+      "ko": "可洪音义研究"
+    },
+    "chars": 5589,
+    "total": 5743,
+    "encoded": 5589,
+    "unencoded": 35,
+    "codes": "/charsets/study_kehong.codes.tsv",
+    "records": {
+      "file": "/charsets/study_kehong_records.json",
+      "count": 5743,
+      "glyphs": 0,
+      "search": true
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "可洪音义研究",
+      "url": ""
+    },
+    "columns": 10
+  },
+  {
+    "id": "study_liuchao",
+    "group": "Studies",
+    "label": "六朝別字記新編",
+    "names": {
+      "en": "六朝別字記新編",
+      "zh": "六朝別字記新編",
+      "hans": "六朝別字記新編",
+      "ja": "六朝別字記新編",
+      "ko": "六朝別字記新編"
+    },
+    "chars": 220,
+    "total": 525,
+    "encoded": 220,
+    "unencoded": 302,
+    "codes": "/charsets/study_liuchao.codes.tsv",
+    "records": {
+      "file": "/charsets/study_liuchao_records.json",
+      "count": 525,
+      "glyphs": 0,
+      "search": true
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "六朝別字記新編",
+      "url": ""
+    },
+    "columns": 10
+  },
+  {
+    "id": "study_longkan",
+    "group": "Studies",
+    "label": "龙龛手镜研究",
+    "names": {
+      "en": "龙龛手镜研究",
+      "zh": "龙龛手镜研究",
+      "hans": "龙龛手镜研究",
+      "ja": "龙龛手镜研究",
+      "ko": "龙龛手镜研究"
+    },
+    "chars": 716,
+    "total": 956,
+    "encoded": 716,
+    "unencoded": 220,
+    "codes": "/charsets/study_longkan.codes.tsv",
+    "records": {
+      "file": "/charsets/study_longkan_records.json",
+      "count": 956,
+      "glyphs": 0,
+      "search": true
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "龙龛手镜研究",
+      "url": ""
+    },
+    "columns": 10
+  },
+  {
+    "id": "study_mingqing_xiaoshuo",
+    "group": "Studies",
+    "label": "明清小说俗字俗语研究",
+    "names": {
+      "en": "明清小说俗字俗语研究",
+      "zh": "明清小说俗字俗语研究",
+      "hans": "明清小说俗字俗语研究",
+      "ja": "明清小说俗字俗语研究",
+      "ko": "明清小说俗字俗语研究"
+    },
+    "chars": 99,
+    "total": 157,
+    "encoded": 99,
+    "unencoded": 58,
+    "codes": "/charsets/study_mingqing_xiaoshuo.codes.tsv",
+    "records": {
+      "file": "/charsets/study_mingqing_xiaoshuo_records.json",
+      "count": 157,
+      "glyphs": 0,
+      "search": true
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "明清小说俗字俗语研究",
+      "url": ""
+    },
+    "columns": 10
+  },
+  {
+    "id": "study_mingqing_zishu",
+    "group": "Studies",
+    "label": "明清大型字書疑難字考釋與研究",
+    "names": {
+      "en": "明清大型字書疑難字考釋與研究",
+      "zh": "明清大型字書疑難字考釋與研究",
+      "hans": "明清大型字書疑難字考釋與研究",
+      "ja": "明清大型字書疑難字考釋與研究",
+      "ko": "明清大型字書疑難字考釋與研究"
+    },
+    "chars": 1001,
+    "total": 1007,
+    "encoded": 1001,
+    "unencoded": 5,
+    "codes": "/charsets/study_mingqing_zishu.codes.tsv",
+    "records": {
+      "file": "/charsets/study_mingqing_zishu_records.json",
+      "count": 1007,
+      "glyphs": 0,
+      "search": true
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "明清大型字書疑難字考釋與研究",
+      "url": ""
+    },
+    "columns": 10
+  },
+  {
+    "id": "study_nanzi_sankao",
+    "group": "Studies",
+    "label": "疑难字三考",
+    "names": {
+      "en": "疑难字三考",
+      "zh": "疑难字三考",
+      "hans": "疑难字三考",
+      "ja": "疑难字三考",
+      "ko": "疑难字三考"
+    },
+    "chars": 998,
+    "total": 1032,
+    "encoded": 998,
+    "unencoded": 34,
+    "codes": "/charsets/study_nanzi_sankao.codes.tsv",
+    "records": {
+      "file": "/charsets/study_nanzi_sankao_records.json",
+      "count": 1032,
+      "glyphs": 0,
+      "search": true
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "疑难字三考",
+      "url": ""
+    },
+    "columns": 10
+  },
+  {
+    "id": "study_suihanlu",
+    "group": "Studies",
+    "label": "新集藏经音义随函录研究",
+    "names": {
+      "en": "新集藏经音义随函录研究",
+      "zh": "新集藏经音义随函录研究",
+      "hans": "新集藏经音义随函录研究",
+      "ja": "新集藏经音义随函录研究",
+      "ko": "新集藏经音义随函录研究"
+    },
+    "chars": 895,
+    "total": 2017,
+    "encoded": 895,
+    "unencoded": 1078,
+    "codes": "/charsets/study_suihanlu.codes.tsv",
+    "records": {
+      "file": "/charsets/study_suihanlu_records.json",
+      "count": 2017,
+      "glyphs": 0,
+      "search": true
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "新集藏经音义随函录研究",
+      "url": ""
+    },
+    "columns": 10
+  },
+  {
+    "id": "study_suitang_muzhi",
+    "group": "Studies",
+    "label": "隋唐出土墓志文字研究及整理",
+    "names": {
+      "en": "隋唐出土墓志文字研究及整理",
+      "zh": "隋唐出土墓志文字研究及整理",
+      "hans": "隋唐出土墓志文字研究及整理",
+      "ja": "隋唐出土墓志文字研究及整理",
+      "ko": "隋唐出土墓志文字研究及整理"
+    },
+    "chars": 91,
+    "total": 142,
+    "encoded": 91,
+    "unencoded": 51,
+    "codes": "/charsets/study_suitang_muzhi.codes.tsv",
+    "records": {
+      "file": "/charsets/study_suitang_muzhi_records.json",
+      "count": 142,
+      "glyphs": 0,
+      "search": true
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "隋唐出土墓志文字研究及整理",
+      "url": ""
+    },
+    "columns": 10
+  },
+  {
+    "id": "study_yinan_jianming",
+    "group": "Studies",
+    "label": "疑难字简明字典",
+    "names": {
+      "en": "疑难字简明字典",
+      "zh": "疑难字简明字典",
+      "hans": "疑难字简明字典",
+      "ja": "疑难字简明字典",
+      "ko": "疑难字简明字典"
+    },
+    "chars": 10733,
+    "total": 12433,
+    "encoded": 10733,
+    "unencoded": 41,
+    "codes": "/charsets/study_yinan_jianming.codes.tsv",
+    "records": {
+      "file": "/charsets/study_yinan_jianming_records.json",
+      "count": 12433,
+      "glyphs": 0,
+      "search": true
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "疑难字简明字典",
+      "url": ""
+    },
+    "columns": 10
+  },
+  {
+    "id": "study_yiqiejing",
+    "group": "Studies",
+    "label": "一切经音义刻本用字研究",
+    "names": {
+      "en": "一切经音义刻本用字研究",
+      "zh": "一切经音义刻本用字研究",
+      "hans": "一切经音义刻本用字研究",
+      "ja": "一切经音义刻本用字研究",
+      "ko": "一切经音义刻本用字研究"
+    },
+    "chars": 414,
+    "total": 780,
+    "encoded": 414,
+    "unencoded": 362,
+    "codes": "/charsets/study_yiqiejing.codes.tsv",
+    "records": {
+      "file": "/charsets/study_yiqiejing_records.json",
+      "count": 780,
+      "glyphs": 0,
+      "search": true
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "一切经音义刻本用字研究",
+      "url": ""
+    },
+    "columns": 10
+  },
+  {
+    "id": "study_yupian_suzi",
+    "group": "Studies",
+    "label": "玉篇俗字",
+    "names": {
+      "en": "玉篇俗字",
+      "zh": "玉篇俗字",
+      "hans": "玉篇俗字",
+      "ja": "玉篇俗字",
+      "ko": "玉篇俗字"
+    },
+    "chars": 0,
+    "total": 136,
+    "encoded": 0,
+    "unencoded": 136,
+    "records": {
+      "file": "/charsets/study_yupian_suzi_records.json",
+      "count": 136,
+      "glyphs": 0,
+      "search": true
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "玉篇俗字",
+      "url": ""
+    },
+    "columns": 10
+  },
+  {
+    "id": "study_zhengzitong",
+    "group": "Studies",
+    "label": "正字通异体字研究",
+    "names": {
+      "en": "正字通异体字研究",
+      "zh": "正字通异体字研究",
+      "hans": "正字通异体字研究",
+      "ja": "正字通异体字研究",
+      "ko": "正字通异体字研究"
+    },
+    "chars": 468,
+    "total": 522,
+    "encoded": 468,
+    "unencoded": 48,
+    "codes": "/charsets/study_zhengzitong.codes.tsv",
+    "records": {
+      "file": "/charsets/study_zhengzitong_records.json",
+      "count": 522,
+      "glyphs": 0,
+      "search": true
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "正字通异体字研究",
+      "url": ""
+    },
+    "columns": 10
+  },
+  {
+    "id": "study_zhiyinpian",
+    "group": "Studies",
+    "label": "直音篇",
+    "names": {
+      "en": "直音篇",
+      "zh": "直音篇",
+      "hans": "直音篇",
+      "ja": "直音篇",
+      "ko": "直音篇"
+    },
+    "chars": 525,
+    "total": 525,
+    "encoded": 525,
+    "unencoded": 0,
+    "codes": "/charsets/study_zhiyinpian.codes.tsv",
+    "records": {
+      "file": "/charsets/study_zhiyinpian_records.json",
+      "count": 525,
+      "glyphs": 0,
+      "search": true
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "直音篇",
+      "url": ""
+    },
+    "columns": 10
+  },
+  {
+    "id": "study_zhongyi",
+    "group": "Studies",
+    "label": "中医古籍用字研究",
+    "names": {
+      "en": "中医古籍用字研究",
+      "zh": "中医古籍用字研究",
+      "hans": "中医古籍用字研究",
+      "ja": "中医古籍用字研究",
+      "ko": "中医古籍用字研究"
+    },
+    "chars": 192,
+    "total": 236,
+    "encoded": 192,
+    "unencoded": 36,
+    "codes": "/charsets/study_zhongyi.codes.tsv",
+    "records": {
+      "file": "/charsets/study_zhongyi_records.json",
+      "count": 236,
+      "glyphs": 0,
+      "search": true
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "中医古籍用字研究",
+      "url": ""
+    },
+    "columns": 10
+  },
+  {
+    "id": "study_zidanku",
+    "group": "Studies",
+    "label": "子弹库帛书",
+    "names": {
+      "en": "子弹库帛书",
+      "zh": "子弹库帛书",
+      "hans": "子弹库帛书",
+      "ja": "子弹库帛书",
+      "ko": "子弹库帛书"
+    },
+    "chars": 361,
+    "total": 396,
+    "encoded": 361,
+    "unencoded": 35,
+    "codes": "/charsets/study_zidanku.codes.tsv",
+    "records": {
+      "file": "/charsets/study_zidanku_records.json",
+      "count": 396,
+      "glyphs": 0,
+      "search": true
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "子弹库帛书",
+      "url": ""
+    },
+    "columns": 10
+  },
+  {
+    "id": "study_zizibu",
+    "group": "Studies",
+    "label": "字孳補",
+    "names": {
+      "en": "字孳補",
+      "zh": "字孳補",
+      "hans": "字孳補",
+      "ja": "字孳補",
+      "ko": "字孳補"
+    },
+    "chars": 973,
+    "total": 1755,
+    "encoded": 973,
+    "unencoded": 782,
+    "codes": "/charsets/study_zizibu.codes.tsv",
+    "records": {
+      "file": "/charsets/study_zizibu_records.json",
+      "count": 1755,
+      "glyphs": 0,
+      "search": true
+    },
+    "recordsNote": false,
+    "source": {
+      "name": "字孳補",
+      "url": ""
+    },
+    "columns": 10
+  },
+  {
     "id": "dialect_guan",
     "group": "Dialect characters",
     "label": "官話",

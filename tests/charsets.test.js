@@ -236,7 +236,7 @@ test('snapshot covers every source catalogue and counts match unique scalars', (
   expect(referenceIds).toHaveLength(115)
   for (const id of referenceIds) expect(catalogue.some(row => row.id === id)).toBe(true)
   for (const input of sources.inputs) expect(input.sha256).toMatch(/^[a-f0-9]{64}$/)
-  expect(catalogue.length).toBe(295)
+  expect(catalogue.length).toBe(321)
   for (const id of ['irgn', 'l2', 'g_fzk', '1k8myqp9o8zxkvdpbqdhrfs6yfx5bk2t']) expect(catalogue.some(row => row.id === id)).toBe(false)
   const cns = catalogue.filter(row => row.group === 'CNS sources')
   const cnsSource = JSON.parse(readFileSync(new URL('cns-sources.json', base), 'utf8'))
@@ -282,7 +282,8 @@ test('snapshot covers every source catalogue and counts match unique scalars', (
     const members = membersOf(readFileSync(new URL(`${row.id}.txt`, base), 'utf8'))
     expect(new Set(members).size).toBe(row.chars)
     expect(members.length).toBe(row.chars)
-    expect(row.source.url).toMatch(/^https:\/\//)
+    // A study table was supplied privately and has no address.
+    expect(row.source.url).toMatch(row.group === 'Studies' ? /^$/ : /^https:\/\//)
     expect(Number.isInteger(row.encoded)).toBe(true)
     expect(Number.isInteger(row.unencoded)).toBe(true)
     // IWDS counts entries for `total`, not example characters.

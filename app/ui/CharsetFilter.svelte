@@ -9,7 +9,7 @@
 
   const CNS_GROUP = 'CNS sources'
   /** @type {Record<string, string>} */
-  const GROUP_KEYS = { [CNS_GROUP]: 'charset.cnsSources', 'Dialect characters': 'charset.dialectChars' }
+  const GROUP_KEYS = { [CNS_GROUP]: 'charset.cnsSources', 'Dialect characters': 'charset.dialectChars', Studies: 'charset.studies' }
   const groupName = (/** @type {string} */ group) => GROUP_KEYS[group] ? t(GROUP_KEYS[group]) : group
 
   /** @type {{ charsets: import('../lib/charsets.js').Charset[], selected: string, onchange: (id: string) => void, failed?: boolean, onretry: () => void }} */
@@ -197,7 +197,7 @@
       <span>{t('charset.mapped', { count: chosen.chars.toLocaleString() })}</span>
       <span>{t('charset.rows', { count: chosen.total.toLocaleString() })}</span>
       {#if chosen.source.version}<span class="ui-count">{chosen.source.version}</span>{/if}
-      <a href={chosen.source.url} target="_blank" rel="noopener noreferrer">{t('method.source')}: {chosen.source.name}</a>
+      {#if chosen.source.url}<a href={chosen.source.url} target="_blank" rel="noopener noreferrer">{t('method.source')}: {chosen.source.name}</a>{:else}<span>{t('method.source')}: {chosen.source.name}</span>{/if}
       {#if chosen.source.dataUrl}<a href={chosen.source.dataUrl} target="_blank" rel="noopener noreferrer">{t('convert.data')}</a>{/if}
       {#if recordsFile}<a href={recordsFile} target="_blank" rel="noopener noreferrer">{t('charset.records')}</a>{/if}
     </div>

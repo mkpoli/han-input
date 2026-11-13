@@ -25,7 +25,7 @@
         title={[entry.record.source, entry.document.title].join(' · ')} onclick={() => showRecord(entry.record, entry.document)}>
         {#if entry.record.sprite || entry.record.atlas || entry.record.glyph}
           <RecordGlyph record={entry.record} />
-        {:else}<span class="formula" lang="und-Hani">{entry.record.composition ?? ''}</span>{/if}
+        {:else}<span class="formula" lang="und-Hani">{entry.record.ids ?? entry.record.composition ?? ''}</span>{/if}
         <span class="ui-tile-note ui-mono">{entry.record.source}</span>
       </button>
     {/snippet}

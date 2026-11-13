@@ -33,6 +33,7 @@ A member is a string of one or more code points. GB 12052 writes 1,718 archaic H
 | CBETA缺字 | 31,935 CB codes: 31,664 from CBETA's missing-character database and 271 found only in its image archive. 16,607 map to a Unicode character and 15,328 do not; 28,388 carry CBETA's glyph image |
 | FZ oversized PUA | 633 BMP private-use slots defined by the 方正超大字符集 fonts' cmaps; the font files and glyph outlines are not kept |
 | 方言字 | Fourteen sets of characters that one doculect coined or gave its own use: twelve Chinese varieties from the 嚴式方言字 list, 日本國字 and 朝鮮國字 |
+| 研究字頭 | 26 sets, one per book, from headword tables compiled from research on 疑難字, 俗字 and 異體字: 34,325 records, 4,387 of them unencoded. The sets list 28,017 characters counted per book |
 
 Each set has a unique character count and a source-row count. A source row joins through its assigned scalars, or through its private-use glyph slot where no scalar is assigned. A row whose only glyph is an Ideographic Description Sequence stays out of the scalar count and is kept as a record on the set. Repeated mappings, variation sequences and IDS descriptions can make the counts differ. Draft row numbers never establish Unicode assignments.
 
@@ -90,6 +91,16 @@ The twelve Chinese sets follow the 嚴式方言字 list of the 全國漢語方�
 
 `bun scripts/build_dialect_chars.mjs` rebuilds the sets from the inputs pinned in `dialect_source.json`; the full build calls the same writer.
 
+## Study headword tables
+
+Twenty-six sets index the headword (字頭) tables compiled from research books on 疑難字, 俗字 and 異體字, one set per book, in the group 研究字頭. An encoded headword is a member, with the book's own locator under it. A headword written as an IDS, a component description or a private-use character is a record that Find reaches through its parts.
+
+A record's source is the locator the book prints: a page, a page-column such as `359-1`, a serial, or a volume and serial. A record may also list related characters, the forms a table gives side by side, and alternate forms. A record's card links the related characters and names the kind of relation where the table does.
+
+Related forms come from the 随函录 correct-form column, the 简化汉字修订方案 同字 column, the 甲骨文字释林 或作 column, the rows of several forms in 正字通, 隋唐墓志, 一切经音义 and 东汉碑刻, the pairing of 康熙外字 forms with their stand-in characters, and the brackets of 疑难字简明字典 (（） simplified, ［］ variant, 〔〕 jump). Section headings, multi-character words and placeholders are dropped, and an identical headword on the same page is kept once.
+
+`uv run scripts/import_study_tables.py` reads the tables from `cache/study-tables/`, checks each against its SHA-256 and writes `study_*_records.json` and `study_*_source.json`; the full build indexes them.
+
 ## G source collections
 
 Thirteen sets index the G source codes that name publications and lists in Unihan `kIRG_GSource`: GDM, GHC, GKJ, GLGYJ, GPGLG, GXM, GZ·U and GZA-1, -2, -3, -4, -6 and -7. A member is an assigned character whose value carries the code; no unencoded row enters these sets. The code under a member is that member's G source serial, such as GDM-00013. The GZA sets split on the serial's first digit, the `[123467]` of UAX #38's `GZA-[123467]\d{5}` pattern, so GZA-5 has no members. GZ·U holds the encoded GZ source; the existing gz set is 字統's broader snapshot of the 古壯字字典, with 7,964 rows including unencoded forms, and keeps its label.
@@ -124,6 +135,33 @@ Character cards show the G source beside its code, and a printed record card doe
 - **ambar/fangyanzi**, [汉语方言字](https://github.com/ambar/fangyanzi), commit [760a0a2](https://github.com/ambar/fangyanzi/tree/760a0a2de3e02bb902807372556cedaef9d117f0) (2022-11-01), `data/fangyanzi.json`, retrieved 2026-11-14, MIT. A transcription of the 全國漢語方言用字總表 (its headings count 529 嚴式 and 2,582 寬式 characters), which its README calls the 漢語方言用字規範 of the Ministry of Education's language resources protection project, collected mainly from the 現代漢語方言大詞典. The publisher, date and edition of the original were not located, and the transcription replaces its private-use glyphs with Unicode characters or IDS, correcting labels and readings as its README lists.
 - **IDS Workshop**, [open IDS descriptions](https://github.com/mkpoli/ids-input/tree/a35965b21260748d9eb0bdf21a6c3246b015b163/data/open-data), commit a35965b (2026-11-10), `descriptions.tsv`, CC0 1.0. The kokuji group cites [A list of kokuji](http://www.sljfaq.org/afaq/kokuji-list.html) (sljfaq.org, undated) and English Wikipedia's [Kokuji](https://en.wikipedia.org/wiki/Kokuji); the gukja group cites Korean Wikipedia's [국자의 음역자와 구결자](https://ko.wikipedia.org/w/index.php?title=국자의_음역자와_구결자&oldid=42393816) (CC BY-SA 4.0). The IDS come from [BabelStone IDS](https://www.babelstone.co.uk/CJK/IDS.TXT) (Andrew West, 2025-06-27). These are curated examples, not complete inventories.
 - **NGWU YOH**, personal communications dated 2026-11-06 and 2026-11-07 requesting character-set search and an Extension E withdrawn set; privately supplied screenshots of 字統網 and CNS11643. These establish the interface reference and requested category, with no independent character-membership evidence.
+- **中医古籍用字研究**, `《中医古籍用字研究》字頭.xlsx`, privately supplied on 2026-11-14 and pinned by SHA-256 in its `study_*_source.json`: headwords by index page-column, with two alternate-form columns; 237 rows. The alternate columns carry no labels.
+- **六朝別字記新編**, `《六朝別字記新編》字頭（不全）v2.xlsx`, privately supplied on 2026-11-14 and pinned by SHA-256 in its `study_*_source.json`: headwords by overview-table page, with a note column of alternate descriptions. The file calls itself incomplete (不全).
+- **大字典论稿**, `《大字典论稿》難字部分（類推繁体）.xls`, privately supplied on 2026-11-14 and pinned by SHA-256 in its `study_*_source.json`: the 難字 headwords by page; 字頭；備選字形 joins alternates with ；. Page numbers are stored as floats.
+- **字孳補**, `《字孳補》字頭v2.xls`, privately supplied on 2026-11-14 and pinned by SHA-256 in its `study_*_source.json`: headwords by 地支 volume and reference page, with alternate forms marked for reference only and notes. About 186 section-heading rows are dropped.
+- **徽州文书俗字研究**, `《徽州文书俗字研究》字表節選v2.xls`, privately supplied on 2026-11-14 and pinned by SHA-256 in its `study_*_source.json`: headwords by the page at the table's lower right, with four unlabeled alternate columns. An excerpt (節選).
+- **徽州文书稀俗字词例释**, `《徽州文书稀俗字词例释》俗字部分字頭v2.xlsx`, privately supplied on 2026-11-14 and pinned by SHA-256 in its `study_*_source.json`: the 俗字 part, headwords by page with alternate forms.
+- **敦煌佛典语词和俗字研究**, `《敦煌佛典语词和俗字研究》俗字部分字頭.xlsx`, privately supplied on 2026-11-14 and pinned by SHA-256 in its `study_*_source.json`: the 俗字 part, headwords by page; the alternate column says to follow the original book.
+- **新集藏经音义随函录研究**, `《新集藏经音义随函录研究》字頭v3 釋義・關聯字・字理付.xlsx`, privately supplied on 2026-11-14 and pinned by SHA-256 in its `study_*_source.json`: headwords with an explanation, the correct form, a 字理 character and a page citation (v3 only; v2 is not used). The 字理 column is not read, and footnote digits after a correct form are dropped. 133 radical-heading rows are dropped.
+- **明清大型字書疑難字考釋與研究**, `《明清大型字書疑難字考釋與研究》下篇字頭.xlsx`, privately supplied on 2026-11-14 and pinned by SHA-256 in its `study_*_source.json`: the lower part, headwords by serial with alternate forms.
+- **明清小说俗字俗语研究**, `《明清小说俗字俗语研究》字頭（U外58種）.xlsx`, privately supplied on 2026-11-14 and pinned by SHA-256 in its `study_*_source.json`: headwords outside Unicode by section and serial, with two note columns of forms.
+- **可洪音义研究**, `可洪音义研究异体字表字头.txt`, privately supplied on 2026-11-14 and pinned by SHA-256 in its `study_*_source.json`: headword and page, UTF-16LE, IDS wrapped in ｛｝. Some lines repeat and one has no headword.
+- **正字通异体字研究**, `《正字通异体字研究》字頭.xlsx`, privately supplied on 2026-11-14 and pinned by SHA-256 in its `study_*_source.json`: a page and up to nine forms per row, each row a group of variants.
+- **汉语大字典难字考**, `《汉语大字典难字考》字頭.xlsx`, privately supplied on 2026-11-14 and pinned by SHA-256 in its `study_*_source.json`: headwords by 檢字表 page-column such as 1-1, among 151 radical headings that are dropped.
+- **玉篇俗字**, `《玉篇俗字》字表U外去重137种.xlsx`, privately supplied on 2026-11-14 and pinned by SHA-256 in its `study_*_source.json`: 137 deduplicated headwords outside Unicode, by serial and one of five source books (玉篇, 玉篇殘卷, 干祿字書, 廣韻, 類篇), with a note form. One placeholder row is dropped.
+- **甲骨文字释林**, `《甲骨文字释林》-目录U外字75个.xlsx`, privately supplied on 2026-11-14 and pinned by SHA-256 in its `study_*_source.json`: 75 contents-page headwords as IDS by page, with 或作 forms. The sheet says the book writes 木 as 朩, which the IDS keep.
+- **疑难字三考**, `《疑难字三考》字头整理表.xlsx`, privately supplied on 2026-11-14 and pinned by SHA-256 in its `study_*_source.json`: headwords by serial; 1,032 rows.
+- **简化汉字修订方案（草案）**, `《简化汉字修订方案（草案）》未录入释义及字形汇总表.xlsx`, privately supplied on 2026-11-14 and pinned by SHA-256 in its `study_*_source.json`: forms of the 1963 draft not yet entered with a meaning, with the meaning, the same-meaning character and the source page. The inclusion status, 字理 and remark columns are not read.
+- **隋唐出土墓志文字研究及整理**, `《隋唐出土墓志文字研究及整理》第15章俗字考字頭.xlsx`, privately supplied on 2026-11-14 and pinned by SHA-256 in its `study_*_source.json`: chapter 15 only, a page and the forms of each variant group.
+- **一切经音义刻本用字研究**, `一切经音义刻本用字研究-字頭節選.xlsx`, privately supplied on 2026-11-14 and pinned by SHA-256 in its `study_*_source.json`: a page and up to eleven forms per row. An excerpt (節選). A few IDS use `#(...)` component notation, kept as text.
+- **东汉碑刻异体字研究**, `东汉碑刻异体字研究-字頭節選.xlsx`, privately supplied on 2026-11-14 and pinned by SHA-256 in its `study_*_source.json`: a page and the forms of each variant group. An excerpt (節選).
+- **直音篇**, `直音篇七卷部首-揚州資政左室v2.xlsx`, privately supplied on 2026-11-14 and pinned by SHA-256 in its `study_*_source.json`: radical headings by volume and serial; 31 cells hold a radical with its variants, split into a group.
+- **子弹库帛书**, `子弹库帛书-第九部分-文字編字頭.txt`, privately supplied on 2026-11-14 and pinned by SHA-256 in its `study_*_source.json`: part 9, the character list, by page; twelve two-character compounds are dropped.
+- **龙龛手镜研究**, `龙龛手镜研究字头.txt`, privately supplied on 2026-11-14 and pinned by SHA-256 in its `study_*_source.json`: headword and page, IDS wrapped in ｛｝.
+- **汉语大字典音义未详字头**, `汉语大字典_音义未详字头_粗校.txt`, privately supplied on 2026-11-14 and pinned by SHA-256 in its `study_*_source.json`: headwords with the kind of gap (义未详, 音未详, 音义未详), kept as the source. The file calls itself roughly proofread (粗校).
+- **康熙外字**, `康熙外字.txt`, privately supplied on 2026-11-14 and pinned by SHA-256 in its `study_*_source.json`: a header line with the unencoded form, then entries with the stand-in character and the 《康熙字典》 page and line (頁N第M). 184 headers and 190 entries, paired by order.
+- **疑难字简明字典**, `疑难字简明字典 刘叔新 索引.txt`, privately supplied on 2026-11-14 and pinned by SHA-256 in its `study_*_source.json`: the index: headword, note and ID (YN00001 on). Suffixes T, H, J and SS mark Taiwan, Hong Kong, Japan and 中易 forms. Words in 【】 are dropped; 26 headwords and many note forms are private-use characters, kept as text.
+- The tables are third-party transcriptions of the books; their maker is not recorded here.
 
 ## Data and checks
 
@@ -133,6 +171,7 @@ The checked-in [catalogue](../app/public/charsets/index.json), per-set text file
 bun scripts/import_irg_records.mjs
 bun scripts/import_glyphwiki_ebag.mjs
 uv run scripts/import_cbeta_gaiji.py
+uv run scripts/import_study_tables.py
 bun scripts/build_charsets.mjs
 bun scripts/build_g_sources.mjs
 bun scripts/build_dialect_chars.mjs

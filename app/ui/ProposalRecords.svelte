@@ -21,7 +21,7 @@
   /** @type {HTMLElement | null} */
   let top = $state(null)
   const idsMode = $derived(records.records.some(record => record.kind === 'ids'))
-  const textOnly = $derived(records.records.every(record => !record.glyph && !record.sprite && !record.atlas && !record.mappedUnicode && record.kind !== 'ids'))
+  const textOnly = $derived(records.records.every(record => !record.glyph && !record.sprite && !record.atlas && !record.mappedUnicode && !record.ids && record.kind !== 'ids'))
   /** @type {'all' | 'encoded' | 'unencoded'} */
   let show = $state('all')
   let byCode = $state(false)
@@ -85,6 +85,9 @@
             {:else if record.mappedUnicode}
               <span class="mapped" lang="und-Hani">{String.fromCodePoint(parseInt(record.mappedUnicode.slice(2), 16))}</span>
               <span class="ui-tile-note ui-mono">{code(record)}</span>
+            {:else if record.ids}
+              <span class="ids" lang="und-Hani">{record.ids}</span>
+              <span class="ui-tile-note ui-mono">{code(record)}</span>
             {:else}<span class="code ui-mono">{code(record)}</span>{/if}
           </button>
         {/snippet}
@@ -104,6 +107,7 @@
   .records-tools button[aria-pressed='true']{border-color:var(--ui-color-accent);background:var(--ui-color-accent-soft);color:var(--ui-color-accent-ink)}
   .code{font-size:var(--ui-text-2xs);overflow-wrap:anywhere}
   .mapped{display:grid;place-items:center;font-family:var(--ui-font-script);font-size:40px;line-height:1}
+  .ids{display:grid;place-items:center;font-family:var(--ui-font-script);font-size:var(--ui-text-sm);line-height:1.2;overflow-wrap:anywhere;text-align:center}
   .text-only{grid-template-columns:repeat(auto-fill,minmax(104px,1fr))}
   .text-only .code{white-space:nowrap}
 .ids-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:4px;margin:0;padding:0;list-style:none}
