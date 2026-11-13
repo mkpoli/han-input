@@ -11,14 +11,35 @@
   import { FAMILIES } from '../lib/families.js'
   import SourceCode from './SourceCode.svelte'
   import { isHan } from '../../src/fold.js'
-  import { codePoints, puaOf } from '../../src/pua.js'
+  import { codePoints, isPuaChar, loadPua, loadPuaCodes, readingsOf as puaReadingsOf } from '../../src/pua.js'
+  import PuaReadings from './PuaReadings.svelte'
   import { characterVariants } from '../../src/variants.js'
   import { pieces } from '../lib/notation.js'
 
   const char = $derived(route.c)
   // A member may be a jamo sequence: GB 12052 spells archaic Hangul with two or three code points.
   const cp = $derived(char ? codePoints(char) : '')
-  const puaRows = $derived(char ? puaOf(char) : [])
+  /** @type {ReturnType<import('../../src/pua.js').Pua['of']>} */
+  let puaRows = $state([])
+  /** @type {import('../../src/pua.js').PuaReading[]} */
+  let slotReadings = $state([])
+  $effect(() => {
+    const shown = char
+    let active = true
+    puaRows = []
+    slotReadings = []
+    if (!shown) return
+    loadPua().then(async pua => {
+      if (!active) return
+      puaRows = pua.of(shown)
+      // A private-use character means something in each scheme that has the slot.
+      if (isPuaChar(shown)) {
+        const codes = await loadPuaCodes()
+        if (active) slotReadings = puaReadingsOf(pua, codes, shown)
+      }
+    }).catch(() => {})
+    return () => { active = false }
+  })
   /** @param {string} code */
   const puaText = code => String.fromCodePoint(parseInt(code.slice(2), 16))
 
@@ -118,6 +139,13 @@
         </div>
       </div>
     </header>
+
+    {#if slotReadings.length}
+      <section class="family">
+        <h3 class="ui-label">{t('pua.readings')} <span class="ui-count">{slotReadings.length}</span></h3>
+        <PuaReadings readings={slotReadings} label={t('pua.readings')} />
+      </section>
+    {/if}
 
     {#if puaRows.length}
       <section class="family">

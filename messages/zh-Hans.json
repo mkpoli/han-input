@@ -309,6 +309,8 @@
   "pua.source.hanyang": "Hanyang",
   "pua.source.cns": "CNS",
   "pua.source.gb18030": "GB 18030",
+  "pua.readings": "私用区解读",
+  "pua.source.cbeta": "CBETA",
   "pua.relation.simplified": "简体字",
   "pua.relation.traditional": "繁体字",
   "pua.relation.semantic": "语义异体字",

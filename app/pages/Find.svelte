@@ -16,6 +16,7 @@
   import MethodGroups from '../ui/MethodGroups.svelte'
   import CharsetFilter from '../ui/CharsetFilter.svelte'
   import ProposalRecords from '../ui/ProposalRecords.svelte'
+  import PuaReadings from '../ui/PuaReadings.svelte'
 
   const EXAMPLES = ['ユタヘヘミ', 'jnd', 'luong', '端一東平', '30407', 'tsɿ', '氵 12畫', '口匕', 'river ジ', 'chữ', 'a-1', 'a672', 'U+5B57', '氵+青', '日*月']
   // A browsed set and the common-results grid turn 240 characters at a time; other grids use 96.
@@ -156,7 +157,7 @@
   const variantChars = $derived(single ? single.variants.map(row => row.char) : [])
   const tallyNotes = $derived(new Map(tally.map(([char, count]) => [char, String(count)])))
   const varieties = $derived(single ? new Set(single.readings.map(hit => hit.n)).size : 0)
-  const empty = $derived(!busy && answers.length > 0 && !common.length && !groups.length)
+  const empty = $derived(!busy && answers.length > 0 && !common.length && !groups.length && !single?.pua.length)
 
   /** A page of a browsed set arrives as one grid, so its face is fetched before the page turns.
    * @param {number} next */
@@ -269,7 +270,13 @@
       <PaginatedTiles chars={common} perPage={GRID_LIMIT} label={t('find.common', { count: common.length })} />
     </section>
   {:else if single}
-    {#if single.chars.length && !single.shapes.some(shape => shape.exact) && ['text', 'point', 'strokes', 'pua'].includes(single.clue.kind)}
+    {#if single.pua.length}
+      <section class="ui-section">
+        <h2 class="ui-label">{t('pua.readings')} <span class="ui-count">{single.pua.length}</span></h2>
+        <PuaReadings readings={single.pua} label={t('pua.readings')} />
+      </section>
+    {/if}
+    {#if single.chars.length && !single.shapes.some(shape => shape.exact) && ['text', 'point', 'strokes'].includes(single.clue.kind)}
       <section class="ui-section">
         <h2 class="ui-label">{t('find.characters')}</h2>
         <PaginatedTiles chars={single.chars} size={72} label={t('find.characters')} />

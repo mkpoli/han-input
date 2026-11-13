@@ -5,7 +5,7 @@ import { strict as assert } from 'node:assert'
 import { existsSync, mkdirSync, readdirSync } from 'node:fs'
 import { homedir } from 'node:os'
 import { join } from 'node:path'
-import { MOE_PUA } from '../src/pua.js'
+import MOE_PUA from '../data/moe-pua.json' with { type: 'json' }
 import { serveDist } from './serve-dist.mjs'
 
 const SITE = process.env.SITE_URL ?? 'http://127.0.0.1:5317'
@@ -79,7 +79,7 @@ try {
       const found = async query => {
         await page.goto(`${SITE}/?q=${encodeURIComponent(query)}`)
         await page.waitForLoadState('networkidle')
-        return page.locator('main .ui-tile-glyph').allTextContents()
+        return page.locator('main .ui-tile-glyph, main .readings .glyph').allTextContents()
       }
       assert.ok((await found('U+E43B')).includes('䀯'))
       assert.ok((await found('U+F266')).includes('䏰'))
