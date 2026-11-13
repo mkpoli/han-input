@@ -100,9 +100,25 @@ that prompted this is a longer form of 卩 with no encoded character of its own 
 communication, 2026-11-09). Groups are checked in at
 [data/variant-groups.json](../data/variant-groups.json), separately from IWDS.
 
-Both relations are readings of the sources, not proof that the forms are one character. IWDS calls most
+The IWDS and Unicode relations are readings of the sources, not proof that the forms are one character. IWDS calls most
 of its groups unifiable, and a compatibility mapping only states that one code point stands for another;
 neither makes the glyphs identical in every font.
+
+### Sourced variant relations
+
+| Source | Gives | Terms |
+| --- | --- | --- |
+| 电脑汉字字典.csv, privately supplied 2026-11-14, SHA-256 `da5b73e8…2260d` | a variant database of 98,060 headwords with relations tagged by source (漢語大字典, 教育部異體字字典, 戶籍統一文字, 入管正字, 常用漢字表 and others), kept per relation | Author and licence not stated. The tags' sources are cited as the file states them, unverified |
+| 新华字典12版字表_含繁异体.txt, privately supplied 2026-11-14, SHA-256 `3dda96b1…8260` | the 新华字典 12th edition's headwords, each with the traditional or variant forms printed after it, unlabelled | Author and licence not stated; the content is cited as the file states it, unverified |
+
+`bun scripts/import_sourced_variants.mjs` reads both files from `cache/variant-tables/` and writes
+[data/sourced-variants.json](../data/sourced-variants.json), which the browser loads when it shows a
+character's variants. The importer holds a table that classifies every tag of the first file: variant,
+simplified-form and 正字 tags are kept under a short source label, and tags for shapes (enclosed forms,
+kana, bopomofo, stroke characters), code point bookkeeping, "related" without a stated relation and
+component forms are dropped. A tag with a `←` prefix is the same relation read from the other character,
+and 繁體字 is 簡化字 read from the other side, so each pair is stored once with its sources. The
+新华字典 forms are kept as variants, since the file does not say which are traditional.
 
 ## Search by meaning
 

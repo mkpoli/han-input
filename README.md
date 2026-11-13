@@ -43,7 +43,8 @@ and writes `app/public/charsets/glyphs/` plus one records file per set.
 
 The part spellings and character variants come from the committed [variant snapshot](data/variants.json),
 built by `bun scripts/import_variants.mjs` from IWDS, the curated [Idu groups](data/variant-groups.json)
-and UnicodeData.
+and UnicodeData. The relations a variant database states, each with the source its tag names, are in
+[data/sourced-variants.json](data/sourced-variants.json), built by `bun scripts/import_sourced_variants.mjs`.
 
 The composition converter uses the thirteen symbols of the 漢字構形資料庫, read from old text at
 U+F6A3–U+F6AF. `uv run scripts/build_composition_font.py` draws them after table 1 of the
