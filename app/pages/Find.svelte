@@ -17,6 +17,8 @@
   import CharsetFilter from '../ui/CharsetFilter.svelte'
   import ProposalRecords from '../ui/ProposalRecords.svelte'
   import PuaReadings from '../ui/PuaReadings.svelte'
+  import RecordTiles from '../ui/RecordTiles.svelte'
+  import { findRecords } from '../lib/records.js'
 
   const EXAMPLES = ['ユタヘヘミ', 'jnd', 'luong', '端一東平', '30407', 'tsɿ', '氵 12畫', '口匕', 'river ジ', 'chữ', 'a-1', 'a672', 'U+5B57', '氵+青', '日*月']
   // A browsed set and the common-results grid turn 240 characters at a time; other grids use 96.
@@ -27,6 +29,8 @@
   let answers = $state([])
   /** @type {string[]} */
   let common = $state([])
+  /** @type {import('../lib/records.js').RecordEntry[]} */
+  let recordHits = $state([])
   /** @type {string[]} */
   let browsed = $state([])
   /** @type {Map<string, string>} */
@@ -89,6 +93,7 @@
     let active = true
     answers = []
     common = []
+    recordHits = []
     browsed = []
     codes = new Map()
     records = null
@@ -130,6 +135,8 @@
         const found = await Promise.all(clues.map(answer))
         if (!active) return
         const filtered = membership ? found.map(item => filterAnswer(item, membership, selected)) : found
+        // Records arrive after the characters, so the first query does not wait for the record index.
+        findRecords(clues, selected ?? '').then(hits => { if (active) recordHits = hits }).catch(() => {})
         const kept = await intersect(filtered)
         if (!active) return
         // `kept` is a grid only when several clues remain; one clue renders its hits instead.
@@ -157,7 +164,7 @@
   const variantChars = $derived(single ? single.variants.map(row => row.char) : [])
   const tallyNotes = $derived(new Map(tally.map(([char, count]) => [char, String(count)])))
   const varieties = $derived(single ? new Set(single.readings.map(hit => hit.n)).size : 0)
-  const empty = $derived(!busy && answers.length > 0 && !common.length && !groups.length && !single?.pua.length)
+  const empty = $derived(!busy && answers.length > 0 && !common.length && !groups.length && !single?.pua.length && !recordHits.length)
 
   /** A page of a browsed set arrives as one grid, so its face is fetched before the page turns.
    * @param {number} next */
@@ -203,6 +210,15 @@
     await loadGlyphs(arranged.slice(0, GRID_LIMIT))
   }
 </script>
+
+{#snippet recordSection()}
+  {#if recordHits.length}
+    <section class="ui-section">
+      <h2 class="ui-label">{t('find.records')} <span class="ui-count">{recordHits.length}</span></h2>
+      <RecordTiles entries={recordHits} label={t('find.records')} />
+    </section>
+  {/if}
+{/snippet}
 
 <div class="ui-page">
   <header class="ui-page-head">
@@ -260,7 +276,7 @@
   {:else if empty}
     <p class="ui-hint">{t('find.none')}</p>
   {:else if many}
-    <section class="ui-section">
+    {#if common.length}<section class="ui-section">
       <h2 class="ui-label">{t('find.common', { count: common.length })}</h2>
       <p class="clues">
         {#each answers as item, i (i)}
@@ -268,7 +284,8 @@
         {/each}
       </p>
       <PaginatedTiles chars={common} perPage={GRID_LIMIT} label={t('find.common', { count: common.length })} />
-    </section>
+    </section>{/if}
+    {@render recordSection()}
   {:else if single}
     {#if single.pua.length}
       <section class="ui-section">
@@ -290,6 +307,7 @@
         <PaginatedTiles chars={shape.chars} label={title} />
       </section>
     {/each}
+    {@render recordSection()}
     {#if single.variants.length}
       <section class="ui-section">
         <h2 class="ui-label">{t('find.sameCharacter')} <span class="ui-count">{single.variants.length}</span></h2>

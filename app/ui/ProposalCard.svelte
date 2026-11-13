@@ -64,6 +64,26 @@
       <p class="related"><span class="ui-hint">{t('proposal.composition')}</span> <span class="formula" lang="und-Hani">{record.composition}</span></p>
       {#if ids}<p class="related"><span class="ui-hint">IDS</span> <span class="formula" lang="und-Hani">{ids}</span></p>{/if}
     {/if}
+    {#if record.workbook}
+      {@const notes = record.workbook}
+      <section class="workbook">
+        <h3 class="ui-label">{document.workbook ?? ''}</h3>
+        {#if notes.radical || notes.strokes || notes.zhuyin}
+          <dl class="notes">
+            {#if notes.radical}<div><dt class="ui-hint">{t('proposal.radical')}</dt><dd lang="und-Hani">{notes.radical}</dd></div>{/if}
+            {#if notes.strokes}<div><dt class="ui-hint">{t('proposal.strokes')}</dt><dd>{notes.strokes}</dd></div>{/if}
+            {#if notes.zhuyin}<div><dt class="ui-hint">{t('proposal.zhuyin')}</dt><dd lang="zh-Bopo">{notes.zhuyin.join(' ')}</dd></div>{/if}
+          </dl>
+        {/if}
+        {#if notes.ids && notes.ids !== ids}<p class="related"><span class="ui-hint">IDS</span> <span class="formula" lang="und-Hani">{notes.ids}</span></p>{/if}
+        {#if notes.idsMachine && notes.idsMachine !== ids && notes.idsMachine !== notes.ids}<p class="related"><span class="ui-hint">{t('proposal.idsMachine')}</span> <span class="formula" lang="und-Hani">{notes.idsMachine}</span></p>{/if}
+        {#if notes.proposed}
+          <p class="related"><span class="ui-hint">{t('proposal.proposed')}</span>
+            <a href={link('', { c: notes.proposed })} lang="und-Hani" onclick={event => { event.preventDefault(); if (notes.proposed) choose(notes.proposed) }}>{notes.proposed}</a>
+          </p>
+        {/if}
+      </section>
+    {/if}
     {#if record.moeVariant}
       <div class="links">
         <a href={`https://dict.variants.moe.edu.tw/search.jsp?ID=7&WORD=${encodeURIComponent(record.moeVariant)}&WORD=`} target="_blank" rel="noopener noreferrer">{t('proposal.moeVariant')} <span class="ui-mono">{record.moeVariant}</span></a>
@@ -86,6 +106,11 @@
   .name{margin:0;font-size:var(--ui-text-sm);overflow-wrap:anywhere}
   .facts a{color:var(--ui-color-accent-ink);font-size:var(--ui-text-sm);overflow-wrap:anywhere}
   .mapped,.unified,.related{margin:0}
+  .workbook{display:grid;gap:var(--ui-space-sm);padding-block-start:var(--ui-space-sm);border-block-start:1px solid var(--ui-color-border)}
+  .workbook h3{margin:0}
+  .notes{display:flex;flex-wrap:wrap;gap:var(--ui-space-xs) var(--ui-space-lg);margin:0}
+  .notes div{display:flex;gap:var(--ui-space-sm);align-items:baseline}
+  .notes dd{margin:0}
   .related{display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--ui-space-sm)}
   .related a{font-size:24px;line-height:1;color:var(--ui-color-ink);text-decoration:none}
   .related .formula{font-family:var(--ui-font-script);font-size:var(--ui-text-lg);overflow-wrap:anywhere}
