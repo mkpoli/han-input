@@ -8,9 +8,10 @@
   import { loadMethods } from '../lib/data.js'
   import { loadGlyphs } from '../lib/fonts.js'
   import { isHan } from '../../src/fold.js'
-  import { autofocus } from '../lib/ui.svelte.js'
+  import { autofocus, choose } from '../lib/ui.svelte.js'
   import { nameOf, t } from '../lib/i18n.svelte.js'
   import Tiles from '../ui/Tiles.svelte'
+  import VariantList from '../ui/VariantList.svelte'
   import Pager from '../ui/Pager.svelte'
   import PaginatedTiles from '../ui/PaginatedTiles.svelte'
   import MethodGroups from '../ui/MethodGroups.svelte'
@@ -161,7 +162,6 @@
   const prefixGroups = $derived(groups.filter(group => !group.literal))
   const tally = $derived(single ? tallyReadings(single.readings) : [])
   const tallyChars = $derived(tally.map(([char]) => char))
-  const variantChars = $derived(single ? single.variants.map(row => row.char) : [])
   const tallyNotes = $derived(new Map(tally.map(([char, count]) => [char, String(count)])))
   const varieties = $derived(single ? new Set(single.readings.map(hit => hit.n)).size : 0)
   const empty = $derived(!busy && answers.length > 0 && !common.length && !groups.length && !single?.pua.length && !recordHits.length)
@@ -311,8 +311,7 @@
     {#if single.variants.length}
       <section class="ui-section">
         <h2 class="ui-label">{t('find.sameCharacter')} <span class="ui-count">{single.variants.length}</span></h2>
-        <p class="ui-hint">{t('find.sameCharacterNote')}</p>
-        <PaginatedTiles chars={variantChars} label={t('find.sameCharacter')} />
+        <VariantList rows={single.variants} labels={single.labels} pick={choose} />
       </section>
     {/if}
     <MethodGroups groups={exactGroups} {methods} {query} heading={t('find.sameCode')} />

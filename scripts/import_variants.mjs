@@ -84,11 +84,11 @@ export function readCurated(path) {
 export function variantIndex(groups, compat) {
   /** @type {Record<string, { component: string, group: string }[]>} */
   const component = {}
-  /** @type {Record<string, { char: string, relation: string, source: string, group?: string }[]>} */
+  /** @type {Record<string, { char: string, relation: string, sources: string[], group?: string }[]>} */
   const character = {}
   /** @type {Record<string, { component: string, group: string }[]>} */
   const fuzzy = {}
-  /** @param {string} char @param {{ char: string, relation: string, source: string, group?: string }} row */
+  /** @param {string} char @param {{ char: string, relation: string, sources: string[], group?: string }} row */
   const add = (char, row) => {
     const rows = character[char] ??= []
     if (!rows.some(other => other.char === row.char && other.relation === row.relation)) rows.push(row)
@@ -107,14 +107,14 @@ export function variantIndex(groups, compat) {
     }
     if (fuzzyGroup) continue
     for (const [a, b] of group.pairs ?? []) {
-      add(a, { char: b, relation: 'variant', source: 'iwds', group: group.id })
-      add(b, { char: a, relation: 'variant', source: 'iwds', group: group.id })
+      add(a, { char: b, relation: 'variant', sources: ['iwds'], group: group.id })
+      add(b, { char: a, relation: 'variant', sources: ['iwds'], group: group.id })
     }
   }
   for (const [compatChar, unified] of compat) {
     if (unified === compatChar) continue
-    add(compatChar, { char: unified, relation: 'compatibility', source: 'unicode' })
-    add(unified, { char: compatChar, relation: 'compatibility', source: 'unicode' })
+    add(compatChar, { char: unified, relation: 'compatibility', sources: ['unicode'] })
+    add(unified, { char: compatChar, relation: 'compatibility', sources: ['unicode'] })
   }
   return { component, character, fuzzy }
 }

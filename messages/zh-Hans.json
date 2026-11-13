@@ -78,7 +78,6 @@
   "find.structureVariant": "也写作{parts}的字",
   "find.structureNote": "不同来源对这个排列的写法不一。",
   "find.sameCharacter": "异体",
-  "find.sameCharacterNote": "IWDS收录的异体，以及Unicode对应到本字的码位。",
   "find.variantOf": "也含{part}的字",
   "find.similarPart": "形近的{part}",
   "find.similarNote": "形近而不同的字。",
@@ -323,8 +322,8 @@
   "pua.relation.semantic": "语义异体字",
   "pua.relation.specialized": "专用语义异体字",
   "pua.relation.z": "Z异体字",
-  "variant.relation.variant": "IWDS异体",
-  "variant.relation.compatibility": "兼容",
-  "variant.source.iwds": "IWDS",
-  "variant.source.unicode": "Unicode"
+  "variant.relation.variant": "异体",
+  "variant.relation.simplified": "简化字",
+  "variant.relation.traditional": "繁体字",
+  "variant.relation.compatibility": "兼容"
 }

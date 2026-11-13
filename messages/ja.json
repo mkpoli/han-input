@@ -78,7 +78,6 @@
   "find.structureVariant": "{parts}とも書く字",
   "find.structureNote": "資料によってこの並びの書き方が異なります。",
   "find.sameCharacter": "異体",
-  "find.sameCharacterNote": "IWDSが収録する異体と、Unicodeがこの字に対応づける符号位置です。",
   "find.variantOf": "{part}とも書く字",
   "find.similarPart": "形の近い{part}",
   "find.similarNote": "別の字で、形が近いものです。",
@@ -323,8 +322,8 @@
   "pua.relation.semantic": "意味上の異体字",
   "pua.relation.specialized": "専用の意味上の異体字",
   "pua.relation.z": "Z異体字",
-  "variant.relation.variant": "IWDS異体",
-  "variant.relation.compatibility": "互換",
-  "variant.source.iwds": "IWDS",
-  "variant.source.unicode": "Unicode"
+  "variant.relation.variant": "異体",
+  "variant.relation.simplified": "簡体字",
+  "variant.relation.traditional": "繁体字",
+  "variant.relation.compatibility": "互換"
 }

@@ -3,14 +3,14 @@
 import { hanIn, inScope, isHan, isRareKana } from '../../src/fold.js'
 import { isPuaChar, loadPua, loadPuaCodes, puaSlot, readingsOf, slotsOfCode } from '../../src/pua.js'
 import { convertArithmetic, isArithmetic } from '../../src/arithmetic.js'
-import { findCodes, findMeaning, findPart, findReadings, findRun, loadChars, loadVariants } from './data.js'
-import { fuzzyComponents, characterVariants, spellings } from '../../src/variants.js'
+import { findCodes, findMeaning, findPart, findReadings, findRun, loadChars, loadVariants, variantsOf } from './data.js'
+import { fuzzyComponents, spellings } from '../../src/variants.js'
 
 /**
  * @typedef {{ kind: 'code' | 'scoped' | 'strokes' | 'point' | 'pua' | 'arithmetic' | 'text' | 'part', text: string, method?: string, code?: string, value?: number, char?: string, chars?: string[] }} Clue
  * @typedef {{ text: string, chars: string[], exact: boolean }} Shape
- * @typedef {{ char: string, relation: string, source: string, group?: string }} VariantRow
- * @typedef {{ clue: Clue, hits: import('./data.js').CodeHit[], readings: import('./data.js').ReadingHit[], meaning: string[], parts: string[], partVariants: Shape[], similarParts: Shape[], shapes: Shape[], variants: VariantRow[], pua: import('../../src/pua.js').PuaReading[], chars: string[] }} Answer
+ * @typedef {import('../../src/variants.js').CharacterVariant} VariantRow
+ * @typedef {{ clue: Clue, hits: import('./data.js').CodeHit[], readings: import('./data.js').ReadingHit[], meaning: string[], parts: string[], partVariants: Shape[], similarParts: Shape[], shapes: Shape[], variants: VariantRow[], labels: Record<string, string>, pua: import('../../src/pua.js').PuaReading[], chars: string[] }} Answer
  */
 
 /** @param {string} term @param {boolean} alone @returns {Clue} */
@@ -54,7 +54,7 @@ export async function answer(clue) {
 /** @param {Clue} clue @returns {Promise<Answer>} */
 async function lookUp(clue) {
   /** @type {Answer} */
-  const out = { clue, hits: [], readings: [], meaning: [], parts: [], partVariants: [], similarParts: [], shapes: [], variants: [], pua: [], chars: [] }
+  const out = { clue, hits: [], readings: [], meaning: [], parts: [], partVariants: [], similarParts: [], shapes: [], variants: [], labels: {}, pua: [], chars: [] }
   if (clue.kind === 'point') {
     if (clue.value !== undefined && clue.value <= 0x10FFFF) out.chars = [String.fromCodePoint(clue.value)]
     return out
@@ -95,7 +95,7 @@ async function lookUp(clue) {
     // spell a part in more than one way, so the other spellings count here too.
     const [parts, hits, variants] = await Promise.all([findPart(clue.text), findCodes(clue.text), loadVariants()])
     out.parts = parts
-    out.variants = characterVariants(clue.text, variants)
+    ;({ rows: out.variants, labels: out.labels } = await variantsOf(clue.text))
     const groups = await partGroups(clue.text, parts, variants)
     out.partVariants = groups.parts
     out.similarParts = groups.similar
@@ -118,7 +118,7 @@ async function lookUp(clue) {
       const groups = await partGroups(clue.text, out.parts, variants)
       out.partVariants = groups.parts
       out.similarParts = groups.similar
-      out.variants = characterVariants(clue.text, variants)
+      ;({ rows: out.variants, labels: out.labels } = await variantsOf(clue.text))
     } else if (chars.length <= 3 && chars.every(isHan)) {
       // Two or three parts in a row are also a way of writing a character; the run is shown beside
       // any code of the same spelling, since a method may use Han characters as its codes.

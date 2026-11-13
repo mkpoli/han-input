@@ -78,7 +78,6 @@
   "find.structureVariant": "Also written as {parts}",
   "find.structureNote": "Sources spell this sequence in more than one way.",
   "find.sameCharacter": "Variants",
-  "find.sameCharacterNote": "Variants IWDS records, and code points Unicode maps to this character.",
   "find.variantOf": "Also written with {part}",
   "find.similarPart": "Similar part: {part}",
   "find.similarNote": "A different character whose shape is close.",
@@ -323,8 +322,8 @@
   "pua.relation.semantic": "Semantic variant",
   "pua.relation.specialized": "Specialized semantic variant",
   "pua.relation.z": "Z variant",
-  "variant.relation.variant": "IWDS variation",
-  "variant.relation.compatibility": "Compatibility",
-  "variant.source.iwds": "IWDS",
-  "variant.source.unicode": "Unicode"
+  "variant.relation.variant": "Variant",
+  "variant.relation.simplified": "Simplified form",
+  "variant.relation.traditional": "Traditional form",
+  "variant.relation.compatibility": "Compatibility"
 }

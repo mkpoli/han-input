@@ -78,7 +78,6 @@
   "find.structureVariant": "{parts}로도 쓴 글자",
   "find.structureNote": "자료마다 이 배열을 다르게 씁니다.",
   "find.sameCharacter": "이체자",
-  "find.sameCharacterNote": "IWDS가 수록한 이체와 유니코드가 이 글자에 대응시키는 부호 위치입니다.",
   "find.variantOf": "{part}로도 쓴 글자",
   "find.similarPart": "비슷한 모양의 {part}",
   "find.similarNote": "모양이 비슷한 다른 글자입니다.",
@@ -323,8 +322,8 @@
   "pua.relation.semantic": "의미 이체자",
   "pua.relation.specialized": "전용 의미 이체자",
   "pua.relation.z": "Z 이체자",
-  "variant.relation.variant": "IWDS 이체",
-  "variant.relation.compatibility": "호환",
-  "variant.source.iwds": "IWDS",
-  "variant.source.unicode": "유니코드"
+  "variant.relation.variant": "이체",
+  "variant.relation.simplified": "간화자",
+  "variant.relation.traditional": "번체자",
+  "variant.relation.compatibility": "호환"
 }

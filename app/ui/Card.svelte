@@ -2,7 +2,7 @@
   // What a character is called: its code in every method, then the sites that say more. Definitions
   // live with those sites, so the card carries one line of gloss and no entry.
   import { tick } from 'svelte'
-  import { codesOf, descriptionsOf, loadMethods, loadVariants, loadVarieties, readingsOf } from '../lib/data.js'
+  import { codesOf, descriptionsOf, loadMethods, loadVarieties, readingsOf, variantsOf } from '../lib/data.js'
   import { readingTree } from '../lib/classification.js'
   import { LINKS } from '../lib/links.js'
   import { link, route, go, open } from '../lib/route.svelte.js'
@@ -14,7 +14,7 @@
   import { isHan } from '../../src/fold.js'
   import { codePoints, isPuaChar, loadPua, loadPuaCodes, readingsOf as puaReadingsOf } from '../../src/pua.js'
   import PuaReadings from './PuaReadings.svelte'
-  import { characterVariants } from '../../src/variants.js'
+  import VariantList from './VariantList.svelte'
   import { pieces } from '../lib/notation.js'
 
   const char = $derived(route.c)
@@ -77,6 +77,8 @@
   let writings = $state([])
   /** @type {import('../../src/variants.js').CharacterVariant[]} */
   let variants = $state([])
+  /** @type {Record<string, string>} */
+  let variantLabels = $state({})
   /** @type {import('../lib/notation.js').Components} */
   let components = $state({ numbers: {}, entities: {} })
   let filter = $state('')
@@ -93,7 +95,7 @@
     codesOf(at).then(found => { if (at === char) codes = found })
     readingsOf(at).then(found => { if (at === char) readings = found })
     descriptionsOf(at).then(found => { if (at === char) writings = found })
-    loadVariants().then(found => { if (at === char) variants = characterVariants(at, found) }).catch(() => {})
+    variantsOf(at).then(found => { if (at === char) { variants = found.rows; variantLabels = found.labels } }).catch(() => {})
   })
 
   const needle = $derived(filter.trim().toLowerCase())
@@ -182,14 +184,7 @@
     {#if variants.length}
       <section class="family">
         <h3 class="ui-label">{t('card.variants')} <span class="ui-count">{variants.length}</span></h3>
-        <dl>
-          {#each variants as row (row.char + row.relation)}
-            <div class="row">
-              <dt><a class="variant-char" href={link(route.page, { method: route.method, c: row.char })} lang="und-Hani" onclick={event => follow(event, row.char)}>{row.char}</a></dt>
-              <dd>{t(`variant.relation.${row.relation}`)} · {t(`variant.source.${row.source}`)}</dd>
-            </div>
-          {/each}
-        </dl>
+        <VariantList rows={variants} labels={variantLabels} pick={(to, from) => { from.closest('dialog')?.querySelector('button')?.focus(); open(to) }} />
       </section>
     {/if}
 
@@ -298,7 +293,6 @@
   dd{margin:0;font-size:var(--ui-text-xs);overflow-wrap:anywhere;font-family:'Han Ext',var(--ui-font-mono),var(--ui-font-sans),'Jigmo'}
   .pua .row{grid-template-columns:max-content minmax(0,1fr);gap:var(--ui-space-sm)}
   .writing .row{grid-template-columns:max-content minmax(0,1fr);gap:var(--ui-space-sm);align-items:baseline}
-  .variant-char{font-family:var(--ui-font-script);font-size:20px;line-height:1.2}
   .writing .seq{font-size:18px;line-height:1.3;overflow-wrap:anywhere;font-family:var(--ui-font-script)}
   .writing .mark{text-decoration:underline dotted;text-underline-offset:2px;text-decoration-color:var(--ui-color-accent);color:var(--ui-color-accent);cursor:help}
   .writing .pua{font-family:'IDS Numbered','Han Ext',serif}

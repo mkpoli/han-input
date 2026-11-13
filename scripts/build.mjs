@@ -162,6 +162,7 @@ for (const [run, chars] of shapes) {
 }
 for (const [bucket, rows] of shapeFiles) writeFileSync(join(OUT, 'g', `${bucket}.gz`), gz(rows.join('\n')))
 writeFileSync(join(OUT, 'variants.json.gz'), gz(readFileSync(join(import.meta.dirname, '..', 'data', 'variants.json'), 'utf8')))
+writeFileSync(join(OUT, 'sourced-variants.json.gz'), gz(readFileSync(join(import.meta.dirname, '..', 'data', 'sourced-variants.json'), 'utf8')))
 
 // Modern kana come among the commonest characters, and hentaigana and Nüshu after every block of Han.
 const derivedRows = [...derived].map(char => [char, /[\u3040-\u30FF]/.test(char) ? 500 : 7000, 0, ''])

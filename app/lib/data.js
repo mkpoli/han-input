@@ -2,6 +2,7 @@
 // serves the .gz files as they are.
 import { charBucket, codeBucket, fold, partBucket, pinyinDigits, runBucket, wordBucket } from '../../src/fold.js'
 import { hasHan, SIMPLIFIED } from '../../src/script.js'
+import { allVariants, BASE_LABELS } from '../../src/variants.js'
 
 /** @param {string} path @returns {Promise<string>} empty for a file that does not exist */
 async function readGz(path) {
@@ -150,12 +151,27 @@ export async function findRun(run) {
 }
 
 /** @typedef {import('../../src/variants.js').Variants} Variants */
+
 /** @type {Promise<Variants> | null} */
 let variants = null
 /** Spellings of a part, and the characters Unicode calls the same. @returns {Promise<Variants>} */
 export const loadVariants = () => (variants ??= readGz('variants.json.gz').then(body => body
   ? JSON.parse(body)
   : { sources: [], component: {}, character: {} }).catch(error => { variants = null; throw error }))
+
+/** @typedef {import('../../src/variants.js').SourcedVariants} SourcedVariants */
+/** @type {Promise<SourcedVariants> | null} */
+let sourced = null
+/** The variant relations that name their sources; a megabyte, so read when a character's variants are shown. @returns {Promise<SourcedVariants>} */
+export const loadSourcedVariants = () => (sourced ??= readGz('sourced-variants.json.gz').then(body => body
+  ? JSON.parse(body)
+  : { sources: [], codes: {}, labels: {}, character: {} }).catch(error => { sourced = null; throw error }))
+
+/** Every relation the data states for a character, with the source labels. @param {string} char @returns {Promise<{ rows: import('../../src/variants.js').CharacterVariant[], labels: Record<string, string> }>} */
+export async function variantsOf(char) {
+  const [found, more] = await Promise.all([loadVariants(), loadSourcedVariants()])
+  return { rows: allVariants(char, found, more), labels: { ...BASE_LABELS, ...more.labels } }
+}
 
 /** @typedef {{ rank: number, strokes: number, radical: string }} CharRow */
 /** @type {Promise<Map<string, CharRow>> | null} */

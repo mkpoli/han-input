@@ -43,10 +43,10 @@ describe('Unicode compatibility', () => {
     const { component, character } = variantIndex(readIwds(XML), readCompat(UCD))
     expect(component['匕']).toEqual([{ component: '七', group: '141' }, { component: '𠤎', group: '141' }])
     expect(character['叱']).toEqual([
-      { char: '𠮟', relation: 'variant', source: 'iwds', group: '141' },
-      { char: '叱', relation: 'compatibility', source: 'unicode' },
+      { char: '𠮟', relation: 'variant', sources: ['iwds'], group: '141' },
+      { char: '叱', relation: 'compatibility', sources: ['unicode'] },
     ])
-    expect(character['叱']).toEqual([{ char: '叱', relation: 'compatibility', source: 'unicode' }])
+    expect(character['叱']).toEqual([{ char: '叱', relation: 'compatibility', sources: ['unicode'] }])
   })
 })
 
@@ -69,7 +69,7 @@ describe('the checked-in table', () => {
   })
   test('treats the seal radical and its Kangxi form as one shape', () => {
     expect(data.component['卩']).toEqual([{ component: '⼙', group: 'seal-forms' }, { component: '𰆊', group: 'seal-forms' }])
-    expect(data.character['卩']).toContainEqual({ char: '⼙', relation: 'compatibility', source: 'unicode' })
+    expect(data.character['卩']).toContainEqual({ char: '⼙', relation: 'compatibility', sources: ['unicode'] })
   })
   test('keeps 卪 as a fuzzy neighbour of 卩, not a spelling', () => {
     expect(data.fuzzy['卩']).toEqual([{ component: '卪', group: 'seal-similar' }])
