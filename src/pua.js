@@ -4,18 +4,23 @@
 // is kept apart, so a slot two schemes share keeps both readings.
 
 /** @typedef {{ name: string, url: string, dataUrl?: string, retrieved?: string, sha256?: string, licence?: string, version?: string }} PuaSource */
-/** @typedef {{ id: string, source: PuaSource, mappings: Record<string, string>, records?: string }} PuaScheme */
-/** @typedef {{ source: string, slot: string, code: string, char: string, records?: string }} PuaReading */
+/** @typedef {{ id: string, source: PuaSource, mappings: Record<string, string>, records?: string, font?: boolean }} PuaScheme */
+/** @typedef {{ source: string, slot: string, code: string, char: string, ids?: string, records?: string, font?: boolean }} PuaReading */
+/** What a scheme names its slots by: its own codes, and IDS for slots it describes only by shape. An
+ * empty IDS still claims the slot. @typedef {Map<string, { codes: Record<string, string>, ids: Record<string, string> }>} PuaNames */
 
 const SCHEMES = [
   { id: 'moe', load: () => import('../data/moe-pua.json') },
   { id: 'hkscs', load: () => import('../data/hkscs-pua.json') },
   { id: 'hanyang', load: () => import('../data/hanyang-pua.json') },
-  { id: 'cns', load: () => import('../data/cns-pua.json'), codes: () => import('../data/cns-pua-codes.json') },
+  // The site's CNS PUA font draws the CNS rows at their own slots.
+  { id: 'cns', load: () => import('../data/cns-pua.json'), codes: () => import('../data/cns-pua-codes.json'), font: true },
   { id: 'gb18030', load: () => import('../data/gb18030-pua.json') },
   // CBETA reserves U+F0000 plus a CB code's number; a slot without a Unicode character is a record of
   // the CBETA缺字 character set.
   { id: 'cbeta', load: () => import('../data/cbeta-pua.json'), codes: () => import('../data/cbeta-pua-codes.json'), records: 'cbeta_gaiji' },
+  // The 中华书局宋 font's plane 15 slots, named by a Unicode character or by an IDS.
+  { id: 'zhonghua', load: () => import('../data/zhonghua-pua.json'), codes: () => import('../data/zhonghua-pua-codes.json') },
 ]
 
 export const PUA_SCHEME_IDS = SCHEMES.map(scheme => scheme.id)
@@ -87,9 +92,9 @@ export function makePua(schemes, variants) {
     /**
      * Convert one scheme, or every scheme where they agree. A scheme that names a slot without a Unicode
      * character for it claims the slot as it is, so it conflicts with a scheme that converts it.
-     * @param {string} text @param {string} [id] @param {Map<string, Record<string, string>>} [codes]
+     * @param {string} text @param {string} [id] @param {PuaNames} [names]
      */
-    convert(text, id = 'moe', codes = new Map()) {
+    convert(text, id = 'moe', names = new Map()) {
       const sources = chosen(id)
       let converted = 0
       let unmapped = 0
@@ -99,7 +104,7 @@ export function makePua(schemes, variants) {
       const conflicts = []
       for (const char of text) {
         const options = sources.flatMap(scheme => char in scheme.mappings ? [{ char: scheme.mappings[char], source: scheme.id }]
-          : codes.get(scheme.id)?.[char] ? [{ char, source: scheme.id }] : [])
+          : claims(names, scheme.id, char) ? [{ char, source: scheme.id }] : [])
         const targets = new Set(options.map(option => option.char))
         const [target] = targets
         if (targets.size === 1 && target !== char) { output += target; converted++ }
@@ -123,36 +128,43 @@ export function makePua(schemes, variants) {
 
 /** @typedef {ReturnType<typeof makePua>} Pua */
 
+/** Whether a scheme names a slot by a code or an IDS. @param {PuaNames} names @param {string} id @param {string} slot */
+const claims = (names, id, slot) => Boolean(names.get(id)?.codes[slot]) || names.get(id)?.ids[slot] !== undefined
+
 /**
- * Each scheme's reading of one private-use slot: the scheme's code for it and its Unicode character.
- * A scheme that names the slot but has no character for it leaves `char` empty.
- * @param {Pua} pua @param {Map<string, Record<string, string>>} codes @param {string} slot
+ * Each scheme's reading of one private-use slot: the scheme's code for it, its Unicode character, and
+ * the IDS a scheme describes it by. A scheme that names the slot without a character leaves `char` empty.
+ * @param {Pua} pua @param {PuaNames} names @param {string} slot
  * @returns {PuaReading[]}
  */
-export function readingsOf(pua, codes, slot) {
+export function readingsOf(pua, names, slot) {
   return pua.schemes.flatMap(scheme => {
-    const code = codes.get(scheme.id)?.[slot] ?? ''
+    const code = names.get(scheme.id)?.codes[slot] ?? ''
+    const ids = names.get(scheme.id)?.ids[slot]
     const char = scheme.mappings[slot] ?? ''
-    if (!code && !char) return []
-    return [{ source: scheme.id, slot, code, char, ...(scheme.records ? { records: scheme.records } : {}) }]
+    if (!code && !char && ids === undefined) return []
+    return [{ source: scheme.id, slot, code, char, ...(ids ? { ids } : {}), ...(scheme.records ? { records: scheme.records } : {}), ...(scheme.font ? { font: true } : {}) }]
   })
 }
 
-/** The slots a scheme code names, in every scheme. @param {Map<string, Record<string, string>>} codes @param {string} code */
-export function slotsOfCode(codes, code) {
+/** The slots a scheme code names, in every scheme. @param {PuaNames} names @param {string} code */
+export function slotsOfCode(names, code) {
   const wanted = code.toUpperCase()
-  return [...codes].flatMap(([source, table]) => Object.entries(table).filter(([, value]) => value.toUpperCase() === wanted).map(([slot]) => ({ source, slot })))
+  return [...names].flatMap(([source, { codes }]) => Object.entries(codes).filter(([, value]) => value.toUpperCase() === wanted).map(([slot]) => ({ source, slot })))
 }
 
 /**
- * A codes file lists each slot's code, or, for a scheme that numbers its slots from a base, the numbers.
- * @param {{ codes?: Record<string, string>, formula?: { base: number, prefix: string, digits: number }, numbers?: number[] }} data
- * @returns {Record<string, string>}
+ * A codes file lists each slot's code, or, for a scheme that numbers its slots from a base, the numbers;
+ * it may also describe slots by IDS.
+ * @param {{ codes?: Record<string, string>, formula?: { base: number, prefix: string, digits: number }, numbers?: number[], ids?: Record<string, string> }} data
+ * @returns {{ codes: Record<string, string>, ids: Record<string, string> }}
  */
 export function expandCodes(data) {
-  if (data.codes) return data.codes
-  const { base, prefix, digits } = /** @type {{ base: number, prefix: string, digits: number }} */ (data.formula)
-  return Object.fromEntries((data.numbers ?? []).map(number => [String.fromCodePoint(base + number), `${prefix}${String(number).padStart(digits, '0')}`]))
+  const ids = data.ids ?? {}
+  if (data.codes) return { codes: data.codes, ids }
+  if (!data.formula) return { codes: {}, ids }
+  const { base, prefix, digits } = data.formula
+  return { codes: Object.fromEntries((data.numbers ?? []).map(number => [String.fromCodePoint(base + number), `${prefix}${String(number).padStart(digits, '0')}`])), ids }
 }
 
 /** @param {any} module */
@@ -163,20 +175,20 @@ let loaded = null
 /** Every scheme's mappings, loaded once. */
 export function loadPua() {
   loaded ??= Promise.all([
-    Promise.all(SCHEMES.map(async ({ id, load, records }) => {
+    Promise.all(SCHEMES.map(async ({ id, load, records, font }) => {
       const data = json(await load())
-      return /** @type {PuaScheme} */ ({ id, source: data.source, mappings: data.mappings, ...(records ? { records } : {}) })
+      return /** @type {PuaScheme} */ ({ id, source: data.source, mappings: data.mappings, ...(records ? { records } : {}), ...(font ? { font } : {}) })
     })),
     import('../data/moe-pua-variants.json').then(json),
   ]).then(([schemes, variants]) => makePua(schemes, variants)).catch(error => { loaded = null; throw error })
   return loaded
 }
 
-/** @type {Promise<Map<string, Record<string, string>>> | null} */
+/** @type {Promise<PuaNames> | null} */
 let loadedCodes = null
-/** The scheme codes of every named slot, loaded once. */
+/** The codes and IDS of every named slot, loaded once. */
 export function loadPuaCodes() {
-  loadedCodes ??= Promise.all(SCHEMES.filter(scheme => scheme.codes).map(async scheme => /** @type {[string, Record<string, string>]} */ ([scheme.id, expandCodes(json(await /** @type {() => Promise<any>} */ (scheme.codes)()))])))
+  loadedCodes ??= Promise.all(SCHEMES.filter(scheme => scheme.codes).map(async scheme => /** @type {[string, { codes: Record<string, string>, ids: Record<string, string> }]} */ ([scheme.id, expandCodes(json(await /** @type {() => Promise<any>} */ (scheme.codes)()))])))
     .then(entries => new Map(entries))
     .catch(error => { loadedCodes = null; throw error })
   return loadedCodes

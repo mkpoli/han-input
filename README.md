@@ -21,7 +21,7 @@ It covers Han, extended sinographies such as Chữ Nôm and Sawndip, and kana an
 - **Readings**: every variety in 漢字音典, each typed the same way.
 - **Rhyme tables**: the Guangyun by rhyme, initial, grade and tone.
 - **Radicals**: the 214 Kangxi radicals by residual strokes.
-- **PUA conversion**: convert private-use text from one of six schemes (MOE fonts, HKSCS, Hanyang, CNS, GB 18030, CBETA) to Unicode and browse the mappings. Find reads a private-use character, its code point, a CB code or a CNS code in every scheme that has the slot, so a slot two schemes share shows both. Each character's card lists its own PUA codes and those of its Unihan variants.
+- **PUA conversion**: convert private-use text from one of seven schemes (MOE fonts, HKSCS, Hanyang, CNS, GB 18030, CBETA, the 中华书局宋 font) to Unicode and browse the mappings. Find reads a private-use character, its code point, a CB code or a CNS code in every scheme that has the slot, so a slot two schemes share shows both. Each character's card lists its own PUA codes and those of its Unihan variants.
 - **Composition**: convert the 構字式 of Taiwan's 漢字構形資料庫 (Big5 8DF1–8DFD) and arithmetic composition to IDS. The thirteen symbols and the arithmetic signs are palettes; the Korean History Database and CBETA assign those signs differently.
 
 ## Development
@@ -53,6 +53,6 @@ U+F6A3–U+F6AF. `uv run scripts/build_composition_font.py` draws them after tab
 The PUA schemes are committed snapshots, `data/<scheme>-pua.json`, loaded only when a page needs them;
 CNS and CBETA also name each slot in `data/<scheme>-pua-codes.json`. `bun scripts/import_moe_pua.mjs`
 imports the checksum-pinned MOE source, `bun scripts/import_pua_cns.mjs` the CNS bulk release's plane 15
-table and `uv run scripts/import_cbeta_gaiji.py` the CBETA codes;
+table, `uv run scripts/import_cbeta_gaiji.py` the CBETA codes and `uv run scripts/import_pua_zhonghua.py` the 中华书局宋 slots;
 `bun scripts/import_moe_pua_variants.mjs [Unihan_Variants.txt]` rebuilds the Unihan variant index from
 Unihan 18.0; `SITE_URL=http://127.0.0.1:5317 bun scripts/check_pua.mjs` checks a running preview in Chromium.

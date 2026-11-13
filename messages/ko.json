@@ -318,6 +318,7 @@
   "pua.source.gb18030": "GB 18030",
   "pua.readings": "방식별 글자",
   "pua.source.cbeta": "CBETA",
+  "pua.source.zhonghua": "중화서국 송체",
   "pua.relation.simplified": "간체자",
   "pua.relation.traditional": "번체자",
   "pua.relation.semantic": "의미 이체자",

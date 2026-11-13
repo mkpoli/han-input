@@ -149,11 +149,11 @@ async function puaReadings(slots, code) {
 }
 
 /**
- * The characters private-use readings name: a Unicode character, or the slot itself where a scheme
- * draws it as a character (a CNS row) rather than keeping it as a record.
+ * The characters private-use readings name: a Unicode character, or the slot itself where the site's
+ * font draws the scheme's glyph there (a CNS row).
  * @param {import('../../src/pua.js').PuaReading[]} readings
  */
-const puaChars = readings => [...new Set(readings.flatMap(reading => reading.char ? [reading.char] : reading.records ? [] : [reading.slot]))]
+const puaChars = readings => [...new Set(readings.flatMap(reading => reading.char ? [reading.char] : reading.font ? [reading.slot] : []))]
 
 /** Characters an answer contributes to an intersection. @param {Answer} item */
 export function answerChars(item) {

@@ -46,6 +46,8 @@
           aria-label={reading.code} title={reading.code} onclick={() => { if (held) showRecord(held.record, held.document) }}>
           {#if held && (held.record.atlas || held.record.sprite || held.record.glyph)}<RecordGlyph record={held.record} />{:else}<span class="ui-mono code">{reading.code}</span>{/if}
         </button>
+      {:else if !reading.font}
+        <span class="ui-tile glyph shape" lang="und-Hani">{reading.ids || '—'}</span>
       {:else}
         <a class="ui-tile glyph" href={link('', { c: reading.slot })} lang="und-Hani" onclick={event => { event.preventDefault(); choose(reading.slot) }}>{reading.slot}</a>
       {/if}
@@ -63,6 +65,7 @@
   li{display:flex;align-items:center;gap:var(--ui-space-sm);min-inline-size:0}
   .glyph{flex:none;display:grid;place-items:center;inline-size:72px;block-size:72px;padding:6px;font-family:var(--ui-font-script);font-size:44px;line-height:1;color:var(--ui-color-ink);text-decoration:none}
   .code{font-size:var(--ui-text-2xs)}
+  .shape{font-size:var(--ui-text-sm);line-height:1.2;overflow-wrap:anywhere;text-align:center;color:var(--ui-color-ink-soft)}
   .facts{display:grid;gap:2px;min-inline-size:0;font-size:var(--ui-text-sm);overflow-wrap:anywhere}
   .tag{justify-self:start;padding:0 var(--ui-space-xs);border:1px solid var(--ui-color-border);border-radius:var(--ui-radius-sm);font-size:var(--ui-text-xs)}
 </style>

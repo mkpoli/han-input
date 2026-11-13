@@ -9,7 +9,7 @@
   let input = $state(params.get('q') ?? '')
   let sourceId = $state(PUA_SCHEME_IDS.includes(params.get('s') ?? '') ? /** @type {string} */ (params.get('s')) : 'all')
   let pua = $state(/** @type {import('../../src/pua.js').Pua | null} */ (null))
-  /** @type {Map<string, Record<string, string>>} */
+  /** @type {import('../../src/pua.js').PuaNames} */
   let codes = $state(new Map())
   // A slot a scheme names without a character still counts, so 全字庫 text is not read as CBETA's.
   Promise.all([loadPua(), loadPuaCodes()]).then(([loaded, named]) => { codes = named; pua = loaded }).catch(() => {})
