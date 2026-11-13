@@ -20,7 +20,8 @@ const hant = OpenCC.Converter({ from: 'cn', to: 'tw' })
 /** @type {{url:string,sha256:string}[]} */
 const inputs = []
 const lockPath = join(OUT, 'sources.json')
-const locked = existsSync(lockPath) ? JSON.parse(readFileSync(lockPath, 'utf8')).inputs : []
+const lockFile = existsSync(lockPath) ? JSON.parse(readFileSync(lockPath, 'utf8')) : null
+const locked = lockFile?.inputs ?? []
 /** @param {string} url @param {Buffer} bytes */
 function record(url, bytes) {
   pin(url, createHash('sha256').update(bytes).digest('hex'))
@@ -248,7 +249,9 @@ for (const row of catalogue) {
 }
 writeFileSync(join(OUT, 'index.json'), JSON.stringify(catalogue, null, 2) + '\n')
 writeFileSync(join(OUT, 'sources.json'), JSON.stringify({
-  catalogue: `${BASE}metadata.json`, retrieved: new Date().toISOString().slice(0, 10),
+  catalogue: `${BASE}metadata.json`,
+  // A locked catalogue digest means the same bytes as the recorded retrieval, so its date stands.
+  retrieved: locked.some((/** @type {{url:string}} */ item) => item.url === `${BASE}metadata.json`) ? lockFile.retrieved : new Date().toISOString().slice(0, 10),
   attribution: '字統網, character-set catalogue and glyph mappings. Editorial mappings; original standards and proposal documents remain authoritative. Reuse terms are unspecified at these endpoints. GB/T 12052-1989 follows Jaemin Chung’s transcription (ecma35lib); its printed totals differ from the table by three, and the set counts printed rows.',
   policy: 'Source-row sets index every row through its assigned Unicode scalars, or its private-use glyph slots where no scalar is assigned; rows described only by an IDS are kept as records, not scalar members; a glyph printed at more than one position is listed once, at its first position; a member may be a jamo sequence when a standard prints one glyph for a Hangul syllable Unicode cannot compose. Unihan kIRG_TSource fills assignments newer than the bulk release. Literal Unicode block sets contain assigned scalars. Unihan kIRG_GSource gives the G source collections. Local row numbers, IDS components and variation sequences do not establish scalar membership. OTHER follows the source’s unified substitutions, rather than literal Unicode block membership.',
   inputs: inputs.sort((a, b) => a.url.localeCompare(b.url)),
