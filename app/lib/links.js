@@ -17,6 +17,7 @@ export const LINKS = [
   { key: 'webyuntu', name: 'Web韻圖', kind: 'sound', deep: false, url: () => 'https://suzukish.sakura.ne.jp/search/inkyo/index.php' },
   { key: 'kaom', name: '古音小鏡 kaom', kind: 'sound', deep: false, url: () => 'http://www.kaom.net/' },
   { key: 'glyphatlas', name: 'Glyph Atlas', kind: 'shape', deep: true, url: c => `https://glyphatlas.org/?q=${e(c)}` },
+  { key: 'rare', name: '珍字集覽 Rare Character Compendium', kind: 'shape', deep: true, url: c => `https://rare.glyphatlas.org/?q=${e(c)}` },
   { key: 'ids', name: 'IDS Workshop', kind: 'shape', deep: true, url: c => `https://ids.mkpo.li/${e(c)}` },
   { key: 'glyphwiki', name: 'GlyphWiki', kind: 'shape', deep: true, url: c => `https://glyphwiki.org/wiki/u${cp(c)}` },
   { key: 'chise', name: 'CHISE', kind: 'shape', deep: true, url: c => `https://www.chise.org/est/view/character/${e(c)}` },

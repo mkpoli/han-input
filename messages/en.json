@@ -9,7 +9,7 @@
   "rhymes.seo": "The Guangyun as a rhyme table: rhymes down the side, initials across the top, grade and tone in every row.",
   "radicals.seo": "The 214 Kangxi radicals by residual strokes, each listing the characters written under it.",
   "convert.seo": "Convert the private-use codes of old Taiwanese and Hakka fonts to Unicode, and browse every recorded mapping.",
-  "composition.seo": "Convert Taiwan's pre-IDS composition formulas and arithmetic composition to IDS, with each database's signs kept distinct.",
+  "composition.seo": "Convert Taiwan's legacy composition formulas and arithmetic composition to IDS, with each database's signs kept distinct.",
   "about.seo": "Where every table on Han Input comes from, the terms each carries and the limits of what it records.",
   "nav.label": "Pages",
   "nav.find": "Find",

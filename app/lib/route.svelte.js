@@ -3,6 +3,7 @@
 // the page's query in `?q=`, Find's character set in `?set=`, and the page of a browsed set in `?p=`.
 
 import { NAV } from './paths.js'
+import { pushScroll, replaceScroll, leaveScroll, restoreScroll, cancelScroll } from './scroll.js'
 export { NAV }
 
 /** @typedef {{ page: string, method: string, q: string, c: string, set: string, p: number }} Route */
@@ -47,29 +48,29 @@ export function go(page, method = '') {
   route.q = ''
   route.set = ''
   route.p = 1
-  history.pushState(null, '', href(route))
-  scrollTo(0, 0)
+  pushScroll(href(route), true)
 }
 
 /** Close the open character, leaving a record card free to take its place. */
 export function close() {
   if (!route.c) return
   route.c = ''
-  history.replaceState(null, '', href(route))
+  replaceScroll(href(route))
 }
 
 /** @param {string} char */
 export function open(char) {
   if (route.c === char) return
   route.c = char
-  history.replaceState(null, '', href(route))
+  replaceScroll(href(route))
 }
 
 /** @param {string} q */
 export function setQuery(q) {
+  if (route.q !== q) cancelScroll()
   route.q = q
   route.p = 1
-  history.replaceState(null, '', href(route))
+  replaceScroll(href(route))
 }
 
 /** @param {string} id */
@@ -77,7 +78,7 @@ export function setCharset(id) {
   if (route.page !== '' || route.set === id) return
   route.set = id
   route.p = 1
-  history.pushState(null, '', href(route))
+  pushScroll(href(route), false)
 }
 
 /** Show one page of a browsed set in the address, so a reload, a shared link or Back finds it.
@@ -85,8 +86,8 @@ export function setCharset(id) {
 export function setPage(p, mode = {}) {
   if (route.page !== '' || !route.set || !Number.isInteger(p) || p < 1 || route.p === p) return
   route.p = p
-  if (mode.replace) history.replaceState(null, '', href(route))
-  else history.pushState(null, '', href(route))
+  if (mode.replace) replaceScroll(href(route))
+  else pushScroll(href(route), false)
 }
 
 /** A link to one page of the current browsed set, for the pager's own anchors. @param {number} p */
@@ -95,4 +96,8 @@ export const pageHref = p => href({ ...route, p })
 /** A link into the site. @param {string} page @param {{ method?: string, c?: string, q?: string, set?: string, p?: number }} [at] */
 export const link = (page, at = {}) => href({ page, method: at.method ?? '', c: at.c ?? '', q: at.q ?? '', set: at.set ?? '', p: at.p ?? 1 })
 
-addEventListener('popstate', () => Object.assign(route, read()))
+addEventListener('popstate', () => {
+  leaveScroll()
+  Object.assign(route, read())
+  void restoreScroll()
+})
