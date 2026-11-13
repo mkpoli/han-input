@@ -1,6 +1,7 @@
-// The composition formulas of Taiwan's 漢字構形資料庫, introduced in its version 1.4 (2002). Its thirteen symbols
-// live in the Big5 user area at 8DF1–8DFD, and in Unicode at U+F6A3–U+F6AF. Connectors sit between
-// two parts, repeats sit before the part they repeat, and a shape marker wraps a part list.
+// The composition formulas of Taiwan's 漢字構形資料庫, introduced in its version 1.4 (2002).
+// Its thirteen symbols live in the Big5 user area at 8DF1–8DFD, and in Unicode at U+F6A3–U+F6AF.
+// Connectors sit between two parts, repeats sit before the part they repeat, and a shape marker
+// wraps a part list.
 
 /** @typedef {'lr' | 'ud' | 'oc'} Connector */
 /** @typedef {'v2' | 'h2' | 't3' | 'v3' | 'h3' | 'q4' | 'v4' | 'h4'} Repeat */
