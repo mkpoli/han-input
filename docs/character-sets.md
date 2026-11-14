@@ -88,7 +88,7 @@ Each set holds the characters one doculect coined or gave its own use. Character
 
 The twelve Chinese sets follow the 嚴式方言字 list of the 全國漢語方言用字總表: 官話, 晉語, 吳語, 徽語, 贛語, 湘語, 客家話, 粵語, 閩語, 閩東語, 閩南語 and 平話. A row joins every group it is labelled with. The list labels Min only as 閩; 閩東語 takes the Min rows it reads at Fuzhou or Gutian, and 閩南語 those it reads at Xiamen, Zhangzhou or Zhangping. Its 寬式方言字 tier, ordinary characters such as 乞 or 比 given a dialect sense, stays out. 日本國字 and 朝鮮國字 take the kokuji and gukja groups of IDS Workshop's open IDS descriptions. A row that the source can only describe with an IDS is a record on its set.
 
-`bun scripts/build_dialect_chars.mjs` rebuilds the sets from the inputs pinned in `dialect_source.json`; the full build calls the same writer.
+`bun scripts/build_dialect_chars.mjs` rebuilds the sets from the inputs pinned in `dialect_source.json`; the full build calls the same writer. It also writes `dialect_rows.json`, every source row once with its sets, readings and gloss, for the Dialects page. On that page a Min row read at Fuzhou or Xiamen counts as one variety, though it belongs to 閩語 as well.
 
 ## G source collections
 

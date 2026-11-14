@@ -32,7 +32,7 @@ const fetch = (path, init) => worker.fetch(new Request(`https://han.mkpo.li${pat
 
 describe('app paths', () => {
   test('accepts every route the app renders', () => {
-    for (const path of ['/', '/methods', '/methods/', '/readings', '/rhymes', '/radicals', '/convert', '/composition', '/about', '/m/cangjie5', '/v/16', '/v/16/', '//methods', '//m/cangjie5']) {
+    for (const path of ['/', '/methods', '/methods/', '/readings', '/rhymes', '/radicals', '/dialects', '/convert', '/composition', '/about', '/m/cangjie5', '/v/16', '/v/16/', '//methods', '//m/cangjie5']) {
       expect(isAppPath(path), path).toBe(true)
     }
   })
