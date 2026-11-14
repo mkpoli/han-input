@@ -59,9 +59,11 @@ test('a dialect set counts every source row, repeated characters included', () =
 
 test('a Min row and its Fuzhou or Xiamen reading count as one doculect', async () => {
   const { doculects, groupDialects } = await import('../app/lib/dialects.js')
-  expect(doculects(['dialect_min', 'dialect_min_dong'])).toBe(1)
-  expect(doculects(['dialect_min', 'dialect_min_dong', 'dialect_min_nan'])).toBe(2)
-  expect(doculects(['dialect_min', 'dialect_yue'])).toBe(2)
+  expect(doculects([{ sets: ['dialect_min', 'dialect_min_dong'] }])).toBe(1)
+  expect(doculects([{ sets: ['dialect_min', 'dialect_min_dong', 'dialect_min_nan'] }])).toBe(2)
+  expect(doculects([{ sets: ['dialect_min', 'dialect_yue'] }])).toBe(2)
+  // A Min row read only at Yong'an beside one read at Xiamen: two Min varieties.
+  expect(doculects([{ sets: ['dialect_min'] }, { sets: ['dialect_min', 'dialect_min_nan'] }])).toBe(2)
   const sets = /** @type {any[]} */ (['dialect_yue', 'dialect_min'].map(id => ({ id })))
   const { entries } = groupDialects(sets, [
     { char: '乜', sets: ['dialect_min'], def: 'a' },

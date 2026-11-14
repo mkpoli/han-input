@@ -19,9 +19,11 @@ const MIN_PARTS = ['dialect_min_dong', 'dialect_min_nan']
 /** @typedef {{ key: string, char: string, sets: string[], doculects: number, rows: DialectRow[] }} DialectEntry */
 /** @typedef {{ sets: import('./charsets.js').Charset[], entries: DialectEntry[], byKey: Map<string, DialectEntry> }} Dialects */
 
-/** The doculects a set of tags counts as. @param {string[]} sets */
-export function doculects(sets) {
-  return sets.filter(id => id !== MIN || !sets.some(other => MIN_PARTS.includes(other))).length
+/** The doculects rows count as together. Each row is one doculect per tag, except that a Min row
+ * read at Fuzhou or Xiamen counts there and not again as 閩語. @param {{ sets: string[] }[]} rows */
+export function doculects(rows) {
+  const tags = new Set(rows.flatMap(row => row.sets.some(id => MIN_PARTS.includes(id)) ? row.sets.filter(id => id !== MIN) : row.sets))
+  return tags.size
 }
 
 /** Group the rows by character, or by IDS where the row has no character, in catalogue order.
@@ -41,7 +43,7 @@ export function groupDialects(sets, rows) {
   const entries = [...byKey.values()]
   for (const entry of entries) {
     entry.sets.sort((a, b) => (order.get(a) ?? 0) - (order.get(b) ?? 0))
-    entry.doculects = doculects(entry.sets)
+    entry.doculects = doculects(entry.rows)
   }
   return { sets, entries, byKey }
 }

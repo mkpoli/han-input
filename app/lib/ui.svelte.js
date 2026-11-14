@@ -22,6 +22,7 @@ export const ui = $state({
 /** @param {string} char */
 export function choose(char) {
   ui.record = null
+  ui.dialect = ''
   open(char)
   if (matchMedia('(max-width: 900px)').matches) ui.sheet = true
 }
@@ -29,6 +30,7 @@ export function choose(char) {
 /** @param {import('./charsets.js').ProposalRecord} record @param {import('./charsets.js').ProposalDocument} document */
 export function showRecord(record, document) {
   close()
+  ui.dialect = ''
   ui.record = { record, document }
   if (matchMedia('(max-width: 900px)').matches) ui.sheet = true
 }

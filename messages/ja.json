@@ -178,7 +178,7 @@
   "dialects.intro": "各地の方言や域外で作られ、独自に使われてきた字。",
   "dialects.seo": "官話・呉語・粤語・閩語・客家語など中国語方言の方言字と、日本の国字・朝鮮の国字。各地の読みと字義を添える。",
   "dialects.search": "字・字義・読み",
-  "dialects.shared": "複数の方言に共通",
+  "dialects.shared": "複数の地域に共通",
   "dialects.doculects": "方言",
   "dialects.all": "すべて",
   "dialects.count": "{count}字",

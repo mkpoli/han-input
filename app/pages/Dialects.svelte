@@ -45,7 +45,6 @@
   /** @param {import('../lib/dialects.js').DialectEntry} entry */
   function pick(entry) {
     if (entry.char) {
-      ui.dialect = ''
       choose(entry.char)
       return
     }
@@ -56,7 +55,7 @@
   }
 
   /** @param {import('../lib/dialects.js').DialectEntry} entry */
-  const current = entry => entry.char ? route.c === entry.char : ui.dialect === entry.key
+  const current = entry => entry.char ? route.c === entry.char : !route.c && ui.dialect === entry.key
 </script>
 
 <div class="ui-page" data-width="wide">
@@ -69,7 +68,7 @@
     <p class="ui-hint">{t('dialects.failed')} <button class="ui-button" data-size="sm" type="button" onclick={() => { retry++ }}>{t('dialects.retry')}</button></p>
   {:else if data}
     <div class="controls">
-      <input class="ui-input search" type="search" value={route.q} oninput={event => { setQuery(event.currentTarget.value); limit = PAGE }} placeholder={t('dialects.search')} aria-label={t('dialects.search')} autocomplete="off" />
+      <input class="ui-input search" data-primary type="search" value={route.q} oninput={event => { setQuery(event.currentTarget.value); limit = PAGE }} placeholder={t('dialects.search')} aria-label={t('dialects.search')} autocomplete="off" />
       <label class="ui-check-row shared"><input class="ui-switch" type="checkbox" role="switch" bind:checked={shared} onchange={() => { limit = PAGE }} /><span>{t('dialects.shared')}</span></label>
     </div>
     <div class="ui-chip-row" role="group" aria-label={t('dialects.doculects')}>

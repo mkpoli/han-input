@@ -175,7 +175,7 @@
   "radicals.intro": "Pick a Kangxi radical to list its characters by the strokes beyond it.",
   "radicals.rest": "{count} more strokes",
   "dialects.title": "Dialect characters",
-  "dialects.intro": "Characters a single variety coined or gave its own use, from Chinese dialects to kokuji and gukja.",
+  "dialects.intro": "Characters coined or given their own use in a variety, from Chinese dialects to kokuji and gukja.",
   "dialects.seo": "Dialect characters of Mandarin, Wu, Cantonese, Min, Hakka and other Chinese varieties, with Japanese kokuji and Korean gukja, each with its readings and gloss.",
   "dialects.search": "Character, gloss or reading",
   "dialects.shared": "Shared by several",
