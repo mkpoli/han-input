@@ -3,6 +3,8 @@
   import { ui, showRecord } from '../lib/ui.svelte.js'
   import Pager from './Pager.svelte'
   import RecordGlyph from './RecordGlyph.svelte'
+  import GridRows from './GridRows.svelte'
+  import { gridNavigation } from './grid.js'
 
   /** @type {{ entries: import('../lib/records.js').RecordEntry[], label: string }} */
   let { entries, label } = $props()
@@ -11,19 +13,23 @@
   const pages = $derived(Math.max(1, Math.ceil(entries.length / PER_PAGE)))
   const shown = $derived(entries.slice(page * PER_PAGE, (page + 1) * PER_PAGE))
   $effect(() => { entries; page = 0 })
+  /** @type {HTMLDivElement | null} */
+  let grid = $state(null)
 </script>
 
 {#if pages > 1}<Pager page={page + 1} {pages} onchange={next => { page = next - 1 }} />{/if}
-<div class="ui-tiles records" role="listbox" aria-label={label}>
-  {#each shown as entry (entry.set + ':' + entry.record.source)}
-    <button class="ui-tile" type="button" role="option" aria-selected={ui.record?.record === entry.record}
-      title={[entry.record.source, entry.document.title].join(' · ')} onclick={() => showRecord(entry.record, entry.document)}>
-      {#if entry.record.sprite || entry.record.atlas || entry.record.glyph}
-        <RecordGlyph record={entry.record} />
-      {:else}<span class="formula" lang="und-Hani">{entry.record.composition ?? ''}</span>{/if}
-      <span class="ui-tile-note ui-mono">{entry.record.source}</span>
-    </button>
-  {/each}
+<div class="ui-tiles records" role="grid" aria-label={label} bind:this={grid} use:gridNavigation>
+  <GridRows {grid} items={shown}>
+    {#snippet children(entry, index)}
+      <button class="ui-tile" type="button" tabindex={index === 0 ? 0 : -1} aria-current={ui.record?.record === entry.record ? 'true' : undefined}
+        title={[entry.record.source, entry.document.title].join(' · ')} onclick={() => showRecord(entry.record, entry.document)}>
+        {#if entry.record.sprite || entry.record.atlas || entry.record.glyph}
+          <RecordGlyph record={entry.record} />
+        {:else}<span class="formula" lang="und-Hani">{entry.record.composition ?? ''}</span>{/if}
+        <span class="ui-tile-note ui-mono">{entry.record.source}</span>
+      </button>
+    {/snippet}
+  </GridRows>
 </div>
 
 <style>

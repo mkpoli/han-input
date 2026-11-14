@@ -9,6 +9,10 @@
   /** @type {{ id: string, name: string, url: string, licence: string, attribution?: string, version?: string }[]} */
   let writing = $state([])
   loadMethods().then(list => { methods = list })
+  /** @type {{ id: string, name: string, licence: string, attribution?: string }[]} */
+  let order = $state([])
+  fetch('/data/order.json').then(response => response.ok ? response.json() : { sources: [] })
+    .then(doc => { order = doc.sources ?? [] }).catch(() => {})
   fetch('/data/ids.json').then(response => response.ok ? response.json() : { sources: [] })
     .then(doc => { writing = doc.sources ?? [] }).catch(() => {})
   /** @type {{ name: string, url: string, licence: string }[]} */
@@ -87,6 +91,24 @@
       {/each}
     </dl>
   </section>
+  {#if order.length}
+    <section class="ui-section">
+      <h2 class="ui-label">{t('about.order')}</h2>
+      <div class="ui-table-wrap">
+        <table class="table">
+          <thead><tr><th>{t('method.source')}</th><th>{t('method.licence')}</th></tr></thead>
+          <tbody>
+            {#each order as entry (entry.id)}
+              <tr>
+                <td>{entry.name}{#if entry.attribution}<br><span class="ui-hint">{entry.attribution}</span>{/if}</td>
+                <td class="ui-hint">{entry.licence}</td>
+              </tr>
+            {/each}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  {/if}
   {#if writing.length}
     <section class="ui-section">
       <h2 class="ui-label">{t('about.writing')}</h2>

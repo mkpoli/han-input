@@ -8,6 +8,14 @@
 /** @type {Promise<Charset[]> | null} */
 let catalogue = null
 /** @returns {Promise<Charset[]>} */
+/** The size a set is listed with. IDS records add the rows a set could only describe to its members;
+ * a proposal's records are the whole set.
+ * @param {Charset} set */
+export function listedCount(set) {
+  if (!set.records) return set.chars
+  return set.records.file.endsWith('.ids.json') ? set.chars + set.records.count : set.records.count
+}
+
 export function loadCharsets() {
   return catalogue ??= fetch('/charsets/index.json').then(async response => {
     if (!response.ok) throw new Error('Character sets unavailable')

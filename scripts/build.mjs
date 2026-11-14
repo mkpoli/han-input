@@ -8,13 +8,18 @@
 //   i/<plane>.gz     each character's descriptions as the source writes them, and the sources
 //   ids-components.json  BabelStone's numbered components: PUA character, description, fragment,
 //                        and the CHISE entities each aligns with
-//   chars.tsv.gz     code point, rank, strokes, radical
+//   chars.tsv.gz     character, rank, strokes, radical. The rank is one number, low first:
+//                    tier * 1e7 + corpus position * 100 + strokes. The tier is school grade (1-6), Joyo/IICore
+//                    (10), Jinmeiyo/Korean education (20), UnihanCore2020 (30), then block (40-60); kana take 5
+//                    and hentaigana and Nushu 70. The position is 1 for the commonest character of the
+//                    classical-text frequency table and 99999 for one it lacks.
 //   methods.json     what the above were made from
 import { appendFileSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { gzipSync } from 'node:zlib'
 import { charBucket, codeBucket, fold, inScope, isHan, partBucket, pinyinDigits, runBucket, wordBucket } from '../src/fold.js'
 import { readUnihan, unihanMethods, rankChars } from './sources/unihan.mjs'
+import { FREQUENCY_SOURCE, readFrequency } from './sources/frequency.mjs'
 import { IDS_SOURCES, components, partsOf, readDescriptions, runsOf } from './sources/ids.mjs'
 import { allMethods } from './sources/index.mjs'
 import { meaningWords } from './sources/meaning.mjs'
@@ -52,6 +57,8 @@ const codes = new Spool('c')
 const chars = new Spool('x')
 
 console.log('reading Unihan')
+// The frequency table is privately supplied, so a missing copy stops the build before the heavy steps.
+const positions = readFrequency()
 const fields = await readUnihan()
 const methods = [...unihanMethods(fields), ...await allMethods()]
 
@@ -129,6 +136,7 @@ for (const [char, rows] of descriptions) {
 }
 for (const [bucket, rows] of writingFiles) writeFileSync(join(OUT, 'i', `${bucket}.gz`), gz(rows.join('\n')))
 writeFileSync(join(OUT, 'ids.json'), JSON.stringify({ sources: IDS_SOURCES }))
+writeFileSync(join(OUT, 'order.json'), JSON.stringify({ sources: [FREQUENCY_SOURCE] }))
 writeFileSync(join(OUT, 'ids-components.json'), JSON.stringify(components()))
 
 console.log('parts')
@@ -164,8 +172,8 @@ for (const [bucket, rows] of shapeFiles) writeFileSync(join(OUT, 'g', `${bucket}
 writeFileSync(join(OUT, 'variants.json.gz'), gz(readFileSync(join(import.meta.dirname, '..', 'data', 'variants.json'), 'utf8')))
 
 // Modern kana come among the commonest characters, and hentaigana, Nüshu and Small Seal after every block of Han.
-const derivedRows = [...derived].map(char => [char, /[\u3040-\u30FF]/.test(char) ? 500 : 7000, 0, ''])
-writeFileSync(join(OUT, 'chars.tsv.gz'), gz([...rankChars(fields), ...derivedRows].map(row => row.join('\t')).join('\n')))
+const derivedRows = [...derived].map(char => [char, (/[\u3040-\u30FF]/.test(char) ? 5 : 70) * 1e7, 0, ''])
+writeFileSync(join(OUT, 'chars.tsv.gz'), gz([...rankChars(fields, positions), ...derivedRows].map(row => row.join('\t')).join('\n')))
 writeFileSync(join(OUT, 'rhymes.json.gz'), gz(JSON.stringify(rhymeTable())))
 // Two tables of one method keep the same name, so where they come from tells them apart.
 const uses = new Map()

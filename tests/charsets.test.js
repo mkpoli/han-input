@@ -2,7 +2,7 @@ import { describe, test, expect, afterEach } from 'bun:test'
 import { readFileSync, readdirSync } from 'node:fs'
 import { mappedMembers, membersText, iwdsMembers, scalarExpressions, idsRecords, columnsOf } from '../scripts/charset-members.mjs'
 import { GB12052_UNENCODED, gb12052Members } from '../scripts/sources/charsets-gb12052.mjs'
-import { compareCodes, coverageParts, filterAnswer, loadCharsets, loadCharset, loadRecords, sharedCharacters } from '../app/lib/charsets.js'
+import { compareCodes, coverageParts, filterAnswer, listedCount, loadCharsets, loadCharset, loadRecords, sharedCharacters } from '../app/lib/charsets.js'
 import { loadChars, findMeaning } from '../app/lib/data.js'
 import { cnsSourceSets, unihanTSources } from '../scripts/sources/charsets-cns.mjs'
 import { ziSourcePage } from '../scripts/sources/zi-page.mjs'
@@ -236,7 +236,7 @@ test('snapshot covers every source catalogue and counts match unique scalars', (
   expect(referenceIds).toHaveLength(115)
   for (const id of referenceIds) expect(catalogue.some(row => row.id === id)).toBe(true)
   for (const input of sources.inputs) expect(input.sha256).toMatch(/^[a-f0-9]{64}$/)
-  expect(catalogue.length).toBe(281)
+  expect(catalogue.length).toBe(296)
   expect(catalogue.find(row => row.id === 'block_seal')?.chars).toBe(11328)
   for (const id of ['irgn', 'l2', 'g_fzk', '1k8myqp9o8zxkvdpbqdhrfs6yfx5bk2t']) expect(catalogue.some(row => row.id === id)).toBe(false)
   const cns = catalogue.filter(row => row.group === 'CNS sources')
@@ -371,6 +371,20 @@ test('snapshot covers every source catalogue and counts match unique scalars', (
     'file:cbeta-workbooks/CBETA難字庫.xlsx',
     'file:cbeta-workbooks/CBETA難字庫IDS版_1.2.xlsx',
   ])
+  const fz = catalogue.find(row => row.id === 'fz_pua')
+  expect(fz.group).toBe('PUA')
+  expect(fz.chars).toBe(0)
+  expect(fz.total).toBe(633)
+  expect(fz.records).toEqual({ file: '/charsets/fz_pua_records.json', count: 633, glyphs: 0 })
+  const fzRecords = JSON.parse(readFileSync(new URL('fz_pua_records.json', base), 'utf8'))
+  expect(fzRecords.records).toHaveLength(633)
+  expect(new Set(fzRecords.records.map(record => record.source)).size).toBe(633)
+  expect(fzRecords.records.every(record => /^U\+[EF][0-9A-F]{3}$/.test(record.source))).toBe(true)
+  const fzSource = JSON.parse(readFileSync(new URL('fz_pua_source.json', base), 'utf8'))
+  const fonts = Object.values(fzSource)
+  expect(fonts).toHaveLength(6)
+  expect(fonts.every(font => font.url.startsWith('https://raw.githubusercontent.com/xiangrongjingujiu/FangZhengChaoDaZiFuJi/1ecfaafaa9a8f9661e878fd507094e83a33226b3/') && /^[a-f0-9]{64}$/.test(font.sha256))).toBe(true)
+  expect(fonts.reduce((sum, font) => sum + font.pua, 0)).toBeGreaterThan(633)
   const sat = catalogue.find(row => row.id === 'ext_f_sat_withdrawals')
   expect(sat.group).toBe('Proposals')
   expect(sat.chars).toBe(0)
@@ -515,4 +529,11 @@ test('search-data failures release caches for the Find retry button', async () =
   await expect(findMeaning('retry-fixture')).rejects.toThrow('Failed to fetch')
   globalThis.fetch = async () => new Response('retry-fixture\t字')
   expect(await findMeaning('retry-fixture')).toEqual(['字'])
+})
+
+test('a set with IDS records is listed with its members and records together', () => {
+  const source = { name: '', url: '' }
+  expect(listedCount({ id: 'a', group: '', label: '', names: { en: '' }, chars: 2059, total: 3336, source, records: { file: '/charsets/a.ids.json', count: 885, glyphs: 0 } })).toBe(2944)
+  expect(listedCount({ id: 'b', group: '', label: '', names: { en: '' }, chars: 3, total: 138, source, records: { file: '/charsets/b_records.json', count: 138, glyphs: 134 } })).toBe(138)
+  expect(listedCount({ id: 'c', group: '', label: '', names: { en: '' }, chars: 40, total: 40, source })).toBe(40)
 })

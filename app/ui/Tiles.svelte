@@ -3,6 +3,10 @@
   import { route } from '../lib/route.svelte.js'
   import { choose, put } from '../lib/ui.svelte.js'
   import { t } from '../lib/i18n.svelte.js'
+  import GridRows from './GridRows.svelte'
+  import { gridNavigation } from './grid.js'
+  /** @type {HTMLDivElement | null} */
+  let grid = $state(null)
 
   /** `columns` fixes the row width on a wide screen, for a set browsed as a code table.
    * @type {{ chars: string[], notes?: Map<string, string>, limit?: number, size?: number, columns?: number, label?: string, codeNotes?: boolean }} */
@@ -10,14 +14,16 @@
   const shown = $derived(chars.slice(0, limit))
 </script>
 
-<div class="ui-tiles" data-codes={codeNotes ? 'true' : undefined} style:--ui-tile-size="{size}px" style:--ui-tile-columns={columns || undefined} data-columns={columns || undefined} role="listbox" aria-label={label}>
-  {#each shown as char (char)}
-    {@const note = notes?.get(char)}
-    <button class="ui-tile" type="button" role="option" aria-selected={route.c === char} data-note={note ? undefined : 'none'} title={note ? `${char} ${note}` : char}
-      onclick={() => choose(char)} ondblclick={() => put(char)}>
-      <span class="ui-tile-glyph ui-script" lang="und-Hani">{char}</span>{#if note}<span class="ui-tile-note ui-mono">{note}</span>{/if}
-    </button>
-  {/each}
+<div class="ui-tiles" data-codes={codeNotes ? 'true' : undefined} style:--ui-tile-size="{size}px" style:--ui-tile-columns={columns || undefined} data-columns={columns || undefined} role="grid" aria-label={label} bind:this={grid} use:gridNavigation>
+  <GridRows {grid} items={shown}>
+    {#snippet children(char, index)}
+      {@const note = notes?.get(char)}
+      <button class="ui-tile" type="button" tabindex={index === 0 ? 0 : -1} aria-current={route.c === char ? 'true' : undefined} data-note={note ? undefined : 'none'} title={note ? `${char} ${note}` : char}
+        onclick={() => choose(char)} ondblclick={() => put(char)}>
+        <span class="ui-tile-glyph ui-script" lang="und-Hani">{char}</span>{#if note}<span class="ui-tile-note ui-mono">{note}</span>{/if}
+      </button>
+    {/snippet}
+  </GridRows>
 </div>
 {#if chars.length > limit}<p class="ui-hint cut">{t('common.cut', { shown: limit, total: chars.length })}</p>{/if}
 

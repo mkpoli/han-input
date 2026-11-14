@@ -20,6 +20,8 @@
   import Readings from './pages/Readings.svelte'
   import Rhymes from './pages/Rhymes.svelte'
   import Radicals from './pages/Radicals.svelte'
+  import Dialects from './pages/Dialects.svelte'
+  import DialectCard from './ui/DialectCard.svelte'
   import About from './pages/About.svelte'
   import Convert from './pages/Convert.svelte'
   import NotFound from './pages/NotFound.svelte'
@@ -179,6 +181,7 @@
     {:else if route.page === 'readings'}<Readings />
     {:else if route.page === 'rhymes'}<Rhymes />
     {:else if route.page === 'radicals'}<Radicals />
+    {:else if route.page === 'dialects'}<Dialects />
     {:else if route.page === 'convert'}<Convert />
     {:else if route.page === 'notfound'}<NotFound />
     {:else if route.page === 'composition'}<Composition />
@@ -192,7 +195,7 @@
         <div class="sheet-status ui-hint ui-glyph-text" class:show={ui.sheet && !!toast.message} bind:clientHeight={sheetStatusHeight} role="status" aria-live="polite">{#if ui.sheet}{#key toast.id}{toast.message}{/key}{/if}</div>
       </div>
     {/if}
-    {#if ui.record && !route.c}<ProposalCard />{:else}<Card />{/if}
+    {#if route.page === 'dialects' && ui.dialect && !route.c}<DialectCard />{:else if ui.record && !route.c}<ProposalCard />{:else}<Card />{/if}
   </aside>
   <dialog class="sheet" bind:this={sheet} aria-label={t('card.label')} oncancel={event => { event.preventDefault(); dismissSheet() }}></dialog>
 

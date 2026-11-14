@@ -1,0 +1,68 @@
+{
+  "FZKTK": {
+    "url": "https://raw.githubusercontent.com/xiangrongjingujiu/FangZhengChaoDaZiFuJi/1ecfaafaa9a8f9661e878fd507094e83a33226b3/%E6%96%B9%E6%AD%A3%E6%A5%B7%E4%BD%93%E8%B6%85%E5%A4%A7%E5%AD%97%E7%AC%A6%E9%9B%86/FZKTK.TTF",
+    "repository": "https://github.com/xiangrongjingujiu/FangZhengChaoDaZiFuJi",
+    "committed": "2021-05-30",
+    "retrieved": "2026-11-12",
+    "sha256": "6527f1a53414d9d1dcdb64f7f26cc451ef7ab2c57a2a2b1a06e5255e97f2d894",
+    "family": "FZKai-Z03",
+    "version": "5.30",
+    "copyright": "Copyright(c) Beijing Founder Electronics Co.,Ltd.2015",
+    "pua": 106
+  },
+  "FZKTJW": {
+    "url": "https://raw.githubusercontent.com/xiangrongjingujiu/FangZhengChaoDaZiFuJi/1ecfaafaa9a8f9661e878fd507094e83a33226b3/%E6%96%B9%E6%AD%A3%E6%A5%B7%E4%BD%93%E8%B6%85%E5%A4%A7%E5%AD%97%E7%AC%A6%E9%9B%86/FZKTJW.TTF",
+    "repository": "https://github.com/xiangrongjingujiu/FangZhengChaoDaZiFuJi",
+    "committed": "2021-05-30",
+    "retrieved": "2026-11-12",
+    "sha256": "2239b43b9decc6c74b353c2dc41e15f7fdede652148afcae6eb959bb03d82aa2",
+    "family": "FZKai-Z03S",
+    "version": "5.30",
+    "copyright": "Copyright(c) Beijing Founder Electronics Co.,Ltd.2015",
+    "pua": 522
+  },
+  "FZJCGFKTK": {
+    "url": "https://raw.githubusercontent.com/xiangrongjingujiu/FangZhengChaoDaZiFuJi/1ecfaafaa9a8f9661e878fd507094e83a33226b3/%E6%96%B9%E6%AD%A3%E6%A5%B7%E4%BD%93%E8%B6%85%E5%A4%A7%E5%AD%97%E7%AC%A6%E9%9B%86/FZJCGFKTK.TTF",
+    "repository": "https://github.com/xiangrongjingujiu/FangZhengChaoDaZiFuJi",
+    "committed": "2021-05-30",
+    "retrieved": "2026-11-12",
+    "sha256": "e9e2fac858fafc1b572a4d0223f03d63faeaa6f3d46135caebca0f87433a3448",
+    "family": "FZJiaoCai GuiFanKai",
+    "version": "1.02",
+    "copyright": "Copyright(c) Beijing Founder Electronics Co.,Ltd. ±±æ©±±¥Û∑Ω’˝µÁ◊””–œﬁπ´Àæ",
+    "pua": 108
+  },
+  "FZSongS": {
+    "url": "https://raw.githubusercontent.com/xiangrongjingujiu/FangZhengChaoDaZiFuJi/1ecfaafaa9a8f9661e878fd507094e83a33226b3/%E6%96%B9%E6%AD%A3%E5%AE%8B%E4%BD%93%E8%B6%85%E5%A4%A7%E5%AD%97%E7%AC%A6%E9%9B%86/FZSongS.TTF",
+    "repository": "https://github.com/xiangrongjingujiu/FangZhengChaoDaZiFuJi",
+    "committed": "2021-05-30",
+    "retrieved": "2026-11-12",
+    "sha256": "b113c3d12abadc5614e49cccfabf48fd67ef5ab97fb4d6195252a572a44c0dd7",
+    "family": "FZSongS-Extended",
+    "version": "Version 2.00",
+    "copyright": "Copyright(c) Beijing Founder Electronics Co.,Ltd.2007",
+    "pua": 122
+  },
+  "FZKaiS-Extended-1": {
+    "url": "https://raw.githubusercontent.com/xiangrongjingujiu/FangZhengChaoDaZiFuJi/1ecfaafaa9a8f9661e878fd507094e83a33226b3/%E6%96%B9%E6%AD%A3%E6%A5%B7%E4%BD%93%E8%B6%85%E5%A4%A7%E5%AD%97%E7%AC%A6%E9%9B%86/FZKaiS-Extended-1.ttf",
+    "repository": "https://github.com/xiangrongjingujiu/FangZhengChaoDaZiFuJi",
+    "committed": "2021-05-30",
+    "retrieved": "2026-11-12",
+    "sha256": "8b639c172de33d773fdd3235f2bc48ef0800369f2d25baf2f847a05b9f1d72fc",
+    "family": "FZKaiS-Extended",
+    "version": "1.00",
+    "copyright": "Copyright(c) Founder Corporation.2006",
+    "pua": 0
+  },
+  "FZSongS-SIP": {
+    "url": "https://raw.githubusercontent.com/xiangrongjingujiu/FangZhengChaoDaZiFuJi/1ecfaafaa9a8f9661e878fd507094e83a33226b3/%E6%96%B9%E6%AD%A3%E5%AE%8B%E4%BD%93%E8%B6%85%E5%A4%A7%E5%AD%97%E7%AC%A6%E9%9B%86/FZSongS-SIP.TTF",
+    "repository": "https://github.com/xiangrongjingujiu/FangZhengChaoDaZiFuJi",
+    "committed": "2021-05-30",
+    "retrieved": "2026-11-12",
+    "sha256": "58018d4a773385c9300c11dbba7d1f386f6e4450a313591d72b1527b9d1d246d",
+    "family": "FZSongS-Extended(SIP)",
+    "version": "Version 2.00",
+    "copyright": "Copyright(c) Beijing Founder Electronics Co.,Ltd.2007",
+    "pua": 0
+  }
+}

@@ -8,6 +8,10 @@
   import { compareCodes } from '../lib/charsets.js'
   import Pager from './Pager.svelte'
   import RecordGlyph from './RecordGlyph.svelte'
+  import GridRows from './GridRows.svelte'
+  import { gridNavigation } from './grid.js'
+  /** @type {HTMLDivElement | null} */
+  let grid = $state(null)
 
   /** @type {{ records: import('../lib/charsets.js').ProposalRecords, label: string }} */
   let { records, label } = $props()
@@ -69,20 +73,22 @@
       {/each}
     </ol>
   {:else}
-    <div class="ui-tiles records" class:text-only={textOnly} role="listbox" aria-label={`${label} ${t('charset.records')}`}>
-      {#each shown as record, i (record.document + ':' + code(record) + ':' + i)}
-        <button class="ui-tile" type="button" role="option" aria-selected={ui.record?.record === record}
-          title={[code(record), sourceName(record), documents.get(record.document)?.document].filter(Boolean).join(' · ')}
-          onclick={() => { const doc = documents.get(record.document); if (doc) showRecord(record, doc) }}>
-          {#if record.sprite || record.atlas || record.glyph}
-            <RecordGlyph {record} />
-            <span class="ui-tile-note ui-mono">{code(record)}</span>
-          {:else if record.mappedUnicode}
-            <span class="mapped" lang="und-Hani">{String.fromCodePoint(parseInt(record.mappedUnicode.slice(2), 16))}</span>
-            <span class="ui-tile-note ui-mono">{code(record)}</span>
-          {:else}<span class="code ui-mono">{code(record)}</span>{/if}
-        </button>
-      {/each}
+    <div class="ui-tiles records" class:text-only={textOnly} role="grid" aria-label={`${label} ${t('charset.records')}`} bind:this={grid} use:gridNavigation>
+      <GridRows {grid} items={shown}>
+        {#snippet children(record, index)}
+          <button class="ui-tile" type="button" tabindex={index === 0 ? 0 : -1} aria-current={ui.record?.record === record ? 'true' : undefined}
+            title={[code(record), sourceName(record), documents.get(record.document)?.document].filter(Boolean).join(' · ')}
+            onclick={() => { const doc = documents.get(record.document); if (doc) showRecord(record, doc) }}>
+            {#if record.sprite || record.atlas || record.glyph}
+              <RecordGlyph {record} />
+              <span class="ui-tile-note ui-mono">{code(record)}</span>
+            {:else if record.mappedUnicode}
+              <span class="mapped" lang="und-Hani">{String.fromCodePoint(parseInt(record.mappedUnicode.slice(2), 16))}</span>
+              <span class="ui-tile-note ui-mono">{code(record)}</span>
+            {:else}<span class="code ui-mono">{code(record)}</span>{/if}
+          </button>
+        {/snippet}
+      </GridRows>
     </div>
     {#if !arranged.length}<p class="ui-hint">{t('find.none')}</p>{/if}
   {/if}

@@ -45,7 +45,7 @@ export async function answer(clue) {
   const found = await lookUp(clue)
   // Commonest first, since a table's own order is often by code point.
   const rows = await loadChars()
-  const rank = (/** @type {string} */ char) => rows.get(char)?.rank ?? 1e6
+  const rank = (/** @type {string} */ char) => rows.get(char)?.rank ?? 1e10
   for (const hit of [...found.hits, ...found.readings]) hit.chars.sort((a, b) => rank(a) - rank(b))
   for (const shape of [...found.shapes, ...found.partVariants, ...found.similarParts]) shape.chars.sort((a, b) => rank(a) - rank(b))
   return found
@@ -167,7 +167,7 @@ export async function intersect(answers) {
   const sets = answers.map(item => new Set(answerChars(item)))
   const [first, ...rest] = sets
   const kept = [...(first ?? [])].filter(char => rest.every(set => set.has(char)))
-  return kept.sort((a, b) => (rows.get(a)?.rank ?? 1e6) - (rows.get(b)?.rank ?? 1e6))
+  return kept.sort((a, b) => (rows.get(a)?.rank ?? 1e10) - (rows.get(b)?.rank ?? 1e10))
 }
 
 /** How much of a method group a page shows: its first codes, each with its first characters. */
