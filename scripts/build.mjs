@@ -63,7 +63,7 @@ const fields = await readUnihan()
 const methods = [...unihanMethods(fields), ...await allMethods()]
 
 const toHans = OpenCC.Converter({ from: 'hk', to: 'cn' })
-/** Kana and Nüshu met in any table, for the ordering file. */
+/** Kana, Nüshu and Small Seal met in any table, for the ordering file. */
 const derived = new Set()
 const manifest = []
 const ids = new Set()
@@ -171,7 +171,7 @@ for (const [run, chars] of shapes) {
 for (const [bucket, rows] of shapeFiles) writeFileSync(join(OUT, 'g', `${bucket}.gz`), gz(rows.join('\n')))
 writeFileSync(join(OUT, 'variants.json.gz'), gz(readFileSync(join(import.meta.dirname, '..', 'data', 'variants.json'), 'utf8')))
 
-// Modern kana come among the commonest characters, and hentaigana and Nüshu after every block of Han.
+// Modern kana come among the commonest characters, and hentaigana, Nüshu and Small Seal after every block of Han.
 const derivedRows = [...derived].map(char => [char, (/[\u3040-\u30FF]/.test(char) ? 5 : 70) * 1e7, 0, ''])
 writeFileSync(join(OUT, 'chars.tsv.gz'), gz([...rankChars(fields, positions), ...derivedRows].map(row => row.join('\t')).join('\n')))
 writeFileSync(join(OUT, 'rhymes.json.gz'), gz(JSON.stringify(rhymeTable())))
