@@ -95,7 +95,7 @@
             {/snippet}
           </GridRows>
         </div>
-        {#if list.length > limit}<button class="ui-button more" type="button" onclick={() => { limit += PAGE }}>{t('dialects.more', { count: list.length - limit })}</button>{/if}
+        {#if list.length > limit}<button class="ui-button more" type="button" onclick={() => { limit += PAGE }}>{t('dialects.more', { count: Math.min(PAGE, list.length - limit) })}</button>{/if}
       {:else}
         <p class="ui-hint">{t('dialects.none')}</p>
       {/if}

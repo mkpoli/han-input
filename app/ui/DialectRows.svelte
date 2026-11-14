@@ -7,12 +7,22 @@
   /** @type {{ entryKey: string }} */
   let { entryKey } = $props()
   let data = $state(/** @type {import('../lib/dialects.js').Dialects | null} */ (null))
-  loadDialects().then(loaded => { data = loaded }).catch(() => {})
+  let failed = $state(false)
+  let retry = $state(0)
+  $effect(() => {
+    void retry
+    let active = true
+    failed = false
+    loadDialects().then(loaded => { if (active) data = loaded }).catch(() => { if (active) failed = true })
+    return () => { active = false }
+  })
   const entry = $derived(data?.byKey.get(entryKey) ?? null)
   const sets = $derived(new Map((data?.sets ?? []).map(set => [set.id, set])))
 </script>
 
-{#if entry}
+{#if failed}
+  <p class="ui-hint">{t('dialects.failed')} <button class="ui-button" data-size="sm" type="button" onclick={() => { retry++ }}>{t('dialects.retry')}</button></p>
+{:else if entry}
   <section class="family">
     <h3 class="ui-label">{t('dialects.rows')} <span class="ui-count">{entry.rows.length}</span></h3>
     <ol class="rows">
