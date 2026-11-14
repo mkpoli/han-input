@@ -29,7 +29,7 @@ test('a row with only an IDS becomes a record, never a member', () => {
     { type: '嚴式', char: '', ids: '⿱十八', group: ['吴'], pinyin: { 金華: 'tɛ' } },
     { type: '寬式', char: '比', group: ['吳'], pinyin: {} },
   ])
-  expect(rows).toEqual([{ char: '', ids: '⿱十八', group: ['吳'], cities: ['金華'] }])
+  expect(rows).toEqual([{ char: '', ids: '⿱十八', group: ['吳'], cities: ['金華'], def: '', readings: [['金華', 'tɛ']], note: '' }])
   const gukja = openIdsRows('ids\tchar\tcodepoint\tgroup\n⿱加乙\t乫\tU+4E6B\tkorean\n⿱乙丁\t\t\tkorean\n⿰土下\t圷\tU+5737\tkokuji\n', 'korean')
   expect(gukja.map(row => row.char || row.ids)).toEqual(['乫', '⿱乙丁'])
   const catalogue = JSON.parse(readFileSync(new URL('index.json', base), 'utf8'))
@@ -51,5 +51,24 @@ test('a dialect set counts every source row, repeated characters included', () =
   writeDialectSets(catalogue, { fangyanzi: rows, openIds }, out, text => text)
   const yue = catalogue.find(row => row.id === 'dialect_yue')
   expect([yue.chars, yue.unencoded, yue.total]).toEqual([1, 1, 3])
+  const page = JSON.parse(readFileSync(join(out, 'dialect_rows.json'), 'utf8'))
+  expect(page.find((/** @type {{ char: string }} */ row) => row.char === '乇').sets).toEqual(['dialect_min', 'dialect_min_dong', 'dialect_min_nan'])
+  expect(page.find((/** @type {{ char: string }} */ row) => row.char === '圷').readings).toBeUndefined()
   rmSync(out, { recursive: true })
+})
+
+test('a Min row and its Fuzhou or Xiamen reading count as one doculect', async () => {
+  const { doculects, groupDialects } = await import('../app/lib/dialects.js')
+  expect(doculects([{ sets: ['dialect_min', 'dialect_min_dong'] }])).toBe(1)
+  expect(doculects([{ sets: ['dialect_min', 'dialect_min_dong', 'dialect_min_nan'] }])).toBe(2)
+  expect(doculects([{ sets: ['dialect_min', 'dialect_yue'] }])).toBe(2)
+  // A Min row read only at Yong'an beside one read at Xiamen: two Min varieties.
+  expect(doculects([{ sets: ['dialect_min'] }, { sets: ['dialect_min', 'dialect_min_nan'] }])).toBe(2)
+  const sets = /** @type {any[]} */ (['dialect_yue', 'dialect_min'].map(id => ({ id })))
+  const { entries } = groupDialects(sets, [
+    { char: '乜', sets: ['dialect_min'], def: 'a' },
+    { char: '乜', sets: ['dialect_yue'], def: 'b' },
+    { char: '', ids: '⿰口乜', sets: ['dialect_yue'] },
+  ])
+  expect(entries.map(entry => [entry.key, entry.sets, entry.doculects, entry.rows.length])).toEqual([['乜', ['dialect_yue', 'dialect_min'], 2, 2], ['⿰口乜', ['dialect_yue'], 1, 1]])
 })
