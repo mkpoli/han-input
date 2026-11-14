@@ -12,6 +12,7 @@ import { extraMethods } from './extra.mjs'
 import { kanaMethods } from './kana.mjs'
 import { mojikyoMethod } from './mojikyo.mjs'
 import { yuhaoMethods } from './yuhao.mjs'
+import { xiaoheLiangfenMethods } from './xiaohe-liangfen.mjs'
 
 /** @type {[string, string, string, string, string, import('../lib.mjs').Family, string?][]} repo, file, id, English, 漢字 name, family, licence */
 const RIME = [
@@ -73,6 +74,7 @@ export async function allMethods() {
     ...await yuhaoMethods(),
     ...await cinMethods(),
     ...await extraMethods(),
+    ...xiaoheLiangfenMethods(),
   ]
   for (const [repo, file, id, en, zh, family, licence] of RIME) {
     out.push(...await attempt(id, async () => [await rimeMethod({ repo, file, id, en, zh, family, licence: licence ?? '' })]))

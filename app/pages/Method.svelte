@@ -137,7 +137,7 @@
     {/if}
     <section class="ui-section source">
       <h2 class="ui-label">{t('method.source')}</h2>
-      <p><a href={method.source.url} target="_blank" rel="noopener noreferrer">{method.source.name}</a>{#if method.source.attribution}, {method.source.attribution}{/if}</p>
+      <p>{#if method.source.url}<a href={method.source.url} target="_blank" rel="noopener noreferrer">{method.source.name}</a>{:else}{method.source.name}{/if}{#if method.source.attribution}, {method.source.attribution}{/if}</p>
       <p class="ui-hint">{t('method.licence')}: {method.source.licence}</p>
       {#if method.source.note}<p class="ui-hint">{method.source.note}</p>{/if}
     </section>
