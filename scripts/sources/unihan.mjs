@@ -134,11 +134,17 @@ export function unihanMethods(fields) {
 const UNIHAN_BLOCK = (/** @type {number} */ cp) =>
   cp >= 0x4E00 && cp <= 0x9FFF ? 40 : cp >= 0x3400 && cp <= 0x4DBF ? 50 : 60
 
+/** Position given to a character the corpus lacks; it sorts after every listed one. */
+export const UNLISTED = 99_999
+
 /**
- * How common a character is, for ordering candidates, low first: school grade, then the core sets,
- * then the block. Ties break on stroke count. @param {Map<string, Map<string, string>>} fields
+ * How common a character is, for ordering candidates, low first, as one number:
+ * `tier * 1e7 + corpus position * 100 + strokes`. The tier is school grade, then the core sets, then
+ * the block. Within a tier the character commoner in classical texts comes first (position 1 is the
+ * commonest; a character the corpus lacks takes UNLISTED), then the one with fewer strokes.
+ * @param {Map<string, Map<string, string>>} fields @param {Map<string, number>} positions character to corpus position
  */
-export function rankChars(fields) {
+export function rankChars(fields, positions) {
   const get = (/** @type {string} */ f, /** @type {string} */ c) => fields.get(f)?.get(c)
   /** @type {[string, number, number, string][]} */
   const rows = []
@@ -150,7 +156,7 @@ export function rankChars(fields) {
       : get('kJinmeiyoKanji', char) || get('kKoreanEducationHanja', char) ? 20
       : get('kUnihanCore2020', char) ? 30
       : UNIHAN_BLOCK(char.codePointAt(0) ?? 0)
-    rows.push([char, tier * 100 + strokes, strokes, rs.split(' ')[0]])
+    rows.push([char, tier * 1e7 + Math.min(positions.get(char) ?? UNLISTED, UNLISTED) * 100 + Math.min(strokes, 99), strokes, rs.split(' ')[0]])
   }
   return rows
 }

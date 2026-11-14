@@ -58,6 +58,7 @@
   "ids.source.chise": "CHISE",
   "ids.source.project": "本项目",
   "about.writing": "字形来源",
+  "about.order": "结果排序",
   "about.writingIntro": "每个字的写法，以及每条描述来自哪里。",
   "about.variants": "异体写法",
   "family.shape": "字形",
