@@ -153,6 +153,7 @@
   "proposal.strokes": "画数",
   "proposal.zhuyin": "注音",
   "proposal.idsMachine": "機械変換IDS",
+  "proposal.reviewed": "確認済みIDS",
   "proposal.proposed": "推定字",
   "methods.title": "すべての入力法",
   "methods.intro": "開くとその方式で入力できます。",

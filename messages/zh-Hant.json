@@ -153,6 +153,7 @@
   "proposal.strokes": "筆畫",
   "proposal.zhuyin": "注音",
   "proposal.idsMachine": "機器轉換IDS",
+  "proposal.reviewed": "審校IDS",
   "proposal.proposed": "推定字",
   "methods.title": "所有輸入方法",
   "methods.intro": "打開即可用它輸入。",
