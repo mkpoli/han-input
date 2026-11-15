@@ -5,8 +5,8 @@ own source and terms are also in the site, on its Sources page and on each metho
 
 ## Scope
 
-The site finds characters of sinographic writing systems: Han, the extended sinographies that reuse and
-extend it such as Chữ Nôm and Sawndip, and the kana and Nüshu derived from it. Siniform scripts (Tangut,
+The site finds characters of sinographic writing systems: Han and its Small Seal forms, the extended
+sinographies that reuse and extend it such as Chữ Nôm and Sawndip, and the kana and Nüshu derived from it. Siniform scripts (Tangut,
 Khitan, Jurchen) stay out. A standard's table can be browsed in full where it lists characters outside
 this scope, as GB/T 12052 does for Hangul and symbols; a search still covers only the scripts above.
 The terms follow Zev Handel's "sinographic" and "siniform", Marc Miyake's
@@ -27,6 +27,8 @@ Discord discussion of 2026-10-27, and the works themselves were not read.
 | 小鶴兩分 code table, file `两分百度码表.txt`, SHA-256 `813bfd08…341a`, privately supplied 2026-11-14 | 97,914 indexed mostly rare characters (97,925 in the file) by four-letter codes derived from 小鶴雙拼 keys of component names (山火 → `ujho`); 22 two-letter and 29 six-letter lines are kept as they are | Author, source and licence not stated. Four stray lines and nine plane-16 private-use component glyphs are dropped |
 | Rime tables named in `scripts/sources/index.mjs` | codes and spellings | Per repository |
 | [UnicodeData.txt and NushuSources.txt](https://www.unicode.org/Public/18.0.0/ucd/), Unicode 18.0 | kana names, Nüshu readings and Nüshu Duben positions | Unicode License v3 |
+| [SealSources.txt](https://www.unicode.org/Public/18.0.0/ucd/SealSources.txt), Unicode 18.0, SHA-256 `05ba2c22…aa90` | each Small Seal form's modern character, Shuowen radical, and number in four Shuowen editions; simplified forms of the modern characters are converted by OpenCC | Unicode License v3 |
+| Michel Suignard, [Considerations concerning the Small Seal encoding initiative](https://www.unicode.org/wg2/docs/n5294R3-ConsiderationsSmallSeal.pdf), WG2 N5294R3 (L2/25-049R), 2025-01-26 | the editions behind the source tags: Tenghuaxie (THX, which the file calls a unified source) and Chen Changzhi (CCZ) of Xu Xuan's text, Qi Junzao's 1839 carving of Xu Kai's (QJZ), and Duan Yucai's 經韻樓本 (DYC). The draft writes extra THX numbers as X- and KD-; the final file writes TH-X and TH-Y, and what those mark was not checked | Unicode document; cited, not reproduced |
 | [hentaigana.el](https://github.com/kawabata/hentaigana) 1.170817, 川幡太一 | the Han character each hiragana and hentaigana form was written from, and hentaigana by modern kana | GPL-3.0-or-later |
 | [rime-hentaigana](https://github.com/yuanhao-chen-nyoeghau/rime-hentaigana) | kana by spelling | Apache-2.0 |
 | 综合频率表(由高到低).csv, privately supplied 2026-11-14, SHA-256 `99b916a3…dc1d` | character counts over a classical-text corpus of 1.56 billion characters, 59,279 characters; orders characters within each tier of commonness. Corpus and compiler not stated; classical usage only | None stated |
@@ -49,6 +51,7 @@ Discord discussion of 2026-10-27, and the works themselves were not read.
 | [CBETA, 一般組字式基本規則](https://cbetaonline.dila.edu.tw/doc/en/02-04_create_word.php) ([Chinese](https://archive.cbeta.org/data-format/rare-rule.htm)) | the general arithmetic signs `*` (left-right), `/` (top-bottom), `@` (contain), `-` (delete), `-+` (replace), `?` (unknown), `()` and `[]` | Public pages; no separate data licence is stated. The rules are implemented; no records are copied |
 | [Noto Sans Nushu and Noto Serif Hentaigana](https://github.com/notofonts) | glyphs for Nüshu and hentaigana | OFL-1.1 |
 | [Jigmo](https://kamichikoichi.github.io/jigmo/) 2025-09-12, 上地宏一 | glyphs for the extension blocks, cut by `scripts/build_fonts.py` | CC0-1.0 |
+| [Sealie](https://github.com/iebb/sealie) 1.2.0 Regular, ieb, [release](https://github.com/iebb/sealie/releases/tag/v1.2.0) 2026-10-26, SHA-256 `5d949eaf…c212` | glyphs for the 11,328 Small Seal characters, cut by `scripts/build_fonts.py` into 256-code-point slices | OFL-1.1. A monoline display design marked experimental by its author; its README says OpenAI image generation made the first drawings and reviewed centrelines form the source. Its forms are a modern stylisation, not a facsimile of any Shuowen edition |
 | [全字庫正宋體 TW-Sung-Plus](https://www.cns11643.gov.tw/downloadList.jsp?ID=2), 數位發展部, `Fonts_Sung.zip` 20260805 | glyphs for the private-use slots of unencoded CNS source rows, cut by `scripts/build_fonts.py` | 政府資料開放授權條款第1版 (OGDL 1.0), attribution「數位發展部，CNS11643中文標準交換碼全字庫網站」 |
 | BabelStone Han PUA 1.472, Andrew West | glyphs for the numbered components IDS.TXT leaves without a fragment, cut to `app/public/fonts/IDSNumbered.woff2` | Arphic Public License, `LICENSE-BabelStoneHanPUA.txt` |
 | [han-compose](https://github.com/mkpoli/han-compose), MIT; outlines from Noto Sans CJK JP and Plangothic (SIL OFL 1.1), with KanjiVG-assisted cuts (CC BY-SA 3.0) | draws an IDS as sans-serif outlines; the three composed CNS rows in `app/public/fonts/cns-composed.woff2` | MIT code; the drawn glyphs carry the fonts' OFL and, for KanjiVG cuts, CC BY-SA 3.0 |

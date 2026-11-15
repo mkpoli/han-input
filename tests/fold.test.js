@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'bun:test'
-import { charBucket, codeBucket, fold, hanIn, inScope, isHan, isRareKana, pinyinDigits } from '../src/fold.js'
+import { charBucket, codeBucket, fold, hanIn, inScope, isHan, isRareKana, isSeal, pinyinDigits } from '../src/fold.js'
 
 describe('fold', () => {
   test('drops tone marks and case on Latin', () => {
@@ -61,9 +61,19 @@ describe('scope', () => {
     expect(isRareKana('\u{1B002}')).toBe(true)
     expect(isRareKana('あ')).toBe(false)
   })
-  test('a run of kana is not read as characters, and Nüshu is', () => {
+  test('a run of kana is not read as characters, and Nüshu and Small Seal are', () => {
     expect(hanIn('ユタ')).toEqual([])
-    expect(hanIn('\u{1B170}字')).toEqual(['\u{1B170}', '字'])
+    expect(hanIn('\u{1B170}字\u{3D000}')).toEqual(['\u{1B170}', '字', '\u{3D000}'])
+  })
+  test('Small Seal is in scope and kept apart from Han', () => {
+    for (const char of ['\u{3D000}', '\u{3FC3F}']) {
+      expect(inScope(char)).toBe(true)
+      expect(isSeal(char)).toBe(true)
+      expect(isHan(char)).toBe(false)
+    }
+    expect(isSeal('一')).toBe(false)
+    expect(isHan('\u{3347F}')).toBe(true)
+    expect(inScope('\u{3FC40}')).toBe(false)
   })
 })
 

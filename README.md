@@ -5,7 +5,7 @@ a reading in any variety, a part, a stroke count, a meaning. Several clues combi
 remains. The card of a character shows it under every method and how it is written, and links on to 字統網
 and the other sites that say more.
 
-It covers Han, extended sinographies such as Chữ Nôm and Sawndip, and kana and Nüshu. Scope and sources are in
+It covers Han and Small Seal, extended sinographies such as Chữ Nôm and Sawndip, and kana and Nüshu. Scope and sources are in
 [`docs/materials.md`](docs/materials.md).
 
 ## Pages
