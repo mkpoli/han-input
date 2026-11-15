@@ -1,13 +1,21 @@
 // What every source module shares: pinned downloads, and the shape of a method.
 import { createHash } from 'node:crypto'
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { dirname, join } from 'node:path'
 
 /** The pinned downloads and the privately supplied files. HAN_INPUT_CACHE names a copy kept outside the checkout, so a fresh one can build. */
 export const CACHE = process.env.HAN_INPUT_CACHE || join(import.meta.dirname, '..', 'cache')
-/** A build's scratch directory, its own for each run so two builds over one cache do not write into each other. @param {string} name */
-export const scratch = name => join(tmpdir(), `han-input-${name}-${process.pid}`)
+/**
+ * A build's scratch directory, its own for each run so two builds over one cache do not write into
+ * each other. It is removed when the run ends, a failed one included.
+ * @param {string} name
+ */
+export function scratch(name) {
+  const path = join(tmpdir(), `han-input-${name}-${process.pid}`)
+  process.on('exit', () => rmSync(path, { recursive: true, force: true }))
+  return path
+}
 
 /** @typedef {{ en: string, zh?: string, hans?: string, ja?: string, ko?: string }} Names */
 /**

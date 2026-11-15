@@ -47,8 +47,8 @@ bun run deploy --dry-run    # build any checkout and check the upload without ma
 ```
 
 `bun run deploy` uploads only a checkout that is `origin/main` with nothing uncommitted. It runs the
-checks, builds the data and the readings, builds the site and uploads it with wrangler, then waits
-until the site lists the methods it built. The data comes from files that are not in the repository,
+checks, empties `app/public/data/` and builds the data and the readings into it, builds the site and
+uploads it with wrangler, then waits until the site's `/data/build.json` names the commit. The data comes from files that are not in the repository,
 so it runs where the cache is; `HAN_INPUT_CACHE=<dir>` names a cache outside the checkout, which lets a
 fresh worktree of `main` build.
 
