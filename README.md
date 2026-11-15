@@ -39,6 +39,19 @@ bun run verify          # unit tests, type check, messages
 before `build:data` reads it. The generated `app/public/data/` is about 300 MB and is not committed.
 Results are ordered with a privately supplied classical frequency table, `cache/frequency/综合频率表(由高到低).csv`; `build:data` stops if it is missing.
 
+## Deploying
+
+```sh
+bun run deploy              # merged main, built and uploaded
+bun run deploy --dry-run    # build any checkout and check the upload without making it
+```
+
+`bun run deploy` uploads only a checkout that is `origin/main` with nothing uncommitted. It runs the
+checks, empties `app/public/data/` and builds the data and the readings into it, builds the site and
+uploads it with wrangler, then waits until the site's `/data/build.json` names the commit. The data comes from files that are not in the repository,
+so it runs where the cache is; `HAN_INPUT_CACHE=<dir>` names a cache outside the checkout, which lets a
+fresh worktree of `main` build.
+
 The proposal sets carry the glyphs printed in their IRG documents. `bun scripts/import_irg_records.mjs`
 cuts them from the pinned PDFs (poppler and ImageMagick), matches each to the codes printed beside it,
 and writes `app/public/charsets/glyphs/` plus one records file per set.
