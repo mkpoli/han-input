@@ -8,7 +8,7 @@ export const STROKE_KEYS = /** @type {const} */ ([
 ])
 
 /** The methods whose codes are strokes in writing order. */
-export const STROKE_METHODS = new Set(['wubihua', 'cns-stroke-order'])
+export const STROKE_METHODS = new Set(['wubihua', 'cns-stroke-order', 'open-stroke-order'])
 
 /**
  * The keys some code goes on with after `typed`.

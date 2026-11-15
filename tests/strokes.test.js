@@ -3,7 +3,7 @@ import { STROKE_KEYS, STROKE_METHODS, nextKeys } from '../src/strokes.js'
 
 test('numbers the five stroke classes in their order', () => {
   expect(STROKE_KEYS.map(key => key.digit + key.stroke).join(' ')).toBe('1㇐ 2㇑ 3㇒ 4㇔ 5㇕')
-  expect([...STROKE_METHODS]).toEqual(['wubihua', 'cns-stroke-order'])
+  expect([...STROKE_METHODS]).toEqual(['wubihua', 'cns-stroke-order', 'open-stroke-order'])
 })
 
 test('names the keys a code goes on with', () => {
