@@ -24,11 +24,11 @@ import { IDS_SOURCES, components, partsOf, readDescriptions, runsOf } from './so
 import { allMethods } from './sources/index.mjs'
 import { meaningWords } from './sources/meaning.mjs'
 import { rhymeTable } from './sources/qieyun.mjs'
-import { CACHE } from './lib.mjs'
+import { scratch } from './lib.mjs'
 import * as OpenCC from 'opencc-js'
 
 const OUT = join(import.meta.dirname, '..', 'app', 'public', 'data')
-const SPOOL = join(CACHE, 'spool')
+const SPOOL = scratch('spool')
 for (const dir of ['s', 'c', 'x', 'm', 'p', 'i', 'g']) rmSync(join(OUT, dir), { recursive: true, force: true })
 rmSync(SPOOL, { recursive: true, force: true })
 for (const dir of ['s', 'c', 'x', 'm', 'p', 'i', 'g']) mkdirSync(join(OUT, dir), { recursive: true })
