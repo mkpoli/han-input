@@ -125,7 +125,7 @@ export function filterAnswer(answer, membership, setId = '') {
     meaning: keep(answer.meaning), parts: keep(answer.parts),
     hits: answer.hits.map(hit => ({ ...hit, chars: keep(hit.chars) })).filter(hit => hit.chars.length),
     readings: answer.readings.map(hit => ({ ...hit, chars: keep(hit.chars) })).filter(hit => hit.chars.length),
-    pua: answer.pua.filter(reading => membership.has(reading.char || reading.slot) || (!reading.char && reading.records === setId)),
+    pua: answer.pua.filter(reading => membership.has(reading.char || reading.slot) || (!reading.char && reading.set === setId)),
   }
 }
 
