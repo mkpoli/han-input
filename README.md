@@ -5,7 +5,7 @@ a reading in any variety, a part, a stroke count, a meaning. Several clues combi
 remains. The card of a character shows it under every method and how it is written, and links on to 字統網
 and the other sites that say more.
 
-It covers Han, extended sinographies such as Chữ Nôm and Sawndip, and kana and Nüshu. Scope and sources are in
+It covers Han and Small Seal, extended sinographies such as Chữ Nôm and Sawndip, and kana and Nüshu. Scope and sources are in
 [`docs/materials.md`](docs/materials.md).
 
 ## Pages
@@ -21,6 +21,7 @@ It covers Han, extended sinographies such as Chữ Nôm and Sawndip, and kana an
 - **Readings**: every variety in 漢字音典, each typed the same way.
 - **Rhyme tables**: the Guangyun by rhyme, initial, grade and tone.
 - **Radicals**: the 214 Kangxi radicals by residual strokes.
+- **Dialects**: every character in the [dialect-character sets](docs/character-sets.md#dialect-characters) on one grid, filtered by variety. Shapes that several varieties use can be shown alone; on this page the card adds the source's rows, with their readings by place and gloss.
 - **PUA conversion**: convert private-use text from one of seven schemes (MOE fonts, HKSCS, Hanyang, CNS, GB 18030, CBETA, the 中华书局宋 font) to Unicode and browse the mappings. Find reads a private-use character, its code point, a CB code or a CNS code in every scheme that has the slot, so a slot two schemes share shows both. Each character's card lists its own PUA codes and those of its Unihan variants.
 - **Composition**: convert the 構字式 of Taiwan's 漢字構形資料庫 (Big5 8DF1–8DFD) and arithmetic composition to IDS. The thirteen symbols and the arithmetic signs are palettes; the Korean History Database and CBETA assign those signs differently.
 
@@ -36,6 +37,20 @@ bun run verify          # unit tests, type check, messages
 `bun scripts/build_readings.mjs` builds the readings from the database in 漢字音典's release APK, unpacked to
 `cache/mcpdict/x`. `bun scripts/build_wiktionary.mjs <dir>` builds the meaning index from Wiktionary dumps
 before `build:data` reads it. The generated `app/public/data/` is about 300 MB and is not committed.
+Results are ordered with a privately supplied classical frequency table, `cache/frequency/综合频率表(由高到低).csv`; `build:data` stops if it is missing.
+
+## Deploying
+
+```sh
+bun run deploy              # merged main, built and uploaded
+bun run deploy --dry-run    # build any checkout and check the upload without making it
+```
+
+`bun run deploy` uploads only a checkout that is `origin/main` with nothing uncommitted. It runs the
+checks, empties `app/public/data/` and builds the data and the readings into it, builds the site and
+uploads it with wrangler, then waits until the site's `/data/build.json` names the commit. The data comes from files that are not in the repository,
+so it runs where the cache is; `HAN_INPUT_CACHE=<dir>` names a cache outside the checkout, which lets a
+fresh worktree of `main` build.
 
 The proposal sets carry the glyphs printed in their IRG documents. `bun scripts/import_irg_records.mjs`
 cuts them from the pinned PDFs (poppler and ImageMagick), matches each to the codes printed beside it,

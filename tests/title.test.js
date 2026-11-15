@@ -31,7 +31,7 @@ describe('page metadata', () => {
 
 describe('catalogues', () => {
   test('holds every title and description key in every language', () => {
-    for (const page of ['', 'methods', 'readings', 'rhymes', 'radicals', 'convert', 'composition', 'about', 'notfound', 'm', 'v']) {
+    for (const page of ['', 'methods', 'readings', 'rhymes', 'radicals', 'dialects', 'convert', 'composition', 'about', 'notfound', 'm', 'v']) {
       const { title, description } = pageMetadata(page)
       for (const [locale, catalogue] of Object.entries(CATALOGUES)) {
         expect(title in catalogue, `${locale} ${title}`).toBe(true)

@@ -8,7 +8,8 @@ import { membersText } from '../charset-members.mjs'
 
 export const DIALECT_GROUP = 'Dialect characters'
 
-/** @typedef {{ char: string, ids: string | null, group: string[], cities: string[] }} Row */
+/** A source row. `readings` pairs a place with its form; a kokuji or gukja reading has no place.
+ * @typedef {{ char: string, ids: string | null, group: string[], cities: string[], def: string, readings: [string, string][], note: string }} Row */
 /** @typedef {{ id: string, label: string, en: string, zh: string, ja: string, ko: string, source: 'fangyanzi' | 'kokuji' | 'gukja', keep: (row: Row) => boolean, note?: string }} DialectSet */
 
 const inGroup = (/** @type {string} */ group) => (/** @type {Row} */ row) => row.group.includes(group)
@@ -45,6 +46,9 @@ export function fangyanziRows(json) {
     ids: entry.ids ?? null,
     group: entry.group.map((/** @type {string} */ group) => group === '吴' ? '吳' : group),
     cities: Object.keys(entry.pinyin ?? {}),
+    def: entry.def ?? '',
+    readings: /** @type {[string, string][]} */ (Object.entries(entry.pinyin ?? {})),
+    note: entry.note ?? '',
   }))
 }
 
@@ -61,6 +65,9 @@ export function openIdsRows(tsv, group) {
     ids: cells[at('ids')] || null,
     group: [],
     cities: [],
+    def: '',
+    readings: /** @type {[string, string][]} */ (cells[at('reading')] ? [['', cells[at('reading')]]] : []),
+    note: '',
   }))
 }
 
@@ -84,6 +91,16 @@ export const DIALECT_SOURCES = {
     licence: 'https://creativecommons.org/publicdomain/zero/1.0/',
     note: 'From Korean Wikipedia’s 국자의 음역자와 구결자.',
   },
+}
+
+/** Every source row once, with the sets it belongs to, for the dialect page.
+ * @param {Record<DialectSet['source'], Row[]>} rows */
+function pageRows(rows) {
+  return /** @type {const} */ (['fangyanzi', 'kokuji', 'gukja']).flatMap(source => rows[source].map(row => ({
+    char: row.char, ...(row.ids ? { ids: row.ids } : {}),
+    sets: DIALECT_SETS.filter(set => set.source === source && set.keep(row)).map(set => set.id),
+    ...(row.def ? { def: row.def } : {}), ...(row.readings.length ? { readings: row.readings } : {}), ...(row.note ? { note: row.note } : {}),
+  }))).filter(row => (row.char || row.ids) && row.sets.length)
 }
 
 /** Write each doculect's set and its IDS records, and append the catalogue entries.
@@ -129,5 +146,6 @@ export function writeDialectSets(catalogue, inputs, out, hans) {
     catalogue.push(entry)
     added.push(entry)
   }
+  writeFileSync(join(out, 'dialect_rows.json'), JSON.stringify(pageRows(rows)) + '\n')
   return added
 }

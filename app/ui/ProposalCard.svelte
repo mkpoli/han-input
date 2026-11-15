@@ -7,6 +7,7 @@
   import SourceCode from './SourceCode.svelte'
   import RecordGlyph from './RecordGlyph.svelte'
   import { convertArithmetic } from '../../src/arithmetic.js'
+  import { glyphIds, sourceOf } from '../lib/glyph-ids.js'
 
   const held = $derived(ui.record)
   const record = $derived(held?.record ?? null)
@@ -20,6 +21,13 @@
   const ids = $derived(record?.composition ? convertArithmetic(record.composition, 'general').ids : '')
   const unified = $derived(record?.unifiedWith ?? '')
   const unifiedChar = $derived(unified.startsWith('U+') ? String.fromCodePoint(parseInt(unified.slice(2), 16)) : '')
+  let reviewed = $state(/** @type {import('../lib/glyph-ids.js').GlyphIds | null} */ (null))
+  $effect(() => {
+    const key = record?.key
+    reviewed = null
+    glyphIds(key).then(found => { if (record?.key === key) reviewed = found })
+  })
+  const reviewedSource = $derived(reviewed?.verdict === 'known' ? sourceOf(reviewed.by) : null)
 
   /** @param {MouseEvent} event @param {string} char */
   function follow(event, char) {
@@ -62,6 +70,11 @@
     {#if record.common}
       <p class="related"><span class="ui-hint">{t('proposal.common')}</span>
         <a href={link('', { c: record.common })} lang="und-Hani" onclick={event => { event.preventDefault(); if (record.common) choose(record.common) }}>{record.common}</a>
+      </p>
+    {/if}
+    {#if reviewed}
+      <p class="related"><span class="ui-hint">{reviewed.verdict === 'known' ? 'IDS' : t('proposal.reviewed')}</span> <span class="formula" lang="und-Hani">{reviewed.ids}</span>
+        {#if reviewedSource}<a class="source" href={reviewedSource.url} target="_blank" rel="noopener noreferrer">{reviewedSource.name}</a>{/if}
       </p>
     {/if}
     {#if record.composition}
@@ -116,6 +129,7 @@
   .notes dd{margin:0}
   .related{display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--ui-space-sm)}
   .related a{font-size:24px;line-height:1;color:var(--ui-color-ink);text-decoration:none}
+  .related a.source{font-size:var(--ui-text-xs);color:var(--ui-color-accent-ink);text-decoration:underline}
   .related .formula{font-family:var(--ui-font-script);font-size:var(--ui-text-lg);overflow-wrap:anywhere}
   .unified a{font-size:24px;line-height:1;color:var(--ui-color-ink);text-decoration:none}
   .mapped a{font-size:56px;line-height:1;color:var(--ui-color-ink);text-decoration:none}

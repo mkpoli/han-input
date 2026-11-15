@@ -9,11 +9,11 @@ import { appendFileSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFile
 import { join } from 'node:path'
 import { gzipSync } from 'node:zlib'
 import { codeBucket, fold, inScope } from '../src/fold.js'
-import { CACHE } from './lib.mjs'
+import { CACHE, scratch } from './lib.mjs'
 
 const DB = join(CACHE, 'mcpdict/x/assets/databases/mcpdict.db')
 const OUT = join(import.meta.dirname, '..', 'app', 'public', 'data')
-const SPOOL = join(CACHE, 'spool-readings')
+const SPOOL = scratch('spool-readings')
 for (const dir of ['d', 'y', 'r']) { rmSync(join(OUT, dir), { recursive: true, force: true }); mkdirSync(join(OUT, dir), { recursive: true }) }
 rmSync(SPOOL, { recursive: true, force: true })
 for (const dir of ['raw', 'y', 'r']) mkdirSync(join(SPOOL, dir), { recursive: true })

@@ -9,9 +9,12 @@ import { qieyunMethods } from './qieyun.mjs'
 import { cinMethods } from './cin.mjs'
 import { extendedMethods } from './extended.mjs'
 import { extraMethods } from './extra.mjs'
+import { openStrokeMethods } from './open-strokes.mjs'
 import { kanaMethods } from './kana.mjs'
+import { sealMethods } from './seal.mjs'
 import { mojikyoMethod } from './mojikyo.mjs'
 import { yuhaoMethods } from './yuhao.mjs'
+import { xiaoheLiangfenMethods } from './xiaohe-liangfen.mjs'
 
 /** @type {[string, string, string, string, string, import('../lib.mjs').Family, string?][]} repo, file, id, English, 漢字 name, family, licence */
 const RIME = [
@@ -69,10 +72,13 @@ export async function allMethods() {
       entries: table.map(row => /** @type {[string, string]} */ ([row.code, row.char])) },
     ...await extendedMethods(),
     ...await kanaMethods(),
+    ...await sealMethods(),
     await mojikyoMethod(),
     ...await yuhaoMethods(),
     ...await cinMethods(),
     ...await extraMethods(),
+    ...await openStrokeMethods(),
+    ...xiaoheLiangfenMethods(),
   ]
   for (const [repo, file, id, en, zh, family, licence] of RIME) {
     out.push(...await attempt(id, async () => [await rimeMethod({ repo, file, id, en, zh, family, licence: licence ?? '' })]))

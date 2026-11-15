@@ -7,6 +7,7 @@ export const NAV = /** @type {const} */ ([
   { path: 'readings', label: 'nav.readings' },
   { path: 'rhymes', label: 'nav.rhymes' },
   { path: 'radicals', label: 'nav.radicals' },
+  { path: 'dialects', label: 'nav.dialects' },
   { path: 'convert', label: 'nav.convert' },
   { path: 'composition', label: 'nav.composition' },
   { path: 'about', label: 'nav.about' },

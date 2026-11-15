@@ -3078,6 +3078,29 @@
     "columns": 16
   },
   {
+    "id": "block_seal",
+    "group": "Unicode blocks",
+    "label": "Seal",
+    "names": {
+      "en": "Seal"
+    },
+    "chars": 11328,
+    "total": 11328,
+    "encoded": 11328,
+    "unencoded": 0,
+    "positions": {
+      "total": 11328,
+      "filled": 11328,
+      "mapped": 11328
+    },
+    "codes": "/charsets/block_seal.codes.tsv",
+    "source": {
+      "name": "Unicode 18.0.0",
+      "url": "https://www.unicode.org/Public/18.0.0/ucd/Blocks.txt"
+    },
+    "columns": 16
+  },
+  {
     "id": "ext_a_j_removals",
     "group": "Proposals",
     "label": "Ext.A removed · J",

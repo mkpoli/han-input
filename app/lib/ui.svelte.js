@@ -15,11 +15,14 @@ export const ui = $state({
   theme: /** @type {'auto' | 'light' | 'dark'} */ ((typeof localStorage !== 'undefined' && localStorage.getItem(THEME)) || 'auto'),
   /** A printed proposal record shown in place of the character card, with its document. */
   record: /** @type {{ record: import('./charsets.js').ProposalRecord, document: import('./charsets.js').ProposalDocument } | null} */ (null),
+  /** A dialect-list row with no character, picked on the dialect page; it names its IDS. */
+  dialect: '',
 })
 
 /** @param {string} char */
 export function choose(char) {
   ui.record = null
+  ui.dialect = ''
   open(char)
   if (matchMedia('(max-width: 900px)').matches) ui.sheet = true
 }
@@ -27,6 +30,7 @@ export function choose(char) {
 /** @param {import('./charsets.js').ProposalRecord} record @param {import('./charsets.js').ProposalDocument} document */
 export function showRecord(record, document) {
   close()
+  ui.dialect = ''
   ui.record = { record, document }
   if (matchMedia('(max-width: 900px)').matches) ui.sheet = true
 }

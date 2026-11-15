@@ -1,6 +1,7 @@
 <script>
   // What a character is called: its code in every method, then the sites that say more. Definitions
-  // live with those sites, so the card carries one line of gloss and no entry.
+  // live with those sites, so the card carries one line of gloss and no entry. On the dialect page it
+  // also shows the dialect list's rows for the character, since comparing them is that page's purpose.
   import { tick } from 'svelte'
   import { codesOf, descriptionsOf, loadMethods, loadVariants, loadVarieties, readingsOf } from '../lib/data.js'
   import { readingTree } from '../lib/classification.js'
@@ -14,6 +15,7 @@
   import { isHan } from '../../src/fold.js'
   import { codePoints, isPuaChar, loadPua, loadPuaCodes, readingsOf as puaReadingsOf } from '../../src/pua.js'
   import PuaReadings from './PuaReadings.svelte'
+  import DialectRows from './DialectRows.svelte'
   import { characterVariants } from '../../src/variants.js'
   import { pieces } from '../lib/notation.js'
 
@@ -150,6 +152,8 @@
         </div>
       </div>
     </header>
+
+    {#if route.page === 'dialects'}<DialectRows entryKey={char} />{/if}
 
     {#if slotReadings.length}
       <section class="family">
