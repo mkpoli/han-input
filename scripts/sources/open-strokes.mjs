@@ -6,9 +6,9 @@ import { gunzipSync } from 'node:zlib'
 import { fetchOnce, sha256 } from '../lib.mjs'
 
 /** The release as the sibling project's repository holds it at this commit, each file by its SHA-256. */
-const COMMIT = '1c6301f6864192719ace563a66487f08cd72a9b7'
+const COMMIT = '68da026c07b78aecb165212863dd06a3291c9cd0'
 const FILES = /** @type {const} */ ({
-  'induced.tsv.gz': '45e690fe9f28c937b94be13fc01e3cbd50e49f4f5e109592149c2f8fc72b2aa6',
+  'induced.tsv.gz': '9438691aa59b80b208bacaae129f2c2b4125b86bc1097745f8994827d6542cb4',
   'entered.tsv': 'aa9a3207a46ff1a4393b29f0a331ad984c6c441329a53e33045d119ae38306d2',
 })
 const SOURCE = {
