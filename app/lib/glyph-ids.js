@@ -9,7 +9,10 @@ let table = null
 /** @returns {Promise<Map<string, GlyphIds>>} */
 function load() {
   table ??= fetch('/charsets/glyph-ids.json')
-    .then(response => response.ok ? response.json() : { glyphs: {} })
+    .then(response => {
+      if (!response.ok) throw new Error(`glyph-ids.json: ${response.status}`)
+      return response.json()
+    })
     .then(data => new Map(Object.entries(data.glyphs).map(([key, [ids, verdict, by]]) => [key, { ids, verdict, by }])))
     .catch(() => { table = null; return new Map() })
   return table
