@@ -9,6 +9,7 @@ import { qieyunMethods } from './qieyun.mjs'
 import { cinMethods } from './cin.mjs'
 import { extendedMethods } from './extended.mjs'
 import { extraMethods } from './extra.mjs'
+import { openStrokeMethods } from './open-strokes.mjs'
 import { kanaMethods } from './kana.mjs'
 import { sealMethods } from './seal.mjs'
 import { mojikyoMethod } from './mojikyo.mjs'
@@ -76,6 +77,7 @@ export async function allMethods() {
     ...await yuhaoMethods(),
     ...await cinMethods(),
     ...await extraMethods(),
+    ...await openStrokeMethods(),
     ...xiaoheLiangfenMethods(),
   ]
   for (const [repo, file, id, en, zh, family, licence] of RIME) {
