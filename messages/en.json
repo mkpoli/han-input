@@ -153,6 +153,7 @@
   "proposal.strokes": "Strokes",
   "proposal.zhuyin": "Zhuyin",
   "proposal.idsMachine": "Machine IDS",
+  "proposal.reviewed": "Reviewed IDS",
   "proposal.proposed": "Proposed match",
   "methods.title": "Every way in",
   "methods.intro": "Open a method to type in it.",

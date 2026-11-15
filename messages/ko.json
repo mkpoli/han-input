@@ -153,6 +153,7 @@
   "proposal.strokes": "획수",
   "proposal.zhuyin": "주음",
   "proposal.idsMachine": "기계 변환 IDS",
+  "proposal.reviewed": "검토된 IDS",
   "proposal.proposed": "추정자",
   "methods.title": "모든 입력법",
   "methods.intro": "열면 그 방식으로 입력합니다.",
