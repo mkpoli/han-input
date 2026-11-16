@@ -34,10 +34,10 @@
       "page": 1,
       "glyph": "glyphs/unc-utc/UTC00291.png",
       "guess": {
-        "ids": "⿸厂⿱⿰幺己⿰⺝⿺乚三",
-        "confidence": 0.478,
+        "ids": "⿸厂龍",
+        "confidence": 0.608,
         "model": "han2ids-v0.4",
-        "variant": "em"
+        "variant": "fit 0.03"
       }
     },
     {
@@ -47,7 +47,7 @@
       "glyph": "glyphs/unc-utc/UTC00294.png",
       "guess": {
         "ids": "⿰缶⿳彑一氺",
-        "confidence": 0.737,
+        "confidence": 0.753,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -58,10 +58,10 @@
       "page": 1,
       "glyph": "glyphs/unc-utc/UTC00296.png",
       "guess": {
-        "ids": "⿰冫罩",
-        "confidence": 0.439,
+        "ids": "⿰氵⿱罒早",
+        "confidence": 0.905,
         "model": "han2ids-v0.4",
-        "variant": "fit 0.15"
+        "variant": "em"
       }
     },
     {
@@ -71,7 +71,7 @@
       "glyph": "glyphs/unc-utc/UTC00297.png",
       "guess": {
         "ids": "⿰女雨",
-        "confidence": 0.796,
+        "confidence": 0.87,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -82,10 +82,10 @@
       "page": 1,
       "glyph": "glyphs/unc-utc/UTC00300.png",
       "guess": {
-        "ids": "⿱艹⿰香⿱口匂",
-        "confidence": 0.639,
+        "ids": "⿱艹⿰香曷",
+        "confidence": 0.897,
         "model": "han2ids-v0.4",
-        "variant": "fit 0.15"
+        "variant": "em"
       }
     },
     {
@@ -95,7 +95,7 @@
       "glyph": "glyphs/unc-utc/UTC00301.png",
       "guess": {
         "ids": "⿱⿰方方⿰士士",
-        "confidence": 0.626,
+        "confidence": 0.84,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -107,7 +107,7 @@
       "glyph": "glyphs/unc-utc/UTC00302.png",
       "guess": {
         "ids": "⿰土建",
-        "confidence": 0.806,
+        "confidence": 0.879,
         "model": "han2ids-v0.4",
         "variant": "fit 0.03"
       }
@@ -119,7 +119,7 @@
       "glyph": "glyphs/unc-utc/UTC00303.png",
       "guess": {
         "ids": "⿰⿱𫇦禾昷",
-        "confidence": 0.289,
+        "confidence": 0.761,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -131,7 +131,7 @@
       "glyph": "glyphs/unc-utc/UTC00304.png",
       "guess": {
         "ids": "⿰冫央",
-        "confidence": 0.842,
+        "confidence": 0.902,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -143,7 +143,7 @@
       "glyph": "glyphs/unc-utc/UTC00305.png",
       "guess": {
         "ids": "⿰天昆",
-        "confidence": 0.833,
+        "confidence": 0.885,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -155,7 +155,7 @@
       "glyph": "glyphs/unc-utc/UTC00306.png",
       "guess": {
         "ids": "⿰土式",
-        "confidence": 0.903,
+        "confidence": 0.963,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -167,7 +167,7 @@
       "glyph": "glyphs/unc-utc/UTC00308.png",
       "guess": {
         "ids": "⿰支翟",
-        "confidence": 0.71,
+        "confidence": 0.755,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -178,10 +178,10 @@
       "page": 1,
       "glyph": "glyphs/unc-utc/UTC00311.png",
       "guess": {
-        "ids": "⿰文⿳一且貝",
-        "confidence": 0.394,
+        "ids": "⿰文⿱一頁",
+        "confidence": 0.333,
         "model": "han2ids-v0.4",
-        "variant": "fit 0.08"
+        "variant": "em"
       }
     },
     {
@@ -191,7 +191,7 @@
       "glyph": "glyphs/unc-utc/UTC00312.png",
       "guess": {
         "ids": "⿰阝春",
-        "confidence": 0.844,
+        "confidence": 0.904,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -203,7 +203,7 @@
       "glyph": "glyphs/unc-utc/UTC00314.png",
       "guess": {
         "ids": "⿰月庚",
-        "confidence": 0.801,
+        "confidence": 0.921,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -215,7 +215,7 @@
       "glyph": "glyphs/unc-utc/UTC00315.png",
       "guess": {
         "ids": "⿰赤兒",
-        "confidence": 0.836,
+        "confidence": 0.891,
         "model": "han2ids-v0.4",
         "variant": "em"
       }

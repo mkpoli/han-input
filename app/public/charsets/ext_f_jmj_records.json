@@ -37,7 +37,7 @@
       "unifiedWith": "U+0642D",
       "guess": {
         "ids": "⿺⿻一亅丶",
-        "confidence": 0.801,
+        "confidence": 0.864,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -50,10 +50,10 @@
       "glyph": "glyphs/ext-f-jmj/00030.png",
       "unifiedWith": "U+2B741",
       "guess": {
-        "ids": "⿻⿱一⿻口丿丶",
-        "confidence": 0.419,
+        "ids": "⿸⿱一⿻口丿丶",
+        "confidence": 0.826,
         "model": "han2ids-v0.4",
-        "variant": "fit 0.15"
+        "variant": "em"
       }
     },
     {
@@ -65,7 +65,7 @@
       "unifiedWith": "JMJ-056893",
       "guess": {
         "ids": "⿱丶来",
-        "confidence": 0.222,
+        "confidence": 0.576,
         "model": "han2ids-v0.4",
         "variant": "fit 0.08"
       }
@@ -79,7 +79,7 @@
       "unifiedWith": "U+05178",
       "guess": {
         "ids": "⿱曲八",
-        "confidence": 0.372,
+        "confidence": 0.911,
         "model": "han2ids-v0.4",
         "variant": "fit 0.03"
       }
@@ -93,7 +93,7 @@
       "unifiedWith": "U+0530B",
       "guess": {
         "ids": "⿹勹𦈢",
-        "confidence": 0.848,
+        "confidence": 0.949,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -107,9 +107,9 @@
       "unifiedWith": "U+2B9E6",
       "guess": {
         "ids": "⿰十專",
-        "confidence": 0.822,
+        "confidence": 0.873,
         "model": "han2ids-v0.4",
-        "variant": "fit 0.03"
+        "variant": "em"
       }
     },
     {
@@ -121,7 +121,7 @@
       "unifiedWith": "U+20AE4",
       "guess": {
         "ids": "⿱又厷",
-        "confidence": 0.611,
+        "confidence": 0.942,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -135,7 +135,7 @@
       "unifiedWith": "U+20BCC",
       "guess": {
         "ids": "⿱又右",
-        "confidence": 0.764,
+        "confidence": 0.905,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -149,7 +149,7 @@
       "unifiedWith": "JMJ-057254",
       "guess": {
         "ids": "⿱隹夊",
-        "confidence": 0.768,
+        "confidence": 0.809,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -162,10 +162,10 @@
       "glyph": "glyphs/ext-f-jmj/01651.png",
       "unifiedWith": "U+2B762",
       "guess": {
-        "ids": "⿻⿰夕丶丶",
-        "confidence": 0.469,
+        "ids": "⿰夕⿺十丶",
+        "confidence": 0.564,
         "model": "han2ids-v0.4",
-        "variant": "fit 0.15"
+        "variant": "em"
       }
     },
     {
@@ -177,7 +177,7 @@
       "unifiedWith": "JMJ-059482",
       "guess": {
         "ids": "⿳⺊𭁨大",
-        "confidence": 0.899,
+        "confidence": 0.929,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -191,7 +191,7 @@
       "unifiedWith": "U+219F1",
       "guess": {
         "ids": "⿱宀吾",
-        "confidence": 0.487,
+        "confidence": 0.53,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -205,7 +205,7 @@
       "unifiedWith": "JMJ-057337",
       "guess": {
         "ids": "⿱宀𰥍",
-        "confidence": 0.368,
+        "confidence": 0.741,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -219,9 +219,9 @@
       "unifiedWith": "U+2BBFC",
       "guess": {
         "ids": "⿱⿲木歹木大",
-        "confidence": 0.806,
+        "confidence": 0.952,
         "model": "han2ids-v0.4",
-        "variant": "fit 0.08"
+        "variant": "em"
       }
     },
     {
@@ -233,7 +233,7 @@
       "unifiedWith": "U+2C199",
       "guess": {
         "ids": "⿱⿻巳巳廾",
-        "confidence": 0.635,
+        "confidence": 0.649,
         "model": "han2ids-v0.4",
         "variant": "fit 0.15"
       }
@@ -247,7 +247,7 @@
       "unifiedWith": "U+2BA3D",
       "guess": {
         "ids": "⿰皀殳",
-        "confidence": 0.704,
+        "confidence": 0.764,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -261,9 +261,9 @@
       "unifiedWith": "U+2C1B6",
       "guess": {
         "ids": "⿰豙殳",
-        "confidence": 0.366,
+        "confidence": 0.695,
         "model": "han2ids-v0.4",
-        "variant": "fit 0.03"
+        "variant": "em"
       }
     },
     {
@@ -275,7 +275,7 @@
       "unifiedWith": "U+2C231",
       "guess": {
         "ids": "⿰氵㥯",
-        "confidence": 0.65,
+        "confidence": 0.685,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -289,9 +289,9 @@
       "unifiedWith": "U+2C3AD",
       "guess": {
         "ids": "⿰朶瓦",
-        "confidence": 0.728,
+        "confidence": 0.963,
         "model": "han2ids-v0.4",
-        "variant": "fit 0.03"
+        "variant": "em"
       }
     },
     {
@@ -303,7 +303,7 @@
       "unifiedWith": "U+2B7AC",
       "guess": {
         "ids": "⿸疒圣",
-        "confidence": 0.887,
+        "confidence": 0.939,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -317,7 +317,7 @@
       "unifiedWith": "JMJ-058133",
       "guess": {
         "ids": "〾⿱𭼽豆",
-        "confidence": 0.668,
+        "confidence": 0.693,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -331,7 +331,7 @@
       "unifiedWith": "JMJ-058472",
       "guess": {
         "ids": "⿱艹麦",
-        "confidence": 0.499,
+        "confidence": 0.962,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -345,7 +345,7 @@
       "unifiedWith": "U+04572",
       "guess": {
         "ids": "⿱艹廩",
-        "confidence": 0.797,
+        "confidence": 0.956,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -359,7 +359,7 @@
       "unifiedWith": "U+08B53",
       "guess": {
         "ids": "⿰訁恵",
-        "confidence": 0.723,
+        "confidence": 0.782,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -373,7 +373,7 @@
       "unifiedWith": "U+08FF3",
       "guess": {
         "ids": "⿱又⿺辶圣",
-        "confidence": 0.417,
+        "confidence": 0.556,
         "model": "han2ids-v0.4",
         "variant": "fit 0.03"
       }
@@ -387,7 +387,7 @@
       "unifiedWith": "U+2CE7B",
       "guess": {
         "ids": "⿰齒朶",
-        "confidence": 0.845,
+        "confidence": 0.944,
         "model": "han2ids-v0.4",
         "variant": "em"
       }

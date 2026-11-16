@@ -36,7 +36,7 @@
       "glyph": "glyphs/ext-d/00225.png",
       "guess": {
         "ids": "⿰丨云",
-        "confidence": 0.789,
+        "confidence": 0.935,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -49,7 +49,7 @@
       "glyph": "glyphs/ext-d/00294.png",
       "guess": {
         "ids": "⿰𠄌⺄",
-        "confidence": 0.573,
+        "confidence": 0.608,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -62,7 +62,7 @@
       "glyph": "glyphs/ext-d/00325.png",
       "guess": {
         "ids": "⿵乃木",
-        "confidence": 0.776,
+        "confidence": 0.848,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -75,7 +75,7 @@
       "glyph": "glyphs/ext-d/00672.png",
       "guess": {
         "ids": "⿳亠父加",
-        "confidence": 0.678,
+        "confidence": 0.785,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -87,10 +87,10 @@
       "page": 3,
       "glyph": "glyphs/ext-d/01917.png",
       "guess": {
-        "ids": "⿰左児",
-        "confidence": 0.697,
+        "ids": "⿱⿰左日儿",
+        "confidence": 0.818,
         "model": "han2ids-v0.4",
-        "variant": "fit 0.03"
+        "variant": "fit 0.15"
       }
     },
     {
@@ -101,7 +101,7 @@
       "glyph": "glyphs/ext-d/02047.png",
       "guess": {
         "ids": "⿱⿰工几共",
-        "confidence": 0.085,
+        "confidence": 0.824,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -114,9 +114,9 @@
       "glyph": "glyphs/ext-d/02621.png",
       "guess": {
         "ids": "⿰𫜹刂",
-        "confidence": 0.197,
+        "confidence": 0.941,
         "model": "han2ids-v0.4",
-        "variant": "fit 0.03"
+        "variant": "em"
       }
     },
     {
@@ -127,7 +127,7 @@
       "glyph": "glyphs/ext-d/02652.png",
       "guess": {
         "ids": "⿱刀目",
-        "confidence": 0.114,
+        "confidence": 0.959,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -140,7 +140,7 @@
       "glyph": "glyphs/ext-d/03123.png",
       "guess": {
         "ids": "⿺北西",
-        "confidence": 0.765,
+        "confidence": 0.817,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -153,7 +153,7 @@
       "glyph": "glyphs/ext-d/04239.png",
       "guess": {
         "ids": "⿰口皀",
-        "confidence": 0.86,
+        "confidence": 0.915,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -166,7 +166,7 @@
       "glyph": "glyphs/ext-d/06346.png",
       "guess": {
         "ids": "⿱林⿰土北",
-        "confidence": 0.457,
+        "confidence": 0.623,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -179,7 +179,7 @@
       "glyph": "glyphs/ext-d/06807.png",
       "guess": {
         "ids": "⿰女助",
-        "confidence": 0.683,
+        "confidence": 0.726,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -192,7 +192,7 @@
       "glyph": "glyphs/ext-d/07085.png",
       "guess": {
         "ids": "⿰女實",
-        "confidence": 0.659,
+        "confidence": 0.712,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -205,7 +205,7 @@
       "glyph": "glyphs/ext-d/07147.png",
       "guess": {
         "ids": "⿰子双",
-        "confidence": 0.807,
+        "confidence": 0.88,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -217,10 +217,10 @@
       "page": 3,
       "glyph": "glyphs/ext-d/08018.png",
       "guess": {
-        "ids": "⿰山唐",
-        "confidence": 0.382,
+        "ids": "⿰山⿸广⿱田日",
+        "confidence": 0.662,
         "model": "han2ids-v0.4",
-        "variant": "fit 0.15"
+        "variant": "em"
       }
     },
     {
@@ -231,7 +231,7 @@
       "glyph": "glyphs/ext-d/08127.png",
       "guess": {
         "ids": "⿰左官",
-        "confidence": 0.782,
+        "confidence": 0.9,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -244,7 +244,7 @@
       "glyph": "glyphs/ext-d/08276.png",
       "guess": {
         "ids": "⿰平民",
-        "confidence": 0.656,
+        "confidence": 0.756,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -257,7 +257,7 @@
       "glyph": "glyphs/ext-d/08604.png",
       "guess": {
         "ids": "⿰弓武",
-        "confidence": 0.828,
+        "confidence": 0.955,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -270,9 +270,9 @@
       "glyph": "glyphs/ext-d/08822.png",
       "guess": {
         "ids": "⿱心心",
-        "confidence": 0.452,
+        "confidence": 0.923,
         "model": "han2ids-v0.4",
-        "variant": "fit 0.15"
+        "variant": "em"
       }
     },
     {
@@ -283,7 +283,7 @@
       "glyph": "glyphs/ext-d/09575.png",
       "guess": {
         "ids": "⿺兒手",
-        "confidence": 0.803,
+        "confidence": 0.948,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -296,7 +296,7 @@
       "glyph": "glyphs/ext-d/10550.png",
       "guess": {
         "ids": "⿰日⿸户隹",
-        "confidence": 0.736,
+        "confidence": 0.827,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -309,7 +309,7 @@
       "glyph": "glyphs/ext-d/11012.png",
       "guess": {
         "ids": "⿰木舍",
-        "confidence": 0.746,
+        "confidence": 0.869,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -322,7 +322,7 @@
       "glyph": "glyphs/ext-d/11069.png",
       "guess": {
         "ids": "⿱丙木",
-        "confidence": 0.099,
+        "confidence": 0.474,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -334,10 +334,10 @@
       "page": 3,
       "glyph": "glyphs/ext-d/11175.png",
       "guess": {
-        "ids": "⿰木⿹𢦏⿻⿰丿亅⺗",
-        "confidence": 0.394,
+        "ids": "⿰木⿹𢦏𡭔",
+        "confidence": 0.678,
         "model": "han2ids-v0.4",
-        "variant": "fit 0.03"
+        "variant": "em"
       }
     },
     {
@@ -348,9 +348,9 @@
       "glyph": "glyphs/ext-d/11310.png",
       "guess": {
         "ids": "⿰木⿱自母",
-        "confidence": 0.582,
+        "confidence": 0.877,
         "model": "han2ids-v0.4",
-        "variant": "fit 0.08"
+        "variant": "em"
       }
     },
     {
@@ -361,7 +361,7 @@
       "glyph": "glyphs/ext-d/11376.png",
       "guess": {
         "ids": "⿰木嵗",
-        "confidence": 0.591,
+        "confidence": 0.679,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -373,10 +373,10 @@
       "page": 3,
       "glyph": "glyphs/ext-d/11501.png",
       "guess": {
-        "ids": "〾⿱⿲木米殳殳",
-        "confidence": 0.284,
+        "ids": "⿲木⿱士冖米",
+        "confidence": 0.328,
         "model": "han2ids-v0.4",
-        "variant": "fit 0.15"
+        "variant": "em"
       }
     },
     {
@@ -387,7 +387,7 @@
       "glyph": "glyphs/ext-d/11672.png",
       "guess": {
         "ids": "⿱止及",
-        "confidence": 0.828,
+        "confidence": 0.961,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -400,7 +400,7 @@
       "glyph": "glyphs/ext-d/12178.png",
       "guess": {
         "ids": "⿰氵⿱艹⿱一㐄",
-        "confidence": 0.763,
+        "confidence": 0.805,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -413,7 +413,7 @@
       "glyph": "glyphs/ext-d/12765.png",
       "guess": {
         "ids": "⿰氵耤",
-        "confidence": 0.235,
+        "confidence": 0.292,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -426,7 +426,7 @@
       "glyph": "glyphs/ext-d/13141.png",
       "guess": {
         "ids": "⿰火𥙊",
-        "confidence": 0.613,
+        "confidence": 0.743,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -439,7 +439,7 @@
       "glyph": "glyphs/ext-d/13326.png",
       "guess": {
         "ids": "⿰火⿸广⿱䀠安",
-        "confidence": 0.678,
+        "confidence": 0.77,
         "model": "han2ids-v0.4",
         "variant": "fit 0.03"
       }
@@ -452,7 +452,7 @@
       "glyph": "glyphs/ext-d/14180.png",
       "guess": {
         "ids": "⿰生若",
-        "confidence": 0.737,
+        "confidence": 0.886,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -465,7 +465,7 @@
       "glyph": "glyphs/ext-d/14720.png",
       "guess": {
         "ids": "⿱明目",
-        "confidence": 0.227,
+        "confidence": 0.953,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -478,7 +478,7 @@
       "glyph": "glyphs/ext-d/14803.png",
       "guess": {
         "ids": "⿰目緣",
-        "confidence": 0.694,
+        "confidence": 0.849,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -491,7 +491,7 @@
       "glyph": "glyphs/ext-d/15648.png",
       "guess": {
         "ids": "⿱穴⿱宀儿",
-        "confidence": 0.334,
+        "confidence": 0.513,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -504,7 +504,7 @@
       "glyph": "glyphs/ext-d/16173.png",
       "guess": {
         "ids": "⿱𥫗⿲糹⿱土隹戈",
-        "confidence": 0.544,
+        "confidence": 0.566,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -517,7 +517,7 @@
       "glyph": "glyphs/ext-d/17288.png",
       "guess": {
         "ids": "⿱叔聿",
-        "confidence": 0.487,
+        "confidence": 0.666,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -530,7 +530,7 @@
       "glyph": "glyphs/ext-d/17316.png",
       "guess": {
         "ids": "⿰月布",
-        "confidence": 0.76,
+        "confidence": 0.921,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -543,7 +543,7 @@
       "glyph": "glyphs/ext-d/17470.png",
       "guess": {
         "ids": "⿰肉⿱⿲幺幺力⿱刀力",
-        "confidence": 0.39,
+        "confidence": 0.539,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -556,7 +556,7 @@
       "glyph": "glyphs/ext-d/17636.png",
       "guess": {
         "ids": "⿲舟示申",
-        "confidence": 0.401,
+        "confidence": 0.858,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -569,7 +569,7 @@
       "glyph": "glyphs/ext-d/17655.png",
       "guess": {
         "ids": "⿰舟羅",
-        "confidence": 0.732,
+        "confidence": 0.934,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -582,7 +582,7 @@
       "glyph": "glyphs/ext-d/18265.png",
       "guess": {
         "ids": "⿱艹𥑴",
-        "confidence": 0.225,
+        "confidence": 0.337,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -595,7 +595,7 @@
       "glyph": "glyphs/ext-d/18269.png",
       "guess": {
         "ids": "⿱茨皿",
-        "confidence": 0.565,
+        "confidence": 0.694,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -608,9 +608,9 @@
       "glyph": "glyphs/ext-d/18327.png",
       "guess": {
         "ids": "⿱艹補",
-        "confidence": 0.742,
+        "confidence": 0.902,
         "model": "han2ids-v0.4",
-        "variant": "fit 0.03"
+        "variant": "em"
       }
     },
     {
@@ -621,7 +621,7 @@
       "glyph": "glyphs/ext-d/18470.png",
       "guess": {
         "ids": "⿱艹覔",
-        "confidence": 0.276,
+        "confidence": 0.373,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -634,7 +634,7 @@
       "glyph": "glyphs/ext-d/18629.png",
       "guess": {
         "ids": "⿱艹𭮧",
-        "confidence": 0.494,
+        "confidence": 0.582,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -647,7 +647,7 @@
       "glyph": "glyphs/ext-d/18636.png",
       "guess": {
         "ids": "⿱艹⿰⿱艹示⿱賏𢛧",
-        "confidence": 0.409,
+        "confidence": 0.454,
         "model": "han2ids-v0.4",
         "variant": "fit 0.03"
       }
@@ -660,7 +660,7 @@
       "glyph": "glyphs/ext-d/18822.png",
       "guess": {
         "ids": "⿰虫⿱𠂉⿱中儿",
-        "confidence": 0.718,
+        "confidence": 0.758,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -673,7 +673,7 @@
       "glyph": "glyphs/ext-d/18955.png",
       "guess": {
         "ids": "⿰虫⿱止𫀄",
-        "confidence": 0.708,
+        "confidence": 0.785,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -686,7 +686,7 @@
       "glyph": "glyphs/ext-d/18979.png",
       "guess": {
         "ids": "⿰虫⿱䜌叉",
-        "confidence": 0.489,
+        "confidence": 0.548,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -699,9 +699,9 @@
       "glyph": "glyphs/ext-d/19145.png",
       "guess": {
         "ids": "⿰衤⿲月月力",
-        "confidence": 0.458,
+        "confidence": 0.567,
         "model": "han2ids-v0.4",
-        "variant": "em"
+        "variant": "fit 0.03"
       }
     },
     {
@@ -712,7 +712,7 @@
       "glyph": "glyphs/ext-d/19249.png",
       "guess": {
         "ids": "⿺見直",
-        "confidence": 0.799,
+        "confidence": 0.933,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -725,7 +725,7 @@
       "glyph": "glyphs/ext-d/19760.png",
       "guess": {
         "ids": "⿰豆燕",
-        "confidence": 0.785,
+        "confidence": 0.925,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -738,7 +738,7 @@
       "glyph": "glyphs/ext-d/20991.png",
       "guess": {
         "ids": "⿳𠆢悲⿱一由",
-        "confidence": 0.618,
+        "confidence": 0.687,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -751,7 +751,7 @@
       "glyph": "glyphs/ext-d/21069.png",
       "guess": {
         "ids": "⿰⿴囗金卜",
-        "confidence": 0.528,
+        "confidence": 0.597,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -764,7 +764,7 @@
       "glyph": "glyphs/ext-d/21313.png",
       "guess": {
         "ids": "⿲厷隹金",
-        "confidence": 0.418,
+        "confidence": 0.477,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -777,7 +777,7 @@
       "glyph": "glyphs/ext-d/21336.png",
       "guess": {
         "ids": "⿱湯金",
-        "confidence": 0.806,
+        "confidence": 0.953,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -790,7 +790,7 @@
       "glyph": "glyphs/ext-d/21738.png",
       "guess": {
         "ids": "⿵門出",
-        "confidence": 0.72,
+        "confidence": 0.94,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -803,7 +803,7 @@
       "glyph": "glyphs/ext-d/22235.png",
       "guess": {
         "ids": "⿱譶龖",
-        "confidence": 0.474,
+        "confidence": 0.594,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -816,7 +816,7 @@
       "glyph": "glyphs/ext-d/22300.png",
       "guess": {
         "ids": "⿰⿱卝干青",
-        "confidence": 0.597,
+        "confidence": 0.672,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -829,7 +829,7 @@
       "glyph": "glyphs/ext-d/22387.png",
       "guess": {
         "ids": "⿰魚眷",
-        "confidence": 0.788,
+        "confidence": 0.925,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -842,7 +842,7 @@
       "glyph": "glyphs/ext-d/22423.png",
       "guess": {
         "ids": "⿰⿱亠厶頁",
-        "confidence": 0.709,
+        "confidence": 0.763,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -855,7 +855,7 @@
       "glyph": "glyphs/ext-d/22822.png",
       "guess": {
         "ids": "⿱馬⺀",
-        "confidence": 0.205,
+        "confidence": 0.818,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -867,10 +867,10 @@
       "page": 4,
       "glyph": "glyphs/ext-d/23129.png",
       "guess": {
-        "ids": "⿱髟⿱主⿻二龰",
-        "confidence": 0.235,
+        "ids": "⿱髟走",
+        "confidence": 0.897,
         "model": "han2ids-v0.4",
-        "variant": "fit 0.15"
+        "variant": "em"
       }
     },
     {
@@ -880,10 +880,10 @@
       "page": 4,
       "glyph": "glyphs/ext-d/23328.png",
       "guess": {
-        "ids": "⿱冖⿰⿱八魚⿱⺈⿵冂魚",
-        "confidence": 0.501,
+        "ids": "⿱㓁⿵冂魚",
+        "confidence": 0.539,
         "model": "han2ids-v0.4",
-        "variant": "fit 0.08"
+        "variant": "em"
       }
     },
     {
@@ -894,7 +894,7 @@
       "glyph": "glyphs/ext-d/23335.png",
       "guess": {
         "ids": "⿰魚苖",
-        "confidence": 0.674,
+        "confidence": 0.728,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -907,7 +907,7 @@
       "glyph": "glyphs/ext-d/23376.png",
       "guess": {
         "ids": "⿰魚麥",
-        "confidence": 0.717,
+        "confidence": 0.866,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -920,7 +920,7 @@
       "glyph": "glyphs/ext-d/23410.png",
       "guess": {
         "ids": "⿰魚卿",
-        "confidence": 0.639,
+        "confidence": 0.695,
         "model": "han2ids-v0.4",
         "variant": "fit 0.03"
       }
@@ -933,7 +933,7 @@
       "glyph": "glyphs/ext-d/23426.png",
       "guess": {
         "ids": "⿰魚集",
-        "confidence": 0.844,
+        "confidence": 0.916,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -946,7 +946,7 @@
       "glyph": "glyphs/ext-d/23765.png",
       "guess": {
         "ids": "⿰⿱艹⿰亻匕鳥",
-        "confidence": 0.576,
+        "confidence": 0.815,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -959,7 +959,7 @@
       "glyph": "glyphs/ext-d/23771.png",
       "guess": {
         "ids": "⿰岩鳥",
-        "confidence": 0.684,
+        "confidence": 0.747,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -972,7 +972,7 @@
       "glyph": "glyphs/ext-d/23833.png",
       "guess": {
         "ids": "⿰𡻕鳥",
-        "confidence": 0.556,
+        "confidence": 0.616,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -985,7 +985,7 @@
       "glyph": "glyphs/ext-d/23855.png",
       "guess": {
         "ids": "⿱啄鳥",
-        "confidence": 0.397,
+        "confidence": 0.504,
         "model": "han2ids-v0.4",
         "variant": "fit 0.08"
       }
@@ -997,10 +997,10 @@
       "page": 4,
       "glyph": "glyphs/ext-d/23858.png",
       "guess": {
-        "ids": "⿱⿲禾禾弓⿰⿱丶鬯鳥",
-        "confidence": 0.271,
+        "ids": "⿰⿱棥花鳥",
+        "confidence": 0.397,
         "model": "han2ids-v0.4",
-        "variant": "fit 0.15"
+        "variant": "em"
       }
     },
     {
@@ -1011,7 +1011,7 @@
       "glyph": "glyphs/ext-d/24112.png",
       "guess": {
         "ids": "⿰鹿子",
-        "confidence": 0.771,
+        "confidence": 0.909,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -1024,7 +1024,7 @@
       "glyph": "glyphs/ext-d/24143.png",
       "guess": {
         "ids": "⿺麦曹",
-        "confidence": 0.85,
+        "confidence": 0.923,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
@@ -1037,7 +1037,7 @@
       "glyph": "glyphs/ext-d/24260.png",
       "guess": {
         "ids": "⿰鼠斬",
-        "confidence": 0.87,
+        "confidence": 0.941,
         "model": "han2ids-v0.4",
         "variant": "em"
       }
