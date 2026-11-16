@@ -19,7 +19,7 @@ Run it from the han2ids checkout so its package and venv are in reach:
     uv run --with cairosvg python ../han-input/scripts/guess_ids.py --batch 8
 
 `--limit` stops after that many records, for a pilot. A record that already carries `guess` is
-skipped, so an interrupted run resumes.
+skipped, so an interrupted run resumes; `--refresh` recomputes every existing guess.
 """
 from __future__ import annotations
 
@@ -27,8 +27,10 @@ import argparse
 import io
 import json
 import math
+import os
 import re
 import sys
+import tempfile
 import time
 from pathlib import Path
 
@@ -78,8 +80,8 @@ def image_of(record: dict) -> Image.Image | None:
 
 @torch.no_grad()
 def read_batch(reader: Han2IDS, pictures: list[Image.Image]) -> list[tuple[str, float, str, bool]]:
-    """Greedy decode one image's four crops with the encoder run once, then pick the reading the
-    image model's own routine would pick: em-box unless another valid crop beats it by 0.08."""
+    """Greedy decode one image's four crops with the encoder run once, then keep the em box unless
+    a valid crop beats it by 0.08; the highest-scoring qualifying crop wins."""
     names: list[str] = []
     flat = []
     for picture in pictures:
@@ -117,8 +119,10 @@ def read_batch(reader: Han2IDS, pictures: list[Image.Image]) -> list[tuple[str, 
                 mask[i, operators] = 0
                 mask[i, operands] = 0
         choice = (logprobs + mask).argmax(-1)
-        scores += (logprobs + mask)[torch.arange(batch, device=device), choice]
-        lengths += (~finished)
+        active = ~finished
+        step_scores = (logprobs + mask)[torch.arange(batch, device=device), choice]
+        scores += torch.where(active, step_scores, torch.zeros_like(step_scores))
+        lengths += active
         tokens = torch.cat([tokens, choice[:, None]], 1)
         for i in range(batch):
             if finished[i]:
@@ -143,9 +147,11 @@ def read_batch(reader: Han2IDS, pictures: list[Image.Image]) -> list[tuple[str, 
             best = max(valid, key=lambda i: block[i][1]) if valid else 0
         else:
             best = 0
-            for i in range(1, len(block)):
-                if block[i][3] and block[i][1] > block[0][1] + 0.08:
-                    best = i
+            alternatives = [i for i in range(1, len(block)) if block[i][3]]
+            if alternatives:
+                candidate = max(alternatives, key=lambda i: block[i][1])
+                if block[candidate][1] > block[0][1] + 0.08:
+                    best = candidate
         picked.append(block[best])
     return picked
 
@@ -154,12 +160,12 @@ def records_files() -> list[Path]:
     return sorted(CHARSETS.glob("*_records.json"))
 
 
-def targets(files: list[Path], limit: int | None) -> list[tuple[Path, dict, int]]:
+def targets(files: list[Path], limit: int | None, refresh: bool) -> list[tuple[Path, dict, int]]:
     found = []
     for path in files:
         data = json.loads(path.read_text())
         for index, record in enumerate(data.get("records", [])):
-            if record.get("kind") == "ids" or record.get("guess"):
+            if record.get("kind") == "ids" or (record.get("guess") and not refresh):
                 continue
             if not (record.get("glyph") or record.get("sprite")):
                 continue
@@ -169,15 +175,39 @@ def targets(files: list[Path], limit: int | None) -> list[tuple[Path, dict, int]
     return found
 
 
+def write_records(path: Path, data: dict) -> None:
+    """Write the document in the file's own layout, replacing it only once it is complete."""
+    original = path.read_text()
+    if "\n" not in original.rstrip("\n"):
+        text = json.dumps(data, ensure_ascii=False, separators=(",", ":")) + "\n"
+    else:
+        text = json.dumps(data, ensure_ascii=False, indent=2) + "\n"
+    mode = path.stat().st_mode
+    handle = tempfile.NamedTemporaryFile("w", encoding="utf-8", dir=path.parent, prefix=f"{path.name}.", suffix=".tmp", delete=False)
+    try:
+        handle.write(text)
+        handle.flush()
+        os.fsync(handle.fileno())
+        handle.close()
+        os.chmod(handle.name, mode)
+        os.replace(handle.name, path)
+    finally:
+        if not handle.closed:
+            handle.close()
+        if os.path.exists(handle.name):
+            os.unlink(handle.name)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--checkpoint", type=Path, default=ROOT / "cache/han2ids/han2ids-v0.4.pt")
     parser.add_argument("--batch", type=int, default=8, help="images per encoder pass")
     parser.add_argument("--limit", type=int, default=None)
+    parser.add_argument("--refresh", action="store_true", help="recompute records that already carry a guess")
     args = parser.parse_args()
 
-    found = targets(records_files(), args.limit)
-    print(f"{len(found)} records with an image and no IDS", flush=True)
+    found = targets(records_files(), args.limit, args.refresh)
+    print(f"{len(found)} image records to read", flush=True)
     reader = Han2IDS(args.checkpoint)
     print(f"device {reader.device}", flush=True)
     started = time.time()
@@ -201,6 +231,9 @@ def main() -> int:
         readings = read_batch(reader, pictures)
         for (path, data, index), (ids, confidence, variant, valid) in zip(kept, readings):
             if not valid:
+                if args.refresh:
+                    data["records"][index].pop("guess", None)
+                    dirty[path] = data
                 continue
             record = data["records"][index]
             record["guess"] = {
@@ -216,10 +249,10 @@ def main() -> int:
             print(f"{done}/{len(found)} · {done / elapsed:.1f}/s · {elapsed:.0f}s", flush=True)
         if start % (args.batch * 100) == 0:
             for path, data in dirty.items():
-                path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n")
+                write_records(path, data)
             dirty.clear()
     for path, data in dirty.items():
-        path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n")
+        write_records(path, data)
     print(f"wrote {done} guesses in {time.time() - started:.0f}s", flush=True)
     return 0
 
