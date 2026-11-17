@@ -42,6 +42,12 @@ describe('Tày Nôm dictionary snapshot', () => {
     expect(doc.entries.find(entry => entry.id === 5)?.examples[0].source).toBe('(T.Ng.)')
   })
 
+  test('keeps a source and a transcription on every example', () => {
+    const examples = doc.entries.flatMap(entry => entry.examples)
+    expect(examples.filter(example => !example.source)).toHaveLength(0)
+    expect(examples.flatMap(example => example.lines).filter(line => !line.reading)).toHaveLength(0)
+  })
+
   test('pairs the encoded character of a mixed headword', () => {
     expect(tayNomPairs(doc)).toContainEqual(['gằn', '垠'])
   })
