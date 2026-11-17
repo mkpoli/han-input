@@ -137,6 +137,10 @@ if (!files.length) throw new Error(`no pages in ${RAW}; run with --fetch first`)
 const entries = files.map(file => parseEntry(Number.parseInt(file, 10), readFileSync(join(RAW, file), 'utf8')))
 const ids = new Set(entries.map(entry => entry.id))
 if (ids.size !== entries.length) throw new Error('two entries share an id')
+// A crawl that stopped early leaves a prefix of the pages; refuse it rather than replace a complete
+// snapshot with what arrived.
+for (let id = 1; id <= LAST; id++) if (!ids.has(id)) throw new Error(`entry ${id} is missing; snapshot left unchanged`)
+if (entries.length !== LAST) throw new Error(`${entries.length} entries, expected ${LAST}; snapshot left unchanged`)
 const noReading = entries.filter(entry => !entry.reading)
 if (noReading.length) console.warn(`  ${noReading.length} entries have no reading: ${noReading.map(entry => entry.id).join(', ')}`)
 
