@@ -2,37 +2,37 @@
   // The 訓用字 rows of one character: each reading, the other characters the dictionary records
   // for the word, its first gloss, and a link to the entry.
   import { t } from '../lib/i18n.svelte.js'
-  import { loadKun } from '../lib/kun.js'
+  import { loadHun } from '../lib/hun.js'
 
   /** @type {{ char: string }} */
   let { char } = $props()
-  let data = $state(/** @type {import('../lib/kun.js').Kun | null} */ (null))
+  let data = $state(/** @type {import('../lib/hun.js').Hun | null} */ (null))
   let failed = $state(false)
   let retry = $state(0)
   $effect(() => {
     void retry
     let active = true
     failed = false
-    loadKun().then(loaded => { if (active) data = loaded }).catch(() => { if (active) failed = true })
+    loadHun().then(loaded => { if (active) data = loaded }).catch(() => { if (active) failed = true })
     return () => { active = false }
   })
   const entry = $derived(data?.byChar.get(char) ?? null)
 </script>
 
 {#if failed}
-  <p class="ui-hint">{t('kun.failed')} <button class="ui-button" data-size="sm" type="button" onclick={() => { retry++ }}>{t('kun.retry')}</button></p>
+  <p class="ui-hint">{t('hun.failed')} <button class="ui-button" data-size="sm" type="button" onclick={() => { retry++ }}>{t('hun.retry')}</button></p>
 {:else if entry}
   <section class="family">
-    <h3 class="ui-label">{t('kun.rows')} <span class="ui-count">{entry.rows.length}</span></h3>
+    <h3 class="ui-label">{t('hun.rows')} <span class="ui-count">{entry.rows.length}</span></h3>
     <ol class="rows">
       {#each entry.rows as row (row.id + row.reading)}
         <li>
           <div class="head">
             <span class="reading ui-mono">{row.reading}</span>
-            {#if row.benzi.length}<span class="benzi">{t('kun.benzi')} <b>{row.benzi.join('、')}</b></span>{/if}
+            {#if row.benzi.length}<span class="benzi">{t('hun.benzi')} <b>{row.benzi.join('、')}</b></span>{/if}
           </div>
           {#if row.gloss}<p class="def">{row.gloss}</p>{/if}
-          {#if row.url}<a class="entry" href={row.url} target="_blank" rel="noopener noreferrer">{t('kun.entry')}</a>{/if}
+          {#if row.url}<a class="entry" href={row.url} target="_blank" rel="noopener noreferrer">{t('hun.entry')}</a>{/if}
         </li>
       {/each}
     </ol>

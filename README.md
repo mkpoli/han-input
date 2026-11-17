@@ -22,7 +22,7 @@ It covers Han and Small Seal, extended sinographies such as Chữ Nôm and Sawnd
 - **Rhyme tables**: the Guangyun by rhyme, initial, grade and tone.
 - **Radicals**: the 214 Kangxi radicals by residual strokes.
 - **Dialects**: every character in the [dialect-character sets](docs/character-sets.md#dialect-characters) on one grid, filtered by variety. Shapes that several varieties use can be shown alone; on this page the card adds the source's rows, with their readings by place and gloss.
-- **Kun readings**: Hokkien characters the Ministry of Education's 臺灣台語常用詞辭典 marks 替 (替代字), each with its reading, the other characters recorded for the word and a gloss. The card lists every reading of the character.
+- **Hun readings**: Hokkien characters the Ministry of Education's 臺灣台語常用詞辭典 marks 替 (替代字), each with its reading, the other characters recorded for the word and a gloss. The card lists every reading of the character.
 - **PUA conversion**: convert private-use text from one of seven schemes (MOE fonts, HKSCS, Hanyang, CNS, GB 18030, CBETA, the 中华书局宋 font) to Unicode and browse the mappings. Find reads a private-use character, its code point, a CB code or a CNS code in every scheme that has the slot, so a slot two schemes share shows both. Each character's card lists its own PUA codes and those of its Unihan variants.
 - **Composition**: convert the 構字式 of Taiwan's 漢字構形資料庫 (Big5 8DF1–8DFD) and arithmetic composition to IDS. The thirteen symbols and the arithmetic signs are palettes; the Korean History Database and CBETA assign those signs differently.
 
@@ -37,7 +37,7 @@ bun run verify          # unit tests, type check, messages
 
 `bun scripts/build_readings.mjs` builds the readings from the database in 漢字音典's release APK, unpacked to
 `cache/mcpdict/x`. `bun scripts/build_wiktionary.mjs <dir>` builds the meaning index from Wiktionary dumps
-before `build:data` reads it. `bun scripts/import_kun_readings.mjs` rebuilds `app/public/kun/readings.json` from the pinned dictionary download. The generated `app/public/data/` is about 300 MB and is not committed.
+before `build:data` reads it. `bun scripts/import_hun_readings.mjs` rebuilds `app/public/hun/readings.json` from the pinned dictionary download. The generated `app/public/data/` is about 300 MB and is not committed.
 Results are ordered with a privately supplied classical frequency table, `cache/frequency/综合频率表(由高到低).csv`; `build:data` stops if it is missing.
 
 ## Deploying

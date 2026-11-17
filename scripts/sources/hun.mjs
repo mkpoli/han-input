@@ -2,12 +2,12 @@
 // its reading, the other characters the entry records and its first gloss.
 const MARK = '【替】'
 
-/** @typedef {{ char: string, reading: string, benzi: string[], gloss: string, id: string, url: string }} KunRow */
+/** @typedef {{ char: string, reading: string, benzi: string[], gloss: string, id: string, url: string }} HunRow */
 
-/** @param {unknown} json KipSutianData.json @returns {KunRow[]} */
-export function kunRows(json) {
+/** @param {unknown} json KipSutianData.json @returns {HunRow[]} */
+export function hunRows(json) {
   if (!Array.isArray(json)) throw new Error('KipSutianData.json is not an array')
-  /** @type {KunRow[]} */
+  /** @type {HunRow[]} */
   const rows = []
   for (const entry of json) {
     const head = entry?.['漢字']

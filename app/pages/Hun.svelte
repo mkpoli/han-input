@@ -5,12 +5,12 @@
   import { t } from '../lib/i18n.svelte.js'
   import { route, setQuery } from '../lib/route.svelte.js'
   import { choose, put } from '../lib/ui.svelte.js'
-  import { loadKun } from '../lib/kun.js'
+  import { loadHun } from '../lib/hun.js'
   import { gridNavigation } from '../ui/grid.js'
   import GridRows from '../ui/GridRows.svelte'
 
   const PAGE = 480
-  let data = $state(/** @type {import('../lib/kun.js').Kun | null} */ (null))
+  let data = $state(/** @type {import('../lib/hun.js').Hun | null} */ (null))
   let failed = $state(false)
   let retry = $state(0)
   let withBenzi = $state(false)
@@ -22,7 +22,7 @@
     void retry
     let active = true
     failed = false
-    loadKun().then(loaded => { if (active) data = loaded }).catch(() => { if (active) failed = true })
+    loadHun().then(loaded => { if (active) data = loaded }).catch(() => { if (active) failed = true })
     return () => { active = false }
   })
 
@@ -35,35 +35,35 @@
   const shown = $derived(list.slice(0, limit))
   const readings = $derived(list.reduce((count, entry) => count + entry.rows.length, 0))
 
-  /** @param {import('../lib/kun.js').KunEntry} entry */
+  /** @param {import('../lib/hun.js').HunEntry} entry */
   const pick = entry => choose(entry.char)
-  /** @param {import('../lib/kun.js').KunEntry} entry */
+  /** @param {import('../lib/hun.js').HunEntry} entry */
   const current = entry => route.c === entry.char
 </script>
 
 <div class="ui-page" data-width="wide">
   <header class="ui-page-head">
-    <h1 class="ui-page-title">{t('kun.title')}</h1>
-    <p class="ui-page-intro">{t('kun.intro')}</p>
+    <h1 class="ui-page-title">{t('hun.title')}</h1>
+    <p class="ui-page-intro">{t('hun.intro')}</p>
     {#if data}
-      <p class="ui-hint source">{t('kun.sourceLabel')} <a href={data.source.site} target="_blank" rel="noopener noreferrer">{data.source.name}</a> · <a href={data.source.licenceUrl} target="_blank" rel="noopener noreferrer">{data.source.licence}</a></p>
+      <p class="ui-hint source">{t('hun.sourceLabel')} <a href={data.source.site} target="_blank" rel="noopener noreferrer">{data.source.name}</a> · <a href={data.source.licenceUrl} target="_blank" rel="noopener noreferrer">{data.source.licence}</a></p>
     {/if}
   </header>
 
   {#if failed}
-    <p class="ui-hint">{t('kun.failed')} <button class="ui-button" data-size="sm" type="button" onclick={() => { retry++ }}>{t('kun.retry')}</button></p>
+    <p class="ui-hint">{t('hun.failed')} <button class="ui-button" data-size="sm" type="button" onclick={() => { retry++ }}>{t('hun.retry')}</button></p>
   {:else if data}
     <div class="controls">
-      <input class="ui-input search" data-primary type="search" value={route.q} oninput={event => { setQuery(event.currentTarget.value); limit = PAGE }} placeholder={t('kun.search')} aria-label={t('kun.search')} autocomplete="off" />
-      <label class="ui-check-row"><input class="ui-switch" type="checkbox" role="switch" bind:checked={withBenzi} onchange={() => { limit = PAGE }} /><span>{t('kun.withBenzi')}</span></label>
+      <input class="ui-input search" data-primary type="search" value={route.q} oninput={event => { setQuery(event.currentTarget.value); limit = PAGE }} placeholder={t('hun.search')} aria-label={t('hun.search')} autocomplete="off" />
+      <label class="ui-check-row"><input class="ui-switch" type="checkbox" role="switch" bind:checked={withBenzi} onchange={() => { limit = PAGE }} /><span>{t('hun.withBenzi')}</span></label>
     </div>
 
     <section class="ui-section">
-      <h2 class="ui-label">{t('kun.count', { chars: list.length, readings })}</h2>
+      <h2 class="ui-label">{t('hun.count', { chars: list.length, readings })}</h2>
       {#if list.length}
-        <div class="ui-tiles" style:--ui-tile-size="76px" role="grid" aria-label={t('kun.title')} bind:this={grid} use:gridNavigation>
+        <div class="ui-tiles" style:--ui-tile-size="76px" role="grid" aria-label={t('hun.title')} bind:this={grid} use:gridNavigation>
           <GridRows {grid} items={shown}>
-            {#snippet children(/** @type {import('../lib/kun.js').KunEntry} */ entry, index)}
+            {#snippet children(/** @type {import('../lib/hun.js').HunEntry} */ entry, index)}
               <button class="ui-tile" type="button" tabindex={index === 0 ? 0 : -1} aria-current={current(entry) ? 'true' : undefined}
                 title={`${entry.char} · ${entry.rows.map(row => row.reading).join(' / ')}`}
                 onclick={() => pick(entry)} ondblclick={() => put(entry.char)}>
@@ -73,9 +73,9 @@
             {/snippet}
           </GridRows>
         </div>
-        {#if list.length > limit}<button class="ui-button more" type="button" onclick={() => { limit += PAGE }}>{t('kun.more', { count: Math.min(PAGE, list.length - limit) })}</button>{/if}
+        {#if list.length > limit}<button class="ui-button more" type="button" onclick={() => { limit += PAGE }}>{t('hun.more', { count: Math.min(PAGE, list.length - limit) })}</button>{/if}
       {:else}
-        <p class="ui-hint">{t('kun.none')}</p>
+        <p class="ui-hint">{t('hun.none')}</p>
       {/if}
     </section>
   {/if}
