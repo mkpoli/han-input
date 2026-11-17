@@ -20,6 +20,7 @@ Discord discussion of 2026-10-27, and the works themselves were not read.
 | --- | --- | --- |
 | [Unihan 18.0.0](https://www.unicode.org/Public/18.0.0/ucd/Unihan.zip), SHA-256 `4c93ea9c…d43e` | readings, shape codes, dictionary positions, encodings, variant relations, the one-line gloss, ordering | Unicode License v3 |
 | [漢字音典 MCPDict](https://github.com/osfans/MCPDict) release 20261104, APK SHA-256 `1b562a6e…ccb0`, with [音典](https://nk2028.shn.hk/yindian/) by nk2028 | 3,314 varieties' readings: historical, dialect, foreign, opera | Repository MIT. Its README asks to be told of copyright concerns and states no terms for the tables; each variety's own source is shown on its page |
+| [Từ điển chữ Nôm Tày](https://nomfoundation.org/nom-tools/Tu-Dien-Chu-Nom-Tay?uiLang=en), Hoàng Triều Ân (ed.), Dương Nhật Thanh and Hoàng Tuấn Nam, Nhà Xuất Bản Khoa học Xã hội, 2003, digitized by the Vietnamese Nôm Preservation Foundation; retrieved 2026-11-17 | 2,774 headwords with their Quốc Ngữ readings, definitions and example lines | © 2001–2026 VNPF. Non-commercial public use with attribution and a link; commercial use needs the Foundation's permission |
 | [教育部《臺灣台語常用詞辭典》](https://sutian.moe.edu.tw/), [KipSutianData.json](https://chhoetaigi.github.io/KipSutianDataMirror/public/20261019-0109/bunji/KipSutianData.json) 20261019-0109, SHA-256 `2d4aa6db…6af3`, via ChhoeTaigi KipSutianDataMirror | 999 替 headwords: each 訓用 character, its reading, 異用字 and first gloss | CC BY-ND 3.0 TW; the rows are shown as the dictionary prints them |
 | [TshetUinh.js](https://github.com/nk2028/tshet-uinh-js) 0.15.4 and [tshet-uinh-examples](https://github.com/nk2028/tshet-uinh-examples) 20260629.0.1 by nk2028, over [tshet-uinh-data](https://github.com/nk2028/tshet-uinh-data) | Guangyun positions and fanqie, and romanizations and reconstructions computed from them | MIT; data CC0-1.0 |
 | [葦手入力](https://ashide.otodo.net/) version 5, 中山春明, 2021-12-10 | kana shape codes | None stated for version 5; the [2018 repository](https://github.com/haruakira/Ashide) is GPL-3.0 |
@@ -94,6 +95,10 @@ The research behind these choices, with every candidate and what was checked, is
 [`research-input-methods.md`](research-input-methods.md) and
 [`research-extended-sinography.md`](research-extended-sinography.md). Those tables record uncertainty row
 by row and were compiled by a delegated research pass, so a row marked uncertain has not been reconfirmed.
+
+## Tày, Zhuang and Bouyei
+
+The Tày Nôm dictionary gives each headword a Quốc Ngữ reading; [`data/tay-nom.json`](../data/tay-nom.json) keeps all 2,774 entries as the Foundation prints them, and the site indexes one reading per encoded character (3,262 pairs over 1,988 characters). The card of a character sets that reading beside its Sawndip (Zhuang) code and its Bouyei code, so the same character can be read out in any of the three. Only a character each table lists has a counterpart: the tables state three languages' own readings and do not derive one spelling from another's phonology.
 
 ## Variant spellings
 
