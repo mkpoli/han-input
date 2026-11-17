@@ -20,6 +20,7 @@ Discord discussion of 2026-10-27, and the works themselves were not read.
 | --- | --- | --- |
 | [Unihan 18.0.0](https://www.unicode.org/Public/18.0.0/ucd/Unihan.zip), SHA-256 `4c93ea9c…d43e` | readings, shape codes, dictionary positions, encodings, variant relations, the one-line gloss, ordering | Unicode License v3 |
 | [漢字音典 MCPDict](https://github.com/osfans/MCPDict) release 20261104, APK SHA-256 `1b562a6e…ccb0`, with [音典](https://nk2028.shn.hk/yindian/) by nk2028 | 3,314 varieties' readings: historical, dialect, foreign, opera | Repository MIT. Its README asks to be told of copyright concerns and states no terms for the tables; each variety's own source is shown on its page |
+| [教育部《臺灣台語常用詞辭典》](https://sutian.moe.edu.tw/), [KipSutianData.json](https://chhoetaigi.github.io/KipSutianDataMirror/public/20261019-0109/bunji/KipSutianData.json) 20261019-0109, SHA-256 `2d4aa6db…6af3`, via ChhoeTaigi KipSutianDataMirror | 999 替 headwords: each 訓用 character, its reading, 異用字 and first gloss | CC BY-ND 3.0 TW; the rows are shown as the dictionary prints them |
 | [TshetUinh.js](https://github.com/nk2028/tshet-uinh-js) 0.15.4 and [tshet-uinh-examples](https://github.com/nk2028/tshet-uinh-examples) 20260629.0.1 by nk2028, over [tshet-uinh-data](https://github.com/nk2028/tshet-uinh-data) | Guangyun positions and fanqie, and romanizations and reconstructions computed from them | MIT; data CC0-1.0 |
 | [葦手入力](https://ashide.otodo.net/) version 5, 中山春明, 2021-12-10 | kana shape codes | None stated for version 5; the [2018 repository](https://github.com/haruakira/Ashide) is GPL-3.0 |
 | [cin-tables](https://github.com/chinese-opendesktop/cin-tables) | 106 `.cin` tables | Per file; the header line is shown on each method's page. Repository CC0-1.0 |
@@ -56,6 +57,8 @@ Discord discussion of 2026-10-27, and the works themselves were not read.
 | [全字庫正宋體 TW-Sung-Plus](https://www.cns11643.gov.tw/downloadList.jsp?ID=2), 數位發展部, `Fonts_Sung.zip` 20260805 | glyphs for the private-use slots of unencoded CNS source rows, cut by `scripts/build_fonts.py` | 政府資料開放授權條款第1版 (OGDL 1.0), attribution「數位發展部，CNS11643中文標準交換碼全字庫網站」 |
 | BabelStone Han PUA 1.472, Andrew West | glyphs for the numbered components IDS.TXT leaves without a fragment, cut to `app/public/fonts/IDSNumbered.woff2` | Arphic Public License, `LICENSE-BabelStoneHanPUA.txt` |
 | [han-compose](https://github.com/mkpoli/han-compose), MIT; outlines from Noto Sans CJK JP and Plangothic (SIL OFL 1.1), with KanjiVG-assisted cuts (CC BY-SA 3.0) | draws an IDS as sans-serif outlines; the three composed CNS rows in `app/public/fonts/cns-composed.woff2` | MIT code; the drawn glyphs carry the fonts' OFL and, for KanjiVG cuts, CC BY-SA 3.0 |
+
+The 訓讀 page takes the dictionary's 替 headwords. Its 編輯體例 calls a 替代字 a character that is not the 本字 and lends its shape or sound to the word; the 用字原則 divides these into 訓用字, borrowed for meaning, and 俗字 such as 借音字. The page keeps the reading and first gloss of each entry and lists the entry's 異用字 beside them, so the list is the dictionary's 替代字 selection and includes some 借音 alongside the 訓用.
 
 The 構字式 converter (`src/legacy.js`) reads the thirteen symbols and writes IDS; a shape marker yields
 its parts joined by `·`, since the writing order it records does not give their arrangement. The font

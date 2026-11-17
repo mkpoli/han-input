@@ -16,6 +16,7 @@
   import { codePoints, isPuaChar, loadPua, loadPuaCodes, readingsOf as puaReadingsOf } from '../../src/pua.js'
   import PuaReadings from './PuaReadings.svelte'
   import DialectRows from './DialectRows.svelte'
+  import KunRows from './KunRows.svelte'
   import { characterVariants } from '../../src/variants.js'
   import { pieces } from '../lib/notation.js'
 
@@ -154,6 +155,7 @@
     </header>
 
     {#if route.page === 'dialects'}<DialectRows entryKey={char} />{/if}
+    {#if route.page === 'kun'}<KunRows {char} />{/if}
 
     {#if slotReadings.length}
       <section class="family">

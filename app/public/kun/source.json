@@ -1,0 +1,11 @@
+{
+  "name": "教育部《臺灣台語常用詞辭典》",
+  "site": "https://sutian.moe.edu.tw/",
+  "url": "https://chhoetaigi.github.io/KipSutianDataMirror/public/20261019-0109/bunji/KipSutianData.json",
+  "version": "20261019-0109",
+  "sha256": "2d4aa6db6b179033f883d980b579929da1e4532b391964cd2163d2b1654c6af3",
+  "licence": "CC BY-ND 3.0 TW",
+  "licenceUrl": "https://sutian.moe.edu.tw/zh-hant/piantsip/pankhuan-singbing/",
+  "retrieved": "2026-11-17",
+  "note": "Headwords marked 替 are 替代字; the dictionary defines 訓用字 as a character borrowed for its meaning with a reading that belongs to another word."
+}
