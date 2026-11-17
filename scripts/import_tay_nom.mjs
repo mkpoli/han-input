@@ -106,14 +106,15 @@ function parseEntry(id, html) {
         groups.push(group)
       }
       group.nom.push(text(cell))
-    } else if (cell.includes('<i>')) {
-      if (group) group.readings.push(text(cell))
-    } else if (cell.includes('stlkieu')) {
+    } else if (cell.includes('<b>')) {
+      // A gloss can carry italics of its own; test it before the reading branch.
+      if (group) group.gloss = text(cell)
+    } else if (cell.includes('stlkieu') || /^\([^()]*\)$/.test(text(cell))) {
       if (!group) continue
       group.source = text(cell)
       group.sourceName = decode(cell.match(/escape\('([^']*)'\)/)?.[1] ?? '')
-    } else if (cell.includes('<b>')) {
-      if (group) group.gloss = text(cell)
+    } else if (cell.includes('<i>')) {
+      if (group) group.readings.push(text(cell))
     }
   }
   const examples = groups.map(group => {

@@ -98,7 +98,7 @@ by row and were compiled by a delegated research pass, so a row marked uncertain
 
 ## Tày, Zhuang and Bouyei
 
-The Tày Nôm dictionary gives each headword a Quốc Ngữ reading; [`data/tay-nom.json`](../data/tay-nom.json) keeps all 2,774 entries as the Foundation prints them, and the site indexes one reading per character. The card of a character sets that reading beside its Sawndip (Zhuang) code and its Bouyei code, so the same character can be read out in any of the three. Only a character each table lists has a counterpart: the tables state three languages' own readings and do not derive one spelling from another's phonology.
+The Tày Nôm dictionary gives each headword a Quốc Ngữ reading; [`data/tay-nom.json`](../data/tay-nom.json) keeps all 2,774 entries as the Foundation prints them, and the site indexes one reading per encoded character (3,262 pairs over 1,988 characters). The card of a character sets that reading beside its Sawndip (Zhuang) code and its Bouyei code, so the same character can be read out in any of the three. Only a character each table lists has a counterpart: the tables state three languages' own readings and do not derive one spelling from another's phonology.
 
 ## Variant spellings
 

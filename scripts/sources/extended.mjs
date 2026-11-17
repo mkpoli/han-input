@@ -11,6 +11,22 @@ const WIKTIONARY = {
   licence: 'CC BY-SA 4.0 and GFDL, as Wiktionary states', attribution: 'Wiktionary contributors',
 }
 
+/** One reading per character. Pair the headword's characters with its syllables first, so a
+ * headword that mixes an encoded character with a private-use one keeps the encoded pairing.
+ * @param {{ entries: { chars: string, reading: string }[] }} doc
+ * @returns {[string, string][]} */
+export function tayNomPairs(doc) {
+  /** @type {[string, string][]} */
+  const pairs = []
+  for (const entry of doc.entries) {
+    const chars = [...entry.chars]
+    const syllables = entry.reading.toLowerCase().split(/[\s\-–]+/u).filter(Boolean)
+    if (chars.length !== syllables.length) continue
+    for (let i = 0; i < chars.length; i++) if (isHan(chars[i])) pairs.push([syllables[i], chars[i]])
+  }
+  return pairs
+}
+
 /** @returns {Promise<import('../lib.mjs').Method[]>} */
 export async function extendedMethods() {
   const out = [
@@ -43,15 +59,6 @@ export async function extendedMethods() {
     }).filter(([code]) => code),
   })
   const tayNom = JSON.parse(readFileSync(join(import.meta.dirname, '..', '..', 'data', 'tay-nom.json'), 'utf8'))
-  /** One reading per character: a compound headword pairs its characters with its syllables.
-   * @type {[string, string][]} */
-  const tay = []
-  for (const entry of tayNom.entries) {
-    const chars = [...entry.chars].filter(char => isHan(char))
-    const syllables = entry.reading.toLowerCase().split(/[\s\-–]+/u).filter(Boolean)
-    if (chars.length !== syllables.length) continue
-    for (let i = 0; i < chars.length; i++) tay.push([syllables[i], chars[i]])
-  }
   out.push({
     id: 'tay-nom', family: 'extended', names: { en: 'Tày Nôm by Quốc Ngữ', zh: '岱儂字喃（國語字）' },
     source: {
@@ -61,7 +68,7 @@ export async function extendedMethods() {
       attribution: 'Vietnamese Nôm Preservation Foundation',
       note: 'Readings from the Foundation’s lookup page; the entry’s definition and examples stay there.',
     },
-    entries: tay,
+    entries: tayNomPairs(tayNom),
   })
   const bouyei = JSON.parse(readFileSync(await fetchOnce('https://zi.tools/api/ma/ma/bouyei.json'), 'utf8'))
   out.push({

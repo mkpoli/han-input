@@ -1,6 +1,7 @@
 import { describe, test, expect } from 'bun:test'
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
+import { tayNomPairs } from '../scripts/sources/extended.mjs'
 
 const doc = JSON.parse(readFileSync(join(import.meta.dirname, '..', 'data', 'tay-nom.json'), 'utf8'))
 
@@ -29,5 +30,19 @@ describe('Tày Nôm dictionary snapshot', () => {
 
   test('gives a reading for every headword', () => {
     expect(doc.entries.filter(entry => !entry.reading)).toHaveLength(0)
+  })
+
+  test('keeps a gloss that carries italics', () => {
+    const entry = doc.entries.find(entry => entry.id === 15)
+    expect(entry?.examples[0].gloss).toContain('tương lai')
+    expect(entry?.examples[0].notes).toBeUndefined()
+  })
+
+  test('keeps a source printed without a tooltip', () => {
+    expect(doc.entries.find(entry => entry.id === 5)?.examples[0].source).toBe('(T.Ng.)')
+  })
+
+  test('pairs the encoded character of a mixed headword', () => {
+    expect(tayNomPairs(doc)).toContainEqual(['gằn', '垠'])
   })
 })
