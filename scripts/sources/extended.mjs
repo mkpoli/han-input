@@ -4,6 +4,7 @@ import { existsSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { CACHE, fetchOnce } from '../lib.mjs'
 import { rimeMethod } from './rime.mjs'
+import { isHan } from '../../src/fold.js'
 
 const WIKTIONARY = {
   name: 'English Wiktionary, through the wiktextract data file', url: 'https://kaikki.org/dictionary/rawdata.html',
@@ -40,6 +41,38 @@ export async function extendedMethods() {
       const [char, code] = line.split('\t')
       return /** @type {[string, string]} */ ([code ?? '', char])
     }).filter(([code]) => code),
+  })
+  const tayNom = JSON.parse(readFileSync(join(import.meta.dirname, '..', '..', 'data', 'tay-nom.json'), 'utf8'))
+  /** One reading per character: a compound headword pairs its characters with its syllables.
+   * @type {[string, string][]} */
+  const tay = []
+  for (const entry of tayNom.entries) {
+    const chars = [...entry.chars].filter(char => isHan(char))
+    const syllables = entry.reading.toLowerCase().split(/[\s\-–]+/u).filter(Boolean)
+    if (chars.length !== syllables.length) continue
+    for (let i = 0; i < chars.length; i++) tay.push([syllables[i], chars[i]])
+  }
+  out.push({
+    id: 'tay-nom', family: 'extended', names: { en: 'Tày Nôm by Quốc Ngữ', zh: '岱儂字喃（國語字）' },
+    source: {
+      name: 'Từ điển chữ Nôm Tày, Hoàng Triều Ân (ed.), Dương Nhật Thanh and Hoàng Tuấn Nam, 2003',
+      url: 'https://nomfoundation.org/nom-tools/Tu-Dien-Chu-Nom-Tay?uiLang=en',
+      licence: '© Vietnamese Nôm Preservation Foundation; non-commercial use with attribution and a link',
+      attribution: 'Vietnamese Nôm Preservation Foundation',
+      note: 'Readings from the Foundation’s lookup page; the entry’s definition and examples stay there.',
+    },
+    entries: tay,
+  })
+  const bouyei = JSON.parse(readFileSync(await fetchOnce('https://zi.tools/api/ma/ma/bouyei.json'), 'utf8'))
+  out.push({
+    id: 'bouyei', family: 'extended', names: { en: 'Bouyei by its romanization', zh: '布依文' },
+    source: {
+      name: '字統網, G布依 character set', url: 'https://zi.tools/?secondary=character_set&set=G%E5%B8%83%E4%BE%9D',
+      licence: 'No blanket licence located; the code mappings are treated as factual data', attribution: '字統網 (zi.tools)',
+    },
+    entries: /** @type {[string, string][]} */ (bouyei.rows)
+      .map(([code, char]) => /** @type {[string, string]} */ ([String(code).replace(/\.\d+$/, ''), char]))
+      .filter(([code, char]) => Boolean(code) && isHan(char)),
   })
   const forms = join(CACHE, 'wikt-forms.tsv')
   if (existsSync(forms)) {
