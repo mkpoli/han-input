@@ -1,12 +1,12 @@
 import { expect, test } from 'bun:test'
 import { readFileSync } from 'node:fs'
-import { kunRows } from '../scripts/sources/kun.mjs'
-import { groupKun } from '../app/lib/kun.js'
+import { hunRows } from '../scripts/sources/hun.mjs'
+import { groupHun } from '../app/lib/hun.js'
 
-const doc = JSON.parse(readFileSync(new URL('../app/public/kun/readings.json', import.meta.url), 'utf8'))
+const doc = JSON.parse(readFileSync(new URL('../app/public/hun/readings.json', import.meta.url), 'utf8'))
 
 test('keeps only headwords marked 替, with the reading, other characters and first gloss', () => {
-  const rows = kunRows([
+  const rows = hunRows([
     { 漢字: '一【替】', 羅馬字: 'tsi̍t', 異用字: [{ 漢字: '一', 異用字: '蜀' }, { 漢字: '一', 異用字: '蜀' }], 義項: [{ 解說: '數目。' }], 詞目id: '1', 網址: 'u' },
     { 漢字: '一', 羅馬字: 'it', 異用字: [], 義項: [{ 解說: 'not a replacement' }], 詞目id: '2', 網址: 'v' },
     { 漢字: '二【替】', 羅馬字: '', 異用字: [], 義項: [], 詞目id: '3', 網址: 'w' },
@@ -29,8 +29,8 @@ test('the committed list holds every 替 headword in the pinned dictionary', () 
 })
 
 test('groups rows by character in dictionary order and keeps every reading', () => {
-  const kun = groupKun(doc)
-  expect(kun.entries.length).toBe(914)
-  expect(kun.entries[0].char).toBe('一')
-  expect(kun.byChar.get('奶').rows.map(row => row.reading)).toEqual(['ling/ni', 'nai', 'ne'])
+  const hun = groupHun(doc)
+  expect(hun.entries.length).toBe(914)
+  expect(hun.entries[0].char).toBe('一')
+  expect(hun.byChar.get('奶').rows.map(row => row.reading)).toEqual(['ling/ni', 'nai', 'ne'])
 })
