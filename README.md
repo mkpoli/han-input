@@ -28,6 +28,8 @@ It covers Han and Small Seal, extended sinographies such as Chữ Nôm and Sawnd
 
 ## Development
 
+The [family guide to checkboxes, radios and switches](https://github.com/mkpoli/tangut-input/blob/main/design/README.md#which-control) gives the markup for the controls in this app’s [design stylesheets](design/).
+
 ```sh
 bun install
 bun run build:data      # the tables, from sources pinned in scripts/ and cached in cache/

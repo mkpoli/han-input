@@ -69,7 +69,7 @@
   {:else if data}
     <div class="controls">
       <input class="ui-input search" data-primary type="search" value={route.q} oninput={event => { setQuery(event.currentTarget.value); limit = PAGE }} placeholder={t('dialects.search')} aria-label={t('dialects.search')} autocomplete="off" />
-      <label class="ui-check-row shared"><input class="ui-switch" type="checkbox" role="switch" bind:checked={shared} onchange={() => { limit = PAGE }} /><span>{t('dialects.shared')}</span></label>
+      <label class="ui-check-row"><input class="ui-checkbox" type="checkbox" bind:checked={shared} onchange={() => { limit = PAGE }} /><span class="ui-check-text">{t('dialects.shared')}</span></label>
     </div>
     <div class="ui-chip-row" role="group" aria-label={t('dialects.doculects')}>
       {#each data.sets as set (set.id)}
@@ -106,7 +106,6 @@
 <style>
   .controls{display:flex;flex-wrap:wrap;align-items:center;gap:var(--ui-space-sm) var(--ui-space-xl)}
   .search{flex:1 1 260px;min-inline-size:0}
-  .shared{align-items:center}
   .ui-chip-row{margin-block:var(--ui-space-lg) var(--ui-space-xl)}
   .ui-chip{font-size:var(--ui-text-sm)}
   .dot,.dots i{flex:none;border-radius:50%;background:light-dark(oklch(0.52 0.13 var(--hue)),oklch(0.8 0.11 var(--hue)))}
