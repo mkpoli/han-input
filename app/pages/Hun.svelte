@@ -55,7 +55,7 @@
   {:else if data}
     <div class="controls">
       <input class="ui-input search" data-primary type="search" value={route.q} oninput={event => { setQuery(event.currentTarget.value); limit = PAGE }} placeholder={t('hun.search')} aria-label={t('hun.search')} autocomplete="off" />
-      <label class="ui-check-row"><input class="ui-switch" type="checkbox" role="switch" bind:checked={withBenzi} onchange={() => { limit = PAGE }} /><span>{t('hun.withBenzi')}</span></label>
+      <label class="ui-check-row"><input class="ui-checkbox" type="checkbox" bind:checked={withBenzi} onchange={() => { limit = PAGE }} /><span class="ui-check-text">{t('hun.withBenzi')}</span></label>
     </div>
 
     <section class="ui-section">
