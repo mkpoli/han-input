@@ -11,7 +11,7 @@ slices, since its outlines are heavier. The rest of Han stays in
 one file, used only where a system has no face for it. The CNS plane-15 private-use glyphs go into
 4096-code-point slices under 'CNS PUA'. Writes app/public/fonts and app/fonts.css.
 Run after unzipping Jigmo-20250912.zip into cache/jigmo, fetching the two Noto TTFs into cache/noto,
-downloading Sealie-Regular.ttf from the v1.3.1 release into cache/sealie, and downloading Fonts_Sung.zip
+downloading Sealie-Regular.ttf from the v1.3.1-c8d4a98 snapshot into cache/sealie, and downloading Fonts_Sung.zip
 into cache/Fonts_Sung.zip.
 """
 import hashlib
@@ -61,13 +61,16 @@ for family_file, name, codes in (("NotoSansNushu", "noto-nushu.woff2", "U+16FE1,
     font.save(OUT / name)
     faces.append((name, codes))
 
-# https://github.com/iebb/sealie/releases/tag/v1.3.1, digest from the release's font-hashes.json.
-SEALIE_SHA256 = "80ed17835a6a27a7bc26bf2c16a46a5538f7e68d27185adc93fdfd63620e4520"
+# Sealie at commit c8d4a98 of iebb/sealie, 38 minutes after release 1.3.1: upstream's own workflow build of that
+# commit (run 44912812191), which differs from 1.3.1 in U+3EA9E alone, the left 匕 of 比 drawn with both strokes.
+# No release holds it yet, so the file is kept at https://github.com/mkpoli/sealie/releases/tag/v1.3.1-c8d4a98.
+# Return to iebb/sealie's releases with the first after 1.3.1.
+SEALIE_SHA256 = "b69dc90a5cde9a063b94b69a199b4f15ed9781d394947af0a057f6ef65770714"
 sealie = ROOT / "cache/sealie/Sealie-Regular.ttf"
 if not sealie.exists():
-    raise SystemExit("Missing cache/sealie/Sealie-Regular.ttf from https://github.com/iebb/sealie/releases/tag/v1.3.1")
+    raise SystemExit("Missing cache/sealie/Sealie-Regular.ttf from https://github.com/mkpoli/sealie/releases/tag/v1.3.1-c8d4a98")
 if hashlib.sha256(sealie.read_bytes()).hexdigest() != SEALIE_SHA256:
-    raise SystemExit("cache/sealie/Sealie-Regular.ttf is not the pinned v1.3.1 file")
+    raise SystemExit("cache/sealie/Sealie-Regular.ttf is not the pinned v1.3.1-c8d4a98 file")
 cmap = TTFont(sealie, lazy=True).getBestCmap()
 seal = sorted(code for code in cmap if 0x3D000 <= code <= 0x3FC3F)
 for block in sorted({code >> 8 for code in seal}):
