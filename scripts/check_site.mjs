@@ -224,6 +224,32 @@ for (const [name, hex] of [['Extension B', '20000'], ['Extension G', '30000'], [
     assert.ok(fonts.some(font => font.isCustomFont), fonts.map(font => font.familyName).join())
   })
 }
+await check('a Small Seal character covered by LXGW Seal renders both Sealie and LXGW Seal', async () => {
+  await page.goto(`${SITE}/?c=3D01E`)
+  await page.waitForLoadState('networkidle')
+  await page.waitForFunction(() => document.fonts.status === 'loaded')
+  assert.equal(await page.locator('.card .glyph').count(), 2)
+  const cdp = await page.context().newCDPSession(page)
+  await cdp.send('DOM.enable')
+  await cdp.send('CSS.enable')
+  const { root } = await cdp.send('DOM.getDocument')
+  const sealieNode = await cdp.send('DOM.querySelector', { nodeId: root.nodeId, selector: '.card .glyph.ui-script' })
+  const lxgwNode = await cdp.send('DOM.querySelector', { nodeId: root.nodeId, selector: '.card .glyph.lxgw-seal' })
+  const sealieFonts = (await cdp.send('CSS.getPlatformFontsForNode', { nodeId: sealieNode.nodeId })).fonts
+  const lxgwFonts = (await cdp.send('CSS.getPlatformFontsForNode', { nodeId: lxgwNode.nodeId })).fonts
+  assert.ok(sealieFonts.some(font => font.isCustomFont), sealieFonts.map(font => font.familyName).join())
+  assert.ok(lxgwFonts.some(font => font.isCustomFont), lxgwFonts.map(font => font.familyName).join())
+  assert.notEqual(
+    sealieFonts.find(font => font.isCustomFont)?.familyName,
+    lxgwFonts.find(font => font.isCustomFont)?.familyName,
+  )
+})
+await check('an uncovered Small Seal character keeps a single specimen', async () => {
+  await page.goto(`${SITE}/?c=3EBA4`)
+  await page.waitForLoadState('networkidle')
+  assert.equal(await page.locator('.card .glyph').count(), 1)
+  assert.equal(await page.locator('.card .glyph.lxgw-seal').count(), 0)
+})
 await check('an IRG G source names itself', async () => {
   await page.goto(`${SITE}/?c=206C5`)
   await page.waitForLoadState('networkidle')
@@ -244,7 +270,7 @@ await check('an Extension E record names its G source', async () => {
 })
 await check('no script errors', async () => assert.equal(errors.join(' | '), ''))
 
-const SHOTS = [['find', '/?q=lung4&c=9F8D'], ['clues', '/?q=%E6%B0%B5+12%E7%95%AB&c=6E56'], ['methods', '/methods'], ['ashide', '/m/ashide?q=%E3%83%A6%E3%82%BF'], ['readings', '/readings'], ['rhymes', '/rhymes?q=%E6%9D%B1&c=6771'], ['radicals', '/radicals?q=85'], ['dialects', '/dialects?c=5187'], ['hun', '/hun?c=8089'], ['rare', '/?c=33473'], ['nushu', '/?q=%E4%B8%80&c=1B170'], ['hentaigana', '/?q=%E5%AE%89&c=1B002'], ['seal', '/?q=%E9%A6%AC&c=3EBA4'], ['about', '/about']]
+const SHOTS = [['find', '/?q=lung4&c=9F8D'], ['clues', '/?q=%E6%B0%B5+12%E7%95%AB&c=6E56'], ['methods', '/methods'], ['ashide', '/m/ashide?q=%E3%83%A6%E3%82%BF'], ['readings', '/readings'], ['rhymes', '/rhymes?q=%E6%9D%B1&c=6771'], ['radicals', '/radicals?q=85'], ['dialects', '/dialects?c=5187'], ['hun', '/hun?c=8089'], ['rare', '/?c=33473'], ['nushu', '/?q=%E4%B8%80&c=1B170'], ['hentaigana', '/?q=%E5%AE%89&c=1B002'], ['seal', '/?q=%E9%A6%AC&c=3EBA4'], ['seal-lxgw', '/?q=%E7%A6%8F&c=3D01E'], ['about', '/about']]
 for (const [theme, phone] of [['light', false], ['dark', false], ['light', true], ['dark', true]]) {
   const view = await browser.newContext({ viewport: phone ? { width: 390, height: 844 } : { width: 1360, height: 900 }, deviceScaleFactor: 2, colorScheme: /** @type {'light' | 'dark'} */ (theme), locale: 'en-US' })
   if (dist) await serveDist(view, dist)
@@ -260,6 +286,18 @@ for (const [theme, phone] of [['light', false], ['dark', false], ['light', true]
       })
     }
     await tab.screenshot({ path: `shots/${name}-${theme}${phone ? '-phone' : ''}.png` })
+  }
+  if (phone) {
+    await check(`seal-lxgw sheet at phone width shows both faces without overflow (${theme})`, async () => {
+      await tab.goto(`${SITE}/?q=%E7%A6%8F`)
+      await tab.waitForLoadState('networkidle')
+      await tab.locator('main .ui-tile-glyph', { hasText: '\u{3D01E}' }).first().click()
+      await tab.locator('dialog.card .glyph.lxgw-seal, aside.card .glyph.lxgw-seal').first().waitFor({ state: 'visible' })
+      await tab.waitForFunction(() => document.fonts.status === 'loaded')
+      const overflow = await tab.evaluate(() => document.documentElement.scrollWidth - innerWidth)
+      assert.ok(overflow <= 0, `overflow ${overflow}`)
+      await tab.screenshot({ path: `shots/seal-lxgw-sheet-${theme}-phone.png` })
+    })
   }
   await view.close()
 }
