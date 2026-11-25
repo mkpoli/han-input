@@ -166,7 +166,7 @@ for name, codes in faces:
     lines.append(f"@font-face {{ font-family: 'Han Ext'; src: url('/fonts/{name}') format('woff2'); font-display: swap; unicode-range: {codes};{size} }}")
 for name, codes in cns_faces:
     lines.append(f"@font-face {{ font-family: 'CNS PUA'; src: url('/fonts/{name}') format('woff2'); font-display: swap; unicode-range: {codes}; }}")
-(ROOT / "app/fonts.css").write_text("\n".join(lines) + "\n")
+(ROOT / "app/fonts.css").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 lxgw_chars = "".join(chr(code) for code in lxgw_codes)
 (ROOT / "app/lib/lxgw-seal.js").write_text(
@@ -176,5 +176,6 @@ lxgw_chars = "".join(chr(code) for code in lxgw_codes)
     "/** Whether LXGW Seal has a glyph for this Small Seal character. @param {string} char */\n"
     "export const hasLxgwSeal = char => COVERED.has(char)\n\n"
     "/** All Small Seal characters covered by LXGW Seal, in code-point order. */\n"
-    "export const LXGW_SEAL_CHARS = [...COVERED]\n"
+    "export const LXGW_SEAL_CHARS = [...COVERED]\n",
+    encoding="utf-8",
 )
