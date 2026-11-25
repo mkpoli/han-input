@@ -1,9 +1,13 @@
 // The sites that say more about a character. This site finds it; the entry lives with them. Most of
-// them cover Han alone, and `every` marks those that also have kana and Nüshu.
+// them cover Han alone, `seal` marks those that also cover Small Seal, and `every` marks those that
+// also have kana and Nüshu.
+import { isHan, isSeal } from '../../src/fold.js'
+
 const cp = (/** @type {string} */ char) => (char.codePointAt(0) ?? 0).toString(16)
+const hex = (/** @type {string} */ char) => cp(char).toUpperCase().padStart(4, '0')
 const e = encodeURIComponent
 
-/** @type {{ key: string, name: string, kind: 'all' | 'dict' | 'sound' | 'shape', url: (char: string) => string, deep: boolean, every?: boolean }[]} */
+/** @type {{ key: string, name: string, kind: 'all' | 'dict' | 'sound' | 'shape', url: (char: string) => string, deep: boolean, every?: boolean, seal?: boolean }[]} */
 export const LINKS = [
   { key: 'zitools', name: '字統網 zi.tools', kind: 'all', deep: true, url: c => `https://zi.tools/zi/${e(c)}` },
   { key: 'zdic', name: '漢典 zdic', kind: 'dict', deep: true, url: c => `https://www.zdic.net/hans/${e(c)}` },
@@ -16,7 +20,7 @@ export const LINKS = [
   { key: 'qieyun', name: '切韻音系查詢 nk2028', kind: 'sound', deep: true, url: c => `https://nk2028.shn.hk/qieyun/#/?q=${e(c)}` },
   { key: 'webyuntu', name: 'Web韻圖', kind: 'sound', deep: false, url: () => 'https://suzukish.sakura.ne.jp/search/inkyo/index.php' },
   { key: 'kaom', name: '古音小鏡 kaom', kind: 'sound', deep: false, url: () => 'http://www.kaom.net/' },
-  { key: 'glyphatlas', name: 'Glyph Atlas', kind: 'shape', deep: true, url: c => `https://glyphatlas.org/?q=${e(c)}` },
+  { key: 'glyphatlas', seal: true, name: 'Glyph Atlas', kind: 'shape', deep: true, url: c => `https://glyphatlas.org/character/U+${hex(c)}` },
   { key: 'rare', name: '珍字集覽 Rare Character Compendium', kind: 'shape', deep: true, url: c => `https://rare.glyphatlas.org/?q=${e(c)}` },
   { key: 'ids', name: 'IDS Workshop', kind: 'shape', deep: true, url: c => `https://ids.mkpo.li/${e(c)}` },
   { key: 'glyphwiki', name: 'GlyphWiki', kind: 'shape', deep: true, url: c => `https://glyphwiki.org/wiki/u${cp(c)}` },
@@ -24,3 +28,6 @@ export const LINKS = [
   { key: 'unicode', name: 'Unicode', kind: 'all', deep: true, every: true, url: c => `https://util.unicode.org/UnicodeJsps/character.jsp?a=${cp(c).toUpperCase()}` },
   { key: 'unihan', name: 'Unihan', kind: 'all', deep: true, url: c => `https://www.unicode.org/cgi-bin/GetUnihanData.pl?codepoint=${cp(c).toUpperCase()}` },
 ]
+
+/** The reference sites shown on a character's card. @param {string} char */
+export const linksFor = char => LINKS.filter(site => site.every || isHan(char) || (site.seal && isSeal(char)))
