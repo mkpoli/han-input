@@ -5,10 +5,10 @@
   import { NAV, go, route } from './lib/route.svelte.js'
   import { installScroll } from './lib/scroll.js'
   import { pageMetadata } from './lib/title.js'
-  import { applySeo } from './lib/seo.js'
+  import { applySeo, localeOf } from './lib/seo.js'
   import { ui, applyTheme, closeRecord, hideSheet } from './lib/ui.svelte.js'
   import { toast } from './lib/clip.svelte.js'
-  import { i18n, t } from './lib/i18n.svelte.js'
+  import { t } from './lib/i18n.svelte.js'
   import Writing from './ui/Writing.svelte'
   import SettingsRows from './ui/SettingsRows.svelte'
   import Card from './ui/Card.svelte'
@@ -132,7 +132,7 @@
     applySeo(route.page, location.pathname, {
       title: route.page === '' ? `${name} — ${t(title)}` : `${t(title)} — ${name}`,
       description: t(description),
-    }, new URLSearchParams(location.search).get('lang') ? i18n.locale : null)
+    }, localeOf(new URLSearchParams(location.search).get('lang')))
   })
   const OWNER = /** @type {Record<string, string>} */ ({ m: 'methods', v: 'readings' })
   const current = $derived(OWNER[route.page] ?? route.page)

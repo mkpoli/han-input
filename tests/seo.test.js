@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'bun:test'
 import { readFileSync } from 'node:fs'
 import { NAV } from '../app/lib/paths.js'
-import { SEO_LOCALES, SITE, alternatesOf, canonicalPath, localeOf, localizedUrl, seoOf } from '../app/lib/seo.js'
+import { SEO_LOCALES, SITE, alternatesOf, applySeo, canonicalPath, localeOf, localizedUrl, seoOf } from '../app/lib/seo.js'
 import en from '../messages/en.json' with { type: 'json' }
 import ja from '../messages/ja.json' with { type: 'json' }
 
@@ -66,6 +66,63 @@ describe('page SEO', () => {
   })
   test('falls back to the finder for a route it does not know', () => {
     expect(seoOf('nope', '/nope')).toEqual(seoOf('', '/nope'))
+  })
+  test('rebuilds hreflang alternates on client navigation and strips them on notfound', () => {
+    const nodes = [
+      { tag: 'meta', attrs: { name: 'description', content: '' } },
+      { tag: 'meta', attrs: { name: 'robots', content: 'index, follow' } },
+      { tag: 'link', attrs: { rel: 'canonical', href: 'https://han.mkpo.li/methods' } },
+      { tag: 'link', attrs: { rel: 'alternate', hreflang: 'ja', href: 'https://han.mkpo.li/methods?lang=ja' } },
+      { tag: 'meta', attrs: { property: 'og:locale', content: 'en' } },
+      { tag: 'meta', attrs: { property: 'og:title', content: '' } },
+      { tag: 'meta', attrs: { property: 'og:description', content: '' } },
+      { tag: 'meta', attrs: { property: 'og:url', content: '' } },
+      { tag: 'meta', attrs: { name: 'twitter:title', content: '' } },
+      { tag: 'meta', attrs: { name: 'twitter:description', content: '' } },
+    ]
+    const head = {
+      querySelector(/** @type {string} */ sel) {
+        const m = /^(meta|link)\[(\w+)="([^"]+)"\]$/.exec(sel)
+        const found = m && nodes.find(n => n.tag === m[1] && n.attrs[m[2]] === m[3])
+        return found ? wrap(found) : null
+      },
+      querySelectorAll(/** @type {string} */ sel) {
+        if (sel === 'link[rel="alternate"][hreflang]') return nodes.filter(n => n.tag === 'link' && n.attrs.rel === 'alternate' && 'hreflang' in n.attrs).map(wrap)
+        return []
+      },
+      appendChild(/** @type {any} */ el) { nodes.push(el._node) },
+      insertBefore(/** @type {any} */ el, /** @type {any} */ ref) {
+        const i = ref ? nodes.indexOf(ref._node) : -1
+        if (i >= 0) nodes.splice(i, 0, el._node)
+        else nodes.push(el._node)
+      },
+    }
+    const wrap = (/** @type {{ tag: string, attrs: Record<string, string> }} */ node) => ({
+      _node: node,
+      parentNode: head,
+      get nextSibling() { const i = nodes.indexOf(node); return i >= 0 && i + 1 < nodes.length ? wrap(nodes[i + 1]) : null },
+      setAttribute(/** @type {string} */ k, /** @type {string} */ v) { node.attrs[k] = v },
+      remove() { const i = nodes.indexOf(node); if (i >= 0) nodes.splice(i, 1) },
+    })
+    const prev = globalThis.document
+    const doc = /** @type {any} */ ({
+      title: '',
+      createElement: (/** @type {string} */ tag) => wrap({ tag, attrs: {} }),
+      head,
+    })
+    Object.defineProperty(globalThis, 'document', { value: doc, configurable: true, writable: true })
+    try {
+      applySeo('readings', '/readings', seoOf('readings', '/readings', 'ja'), 'ja')
+      const alts = nodes.filter(n => n.attrs.rel === 'alternate').map(n => [n.attrs.hreflang, n.attrs.href])
+      expect(alts).toEqual(alternatesOf('/readings').map(a => [a.lang, a.href]))
+      expect(nodes.find(n => n.attrs.rel === 'canonical')?.attrs.href).toBe('https://han.mkpo.li/readings?lang=ja')
+
+      applySeo('notfound', '/nope')
+      expect(nodes.some(n => n.attrs.rel === 'alternate')).toBe(false)
+      expect(nodes.find(n => n.attrs.name === 'robots')?.attrs.content).toBe('noindex, nofollow')
+    } finally {
+      Object.defineProperty(globalThis, 'document', { value: prev, configurable: true, writable: true })
+    }
   })
 })
 

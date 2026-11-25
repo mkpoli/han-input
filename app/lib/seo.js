@@ -93,6 +93,19 @@ export function applySeo(page, path = page ? `/${page}` : '/', text = englishSeo
   }
   set('meta[name="description"]', description)
   set('link[rel="canonical"]', url, 'href')
+  for (const link of document.head.querySelectorAll('link[rel="alternate"][hreflang]')) link.remove()
+  if (page !== 'notfound') {
+    const anchor = document.head.querySelector('link[rel="canonical"]')
+    let after = anchor
+    for (const { lang: code, href } of alternatesOf(path)) {
+      const link = document.createElement('link')
+      link.setAttribute('rel', 'alternate')
+      link.setAttribute('hreflang', code)
+      link.setAttribute('href', href)
+      if (after?.parentNode) { after.parentNode.insertBefore(link, after.nextSibling); after = link }
+      else document.head.appendChild(link)
+    }
+  }
   set('meta[name="robots"]', page === 'notfound' ? 'noindex, nofollow' : 'index, follow')
   set('meta[property="og:locale"]', active)
   set('meta[property="og:title"]', title)
