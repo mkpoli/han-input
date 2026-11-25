@@ -3,11 +3,12 @@
   // named by, and where the document states it. Many of these characters were never encoded.
   import { ui, choose } from '../lib/ui.svelte.js'
   import { link } from '../lib/route.svelte.js'
-  import { t } from '../lib/i18n.svelte.js'
+  import { i18n, t } from '../lib/i18n.svelte.js'
   import SourceCode from './SourceCode.svelte'
   import RecordGlyph from './RecordGlyph.svelte'
   import { convertArithmetic } from '../../src/arithmetic.js'
   import { glyphIds, sourceOf } from '../lib/glyph-ids.js'
+  import { isIdsSequence, matchRccByCode, matchRccByIdsList, rccEntryUrl, rccSearchUrl } from '../lib/rcc.js'
 
   const held = $derived(ui.record)
   const record = $derived(held?.record ?? null)
@@ -28,6 +29,29 @@
     glyphIds(key).then(found => { if (record?.key === key) reviewed = found })
   })
   const reviewedSource = $derived(reviewed?.verdict === 'known' ? sourceOf(reviewed.by) : null)
+  const candidateIds = $derived([...new Set([reviewed?.ids, ids, record?.workbook?.ids, record?.workbook?.idsMachine].filter(/** @param {string | undefined} value @returns {value is string} */ value => !!value && isIdsSequence(value)))])
+  const rccQuery = $derived(candidateIds[0] || mapped || code)
+  /** @type {import('../lib/rcc.js').RccMatch[]} */
+  let rccMatches = $state([])
+  $effect(() => {
+    const idsList = candidateIds
+    const unicode = record?.mappedUnicode ?? ''
+    rccMatches = []
+    if (!idsList.length && !unicode) return
+    let active = true
+    const controller = new AbortController()
+    Promise.all([
+      idsList.length ? matchRccByIdsList(idsList, { signal: controller.signal }) : Promise.resolve([]),
+      unicode ? matchRccByCode(unicode, { signal: controller.signal }) : Promise.resolve([]),
+    ]).then(([byIds, byCode]) => {
+      if (!active) return
+      /** @type {Map<number, import('../lib/rcc.js').RccMatch>} */
+      const merged = new Map()
+      for (const item of [...byIds, ...byCode]) if (!merged.has(item.id)) merged.set(item.id, item)
+      rccMatches = [...merged.values()].sort((a, b) => a.id - b.id)
+    })
+    return () => { active = false; controller.abort() }
+  })
 
   /** @param {MouseEvent} event @param {string} char */
   function follow(event, char) {
@@ -101,9 +125,28 @@
         {/if}
       </section>
     {/if}
-    {#if record.moeVariant}
+    {#if rccMatches.length}
+      <section class="rcc">
+        <h3 class="ui-label">{t('rcc.name')} <span class="ui-count">{rccMatches.length}</span></h3>
+        <div class="rcc-links">
+          {#each rccMatches as match (match.id)}
+            <a class="rcc-link" href={rccEntryUrl(match.id, i18n.locale)} target="_blank" rel="noopener noreferrer" title={t('rcc.entryLabel', { code: match.code })}>
+              <span class="ui-mono">{match.code}</span>
+              {#if match.ids}<span class="rcc-ids" lang="und-Hani">{match.ids}</span>{/if}
+              <span aria-hidden="true">↗</span>
+            </a>
+          {/each}
+        </div>
+      </section>
+    {/if}
+    {#if record.moeVariant || rccQuery}
       <div class="links">
-        <a href={`https://dict.variants.moe.edu.tw/search.jsp?ID=7&WORD=${encodeURIComponent(record.moeVariant)}&WORD=`} target="_blank" rel="noopener noreferrer">{t('proposal.moeVariant')} <span class="ui-mono">{record.moeVariant}</span></a>
+        {#if record.moeVariant}
+          <a href={`https://dict.variants.moe.edu.tw/search.jsp?ID=7&WORD=${encodeURIComponent(record.moeVariant)}&WORD=`} target="_blank" rel="noopener noreferrer">{t('proposal.moeVariant')} <span class="ui-mono">{record.moeVariant}</span></a>
+        {/if}
+        {#if rccQuery}
+          <a href={rccSearchUrl(rccQuery, i18n.locale)} target="_blank" rel="noopener noreferrer">{t('rcc.search')} <span aria-hidden="true">↗</span></a>
+        {/if}
       </div>
     {/if}
     {#if record.evidenceUrls?.length}
@@ -135,4 +178,11 @@
   .mapped a{font-size:56px;line-height:1;color:var(--ui-color-ink);text-decoration:none}
   .links{display:flex;flex-wrap:wrap;gap:var(--ui-space-2xs)}
   .links a{padding:2px var(--ui-space-sm);border:1px solid var(--ui-color-border);border-radius:var(--ui-radius-sm);font-size:var(--ui-text-xs);color:var(--ui-color-ink);text-decoration:none;overflow-wrap:anywhere}
+  .links a:hover{background:var(--ui-color-surface-hover)}
+  .rcc{display:grid;gap:var(--ui-space-xs)}
+  .rcc h3{margin:0}
+  .rcc-links{display:flex;flex-wrap:wrap;gap:var(--ui-space-2xs)}
+  .rcc-link{display:inline-flex;align-items:baseline;gap:var(--ui-space-2xs);padding:2px var(--ui-space-sm);border:1px solid var(--ui-color-accent);border-radius:var(--ui-radius-sm);background:var(--ui-color-accent-soft);color:var(--ui-color-accent-ink);font-size:var(--ui-text-xs);text-decoration:none;white-space:nowrap}
+  .rcc-link:hover{background:color-mix(in srgb,var(--ui-color-accent) 18%,transparent)}
+  .rcc-ids{font-family:var(--ui-font-script);font-size:var(--ui-text-sm)}
 </style>

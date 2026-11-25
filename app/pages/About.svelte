@@ -3,6 +3,7 @@
   import { loadMethods, loadVariants } from '../lib/data.js'
   import { i18n, nameOf, t } from '../lib/i18n.svelte.js'
   import { G_SOURCES, noteOf } from '../lib/sources.js'
+  import { rccSearchUrl } from '../lib/rcc.js'
   import { loadPua } from '../../src/pua.js'
   /** @type {import('../lib/data.js').Method[]} */
   let methods = $state([])
@@ -128,6 +129,21 @@
       </div>
     </section>
   {/if}
+  <section class="ui-section">
+    <h2 class="ui-label">{t('about.rcc')}</h2>
+    <p class="ui-hint">{t('about.rccIntro')}</p>
+    <div class="ui-table-wrap">
+      <table class="table">
+        <thead><tr><th>{t('method.source')}</th><th>{t('method.licence')}</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><a href={rccSearchUrl('', i18n.locale)} target="_blank" rel="noopener noreferrer">{t('rcc.name')}</a></td>
+            <td class="ui-hint">CC BY-SA 4.0</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
 </div>
 
 <style>

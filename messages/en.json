@@ -361,5 +361,10 @@
   "variant.relation.variant": "IWDS variation",
   "variant.relation.compatibility": "Compatibility",
   "variant.source.iwds": "IWDS",
-  "variant.source.unicode": "Unicode"
+  "variant.source.unicode": "Unicode",
+  "rcc.name": "Rare Character Compendium",
+  "rcc.search": "Search Rare Character Compendium",
+  "rcc.entryLabel": "{code} in Rare Character Compendium",
+  "about.rcc": "Unencoded characters",
+  "about.rccIntro": "Live lookups for matching R+XXXX records on character cards, proposal records, dialect characters and composition searches."
 }

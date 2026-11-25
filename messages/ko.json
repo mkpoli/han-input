@@ -361,5 +361,10 @@
   "variant.relation.variant": "IWDS 이체",
   "variant.relation.compatibility": "호환",
   "variant.source.iwds": "IWDS",
-  "variant.source.unicode": "유니코드"
+  "variant.source.unicode": "유니코드",
+  "rcc.name": "진자집람",
+  "rcc.search": "진자집람에서 찾기",
+  "rcc.entryLabel": "진자집람의 {code}",
+  "about.rcc": "미부호화 문자",
+  "about.rccIntro": "글자 카드, 제안 기록, 방언자, 구성 검색에서 일치하는 R+XXXX 기록을 실시간으로 조회합니다."
 }

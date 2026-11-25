@@ -16,6 +16,12 @@ describe('readClue', () => {
   test('keeps ordinary code points', () => {
     expect(readClue('U+5B57', true)).toEqual({ kind: 'point', text: 'U+5B57', value: 0x5B57 })
   })
+  test('reads explicit R+XXXX codes as Rare Character Compendium records', () => {
+    expect(readClue('R+0004', true)).toEqual({ kind: 'rcc', text: 'R+0004', value: 4 })
+    expect(readClue('r+10000', true)).toEqual({ kind: 'rcc', text: 'r+10000', value: 0x10000 })
+    expect(readClue('R+0000', true).kind).toBe('code')
+    expect(readClue('R+00004', true).kind).toBe('code')
+  })
   test('keeps hex the MOE table does not assign as a code', () => {
     expect(readClue('0000', true)).toEqual({ kind: 'code', text: '0000' })
     expect(readClue('A672', true)).toEqual({ kind: 'code', text: 'A672' })
