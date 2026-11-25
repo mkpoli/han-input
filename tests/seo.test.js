@@ -1,8 +1,9 @@
 import { describe, expect, test } from 'bun:test'
 import { readFileSync } from 'node:fs'
 import { NAV } from '../app/lib/paths.js'
-import { SITE, canonicalPath, seoOf } from '../app/lib/seo.js'
+import { SEO_LOCALES, SITE, alternatesOf, applySeo, canonicalPath, localeOf, localizedUrl, seoOf } from '../app/lib/seo.js'
 import en from '../messages/en.json' with { type: 'json' }
+import ja from '../messages/ja.json' with { type: 'json' }
 
 const read = (/** @type {string} */ path) => readFileSync(new URL(`../app/${path}`, import.meta.url), 'utf8')
 
@@ -19,6 +20,14 @@ describe('page address', () => {
     expect(canonicalPath('/?q=lung4')).toBe('/')
     expect(canonicalPath('/methods?c=5B57')).toBe('/methods')
   })
+  test('recognises only declared interface locales and builds localized addresses', () => {
+    for (const locale of SEO_LOCALES) expect(localeOf(locale)).toBe(locale)
+    for (const bad of [null, undefined, '', 'fr', 'constructor', '__proto__']) expect(localeOf(bad), String(bad)).toBeNull()
+    expect(localizedUrl('/methods', 'en')).toBe('https://han.mkpo.li/methods')
+    expect(localizedUrl('/methods', 'ja')).toBe('https://han.mkpo.li/methods?lang=ja')
+    expect(localizedUrl('/', 'zh-Hant')).toBe('https://han.mkpo.li/?lang=zh-Hant')
+    expect(localizedUrl('/methods', 'xx')).toBe('https://han.mkpo.li/methods')
+  })
 })
 
 describe('page SEO', () => {
@@ -27,23 +36,93 @@ describe('page SEO', () => {
       title: 'Han Input — Find a Chinese character',
       description: en['find.seo'],
       url: 'https://han.mkpo.li/',
+      locale: 'en',
     })
     expect(seoOf('methods', '/methods')).toEqual({
       title: 'Every way in — Han Input',
       description: en['methods.seo'],
       url: 'https://han.mkpo.li/methods',
+      locale: 'en',
     })
+  })
+  test('localizes title, description and canonical address for ?lang=', () => {
+    expect(seoOf('methods', '/methods', 'ja')).toEqual({
+      title: `${ja['methods.title']} — ${ja['app.name']}`,
+      description: ja['methods.seo'],
+      url: 'https://han.mkpo.li/methods?lang=ja',
+      locale: 'ja',
+    })
+    expect(seoOf('', '/', 'en').url).toBe('https://han.mkpo.li/')
+    expect(seoOf('', '/', 'xx')).toEqual(seoOf('', '/'))
   })
   test('keeps a detail route’s address under the head of its page', () => {
     expect(seoOf('m', '/m/cangjie5')).toEqual({
       title: 'Every way in — Han Input',
       description: en['methods.seo'],
       url: 'https://han.mkpo.li/m/cangjie5',
+      locale: 'en',
     })
     expect(seoOf('v', '/v/16').title).toBe('Every variety — Han Input')
   })
   test('falls back to the finder for a route it does not know', () => {
     expect(seoOf('nope', '/nope')).toEqual(seoOf('', '/nope'))
+  })
+  test('rebuilds hreflang alternates on client navigation and strips them on notfound', () => {
+    const nodes = [
+      { tag: 'meta', attrs: { name: 'description', content: '' } },
+      { tag: 'meta', attrs: { name: 'robots', content: 'index, follow' } },
+      { tag: 'link', attrs: { rel: 'canonical', href: 'https://han.mkpo.li/methods' } },
+      { tag: 'link', attrs: { rel: 'alternate', hreflang: 'ja', href: 'https://han.mkpo.li/methods?lang=ja' } },
+      { tag: 'meta', attrs: { property: 'og:locale', content: 'en' } },
+      { tag: 'meta', attrs: { property: 'og:title', content: '' } },
+      { tag: 'meta', attrs: { property: 'og:description', content: '' } },
+      { tag: 'meta', attrs: { property: 'og:url', content: '' } },
+      { tag: 'meta', attrs: { name: 'twitter:title', content: '' } },
+      { tag: 'meta', attrs: { name: 'twitter:description', content: '' } },
+    ]
+    const head = {
+      querySelector(/** @type {string} */ sel) {
+        const m = /^(meta|link)\[(\w+)="([^"]+)"\]$/.exec(sel)
+        const found = m && nodes.find(n => n.tag === m[1] && n.attrs[m[2]] === m[3])
+        return found ? wrap(found) : null
+      },
+      querySelectorAll(/** @type {string} */ sel) {
+        if (sel === 'link[rel="alternate"][hreflang]') return nodes.filter(n => n.tag === 'link' && n.attrs.rel === 'alternate' && 'hreflang' in n.attrs).map(wrap)
+        return []
+      },
+      appendChild(/** @type {any} */ el) { nodes.push(el._node) },
+      insertBefore(/** @type {any} */ el, /** @type {any} */ ref) {
+        const i = ref ? nodes.indexOf(ref._node) : -1
+        if (i >= 0) nodes.splice(i, 0, el._node)
+        else nodes.push(el._node)
+      },
+    }
+    const wrap = (/** @type {{ tag: string, attrs: Record<string, string> }} */ node) => ({
+      _node: node,
+      parentNode: head,
+      get nextSibling() { const i = nodes.indexOf(node); return i >= 0 && i + 1 < nodes.length ? wrap(nodes[i + 1]) : null },
+      setAttribute(/** @type {string} */ k, /** @type {string} */ v) { node.attrs[k] = v },
+      remove() { const i = nodes.indexOf(node); if (i >= 0) nodes.splice(i, 1) },
+    })
+    const prev = globalThis.document
+    const doc = /** @type {any} */ ({
+      title: '',
+      createElement: (/** @type {string} */ tag) => wrap({ tag, attrs: {} }),
+      head,
+    })
+    Object.defineProperty(globalThis, 'document', { value: doc, configurable: true, writable: true })
+    try {
+      applySeo('readings', '/readings', seoOf('readings', '/readings', 'ja'), 'ja')
+      const alts = nodes.filter(n => n.attrs.rel === 'alternate').map(n => [n.attrs.hreflang, n.attrs.href])
+      expect(alts).toEqual(alternatesOf('/readings').map(a => [a.lang, a.href]))
+      expect(nodes.find(n => n.attrs.rel === 'canonical')?.attrs.href).toBe('https://han.mkpo.li/readings?lang=ja')
+
+      applySeo('notfound', '/nope')
+      expect(nodes.some(n => n.attrs.rel === 'alternate')).toBe(false)
+      expect(nodes.find(n => n.attrs.name === 'robots')?.attrs.content).toBe('noindex, nofollow')
+    } finally {
+      Object.defineProperty(globalThis, 'document', { value: prev, configurable: true, writable: true })
+    }
   })
 })
 
@@ -51,14 +130,17 @@ describe('served head', () => {
   const html = read('index.html')
   test('holds the tags the worker rewrites', () => {
     for (const tag of [
-      '<title>', '<meta name="description"', '<meta name="robots"',
-      '<link rel="canonical"', '<meta property="og:title"', '<meta property="og:description"',
+      '<html lang="en">', '<title>', '<meta name="description"', '<meta name="robots"',
+      '<link rel="canonical"', '<meta property="og:locale"', '<meta property="og:title"', '<meta property="og:description"',
       '<meta property="og:url"', '<meta name="twitter:title"', '<meta name="twitter:description"',
     ]) expect(html).toContain(tag)
   })
   test('describes the finder as the page SEO does', () => {
     expect(html).toContain(`<title>${seoOf('', '/').title}</title>`)
     expect(html).toContain(`<meta name="description" content="${en['find.seo']}">`)
+    for (const { lang, href } of alternatesOf('/')) {
+      expect(html).toContain(`<link rel="alternate" hreflang="${lang}" href="${href}">`)
+    }
   })
   test('carries a social card', () => {
     expect(html).toContain(`<meta property="og:image" content="${SITE.image}">`)
@@ -75,17 +157,33 @@ describe('served head', () => {
     expect(data.url).toBe('https://han.mkpo.li/')
     expect(data.potentialAction.target).toBe('https://han.mkpo.li/?q={search_term_string}')
   })
+  test('runs the worker first for / so /?lang= gets localized heads', () => {
+    const config = JSON.parse(readFileSync(new URL('../wrangler.jsonc', import.meta.url), 'utf8').replace(/^\s*\/\/.*$/gm, ''))
+    expect(config.assets.run_worker_first).toContain('/')
+  })
 })
 
 describe('crawler files', () => {
   test('points robots at the sitemap', () => {
     expect(read('public/robots.txt')).toContain('Sitemap: https://han.mkpo.li/sitemap.xml')
   })
-  test('lists every rail page once', () => {
-    const locs = [...read('public/sitemap.xml').matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1])
-    const pages = NAV.map(entry => `${SITE.url}/${entry.path}`)
-    expect(new Set(locs)).toEqual(new Set(pages))
-    expect(locs.length).toBe(pages.length)
+  test('lists every rail page in every locale with reciprocal hreflang alternates', () => {
+    const xml = read('public/sitemap.xml')
+    expect(xml).toContain('xmlns:xhtml="http://www.w3.org/1999/xhtml"')
+    const blocks = xml.split('<url>').slice(1)
+    const expected = NAV.flatMap(entry => SEO_LOCALES.map(locale => ({
+      path: entry.path ? `/${entry.path}` : '/',
+      loc: localizedUrl(entry.path ? `/${entry.path}` : '/', locale),
+    })))
+    expect(blocks.length).toBe(expected.length)
+    const locs = blocks.map(block => /<loc>(.*?)<\/loc>/.exec(block)?.[1])
+    expect(new Set(locs)).toEqual(new Set(expected.map(item => item.loc)))
+    for (const block of blocks) {
+      const loc = /** @type {string} */ (/<loc>(.*?)<\/loc>/.exec(block)?.[1])
+      const path = new URL(loc).pathname
+      const links = [...block.matchAll(/<xhtml:link rel="alternate" hreflang="([^"]+)" href="([^"]+)"\/>/g)].map(m => ({ lang: m[1], href: m[2] }))
+      expect(links, loc).toEqual(alternatesOf(path))
+    }
   })
   test('keeps the social card in the source tree', () => {
     const card = readFileSync(new URL('../app/public/og.png', import.meta.url))

@@ -3,6 +3,7 @@
 // the page's query in `?q=`, Find's character set in `?set=`, and the page of a browsed set in `?p=`.
 
 import { NAV } from './paths.js'
+import { localeOf } from './seo.js'
 import { pushScroll, replaceScroll, leaveScroll, restoreScroll, cancelScroll } from './scroll.js'
 export { NAV }
 
@@ -32,6 +33,8 @@ export const route = $state(read())
 /** @param {Route} next */
 function href(next) {
   const params = new URLSearchParams()
+  const lang = typeof location !== 'undefined' ? localeOf(new URLSearchParams(location.search).get('lang')) : null
+  if (lang && lang !== 'en') params.set('lang', lang)
   if (next.q) params.set('q', next.q)
   if (next.c) params.set('c', hex(next.c))
   if (next.page === '' && next.set) params.set('set', next.set)

@@ -1,13 +1,503 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://han.mkpo.li/</loc><priority>1.0</priority></url>
-  <url><loc>https://han.mkpo.li/methods</loc><priority>0.8</priority></url>
-  <url><loc>https://han.mkpo.li/readings</loc><priority>0.8</priority></url>
-  <url><loc>https://han.mkpo.li/rhymes</loc><priority>0.8</priority></url>
-  <url><loc>https://han.mkpo.li/radicals</loc><priority>0.8</priority></url>
-  <url><loc>https://han.mkpo.li/dialects</loc><priority>0.8</priority></url>
-  <url><loc>https://han.mkpo.li/hun</loc><priority>0.8</priority></url>
-  <url><loc>https://han.mkpo.li/convert</loc><priority>0.7</priority></url>
-  <url><loc>https://han.mkpo.li/composition</loc><priority>0.7</priority></url>
-  <url><loc>https://han.mkpo.li/about</loc><priority>0.5</priority></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://han.mkpo.li/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/"/>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/?lang=ja</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/"/>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/?lang=zh-Hans</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/"/>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/?lang=zh-Hant</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/"/>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/?lang=ko</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/"/>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/methods</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/methods"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/methods?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/methods?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/methods?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/methods?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/methods"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/methods?lang=ja</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/methods"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/methods?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/methods?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/methods?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/methods?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/methods"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/methods?lang=zh-Hans</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/methods"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/methods?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/methods?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/methods?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/methods?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/methods"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/methods?lang=zh-Hant</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/methods"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/methods?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/methods?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/methods?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/methods?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/methods"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/methods?lang=ko</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/methods"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/methods?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/methods?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/methods?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/methods?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/methods"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/readings</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/readings"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/readings?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/readings?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/readings?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/readings?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/readings"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/readings?lang=ja</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/readings"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/readings?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/readings?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/readings?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/readings?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/readings"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/readings?lang=zh-Hans</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/readings"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/readings?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/readings?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/readings?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/readings?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/readings"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/readings?lang=zh-Hant</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/readings"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/readings?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/readings?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/readings?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/readings?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/readings"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/readings?lang=ko</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/readings"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/readings?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/readings?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/readings?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/readings?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/readings"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/rhymes</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/rhymes"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/rhymes?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/rhymes?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/rhymes?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/rhymes?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/rhymes"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/rhymes?lang=ja</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/rhymes"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/rhymes?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/rhymes?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/rhymes?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/rhymes?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/rhymes"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/rhymes?lang=zh-Hans</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/rhymes"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/rhymes?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/rhymes?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/rhymes?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/rhymes?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/rhymes"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/rhymes?lang=zh-Hant</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/rhymes"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/rhymes?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/rhymes?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/rhymes?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/rhymes?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/rhymes"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/rhymes?lang=ko</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/rhymes"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/rhymes?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/rhymes?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/rhymes?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/rhymes?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/rhymes"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/radicals</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/radicals"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/radicals?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/radicals?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/radicals?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/radicals?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/radicals"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/radicals?lang=ja</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/radicals"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/radicals?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/radicals?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/radicals?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/radicals?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/radicals"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/radicals?lang=zh-Hans</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/radicals"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/radicals?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/radicals?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/radicals?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/radicals?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/radicals"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/radicals?lang=zh-Hant</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/radicals"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/radicals?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/radicals?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/radicals?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/radicals?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/radicals"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/radicals?lang=ko</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/radicals"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/radicals?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/radicals?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/radicals?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/radicals?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/radicals"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/dialects</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/dialects"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/dialects?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/dialects?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/dialects?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/dialects?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/dialects"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/dialects?lang=ja</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/dialects"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/dialects?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/dialects?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/dialects?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/dialects?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/dialects"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/dialects?lang=zh-Hans</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/dialects"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/dialects?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/dialects?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/dialects?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/dialects?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/dialects"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/dialects?lang=zh-Hant</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/dialects"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/dialects?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/dialects?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/dialects?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/dialects?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/dialects"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/dialects?lang=ko</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/dialects"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/dialects?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/dialects?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/dialects?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/dialects?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/dialects"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/hun</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/hun"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/hun?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/hun?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/hun?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/hun?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/hun"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/hun?lang=ja</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/hun"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/hun?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/hun?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/hun?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/hun?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/hun"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/hun?lang=zh-Hans</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/hun"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/hun?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/hun?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/hun?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/hun?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/hun"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/hun?lang=zh-Hant</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/hun"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/hun?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/hun?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/hun?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/hun?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/hun"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/hun?lang=ko</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/hun"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/hun?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/hun?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/hun?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/hun?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/hun"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/convert</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/convert"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/convert?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/convert?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/convert?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/convert?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/convert"/>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/convert?lang=ja</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/convert"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/convert?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/convert?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/convert?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/convert?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/convert"/>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/convert?lang=zh-Hans</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/convert"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/convert?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/convert?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/convert?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/convert?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/convert"/>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/convert?lang=zh-Hant</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/convert"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/convert?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/convert?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/convert?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/convert?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/convert"/>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/convert?lang=ko</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/convert"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/convert?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/convert?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/convert?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/convert?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/convert"/>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/composition</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/composition"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/composition?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/composition?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/composition?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/composition?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/composition"/>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/composition?lang=ja</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/composition"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/composition?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/composition?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/composition?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/composition?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/composition"/>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/composition?lang=zh-Hans</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/composition"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/composition?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/composition?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/composition?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/composition?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/composition"/>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/composition?lang=zh-Hant</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/composition"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/composition?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/composition?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/composition?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/composition?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/composition"/>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/composition?lang=ko</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/composition"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/composition?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/composition?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/composition?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/composition?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/composition"/>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/about</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/about"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/about?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/about?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/about?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/about?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/about"/>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/about?lang=ja</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/about"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/about?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/about?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/about?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/about?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/about"/>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/about?lang=zh-Hans</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/about"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/about?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/about?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/about?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/about?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/about"/>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/about?lang=zh-Hant</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/about"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/about?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/about?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/about?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/about?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/about"/>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://han.mkpo.li/about?lang=ko</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://han.mkpo.li/about"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://han.mkpo.li/about?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://han.mkpo.li/about?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://han.mkpo.li/about?lang=zh-Hant"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://han.mkpo.li/about?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://han.mkpo.li/about"/>
+    <priority>0.5</priority>
+  </url>
 </urlset>
