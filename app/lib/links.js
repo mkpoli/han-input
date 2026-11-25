@@ -1,9 +1,11 @@
 // The sites that say more about a character. This site finds it; the entry lives with them. Most of
 // them cover Han alone, and `every` marks those that also have kana and Nüshu.
+import { rccSearchUrl } from './rcc.js'
+
 const cp = (/** @type {string} */ char) => (char.codePointAt(0) ?? 0).toString(16)
 const e = encodeURIComponent
 
-/** @type {{ key: string, name: string, kind: 'all' | 'dict' | 'sound' | 'shape', url: (char: string) => string, deep: boolean, every?: boolean }[]} */
+/** @type {{ key: string, name: string, kind: 'all' | 'dict' | 'sound' | 'shape', url: (char: string, locale?: string) => string, deep: boolean, every?: boolean }[]} */
 export const LINKS = [
   { key: 'zitools', name: '字統網 zi.tools', kind: 'all', deep: true, url: c => `https://zi.tools/zi/${e(c)}` },
   { key: 'zdic', name: '漢典 zdic', kind: 'dict', deep: true, url: c => `https://www.zdic.net/hans/${e(c)}` },
@@ -17,7 +19,7 @@ export const LINKS = [
   { key: 'webyuntu', name: 'Web韻圖', kind: 'sound', deep: false, url: () => 'https://suzukish.sakura.ne.jp/search/inkyo/index.php' },
   { key: 'kaom', name: '古音小鏡 kaom', kind: 'sound', deep: false, url: () => 'http://www.kaom.net/' },
   { key: 'glyphatlas', name: 'Glyph Atlas', kind: 'shape', deep: true, url: c => `https://glyphatlas.org/?q=${e(c)}` },
-  { key: 'rare', name: '珍字集覽 Rare Character Compendium', kind: 'shape', deep: true, url: c => `https://rare.glyphatlas.org/?q=${e(c)}` },
+  { key: 'rare', name: 'Rare Character Compendium', kind: 'shape', deep: true, url: (c, locale) => rccSearchUrl(c, locale) },
   { key: 'ids', name: 'IDS Workshop', kind: 'shape', deep: true, url: c => `https://ids.mkpo.li/${e(c)}` },
   { key: 'glyphwiki', name: 'GlyphWiki', kind: 'shape', deep: true, url: c => `https://glyphwiki.org/wiki/u${cp(c)}` },
   { key: 'chise', name: 'CHISE', kind: 'shape', deep: true, url: c => `https://www.chise.org/est/view/character/${e(c)}` },

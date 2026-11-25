@@ -8,8 +8,10 @@
   import { loadMethods } from '../lib/data.js'
   import { loadGlyphs } from '../lib/fonts.js'
   import { isHan } from '../../src/fold.js'
+  import { convertArithmetic } from '../../src/arithmetic.js'
   import { autofocus } from '../lib/ui.svelte.js'
-  import { nameOf, t } from '../lib/i18n.svelte.js'
+  import { i18n, nameOf, t } from '../lib/i18n.svelte.js'
+  import { formatRccCode, isIdsSequence, matchRccByIdsList, rccEntryUrl, rccSearchUrl } from '../lib/rcc.js'
   import Tiles from '../ui/Tiles.svelte'
   import Pager from '../ui/Pager.svelte'
   import PaginatedTiles from '../ui/PaginatedTiles.svelte'
@@ -164,7 +166,43 @@
   const variantChars = $derived(single ? single.variants.map(row => row.char) : [])
   const tallyNotes = $derived(new Map(tally.map(([char, count]) => [char, String(count)])))
   const varieties = $derived(single ? new Set(single.readings.map(hit => hit.n)).size : 0)
-  const empty = $derived(!busy && answers.length > 0 && !common.length && !groups.length && !single?.pua.length && !recordHits.length)
+  const rccCode = $derived(single?.clue.kind === 'rcc' && single.clue.value ? single.clue.value : null)
+  const rccQueryIds = $derived.by(() => {
+    if (busy || failed || route.set || !single) return /** @type {string[]} */ ([])
+    if (isIdsSequence(single.clue.text)) return [single.clue.text]
+    if (single.clue.kind === 'arithmetic') {
+      return [...new Set(/** @type {const} */ (['korean', 'general']).map(notation => convertArithmetic(single.clue.text, notation).ids).filter(isIdsSequence))]
+    }
+    return []
+  })
+  /** @type {import('../lib/rcc.js').RccMatch[]} */
+  let rccHits = $state([])
+  let rccBusy = $state(false)
+  $effect(() => {
+    const idsList = rccQueryIds
+    rccHits = []
+    if (!idsList.length) {
+      rccBusy = false
+      return
+    }
+    let active = true
+    const controller = new AbortController()
+    rccBusy = true
+    matchRccByIdsList(idsList, { signal: controller.signal }).then(found => {
+      if (!active) return
+      rccHits = found
+      rccBusy = false
+    })
+    return () => { active = false; controller.abort() }
+  })
+  const hasLocalHits = $derived(common.length > 0 || groups.length > 0 || !!single?.pua.length || recordHits.length > 0)
+  const empty = $derived(!busy && !rccBusy && answers.length > 0 && !hasLocalHits && !rccCode && !rccHits.length)
+  const rccFallbackQuery = $derived.by(() => {
+    if (!empty || route.set || !single) return ''
+    if (rccQueryIds.length) return rccQueryIds[0]
+    if (single.clue.kind === 'text' || single.clue.kind === 'part') return single.clue.text
+    return ''
+  })
 
   /** A page of a browsed set arrives as one grid, so its face is fetched before the page turns.
    * @param {number} next */
@@ -275,6 +313,11 @@
     </section>
   {:else if empty}
     <p class="ui-hint">{t('find.none')}</p>
+    {#if rccFallbackQuery}
+      <p class="rcc-fallback">
+        <a class="rcc-search" href={rccSearchUrl(rccFallbackQuery, i18n.locale)} target="_blank" rel="noopener noreferrer">{t('rcc.search')} <span aria-hidden="true">↗</span></a>
+      </p>
+    {/if}
   {:else if many}
     {#if common.length}<section class="ui-section">
       <h2 class="ui-label">{t('find.common', { count: common.length })}</h2>
@@ -287,6 +330,33 @@
     </section>{/if}
     {@render recordSection()}
   {:else if single}
+    {#if rccCode}
+      <section class="ui-section">
+        <h2 class="ui-label">{t('rcc.name')}</h2>
+        <div class="rcc-links">
+          <a class="rcc-link" href={rccEntryUrl(rccCode, i18n.locale)} target="_blank" rel="noopener noreferrer" title={t('rcc.entryLabel', { code: formatRccCode(rccCode) })}>
+            <span class="ui-mono">{formatRccCode(rccCode)}</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </section>
+    {/if}
+    {#if rccHits.length}
+      <section class="ui-section">
+        <h2 class="ui-label">{t('rcc.name')} <span class="ui-count">{rccHits.length}</span></h2>
+        <div class="rcc-links">
+          {#each rccHits as match (match.id)}
+            <a class="rcc-link" href={rccEntryUrl(match.id, i18n.locale)} target="_blank" rel="noopener noreferrer" title={t('rcc.entryLabel', { code: match.code })}>
+              <span class="ui-mono">{match.code}</span>
+              {#if match.ids}<span class="rcc-ids" lang="und-Hani">{match.ids}</span>{/if}
+              <span aria-hidden="true">↗</span>
+            </a>
+          {/each}
+        </div>
+      </section>
+    {:else if rccBusy && !hasLocalHits && !rccCode}
+      <p class="ui-hint" role="status">{t('charset.loading')}</p>
+    {/if}
     {#if single.pua.length}
       <section class="ui-section">
         <h2 class="ui-label">{t('pua.readings')} <span class="ui-count">{single.pua.length}</span></h2>
@@ -359,4 +429,11 @@
   .browse-tools{display:flex;flex-wrap:wrap;align-items:center;gap:var(--ui-space-2xs)}
   .seg{display:flex;flex-wrap:wrap;gap:var(--ui-space-2xs)}
   .browse-tools button[aria-pressed='true']{border-color:var(--ui-color-accent);background:var(--ui-color-accent-soft);color:var(--ui-color-accent-ink)}
+  .rcc-links{display:flex;flex-wrap:wrap;gap:var(--ui-space-2xs)}
+  .rcc-link{display:inline-flex;align-items:baseline;gap:var(--ui-space-2xs);padding:4px var(--ui-space-md);border:1px solid var(--ui-color-accent);border-radius:var(--ui-radius-sm);background:var(--ui-color-accent-soft);color:var(--ui-color-accent-ink);font-size:var(--ui-text-sm);text-decoration:none;white-space:nowrap}
+  .rcc-link:hover{background:color-mix(in srgb,var(--ui-color-accent) 18%,transparent)}
+  .rcc-ids{font-family:var(--ui-font-script);font-size:var(--ui-text-md)}
+  .rcc-fallback{margin:var(--ui-space-xs) 0 0}
+  .rcc-search{display:inline-flex;align-items:baseline;gap:var(--ui-space-2xs);padding:4px var(--ui-space-md);border:1px solid var(--ui-color-border);border-radius:var(--ui-radius-sm);color:var(--ui-color-ink);font-size:var(--ui-text-sm);text-decoration:none;white-space:nowrap}
+  .rcc-search:hover{background:var(--ui-color-surface-hover)}
 </style>

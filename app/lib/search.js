@@ -5,9 +5,10 @@ import { isPuaChar, loadPua, loadPuaCodes, puaSlot, readingsOf, slotsOfCode } fr
 import { convertArithmetic, isArithmetic } from '../../src/arithmetic.js'
 import { findCodes, findMeaning, findPart, findReadings, findRun, loadChars, loadVariants } from './data.js'
 import { fuzzyComponents, characterVariants, spellings } from '../../src/variants.js'
+import { parseRccCode } from './rcc.js'
 
 /**
- * @typedef {{ kind: 'code' | 'scoped' | 'strokes' | 'point' | 'pua' | 'arithmetic' | 'text' | 'part', text: string, method?: string, code?: string, value?: number, char?: string, chars?: string[] }} Clue
+ * @typedef {{ kind: 'code' | 'scoped' | 'strokes' | 'point' | 'rcc' | 'pua' | 'arithmetic' | 'text' | 'part', text: string, method?: string, code?: string, value?: number, char?: string, chars?: string[] }} Clue
  * @typedef {{ text: string, chars: string[], exact: boolean }} Shape
  * @typedef {{ char: string, relation: string, source: string, group?: string }} VariantRow
  * @typedef {{ clue: Clue, hits: import('./data.js').CodeHit[], readings: import('./data.js').ReadingHit[], meaning: string[], parts: string[], partVariants: Shape[], similarParts: Shape[], shapes: Shape[], variants: VariantRow[], pua: import('../../src/pua.js').PuaReading[], chars: string[] }} Answer
@@ -20,6 +21,8 @@ export function readClue(term, alone) {
     const slot = puaSlot(point[1])
     return slot ? { kind: 'pua', text: term, char: slot } : { kind: 'point', text: term, value: parseInt(point[1], 16) }
   }
+  const rcc = parseRccCode(term)
+  if (rcc !== null) return { kind: 'rcc', text: term, value: rcc }
   // A private-use character, or a scheme's name for one, is read in every scheme that has the slot.
   if (isPuaChar(term)) return { kind: 'pua', text: term, char: term }
   if (/^CB\d{5}$/i.test(term)) return { kind: 'pua', text: term, code: term.toUpperCase() }
@@ -59,6 +62,7 @@ async function lookUp(clue) {
     if (clue.value !== undefined && clue.value <= 0x10FFFF) out.chars = [String.fromCodePoint(clue.value)]
     return out
   }
+  if (clue.kind === 'rcc') return out
   if (clue.kind === 'pua') {
     out.pua = await puaReadings(clue.char ? [clue.char] : [], clue.code ?? '')
     // A slot no scheme reads is still a code point, shown as it is.

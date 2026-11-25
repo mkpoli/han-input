@@ -360,5 +360,10 @@
   "variant.relation.variant": "IWDS異體",
   "variant.relation.compatibility": "相容",
   "variant.source.iwds": "IWDS",
-  "variant.source.unicode": "Unicode"
+  "variant.source.unicode": "Unicode",
+  "rcc.name": "珍字集覽",
+  "rcc.search": "在珍字集覽中查找",
+  "rcc.entryLabel": "珍字集覽中的{code}",
+  "about.rcc": "未編碼字元",
+  "about.rccIntro": "在字卡、提案記錄、方言字與構字檢索中即時查詢對應的R+XXXX記錄。"
 }

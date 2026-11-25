@@ -360,5 +360,10 @@
   "variant.relation.variant": "IWDS異体",
   "variant.relation.compatibility": "互換",
   "variant.source.iwds": "IWDS",
-  "variant.source.unicode": "Unicode"
+  "variant.source.unicode": "Unicode",
+  "rcc.name": "珍字集覧",
+  "rcc.search": "珍字集覧で探す",
+  "rcc.entryLabel": "珍字集覧の{code}",
+  "about.rcc": "未符号化文字",
+  "about.rccIntro": "字形カード・提案記録・方言字・構字検索で一致するR+XXXX記録を照会します。"
 }
