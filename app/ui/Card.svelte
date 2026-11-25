@@ -12,6 +12,7 @@
   import { nameOf, t } from '../lib/i18n.svelte.js'
   import { FAMILIES } from '../lib/families.js'
   import SourceCode from './SourceCode.svelte'
+  import { hasLxgwSeal } from '../lib/lxgw-seal.js'
   import { codePoints, isPuaChar, loadPua, loadPuaCodes, readingsOf as puaReadingsOf } from '../../src/pua.js'
   import PuaReadings from './PuaReadings.svelte'
   import DialectRows from './DialectRows.svelte'
@@ -20,6 +21,7 @@
   import { pieces } from '../lib/notation.js'
 
   const char = $derived(route.c)
+  const lxgwSeal = $derived(char ? hasLxgwSeal(char) : false)
   // A member may be a jamo sequence: GB 12052 spells archaic Hangul with two or three code points.
   const cp = $derived(char ? codePoints(char) : '')
   /** @type {ReturnType<import('../../src/pua.js').Pua['of']>} */
@@ -141,8 +143,21 @@
   </div>
 {:else}
   <article class="record">
-    <header class="head">
-      <div class="glyph ui-script" lang="und-Hani">{char}</div>
+    <header class="head" class:dual={lxgwSeal}>
+      {#if lxgwSeal}
+        <div class="specimens">
+          <figure class="specimen">
+            <div class="glyph ui-script" lang="und-Hani">{char}</div>
+            <figcaption class="face-name">Sealie</figcaption>
+          </figure>
+          <figure class="specimen">
+            <div class="glyph lxgw-seal" lang="und-Hani">{char}</div>
+            <figcaption class="face-name">{t('card.face.lxgwSeal')}</figcaption>
+          </figure>
+        </div>
+      {:else}
+        <div class="glyph ui-script" lang="und-Hani">{char}</div>
+      {/if}
       <div class="facts">
         <button class="cp ui-mono" type="button" title={t('card.copyCodePoint')} onclick={() => copy(cp)}>{cp}</button>
         {#if gloss}<p class="gloss">{gloss}</p>{/if}
@@ -282,7 +297,12 @@
   .blank-glyph{font-size:72px;line-height:1;color:var(--ui-color-border-strong)}
   .record{display:grid;gap:var(--ui-space-xl);padding:var(--ui-space-xl)}
   .head{display:flex;gap:var(--ui-space-lg);align-items:flex-start}
+  .head.dual{display:grid;gap:var(--ui-space-md)}
+  .specimens{display:flex;gap:var(--ui-space-sm);flex-wrap:wrap}
+  .specimen{display:grid;gap:4px;margin:0;justify-items:center}
+  .face-name{font-size:var(--ui-text-2xs);color:var(--ui-color-ink-muted);line-height:1.2}
   .glyph{flex:none;inline-size:112px;block-size:112px;display:grid;place-items:center;font-size:84px;line-height:1;background:var(--ui-color-canvas);border:1px solid var(--ui-color-border);border-radius:var(--ui-radius-md)}
+  .lxgw-seal{font-family:'LXGW Seal',var(--ui-font-script);font-weight:400}
   .facts{display:grid;gap:var(--ui-space-xs);min-inline-size:0}
   .cp{justify-self:start;padding:0;border:0;background:none;color:var(--ui-color-ink-soft);cursor:pointer;font-size:var(--ui-text-sm)}
   .gloss{font-size:var(--ui-text-sm);line-height:var(--ui-leading-normal,1.5);color:var(--ui-color-ink)}
