@@ -5,7 +5,7 @@
   import { tick } from 'svelte'
   import { codesOf, descriptionsOf, loadMethods, loadVariants, loadVarieties, readingsOf } from '../lib/data.js'
   import { readingTree } from '../lib/classification.js'
-  import { LINKS } from '../lib/links.js'
+  import { linksFor } from '../lib/links.js'
   import { matchRccByCode, rccEntryUrl } from '../lib/rcc.js'
   import { link, route, go, open } from '../lib/route.svelte.js'
   import { put, hideSheet } from '../lib/ui.svelte.js'
@@ -262,7 +262,7 @@
     <section class="more">
       <h3 class="ui-label">{t('card.more')}</h3>
       <div class="links">
-        {#each LINKS.filter(site => site.every || isHan(char)) as site (site.key)}
+        {#each linksFor(char) as site (site.key)}
           <a href={site.url(char, i18n.locale)} target="_blank" rel="noopener noreferrer" class:first={site.key === 'zitools'}>{site.key === 'rare' ? t('rcc.name') : site.name}</a>
         {/each}
       </div>

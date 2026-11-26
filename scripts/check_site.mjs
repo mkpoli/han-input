@@ -187,6 +187,12 @@ await check('the card lists codes, every reading, and 字統 first', async () =>
   assert.match(await links.first().getAttribute('href') ?? '', /^https:\/\/zi\.tools\/zi\//)
   assert.match(await page.locator('.card').innerText(), /Readings in \d{3,} varieties/i)
 })
+await check('a Small Seal card links to its Glyph Atlas character page', async () => {
+  await page.goto(`${SITE}/?c=3D01E`)
+  await page.waitForLoadState('networkidle')
+  const href = await page.locator('.card .links a', { hasText: 'Glyph Atlas' }).getAttribute('href')
+  assert.equal(href, 'https://glyphatlas.org/character/U+3D01E')
+})
 await check('a method types and takes a candidate into the text', async () => {
   await page.goto(`${SITE}/m/ashide`)
   await page.waitForLoadState('networkidle')
