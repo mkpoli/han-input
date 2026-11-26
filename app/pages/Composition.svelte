@@ -5,7 +5,8 @@
   import { LEGACY_SYMBOLS, convertLegacy, repeatExample } from '../../src/legacy.js'
   import { convertArithmetic } from '../../src/arithmetic.js'
   import { copy } from '../lib/clip.svelte.js'
-  import { t } from '../lib/i18n.svelte.js'
+  import { i18n, t } from '../lib/i18n.svelte.js'
+  import { isIdsSequence, matchRccByIds, rccEntryUrl, rccSearchUrl } from '../lib/rcc.js'
   import { link } from '../lib/route.svelte.js'
 
   const params = new URLSearchParams(location.search)
@@ -14,6 +15,42 @@
   let notation = $state(/** @type {'korean' | 'general'} */ ('korean'))
   const result = $derived(convertLegacy(input))
   const arithmetic = $derived(convertArithmetic(arithmeticInput, notation))
+  const legacyIds = $derived.by(() => {
+    const seq = result.text.trim()
+    return !/\s/.test(seq) && isIdsSequence(seq) ? seq : ''
+  })
+  const arithmeticIds = $derived.by(() => {
+    const seq = arithmetic.ids.trim()
+    return !/\s/.test(seq) && isIdsSequence(seq) ? seq : ''
+  })
+  /** @type {import('../lib/rcc.js').RccMatch[]} */
+  let legacyRcc = $state([])
+  /** @type {import('../lib/rcc.js').RccMatch[]} */
+  let arithmeticRcc = $state([])
+
+  $effect(() => {
+    const seq = legacyIds
+    legacyRcc = []
+    if (!seq) return
+    let active = true
+    const controller = new AbortController()
+    const timer = setTimeout(() => {
+      matchRccByIds(seq, { signal: controller.signal }).then(found => { if (active) legacyRcc = found })
+    }, 200)
+    return () => { active = false; clearTimeout(timer); controller.abort() }
+  })
+
+  $effect(() => {
+    const seq = arithmeticIds
+    arithmeticRcc = []
+    if (!seq) return
+    let active = true
+    const controller = new AbortController()
+    const timer = setTimeout(() => {
+      matchRccByIds(seq, { signal: controller.signal }).then(found => { if (active) arithmeticRcc = found })
+    }, 200)
+    return () => { active = false; clearTimeout(timer); controller.abort() }
+  })
   /** @type {HTMLTextAreaElement | null} */
   let field = null
   /** @type {HTMLTextAreaElement | null} */
@@ -110,6 +147,18 @@
     {#if result.problems.length}<span>{t('composition.problems', { count: result.problems.length })}</span>{/if}
   </div>
 
+  {#if legacyIds}
+    <div class="rcc-bar">
+      {#each legacyRcc as match (match.id)}
+        <a class="rcc-link" href={rccEntryUrl(match.id, i18n.locale)} target="_blank" rel="noopener noreferrer" aria-label={t('rcc.entryLabel', { code: match.code })}>
+          <span class="ui-mono">{match.code}</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      {/each}
+      <a class="rcc-search" href={rccSearchUrl(legacyIds, i18n.locale)} target="_blank" rel="noopener noreferrer">{t('rcc.search')} <span aria-hidden="true">↗</span></a>
+    </div>
+  {/if}
+
   {#if result.shapes}<p class="ui-hint">{t('composition.parts')}</p>{/if}
   {#if result.unresolvedChars.length}
     <p class="ui-hint private">{t('composition.unresolvedHint')}
@@ -189,6 +238,18 @@
       {#if arithmetic.ids}<span>{t('composition.arithmetic.converted')}</span>{/if}
       {#if arithmetic.problems.length}<span>{t('composition.problems', { count: arithmetic.problems.length })}</span>{/if}
     </div>
+
+    {#if arithmeticIds}
+      <div class="rcc-bar">
+        {#each arithmeticRcc as match (match.id)}
+          <a class="rcc-link" href={rccEntryUrl(match.id, i18n.locale)} target="_blank" rel="noopener noreferrer" aria-label={t('rcc.entryLabel', { code: match.code })}>
+            <span class="ui-mono">{match.code}</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        {/each}
+        <a class="rcc-search" href={rccSearchUrl(arithmeticIds, i18n.locale)} target="_blank" rel="noopener noreferrer">{t('rcc.search')} <span aria-hidden="true">↗</span></a>
+      </div>
+    {/if}
 
     {#if arithmetic.notes.length}
       <ul class="arithmetic-notes">
@@ -271,6 +332,11 @@
   .arith-sign{font-family:var(--ui-font-mono),monospace;font-size:24px;line-height:1}
   .arithmetic-formula{font-family:var(--ui-font-script);line-height:1.6}
   .arithmetic-notes{margin:var(--ui-space-xs) 0 0;padding-inline-start:1.4em;color:var(--ui-color-ink-soft);font-size:var(--ui-text-sm)}
+  .rcc-bar{display:flex;flex-wrap:wrap;align-items:center;gap:var(--ui-space-2xs);margin-block-start:var(--ui-space-xs)}
+  .rcc-link{display:inline-flex;align-items:baseline;gap:var(--ui-space-2xs);padding:2px var(--ui-space-sm);border:1px solid var(--ui-color-accent);border-radius:var(--ui-radius-sm);background:var(--ui-color-accent-soft);color:var(--ui-color-accent-ink);font-size:var(--ui-text-xs);text-decoration:none;white-space:nowrap}
+  .rcc-link:hover{background:color-mix(in srgb,var(--ui-color-accent) 18%,transparent)}
+  .rcc-search{display:inline-flex;align-items:baseline;gap:var(--ui-space-2xs);padding:2px var(--ui-space-sm);border:1px solid var(--ui-color-border);border-radius:var(--ui-radius-sm);color:var(--ui-color-ink);font-size:var(--ui-text-xs);text-decoration:none;white-space:nowrap}
+  .rcc-search:hover{background:var(--ui-color-surface-hover)}
   .attribution{gap:var(--ui-space-xs);padding-block-start:var(--ui-space-lg);border-block-start:1px solid var(--ui-color-border);color:var(--ui-color-ink-muted);font-size:var(--ui-text-xs);overflow-wrap:anywhere}
   @media (max-width:800px){
     .palette{grid-template-columns:repeat(5,minmax(0,1fr))}
