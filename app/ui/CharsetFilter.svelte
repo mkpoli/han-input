@@ -3,17 +3,18 @@
   import { loadAges, versionRows } from '../lib/ages.js'
   import { blockOccupancy, blockRows, planeRows } from '../lib/blocks.js'
   import { listedCount, loadCharset, loadRecords, sharedCharacters } from '../lib/charsets.js'
+  import { RCC_CHARSET_GROUP, RCC_CHARSET_ID } from '../lib/rcc-data.js'
   import { i18n, nameOf, t } from '../lib/i18n.svelte.js'
   import CoverageChart from './CoverageChart.svelte'
   import CoverageDot from './CoverageDot.svelte'
 
   const CNS_GROUP = 'CNS sources'
   /** @type {Record<string, string>} */
-  const GROUP_KEYS = { [CNS_GROUP]: 'charset.cnsSources', 'Dialect characters': 'charset.dialectChars' }
+  const GROUP_KEYS = { [CNS_GROUP]: 'charset.cnsSources', 'Dialect characters': 'charset.dialectChars', [RCC_CHARSET_GROUP]: 'rcc.name' }
   const groupName = (/** @type {string} */ group) => GROUP_KEYS[group] ? t(GROUP_KEYS[group]) : group
 
-  /** @type {{ charsets: import('../lib/charsets.js').Charset[], selected: string, onchange: (id: string) => void, failed?: boolean, onretry: () => void }} */
-  let { charsets, selected, onchange, failed = false, onretry } = $props()
+  /** @type {{ charsets: import('../lib/charsets.js').Charset[], selected: string, onchange: (id: string) => void, failed?: boolean, onretry: () => void, rccOverlapCount?: number, rccFilterCount?: number, rccOnly?: boolean, onRccOnlyChange?: (next: boolean) => void }} */
+  let { charsets, selected, onchange, failed = false, onretry, rccOverlapCount = 0, rccFilterCount = 0, rccOnly = false, onRccOnlyChange } = $props()
   /** @type {HTMLElement | null} */
   let trigger = $state(null)
   /** @type {HTMLInputElement | null} */
@@ -47,7 +48,7 @@
   })).filter(group => group.sets.length))
   const compareGroups = $derived([...new Set(charsets.map(set => set.group))].map(group => ({
     name: group,
-    sets: charsets.filter(set => set.group === group && set.id !== selected && set.chars > 0),
+    sets: charsets.filter(set => set.group === group && set.id !== selected && (set.chars > 0 || set.id === RCC_CHARSET_ID)),
   })).filter(group => group.sets.length))
   const compared = $derived.by(() => {
     if (!comparison || compareBusy) return null
@@ -174,7 +175,7 @@
                   <span>{set.label}</span>
                   <span class="set-end">
                     {#if coverage}<CoverageDot encoded={set.encoded ?? set.chars} unencoded={set.unencoded ?? 0} />{/if}
-                    <span class="ui-count">{listedCount(set).toLocaleString()}</span>
+                    <span class="ui-count">{set.live && !listedCount(set) ? t('charset.live') : listedCount(set).toLocaleString()}</span>
                   </span>
                 </button>
               {/each}
@@ -199,7 +200,12 @@
       {#if chosen.source.version}<span class="ui-count">{chosen.source.version}</span>{/if}
       <a href={chosen.source.url} target="_blank" rel="noopener noreferrer">{t('method.source')}: {chosen.source.name}</a>
       {#if chosen.source.dataUrl}<a href={chosen.source.dataUrl} target="_blank" rel="noopener noreferrer">{t('convert.data')}</a>{/if}
-      {#if recordsFile}<a href={recordsFile} target="_blank" rel="noopener noreferrer">{t('charset.records')}</a>{/if}
+      {#if recordsFile && recordsFile !== chosen.source.dataUrl}<a href={recordsFile} target="_blank" rel="noopener noreferrer">{t('charset.records')}</a>{/if}
+      {#if chosen.id !== RCC_CHARSET_ID && rccFilterCount > 0}
+        <button class="rcc-overlap" type="button" aria-pressed={rccOnly} onclick={() => onRccOnlyChange?.(!rccOnly)}>{t('rcc.inRcc', { count: rccFilterCount.toLocaleString(i18n.locale) })}</button>
+      {:else if chosen.id !== RCC_CHARSET_ID && rccOverlapCount > 0}
+        <span class="rcc-overlap-badge">{t('rcc.inRcc', { count: rccOverlapCount.toLocaleString(i18n.locale) })}</span>
+      {/if}
     </div>
     <p class="set-name">{nameOf(chosen.names)}</p>
     {#if chosen.chars > 0}
@@ -251,6 +257,9 @@
   .compare{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:var(--ui-space-xs) var(--ui-space-sm);max-inline-size:380px;margin-block-start:var(--ui-space-xs)}
   .compare .ui-hint{grid-column:2}
   .compare-error{display:flex;align-items:center;gap:var(--ui-space-sm);max-inline-size:380px;margin-block-start:var(--ui-space-xs)}
-  .metadata{display:flex;flex-wrap:wrap;gap:var(--ui-space-2xs) var(--ui-space-md);margin-block-start:var(--ui-space-sm);font-size:var(--ui-text-sm);color:var(--ui-color-ink-soft)}
+  .metadata{display:flex;flex-wrap:wrap;align-items:center;gap:var(--ui-space-2xs) var(--ui-space-md);margin-block-start:var(--ui-space-sm);font-size:var(--ui-text-sm);color:var(--ui-color-ink-soft)}
+  .rcc-overlap,.rcc-overlap-badge{padding:1px var(--ui-space-sm);border:1px solid var(--ui-color-accent);border-radius:var(--ui-radius-sm);background:var(--ui-color-accent-soft);color:var(--ui-color-accent-ink);font-size:var(--ui-text-xs)}
+  .rcc-overlap{cursor:pointer}
+  .rcc-overlap[aria-pressed='true']{background:var(--ui-color-accent);color:var(--ui-color-on-accent)}
   .set-name{font-size:var(--ui-text-sm);color:var(--ui-color-ink-soft)}
 </style>

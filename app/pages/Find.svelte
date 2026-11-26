@@ -9,9 +9,11 @@
   import { loadGlyphs } from '../lib/fonts.js'
   import { isHan } from '../../src/fold.js'
   import { convertArithmetic } from '../../src/arithmetic.js'
-  import { autofocus } from '../lib/ui.svelte.js'
+  import { autofocus, showRecord, ui } from '../lib/ui.svelte.js'
   import { i18n, nameOf, t } from '../lib/i18n.svelte.js'
-  import { formatRccCode, isIdsSequence, matchRccByIdsList, rccEntryUrl, rccSearchUrl } from '../lib/rcc.js'
+  import { formatRccCode, isIdsSequence, matchRccByIdsList, rccSearchUrl } from '../lib/rcc.js'
+  import { RCC_CHARSET_ID, getCachedRccDataset, loadRccDataset, mapCharsetRccOverlap, rccEntryToProposal, withRccCharset } from '../lib/rcc-data.js'
+  import { loadGlyphIdsTable } from '../lib/glyph-ids.js'
   import Tiles from '../ui/Tiles.svelte'
   import Pager from '../ui/Pager.svelte'
   import PaginatedTiles from '../ui/PaginatedTiles.svelte'
@@ -20,6 +22,7 @@
   import ProposalRecords from '../ui/ProposalRecords.svelte'
   import PuaReadings from '../ui/PuaReadings.svelte'
   import RecordTiles from '../ui/RecordTiles.svelte'
+  import RccTiles from '../ui/RccTiles.svelte'
   import { findRecords } from '../lib/records.js'
 
   const EXAMPLES = ['ユタヘヘミ', 'jnd', 'luong', '端一東平', '30407', 'tsɿ', '氵 12畫', '口匕', 'river ジ', 'chữ', 'a-1', 'a672', 'U+5B57', '氵+青', '日*月']
@@ -41,11 +44,15 @@
   let show = $state('all')
   let hanOnly = $state(false)
   let byCode = $state(false)
-  /** @type {import('../lib/charsets.js').ProposalRecords | null} */
-  let records = $state(null)
+  let rccOnly = $state(false)
+  let records = $state(/** @type {import('../lib/charsets.js').ProposalRecords | null} */ (null))
   /** @type {import('../lib/charsets.js').Charset[]} */
   let charsets = $state([])
-  const chosen = $derived(charsets.find(set => set.id === route.set))
+  /** @type {import('../lib/rcc-data.js').RccDataset | null} */
+  let rccDataset = $state(getCachedRccDataset())
+  let glyphIdsTable = $state(/** @type {Map<string, import('../lib/glyph-ids.js').GlyphIds> | undefined} */ (undefined))
+  const allCharsets = $derived(withRccCharset(charsets, rccDataset))
+  const chosen = $derived(allCharsets.find(set => set.id === route.set))
   let busy = $state(false)
   let failed = $state(false)
   let catalogueFailed = $state(false)
@@ -55,11 +62,18 @@
   let turning = $state(false)
   /** @type {HTMLElement | null} */
   let browseTop = $state(null)
-  /** @param {string[]} list @param {Map<string, string>} codeOf @param {'all' | 'encoded' | 'unencoded'} mode @param {boolean} sorted @param {boolean} hanOnly */
-  function arrange(list, codeOf, mode, sorted, hanOnly) {
+  const rccOverlap = $derived(mapCharsetRccOverlap(rccDataset, {
+    setId: route.set,
+    members: browsed,
+    records: records?.records ?? [],
+    glyphIdsTable,
+  }))
+  /** @param {string[]} list @param {Map<string, string>} codeOf @param {'all' | 'encoded' | 'unencoded'} mode @param {boolean} sorted @param {boolean} hanOnly @param {boolean} onlyRcc @param {Map<string, import('../lib/rcc-data.js').RccEntry[]>} rccMap */
+  function arrange(list, codeOf, mode, sorted, hanOnly, onlyRcc, rccMap) {
     let out = mode === 'all' ? list : list.filter(char => mode === 'unencoded' ? isPrivateUse(char) : !isPrivateUse(char))
     // A private-use slot is a Han record without a scalar, so it stays in the Han view.
     if (hanOnly) out = out.filter(char => isHan(char) || isPrivateUse(char))
+    if (onlyRcc) out = out.filter(char => rccMap.has(char))
     if (sorted) {
       out = [...out].sort((a, b) => {
         const left = codeOf.get(a)
@@ -72,7 +86,7 @@
     }
     return out
   }
-  const arranged = $derived(arrange(browsed, codes, show, byCode && codes.size > 0, hanOnly))
+  const arranged = $derived(arrange(browsed, codes, show, byCode && codes.size > 0, hanOnly, rccOnly, rccOverlap.byChar))
   const longCodes = $derived([...codes.values()].some(code => code.length > 7))
   const pages = $derived(Math.max(1, Math.ceil(arranged.length / GRID_LIMIT)))
   const page = $derived(Math.min(pages - 1, Math.max(0, route.p - 1)))
@@ -85,6 +99,26 @@
     let active = true
     catalogueFailed = false
     loadCharsets().then(list => { if (active) charsets = list }).catch(() => { if (active) catalogueFailed = true })
+    return () => { active = false }
+  })
+
+  $effect(() => {
+    void route.set
+    rccOnly = false
+  })
+
+  $effect(() => {
+    const selected = route.set
+    if (!selected || selected === RCC_CHARSET_ID || query.trim()) return
+    let active = true
+    loadRccDataset().then(ds => { if (active) rccDataset = ds }).catch(() => {})
+    return () => { active = false }
+  })
+
+  $effect(() => {
+    if (!records || route.set === RCC_CHARSET_ID || glyphIdsTable) return
+    let active = true
+    loadGlyphIdsTable().then(table => { if (active) glyphIdsTable = table }).catch(() => {})
     return () => { active = false }
   })
 
@@ -109,17 +143,34 @@
           if (!active) return
           charsets = catalogue
           catalogueFailed = false
-          entry = catalogue.find(set => set.id === selected) ?? null
+          if (selected === RCC_CHARSET_ID) {
+            const ds = await loadRccDataset()
+            if (!active) return
+            rccDataset = ds
+            entry = withRccCharset(catalogue, ds).find(set => set.id === RCC_CHARSET_ID) ?? null
+          } else {
+            entry = catalogue.find(set => set.id === selected) ?? null
+          }
           if (!entry) throw new Error('Unknown character set')
         }
         const membership = selected ? await loadCharset(selected) : null
         if (!active) return
         if (!clues.length) {
+          if (selected === RCC_CHARSET_ID) {
+            const ds = await loadRccDataset()
+            if (!active) return
+            rccDataset = ds
+            await loadGlyphs([...ds.members].slice(0, GRID_LIMIT))
+            if (!active) return
+            records = ds.records
+            busy = false
+            return
+          }
           const chars = selected ? await browseCharset(selected) : []
           if (!active) return
           const setCodes = selected && entry?.codes ? await loadCharsetCodes(selected) : new Map()
           if (!active) return
-          const visible = arrange(chars, setCodes, untrack(() => show), untrack(() => byCode), untrack(() => hanOnly))
+          const visible = arrange(chars, setCodes, untrack(() => show), untrack(() => byCode), untrack(() => hanOnly), untrack(() => rccOnly), untrack(() => rccOverlap.byChar))
           const requested = untrack(() => route.p)
           const wanted = Math.min(Math.max(1, Math.ceil(visible.length / GRID_LIMIT)), Math.max(1, requested))
           const start = (wanted - 1) * GRID_LIMIT
@@ -167,8 +218,21 @@
   const tallyNotes = $derived(new Map(tally.map(([char, count]) => [char, String(count)])))
   const varieties = $derived(single ? new Set(single.readings.map(hit => hit.n)).size : 0)
   const rccCode = $derived(single?.clue.kind === 'rcc' && single.clue.value ? single.clue.value : null)
+  $effect(() => {
+    if (!rccCode || rccDataset) return
+    let active = true
+    loadRccDataset().then(ds => { if (active) rccDataset = ds }).catch(() => {})
+    return () => { active = false }
+  })
+  const rccCodeItems = $derived.by(() => {
+    if (!rccCode) return []
+    const full = rccDataset?.byId.get(rccCode)
+    return [full
+      ? { id: full.id, code: full.code, ids: full.ids, coverKey: full.coverKey, mappedChar: full.mappedChar }
+      : { id: rccCode, code: formatRccCode(rccCode), ids: null, coverKey: null, mappedChar: '' }]
+  })
   const rccQueryIds = $derived.by(() => {
-    if (busy || failed || route.set || !single) return /** @type {string[]} */ ([])
+    if (busy || failed || (route.set && route.set !== RCC_CHARSET_ID) || !single) return /** @type {string[]} */ ([])
     if (isIdsSequence(single.clue.text)) return [single.clue.text]
     if (single.clue.kind === 'arithmetic') {
       return [...new Set(/** @type {const} */ (['korean', 'general']).map(notation => convertArithmetic(single.clue.text, notation).ids).filter(isIdsSequence))]
@@ -195,6 +259,48 @@
     })
     return () => { active = false; controller.abort() }
   })
+  const rccHitItems = $derived(rccHits.map(hit => {
+    const full = rccDataset?.byId.get(hit.id)
+    return full
+      ? { id: full.id, code: full.code, ids: full.ids ?? hit.ids, coverKey: full.coverKey ?? hit.coverKey, mappedChar: full.mappedChar }
+      : { id: hit.id, code: hit.code, ids: hit.ids, coverKey: hit.coverKey, mappedChar: '' }
+  }))
+  /** Open an RCC glyph tile in the card pane, enriching with the live dataset when ready.
+   * @param {{ id: number, code: string, ids?: string | null, coverKey?: string | null, mappedChar?: string }} item */
+  function openRccTile(item) {
+    const existing = rccDataset?.byId.get(item.id)
+    const entry = existing ?? {
+      id: item.id,
+      code: item.code,
+      ids: item.ids ?? null,
+      allIds: item.ids ? [item.ids] : [],
+      layout: null,
+      coverKey: item.coverKey ?? null,
+      status: null,
+      description: null,
+      radical: null,
+      strokes: null,
+      firstYear: null,
+      sightings: 0,
+      encodings: [],
+      mappedChar: item.mappedChar ?? '',
+      readings: [],
+      meanings: [],
+      tags: [],
+    }
+    const { record, document } = rccEntryToProposal(entry)
+    showRecord(record, document)
+    if (!existing) {
+      loadRccDataset().then(ds => {
+        rccDataset = ds
+        const rich = ds.byId.get(item.id)
+        if (rich && ui.record?.record.key === `${RCC_CHARSET_ID}:${item.id}`) {
+          const next = rccEntryToProposal(rich)
+          showRecord(next.record, next.document)
+        }
+      }).catch(() => {})
+    }
+  }
   const hasLocalHits = $derived(common.length > 0 || groups.length > 0 || !!single?.pua.length || recordHits.length > 0)
   const empty = $derived(!busy && !rccBusy && answers.length > 0 && !hasLocalHits && !rccCode && !rccHits.length)
   const rccFallbackQuery = $derived.by(() => {
@@ -247,6 +353,15 @@
     await tick()
     await loadGlyphs(arranged.slice(0, GRID_LIMIT))
   }
+
+  /** @param {boolean} next */
+  async function setRccOnly(next) {
+    if (rccOnly === next) return
+    rccOnly = next
+    setPage(1, { replace: true })
+    await tick()
+    await loadGlyphs(arranged.slice(0, GRID_LIMIT))
+  }
 </script>
 
 {#snippet recordSection()}
@@ -266,7 +381,8 @@
 
   <input class="ui-input box" data-primary type="search" lang="und-Hani" use:autofocus value={query} aria-label={t('find.label')}
     placeholder={t('find.placeholder')} spellcheck="false" autocomplete="off" autocapitalize="off" oninput={(/** @type {Event & { currentTarget: HTMLInputElement }} */ event) => setQuery(event.currentTarget.value)}>
-  <CharsetFilter {charsets} selected={route.set} onchange={setCharset} failed={catalogueFailed && !route.set} onretry={() => retry++} />
+  <CharsetFilter charsets={allCharsets} selected={route.set} onchange={setCharset} failed={catalogueFailed && !route.set} onretry={() => retry++}
+    rccOverlapCount={rccOverlap.count} rccFilterCount={rccOverlap.matchedCount} {rccOnly} onRccOnlyChange={setRccOnly} />
 
   {#if failed}
     <div class="ui-section" role="alert">
@@ -276,7 +392,7 @@
   {:else if busy}
     <p class="ui-hint" role="status">{t('charset.loading')}</p>
   {:else if !query.trim() && route.set}
-    {#if browsed.length || !records}
+    {#if (browsed.length || !records) && (!rccOnly || arranged.length || !records || !rccOverlap.byRecordKey.size)}
       <section class="ui-section" bind:this={browseTop}>
         <h2 class="ui-label">{t('find.characters')} <span class="ui-count">{arranged.length.toLocaleString()}</span></h2>
         {#if chosen && chosen.group !== 'Proposals'}
@@ -293,15 +409,18 @@
               <button class="ui-button" data-size="sm" type="button" aria-pressed={!hanOnly} onclick={() => setHan(false)}>{t('find.showAllChars')}</button>
               <button class="ui-button" data-size="sm" type="button" aria-pressed={hanOnly} onclick={() => setHan(true)}>{t('find.showHan')}</button>
             </div>
+            {#if rccOverlap.byChar.size}
+              <button class="ui-button" data-size="sm" type="button" aria-pressed={rccOnly} onclick={() => setRccOnly(!rccOnly)}>{t('rcc.inRcc', { count: rccOverlap.byChar.size.toLocaleString(i18n.locale) })}</button>
+            {/if}
           </div>
         {/if}
         <Pager page={page + 1} {pages} disabled={turning} href={pageHref} onchange={next => turnTo(next - 1)} />
-        <Tiles chars={pageChars} notes={codes} columns={chosen?.columns ?? 0} limit={GRID_LIMIT} codeNotes={longCodes} label={chosen ? nameOf(chosen.names) : route.set} />
+        <Tiles chars={pageChars} notes={codes} rccByChar={rccOverlap.byChar} columns={chosen?.columns ?? 0} limit={GRID_LIMIT} codeNotes={longCodes} label={chosen ? nameOf(chosen.names) : route.set} />
         {#if !arranged.length}<p class="ui-hint">{t('find.none')}</p>{/if}
         <Pager page={page + 1} {pages} disabled={turning} href={pageHref} onchange={next => turnTo(next - 1)} />
       </section>
     {/if}
-    {#if records}<ProposalRecords {records} label={chosen ? nameOf(chosen.names) : route.set} />{/if}
+    {#if records && (!rccOnly || rccOverlap.byRecordKey.size || !arranged.length)}<ProposalRecords {records} label={chosen ? nameOf(chosen.names) : route.set} rccByRecord={rccOverlap.byRecordKey} {rccOnly} onRccOnlyChange={setRccOnly} />{/if}
   {:else if !query.trim()}
     <section class="ui-section">
       <h2 class="ui-label">{t('find.try')}</h2>
@@ -333,26 +452,13 @@
     {#if rccCode}
       <section class="ui-section">
         <h2 class="ui-label">{t('rcc.name')}</h2>
-        <div class="rcc-links">
-          <a class="rcc-link" href={rccEntryUrl(rccCode, i18n.locale)} target="_blank" rel="noopener noreferrer" title={t('rcc.entryLabel', { code: formatRccCode(rccCode) })}>
-            <span class="ui-mono">{formatRccCode(rccCode)}</span>
-            <span aria-hidden="true">↗</span>
-          </a>
-        </div>
+        <RccTiles items={rccCodeItems} onselect={openRccTile} />
       </section>
     {/if}
     {#if rccHits.length}
       <section class="ui-section">
         <h2 class="ui-label">{t('rcc.name')} <span class="ui-count">{rccHits.length}</span></h2>
-        <div class="rcc-links">
-          {#each rccHits as match (match.id)}
-            <a class="rcc-link" href={rccEntryUrl(match.id, i18n.locale)} target="_blank" rel="noopener noreferrer" title={t('rcc.entryLabel', { code: match.code })}>
-              <span class="ui-mono">{match.code}</span>
-              {#if match.ids}<span class="rcc-ids" lang="und-Hani">{match.ids}</span>{/if}
-              <span aria-hidden="true">↗</span>
-            </a>
-          {/each}
-        </div>
+        <RccTiles items={rccHitItems} onselect={openRccTile} />
       </section>
     {:else if rccBusy && !hasLocalHits && !rccCode}
       <p class="ui-hint" role="status">{t('charset.loading')}</p>
@@ -429,10 +535,6 @@
   .browse-tools{display:flex;flex-wrap:wrap;align-items:center;gap:var(--ui-space-2xs)}
   .seg{display:flex;flex-wrap:wrap;gap:var(--ui-space-2xs)}
   .browse-tools button[aria-pressed='true']{border-color:var(--ui-color-accent);background:var(--ui-color-accent-soft);color:var(--ui-color-accent-ink)}
-  .rcc-links{display:flex;flex-wrap:wrap;gap:var(--ui-space-2xs)}
-  .rcc-link{display:inline-flex;align-items:baseline;gap:var(--ui-space-2xs);padding:4px var(--ui-space-md);border:1px solid var(--ui-color-accent);border-radius:var(--ui-radius-sm);background:var(--ui-color-accent-soft);color:var(--ui-color-accent-ink);font-size:var(--ui-text-sm);text-decoration:none;white-space:nowrap}
-  .rcc-link:hover{background:color-mix(in srgb,var(--ui-color-accent) 18%,transparent)}
-  .rcc-ids{font-family:var(--ui-font-script);font-size:var(--ui-text-md)}
   .rcc-fallback{margin:var(--ui-space-xs) 0 0}
   .rcc-search{display:inline-flex;align-items:baseline;gap:var(--ui-space-2xs);padding:4px var(--ui-space-md);border:1px solid var(--ui-color-border);border-radius:var(--ui-radius-sm);color:var(--ui-color-ink);font-size:var(--ui-text-sm);text-decoration:none;white-space:nowrap}
   .rcc-search:hover{background:var(--ui-color-surface-hover)}

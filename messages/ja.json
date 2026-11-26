@@ -365,6 +365,10 @@
   "rcc.name": "珍字集覧",
   "rcc.search": "珍字集覧で探す",
   "rcc.entryLabel": "珍字集覧の{code}",
+  "rcc.inRcc": "珍字集覧に収録（{count}）",
+  "rcc.openEntry": "珍字集覧で開く",
+  "rcc.charsets": "収録する文字集合",
+  "charset.live": "最新",
   "about.rcc": "未符号化文字",
   "about.rccIntro": "字形カード・提案記録・方言字・構字検索で一致するR+XXXX記録を照会します。"
 }

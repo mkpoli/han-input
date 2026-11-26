@@ -365,6 +365,10 @@
   "rcc.name": "진자집람",
   "rcc.search": "진자집람에서 찾기",
   "rcc.entryLabel": "진자집람의 {code}",
+  "rcc.inRcc": "진자집람 수록 ({count})",
+  "rcc.openEntry": "진자집람에서 열기",
+  "rcc.charsets": "수록된 문자 집합",
+  "charset.live": "실시간",
   "about.rcc": "미부호화 문자",
   "about.rccIntro": "글자 카드, 제안 기록, 방언자, 구성 검색에서 일치하는 R+XXXX 기록을 실시간으로 조회합니다."
 }

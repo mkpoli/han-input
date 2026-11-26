@@ -6,8 +6,9 @@
   import { convertArithmetic } from '../../src/arithmetic.js'
   import { copy } from '../lib/clip.svelte.js'
   import { i18n, t } from '../lib/i18n.svelte.js'
-  import { isIdsSequence, matchRccByIds, rccEntryUrl, rccSearchUrl } from '../lib/rcc.js'
+  import { isIdsSequence, matchRccByIds, rccSearchUrl } from '../lib/rcc.js'
   import { link } from '../lib/route.svelte.js'
+  import RccTiles from '../ui/RccTiles.svelte'
 
   const params = new URLSearchParams(location.search)
   let input = $state(params.get('q') ?? '')
@@ -149,12 +150,9 @@
 
   {#if legacyIds}
     <div class="rcc-bar">
-      {#each legacyRcc as match (match.id)}
-        <a class="rcc-link" href={rccEntryUrl(match.id, i18n.locale)} target="_blank" rel="noopener noreferrer" aria-label={t('rcc.entryLabel', { code: match.code })}>
-          <span class="ui-mono">{match.code}</span>
-          <span aria-hidden="true">↗</span>
-        </a>
-      {/each}
+      {#if legacyRcc.length}
+        <RccTiles items={legacyRcc} compact />
+      {/if}
       <a class="rcc-search" href={rccSearchUrl(legacyIds, i18n.locale)} target="_blank" rel="noopener noreferrer">{t('rcc.search')} <span aria-hidden="true">↗</span></a>
     </div>
   {/if}
@@ -241,12 +239,9 @@
 
     {#if arithmeticIds}
       <div class="rcc-bar">
-        {#each arithmeticRcc as match (match.id)}
-          <a class="rcc-link" href={rccEntryUrl(match.id, i18n.locale)} target="_blank" rel="noopener noreferrer" aria-label={t('rcc.entryLabel', { code: match.code })}>
-            <span class="ui-mono">{match.code}</span>
-            <span aria-hidden="true">↗</span>
-          </a>
-        {/each}
+        {#if arithmeticRcc.length}
+          <RccTiles items={arithmeticRcc} compact />
+        {/if}
         <a class="rcc-search" href={rccSearchUrl(arithmeticIds, i18n.locale)} target="_blank" rel="noopener noreferrer">{t('rcc.search')} <span aria-hidden="true">↗</span></a>
       </div>
     {/if}
@@ -332,9 +327,7 @@
   .arith-sign{font-family:var(--ui-font-mono),monospace;font-size:24px;line-height:1}
   .arithmetic-formula{font-family:var(--ui-font-script);line-height:1.6}
   .arithmetic-notes{margin:var(--ui-space-xs) 0 0;padding-inline-start:1.4em;color:var(--ui-color-ink-soft);font-size:var(--ui-text-sm)}
-  .rcc-bar{display:flex;flex-wrap:wrap;align-items:center;gap:var(--ui-space-2xs);margin-block-start:var(--ui-space-xs)}
-  .rcc-link{display:inline-flex;align-items:baseline;gap:var(--ui-space-2xs);padding:2px var(--ui-space-sm);border:1px solid var(--ui-color-accent);border-radius:var(--ui-radius-sm);background:var(--ui-color-accent-soft);color:var(--ui-color-accent-ink);font-size:var(--ui-text-xs);text-decoration:none;white-space:nowrap}
-  .rcc-link:hover{background:color-mix(in srgb,var(--ui-color-accent) 18%,transparent)}
+  .rcc-bar{display:flex;flex-wrap:wrap;align-items:center;gap:var(--ui-space-sm);margin-block-start:var(--ui-space-xs)}
   .rcc-search{display:inline-flex;align-items:baseline;gap:var(--ui-space-2xs);padding:2px var(--ui-space-sm);border:1px solid var(--ui-color-border);border-radius:var(--ui-radius-sm);color:var(--ui-color-ink);font-size:var(--ui-text-xs);text-decoration:none;white-space:nowrap}
   .rcc-search:hover{background:var(--ui-color-surface-hover)}
   .attribution{gap:var(--ui-space-xs);padding-block-start:var(--ui-space-lg);border-block-start:1px solid var(--ui-color-border);color:var(--ui-color-ink-muted);font-size:var(--ui-text-xs);overflow-wrap:anywhere}

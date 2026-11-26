@@ -1,8 +1,10 @@
 // Character-set membership is a scalar glyph mapping, independent of the search corpus.
+import { RCC_CHARSET_ID, loadRccDataset } from './rcc-data.js'
+
 /** @typedef {{total:number, filled:number, mapped:number}} Positions */
-/** @typedef {{id:string, group:string, label:string, names:{en:string,zh?:string,hans?:string,ja?:string,ko?:string}, chars:number, total:number, encoded?:number, unencoded?:number, positions?:Positions, codes?:string, records?:{file:string, count:number, glyphs:number, search?:boolean}, recordsNote?:boolean, columns?:number, source:{name:string,url:string,dataUrl?:string,note?:string,noteKey?:string,records?:string,version?:string,licence?:string,attribution?:string}}} Charset */
+/** @typedef {{id:string, group:string, label:string, names:{en:string,zh?:string,hans?:string,ja?:string,ko?:string}, chars:number, total:number, encoded?:number, unencoded?:number, live?:boolean, positions?:Positions, codes?:string, records?:{file:string, count:number, glyphs:number, search?:boolean}, recordsNote?:boolean, columns?:number, source:{name:string,url:string,dataUrl?:string,note?:string,noteKey?:string,records?:string,version?:string,licence?:string,attribution?:string}}} Charset */
 /** @typedef {{id:string, document:string, title:string, source:string, date:string, url:string, status?:string, workbook?:string}} ProposalDocument */
-/** @typedef {{serial?:string|null, sequence?:string, source?:string|null, document:string, page?:number, glyph?:string, sprite?:{sheet:string, symbol:string}, atlas?:{sheet:string, cell:number}, status?:string, mappedUnicode?:string, similarUnicode?:string, common?:string, composition?:string, moeVariant?:string, workbook?:{radical?:string, strokes?:number, zhuyin?:string[], ids?:string, idsMachine?:string, proposed?:string}, mappedCharacter?:string, unifiedWith?:string, mappingKind?:string, mappingEvidence?:string, evidenceUrls?:string[], kind?:'ids', ids?:string, key?:string}} ProposalRecord */
+/** @typedef {{serial?:string|null, sequence?:string, source?:string|null, document:string, page?:number, glyph?:string, sprite?:{sheet:string, symbol:string}, atlas?:{sheet:string, cell:number}, status?:string, mappedUnicode?:string, similarUnicode?:string, common?:string, composition?:string, moeVariant?:string, workbook?:{radical?:string, strokes?:number, zhuyin?:string[], ids?:string, idsMachine?:string, proposed?:string}, mappedCharacter?:string, unifiedWith?:string, mappingKind?:string, mappingEvidence?:string, evidenceUrls?:string[], kind?:'ids', ids?:string, key?:string, rcc?:import('./rcc-data.js').RccEntry}} ProposalRecord */
 /** @typedef {{title:string, complete:boolean, scope:string, documents:ProposalDocument[], records:ProposalRecord[]}} ProposalRecords */
 
 /** @type {Promise<Charset[]> | null} */
@@ -29,6 +31,7 @@ export function loadCharsets() {
 const held = new Map()
 /** @param {string} id @returns {Promise<Set<string>>} */
 export function loadCharset(id) {
+  if (id === RCC_CHARSET_ID) return loadRccDataset().then(dataset => dataset.members)
   let pending = held.get(id)
   if (!pending) {
     pending = (async () => {
@@ -52,7 +55,7 @@ export async function browseCharset(id) { return [...await loadCharset(id)] }
 const collator = new Intl.Collator('en', { numeric: true })
 /** Code order across mixed systems: code points first, then the source's own numbering. @param {string} a @param {string} b */
 export function compareCodes(a, b) {
-  if (a.startsWith('U+') && b.startsWith('U+')) {
+  if ((a.startsWith('U+') && b.startsWith('U+')) || (a.startsWith('R+') && b.startsWith('R+'))) {
     const left = parseInt(a.slice(2), 16)
     const right = parseInt(b.slice(2), 16)
     if (Number.isFinite(left) && Number.isFinite(right) && left !== right) return left - right
@@ -82,6 +85,7 @@ export function isPrivateUse(char) {
 const coded = new Map()
 /** The code each member carries in its own set, in source row order. @param {string} id @returns {Promise<Map<string, string>>} */
 export function loadCharsetCodes(id) {
+  if (id === RCC_CHARSET_ID) return loadRccDataset().then(dataset => dataset.codes)
   let pending = coded.get(id)
   if (!pending) {
     pending = (async () => {
@@ -134,6 +138,7 @@ const proposals = new Map()
 /** The printed records behind a set, with the glyph images that some documents carry.
  * @param {string} id @returns {Promise<ProposalRecords>} */
 export function loadRecords(id) {
+  if (id === RCC_CHARSET_ID) return loadRccDataset().then(dataset => dataset.records)
   let pending = proposals.get(id)
   if (!pending) {
     pending = (async () => {

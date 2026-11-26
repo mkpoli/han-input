@@ -6,13 +6,14 @@
   import { codesOf, descriptionsOf, loadMethods, loadVariants, loadVarieties, readingsOf } from '../lib/data.js'
   import { readingTree } from '../lib/classification.js'
   import { linksFor } from '../lib/links.js'
-  import { matchRccByCode, rccEntryUrl } from '../lib/rcc.js'
+  import { matchRccByCode } from '../lib/rcc.js'
   import { link, route, go, open } from '../lib/route.svelte.js'
   import { put, hideSheet } from '../lib/ui.svelte.js'
   import { copy } from '../lib/clip.svelte.js'
   import { i18n, nameOf, t } from '../lib/i18n.svelte.js'
   import { FAMILIES } from '../lib/families.js'
   import SourceCode from './SourceCode.svelte'
+  import RccTiles from './RccTiles.svelte'
   import { isHan } from '../../src/fold.js'
   import { hasLxgwSeal } from '../lib/lxgw-seal.js'
   import { codePoints, isPuaChar, loadPua, loadPuaCodes, readingsOf as puaReadingsOf } from '../../src/pua.js'
@@ -247,15 +248,7 @@
     {#if rccMatches.length}
       <section class="family">
         <h3 class="ui-label">{t('rcc.name')} <span class="ui-count">{rccMatches.length}</span></h3>
-        <div class="rcc-links">
-          {#each rccMatches as match (match.id)}
-            <a class="rcc-link" href={rccEntryUrl(match.id, i18n.locale)} target="_blank" rel="noopener noreferrer" title={t('rcc.entryLabel', { code: match.code })}>
-              <span class="ui-mono">{match.code}</span>
-              {#if match.ids}<span class="rcc-ids" lang="und-Hani">{match.ids}</span>{/if}
-              <span aria-hidden="true">↗</span>
-            </a>
-          {/each}
-        </div>
+        <RccTiles items={rccMatches} compact />
       </section>
     {/if}
 
@@ -341,10 +334,6 @@
   .links a{padding:2px var(--ui-space-sm);border:1px solid var(--ui-color-border);border-radius:var(--ui-radius-sm);font-size:var(--ui-text-xs);color:var(--ui-color-ink);text-decoration:none;white-space:nowrap}
   .links a:hover{background:var(--ui-color-surface-hover)}
   .links a.first{background:var(--ui-color-accent);border-color:var(--ui-color-accent);color:var(--ui-color-on-accent)}
-  .rcc-links{display:flex;flex-wrap:wrap;gap:var(--ui-space-2xs)}
-  .rcc-link{display:inline-flex;align-items:baseline;gap:var(--ui-space-2xs);padding:2px var(--ui-space-sm);border:1px solid var(--ui-color-accent);border-radius:var(--ui-radius-sm);background:var(--ui-color-accent-soft);color:var(--ui-color-accent-ink);font-size:var(--ui-text-xs);text-decoration:none;white-space:nowrap}
-  .rcc-link:hover{background:color-mix(in srgb,var(--ui-color-accent) 18%,transparent)}
-  .rcc-ids{font-family:var(--ui-font-script);font-size:var(--ui-text-sm)}
   .branch summary{cursor:pointer;padding-block:3px;font-size:var(--ui-text-sm);border-bottom:1px solid var(--ui-color-border)}
   .branch .branch{margin-inline-start:var(--ui-space-sm);padding-inline-start:var(--ui-space-2xs);border-inline-start:1px solid var(--ui-color-border)}
   .rows{margin-inline-start:var(--ui-space-sm)}

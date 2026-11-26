@@ -365,6 +365,10 @@
   "rcc.name": "珍字集览",
   "rcc.search": "在珍字集览中查找",
   "rcc.entryLabel": "珍字集览中的{code}",
+  "rcc.inRcc": "收录于珍字集览（{count}）",
+  "rcc.openEntry": "在珍字集览中打开",
+  "rcc.charsets": "收录于字符集",
+  "charset.live": "实时",
   "about.rcc": "未编码字符",
   "about.rccIntro": "在字卡、提案记录、方言字和构字检索中实时查询对应的R+XXXX记录。"
 }
