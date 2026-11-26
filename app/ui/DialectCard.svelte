@@ -1,9 +1,10 @@
 <script>
   // An IDS-only row of the dialect list in place of the character card: it has no character to open.
   import { i18n, t } from '../lib/i18n.svelte.js'
-  import { matchRccByIds, rccEntryUrl, rccSearchUrl } from '../lib/rcc.js'
+  import { matchRccByIds, rccSearchUrl } from '../lib/rcc.js'
   import { hideSheet, ui } from '../lib/ui.svelte.js'
   import DialectRows from './DialectRows.svelte'
+  import RccTiles from './RccTiles.svelte'
 
   /** @type {import('../lib/rcc.js').RccMatch[]} */
   let rccMatches = $state([])
@@ -28,13 +29,10 @@
   {#if ui.dialect}
     <section class="rcc">
       <h3 class="ui-label">{t('rcc.name')}{#if rccMatches.length}{' '}<span class="ui-count">{rccMatches.length}</span>{/if}</h3>
+      {#if rccMatches.length}
+        <RccTiles items={rccMatches} compact />
+      {/if}
       <div class="rcc-links">
-        {#each rccMatches as match (match.id)}
-          <a class="rcc-link" href={rccEntryUrl(match.id, i18n.locale)} target="_blank" rel="noopener noreferrer" title={t('rcc.entryLabel', { code: match.code })}>
-            <span class="ui-mono">{match.code}</span>
-            <span aria-hidden="true">↗</span>
-          </a>
-        {/each}
         <a class="rcc-search" href={rccSearchUrl(ui.dialect, i18n.locale)} target="_blank" rel="noopener noreferrer">{t('rcc.search')} <span aria-hidden="true">↗</span></a>
       </div>
     </section>
@@ -50,8 +48,6 @@
   .rcc{display:grid;gap:var(--ui-space-xs)}
   .rcc h3{margin:0}
   .rcc-links{display:flex;flex-wrap:wrap;gap:var(--ui-space-2xs)}
-  .rcc-link{display:inline-flex;align-items:baseline;gap:var(--ui-space-2xs);padding:2px var(--ui-space-sm);border:1px solid var(--ui-color-accent);border-radius:var(--ui-radius-sm);background:var(--ui-color-accent-soft);color:var(--ui-color-accent-ink);font-size:var(--ui-text-xs);text-decoration:none;white-space:nowrap}
-  .rcc-link:hover{background:color-mix(in srgb,var(--ui-color-accent) 18%,transparent)}
   .rcc-search{display:inline-flex;align-items:baseline;gap:var(--ui-space-2xs);padding:2px var(--ui-space-sm);border:1px solid var(--ui-color-border);border-radius:var(--ui-radius-sm);color:var(--ui-color-ink);font-size:var(--ui-text-xs);text-decoration:none;white-space:nowrap}
   .rcc-search:hover{background:var(--ui-color-surface-hover)}
 </style>

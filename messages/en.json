@@ -365,6 +365,10 @@
   "rcc.name": "Rare Character Compendium",
   "rcc.search": "Search Rare Character Compendium",
   "rcc.entryLabel": "{code} in Rare Character Compendium",
+  "rcc.inRcc": "In Rare Character Compendium ({count})",
+  "rcc.openEntry": "Open on Rare Character Compendium",
+  "rcc.charsets": "Included in character sets",
+  "charset.live": "Live",
   "about.rcc": "Unencoded characters",
   "about.rccIntro": "Live lookups for matching R+XXXX records on character cards, proposal records, dialect characters and composition searches."
 }

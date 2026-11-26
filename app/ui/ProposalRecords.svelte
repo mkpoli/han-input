@@ -8,20 +8,22 @@
   import { compareCodes } from '../lib/charsets.js'
   import Pager from './Pager.svelte'
   import RecordGlyph from './RecordGlyph.svelte'
+  import RccGlyph from './RccGlyph.svelte'
   import GridRows from './GridRows.svelte'
   import { gridNavigation } from './grid.js'
   /** @type {HTMLDivElement | null} */
   let grid = $state(null)
 
-  /** @type {{ records: import('../lib/charsets.js').ProposalRecords, label: string }} */
-  let { records, label } = $props()
+  /** @type {{ records: import('../lib/charsets.js').ProposalRecords, label: string, rccByRecord?: Map<string, import('../lib/rcc-data.js').RccEntry[]>, rccOnly?: boolean, onRccOnlyChange?: (next: boolean) => void }} */
+  let { records, label, rccByRecord, rccOnly = false, onRccOnlyChange } = $props()
   const documents = $derived(new Map(records.documents.map(doc => /** @type {[string, import('../lib/charsets.js').ProposalDocument]} */ ([doc.id, doc]))))
   const PER_PAGE = 240
   let page = $state(0)
   /** @type {HTMLElement | null} */
   let top = $state(null)
   const idsMode = $derived(records.records.some(record => record.kind === 'ids'))
-  const textOnly = $derived(records.records.every(record => !record.glyph && !record.sprite && !record.atlas && !record.mappedUnicode && record.kind !== 'ids'))
+  const rccMode = $derived(records.records.some(record => !!record.rcc))
+  const textOnly = $derived(records.records.every(record => !record.rcc && !record.glyph && !record.sprite && !record.atlas && !record.mappedUnicode && record.kind !== 'ids'))
   /** @type {'all' | 'encoded' | 'unencoded'} */
   let show = $state('all')
   let byCode = $state(false)
@@ -35,6 +37,7 @@
   }
   const arranged = $derived.by(() => {
     let list = show === 'all' ? records.records : records.records.filter(record => show === 'encoded' ? record.mappedUnicode : !record.mappedUnicode)
+    if (rccOnly) list = list.filter(record => record.key && rccByRecord?.has(record.key))
     if (byCode) list = [...list].sort((a, b) => compareCodes(code(a), code(b)))
     return list
   })
@@ -63,23 +66,35 @@
         <button class="ui-button" data-size="sm" type="button" aria-pressed={show === 'encoded'} onclick={() => { show = 'encoded' }}>{t('find.showEncoded')}</button>
         <button class="ui-button" data-size="sm" type="button" aria-pressed={show === 'unencoded'} onclick={() => { show = 'unencoded' }}>{t('find.showUnencoded')}</button>
       </div>
+      {#if !rccMode && rccByRecord?.size}
+        <button class="ui-button" data-size="sm" type="button" aria-pressed={rccOnly} onclick={() => onRccOnlyChange?.(!rccOnly)}>{t('rcc.inRcc', { count: rccByRecord.size })}</button>
+      {/if}
     </div>
   {/if}
   <Pager page={page + 1} {pages} onchange={next => turnTo(next - 1)} />
   {#if idsMode}
     <ol class="ids-list" aria-label={`${label} ${t('charset.records')}`}>
       {#each shown as record, i (record.document + ':' + code(record) + ':' + i)}
-        <li class="ui-script" title={code(record)}>{code(record)}</li>
+        {@const rccHits = record.key ? rccByRecord?.get(record.key) : undefined}
+        <li class="ui-script" title={[code(record), rccHits?.map(hit => hit.code).join(' ')].filter(Boolean).join(' · ')}>
+          <span>{code(record)}</span>
+          {#if rccHits?.length}<span class="ids-rcc ui-mono">{rccHits[0].code}</span>{/if}
+        </li>
       {/each}
     </ol>
   {:else}
     <div class="ui-tiles records" class:text-only={textOnly} role="grid" aria-label={`${label} ${t('charset.records')}`} bind:this={grid} use:gridNavigation>
       <GridRows {grid} items={shown}>
         {#snippet children(record, index)}
-          <button class="ui-tile" type="button" tabindex={index === 0 ? 0 : -1} aria-current={ui.record?.record === record ? 'true' : undefined}
-            title={[code(record), sourceName(record), documents.get(record.document)?.document].filter(Boolean).join(' · ')}
+          {@const rccHits = !rccMode && record.key ? rccByRecord?.get(record.key) : undefined}
+          <button class="ui-tile" class:in-rcc={!!rccHits?.length} type="button" tabindex={index === 0 ? 0 : -1} aria-current={ui.record?.record === record ? 'true' : undefined}
+            title={[code(record), record.rcc?.ids, sourceName(record), rccHits?.map(hit => hit.code).join(' '), documents.get(record.document)?.document].filter(Boolean).join(' · ')}
             onclick={() => { const doc = documents.get(record.document); if (doc) showRecord(record, doc) }}>
-            {#if record.sprite || record.atlas || record.glyph}
+            {#if rccHits?.length}<span class="rcc-badge ui-mono">{rccHits[0].code}</span>{/if}
+            {#if record.rcc}
+              <RccGlyph ids={record.rcc.ids} mappedChar={record.rcc.mappedChar} coverKey={record.rcc.coverKey} />
+              <span class="ui-tile-note ui-mono">{code(record)}</span>
+            {:else if record.sprite || record.atlas || record.glyph}
               <RecordGlyph {record} />
               <span class="ui-tile-note ui-mono">{code(record)}</span>
             {:else if record.mappedUnicode}
@@ -97,7 +112,7 @@
 
 <style>
   .records{grid-template-columns:repeat(auto-fill,minmax(72px,1fr))}
-  .records .ui-tile{grid-template-rows:1fr auto;padding:3px}
+  .records .ui-tile{grid-template-rows:minmax(0,1fr) auto;padding:3px;overflow:hidden}
   .records .ui-tile-note{font-size:9px;line-height:1.2;white-space:normal;overflow-wrap:anywhere;text-align:center}
   .records-tools{display:flex;flex-wrap:wrap;align-items:center;gap:var(--ui-space-2xs)}
   .seg{display:flex;flex-wrap:wrap;gap:var(--ui-space-2xs)}
@@ -107,5 +122,8 @@
   .text-only{grid-template-columns:repeat(auto-fill,minmax(104px,1fr))}
   .text-only .code{white-space:nowrap}
 .ids-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:4px;margin:0;padding:0;list-style:none}
-.ids-list li{font-family:'Han Ext','Noto Sans CJK JP','Source Han Sans JP',var(--ui-font-serif),serif;font-size:18px;line-height:1.35;padding:4px 6px;border:1px solid var(--ui-color-border);border-radius:var(--ui-radius-sm);overflow-wrap:anywhere}
+.ids-list li{display:flex;align-items:baseline;justify-content:space-between;gap:4px;font-family:'Han Ext','Noto Sans CJK JP','Source Han Sans JP',var(--ui-font-serif),serif;font-size:18px;line-height:1.35;padding:4px 6px;border:1px solid var(--ui-color-border);border-radius:var(--ui-radius-sm);overflow-wrap:anywhere}
+.ids-rcc{flex:none;padding:0 4px;border-radius:2px;background:var(--ui-color-accent-soft);color:var(--ui-color-accent-ink);font-size:10px;line-height:1.4}
+.ui-tile.in-rcc{position:relative;border-color:color-mix(in srgb,var(--ui-color-accent) 45%,var(--ui-color-border))}
+.rcc-badge{position:absolute;inset-block-start:2px;inset-inline-end:2px;padding:0 3px;border-radius:2px;background:var(--ui-color-surface);border:1px solid color-mix(in srgb,var(--ui-color-accent) 45%,var(--ui-color-border));color:var(--ui-color-accent-ink);font-size:8px;line-height:1.25;pointer-events:none}
 </style>

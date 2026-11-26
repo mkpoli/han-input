@@ -84,6 +84,17 @@ export function setCharset(id) {
   pushScroll(href(route), false)
 }
 
+/** Open Find browsed to a character set in a single history entry. @param {string} id */
+export function goCharset(id) {
+  if (route.page === '' && route.method === '' && !route.q && route.set === id && route.p === 1) return
+  route.page = ''
+  route.method = ''
+  route.q = ''
+  route.set = id
+  route.p = 1
+  pushScroll(href(route), true)
+}
+
 /** Show one page of a browsed set in the address, so a reload, a shared link or Back finds it.
  * @param {number} p @param {{ replace?: boolean }} [mode] */
 export function setPage(p, mode = {}) {

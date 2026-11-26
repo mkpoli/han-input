@@ -13,7 +13,11 @@
     "build:data": "bun scripts/build.mjs",
     "build:og": "bun scripts/make-og.mjs",
     "check:site": "bun scripts/check_site.mjs",
-    "deploy": "bun scripts/deploy.mjs"
+    "deploy": "bun scripts/deploy.mjs",
+    "postinstall": "node scripts/prepare-composer.mjs"
+  },
+  "dependencies": {
+    "han-compose": "github:mkpoli/han-compose#8f6843a9fbaacc1ecba3725d3ab14a41339c9e60"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "6.2.4",
