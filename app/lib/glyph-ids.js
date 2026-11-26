@@ -3,12 +3,12 @@
 
 /** @typedef {{ ids: string, verdict: 'known' | 'model' | 'written', by: string }} GlyphIds */
 
-/** @type {Promise<Map<string, GlyphIds>> | null} */
+/** @type {Promise<Map<string, GlyphIds> | null> | null} */
 let table = null
 /** @type {Promise<Map<string, string[]>> | null} */
 let byIdsCache = null
 
-/** @returns {Promise<Map<string, GlyphIds>>} */
+/** Load the glyph-ids table; returns null on transient fetch failure so callers can retry later. @returns {Promise<Map<string, GlyphIds> | null>} */
 export function loadGlyphIdsTable() {
   table ??= fetch('/charsets/glyph-ids.json')
     .then(response => {
@@ -16,13 +16,17 @@ export function loadGlyphIdsTable() {
       return response.json()
     })
     .then(data => new Map(Object.entries(data.glyphs).map(([key, [ids, verdict, by]]) => [key, { ids, verdict, by }])))
-    .catch(() => { table = null; byIdsCache = null; return new Map() })
+    .catch(() => { table = null; byIdsCache = null; return null })
   return table
 }
 
 /** Reverse map from cleaned IDS to the charset ids in glyph-ids.json that carry it. @returns {Promise<Map<string, string[]>>} */
 export function loadGlyphIdsByIds() {
   byIdsCache ??= loadGlyphIdsTable().then(map => {
+    if (!map) {
+      byIdsCache = null
+      return new Map()
+    }
     /** @type {Map<string, Set<string>>} */
     const reverse = new Map()
     for (const [key, entry] of map) {
@@ -41,7 +45,7 @@ export function loadGlyphIdsByIds() {
 
 /** The reviewed description of a record, if it has one. @param {string | undefined} key */
 export async function glyphIds(key) {
-  return key ? (await loadGlyphIdsTable()).get(key) ?? null : null
+  return key ? (await loadGlyphIdsTable())?.get(key) ?? null : null
 }
 
 /** Where a known description comes from: its source's name and page. @param {string} by */

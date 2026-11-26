@@ -1,6 +1,6 @@
 // Client-side IDS glyph composition via han-compose, backed by the CORS-open serif export.
 // Dynamically imports han-compose on first use so initial page load stays small.
-// Only visible tiles ask to compose, with bounded concurrency, per-job deadlines,
+// Only visible tiles ask to compose, with bounded concurrency, per-job & HTTP deadlines,
 // queue cancellation on unmount, and an in-memory LRU cache.
 
 export const COMPOSER_BASE = 'https://ids-input-composer.mkpoli.workers.dev/b53713c2da0e-serif-compose-layout-v4-serif-f7+kin'
@@ -14,6 +14,7 @@ const DEFAULT_TIMEOUT_MS = 15_000
 /**
  * @typedef {{
  *   key: string,
+ *   epoch: number,
  *   started: boolean,
  *   waiters: number,
  *   promise: Promise<ComposedGlyph | null>,
@@ -31,16 +32,39 @@ const pending = new Map()
 /** @type {QueuedJob[]} */
 const queue = []
 let active = 0
+let epoch = 0
+
+/**
+ * Fetch wrapper with a hard abort deadline so stalled manifest/shard requests cannot pin
+ * han-compose's internal readiness promise indefinitely.
+ * @param {RequestInfo | URL} input
+ * @param {RequestInit} [init]
+ */
+function boundedFetch(input, init = {}) {
+  const controller = new AbortController()
+  const upstream = init.signal
+  const onAbort = () => controller.abort()
+  if (upstream) {
+    if (upstream.aborted) controller.abort()
+    else upstream.addEventListener('abort', onAbort, { once: true })
+  }
+  const timer = setTimeout(() => controller.abort(), DEFAULT_TIMEOUT_MS)
+  return fetch(input, { ...init, signal: controller.signal }).finally(() => {
+    clearTimeout(timer)
+    if (upstream) upstream.removeEventListener('abort', onAbort)
+  })
+}
 
 function getRuntime() {
   if (!runtimePromise) {
+    const myEpoch = epoch
     runtimePromise = import('han-compose/loader').then(mod => ({
       compose: mod.compose,
       // Production builds do not bundle the 27 MB unicode/outlines fallback shards; return {}
       // so missing non-Han components degrade cleanly to cover photo / IDS without 404 requests.
-      source: mod.fromUrl(COMPOSER_BASE, { load: async () => ({}) }),
+      source: mod.fromUrl(COMPOSER_BASE, { fetch: boundedFetch, load: async () => ({}) }),
     })).catch(err => {
-      runtimePromise = null
+      if (myEpoch === epoch) runtimePromise = null
       throw err
     })
   }
@@ -78,7 +102,7 @@ function withTimeout(work, timeoutMs) {
 function drain() {
   while (active < MAX_CONCURRENT && queue.length) {
     const next = queue.shift()
-    if (!next || next.waiters <= 0) continue
+    if (!next || next.waiters <= 0 || next.epoch !== epoch) continue
     next.start()
   }
 }
@@ -103,24 +127,27 @@ export function composeGlyph(ids, options = {}) {
 
   let job = pending.get(clean)
   if (!job) {
+    const jobEpoch = epoch
     /** @type {(value: ComposedGlyph | null) => void} */
     let resolveJob = () => {}
     const promise = new Promise(resolve => { resolveJob = resolve })
     /** @type {QueuedJob} */
     const created = {
       key: clean,
+      epoch: jobEpoch,
       started: false,
       waiters: 0,
       promise,
       resolve: resolveJob,
       start() {
-        if (created.started) return
+        if (created.started || created.epoch !== epoch) return
         created.started = true
         active++
         ;(async () => {
           try {
             const { compose, source } = await withTimeout(runtime(), timeoutMs)
             const drawn = await withTimeout(compose(source, clean, { fontStyle: 'serif' }), timeoutMs)
+            if (created.epoch !== epoch) return null
             if (!drawn?.d || drawn.missing?.length) {
               remember(clean, null)
               return null
@@ -135,8 +162,10 @@ export function composeGlyph(ids, options = {}) {
           if (pending.get(clean) === created) pending.delete(clean)
           created.resolve(result)
         }).finally(() => {
-          active--
-          drain()
+          if (created.epoch === epoch) {
+            active = Math.max(0, active - 1)
+            drain()
+          }
         })
       },
     }
@@ -174,11 +203,12 @@ export function composeGlyph(ids, options = {}) {
   })
 }
 
-/** Clear cached SVG paths and queued jobs (intended for tests). */
+/** Clear cached SVG paths and settle queued jobs (intended for tests). */
 export function clearComposeCache() {
+  epoch++
   cache.clear()
+  for (const queued of queue.splice(0)) queued.resolve(null)
   pending.clear()
-  queue.length = 0
   active = 0
   runtimePromise = null
 }

@@ -7,7 +7,7 @@ declare module 'han-compose/loader' {
 
   export interface FromUrlOptions {
     suffix?: string
-    fetch?: typeof globalThis.fetch
+    fetch?: (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>
     load?: (name: string) => Promise<Record<string, unknown>>
   }
 

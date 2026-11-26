@@ -82,6 +82,7 @@ describe('RCC dataset parsing and charset mapping', () => {
     expect(rccEncodingToCharsetIds({ charset: 'SJ/T 11239—2001', code: '01' })).toEqual(['g_8f'])
     expect(rccEncodingToCharsetIds({ charset: 'gb18030', code: '81308130' })).toEqual([])
     expect(rccEncodingToCharsetIds({ charset: 'big5', code: 'A440' })).toEqual(['hb1'])
+    expect(rccEncodingToCharsetIds({ charset: 'big5', code: 'A47F' })).toEqual([])
     expect(rccEncodingToCharsetIds({ charset: 'big5', code: 'C940' })).toEqual(['hb2'])
     expect(rccEncodingToCharsetIds({ charset: 'big5', code: '8140' })).toEqual([])
     expect(rccEncodingToCharsetIds({ charset: 'mj', code: 'MJ059588' })).toEqual(['jmj'])
@@ -145,6 +146,29 @@ describe('RCC dataset parsing and charset mapping', () => {
 
     const badFetch = /** @type {typeof fetch} */ (async () => new Response('down', { status: 503 }))
     await expect(loadRccDataset({ fetchImpl: badFetch })).rejects.toThrow('RCC export unavailable')
+
+    const errorBodyFetch = /** @type {typeof fetch} */ (async () => Response.json({ error: 'temporarily unavailable' }))
+    await expect(loadRccDataset({ fetchImpl: errorBodyFetch })).rejects.toThrow('Invalid RCC export payload')
+  })
+
+  test('matches character tiles by charset code even without a Unicode claim', () => {
+    const dataset = parseRccExport({
+      entries: [
+        {
+          id: 77,
+          ids: '一',
+          claims: [{ kind: 'encoding', value: 'A440', data: { charset: 'big5' } }],
+        },
+      ],
+    })
+    const overlap = mapCharsetRccOverlap(dataset, {
+      setId: 'hb1',
+      members: ['一', '丁'],
+      codes: new Map([['一', 'A440'], ['丁', 'A442']]),
+    })
+    expect(overlap.byChar.get('一')?.map(e => e.code)).toEqual(['R+004D'])
+    expect(overlap.byChar.has('丁')).toBe(false)
+    expect(overlap.matchedCount).toBe(1)
   })
 
   test('scopes encoding matches to the active charset namespace', () => {
@@ -196,9 +220,12 @@ describe('RCC dataset parsing and charset mapping', () => {
   test('composeGlyph times out stalled jobs and cancels aborted queued jobs without blocking', async () => {
     clearComposeCache()
     try {
+      /** @type {string[]} */
+      const started = []
       const stalledRuntime = async () => ({
         source: {},
         compose: async (_source, seq) => {
+          started.push(seq)
           if (seq.startsWith('STALL')) return new Promise(() => {})
           return { d: `M0 0 ${seq}` }
         },
@@ -214,6 +241,7 @@ describe('RCC dataset parsing and charset mapping', () => {
       expect(await queuedAborted).toBeNull()
       expect(await Promise.all(stalled)).toEqual(Array(8).fill(null))
       expect(await afterStall).toEqual({ d: 'M0 0 OK_AFTER', cut: null })
+      expect(started).not.toContain('QUEUED_ABORT')
     } finally {
       clearComposeCache()
     }

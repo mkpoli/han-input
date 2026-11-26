@@ -65,6 +65,7 @@
   const rccOverlap = $derived(mapCharsetRccOverlap(rccDataset, {
     setId: route.set,
     members: browsed,
+    codes,
     records: records?.records ?? [],
     glyphIdsTable,
   }))
@@ -118,7 +119,7 @@
   $effect(() => {
     if (!records || route.set === RCC_CHARSET_ID || glyphIdsTable) return
     let active = true
-    loadGlyphIdsTable().then(table => { if (active) glyphIdsTable = table }).catch(() => {})
+    loadGlyphIdsTable().then(table => { if (active && table) glyphIdsTable = table }).catch(() => {})
     return () => { active = false }
   })
 

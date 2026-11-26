@@ -2,7 +2,7 @@
   // One printed proposal record: the glyph as the document shows it, the source or serial code it is
   // named by, and where the document states it. Many of these characters were never encoded.
   import { ui, choose, hideSheet } from '../lib/ui.svelte.js'
-  import { go, link, setCharset } from '../lib/route.svelte.js'
+  import { goCharset, link } from '../lib/route.svelte.js'
   import { i18n, nameOf, t } from '../lib/i18n.svelte.js'
   import { loadCharsets } from '../lib/charsets.js'
   import SourceCode from './SourceCode.svelte'
@@ -85,8 +85,7 @@
     if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return
     event.preventDefault()
     if ((/** @type {HTMLElement} */ (event.currentTarget)).closest('dialog')) hideSheet()
-    go('')
-    setCharset(setId)
+    goCharset(setId)
   }
 </script>
 

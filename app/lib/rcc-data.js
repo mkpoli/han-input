@@ -142,6 +142,8 @@ function big5CharsetId(code) {
   const match = code.trim().match(/^(?:0x)?([0-9A-F]{4})$/i)
   if (!match) return null
   const value = Number.parseInt(match[1], 16)
+  const low = value & 0xFF
+  if (!((low >= 0x40 && low <= 0x7E) || (low >= 0xA1 && low <= 0xFE))) return null
   if (value >= 0xA440 && value <= 0xC67E) return 'hb1'
   if (value >= 0xC940 && value <= 0xF9D5) return 'hb2'
   return null
@@ -198,7 +200,8 @@ export function parseRccExport(doc) {
     ? doc
     : doc && typeof doc === 'object' && Array.isArray(/** @type {{ entries?: unknown }} */ (doc).entries)
       ? /** @type {{ entries: unknown[] }} */ (doc).entries
-      : []
+      : null
+  if (!rawEntries) throw new Error('Invalid RCC export payload')
   const generatedAt = doc && typeof doc === 'object' && typeof /** @type {{ generated_at?: unknown }} */ (doc).generated_at === 'string'
     ? /** @type {{ generated_at: string }} */ (doc).generated_at
     : ''
@@ -376,6 +379,7 @@ export function parseRccExport(doc) {
 let pendingDataset = null
 /** @type {RccDataset | null} */
 let cachedDataset = null
+let cacheEpoch = 0
 
 /**
  * Load the live Rare Character Compendium dataset in the browser (shared promise, cached for the session).
@@ -389,6 +393,7 @@ export function loadRccDataset(options = {}) {
 
   const fetcher = fetchImpl ?? (typeof fetch === 'function' ? fetch : null)
   if (!fetcher) return Promise.reject(new Error('Fetch unavailable'))
+  const myEpoch = cacheEpoch
 
   const run = (async () => {
     const controller = new AbortController()
@@ -397,7 +402,7 @@ export function loadRccDataset(options = {}) {
       const response = await fetcher(RCC_EXPORT_URL, { signal: controller.signal })
       if (!response.ok) throw new Error(`RCC export unavailable (${response.status})`)
       const dataset = parseRccExport(await response.json())
-      if (!fetchImpl) cachedDataset = dataset
+      if (!fetchImpl && myEpoch === cacheEpoch) cachedDataset = dataset
       return dataset
     } finally {
       if (timer !== null) clearTimeout(timer)
@@ -405,11 +410,12 @@ export function loadRccDataset(options = {}) {
   })()
 
   if (!fetchImpl) {
-    pendingDataset = run.catch(error => {
-      pendingDataset = null
+    const tracked = run.catch(error => {
+      if (myEpoch === cacheEpoch && pendingDataset === tracked) pendingDataset = null
       throw error
     })
-    return pendingDataset
+    pendingDataset = tracked
+    return tracked
   }
   return run
 }
@@ -421,10 +427,12 @@ export function getCachedRccDataset() {
 
 /** @type {Map<string, Promise<Map<string, string[]>>>} */
 const idsRecordsIndexCache = new Map()
+const IDS_FILE_TIMEOUT_MS = 10_000
 
 /**
  * Lazily build a reverse index (`cleaned IDS -> charsetId[]`) from every catalogue charset whose
  * records file stores IDS entries directly (`*.ids.json`, excluding `dialect_*` covered by `dialect_rows.json`).
+ * Partial failures still return available matches without poisoning the session cache.
  * @param {import('./charsets.js').Charset[]} catalogue
  * @returns {Promise<Map<string, string[]>>}
  */
@@ -436,17 +444,26 @@ function loadIdsRecordsByIds(catalogue) {
   const cacheKey = targets.map(t => `${t.id}:${t.file}`).join('|')
   let pending = idsRecordsIndexCache.get(cacheKey)
   if (!pending) {
-    pending = (async () => {
+    const myEpoch = cacheEpoch
+    /** @type {Promise<Map<string, string[]>> | null} */
+    let run = null
+    run = (async () => {
       /** @type {Map<string, Set<string>>} */
       const reverse = new Map()
       const CONCURRENCY = 6
       let cursor = 0
+      let partial = false
       const worker = async () => {
         while (cursor < targets.length) {
           const item = targets[cursor++]
+          const controller = new AbortController()
+          const timer = setTimeout(() => controller.abort(), IDS_FILE_TIMEOUT_MS)
           try {
-            const response = await fetch(item.file)
-            if (!response.ok) continue
+            const response = await fetch(item.file, { signal: controller.signal })
+            if (!response.ok) {
+              partial = true
+              continue
+            }
             const data = await response.json()
             const rows = Array.isArray(data?.records) ? data.records : []
             for (const row of rows) {
@@ -462,19 +479,28 @@ function loadIdsRecordsByIds(catalogue) {
               if (!sets) reverse.set(cleaned, sets = new Set())
               sets.add(item.id)
             }
-          } catch { /* unavailable or offline ids file */ }
+          } catch {
+            partial = true
+          } finally {
+            clearTimeout(timer)
+          }
         }
       }
       await Promise.all(Array.from({ length: Math.min(CONCURRENCY, targets.length) }, () => worker()))
+      if (partial && myEpoch === cacheEpoch && idsRecordsIndexCache.get(cacheKey) === run) {
+        idsRecordsIndexCache.delete(cacheKey)
+      }
       return new Map([...reverse].map(([ids, sets]) => [ids, [...sets]]))
     })()
-    idsRecordsIndexCache.set(cacheKey, pending)
+    idsRecordsIndexCache.set(cacheKey, run)
+    pending = run
   }
   return pending
 }
 
 /** Clear cached RCC dataset and reverse indexes (intended for tests). */
 export function clearRccDatasetCache() {
+  cacheEpoch++
   pendingDataset = null
   cachedDataset = null
   idsRecordsIndexCache.clear()
@@ -583,9 +609,9 @@ export function findRccForRecord(dataset, record, reviewedIds = null, setId = ''
 /**
  * Compute automatic RCC inclusion maps for a browsed Han Input character set.
  * @param {RccDataset | null} dataset
- * @param {{ setId: string, members?: string[], records?: import('./charsets.js').ProposalRecord[], glyphIdsTable?: Map<string, import('./glyph-ids.js').GlyphIds> }} input
+ * @param {{ setId: string, members?: string[], codes?: Map<string, string>, records?: import('./charsets.js').ProposalRecord[], glyphIdsTable?: Map<string, import('./glyph-ids.js').GlyphIds> }} input
  */
-export function mapCharsetRccOverlap(dataset, { setId, members = [], records = [], glyphIdsTable }) {
+export function mapCharsetRccOverlap(dataset, { setId, members = [], codes, records = [], glyphIdsTable }) {
   /** @type {Map<string, RccEntry[]>} */
   const byChar = new Map()
   /** @type {Map<string, RccEntry[]>} */
@@ -596,8 +622,15 @@ export function mapCharsetRccOverlap(dataset, { setId, members = [], records = [
   if (!dataset || setId === RCC_CHARSET_ID) return { byChar, byRecordKey, count: 0, matchedCount: 0 }
 
   for (const char of members) {
-    const hits = dataset.byChar.get(char)
-    if (hits?.length) {
+    /** @type {Map<number, RccEntry>} */
+    const matched = new Map()
+    for (const hit of dataset.byChar.get(char) ?? []) matched.set(hit.id, hit)
+    const setCode = codes?.get(char)
+    if (setCode) {
+      for (const hit of dataset.byCharsetEncoding.get(`${setId}\t${normKey(setCode)}`) ?? []) matched.set(hit.id, hit)
+    }
+    if (matched.size) {
+      const hits = [...matched.values()].sort((a, b) => a.id - b.id)
       byChar.set(char, hits)
       for (const hit of hits) uniqueIds.add(hit.id)
     }
