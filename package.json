@@ -17,7 +17,7 @@
     "postinstall": "node scripts/prepare-composer.mjs"
   },
   "dependencies": {
-    "han-compose": "github:mkpoli/han-compose#8f6843a9fbaacc1ecba3725d3ab14a41339c9e60"
+    "han-compose": "github:mkpoli/han-compose#b15ac37ea879c1c9a4c9abda99b9a01418964304"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "6.2.4",
