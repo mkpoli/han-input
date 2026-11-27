@@ -10,7 +10,7 @@ import { RCC_ORIGIN, cleanIds, formatRccCode } from './rcc.js'
 
 export const RCC_CHARSET_ID = 'rcc'
 export const RCC_CHARSET_GROUP = 'Rare Character Compendium'
-export const RCC_EXPORT_URL = `${RCC_ORIGIN}/api/export?format=json`
+export const RCC_EXPORT_URL = `${RCC_ORIGIN}/api/export?format=index`
 
 const EXPORT_TIMEOUT_MS = 20000
 const UNICODE_VALUE = /^U\+([0-9A-F]{4,6})(?:\b|\s|\(|$)/i
@@ -202,9 +202,12 @@ export function parseRccExport(doc) {
       ? /** @type {{ entries: unknown[] }} */ (doc).entries
       : null
   if (!rawEntries) throw new Error('Invalid RCC export payload')
-  const generatedAt = doc && typeof doc === 'object' && typeof /** @type {{ generated_at?: unknown }} */ (doc).generated_at === 'string'
-    ? /** @type {{ generated_at: string }} */ (doc).generated_at
-    : ''
+  const rawDataset = doc && typeof doc === 'object' ? /** @type {{ dataset?: { generated_at?: unknown }, generated_at?: unknown }} */ (doc) : null
+  const generatedAt = typeof rawDataset?.dataset?.generated_at === 'string'
+    ? rawDataset.dataset.generated_at
+    : typeof rawDataset?.generated_at === 'string'
+      ? rawDataset.generated_at
+      : ''
 
   /** @type {RccEntry[]} */
   const entries = []

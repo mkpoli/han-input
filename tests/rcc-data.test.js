@@ -3,6 +3,7 @@ import { compareCodes } from '../app/lib/charsets.js'
 import { clearComposeCache, composeGlyph } from '../app/lib/compose.js'
 import {
   RCC_CHARSET_ID,
+  RCC_EXPORT_URL,
   clearRccDatasetCache,
   extractUnicodeChar,
   findCharsetsForRccEntry,
@@ -140,9 +141,15 @@ describe('RCC dataset parsing and charset mapping', () => {
   })
 
   test('loads dataset via fetchImpl and rejects non-ok responses cleanly', async () => {
-    const okFetch = /** @type {typeof fetch} */ (async () => Response.json(SAMPLE_EXPORT))
+    expect(RCC_EXPORT_URL).toBe('https://rare.glyphatlas.org/api/export?format=index')
+    const okFetch = /** @type {typeof fetch} */ (async () => Response.json({
+      dataset: { generated_at: '2026-11-26T14:00:00.000Z' },
+      entries: SAMPLE_EXPORT.entries,
+    }))
     const loaded = await loadRccDataset({ fetchImpl: okFetch })
     expect(loaded.entries).toHaveLength(2)
+    expect(loaded.generatedAt).toBe('2026-11-26T14:00:00.000Z')
+    expect(loaded.records.documents[0].date).toBe('2026-11-26')
 
     const badFetch = /** @type {typeof fetch} */ (async () => new Response('down', { status: 503 }))
     await expect(loadRccDataset({ fetchImpl: badFetch })).rejects.toThrow('RCC export unavailable')
